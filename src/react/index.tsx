@@ -86,11 +86,12 @@ class ArrayEditor extends React.Component<{ schema: ArraySchema }, {}> {
     }
 }
 
-class NumberEditor extends React.Component<{ schema: NumberSchema }, {}> {
+class NumberEditor extends React.Component<{ schema: NumberSchema; key: string; onChange: (e: React.FormEvent<{ value: any }>) => void }, {}> {
     public render() {
         return (
             <div>
-                <TitleEditor title={this.props.schema.title} />
+                <TitleEditor title={this.props.schema.title || this.props.key} />
+                <input type="number" onChange={this.props.onChange} />
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
@@ -141,7 +142,8 @@ class StringEditor extends React.Component<{ schema: StringSchema }, {}> {
     }
 }
 
-export class Editor extends React.Component<{ schema: Schema }, {}> {
+export class Editor extends React.Component<{ schema: Schema; initialValue?: any; }, { value: any }> {
+    public value = this.props.initialValue;
     public render() {
         switch (this.props.schema.type) {
             case "object":
@@ -149,7 +151,7 @@ export class Editor extends React.Component<{ schema: Schema }, {}> {
             case "array":
                 return <ArrayEditor schema={this.props.schema} />;
             case "number":
-                return <NumberEditor schema={this.props.schema} />;
+                return <NumberEditor schema={this.props.schema} key="root" onChange={(e) => this.setState({ value: e.currentTarget.value })} />;
             case "integer":
                 return <IntegerEditor schema={this.props.schema} />;
             case "boolean":

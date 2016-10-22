@@ -4,21 +4,18 @@ import { Editor } from "../../src/react/index";
 
 const schema = JSON.parse(`{
     "title": "Example Schema",
-    "type": "object",
-    "properties": {
-        "firstName": {
-            "type": "string"
-        },
-        "lastName": {
-            "type": "string"
-        },
-        "age": {
-            "description": "Age in years",
-            "type": "integer",
-            "minimum": 0
-        }
-    },
-    "required": ["firstName", "lastName"]
+    "type": "number"
 }`);
 
-ReactDOM.render(<Editor schema={schema} />, document.getElementById("container"));
+class Main extends React.Component<{}, {}> {
+    public render() {
+        return (
+            <div>
+                <button onClick={() => console.log((this.refs["value"] as Editor).state.value)}>show data</button>
+                <Editor schema={schema} ref="value" />
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(<Main />, document.getElementById("container"));
