@@ -1,6 +1,10 @@
 import * as React from "react";
 import "tslib";
-import { isNumber, isInteger, toNumber, toInteger } from "lodash";
+declare const require: (name: string) => any;
+const isNumber: (value?: any) => number = require("lodash.isnumber");
+const isInteger: (value?: any) => number = require("lodash.isinteger");
+const toNumber: (value?: any) => number = require("lodash.tonumber");
+const toInteger: (value?: any) => number = require("lodash.tointeger");
 
 type CommonSchema = {
     $schema?: string;
