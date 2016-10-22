@@ -1,5 +1,6 @@
 import * as React from "react";
 import "tslib";
+import { isNumber, isInteger, toNumber, toInteger } from "lodash";
 
 type CommonSchema = {
     $schema?: string;
@@ -86,23 +87,42 @@ class ArrayEditor extends React.Component<{ schema: ArraySchema }, {}> {
     }
 }
 
-class NumberEditor extends React.Component<{ schema: NumberSchema; key: string; onChange: (e: React.FormEvent<{ value: any }>) => void }, {}> {
+class NumberEditor extends React.Component<{ schema: NumberSchema; initialValue: number; key: string; updateValue: (value: any) => void }, { value: number }> {
+    public value = this.props.initialValue || 0;
+    public onChange = (e: React.FormEvent<{ value: any }>) => {
+        if (isNumber(e.currentTarget.value)) {
+            this.value = e.currentTarget.value;
+        } else {
+            this.value = toNumber(e.currentTarget.value);
+        }
+        this.props.updateValue(this.value);
+    }
     public render() {
         return (
             <div>
                 <TitleEditor title={this.props.schema.title || this.props.key} />
-                <input type="number" onChange={this.props.onChange} />
+                <input type="number" onChange={this.onChange} value={this.value} />
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
     }
 }
 
-class IntegerEditor extends React.Component<{ schema: IntegerSchema }, {}> {
+class IntegerEditor extends React.Component<{ schema: IntegerSchema; initialValue: number; key: string; updateValue: (value: any) => void }, { value: number }> {
+    public value = this.props.initialValue || 0;
+    public onChange = (e: React.FormEvent<{ value: any }>) => {
+        if (isInteger(e.currentTarget.value)) {
+            this.value = e.currentTarget.value;
+        } else {
+            this.value = toInteger(e.currentTarget.value);
+        }
+        this.props.updateValue(this.value);
+    }
     public render() {
         return (
             <div>
-                <TitleEditor title={this.props.schema.title} />
+                <TitleEditor title={this.props.schema.title || this.props.key} />
+                <input type="number" onChange={this.onChange} value={this.value} />
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
@@ -151,9 +171,9 @@ export class Editor extends React.Component<{ schema: Schema; initialValue?: any
             case "array":
                 return <ArrayEditor schema={this.props.schema} />;
             case "number":
-                return <NumberEditor schema={this.props.schema} key="root" onChange={(e) => this.setState({ value: e.currentTarget.value })} />;
+                return <NumberEditor schema={this.props.schema} key="root" initialValue={this.props.initialValue} updateValue={(value) => this.setState({ value })} />;
             case "integer":
-                return <IntegerEditor schema={this.props.schema} />;
+                return <IntegerEditor schema={this.props.schema} key="root" initialValue={this.props.initialValue} updateValue={(value) => this.setState({ value })} />;
             case "boolean":
                 return <BooleanEditor schema={this.props.schema} />;
             case "null":
