@@ -1,0 +1,27 @@
+{
+    "extends": "tslint:latest",
+    "rules": {
+        "forin": false,
+        "interface-name": [
+            false
+        ],
+        "max-line-length": [
+            false
+        ],
+        "no-var-requires": false,
+        "no-console": [
+            false
+        ],
+        "no-string-literal": false,
+        "no-reference": false,
+        "ordered-imports": [
+            false
+        ],
+        "object-literal-sort-keys": false,
+        "variable-name": [
+            true,
+            "ban-keywords"
+        ],
+        "no-bitwise": false
+    }
+}
