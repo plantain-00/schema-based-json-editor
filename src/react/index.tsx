@@ -93,9 +93,9 @@ class ArrayEditor extends React.Component<{ schema: ArraySchema }, {}> {
 
 class NumberEditor extends React.Component<{ schema: NumberSchema; initialValue: number; key: string; updateValue: (value: any) => void }, { value: number }> {
     public value = this.props.initialValue || 0;
-    public onChange = (e: React.FormEvent<{ value: any }>) => {
+    public onChange = (e: React.FormEvent<{ value: string }>) => {
         if (isNumber(e.currentTarget.value)) {
-            this.value = e.currentTarget.value;
+            this.value = +e.currentTarget.value;
         } else {
             this.value = toNumber(e.currentTarget.value);
         }
@@ -112,11 +112,11 @@ class NumberEditor extends React.Component<{ schema: NumberSchema; initialValue:
     }
 }
 
-class IntegerEditor extends React.Component<{ schema: IntegerSchema; initialValue: number; key: string; updateValue: (value: any) => void }, { value: number }> {
+class IntegerEditor extends React.Component<{ schema: IntegerSchema; initialValue: number; key: string; updateValue: (value: number) => void }, { value: number }> {
     public value = this.props.initialValue || 0;
-    public onChange = (e: React.FormEvent<{ value: any }>) => {
+    public onChange = (e: React.FormEvent<{ value: string }>) => {
         if (isInteger(e.currentTarget.value)) {
-            this.value = e.currentTarget.value;
+            this.value = +e.currentTarget.value;
         } else {
             this.value = toInteger(e.currentTarget.value);
         }
@@ -133,33 +133,47 @@ class IntegerEditor extends React.Component<{ schema: IntegerSchema; initialValu
     }
 }
 
-class BooleanEditor extends React.Component<{ schema: BooleanSchema }, {}> {
+class BooleanEditor extends React.Component<{ schema: BooleanSchema; initialValue: boolean; key: string; updateValue: (checked: boolean) => void }, { checked: boolean }> {
+    public checked = this.props.initialValue || false;
+    public onChange = (e: React.FormEvent<{ checked: boolean }>) => {
+        this.checked = e.currentTarget.checked;
+        this.props.updateValue(this.checked);
+    }
     public render() {
         return (
             <div>
-                <TitleEditor title={this.props.schema.title} />
+                <label>
+                    <input type="checkbox" onChange={this.onChange} checked={this.checked} />
+                    {this.props.schema.title || this.props.key}
+                </label>
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
     }
 }
 
-class NullEditor extends React.Component<{ schema: NullSchema }, {}> {
+class NullEditor extends React.Component<{ schema: NullSchema; key: string }, {}> {
     public render() {
         return (
             <div>
-                <TitleEditor title={this.props.schema.title} />
+                <TitleEditor title={this.props.schema.title || this.props.key} />
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
     }
 }
 
-class StringEditor extends React.Component<{ schema: StringSchema }, {}> {
+class StringEditor extends React.Component<{ schema: StringSchema; initialValue: string; key: string; updateValue: (value: string) => void }, { value: string }> {
+    public value = this.props.initialValue || "";
+    public onChange = (e: React.FormEvent<{ value: string }>) => {
+        this.value = e.currentTarget.value;
+        this.props.updateValue(this.value);
+    }
     public render() {
         return (
             <div>
-                <TitleEditor title={this.props.schema.title} />
+                <TitleEditor title={this.props.schema.title || this.props.key} />
+                <input type="text" onChange={this.onChange} value={this.value} />
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
@@ -179,11 +193,11 @@ export class Editor extends React.Component<{ schema: Schema; initialValue?: any
             case "integer":
                 return <IntegerEditor schema={this.props.schema} key="root" initialValue={this.props.initialValue} updateValue={(value) => this.setState({ value })} />;
             case "boolean":
-                return <BooleanEditor schema={this.props.schema} />;
+                return <BooleanEditor schema={this.props.schema} key="root" initialValue={this.props.initialValue} updateValue={(value) => this.setState({ value })} />;
             case "null":
-                return <NullEditor schema={this.props.schema} />;
+                return <NullEditor schema={this.props.schema} key="root" />;
             case "string":
-                return <StringEditor schema={this.props.schema} />;
+                return <StringEditor schema={this.props.schema} key="root" initialValue={this.props.initialValue} updateValue={(value) => this.setState({ value })} />;
             default:
                 return null;
         }

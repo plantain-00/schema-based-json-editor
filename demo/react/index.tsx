@@ -4,7 +4,8 @@ import { Editor } from "../../src/react/index";
 
 const schema = JSON.parse(`{
     "title": "Example Schema",
-    "type": "integer"
+    "type": "string",
+    "description": "test"
 }`);
 
 class Main extends React.Component<{}, {}> {
