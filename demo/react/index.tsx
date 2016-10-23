@@ -4,21 +4,16 @@ import { Editor } from "../../src/react/index";
 
 const schema = JSON.parse(`{
     "title": "Example Schema",
-    "type": "object",
-    "properties": {
-        "firstName": {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "title": "Pet",
+        "properties": {
+          "name": {
             "type": "string"
-        },
-        "lastName": {
-            "type": "string"
-        },
-        "age": {
-            "description": "Age in years",
-            "type": "integer",
-            "minimum": 0
+          }
         }
-    },
-    "required": ["firstName", "lastName"]
+      }
 }`);
 
 class Main extends React.Component<{}, {}> {
@@ -27,7 +22,7 @@ class Main extends React.Component<{}, {}> {
         return (
             <div>
                 <button onClick={() => console.log(this.value)}>show data</button>
-                <Editor schema={schema} keyName="root" initialValue={{}} updateValue={value => this.value = value} />
+                <Editor schema={schema} keyName="root" initialValue={[{ name: "aaa" }]} updateValue={value => this.value = value} />
             </div>
         );
     }

@@ -89,12 +89,23 @@ class ObjectEditor extends React.Component<{ schema: ObjectSchema; initialValue:
     }
 }
 
-class ArrayEditor extends React.Component<{ schema: ArraySchema }, {}> {
+class ArrayEditor extends React.Component<{ schema: ArraySchema; initialValue: any[]; keyName: string; updateValue: (value: any) => void }, {}> {
     public render() {
+        const itemElements: JSX.Element[] = [];
+        for (let i = 0; i < this.props.initialValue.length; i++) {
+            const onChange = (value: any) => {
+                this.props.initialValue[i] = value;
+                this.props.updateValue(this.props.initialValue);
+            };
+            itemElements.push(<Editor key={`[${i}]`} schema={this.props.schema.items} keyName={`[${i}]`} initialValue={(this.props.initialValue || {})[i]} updateValue={onChange} />);
+        }
         return (
             <div>
-                <TitleEditor title={this.props.schema.title} />
+                <TitleEditor title={this.props.schema.title || this.props.keyName} />
                 <DescriptionEditor description={this.props.schema.description} />
+                <div>
+                    {itemElements}
+                </div>
             </div>
         );
     }
@@ -182,7 +193,7 @@ export class Editor extends React.Component<{ schema: Schema; initialValue?: any
             case "object":
                 return <ObjectEditor schema={this.props.schema} keyName={this.props.keyName} initialValue={this.props.initialValue} updateValue={this.onChange} />;
             case "array":
-                return <ArrayEditor schema={this.props.schema} />;
+                return <ArrayEditor schema={this.props.schema} keyName={this.props.keyName} initialValue={this.props.initialValue} updateValue={this.onChange} />;
             case "number":
                 return <NumberEditor schema={this.props.schema} keyName={this.props.keyName} initialValue={this.props.initialValue} updateValue={this.onChange} />;
             case "integer":
