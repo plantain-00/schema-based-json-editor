@@ -1,8 +1,6 @@
 import * as React from "react";
 import "tslib";
 declare const require: (name: string) => any;
-const isNumber: (value?: any) => number = require("lodash.isnumber");
-const isInteger: (value?: any) => number = require("lodash.isinteger");
 const toNumber: (value?: any) => number = require("lodash.tonumber");
 const toInteger: (value?: any) => number = require("lodash.tointeger");
 
@@ -52,7 +50,7 @@ type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | Integer
 class TitleEditor extends React.Component<{ title: string | undefined }, {}> {
     public render() {
         if (this.props.title) {
-            return <h2>{this.props.title}</h2>;
+            return <div>{this.props.title}</div>;
         } else {
             return null;
         }
@@ -69,12 +67,23 @@ class DescriptionEditor extends React.Component<{ description: string | undefine
     }
 }
 
-class ObjectEditor extends React.Component<{ schema: ObjectSchema }, {}> {
+class ObjectEditor extends React.Component<{ schema: ObjectSchema; initialValue: any; keyName: string; updateValue: (value: any) => void }, {}> {
     public render() {
+        const propertyElements: JSX.Element[] = [];
+        for (const property in this.props.schema.properties) {
+            const onChange = (value: any) => {
+                this.props.initialValue[property] = value;
+                this.props.updateValue(this.props.initialValue);
+            };
+            propertyElements.push(<Editor key={property} schema={this.props.schema.properties[property]} keyName={property} initialValue={(this.props.initialValue || {})[property]} updateValue={onChange} />);
+        }
         return (
             <div>
-                <TitleEditor title={this.props.schema.title} />
+                <TitleEditor title={this.props.schema.title || this.props.keyName} />
                 <DescriptionEditor description={this.props.schema.description} />
+                <div>
+                    {propertyElements}
+                </div>
             </div>
         );
     }
@@ -91,60 +100,46 @@ class ArrayEditor extends React.Component<{ schema: ArraySchema }, {}> {
     }
 }
 
-class NumberEditor extends React.Component<{ schema: NumberSchema; initialValue: number; key: string; updateValue: (value: any) => void }, { value: number }> {
-    public value = this.props.initialValue || 0;
+class NumberEditor extends React.Component<{ schema: NumberSchema; initialValue: number; keyName: string; updateValue: (value: number) => void }, {}> {
     public onChange = (e: React.FormEvent<{ value: string }>) => {
-        if (isNumber(e.currentTarget.value)) {
-            this.value = +e.currentTarget.value;
-        } else {
-            this.value = toNumber(e.currentTarget.value);
-        }
-        this.props.updateValue(this.value);
+        this.props.updateValue(toNumber(e.currentTarget.value));
     }
     public render() {
         return (
             <div>
-                <TitleEditor title={this.props.schema.title || this.props.key} />
-                <input type="number" onChange={this.onChange} value={this.value} />
+                <TitleEditor title={this.props.schema.title || this.props.keyName} />
+                <input type="number" onChange={this.onChange} defaultValue={String(this.props.initialValue || 0)} />
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
     }
 }
 
-class IntegerEditor extends React.Component<{ schema: IntegerSchema; initialValue: number; key: string; updateValue: (value: number) => void }, { value: number }> {
-    public value = this.props.initialValue || 0;
+class IntegerEditor extends React.Component<{ schema: IntegerSchema; initialValue: number; keyName: string; updateValue: (value: number) => void }, {}> {
     public onChange = (e: React.FormEvent<{ value: string }>) => {
-        if (isInteger(e.currentTarget.value)) {
-            this.value = +e.currentTarget.value;
-        } else {
-            this.value = toInteger(e.currentTarget.value);
-        }
-        this.props.updateValue(this.value);
+        this.props.updateValue(toInteger(e.currentTarget.value));
     }
     public render() {
         return (
             <div>
-                <TitleEditor title={this.props.schema.title || this.props.key} />
-                <input type="number" onChange={this.onChange} value={this.value} />
+                <TitleEditor title={this.props.schema.title || this.props.keyName} />
+                <input type="number" onChange={this.onChange} defaultValue={String(this.props.initialValue || 0)} />
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
     }
 }
 
-class BooleanEditor extends React.Component<{ schema: BooleanSchema; initialValue: boolean; key: string; updateValue: (checked: boolean) => void }, { checked: boolean }> {
-    public checked = this.props.initialValue || false;
+class BooleanEditor extends React.Component<{ schema: BooleanSchema; initialValue: boolean; keyName: string; updateValue: (checked: boolean) => void }, {}> {
     public onChange = (e: React.FormEvent<{ checked: boolean }>) => {
-        this.checked = e.currentTarget.checked;
-        this.props.updateValue(this.checked);
+        this.props.updateValue(e.currentTarget.checked);
     }
     public render() {
         return (
             <div>
                 <label>
-                    <input type="checkbox" onChange={this.onChange} checked={this.checked} />
-                    {this.props.schema.title || this.props.key}
+                    <input type="checkbox" onChange={this.onChange} checked={this.props.initialValue || false} />
+                    {this.props.schema.title || this.props.keyName}
                 </label>
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
@@ -152,52 +147,52 @@ class BooleanEditor extends React.Component<{ schema: BooleanSchema; initialValu
     }
 }
 
-class NullEditor extends React.Component<{ schema: NullSchema; key: string }, {}> {
+class NullEditor extends React.Component<{ schema: NullSchema; keyName: string }, {}> {
     public render() {
         return (
             <div>
-                <TitleEditor title={this.props.schema.title || this.props.key} />
+                <TitleEditor title={this.props.schema.title || this.props.keyName} />
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
     }
 }
 
-class StringEditor extends React.Component<{ schema: StringSchema; initialValue: string; key: string; updateValue: (value: string) => void }, { value: string }> {
-    public value = this.props.initialValue || "";
+class StringEditor extends React.Component<{ schema: StringSchema; initialValue: string; keyName: string; updateValue: (value: string) => void }, {}> {
     public onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = e.currentTarget.value;
-        this.props.updateValue(this.value);
+        this.props.updateValue(e.currentTarget.value);
     }
     public render() {
         return (
             <div>
-                <TitleEditor title={this.props.schema.title || this.props.key} />
-                <input type="text" onChange={this.onChange} value={this.value} />
+                <TitleEditor title={this.props.schema.title || this.props.keyName} />
+                <input type="text" onChange={this.onChange} defaultValue={this.props.initialValue || ""} />
                 <DescriptionEditor description={this.props.schema.description} />
             </div>
         );
     }
 }
 
-export class Editor extends React.Component<{ schema: Schema; initialValue?: any; }, { value: any }> {
-    public value = this.props.initialValue;
+export class Editor extends React.Component<{ schema: Schema; initialValue?: any; keyName: string; updateValue: (value: any) => void }, {}> {
+    public onChange = (value: any) => {
+        this.props.updateValue(value);
+    }
     public render() {
         switch (this.props.schema.type) {
             case "object":
-                return <ObjectEditor schema={this.props.schema} />;
+                return <ObjectEditor schema={this.props.schema} keyName={this.props.keyName} initialValue={this.props.initialValue} updateValue={this.onChange} />;
             case "array":
                 return <ArrayEditor schema={this.props.schema} />;
             case "number":
-                return <NumberEditor schema={this.props.schema} key="root" initialValue={this.props.initialValue} updateValue={(value) => this.setState({ value })} />;
+                return <NumberEditor schema={this.props.schema} keyName={this.props.keyName} initialValue={this.props.initialValue} updateValue={this.onChange} />;
             case "integer":
-                return <IntegerEditor schema={this.props.schema} key="root" initialValue={this.props.initialValue} updateValue={(value) => this.setState({ value })} />;
+                return <IntegerEditor schema={this.props.schema} keyName={this.props.keyName} initialValue={this.props.initialValue} updateValue={this.onChange} />;
             case "boolean":
-                return <BooleanEditor schema={this.props.schema} key="root" initialValue={this.props.initialValue} updateValue={(value) => this.setState({ value })} />;
+                return <BooleanEditor schema={this.props.schema} keyName={this.props.keyName} initialValue={this.props.initialValue} updateValue={this.onChange} />;
             case "null":
-                return <NullEditor schema={this.props.schema} key="root" />;
+                return <NullEditor schema={this.props.schema} keyName={this.props.keyName} />;
             case "string":
-                return <StringEditor schema={this.props.schema} key="root" initialValue={this.props.initialValue} updateValue={(value) => this.setState({ value })} />;
+                return <StringEditor schema={this.props.schema} keyName={this.props.keyName} initialValue={this.props.initialValue} updateValue={this.onChange} />;
             default:
                 return null;
         }

@@ -20,8 +20,6 @@
   "devDependencies": {
     "@types/react": "^0.14.41",
     "@types/react-dom": "^0.14.18",
-    "lodash.isinteger": "^4.0.4",
-    "lodash.isnumber": "^3.0.3",
     "lodash.tointeger": "^4.0.4",
     "lodash.tonumber": "^4.0.3",
     "react": "^15.3.2",
