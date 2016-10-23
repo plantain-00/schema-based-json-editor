@@ -89,20 +89,38 @@ class ObjectEditor extends React.Component<{ schema: ObjectSchema; initialValue:
     }
 }
 
-class ArrayEditor extends React.Component<{ schema: ArraySchema; initialValue: any[]; keyName: string; updateValue: (value: any) => void }, {}> {
+class ArrayEditor extends React.Component<{ schema: ArraySchema; initialValue: any[]; keyName: string; updateValue: (value: any) => void }, { value: any }> {
+    public value = this.props.initialValue || [];
     public render() {
         const itemElements: JSX.Element[] = [];
-        for (let i = 0; i < this.props.initialValue.length; i++) {
+        for (let i = 0; i < this.value.length; i++) {
             const onChange = (value: any) => {
-                this.props.initialValue[i] = value;
+                this.value[i] = value;
+                this.setState({ value: this.value });
+                this.props.updateValue(this.value);
+            };
+            const onDelete = () => {
+                this.value.splice(i, 1);
+                this.setState({ value: this.value });
                 this.props.updateValue(this.props.initialValue);
             };
-            itemElements.push(<Editor key={`[${i}]`} schema={this.props.schema.items} keyName={`[${i}]`} initialValue={(this.props.initialValue || {})[i]} updateValue={onChange} />);
+            itemElements.push((
+                <div key={`[${i}]`}>
+                    <Editor schema={this.props.schema.items} keyName={`[${i}]`} initialValue={this.value[i]} updateValue={onChange} />
+                    <button onClick={onDelete}>delete</button>
+                </div>
+            ));
         }
+        const addItem = () => {
+            this.value.push({});
+            this.setState({ value: this.value });
+            this.props.updateValue(this.value);
+        };
         return (
             <div>
                 <TitleEditor title={this.props.schema.title || this.props.keyName} />
                 <DescriptionEditor description={this.props.schema.description} />
+                <button onClick={addItem}>add</button>
                 <div>
                     {itemElements}
                 </div>
