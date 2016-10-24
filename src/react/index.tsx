@@ -67,63 +67,91 @@ class DescriptionEditor extends React.Component<{ description: string | undefine
     }
 }
 
-class ObjectEditor extends React.Component<{ schema: ObjectSchema; initialValue: any; keyName: string; updateValue: (value: any) => void }, {}> {
+class ObjectEditor extends React.Component<{ schema: ObjectSchema; initialValue: any; keyName: string; updateValue: (value: any) => void }, { collapsed: boolean }> {
+    public collapsed = false;
+    public collapseOrExpand = () => {
+        this.collapsed = !this.collapsed;
+        this.setState({ collapsed: this.collapsed });
+    }
     public render() {
-        const propertyElements: JSX.Element[] = [];
-        for (const property in this.props.schema.properties) {
-            const onChange = (value: any) => {
-                this.props.initialValue[property] = value;
-                this.props.updateValue(this.props.initialValue);
-            };
-            propertyElements.push(<Editor key={property} schema={this.props.schema.properties[property]} keyName={property} initialValue={(this.props.initialValue || {})[property]} updateValue={onChange} />);
-        }
-        return (
-            <div>
-                <TitleEditor title={this.props.schema.title || this.props.keyName} />
-                <DescriptionEditor description={this.props.schema.description} />
+        let childrenElement: JSX.Element | null = null;
+        if (!this.collapsed) {
+            const propertyElements: JSX.Element[] = [];
+            for (const property in this.props.schema.properties) {
+                const onChange = (value: any) => {
+                    this.props.initialValue[property] = value;
+                    this.props.updateValue(this.props.initialValue);
+                };
+                propertyElements.push(<Editor key={property} schema={this.props.schema.properties[property]} keyName={property} initialValue={(this.props.initialValue || {})[property]} updateValue={onChange} />);
+            }
+            childrenElement = (
                 <div>
                     {propertyElements}
                 </div>
-            </div>
+            );
+        }
+        return (
+            <div>
+                <div>
+                    {this.props.schema.title || this.props.keyName}
+                    <button onClick={this.collapseOrExpand}>{this.collapsed ? "expand" : "collapse"}</button>
+                </div>
+                <DescriptionEditor description={this.props.schema.description} />
+                {childrenElement}
+            </div >
         );
     }
 }
 
-class ArrayEditor extends React.Component<{ schema: ArraySchema; initialValue: any[]; keyName: string; updateValue: (value: any) => void }, { value: any }> {
+class ArrayEditor extends React.Component<{ schema: ArraySchema; initialValue: any[]; keyName: string; updateValue: (value: any) => void }, { value?: any; collapsed?: boolean }> {
+    public collapsed = false;
     public value = this.props.initialValue || [];
+    public collapseOrExpand = () => {
+        this.collapsed = !this.collapsed;
+        this.setState({ collapsed: this.collapsed });
+    }
     public render() {
-        const itemElements: JSX.Element[] = [];
-        for (let i = 0; i < this.value.length; i++) {
-            const onChange = (value: any) => {
-                this.value[i] = value;
-                this.setState({ value: this.value });
-                this.props.updateValue(this.value);
-            };
-            const onDelete = () => {
-                this.value.splice(i, 1);
-                this.setState({ value: this.value });
-                this.props.updateValue(this.props.initialValue);
-            };
-            itemElements.push((
-                <div key={`[${i}]`}>
-                    <Editor schema={this.props.schema.items} keyName={`[${i}]`} initialValue={this.value[i]} updateValue={onChange} />
-                    <button onClick={onDelete}>delete</button>
-                </div>
-            ));
-        }
         const addItem = () => {
             this.value.push({});
             this.setState({ value: this.value });
             this.props.updateValue(this.value);
         };
-        return (
-            <div>
-                <TitleEditor title={this.props.schema.title || this.props.keyName} />
-                <DescriptionEditor description={this.props.schema.description} />
-                <button onClick={addItem}>add</button>
+        let childrenElement: JSX.Element | null = null;
+        if (!this.collapsed) {
+            const itemElements: JSX.Element[] = [];
+            for (let i = 0; i < this.value.length; i++) {
+                const onChange = (value: any) => {
+                    this.value[i] = value;
+                    this.setState({ value: this.value });
+                    this.props.updateValue(this.value);
+                };
+                const onDelete = () => {
+                    this.value.splice(i, 1);
+                    this.setState({ value: this.value });
+                    this.props.updateValue(this.props.initialValue);
+                };
+                itemElements.push((
+                    <div key={`[${i}]`}>
+                        <Editor schema={this.props.schema.items} keyName={`[${i}]`} initialValue={this.value[i]} updateValue={onChange} />
+                        <button onClick={onDelete}>delete</button>
+                    </div>
+                ));
+            }
+            childrenElement = (
                 <div>
                     {itemElements}
                 </div>
+            );
+        }
+        return (
+            <div>
+                <div>
+                    {this.props.schema.title || this.props.keyName}
+                    <button onClick={this.collapseOrExpand}>{this.collapsed ? "expand" : "collapse"}</button>
+                </div>
+                <DescriptionEditor description={this.props.schema.description} />
+                <button onClick={addItem}>add</button>
+                {childrenElement}
             </div>
         );
     }
