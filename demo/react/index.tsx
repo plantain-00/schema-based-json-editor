@@ -105,7 +105,7 @@ class Main extends React.Component<{}, {}> {
         return (
             <div>
                 <button onClick={() => console.log(this.value)}>show data</button>
-                <Editor schema={schema} initialValue={{}} updateValue={value => this.value = value} theme="bootstrap3" />
+                <Editor schema={schema} initialValue={{}} updateValue={value => this.value = value} theme="bootstrap3" icon="fontawesome4" />
             </div>
         );
     }
