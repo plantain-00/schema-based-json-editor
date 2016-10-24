@@ -8,3 +8,4 @@
 + angular2 component
 + vuejs component
 + object and array filter
++ array: move up, move down, delete all

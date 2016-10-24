@@ -66,6 +66,26 @@ function getTheme(name: string | undefined) {
     };
 }
 
+function getDefaultValue(schema: Schema): ValueType {
+    switch (schema.type) {
+        case "object":
+            return {};
+        case "array":
+            return [];
+        case "number":
+            return 0;
+        case "integer":
+            return 0;
+        case "boolean":
+            return false;
+        case "string":
+            return "";
+        case "null":
+        default:
+            return null;
+    }
+}
+
 class TitleEditor extends React.Component<{ title: string | undefined; onDelete?: () => void; theme?: string }, {}> {
     public render() {
         if (this.props.title) {
@@ -97,14 +117,18 @@ class DescriptionEditor extends React.Component<{ description: string | undefine
     }
 }
 
-class ObjectEditor extends React.Component<{
-    schema: ObjectSchema;
-    initialValue: any;
+type ValueType = { [name: string]: any } | any[] | number | boolean | string | null
+
+type Props<T extends CommonSchema, V> = {
+    schema: T;
+    initialValue: V;
     title?: string;
-    updateValue: (value: any) => void;
+    updateValue: (value: V) => void;
     theme?: string;
     onDelete?: () => void;
-}, { collapsed: boolean }> {
+}
+
+class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]: ValueType }>, { collapsed: boolean }> {
     public collapsed = false;
     public collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
@@ -116,7 +140,7 @@ class ObjectEditor extends React.Component<{
         if (!this.collapsed) {
             const propertyElements: JSX.Element[] = [];
             for (const property in this.props.schema.properties) {
-                const onChange = (value: any) => {
+                const onChange = (value: ValueType) => {
                     this.props.initialValue[property] = value;
                     this.props.updateValue(this.props.initialValue);
                 };
@@ -124,7 +148,7 @@ class ObjectEditor extends React.Component<{
                 propertyElements.push(<Editor key={property}
                     schema={schema}
                     title={schema.title || property}
-                    initialValue={(this.props.initialValue || {})[property]}
+                    initialValue={(this.props.initialValue || {})[property] || getDefaultValue(schema)}
                     updateValue={onChange}
                     theme={this.props.theme} />);
             }
@@ -152,23 +176,16 @@ class ObjectEditor extends React.Component<{
     }
 }
 
-class ArrayEditor extends React.Component<{
-    schema: ArraySchema;
-    initialValue: any[];
-    title?: string;
-    updateValue: (value: any) => void;
-    theme?: string;
-    onDelete?: () => void;
-}, { value?: any; collapsed?: boolean }> {
+class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { value?: ValueType[]; collapsed?: boolean }> {
     public collapsed = false;
-    public value = this.props.initialValue || [];
+    public value: ValueType[] = this.props.initialValue || [];
     public collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
     public render() {
         const addItem = () => {
-            this.value.push({});
+            this.value.push(getDefaultValue(this.props.schema.items));
             this.setState({ value: this.value });
             this.props.updateValue(this.value);
         };
@@ -177,7 +194,7 @@ class ArrayEditor extends React.Component<{
         if (!this.collapsed) {
             const itemElements: JSX.Element[] = [];
             for (let i = 0; i < this.value.length; i++) {
-                const onChange = (value: any) => {
+                const onChange = (value: ValueType) => {
                     this.value[i] = value;
                     this.setState({ value: this.value });
                     this.props.updateValue(this.value);
@@ -223,14 +240,7 @@ class ArrayEditor extends React.Component<{
     }
 }
 
-class NumberEditor extends React.Component<{
-    schema: NumberSchema;
-    initialValue: number;
-    title?: string;
-    updateValue: (value: number) => void;
-    theme?: string;
-    onDelete?: () => void;
-}, {}> {
+class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
     public onChange = (e: React.FormEvent<{ value: string }>) => {
         this.props.updateValue(toNumber(e.currentTarget.value));
     }
@@ -246,14 +256,7 @@ class NumberEditor extends React.Component<{
     }
 }
 
-class IntegerEditor extends React.Component<{
-    schema: IntegerSchema;
-    initialValue: number;
-    title?: string;
-    updateValue: (value: number) => void;
-    theme?: string
-    onDelete?: () => void;
-}, {}> {
+class IntegerEditor extends React.Component<Props<IntegerSchema, number>, {}> {
     public onChange = (e: React.FormEvent<{ value: string }>) => {
         this.props.updateValue(toInteger(e.currentTarget.value));
     }
@@ -269,23 +272,16 @@ class IntegerEditor extends React.Component<{
     }
 }
 
-class BooleanEditor extends React.Component<{
-    schema: BooleanSchema;
-    initialValue: boolean;
-    title?: string;
-    updateValue: (checked: boolean) => void;
-    theme?: string;
-    onDelete?: () => void;
-}, {}> {
+class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
     public onChange = (e: React.FormEvent<{ checked: boolean }>) => {
         this.props.updateValue(e.currentTarget.checked);
     }
     public render() {
-        const theme = getTheme(this.props.theme)
+        const theme = getTheme(this.props.theme);
         let deleteButton: JSX.Element | null = null;
         if (this.props.onDelete) {
             deleteButton = <button className={theme.button} onClick={this.props.onDelete}>delete</button>;
-        };
+        }
         return (
             <div className={theme.row}>
                 <label>
@@ -299,12 +295,7 @@ class BooleanEditor extends React.Component<{
     }
 }
 
-class NullEditor extends React.Component<{
-    schema: NullSchema;
-    title?: string;
-    theme?: string;
-    onDelete?: () => void;
-}, {}> {
+class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
     public render() {
         return (
             <div>
@@ -315,14 +306,7 @@ class NullEditor extends React.Component<{
     }
 }
 
-class StringEditor extends React.Component<{
-    schema: StringSchema;
-    initialValue: string;
-    title?: string;
-    updateValue: (value: string) => void;
-    theme?: string;
-    onDelete?: () => void;
-}, {}> {
+class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
     public onChange = (e: React.FormEvent<{ value: string }>) => {
         this.props.updateValue(e.currentTarget.value);
     }
@@ -338,66 +322,23 @@ class StringEditor extends React.Component<{
     }
 }
 
-export class Editor extends React.Component<{
-    schema: Schema;
-    initialValue?: any;
-    title?: string;
-    updateValue: (value: any) => void;
-    theme?: string;
-    onDelete?: () => void;
-}, {}> {
-    public onChange = (value: any) => {
-        this.props.updateValue(value);
-    }
+export class Editor extends React.Component<Props<Schema, ValueType>, {}> {
     public render() {
         switch (this.props.schema.type) {
             case "object":
-                return <ObjectEditor schema={this.props.schema}
-                    title={this.props.title}
-                    initialValue={this.props.initialValue}
-                    updateValue={this.onChange}
-                    theme={this.props.theme}
-                    onDelete={this.props.onDelete} />;
+                return <ObjectEditor {...this.props as Props<ObjectSchema, { [name: string]: ValueType }>} />;
             case "array":
-                return <ArrayEditor schema={this.props.schema}
-                    title={this.props.title}
-                    initialValue={this.props.initialValue}
-                    updateValue={this.onChange}
-                    theme={this.props.theme}
-                    onDelete={this.props.onDelete} />;
+                return <ArrayEditor {...this.props as Props<ArraySchema, ValueType[]>} />;
             case "number":
-                return <NumberEditor schema={this.props.schema}
-                    title={this.props.title}
-                    initialValue={this.props.initialValue}
-                    updateValue={this.onChange}
-                    theme={this.props.theme}
-                    onDelete={this.props.onDelete} />;
+                return <NumberEditor  {...this.props as Props<NumberSchema, number>} />;
             case "integer":
-                return <IntegerEditor schema={this.props.schema}
-                    title={this.props.title}
-                    initialValue={this.props.initialValue}
-                    updateValue={this.onChange}
-                    theme={this.props.theme}
-                    onDelete={this.props.onDelete} />;
+                return <IntegerEditor  {...this.props as Props<IntegerSchema, number>} />;
             case "boolean":
-                return <BooleanEditor schema={this.props.schema}
-                    title={this.props.title}
-                    initialValue={this.props.initialValue}
-                    updateValue={this.onChange}
-                    theme={this.props.theme}
-                    onDelete={this.props.onDelete} />;
+                return <BooleanEditor  {...this.props as Props<BooleanSchema, boolean>} />;
             case "null":
-                return <NullEditor schema={this.props.schema}
-                    title={this.props.title}
-                    theme={this.props.theme}
-                    onDelete={this.props.onDelete} />;
+                return <NullEditor  {...this.props as Props<NullSchema, null>} />;
             case "string":
-                return <StringEditor schema={this.props.schema}
-                    title={this.props.title}
-                    initialValue={this.props.initialValue}
-                    updateValue={this.onChange}
-                    theme={this.props.theme}
-                    onDelete={this.props.onDelete} />;
+                return <StringEditor {...this.props as Props<StringSchema, string>} />;
             default:
                 return null;
         }
