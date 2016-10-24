@@ -99,13 +99,15 @@ const schema = JSON.parse(`{
   }
 }`);
 
+const initialValue = {};
+
 class Main extends React.Component<{}, {}> {
     public value: any;
     public render() {
         return (
             <div>
                 <button onClick={() => console.log(this.value)}>show data</button>
-                <Editor schema={schema} initialValue={{}} updateValue={value => this.value = value} theme="bootstrap3" icon="fontawesome4" />
+                <Editor schema={schema} initialValue={initialValue} updateValue={value => this.value = value} theme="bootstrap3" icon="fontawesome4" />
             </div>
         );
     }

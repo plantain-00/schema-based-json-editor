@@ -8,6 +8,7 @@ type CommonSchema = {
     $schema?: string;
     title?: string;
     description?: string;
+    default?: ValueType;
 }
 
 type ObjectSchema = CommonSchema & {
@@ -96,23 +97,33 @@ function getIcon(name: IconName) {
 }
 
 function getDefaultValue(schema: Schema): ValueType {
-    switch (schema.type) {
-        case "object":
-            return {};
-        case "array":
-            return [];
-        case "number":
-            return 0;
-        case "integer":
-            return 0;
-        case "boolean":
-            return false;
-        case "string":
-            return "";
-        case "null":
-        default:
-            return null;
+    let value: ValueType;
+    if (schema.default !== undefined) {
+        value = schema.default;
+    } else {
+        switch (schema.type) {
+            case "object":
+                value = {};
+                break;
+            case "array":
+                value = [];
+                break;
+            case "number":
+            case "integer":
+                value = 0;
+                break;
+            case "boolean":
+                value = false;
+                break;
+            case "string":
+                value = "";
+                break;
+            case "null":
+            default:
+                value = null;
+        }
     }
+    return value;
 }
 
 class TitleEditor extends React.Component<{ title: string | undefined; onDelete?: () => void; theme?: ThemeName; icon?: IconName }, {}> {
@@ -161,7 +172,20 @@ type Props<T extends CommonSchema, V> = {
 
 class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]: ValueType }>, { collapsed?: boolean; value?: { [name: string]: ValueType } }> {
     public collapsed = false;
-    public value: { [name: string]: ValueType } = this.props.initialValue || {};
+    public value: { [name: string]: ValueType };
+    constructor(props: Props<ObjectSchema, { [name: string]: ValueType }>) {
+        super(props);
+        if (this.props.initialValue === undefined) {
+            this.value = getDefaultValue(this.props.schema) as { [name: string]: ValueType };
+        } else {
+            this.value = this.props.initialValue;
+        }
+    }
+    public componentDidMount() {
+        if (this.value !== this.props.initialValue) {
+            this.props.updateValue(this.value);
+        }
+    }
     public collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
@@ -178,10 +202,17 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
                     this.props.updateValue(this.value);
                 };
                 const schema = this.props.schema.properties[property];
+                let initialValue: { [name: string]: ValueType };
+                if (this.props.initialValue === undefined) {
+                    initialValue = getDefaultValue(schema) as { [name: string]: ValueType };
+                    this.value[property] = initialValue;
+                } else {
+                    initialValue = this.value[property] as { [name: string]: ValueType };
+                }
                 propertyElements.push(<Editor key={property}
                     schema={schema}
                     title={schema.title || property}
-                    initialValue={this.value[property] || getDefaultValue(schema)}
+                    initialValue={initialValue}
                     updateValue={onChange}
                     theme={this.props.theme}
                     icon={this.props.icon} />);
@@ -213,7 +244,20 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
 
 class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { value?: ValueType[]; collapsed?: boolean }> {
     public collapsed = false;
-    public value: ValueType[] = this.props.initialValue || [];
+    public value: ValueType[];
+    constructor(props: Props<ArraySchema, ValueType[]>) {
+        super(props);
+        if (this.props.initialValue === undefined) {
+            this.value = getDefaultValue(this.props.schema) as ValueType[];
+        } else {
+            this.value = this.props.initialValue;
+        }
+    }
+    public componentDidMount() {
+        if (this.value !== this.props.initialValue) {
+            this.props.updateValue(this.value);
+        }
+    }
     public collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
@@ -278,6 +322,20 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
 }
 
 class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
+    public value: number;
+    constructor(props: Props<ArraySchema, number>) {
+        super(props);
+        if (this.props.initialValue === undefined) {
+            this.value = getDefaultValue(this.props.schema) as number;
+        } else {
+            this.value = this.props.initialValue;
+        }
+    }
+    public componentDidMount() {
+        if (this.value !== this.props.initialValue) {
+            this.props.updateValue(this.value);
+        }
+    }
     public onChange = (e: React.FormEvent<{ value: string }>) => {
         this.props.updateValue(toNumber(e.currentTarget.value));
     }
@@ -286,7 +344,7 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         return (
             <div className={theme.row}>
                 <TitleEditor {...this.props} />
-                <input className={theme.formControl} type="number" onChange={this.onChange} defaultValue={String(this.props.initialValue || 0)} />
+                <input className={theme.formControl} type="number" onChange={this.onChange} defaultValue={String(this.value)} />
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
             </div>
         );
@@ -294,6 +352,20 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
 }
 
 class IntegerEditor extends React.Component<Props<IntegerSchema, number>, {}> {
+    public value: number;
+    constructor(props: Props<ArraySchema, number>) {
+        super(props);
+        if (this.props.initialValue === undefined) {
+            this.value = getDefaultValue(this.props.schema) as number;
+        } else {
+            this.value = this.props.initialValue;
+        }
+    }
+    public componentDidMount() {
+        if (this.value !== this.props.initialValue) {
+            this.props.updateValue(this.value);
+        }
+    }
     public onChange = (e: React.FormEvent<{ value: string }>) => {
         this.props.updateValue(toInteger(e.currentTarget.value));
     }
@@ -302,7 +374,7 @@ class IntegerEditor extends React.Component<Props<IntegerSchema, number>, {}> {
         return (
             <div className={theme.row}>
                 <TitleEditor {...this.props} />
-                <input className={theme.formControl} type="number" onChange={this.onChange} defaultValue={String(this.props.initialValue || 0)} />
+                <input className={theme.formControl} type="number" onChange={this.onChange} defaultValue={String(this.value)} />
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
             </div>
         );
@@ -310,6 +382,20 @@ class IntegerEditor extends React.Component<Props<IntegerSchema, number>, {}> {
 }
 
 class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
+    public value: boolean;
+    constructor(props: Props<ArraySchema, boolean>) {
+        super(props);
+        if (this.props.initialValue === undefined) {
+            this.value = getDefaultValue(this.props.schema) as boolean;
+        } else {
+            this.value = this.props.initialValue;
+        }
+    }
+    public componentDidMount() {
+        if (this.value !== this.props.initialValue) {
+            this.props.updateValue(this.value);
+        }
+    }
     public onChange = (e: React.FormEvent<{ checked: boolean }>) => {
         this.props.updateValue(e.currentTarget.checked);
     }
@@ -323,7 +409,7 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
         return (
             <div className={theme.row}>
                 <label>
-                    <input className={theme.formControl} type="checkbox" onChange={this.onChange} checked={this.props.initialValue || false} />
+                    <input className={theme.formControl} type="checkbox" onChange={this.onChange} checked={this.value} />
                     {this.props.title}
                     {deleteButton}
                 </label>
@@ -334,6 +420,20 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
 }
 
 class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
+    public value: null;
+    constructor(props: Props<ArraySchema, null>) {
+        super(props);
+        if (this.props.initialValue === undefined) {
+            this.value = getDefaultValue(this.props.schema) as null;
+        } else {
+            this.value = this.props.initialValue;
+        }
+    }
+    public componentDidMount() {
+        if (this.value !== this.props.initialValue) {
+            this.props.updateValue(this.value);
+        }
+    }
     public render() {
         return (
             <div>
@@ -345,6 +445,20 @@ class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
 }
 
 class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
+    public value: string;
+    constructor(props: Props<ArraySchema, string>) {
+        super(props);
+        if (this.props.initialValue === undefined) {
+            this.value = getDefaultValue(this.props.schema) as string;
+        } else {
+            this.value = this.props.initialValue;
+        }
+    }
+    public componentDidMount() {
+        if (this.value !== this.props.initialValue) {
+            this.props.updateValue(this.value);
+        }
+    }
     public onChange = (e: React.FormEvent<{ value: string }>) => {
         this.props.updateValue(e.currentTarget.value);
     }
@@ -353,7 +467,7 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         return (
             <div className={theme.row}>
                 <TitleEditor {...this.props} />
-                <input className={theme.formControl} type="text" onChange={this.onChange} defaultValue={this.props.initialValue || ""} />
+                <input className={theme.formControl} type="text" onChange={this.onChange} defaultValue={this.value} />
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
             </div>
         );

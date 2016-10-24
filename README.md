@@ -1,7 +1,6 @@
 #### todo list
 
-+ validation initial value
-+ fields: minimum, exclusiveMinimum, required, minItems, uniqueItems, readonly, default, enum
++ fields: minimum, exclusiveMinimum, required, minItems, uniqueItems, readonly, enum
 + multiple language
 + code edit
 + angular2 component
