@@ -85,6 +85,16 @@ const schema = JSON.parse(`{
           "name": "Walter"
         }
       ]
+    },
+    "numbers": {
+      "type": "array",
+      "format": "table",
+      "title": "Numbers",
+      "uniqueItems": true,
+      "items": {
+        "type": "number",
+        "title": "Number"
+      }
     }
   }
 }`);
@@ -95,7 +105,7 @@ class Main extends React.Component<{}, {}> {
         return (
             <div>
                 <button onClick={() => console.log(this.value)}>show data</button>
-                <Editor schema={schema} keyName="root" initialValue={{}} updateValue={value => this.value = value} />
+                <Editor schema={schema} initialValue={{}} updateValue={value => this.value = value} theme="bootstrap3" />
             </div>
         );
     }
