@@ -26,18 +26,16 @@ type ArraySchema = CommonSchema & {
 }
 
 type NumberSchema = CommonSchema & {
-    type: "number";
+    type: "number" | "integer";
     minimum?: number;
     exclusiveMinimum?: boolean;
-}
-
-type IntegerSchema = CommonSchema & {
-    type: "integer";
+    enum?: number[];
 }
 
 type StringSchema = CommonSchema & {
     type: "string";
     format?: "color";
+    enum?: string[];
 }
 
 type BooleanSchema = CommonSchema & {
@@ -48,7 +46,7 @@ type NullSchema = CommonSchema & {
     type: "null";
 }
 
-type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | IntegerSchema | BooleanSchema | NullSchema;
+type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema;
 
 type ThemeName = "bootstrap3" | undefined;
 
@@ -112,13 +110,21 @@ function getDefaultValue(schema: Schema): ValueType {
                 break;
             case "number":
             case "integer":
-                value = 0;
+                if (schema.enum !== undefined && schema.enum.length > 0) {
+                    value = schema.enum[0];
+                } else {
+                    value = 0;
+                }
                 break;
             case "boolean":
                 value = false;
                 break;
             case "string":
-                value = "";
+                if (schema.enum !== undefined && schema.enum.length > 0) {
+                    value = schema.enum[0];
+                } else {
+                    value = "";
+                }
                 break;
             case "null":
             default:
@@ -346,52 +352,38 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         }
     }
     public onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.props.updateValue(toNumber(e.currentTarget.value));
-    }
-    public render() {
-        const theme = getTheme(this.props.theme);
-        return (
-            <div className={theme.row}>
-                <TitleEditor {...this.props} />
-                <input className={theme.formControl}
-                    type="number"
-                    onChange={this.onChange}
-                    defaultValue={String(this.value)}
-                    readOnly={this.props.readonly || this.props.schema.readonly} />
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
-            </div>
-        );
-    }
-}
-
-class IntegerEditor extends React.Component<Props<IntegerSchema, number>, {}> {
-    public value: number;
-    constructor(props: Props<ArraySchema, number>) {
-        super(props);
-        if (this.props.initialValue === undefined) {
-            this.value = getDefaultValue(this.props.schema) as number;
+        if (this.props.schema.type === "integer") {
+            this.props.updateValue(toInteger(e.currentTarget.value));
         } else {
-            this.value = this.props.initialValue;
+            this.props.updateValue(toNumber(e.currentTarget.value));
         }
-    }
-    public componentDidMount() {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
-    }
-    public onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.props.updateValue(toInteger(e.currentTarget.value));
     }
     public render() {
         const theme = getTheme(this.props.theme);
-        return (
-            <div className={theme.row}>
-                <TitleEditor {...this.props} />
+        let control: JSX.Element | null = null;
+        if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
+            control = (
                 <input className={theme.formControl}
                     type="number"
                     onChange={this.onChange}
                     defaultValue={String(this.value)}
                     readOnly={this.props.readonly || this.props.schema.readonly} />
+            );
+        } else {
+            const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
+            control = (
+                <select className={theme.formControl}
+                    type="number"
+                    onChange={this.onChange}
+                    defaultValue={String(this.value)} >
+                    {options}
+                </select>
+            );
+        }
+        return (
+            <div className={theme.row}>
+                <TitleEditor {...this.props} />
+                {control}
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
             </div>
         );
@@ -486,14 +478,30 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
     public render() {
         const theme = getTheme(this.props.theme);
         const type = this.props.schema.format === "color" ? "color" : "text";
-        return (
-            <div className={theme.row}>
-                <TitleEditor {...this.props} />
+        let control: JSX.Element | null = null;
+        if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
+            control = (
                 <input className={theme.formControl}
                     type={type}
                     onChange={this.onChange}
                     defaultValue={this.value}
                     readOnly={this.props.readonly || this.props.schema.readonly} />
+            );
+        } else {
+            const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
+            control = (
+                <select className={theme.formControl}
+                    type={type}
+                    onChange={this.onChange}
+                    defaultValue={this.value}>
+                    {options}
+                </select>
+            );
+        }
+        return (
+            <div className={theme.row}>
+                <TitleEditor {...this.props} />
+                {control}
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
             </div>
         );
@@ -508,9 +516,8 @@ export class Editor extends React.Component<Props<Schema, ValueType>, {}> {
             case "array":
                 return <ArrayEditor {...this.props as Props<ArraySchema, ValueType[]>} />;
             case "number":
-                return <NumberEditor  {...this.props as Props<NumberSchema, number>} />;
             case "integer":
-                return <IntegerEditor  {...this.props as Props<IntegerSchema, number>} />;
+                return <NumberEditor  {...this.props as Props<NumberSchema, number>} />;
             case "boolean":
                 return <BooleanEditor  {...this.props as Props<BooleanSchema, boolean>} />;
             case "null":
