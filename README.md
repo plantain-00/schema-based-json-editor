@@ -3,7 +3,7 @@
 + object: required
 + array: minItems, uniqueItems
 + number: minimum, exclusiveMinimum, maximum, exclusiveMaximum
-+ string: pattern, format: "date-time" | "email" | "hostname" | "ipv4" | "ipv6" | "uri";
++ string: format: "date-time" | "email" | "hostname" | "ipv4" | "ipv6" | "uri";
 + code edit, textarea
 + angular2 component
 + vuejs component

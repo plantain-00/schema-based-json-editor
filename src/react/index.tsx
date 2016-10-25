@@ -100,6 +100,11 @@ type Locale = {
         add: string;
         delete: string;
     },
+    error: {
+        minLength: string;
+        maxLength: string;
+        pattern: string;
+    },
 }
 
 export const defaultLocale: Locale = {
@@ -108,6 +113,11 @@ export const defaultLocale: Locale = {
         expand: "Expand",
         add: "Add",
         delete: "Delete",
+    },
+    error: {
+        minLength: "Value must be at least {0} characters long.",
+        maxLength: "Value must be at most {0} characters long.",
+        pattern: "Value doesn't match the pattern {0}.",
     },
 };
 
@@ -118,6 +128,11 @@ export const locales: { [name: string]: Locale } = {
             expand: "显示",
             add: "增加",
             delete: "删除",
+        },
+        error: {
+            minLength: "要求至少 {0} 字符。",
+            maxLength: "要求至多 {0} 字符。",
+            pattern: "要求匹配模式 {0}。",
         },
     },
 };
@@ -554,12 +569,17 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
     public validate() {
         if (this.props.schema.minLength !== undefined
             && this.value.length < this.props.schema.minLength) {
-            this.errorMessage = `Value must be at least ${this.props.schema.minLength} characters long.`;
+            this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
             return;
         }
         if (this.props.schema.maxLength !== undefined
             && this.value.length > this.props.schema.maxLength) {
-            this.errorMessage = `Value must be at most ${this.props.schema.maxLength} characters long.`;
+            this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
+            return;
+        }
+        if (this.props.schema.pattern !== undefined
+            && !this.value.match(this.props.schema.pattern)) {
+            this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
             return;
         }
         this.errorMessage = "";
