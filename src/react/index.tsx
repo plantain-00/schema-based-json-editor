@@ -37,6 +37,7 @@ type IntegerSchema = CommonSchema & {
 
 type StringSchema = CommonSchema & {
     type: "string";
+    format?: "color";
 }
 
 type BooleanSchema = CommonSchema & {
@@ -484,11 +485,12 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
     }
     public render() {
         const theme = getTheme(this.props.theme);
+        const type = this.props.schema.format === "color" ? "color" : "text";
         return (
             <div className={theme.row}>
                 <TitleEditor {...this.props} />
                 <input className={theme.formControl}
-                    type="text"
+                    type={type}
                     onChange={this.onChange}
                     defaultValue={this.value}
                     readOnly={this.props.readonly || this.props.schema.readonly} />
