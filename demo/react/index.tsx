@@ -5,6 +5,7 @@ import { JSONEditor } from "../../src/react/index";
 const schema = JSON.parse(`{
   "title": "Person",
   "type": "object",
+  "required": ["name", "age", "location", "favorite_color", "pets"],
   "properties": {
     "name": {
       "type": "string",
@@ -18,6 +19,9 @@ const schema = JSON.parse(`{
       "default": 25,
       "minimum": 18,
       "maximum": 99
+    },
+    "isOld": {
+      "type": "boolean"
     },
     "favorite_color": {
       "type": "string",
@@ -53,7 +57,8 @@ const schema = JSON.parse(`{
             "state": "location.state"
           }
         }
-      }
+      },
+      "required": ["state"]
     },
     "pets": {
       "type": "array",
@@ -63,6 +68,7 @@ const schema = JSON.parse(`{
       "items": {
         "type": "object",
         "title": "Pet",
+        "required": ["type", "name"],
         "properties": {
           "type": {
             "type": "string",
@@ -108,7 +114,8 @@ class Main extends React.Component<{}, {}> {
     public render() {
         return (
             <div>
-                <button onClick={() => console.log(this.value)}>show data</button>
+                <button onClick={() => console.log(this.value)}>show data in console</button>
+                <button onClick={() => console.log(schema)}>show schema in console</button>
                 <JSONEditor schema={schema}
                     initialValue={initialValue}
                     updateValue={value => this.value = value}

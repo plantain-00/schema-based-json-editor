@@ -61,6 +61,7 @@ type Theme = {
     help: string;
     errorRow: string;
     label: string;
+    optionalCheckbox: string;
 }
 
 export const themes: { [name: string]: Theme } = {
@@ -72,6 +73,7 @@ export const themes: { [name: string]: Theme } = {
         help: "help-block",
         errorRow: "row has-error",
         label: "control-label",
+        optionalCheckbox: "checkbox",
     },
 };
 
@@ -83,6 +85,7 @@ const defaultTheme: Theme = {
     help: "",
     errorRow: "",
     label: "",
+    optionalCheckbox: "",
 };
 
 function getTheme(name: string | undefined | Theme): Theme {
@@ -261,39 +264,34 @@ class TitleEditor extends React.Component<{ title: string | undefined; onDelete?
     }
 }
 
-class DescriptionEditor extends React.Component<{ description: string | undefined; theme: Theme }, {}> {
-    public render() {
-        if (this.props.description) {
-            return <p className={this.props.theme.help}>{this.props.description}</p>;
-        } else {
-            return null;
-        }
-    }
-}
-
 type ValueType = { [name: string]: any } | any[] | number | boolean | string | null
 
 type Props<TSchema extends CommonSchema, TValue> = {
     schema: TSchema;
     initialValue: TValue;
     title?: string;
-    updateValue: (value: TValue) => void;
+    updateValue: (value?: TValue) => void;
     theme: Theme;
     icon: Icon;
     locale: Locale;
     onDelete?: () => void;
     readonly?: boolean;
+    required?: boolean;
 }
 
 class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]: ValueType }>, { collapsed?: boolean; value?: { [name: string]: ValueType } }> {
     public collapsed = false;
-    public value: { [name: string]: ValueType };
+    public value?: { [name: string]: ValueType };
     constructor(props: Props<ObjectSchema, { [name: string]: ValueType }>) {
         super(props);
-        if (this.props.initialValue === undefined) {
-            this.value = getDefaultValue(this.props.schema) as { [name: string]: ValueType };
+        if (this.props.required) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as { [name: string]: ValueType };
+            } else {
+                this.value = this.props.initialValue;
+            }
         } else {
-            this.value = this.props.initialValue;
+            this.value = undefined;
         }
     }
     public componentDidMount() {
@@ -305,13 +303,26 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
+    public toggleOptional = () => {
+        if (this.value === undefined) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as { [name: string]: ValueType };
+            } else {
+                this.value = this.props.initialValue;
+            }
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
+    }
     public render() {
         let childrenElement: JSX.Element | null = null;
-        if (!this.collapsed) {
+        if (!this.collapsed && this.value !== undefined) {
             const propertyElements: JSX.Element[] = [];
             for (const property in this.props.schema.properties) {
                 const onChange = (value: ValueType) => {
-                    this.value[property] = value;
+                    this.value![property] = value;
                     this.setState({ value: this.value });
                     this.props.updateValue(this.value);
                 };
@@ -331,6 +342,7 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
                     theme={this.props.theme}
                     icon={this.props.icon}
                     locale={this.props.locale}
+                    required={this.props.schema.required && this.props.schema.required.some(r => r === property)}
                     readonly={this.props.readonly || this.props.schema.readonly} />);
             }
             childrenElement = (
@@ -343,6 +355,17 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
             deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
         }
+        let optionalCheckbox: JSX.Element | null = null;
+        if (!this.props.required) {
+            optionalCheckbox = (
+                <div className={this.props.theme.optionalCheckbox}>
+                    <label>
+                        <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                        is undefined
+                    </label>
+                </div>
+            );
+        }
         return (
             <div>
                 <h3>
@@ -350,7 +373,8 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
                     <button className={this.props.theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon.expand : this.props.icon.collapse}</button>
                     {deleteButton}
                 </h3>
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
+                <p className={this.props.theme.help}>{this.props.schema.description}</p>
+                {optionalCheckbox}
                 {childrenElement}
             </div >
         );
@@ -359,13 +383,17 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
 
 class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { value?: ValueType[]; collapsed?: boolean }> {
     public collapsed = false;
-    public value: ValueType[];
+    public value?: ValueType[];
     constructor(props: Props<ArraySchema, ValueType[]>) {
         super(props);
-        if (this.props.initialValue === undefined) {
-            this.value = getDefaultValue(this.props.schema) as ValueType[];
+        if (this.props.required) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as ValueType[];
+            } else {
+                this.value = this.props.initialValue;
+            }
         } else {
-            this.value = this.props.initialValue;
+            this.value = undefined;
         }
     }
     public componentDidMount() {
@@ -377,18 +405,31 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
+    public toggleOptional = () => {
+        if (this.value === undefined) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as ValueType[];
+            } else {
+                this.value = this.props.initialValue;
+            }
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
+    }
     public render() {
         let childrenElement: JSX.Element | null = null;
-        if (!this.collapsed) {
+        if (this.value !== undefined && !this.collapsed) {
             const itemElements: JSX.Element[] = [];
             for (let i = 0; i < this.value.length; i++) {
                 const onChange = (value: ValueType) => {
-                    this.value[i] = value;
+                    this.value![i] = value;
                     this.setState({ value: this.value });
                     this.props.updateValue(this.value);
                 };
                 const onDelete = () => {
-                    this.value.splice(i, 1);
+                    this.value!.splice(i, 1);
                     this.setState({ value: this.value });
                     this.props.updateValue(this.value);
                 };
@@ -401,6 +442,7 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                             theme={this.props.theme}
                             icon={this.props.icon}
                             locale={this.props.locale}
+                            required={true}
                             readonly={this.props.readonly || this.props.schema.readonly}
                             onDelete={onDelete} />
                     </div>
@@ -417,13 +459,24 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
             deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
         }
         let addButton: JSX.Element | null = null;
-        if (!this.props.readonly) {
+        if (!this.props.readonly && this.value !== undefined) {
             const addItem = () => {
-                this.value.push(getDefaultValue(this.props.schema.items));
+                this.value!.push(getDefaultValue(this.props.schema.items));
                 this.setState({ value: this.value });
                 this.props.updateValue(this.value);
             };
             addButton = <button className={this.props.theme.button} onClick={addItem}>{this.props.icon.add}</button>;
+        }
+        let optionalCheckbox: JSX.Element | null = null;
+        if (!this.props.required) {
+            optionalCheckbox = (
+                <div className={this.props.theme.optionalCheckbox}>
+                    <label>
+                        <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                        is undefined
+                    </label>
+                </div>
+            );
         }
         return (
             <div>
@@ -433,7 +486,8 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                     {addButton}
                     {deleteButton}
                 </h3>
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
+                <p className={this.props.theme.help}>{this.props.schema.description}</p>
+                {optionalCheckbox}
                 {childrenElement}
             </div>
         );
@@ -441,14 +495,18 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
 }
 
 class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
-    public value: number;
+    public value?: number;
     public errorMessage: string;
     constructor(props: Props<ArraySchema, number>) {
         super(props);
-        if (this.props.initialValue === undefined) {
-            this.value = getDefaultValue(this.props.schema) as number;
+        if (this.props.required) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as number;
+            } else {
+                this.value = this.props.initialValue;
+            }
         } else {
-            this.value = this.props.initialValue;
+            this.value = undefined;
         }
         this.validate();
     }
@@ -463,64 +521,95 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         this.props.updateValue(this.value);
     }
     public validate() {
-        if (this.props.schema.minimum !== undefined) {
-            if (this.props.schema.exclusiveMinimum) {
-                if (this.value <= this.props.schema.minimum) {
-                    this.errorMessage = this.props.locale.error.largerThan.replace("{0}", String(this.props.schema.minimum));
-                    return;
+        if (this.value !== undefined) {
+            if (this.props.schema.minimum !== undefined) {
+                if (this.props.schema.exclusiveMinimum) {
+                    if (this.value <= this.props.schema.minimum) {
+                        this.errorMessage = this.props.locale.error.largerThan.replace("{0}", String(this.props.schema.minimum));
+                        return;
+                    }
+                } else {
+                    if (this.value < this.props.schema.minimum) {
+                        this.errorMessage = this.props.locale.error.minimum.replace("{0}", String(this.props.schema.minimum));
+                        return;
+                    }
                 }
-            } else {
-                if (this.value < this.props.schema.minimum) {
-                    this.errorMessage = this.props.locale.error.minimum.replace("{0}", String(this.props.schema.minimum));
-                    return;
+            }
+            if (this.props.schema.maximum !== undefined) {
+                if (this.props.schema.exclusiveMaximum) {
+                    if (this.value >= this.props.schema.maximum) {
+                        this.errorMessage = this.props.locale.error.smallerThan.replace("{0}", String(this.props.schema.maximum));
+                        return;
+                    }
+                } else {
+                    if (this.value > this.props.schema.maximum) {
+                        this.errorMessage = this.props.locale.error.maximum.replace("{0}", String(this.props.schema.maximum));
+                        return;
+                    }
                 }
             }
         }
-        if (this.props.schema.maximum !== undefined) {
-            if (this.props.schema.exclusiveMaximum) {
-                if (this.value >= this.props.schema.maximum) {
-                    this.errorMessage = this.props.locale.error.smallerThan.replace("{0}", String(this.props.schema.maximum));
-                    return;
-                }
-            } else {
-                if (this.value > this.props.schema.maximum) {
-                    this.errorMessage = this.props.locale.error.maximum.replace("{0}", String(this.props.schema.maximum));
-                    return;
-                }
-            }
-        }
+
         this.errorMessage = "";
+    }
+    public toggleOptional = () => {
+        if (this.value === undefined) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as number;
+            } else {
+                this.value = this.props.initialValue;
+            }
+            this.validate();
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
     }
     public render() {
         let control: JSX.Element | null = null;
-        if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
-            control = (
-                <input className={this.props.theme.formControl}
-                    type="number"
-                    onChange={this.onChange}
-                    defaultValue={String(this.value)}
-                    readOnly={this.props.readonly || this.props.schema.readonly} />
-            );
-        } else {
-            const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
-            control = (
-                <select className={this.props.theme.formControl}
-                    type="number"
-                    onChange={this.onChange}
-                    defaultValue={String(this.value)} >
-                    {options}
-                </select>
-            );
+        if (this.value !== undefined) {
+            if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
+                control = (
+                    <input className={this.props.theme.formControl}
+                        type="number"
+                        onChange={this.onChange}
+                        defaultValue={String(this.value)}
+                        readOnly={this.props.readonly || this.props.schema.readonly} />
+                );
+            } else {
+                const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
+                control = (
+                    <select className={this.props.theme.formControl}
+                        type="number"
+                        onChange={this.onChange}
+                        defaultValue={String(this.value)} >
+                        {options}
+                    </select>
+                );
+            }
         }
         let errorDescription: JSX.Element | null = null;
         if (this.errorMessage) {
-            errorDescription = <DescriptionEditor description={this.errorMessage} theme={this.props.theme} />;
+            errorDescription = <p className={this.errorMessage}>{this.props.schema.description}</p>;
+        }
+        let optionalCheckbox: JSX.Element | null = null;
+        if (!this.props.required) {
+            optionalCheckbox = (
+                <div className={this.props.theme.optionalCheckbox}>
+                    <label>
+                        <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                        is undefined
+                    </label>
+                </div>
+            );
         }
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <TitleEditor {...this.props} />
+                {optionalCheckbox}
                 {control}
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
+                <p className={this.props.theme.help}>{this.props.schema.description}</p>
                 {errorDescription}
             </div>
         );
@@ -528,13 +617,17 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
 }
 
 class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
-    public value: boolean;
+    public value?: boolean;
     constructor(props: Props<ArraySchema, boolean>) {
         super(props);
-        if (this.props.initialValue === undefined) {
-            this.value = getDefaultValue(this.props.schema) as boolean;
+        if (this.props.required) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as boolean;
+            } else {
+                this.value = this.props.initialValue;
+            }
         } else {
-            this.value = this.props.initialValue;
+            this.value = undefined;
         }
     }
     public componentDidMount() {
@@ -543,38 +636,75 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
         }
     }
     public onChange = (e: React.FormEvent<{ checked: boolean }>) => {
-        this.props.updateValue(e.currentTarget.checked);
+        this.value = e.currentTarget.checked;
+        this.props.updateValue(this.value);
+    }
+    public toggleOptional = () => {
+        if (this.value === undefined) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as boolean;
+            } else {
+                this.value = this.props.initialValue;
+            }
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
     }
     public render() {
-        let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
-            deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
+        let control: JSX.Element | null = null;
+        if (this.value !== undefined) {
+            let deleteButton: JSX.Element | null = null;
+            if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
+                deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
+            }
+            control = (
+                <div className={this.props.theme.optionalCheckbox}>
+                    <label>
+                        <input type="checkbox"
+                            onChange={this.onChange}
+                            checked={this.value}
+                            readOnly={this.props.readonly || this.props.schema.readonly} />
+                        {this.props.title}
+                    </label>
+                </div>
+            );
+        }
+        let optionalCheckbox: JSX.Element | null = null;
+        if (!this.props.required) {
+            optionalCheckbox = (
+                <div className={this.props.theme.optionalCheckbox}>
+                    <label>
+                        <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                        is undefined
+                    </label>
+                </div>
+            );
         }
         return (
             <div className={this.props.theme.row}>
-                <label>
-                    <input className={this.props.theme.formControl}
-                        type="checkbox"
-                        onChange={this.onChange}
-                        checked={this.value}
-                        readOnly={this.props.readonly || this.props.schema.readonly} />
-                    {this.props.title}
-                    {deleteButton}
-                </label>
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
+                <TitleEditor {...this.props} />
+                {optionalCheckbox}
+                {control}
+                <p className={this.props.theme.help}>{this.props.schema.description}</p>
             </div>
         );
     }
 }
 
 class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
-    public value: null;
+    public value?: null;
     constructor(props: Props<ArraySchema, null>) {
         super(props);
-        if (this.props.initialValue === undefined) {
-            this.value = getDefaultValue(this.props.schema) as null;
+        if (this.props.required) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as null;
+            } else {
+                this.value = this.props.initialValue;
+            }
         } else {
-            this.value = this.props.initialValue;
+            this.value = undefined;
         }
     }
     public componentDidMount() {
@@ -582,25 +712,54 @@ class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
             this.props.updateValue(this.value);
         }
     }
+    public toggleOptional = () => {
+        if (this.value === undefined) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as null;
+            } else {
+                this.value = this.props.initialValue;
+            }
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
+    }
     public render() {
+        let optionalCheckbox: JSX.Element | null = null;
+        if (!this.props.required) {
+            optionalCheckbox = (
+                <div className={this.props.theme.optionalCheckbox}>
+                    <label>
+                        <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                        is undefined
+                    </label>
+                </div>
+            );
+        }
         return (
             <div>
                 <TitleEditor {...this.props} />
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
+                {optionalCheckbox}
+                <p className={this.props.theme.help}>{this.props.schema.description}</p>
             </div>
         );
     }
 }
 
 class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
-    public value: string;
+    public value?: string;
     public errorMessage: string;
     constructor(props: Props<ArraySchema, string>) {
         super(props);
-        if (this.props.initialValue === undefined) {
-            this.value = getDefaultValue(this.props.schema) as string;
+        if (this.props.required) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as string;
+            } else {
+                this.value = this.props.initialValue;
+            }
         } else {
-            this.value = this.props.initialValue;
+            this.value = undefined;
         }
         this.validate();
     }
@@ -615,53 +774,85 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         this.props.updateValue(this.value);
     }
     public validate() {
-        if (this.props.schema.minLength !== undefined
-            && this.value.length < this.props.schema.minLength) {
-            this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
-            return;
+        if (this.value !== undefined) {
+            if (this.props.schema.minLength !== undefined
+                && this.value.length < this.props.schema.minLength) {
+                this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
+                return;
+            }
+            if (this.props.schema.maxLength !== undefined
+                && this.value.length > this.props.schema.maxLength) {
+                this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
+                return;
+            }
+            if (this.props.schema.pattern !== undefined
+                && !this.value.match(this.props.schema.pattern)) {
+                this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
+                return;
+            }
         }
-        if (this.props.schema.maxLength !== undefined
-            && this.value.length > this.props.schema.maxLength) {
-            this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
-            return;
-        }
-        if (this.props.schema.pattern !== undefined
-            && !this.value.match(this.props.schema.pattern)) {
-            this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
-            return;
-        }
+
         this.errorMessage = "";
+    }
+    public toggleOptional = () => {
+        if (this.value === undefined) {
+            if (this.props.initialValue === undefined) {
+                this.value = getDefaultValue(this.props.schema) as string;
+            } else {
+                this.value = this.props.initialValue;
+            }
+            this.validate();
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
     }
     public render() {
         let control: JSX.Element | null = null;
-        if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
-            control = (
-                <input className={this.props.theme.formControl}
-                    type={this.props.schema.format}
-                    onChange={this.onChange}
-                    defaultValue={this.value}
-                    readOnly={this.props.readonly || this.props.schema.readonly} />
-            );
-        } else {
-            const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
-            control = (
-                <select className={this.props.theme.formControl}
-                    type={this.props.schema.format}
-                    onChange={this.onChange}
-                    defaultValue={this.value}>
-                    {options}
-                </select>
-            );
+        if (this.value !== undefined) {
+            if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
+                control = (
+                    <input className={this.props.theme.formControl}
+                        type={this.props.schema.format}
+                        onChange={this.onChange}
+                        defaultValue={this.value}
+                        readOnly={this.props.readonly || this.props.schema.readonly} />
+                );
+            } else {
+                const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
+                control = (
+                    <select className={this.props.theme.formControl}
+                        type={this.props.schema.format}
+                        onChange={this.onChange}
+                        defaultValue={this.value}>
+                        {options}
+                    </select>
+                );
+            }
         }
+
         let errorDescription: JSX.Element | null = null;
         if (this.errorMessage) {
-            errorDescription = <DescriptionEditor description={this.errorMessage} theme={this.props.theme} />;
+            errorDescription = <p className={this.errorMessage}>{this.props.schema.description}</p>;
+        }
+        let optionalCheckbox: JSX.Element | null = null;
+        if (!this.props.required) {
+            optionalCheckbox = (
+                <div className={this.props.theme.optionalCheckbox}>
+                    <label>
+                        <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                        is undefined
+                    </label>
+                </div>
+            );
         }
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <TitleEditor {...this.props} />
+                {optionalCheckbox}
                 {control}
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
+                <p className={this.props.theme.help}>{this.props.schema.description}</p>
                 {errorDescription}
             </div>
         );
@@ -694,7 +885,7 @@ export class JSONEditor extends React.Component<{
     schema: Schema;
     initialValue: ValueType;
     title?: string;
-    updateValue: (value: ValueType) => void;
+    updateValue: (value?: ValueType) => void;
     theme?: string;
     icon?: string;
     locale?: string;
@@ -713,6 +904,7 @@ export class JSONEditor extends React.Component<{
             theme,
             locale,
             icon,
+            required: true,
         };
         switch (this.props.schema.type) {
             case "object":
