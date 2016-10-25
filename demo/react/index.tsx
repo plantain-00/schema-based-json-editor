@@ -10,6 +10,7 @@ const schema = JSON.parse(`{
       "type": "string",
       "description": "First and Last name",
       "minLength": 4,
+      "maxLength": 20,
       "default": "Jeremy Dorn"
     },
     "age": {

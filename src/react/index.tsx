@@ -34,8 +34,11 @@ type NumberSchema = CommonSchema & {
 
 type StringSchema = CommonSchema & {
     type: "string";
-    format?: "color";
+    format?: "color" | "date-time" | "email" | "hostname" | "ipv4" | "ipv6" | "uri";
     enum?: string[];
+    minLength?: number;
+    maxLength?: number;
+    pattern?: string;
 }
 
 type BooleanSchema = CommonSchema & {
@@ -54,6 +57,8 @@ type Theme = {
     formControl: string;
     button: string;
     help: string;
+    errorRow: string;
+    label: string;
 }
 
 export const themes: { [name: string]: Theme } = {
@@ -63,15 +68,19 @@ export const themes: { [name: string]: Theme } = {
         formControl: "form-control",
         button: "btn btn-default",
         help: "help-block",
+        errorRow: "row has-error",
+        label: "control-label",
     },
 };
 
-const defaultTheme = {
+const defaultTheme: Theme = {
     rowContainer: "",
     row: "",
     formControl: "",
     button: "",
     help: "",
+    errorRow: "",
+    label: "",
 };
 
 function getTheme(name: string | undefined | Theme): Theme {
@@ -93,7 +102,7 @@ type Locale = {
     },
 }
 
-export const defaultLocale = {
+export const defaultLocale: Locale = {
     button: {
         collapse: "Collapse",
         expand: "Expand",
@@ -212,7 +221,7 @@ class TitleEditor extends React.Component<{ title: string | undefined; onDelete?
                 deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
             }
             return (
-                <label>
+                <label className={this.props.theme.label}>
                     {this.props.title}
                     {deleteButton}
                 </label>
@@ -296,23 +305,23 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
                     readonly={this.props.readonly || this.props.schema.readonly} />);
             }
             childrenElement = (
-                <div className={this.props.theme!.rowContainer}>
+                <div className={this.props.theme.rowContainer}>
                     {propertyElements}
                 </div>
             );
         }
         let deleteButton: JSX.Element | null = null;
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
-            deleteButton = <button className={this.props.theme!.button} onClick={this.props.onDelete}>{this.props.icon!.delete}</button>;
+            deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
         }
         return (
             <div>
                 <h3>
                     {this.props.title || this.props.schema.title}
-                    <button className={this.props.theme!.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon!.expand : this.props.icon!.collapse}</button>
+                    <button className={this.props.theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon.expand : this.props.icon.collapse}</button>
                     {deleteButton}
                 </h3>
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
+                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
                 {childrenElement}
             </div >
         );
@@ -355,7 +364,7 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                     this.props.updateValue(this.value);
                 };
                 itemElements.push((
-                    <div key={i} className={this.props.theme!.rowContainer}>
+                    <div key={i} className={this.props.theme.rowContainer}>
                         <Editor schema={this.props.schema.items}
                             title={`[${i}]`}
                             initialValue={this.value[i]}
@@ -369,14 +378,14 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                 ));
             }
             childrenElement = (
-                <div className={this.props.theme!.rowContainer}>
+                <div className={this.props.theme.rowContainer}>
                     {itemElements}
                 </div>
             );
         }
         let deleteButton: JSX.Element | null = null;
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
-            deleteButton = <button className={this.props.theme!.button} onClick={this.props.onDelete}>{this.props.icon!.delete}</button>;
+            deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
         }
         let addButton: JSX.Element | null = null;
         if (!this.props.readonly) {
@@ -385,13 +394,13 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                 this.setState({ value: this.value });
                 this.props.updateValue(this.value);
             };
-            addButton = <button className={this.props.theme!.button} onClick={addItem}>{this.props.icon!.add}</button>;
+            addButton = <button className={this.props.theme.button} onClick={addItem}>{this.props.icon.add}</button>;
         }
         return (
             <div>
                 <h3>
                     {this.props.title || this.props.schema.title}
-                    <button className={this.props.theme!.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon!.expand : this.props.icon!.collapse}</button>
+                    <button className={this.props.theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon.expand : this.props.icon.collapse}</button>
                     {addButton}
                     {deleteButton}
                 </h3>
@@ -428,7 +437,7 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         let control: JSX.Element | null = null;
         if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
             control = (
-                <input className={this.props.theme!.formControl}
+                <input className={this.props.theme.formControl}
                     type="number"
                     onChange={this.onChange}
                     defaultValue={String(this.value)}
@@ -437,7 +446,7 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         } else {
             const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
             control = (
-                <select className={this.props.theme!.formControl}
+                <select className={this.props.theme.formControl}
                     type="number"
                     onChange={this.onChange}
                     defaultValue={String(this.value)} >
@@ -446,7 +455,7 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
             );
         }
         return (
-            <div className={this.props.theme!.row}>
+            <div className={this.props.theme.row}>
                 <TitleEditor {...this.props} />
                 {control}
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
@@ -476,12 +485,12 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
     public render() {
         let deleteButton: JSX.Element | null = null;
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
-            deleteButton = <button className={this.props.theme!.button} onClick={this.props.onDelete}>{this.props.icon!.delete}</button>;
+            deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
         }
         return (
-            <div className={this.props.theme!.row}>
+            <div className={this.props.theme.row}>
                 <label>
-                    <input className={this.props.theme!.formControl}
+                    <input className={this.props.theme.formControl}
                         type="checkbox"
                         onChange={this.onChange}
                         checked={this.value}
@@ -522,6 +531,7 @@ class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
 
 class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
     public value: string;
+    public errorMessage: string;
     constructor(props: Props<ArraySchema, string>) {
         super(props);
         if (this.props.initialValue === undefined) {
@@ -529,6 +539,7 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         } else {
             this.value = this.props.initialValue;
         }
+        this.validate();
     }
     public componentDidMount() {
         if (this.value !== this.props.initialValue) {
@@ -536,14 +547,29 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         }
     }
     public onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.props.updateValue(e.currentTarget.value);
+        this.value = e.currentTarget.value;
+        this.validate();
+        this.props.updateValue(this.value);
+    }
+    public validate() {
+        if (this.props.schema.minLength !== undefined
+            && this.value.length < this.props.schema.minLength) {
+            this.errorMessage = `Value must be at least ${this.props.schema.minLength} characters long.`;
+            return;
+        }
+        if (this.props.schema.maxLength !== undefined
+            && this.value.length > this.props.schema.maxLength) {
+            this.errorMessage = `Value must be at most ${this.props.schema.maxLength} characters long.`;
+            return;
+        }
+        this.errorMessage = "";
     }
     public render() {
         const type = this.props.schema.format === "color" ? "color" : "text";
         let control: JSX.Element | null = null;
         if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
             control = (
-                <input className={this.props.theme!.formControl}
+                <input className={this.props.theme.formControl}
                     type={type}
                     onChange={this.onChange}
                     defaultValue={this.value}
@@ -552,7 +578,7 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         } else {
             const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
             control = (
-                <select className={this.props.theme!.formControl}
+                <select className={this.props.theme.formControl}
                     type={type}
                     onChange={this.onChange}
                     defaultValue={this.value}>
@@ -560,11 +586,16 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
                 </select>
             );
         }
+        let errorDescription: JSX.Element | null = null;
+        if (this.errorMessage) {
+            errorDescription = <DescriptionEditor description={this.errorMessage} theme={this.props.theme} />;
+        }
         return (
-            <div className={this.props.theme!.row}>
+            <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <TitleEditor {...this.props} />
                 {control}
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
+                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
+                {errorDescription}
             </div>
         );
     }
