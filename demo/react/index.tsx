@@ -76,7 +76,8 @@ const schema = JSON.parse(`{
             "default": "dog"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "format": "time"
           }
         }
       },

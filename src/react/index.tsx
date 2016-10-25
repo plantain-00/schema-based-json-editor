@@ -36,7 +36,7 @@ type NumberSchema = CommonSchema & {
 
 type StringSchema = CommonSchema & {
     type: "string";
-    format?: "color" | "date-time" | "email" | "hostname" | "ipv4" | "ipv6" | "uri";
+    format?: "color" | "date" | "datetime" | "datetime-local" | "time" | "month" | "email" | "uri" | "url" | "week" | "hostname" | "ipv4" | "ipv6";
     enum?: string[];
     minLength?: number;
     maxLength?: number;
@@ -633,12 +633,11 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         this.errorMessage = "";
     }
     public render() {
-        const type = this.props.schema.format === "color" ? "color" : "text";
         let control: JSX.Element | null = null;
         if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
             control = (
                 <input className={this.props.theme.formControl}
-                    type={type}
+                    type={this.props.schema.format}
                     onChange={this.onChange}
                     defaultValue={this.value}
                     readOnly={this.props.readonly || this.props.schema.readonly} />
@@ -647,7 +646,7 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
             const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
             control = (
                 <select className={this.props.theme.formControl}
-                    type={type}
+                    type={this.props.schema.format}
                     onChange={this.onChange}
                     defaultValue={this.value}>
                     {options}

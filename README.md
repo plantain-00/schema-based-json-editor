@@ -2,7 +2,6 @@
 
 + object: required
 + array: minItems, uniqueItems
-+ string: format: "date-time" | "email" | "hostname" | "ipv4" | "ipv6" | "uri";
 + code edit, textarea
 + angular2 component
 + vuejs component
