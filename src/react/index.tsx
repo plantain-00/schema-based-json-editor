@@ -48,52 +48,122 @@ type NullSchema = CommonSchema & {
 
 type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema;
 
-type ThemeName = "bootstrap3" | undefined;
-
-function getTheme(name: ThemeName) {
-    if (name === "bootstrap3") {
-        return {
-            rowContainer: "well well-small",
-            row: "row",
-            formControl: "form-control",
-            button: "btn btn-default",
-            help: "help-block",
-        };
-    }
-    return {
-        rowContainer: "",
-        row: "",
-        formControl: "",
-        button: "",
-        help: "",
-    };
+type Theme = {
+    rowContainer: string;
+    row: string;
+    formControl: string;
+    button: string;
+    help: string;
 }
 
-type IconName = "bootstrap3" | "fontawesome4" | undefined;
+export const themes: { [name: string]: Theme } = {
+    "bootstrap3": {
+        rowContainer: "well well-small",
+        row: "row",
+        formControl: "form-control",
+        button: "btn btn-default",
+        help: "help-block",
+    },
+};
 
-function getIcon(name: IconName) {
-    if (name === "bootstrap3") {
-        return {
-            collapse: <i className="glyphicon glyphicon-chevron-down"></i> as string | JSX.Element,
-            expand: <i className="glyphicon glyphicon-chevron-right"></i> as string | JSX.Element,
-            add: <i className="glyphicon glyphicon-plus"></i> as string | JSX.Element,
-            delete: <i className="glyphicon glyphicon-remove"></i> as string | JSX.Element,
-        };
+const defaultTheme = {
+    rowContainer: "",
+    row: "",
+    formControl: "",
+    button: "",
+    help: "",
+};
+
+function getTheme(name: string | undefined | Theme): Theme {
+    if (name === undefined) {
+        return defaultTheme;
     }
-    if (name === "fontawesome4") {
-        return {
-            collapse: <i className="fa fa-caret-square-o-down"></i> as string | JSX.Element,
-            expand: <i className="fa fa-caret-square-o-right"></i> as string | JSX.Element,
-            add: <i className="fa fa-plus"></i> as string | JSX.Element,
-            delete: <i className="fa fa-times"></i> as string | JSX.Element,
-        };
+    if (typeof name === "string") {
+        return themes[name] || defaultTheme;
     }
-    return {
+    return name;
+}
+
+type Locale = {
+    button: {
+        collapse: string;
+        expand: string;
+        add: string;
+        delete: string;
+    },
+}
+
+export const defaultLocale = {
+    button: {
         collapse: "Collapse",
         expand: "Expand",
-        add: "add",
-        delete: "delete",
-    };
+        add: "Add",
+        delete: "Delete",
+    },
+};
+
+export const locales: { [name: string]: Locale } = {
+    "zh-cn": {
+        button: {
+            collapse: "折叠",
+            expand: "显示",
+            add: "增加",
+            delete: "删除",
+        },
+    },
+};
+
+function getLocale(name: string | undefined | Locale): Locale {
+    if (name === undefined) {
+        return defaultLocale;
+    }
+    if (typeof name === "string") {
+        return locales[name] || defaultLocale;
+    }
+    return name;
+}
+
+type Icon = {
+    collapse: string | JSX.Element;
+    expand: string | JSX.Element;
+    add: string | JSX.Element;
+    delete: string | JSX.Element;
+}
+
+export const icons: { [name: string]: Icon } = {
+    "bootstrap3": {
+        collapse: <i className="glyphicon glyphicon-chevron-down"></i> as string | JSX.Element,
+        expand: <i className="glyphicon glyphicon-chevron-right"></i> as string | JSX.Element,
+        add: <i className="glyphicon glyphicon-plus"></i> as string | JSX.Element,
+        delete: <i className="glyphicon glyphicon-remove"></i> as string | JSX.Element,
+    },
+    "fontawesome4": {
+        collapse: <i className="fa fa-caret-square-o-down"></i> as string | JSX.Element,
+        expand: <i className="fa fa-caret-square-o-right"></i> as string | JSX.Element,
+        add: <i className="fa fa-plus"></i> as string | JSX.Element,
+        delete: <i className="fa fa-times"></i> as string | JSX.Element,
+    },
+};
+
+function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
+    if (name === undefined) {
+        return {
+            collapse: locale.button.collapse,
+            expand: locale.button.expand,
+            add: locale.button.add,
+            delete: locale.button.delete,
+        };
+    }
+    if (typeof name === "string") {
+
+        return icons[name] || {
+            collapse: locale.button.collapse,
+            expand: locale.button.expand,
+            add: locale.button.add,
+            delete: locale.button.delete,
+        };
+    }
+    return name;
 }
 
 function getDefaultValue(schema: Schema): ValueType {
@@ -134,14 +204,12 @@ function getDefaultValue(schema: Schema): ValueType {
     return value;
 }
 
-class TitleEditor extends React.Component<{ title: string | undefined; onDelete?: () => void; theme?: ThemeName; icon?: IconName }, {}> {
+class TitleEditor extends React.Component<{ title: string | undefined; onDelete?: () => void; theme: Theme; icon: Icon; locale: Locale }, {}> {
     public render() {
         if (this.props.title) {
             let deleteButton: JSX.Element | null = null;
             if (this.props.onDelete) {
-                const theme = getTheme(this.props.theme);
-                const icon = getIcon(this.props.icon);
-                deleteButton = <button className={theme.button} onClick={this.props.onDelete}>{icon.delete}</button>;
+                deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
             }
             return (
                 <label>
@@ -155,11 +223,10 @@ class TitleEditor extends React.Component<{ title: string | undefined; onDelete?
     }
 }
 
-class DescriptionEditor extends React.Component<{ description: string | undefined; theme?: ThemeName }, {}> {
+class DescriptionEditor extends React.Component<{ description: string | undefined; theme: Theme }, {}> {
     public render() {
         if (this.props.description) {
-            const theme = getTheme(this.props.theme);
-            return <p className={theme.help}>{this.props.description}</p>;
+            return <p className={this.props.theme.help}>{this.props.description}</p>;
         } else {
             return null;
         }
@@ -168,21 +235,22 @@ class DescriptionEditor extends React.Component<{ description: string | undefine
 
 type ValueType = { [name: string]: any } | any[] | number | boolean | string | null
 
-type Props<T extends CommonSchema, V> = {
-    schema: T;
-    initialValue: V;
+type Props<TSchema extends CommonSchema, TValue, TTheme, TLocale, TIcon> = {
+    schema: TSchema;
+    initialValue: TValue;
     title?: string;
-    updateValue: (value: V) => void;
-    theme?: ThemeName;
+    updateValue: (value: TValue) => void;
+    theme?: TTheme;
+    icon?: TIcon;
+    locale?: TLocale;
     onDelete?: () => void;
-    icon?: IconName;
     readonly?: boolean;
 }
 
-class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]: ValueType }>, { collapsed?: boolean; value?: { [name: string]: ValueType } }> {
+class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]: ValueType }, Theme, Locale, Icon>, { collapsed?: boolean; value?: { [name: string]: ValueType } }> {
     public collapsed = false;
     public value: { [name: string]: ValueType };
-    constructor(props: Props<ObjectSchema, { [name: string]: ValueType }>) {
+    constructor(props: Props<ObjectSchema, { [name: string]: ValueType }, Theme, Locale, Icon>) {
         super(props);
         if (this.props.initialValue === undefined) {
             this.value = getDefaultValue(this.props.schema) as { [name: string]: ValueType };
@@ -201,7 +269,6 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
     }
     public render() {
         let childrenElement: JSX.Element | null = null;
-        const theme = getTheme(this.props.theme);
         if (!this.collapsed) {
             const propertyElements: JSX.Element[] = [];
             for (const property in this.props.schema.properties) {
@@ -224,38 +291,38 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
                     initialValue={initialValue}
                     updateValue={onChange}
                     theme={this.props.theme}
-                    readonly={this.props.readonly || this.props.schema.readonly}
-                    icon={this.props.icon} />);
+                    icon={this.props.icon}
+                    locale={this.props.locale}
+                    readonly={this.props.readonly || this.props.schema.readonly} />);
             }
             childrenElement = (
-                <div className={theme.rowContainer}>
+                <div className={this.props.theme!.rowContainer}>
                     {propertyElements}
                 </div>
             );
         }
-        const icon = getIcon(this.props.icon);
         let deleteButton: JSX.Element | null = null;
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
-            deleteButton = <button className={theme.button} onClick={this.props.onDelete}>{icon.delete}</button>;
+            deleteButton = <button className={this.props.theme!.button} onClick={this.props.onDelete}>{this.props.icon!.delete}</button>;
         }
         return (
             <div>
                 <h3>
                     {this.props.title || this.props.schema.title}
-                    <button className={theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? icon.expand : icon.collapse}</button>
+                    <button className={this.props.theme!.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon!.expand : this.props.icon!.collapse}</button>
                     {deleteButton}
                 </h3>
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
+                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
                 {childrenElement}
             </div >
         );
     }
 }
 
-class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { value?: ValueType[]; collapsed?: boolean }> {
+class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[], Theme, Locale, Icon>, { value?: ValueType[]; collapsed?: boolean }> {
     public collapsed = false;
     public value: ValueType[];
-    constructor(props: Props<ArraySchema, ValueType[]>) {
+    constructor(props: Props<ArraySchema, ValueType[], Theme, Locale, Icon>) {
         super(props);
         if (this.props.initialValue === undefined) {
             this.value = getDefaultValue(this.props.schema) as ValueType[];
@@ -273,7 +340,6 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
         this.setState({ collapsed: this.collapsed });
     }
     public render() {
-        const theme = getTheme(this.props.theme);
         let childrenElement: JSX.Element | null = null;
         if (!this.collapsed) {
             const itemElements: JSX.Element[] = [];
@@ -289,28 +355,28 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                     this.props.updateValue(this.value);
                 };
                 itemElements.push((
-                    <div key={i} className={theme.rowContainer}>
+                    <div key={i} className={this.props.theme!.rowContainer}>
                         <Editor schema={this.props.schema.items}
                             title={`[${i}]`}
                             initialValue={this.value[i]}
                             updateValue={onChange}
                             theme={this.props.theme}
                             icon={this.props.icon}
+                            locale={this.props.locale}
                             readonly={this.props.readonly || this.props.schema.readonly}
                             onDelete={onDelete} />
                     </div>
                 ));
             }
             childrenElement = (
-                <div className={theme.rowContainer}>
+                <div className={this.props.theme!.rowContainer}>
                     {itemElements}
                 </div>
             );
         }
-        const icon = getIcon(this.props.icon);
         let deleteButton: JSX.Element | null = null;
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
-            deleteButton = <button className={theme.button} onClick={this.props.onDelete}>{icon.delete}</button>;
+            deleteButton = <button className={this.props.theme!.button} onClick={this.props.onDelete}>{this.props.icon!.delete}</button>;
         }
         let addButton: JSX.Element | null = null;
         if (!this.props.readonly) {
@@ -319,26 +385,26 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                 this.setState({ value: this.value });
                 this.props.updateValue(this.value);
             };
-            addButton = <button className={theme.button} onClick={addItem}>{icon.add}</button>;
+            addButton = <button className={this.props.theme!.button} onClick={addItem}>{this.props.icon!.add}</button>;
         }
         return (
             <div>
                 <h3>
                     {this.props.title || this.props.schema.title}
-                    <button className={theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? icon.expand : icon.collapse}</button>
+                    <button className={this.props.theme!.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon!.expand : this.props.icon!.collapse}</button>
                     {addButton}
                     {deleteButton}
                 </h3>
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
+                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
                 {childrenElement}
             </div>
         );
     }
 }
 
-class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
+class NumberEditor extends React.Component<Props<NumberSchema, number, Theme, Locale, Icon>, {}> {
     public value: number;
-    constructor(props: Props<ArraySchema, number>) {
+    constructor(props: Props<ArraySchema, number, Theme, Locale, Icon>) {
         super(props);
         if (this.props.initialValue === undefined) {
             this.value = getDefaultValue(this.props.schema) as number;
@@ -359,11 +425,10 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         }
     }
     public render() {
-        const theme = getTheme(this.props.theme);
         let control: JSX.Element | null = null;
         if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
             control = (
-                <input className={theme.formControl}
+                <input className={this.props.theme!.formControl}
                     type="number"
                     onChange={this.onChange}
                     defaultValue={String(this.value)}
@@ -372,7 +437,7 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         } else {
             const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
             control = (
-                <select className={theme.formControl}
+                <select className={this.props.theme!.formControl}
                     type="number"
                     onChange={this.onChange}
                     defaultValue={String(this.value)} >
@@ -381,18 +446,22 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
             );
         }
         return (
-            <div className={theme.row}>
-                <TitleEditor {...this.props} />
+            <div className={this.props.theme!.row}>
+                <TitleEditor title={this.props.title}
+                    onDelete={this.props.onDelete}
+                    theme={this.props.theme!}
+                    icon={this.props.icon!}
+                    locale={this.props.locale!} />
                 {control}
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
+                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
             </div>
         );
     }
 }
 
-class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
+class BooleanEditor extends React.Component<Props<BooleanSchema, boolean, Theme, Locale, Icon>, {}> {
     public value: boolean;
-    constructor(props: Props<ArraySchema, boolean>) {
+    constructor(props: Props<ArraySchema, boolean, Theme, Locale, Icon>) {
         super(props);
         if (this.props.initialValue === undefined) {
             this.value = getDefaultValue(this.props.schema) as boolean;
@@ -409,16 +478,14 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
         this.props.updateValue(e.currentTarget.checked);
     }
     public render() {
-        const theme = getTheme(this.props.theme);
-        const icon = getIcon(this.props.icon);
         let deleteButton: JSX.Element | null = null;
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
-            deleteButton = <button className={theme.button} onClick={this.props.onDelete}>{icon.delete}</button>;
+            deleteButton = <button className={this.props.theme!.button} onClick={this.props.onDelete}>{this.props.icon!.delete}</button>;
         }
         return (
-            <div className={theme.row}>
+            <div className={this.props.theme!.row}>
                 <label>
-                    <input className={theme.formControl}
+                    <input className={this.props.theme!.formControl}
                         type="checkbox"
                         onChange={this.onChange}
                         checked={this.value}
@@ -426,15 +493,15 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
                     {this.props.title}
                     {deleteButton}
                 </label>
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
+                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
             </div>
         );
     }
 }
 
-class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
+class NullEditor extends React.Component<Props<NullSchema, null, Theme, Locale, Icon>, {}> {
     public value: null;
-    constructor(props: Props<ArraySchema, null>) {
+    constructor(props: Props<ArraySchema, null, Theme, Locale, Icon>) {
         super(props);
         if (this.props.initialValue === undefined) {
             this.value = getDefaultValue(this.props.schema) as null;
@@ -450,16 +517,20 @@ class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
     public render() {
         return (
             <div>
-                <TitleEditor {...this.props} />
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
+                <TitleEditor title={this.props.title}
+                    onDelete={this.props.onDelete}
+                    theme={this.props.theme!}
+                    icon={this.props.icon!}
+                    locale={this.props.locale!} />
+                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
             </div>
         );
     }
 }
 
-class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
+class StringEditor extends React.Component<Props<StringSchema, string, Theme, Locale, Icon>, {}> {
     public value: string;
-    constructor(props: Props<ArraySchema, string>) {
+    constructor(props: Props<ArraySchema, string, Theme, Locale, Icon>) {
         super(props);
         if (this.props.initialValue === undefined) {
             this.value = getDefaultValue(this.props.schema) as string;
@@ -476,12 +547,11 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         this.props.updateValue(e.currentTarget.value);
     }
     public render() {
-        const theme = getTheme(this.props.theme);
         const type = this.props.schema.format === "color" ? "color" : "text";
         let control: JSX.Element | null = null;
         if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
             control = (
-                <input className={theme.formControl}
+                <input className={this.props.theme!.formControl}
                     type={type}
                     onChange={this.onChange}
                     defaultValue={this.value}
@@ -490,7 +560,7 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         } else {
             const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
             control = (
-                <select className={theme.formControl}
+                <select className={this.props.theme!.formControl}
                     type={type}
                     onChange={this.onChange}
                     defaultValue={this.value}>
@@ -499,31 +569,56 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
             );
         }
         return (
-            <div className={theme.row}>
-                <TitleEditor {...this.props} />
+            <div className={this.props.theme!.row}>
+                <TitleEditor title={this.props.title}
+                    onDelete={this.props.onDelete}
+                    theme={this.props.theme!}
+                    icon={this.props.icon!}
+                    locale={this.props.locale!} />
                 {control}
-                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
+                <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
             </div>
         );
     }
 }
 
-export class Editor extends React.Component<Props<Schema, ValueType>, {}> {
+export class Editor extends React.Component<Props<Schema, ValueType, Theme | string, Locale | string, Icon | string>, {}> {
     public render() {
+        const theme = getTheme(this.props.theme);
+        const locale = getLocale(this.props.locale);
+        const icon = getIcon(this.props.icon, locale);
         switch (this.props.schema.type) {
             case "object":
-                return <ObjectEditor {...this.props as Props<ObjectSchema, { [name: string]: ValueType }>} />;
+                return <ObjectEditor {...this.props as Props<ObjectSchema, { [name: string]: ValueType }, Theme, Locale, Icon>}
+                    theme={theme}
+                    locale={locale}
+                    icon={icon} />;
             case "array":
-                return <ArrayEditor {...this.props as Props<ArraySchema, ValueType[]>} />;
+                return <ArrayEditor {...this.props as Props<ArraySchema, ValueType[], Theme, Locale, Icon>}
+                    theme={theme}
+                    locale={locale}
+                    icon={icon} />;
             case "number":
             case "integer":
-                return <NumberEditor  {...this.props as Props<NumberSchema, number>} />;
+                return <NumberEditor  {...this.props as Props<NumberSchema, number, Theme, Locale, Icon>}
+                    theme={theme}
+                    locale={locale}
+                    icon={icon} />;
             case "boolean":
-                return <BooleanEditor  {...this.props as Props<BooleanSchema, boolean>} />;
+                return <BooleanEditor  {...this.props as Props<BooleanSchema, boolean, Theme, Locale, Icon>}
+                    theme={theme}
+                    locale={locale}
+                    icon={icon} />;
             case "null":
-                return <NullEditor  {...this.props as Props<NullSchema, null>} />;
+                return <NullEditor  {...this.props as Props<NullSchema, null, Theme, Locale, Icon>}
+                    theme={theme}
+                    locale={locale}
+                    icon={icon} />;
             case "string":
-                return <StringEditor {...this.props as Props<StringSchema, string>} />;
+                return <StringEditor {...this.props as Props<StringSchema, string, Theme, Locale, Icon>}
+                    theme={theme}
+                    locale={locale}
+                    icon={icon} />;
             default:
                 return null;
         }

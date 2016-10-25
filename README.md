@@ -1,7 +1,6 @@
 #### todo list
 
 + fields: minimum, exclusiveMinimum, required, minItems, uniqueItems
-+ multiple language
 + code edit
 + angular2 component
 + vuejs component

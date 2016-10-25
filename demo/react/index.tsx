@@ -111,7 +111,8 @@ class Main extends React.Component<{}, {}> {
                     initialValue={initialValue}
                     updateValue={value => this.value = value}
                     theme="bootstrap3"
-                    icon="fontawesome4" />
+                    icon="fontawesome4"
+                    locale="zh-cn" />
             </div>
         );
     }
