@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Editor } from "../../src/react/index";
+import { JSONEditor } from "../../src/react/index";
 
 const schema = JSON.parse(`{
   "title": "Person",
@@ -107,7 +107,7 @@ class Main extends React.Component<{}, {}> {
         return (
             <div>
                 <button onClick={() => console.log(this.value)}>show data</button>
-                <Editor schema={schema}
+                <JSONEditor schema={schema}
                     initialValue={initialValue}
                     updateValue={value => this.value = value}
                     theme="bootstrap3"

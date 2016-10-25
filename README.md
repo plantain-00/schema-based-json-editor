@@ -1,7 +1,7 @@
 #### todo list
 
 + fields: minimum, exclusiveMinimum, required, minItems, uniqueItems
-+ code edit
++ code edit, textarea
 + angular2 component
 + vuejs component
 + object and array filter
