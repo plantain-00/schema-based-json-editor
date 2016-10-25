@@ -9,6 +9,7 @@ type CommonSchema = {
     title?: string;
     description?: string;
     default?: ValueType;
+    readonly?: boolean;
 }
 
 type ObjectSchema = CommonSchema & {
@@ -168,6 +169,7 @@ type Props<T extends CommonSchema, V> = {
     theme?: ThemeName;
     onDelete?: () => void;
     icon?: IconName;
+    readonly?: boolean;
 }
 
 class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]: ValueType }>, { collapsed?: boolean; value?: { [name: string]: ValueType } }> {
@@ -215,6 +217,7 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
                     initialValue={initialValue}
                     updateValue={onChange}
                     theme={this.props.theme}
+                    readonly={this.props.readonly || this.props.schema.readonly}
                     icon={this.props.icon} />);
             }
             childrenElement = (
@@ -225,7 +228,7 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
         }
         const icon = getIcon(this.props.icon);
         let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete) {
+        if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
             deleteButton = <button className={theme.button} onClick={this.props.onDelete}>{icon.delete}</button>;
         }
         return (
@@ -263,11 +266,6 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
         this.setState({ collapsed: this.collapsed });
     }
     public render() {
-        const addItem = () => {
-            this.value.push(getDefaultValue(this.props.schema.items));
-            this.setState({ value: this.value });
-            this.props.updateValue(this.value);
-        };
         const theme = getTheme(this.props.theme);
         let childrenElement: JSX.Element | null = null;
         if (!this.collapsed) {
@@ -291,6 +289,7 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                             updateValue={onChange}
                             theme={this.props.theme}
                             icon={this.props.icon}
+                            readonly={this.props.readonly || this.props.schema.readonly}
                             onDelete={onDelete} />
                     </div>
                 ));
@@ -303,15 +302,24 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
         }
         const icon = getIcon(this.props.icon);
         let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete) {
+        if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
             deleteButton = <button className={theme.button} onClick={this.props.onDelete}>{icon.delete}</button>;
+        }
+        let addButton: JSX.Element | null = null;
+        if (!this.props.readonly) {
+            const addItem = () => {
+                this.value.push(getDefaultValue(this.props.schema.items));
+                this.setState({ value: this.value });
+                this.props.updateValue(this.value);
+            };
+            addButton = <button className={theme.button} onClick={addItem}>{icon.add}</button>;
         }
         return (
             <div>
                 <h3>
                     {this.props.title || this.props.schema.title}
                     <button className={theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? icon.expand : icon.collapse}</button>
-                    <button className={theme.button} onClick={addItem}>{icon.add}</button>
+                    {addButton}
                     {deleteButton}
                 </h3>
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
@@ -344,7 +352,11 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         return (
             <div className={theme.row}>
                 <TitleEditor {...this.props} />
-                <input className={theme.formControl} type="number" onChange={this.onChange} defaultValue={String(this.value)} />
+                <input className={theme.formControl}
+                    type="number"
+                    onChange={this.onChange}
+                    defaultValue={String(this.value)}
+                    readOnly={this.props.readonly || this.props.schema.readonly} />
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
             </div>
         );
@@ -374,7 +386,11 @@ class IntegerEditor extends React.Component<Props<IntegerSchema, number>, {}> {
         return (
             <div className={theme.row}>
                 <TitleEditor {...this.props} />
-                <input className={theme.formControl} type="number" onChange={this.onChange} defaultValue={String(this.value)} />
+                <input className={theme.formControl}
+                    type="number"
+                    onChange={this.onChange}
+                    defaultValue={String(this.value)}
+                    readOnly={this.props.readonly || this.props.schema.readonly} />
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
             </div>
         );
@@ -403,13 +419,17 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
         const theme = getTheme(this.props.theme);
         const icon = getIcon(this.props.icon);
         let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete) {
+        if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
             deleteButton = <button className={theme.button} onClick={this.props.onDelete}>{icon.delete}</button>;
         }
         return (
             <div className={theme.row}>
                 <label>
-                    <input className={theme.formControl} type="checkbox" onChange={this.onChange} checked={this.value} />
+                    <input className={theme.formControl}
+                        type="checkbox"
+                        onChange={this.onChange}
+                        checked={this.value}
+                        readOnly={this.props.readonly || this.props.schema.readonly} />
                     {this.props.title}
                     {deleteButton}
                 </label>
@@ -467,7 +487,11 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         return (
             <div className={theme.row}>
                 <TitleEditor {...this.props} />
-                <input className={theme.formControl} type="text" onChange={this.onChange} defaultValue={this.value} />
+                <input className={theme.formControl}
+                    type="text"
+                    onChange={this.onChange}
+                    defaultValue={this.value}
+                    readOnly={this.props.readonly || this.props.schema.readonly} />
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme} />
             </div>
         );

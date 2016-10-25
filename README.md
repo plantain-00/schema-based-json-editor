@@ -1,6 +1,6 @@
 #### todo list
 
-+ fields: minimum, exclusiveMinimum, required, minItems, uniqueItems, readonly, enum
++ fields: minimum, exclusiveMinimum, required, minItems, uniqueItems, enum
 + multiple language
 + code edit
 + angular2 component
