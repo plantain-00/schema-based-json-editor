@@ -29,6 +29,8 @@ type NumberSchema = CommonSchema & {
     type: "number" | "integer";
     minimum?: number;
     exclusiveMinimum?: boolean;
+    maximum?: number;
+    exclusiveMaximum?: boolean;
     enum?: number[];
 }
 
@@ -104,6 +106,10 @@ type Locale = {
         minLength: string;
         maxLength: string;
         pattern: string;
+        minimum: string;
+        maximum: string;
+        largerThan: string;
+        smallerThan: string;
     },
 }
 
@@ -118,6 +124,10 @@ export const defaultLocale: Locale = {
         minLength: "Value must be at least {0} characters long.",
         maxLength: "Value must be at most {0} characters long.",
         pattern: "Value doesn't match the pattern {0}.",
+        minimum: "Value must be >= {0}.",
+        maximum: "Value must be <= {0}.",
+        largerThan: "Value must be > {0}.",
+        smallerThan: "Value must be < {0}.",
     },
 };
 
@@ -133,6 +143,10 @@ export const locales: { [name: string]: Locale } = {
             minLength: "要求至少 {0} 字符。",
             maxLength: "要求至多 {0} 字符。",
             pattern: "要求匹配模式 {0}。",
+            minimum: "要求 >= {0}。",
+            maximum: "要求 <= {0}。",
+            largerThan: "要求 > {0}。",
+            smallerThan: "要求 < {0}。",
         },
     },
 };
@@ -428,6 +442,7 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
 
 class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
     public value: number;
+    public errorMessage: string;
     constructor(props: Props<ArraySchema, number>) {
         super(props);
         if (this.props.initialValue === undefined) {
@@ -435,6 +450,7 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         } else {
             this.value = this.props.initialValue;
         }
+        this.validate();
     }
     public componentDidMount() {
         if (this.value !== this.props.initialValue) {
@@ -442,11 +458,38 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         }
     }
     public onChange = (e: React.FormEvent<{ value: string }>) => {
-        if (this.props.schema.type === "integer") {
-            this.props.updateValue(toInteger(e.currentTarget.value));
-        } else {
-            this.props.updateValue(toNumber(e.currentTarget.value));
+        this.value = this.props.schema.type === "integer" ? toInteger(e.currentTarget.value) : toNumber(e.currentTarget.value);
+        this.validate();
+        this.props.updateValue(this.value);
+    }
+    public validate() {
+        if (this.props.schema.minimum !== undefined) {
+            if (this.props.schema.exclusiveMinimum) {
+                if (this.value <= this.props.schema.minimum) {
+                    this.errorMessage = this.props.locale.error.largerThan.replace("{0}", String(this.props.schema.minimum));
+                    return;
+                }
+            } else {
+                if (this.value < this.props.schema.minimum) {
+                    this.errorMessage = this.props.locale.error.minimum.replace("{0}", String(this.props.schema.minimum));
+                    return;
+                }
+            }
         }
+        if (this.props.schema.maximum !== undefined) {
+            if (this.props.schema.exclusiveMaximum) {
+                if (this.value >= this.props.schema.maximum) {
+                    this.errorMessage = this.props.locale.error.smallerThan.replace("{0}", String(this.props.schema.maximum));
+                    return;
+                }
+            } else {
+                if (this.value > this.props.schema.maximum) {
+                    this.errorMessage = this.props.locale.error.maximum.replace("{0}", String(this.props.schema.maximum));
+                    return;
+                }
+            }
+        }
+        this.errorMessage = "";
     }
     public render() {
         let control: JSX.Element | null = null;
@@ -469,11 +512,16 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
                 </select>
             );
         }
+        let errorDescription: JSX.Element | null = null;
+        if (this.errorMessage) {
+            errorDescription = <DescriptionEditor description={this.errorMessage} theme={this.props.theme} />;
+        }
         return (
-            <div className={this.props.theme.row}>
+            <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <TitleEditor {...this.props} />
                 {control}
                 <DescriptionEditor description={this.props.schema.description} theme={this.props.theme!} />
+                {errorDescription}
             </div>
         );
     }
