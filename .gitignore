@@ -41,3 +41,4 @@ jspm_packages
 demo/**/*.js
 .vscode
 vendor.bundle.css
+demo/fonts

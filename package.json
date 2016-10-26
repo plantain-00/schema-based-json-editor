@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm run build && tsc -p demo && webpack && npm run bundle-vendor-css",
+    "test": "npm run build && tsc -p demo && webpack",
     "build": "tsc -p src",
     "lint": "tslint **/*.tsx",
+    "copy-fonts": "cp -R ./node_modules/font-awesome/fonts/. ./demo/fonts",
     "bundle-vendor-css": "cleancss ./node_modules/bootstrap/dist/css/bootstrap.min.css ./node_modules/font-awesome/css/font-awesome.min.css ./node_modules/dragula/dist/dragula.min.css -o demo/vendor.bundle.css"
   },
   "repository": {
