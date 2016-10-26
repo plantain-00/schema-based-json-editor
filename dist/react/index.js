@@ -389,7 +389,7 @@ var NumberEditor = (function (_super) {
         var _this = this;
         _super.call(this, props);
         this.onChange = function (e) {
-            _this.value = _this.props.schema.type === "integer" ? toInteger(e.currentTarget.value) : toNumber(e.currentTarget.value);
+            _this.value = _this.props.schema.type === "integer" ? toInteger(e.target.value) : toNumber(e.target.value);
             _this.validate();
             _this.props.updateValue(_this.value);
         };
@@ -488,7 +488,7 @@ var BooleanEditor = (function (_super) {
         var _this = this;
         _super.call(this, props);
         this.onChange = function (e) {
-            _this.value = e.currentTarget.checked;
+            _this.value = e.target.checked;
             _this.props.updateValue(_this.value);
         };
         this.toggleOptional = function () {
@@ -587,7 +587,7 @@ var StringEditor = (function (_super) {
         var _this = this;
         _super.call(this, props);
         this.onChange = function (e) {
-            _this.value = e.currentTarget.value;
+            _this.value = e.target.value;
             _this.validate();
             _this.props.updateValue(_this.value);
         };
@@ -703,9 +703,7 @@ var JSONEditor = (function (_super) {
         var locale = getLocale(this.props.locale);
         var icon = getIcon(this.props.icon, locale);
         var props = {
-            title: this.props.title,
             updateValue: this.props.updateValue,
-            onDelete: this.props.onDelete,
             readonly: this.props.readonly,
             theme: theme,
             locale: locale,

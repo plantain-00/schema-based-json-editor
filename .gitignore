@@ -39,3 +39,4 @@ jspm_packages
 !webpack.config.js
 *.js.map
 demo/**/*.js
+.vscode

@@ -94,12 +94,10 @@ export declare type ValueType = {
 export declare class JSONEditor extends React.Component<{
     schema: Schema;
     initialValue: ValueType;
-    title?: string;
     updateValue: (value?: ValueType) => void;
     theme?: string;
     icon?: string;
     locale?: string;
-    onDelete?: () => void;
     readonly?: boolean;
 }, {}> {
     render(): JSX.Element | null;

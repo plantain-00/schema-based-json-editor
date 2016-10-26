@@ -537,7 +537,7 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
         }
     }
     public onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = this.props.schema.type === "integer" ? toInteger(e.currentTarget.value) : toNumber(e.currentTarget.value);
+        this.value = this.props.schema.type === "integer" ? toInteger(e.target.value) : toNumber(e.target.value);
         this.validate();
         this.props.updateValue(this.value);
     }
@@ -649,7 +649,7 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
         }
     }
     public onChange = (e: React.FormEvent<{ checked: boolean }>) => {
-        this.value = e.currentTarget.checked;
+        this.value = e.target.checked;
         this.props.updateValue(this.value);
     }
     public toggleOptional = () => {
@@ -762,7 +762,7 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
         }
     }
     public onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = e.currentTarget.value;
+        this.value = e.target.value;
         this.validate();
         this.props.updateValue(this.value);
     }
@@ -873,12 +873,10 @@ class Editor extends React.Component<Props<Schema, ValueType>, {}> {
 export class JSONEditor extends React.Component<{
     schema: Schema;
     initialValue: ValueType;
-    title?: string;
     updateValue: (value?: ValueType) => void;
     theme?: string;
     icon?: string;
     locale?: string;
-    onDelete?: () => void;
     readonly?: boolean;
 }, {}> {
     public render() {
@@ -886,9 +884,7 @@ export class JSONEditor extends React.Component<{
         const locale = getLocale(this.props.locale);
         const icon = getIcon(this.props.icon, locale);
         const props = {
-            title: this.props.title,
             updateValue: this.props.updateValue,
-            onDelete: this.props.onDelete,
             readonly: this.props.readonly,
             theme,
             locale,

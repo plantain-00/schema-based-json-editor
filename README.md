@@ -4,13 +4,19 @@
 
 # schema-based-json-editor
 
-#### reactjs component
+#### link styles of `dragula`
+
+```
+<link rel="stylesheet" href="node_modules/dragula/dist/dragula.min.css">
+```
+
+#### reactjs component demo
 
 ```js
 import { JSONEditor } from "schema-based-json-editor/dist/react/index";
 ```
 
-```
+```jsx
 <JSONEditor schema={schema}
     initialValue={initialValue}
     updateValue={value => this.value = value}
@@ -18,6 +24,26 @@ import { JSONEditor } from "schema-based-json-editor/dist/react/index";
     icon="fontawesome4"
     locale="zh-cn" />
 ```
+
+#### properties of the component
+
++ schema: the json schema object
++ initialValue: the initial json
++ updateValue: the function that is invoked when the json is edited in the editor
++ theme: optional, support "bootstrap3" for now
++ icon: optional, support "bootstrap3" and "fontawesome4" for now
++ locale: optional, support "zh-cn" for now
++ readonly: optional, a boolean value
+
+#### features
+
++ reactjs component
++ angular2 component
++ common schema fields: title, description, default, readonly
++ object schema fields: properties, required
++ array schema fields: items, minItems, uniqueItems
++ number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum
++ string schema fields: format, enum, minLength, maxLength, pattern
 
 #### todo list
 
