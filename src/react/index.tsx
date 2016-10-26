@@ -1,8 +1,10 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import "tslib";
 declare const require: (name: string) => any;
 const toNumber: (value?: any) => number = require("lodash.tonumber");
 const toInteger: (value?: any) => number = require("lodash.tointeger");
+import * as dragula from "dragula";
 
 type CommonSchema = {
     $schema?: string;
@@ -207,42 +209,37 @@ function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
     return name;
 }
 
-function getDefaultValue(schema: Schema): ValueType {
-    let value: ValueType;
-    if (schema.default !== undefined) {
-        value = schema.default;
-    } else {
-        switch (schema.type) {
-            case "object":
-                value = {};
-                break;
-            case "array":
-                value = [];
-                break;
-            case "number":
-            case "integer":
-                if (schema.enum !== undefined && schema.enum.length > 0) {
-                    value = schema.enum[0];
-                } else {
-                    value = 0;
-                }
-                break;
-            case "boolean":
-                value = false;
-                break;
-            case "string":
-                if (schema.enum !== undefined && schema.enum.length > 0) {
-                    value = schema.enum[0];
-                } else {
-                    value = "";
-                }
-                break;
-            case "null":
-            default:
-                value = null;
-        }
+function getDefaultValue(schema: Schema, initialValue: ValueType | undefined): ValueType {
+    if (initialValue !== undefined) {
+        return initialValue;
     }
-    return value;
+    if (schema.default !== undefined) {
+        return schema.default;
+    }
+    switch (schema.type) {
+        case "object":
+            return {};
+        case "array":
+            return [];
+        case "number":
+        case "integer":
+            if (schema.enum !== undefined && schema.enum.length > 0) {
+                return schema.enum[0];
+            } else {
+                return 0;
+            }
+        case "boolean":
+            return false;
+        case "string":
+            if (schema.enum !== undefined && schema.enum.length > 0) {
+                return schema.enum[0];
+            } else {
+                return "";
+            }
+        case "null":
+        default:
+            return null;
+    }
 }
 
 class TitleEditor extends React.Component<{ title: string | undefined; onDelete?: () => void; theme: Theme; icon: Icon; locale: Locale }, {}> {
@@ -285,11 +282,7 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
     constructor(props: Props<ObjectSchema, { [name: string]: ValueType }>) {
         super(props);
         if (this.props.required) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as { [name: string]: ValueType };
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as { [name: string]: ValueType };
         } else {
             this.value = undefined;
         }
@@ -305,11 +298,7 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
     }
     public toggleOptional = () => {
         if (this.value === undefined) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as { [name: string]: ValueType };
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as { [name: string]: ValueType };
         } else {
             this.value = undefined;
         }
@@ -327,17 +316,11 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
                     this.props.updateValue(this.value);
                 };
                 const schema = this.props.schema.properties[property];
-                let initialValue: { [name: string]: ValueType };
-                if (this.props.initialValue === undefined) {
-                    initialValue = getDefaultValue(schema) as { [name: string]: ValueType };
-                    this.value[property] = initialValue;
-                } else {
-                    initialValue = this.value[property] as { [name: string]: ValueType };
-                }
+                this.value[property] = getDefaultValue(schema, this.value[property]) as { [name: string]: ValueType };
                 propertyElements.push(<Editor key={property}
                     schema={schema}
                     title={schema.title || property}
-                    initialValue={initialValue}
+                    initialValue={this.value[property]}
                     updateValue={onChange}
                     theme={this.props.theme}
                     icon={this.props.icon}
@@ -384,38 +367,66 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
 class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { value?: ValueType[]; collapsed?: boolean }> {
     public collapsed = false;
     public value?: ValueType[];
+    public drak: dragula.Drake;
     constructor(props: Props<ArraySchema, ValueType[]>) {
         super(props);
         if (this.props.required) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as ValueType[];
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as ValueType[];
         } else {
             this.value = undefined;
         }
+    }
+    public getDragulaContainer() {
+        return ReactDOM.findDOMNode(this).childNodes[2] as Element;
     }
     public componentDidMount() {
         if (this.value !== this.props.initialValue) {
             this.props.updateValue(this.value);
         }
+        const container = this.getDragulaContainer();
+        this.drak = dragula([container]);
+        this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+            if (this.value) {
+                const fromIndex = +el.dataset["index"];
+                if (sibling) {
+                    const toIndex = +sibling.dataset["index"];
+                    this.value.splice(toIndex, 0, this.value[fromIndex]);
+                    if (fromIndex > toIndex) {
+                        this.value.splice(fromIndex + 1, 1);
+                    } else {
+                        this.value.splice(fromIndex, 1);
+                    }
+                } else {
+                    this.value.push(this.value[fromIndex]);
+                    this.value.splice(fromIndex, 1);
+                }
+                this.setState({ value: this.value });
+                this.props.updateValue(this.value);
+            }
+        });
+    }
+    public componentWillUnmount() {
+        if (this.drak) {
+            this.drak.destroy();
+        }
     }
     public collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
-        this.setState({ collapsed: this.collapsed });
+        this.setState({ collapsed: this.collapsed }, () => {
+            const container = this.getDragulaContainer();
+            this.drak.containers = [container];
+        });
     }
     public toggleOptional = () => {
         if (this.value === undefined) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as ValueType[];
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as ValueType[];
         } else {
             this.value = undefined;
         }
-        this.setState({ value: this.value });
+        this.setState({ value: this.value }, () => {
+            const container = this.getDragulaContainer();
+            this.drak.containers = [container];
+        });
         this.props.updateValue(this.value);
     }
     public render() {
@@ -434,7 +445,7 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                     this.props.updateValue(this.value);
                 };
                 itemElements.push((
-                    <div key={i} className={this.props.theme.rowContainer}>
+                    <div key={i} data-index={i} className={this.props.theme.rowContainer}>
                         <Editor schema={this.props.schema.items}
                             title={`[${i}]`}
                             initialValue={this.value[i]}
@@ -461,7 +472,7 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
         let addButton: JSX.Element | null = null;
         if (!this.props.readonly && this.value !== undefined) {
             const addItem = () => {
-                this.value!.push(getDefaultValue(this.props.schema.items));
+                this.value!.push(getDefaultValue(this.props.schema.items, undefined));
                 this.setState({ value: this.value });
                 this.props.updateValue(this.value);
             };
@@ -500,11 +511,7 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
     constructor(props: Props<ArraySchema, number>) {
         super(props);
         if (this.props.required) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as number;
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as number;
         } else {
             this.value = undefined;
         }
@@ -554,11 +561,7 @@ class NumberEditor extends React.Component<Props<NumberSchema, number>, {}> {
     }
     public toggleOptional = () => {
         if (this.value === undefined) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as number;
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as number;
             this.validate();
         } else {
             this.value = undefined;
@@ -621,11 +624,7 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
     constructor(props: Props<ArraySchema, boolean>) {
         super(props);
         if (this.props.required) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as boolean;
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as boolean;
         } else {
             this.value = undefined;
         }
@@ -641,11 +640,7 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
     }
     public toggleOptional = () => {
         if (this.value === undefined) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as boolean;
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue === undefined) as boolean;
         } else {
             this.value = undefined;
         }
@@ -698,11 +693,7 @@ class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
     constructor(props: Props<ArraySchema, null>) {
         super(props);
         if (this.props.required) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as null;
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as null;
         } else {
             this.value = undefined;
         }
@@ -714,11 +705,7 @@ class NullEditor extends React.Component<Props<NullSchema, null>, {}> {
     }
     public toggleOptional = () => {
         if (this.value === undefined) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as null;
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as null;
         } else {
             this.value = undefined;
         }
@@ -753,11 +740,7 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
     constructor(props: Props<ArraySchema, string>) {
         super(props);
         if (this.props.required) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as string;
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as string;
         } else {
             this.value = undefined;
         }
@@ -796,11 +779,7 @@ class StringEditor extends React.Component<Props<StringSchema, string>, {}> {
     }
     public toggleOptional = () => {
         if (this.value === undefined) {
-            if (this.props.initialValue === undefined) {
-                this.value = getDefaultValue(this.props.schema) as string;
-            } else {
-                this.value = this.props.initialValue;
-            }
+            this.value = getDefaultValue(this.props.schema, this.props.initialValue) as string;
             this.validate();
         } else {
             this.value = undefined;

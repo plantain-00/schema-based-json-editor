@@ -83,14 +83,18 @@ const schema = JSON.parse(`{
           },
           "name": {
             "type": "string",
-            "format": "time"
+            "default": "test"
           }
         }
       },
       "default": [
         {
           "type": "dog",
-          "name": "Walter"
+          "name": "A"
+        },
+        {
+          "type": "dog",
+          "name": "B"
         }
       ]
     },
