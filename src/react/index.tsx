@@ -64,11 +64,12 @@ type Theme = {
     errorRow: string;
     label: string;
     optionalCheckbox: string;
+    buttonGroup: string;
 }
 
 export const themes: { [name: string]: Theme } = {
     "bootstrap3": {
-        rowContainer: "well well-small",
+        rowContainer: "well bootstrap3-row-container",
         row: "row",
         formControl: "form-control",
         button: "btn btn-default",
@@ -76,6 +77,7 @@ export const themes: { [name: string]: Theme } = {
         errorRow: "row has-error",
         label: "control-label",
         optionalCheckbox: "checkbox",
+        buttonGroup: "btn-group",
     },
 };
 
@@ -88,6 +90,7 @@ const defaultTheme: Theme = {
     errorRow: "",
     label: "",
     optionalCheckbox: "",
+    buttonGroup: "",
 };
 
 function getTheme(name: string | undefined | Theme): Theme {
@@ -198,7 +201,6 @@ function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
         };
     }
     if (typeof name === "string") {
-
         return icons[name] || {
             collapse: locale.button.collapse,
             expand: locale.button.expand,
@@ -242,6 +244,8 @@ function getDefaultValue(schema: Schema, initialValue: ValueType | undefined): V
     }
 }
 
+const buttonGroupStyle = { marginLeft: "10px" };
+
 class TitleEditor extends React.Component<{ title: string | undefined; onDelete?: () => void; theme: Theme; icon: Icon; locale: Locale }, {}> {
     public render() {
         if (this.props.title) {
@@ -252,7 +256,9 @@ class TitleEditor extends React.Component<{ title: string | undefined; onDelete?
             return (
                 <label className={this.props.theme.label}>
                     {this.props.title}
-                    {deleteButton}
+                    <div className={this.props.theme.buttonGroup} style={buttonGroupStyle}>
+                        {deleteButton}
+                    </div>
                 </label>
             );
         } else {
@@ -353,8 +359,10 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
             <div>
                 <h3>
                     {this.props.title || this.props.schema.title}
-                    <button className={this.props.theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon.expand : this.props.icon.collapse}</button>
-                    {deleteButton}
+                    <div className={this.props.theme.buttonGroup} style={buttonGroupStyle}>
+                        <button className={this.props.theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon.expand : this.props.icon.collapse}</button>
+                        {deleteButton}
+                    </div>
                 </h3>
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
                 {optionalCheckbox}
@@ -364,7 +372,8 @@ class ObjectEditor extends React.Component<Props<ObjectSchema, { [name: string]:
     }
 }
 
-class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { value?: ValueType[]; collapsed?: boolean }> {
+class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { value?: ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
+    public renderSwitch = 1;
     public collapsed = false;
     public value?: ValueType[];
     public drak: dragula.Drake;
@@ -377,7 +386,7 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
         }
     }
     public getDragulaContainer() {
-        return ReactDOM.findDOMNode(this).childNodes[2] as Element;
+        return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
     }
     public componentDidMount() {
         if (this.value !== this.props.initialValue) {
@@ -400,7 +409,8 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                     this.value.push(this.value[fromIndex]);
                     this.value.splice(fromIndex, 1);
                 }
-                this.setState({ value: this.value });
+                this.renderSwitch = -this.renderSwitch;
+                this.setState({ value: this.value, renderSwitch: this.renderSwitch });
                 this.props.updateValue(this.value);
             }
         });
@@ -441,13 +451,15 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
                 };
                 const onDelete = () => {
                     this.value!.splice(i, 1);
-                    this.setState({ value: this.value });
+                    this.renderSwitch = -this.renderSwitch;
+                    this.setState({ value: this.value, renderSwitch: this.renderSwitch });
                     this.props.updateValue(this.value);
                 };
+                const key = (1 + i) * this.renderSwitch;
                 itemElements.push((
-                    <div key={i} data-index={i} className={this.props.theme.rowContainer}>
+                    <div key={key} data-index={i} className={this.props.theme.rowContainer}>
                         <Editor schema={this.props.schema.items}
-                            title={`[${i}]`}
+                            title={String(i)}
                             initialValue={this.value[i]}
                             updateValue={onChange}
                             theme={this.props.theme}
@@ -493,9 +505,11 @@ class ArrayEditor extends React.Component<Props<ArraySchema, ValueType[]>, { val
             <div>
                 <h3>
                     {this.props.title || this.props.schema.title}
-                    <button className={this.props.theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon.expand : this.props.icon.collapse}</button>
-                    {addButton}
-                    {deleteButton}
+                    <div className={this.props.theme.buttonGroup} style={buttonGroupStyle}>
+                        <button className={this.props.theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon.expand : this.props.icon.collapse}</button>
+                        {addButton}
+                        {deleteButton}
+                    </div>
                 </h3>
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
                 {optionalCheckbox}
@@ -650,10 +664,6 @@ class BooleanEditor extends React.Component<Props<BooleanSchema, boolean>, {}> {
     public render() {
         let control: JSX.Element | null = null;
         if (this.value !== undefined) {
-            let deleteButton: JSX.Element | null = null;
-            if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
-                deleteButton = <button className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>;
-            }
             control = (
                 <div className={this.props.theme.optionalCheckbox}>
                     <label>
