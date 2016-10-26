@@ -1,7 +1,7 @@
 "use strict";
 var React = require("react");
 var common = require("../common");
-var title_editor_1 = require("./title.editor");
+var title_editor_1 = require("./title-editor");
 var NullEditor = (function (_super) {
     __extends(NullEditor, _super);
     function NullEditor(props) {
@@ -46,4 +46,4 @@ var NullEditor = (function (_super) {
     return NullEditor;
 }(React.Component));
 exports.NullEditor = NullEditor;
-//# sourceMappingURL=null.editor.js.map
+//# sourceMappingURL=null-editor.js.map

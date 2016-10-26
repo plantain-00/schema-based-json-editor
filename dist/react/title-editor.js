@@ -23,4 +23,4 @@ var TitleEditor = (function (_super) {
     return TitleEditor;
 }(React.Component));
 exports.TitleEditor = TitleEditor;
-//# sourceMappingURL=title.editor.js.map
+//# sourceMappingURL=title-editor.js.map

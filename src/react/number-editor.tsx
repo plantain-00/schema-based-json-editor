@@ -1,53 +1,64 @@
 import * as React from "react";
 import * as common from "../common";
-import { TitleEditor } from "./title.editor";
+import { TitleEditor } from "./title-editor";
 
-export class StringEditor extends React.Component<common.Props<common.StringSchema, string>, {}> {
-    public value?: string;
-    public errorMessage: string;
-    constructor(props: common.Props<common.ArraySchema, string>) {
+export class NumberEditor extends React.Component<common.Props<common.NumberSchema, number>, {}> {
+    value?: number;
+    errorMessage: string;
+    constructor(props: common.Props<common.ArraySchema, number>) {
         super(props);
         if (this.props.required) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as string;
+            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as number;
         } else {
             this.value = undefined;
         }
         this.validate();
     }
-    public componentDidMount() {
+    componentDidMount() {
         if (this.value !== this.props.initialValue) {
             this.props.updateValue(this.value);
         }
     }
-    public onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = e.target.value;
+    onChange = (e: React.FormEvent<{ value: string }>) => {
+        this.value = this.props.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
         this.validate();
         this.props.updateValue(this.value);
     }
-    public validate() {
+    validate() {
         if (this.value !== undefined) {
-            if (this.props.schema.minLength !== undefined
-                && this.value.length < this.props.schema.minLength) {
-                this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
-                return;
+            if (this.props.schema.minimum !== undefined) {
+                if (this.props.schema.exclusiveMinimum) {
+                    if (this.value <= this.props.schema.minimum) {
+                        this.errorMessage = this.props.locale.error.largerThan.replace("{0}", String(this.props.schema.minimum));
+                        return;
+                    }
+                } else {
+                    if (this.value < this.props.schema.minimum) {
+                        this.errorMessage = this.props.locale.error.minimum.replace("{0}", String(this.props.schema.minimum));
+                        return;
+                    }
+                }
             }
-            if (this.props.schema.maxLength !== undefined
-                && this.value.length > this.props.schema.maxLength) {
-                this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
-                return;
-            }
-            if (this.props.schema.pattern !== undefined
-                && !this.value.match(this.props.schema.pattern)) {
-                this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
-                return;
+            if (this.props.schema.maximum !== undefined) {
+                if (this.props.schema.exclusiveMaximum) {
+                    if (this.value >= this.props.schema.maximum) {
+                        this.errorMessage = this.props.locale.error.smallerThan.replace("{0}", String(this.props.schema.maximum));
+                        return;
+                    }
+                } else {
+                    if (this.value > this.props.schema.maximum) {
+                        this.errorMessage = this.props.locale.error.maximum.replace("{0}", String(this.props.schema.maximum));
+                        return;
+                    }
+                }
             }
         }
 
         this.errorMessage = "";
     }
-    public toggleOptional = () => {
+    toggleOptional = () => {
         if (this.value === undefined) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as string;
+            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as number;
             this.validate();
         } else {
             this.value = undefined;
@@ -55,30 +66,29 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
-    public render() {
+    render() {
         let control: JSX.Element | null = null;
         if (this.value !== undefined) {
             if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
                 control = (
                     <input className={this.props.theme.formControl}
-                        type={this.props.schema.format}
+                        type="number"
                         onChange={this.onChange}
-                        defaultValue={this.value}
+                        defaultValue={String(this.value)}
                         readOnly={this.props.readonly || this.props.schema.readonly} />
                 );
             } else {
                 const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
                 control = (
                     <select className={this.props.theme.formControl}
-                        type={this.props.schema.format}
+                        type="number"
                         onChange={this.onChange}
-                        defaultValue={this.value}>
+                        defaultValue={String(this.value)} >
                         {options}
                     </select>
                 );
             }
         }
-
         let errorDescription: JSX.Element | null = null;
         if (this.errorMessage) {
             errorDescription = <p className={this.props.theme.help}>{this.errorMessage}</p>;

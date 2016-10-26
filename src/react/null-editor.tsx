@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as common from "../common";
-import { TitleEditor } from "./title.editor";
+import { TitleEditor } from "./title-editor";
 
 export class NullEditor extends React.Component<common.Props<common.NullSchema, null>, {}> {
-    public value?: null;
+    value?: null;
     constructor(props: common.Props<common.ArraySchema, null>) {
         super(props);
         if (this.props.required) {
@@ -12,12 +12,12 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
             this.value = undefined;
         }
     }
-    public componentDidMount() {
+    componentDidMount() {
         if (this.value !== this.props.initialValue) {
             this.props.updateValue(this.value);
         }
     }
-    public toggleOptional = () => {
+    toggleOptional = () => {
         if (this.value === undefined) {
             this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as null;
         } else {
@@ -26,7 +26,7 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
         this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
-    public render() {
+    render() {
         let optionalCheckbox: JSX.Element | null = null;
         if (!this.props.required) {
             optionalCheckbox = (

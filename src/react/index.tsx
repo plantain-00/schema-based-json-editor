@@ -1,12 +1,12 @@
 import * as React from "react";
 
 import * as common from "../common";
-import { ObjectEditor } from "./object.editor";
-import { ArrayEditor } from "./array.editor";
-import { NumberEditor } from "./number.editor";
-import { BooleanEditor } from "./boolean.editor";
-import { NullEditor } from "./null.editor";
-import { StringEditor } from "./string.editor";
+import { ObjectEditor } from "./object-editor";
+import { ArrayEditor } from "./array-editor";
+import { NumberEditor } from "./number-editor";
+import { BooleanEditor } from "./boolean-editor";
+import { NullEditor } from "./null-editor";
+import { StringEditor } from "./string-editor";
 
 export const icons: { [name: string]: common.Icon } = {
     "bootstrap3": {
@@ -52,7 +52,7 @@ export class JSONEditor extends React.Component<{
     locale?: string;
     readonly?: boolean;
 }, {}> {
-    public render() {
+    render() {
         const theme = common.getTheme(this.props.theme);
         const locale = common.getLocale(this.props.locale);
         const icon = getIcon(this.props.icon, locale);

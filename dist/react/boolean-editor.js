@@ -1,7 +1,7 @@
 "use strict";
 var React = require("react");
 var common = require("../common");
-var title_editor_1 = require("./title.editor");
+var title_editor_1 = require("./title-editor");
 var BooleanEditor = (function (_super) {
     __extends(BooleanEditor, _super);
     function BooleanEditor(props) {
@@ -59,4 +59,4 @@ var BooleanEditor = (function (_super) {
     return BooleanEditor;
 }(React.Component));
 exports.BooleanEditor = BooleanEditor;
-//# sourceMappingURL=boolean.editor.js.map
+//# sourceMappingURL=boolean-editor.js.map

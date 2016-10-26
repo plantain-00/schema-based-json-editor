@@ -80,4 +80,4 @@ var ObjectEditor = (function (_super) {
     return ObjectEditor;
 }(React.Component));
 exports.ObjectEditor = ObjectEditor;
-//# sourceMappingURL=object.editor.js.map
+//# sourceMappingURL=object-editor.js.map

@@ -3,8 +3,8 @@ import * as common from "../common";
 import { Editor } from "./editor";
 
 export class ObjectEditor extends React.Component<common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
-    public collapsed = false;
-    public value?: { [name: string]: common.ValueType };
+    collapsed = false;
+    value?: { [name: string]: common.ValueType };
     constructor(props: common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>) {
         super(props);
         if (this.props.required) {
@@ -13,16 +13,16 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
             this.value = undefined;
         }
     }
-    public componentDidMount() {
+    componentDidMount() {
         if (this.value !== this.props.initialValue) {
             this.props.updateValue(this.value);
         }
     }
-    public collapseOrExpand = () => {
+    collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
-    public toggleOptional = () => {
+    toggleOptional = () => {
         if (this.value === undefined) {
             this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
         } else {
@@ -31,7 +31,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
-    public render() {
+    render() {
         let childrenElement: JSX.Element | null = null;
         if (!this.collapsed && this.value !== undefined) {
             const propertyElements: JSX.Element[] = [];

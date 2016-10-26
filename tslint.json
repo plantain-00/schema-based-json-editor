@@ -22,6 +22,7 @@
             true,
             "ban-keywords"
         ],
-        "no-bitwise": false
+        "no-bitwise": false,
+        "member-access": false
     }
 }

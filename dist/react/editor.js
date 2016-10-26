@@ -1,11 +1,11 @@
 "use strict";
 var React = require("react");
-var object_editor_1 = require("./object.editor");
-var array_editor_1 = require("./array.editor");
-var number_editor_1 = require("./number.editor");
-var boolean_editor_1 = require("./boolean.editor");
-var null_editor_1 = require("./null.editor");
-var string_editor_1 = require("./string.editor");
+var object_editor_1 = require("./object-editor");
+var array_editor_1 = require("./array-editor");
+var number_editor_1 = require("./number-editor");
+var boolean_editor_1 = require("./boolean-editor");
+var null_editor_1 = require("./null-editor");
+var string_editor_1 = require("./string-editor");
 var Editor = (function (_super) {
     __extends(Editor, _super);
     function Editor() {

@@ -4,10 +4,10 @@ import * as common from "../common";
 import { Editor } from "./editor";
 
 export class ArrayEditor extends React.Component<common.Props<common.ArraySchema, common.ValueType[]>, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
-    public renderSwitch = 1;
-    public collapsed = false;
-    public value?: common.ValueType[];
-    public drak: common.dragula.Drake;
+    renderSwitch = 1;
+    collapsed = false;
+    value?: common.ValueType[];
+    drak: common.dragula.Drake;
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>) {
         super(props);
         if (this.props.required) {
@@ -16,10 +16,10 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             this.value = undefined;
         }
     }
-    public getDragulaContainer() {
+    getDragulaContainer() {
         return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
     }
-    public componentDidMount() {
+    componentDidMount() {
         if (this.value !== this.props.initialValue) {
             this.props.updateValue(this.value);
         }
@@ -46,19 +46,19 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             }
         });
     }
-    public componentWillUnmount() {
+    componentWillUnmount() {
         if (this.drak) {
             this.drak.destroy();
         }
     }
-    public collapseOrExpand = () => {
+    collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed }, () => {
             const container = this.getDragulaContainer();
             this.drak.containers = [container];
         });
     }
-    public toggleOptional = () => {
+    toggleOptional = () => {
         if (this.value === undefined) {
             this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as common.ValueType[];
         } else {
@@ -70,7 +70,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         });
         this.props.updateValue(this.value);
     }
-    public render() {
+    render() {
         let childrenElement: JSX.Element | null = null;
         if (this.value !== undefined && !this.collapsed) {
             const itemElements: JSX.Element[] = [];

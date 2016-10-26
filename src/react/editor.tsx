@@ -1,14 +1,14 @@
 import * as React from "react";
 import * as common from "../common";
-import { ObjectEditor } from "./object.editor";
-import { ArrayEditor } from "./array.editor";
-import { NumberEditor } from "./number.editor";
-import { BooleanEditor } from "./boolean.editor";
-import { NullEditor } from "./null.editor";
-import { StringEditor } from "./string.editor";
+import { ObjectEditor } from "./object-editor";
+import { ArrayEditor } from "./array-editor";
+import { NumberEditor } from "./number-editor";
+import { BooleanEditor } from "./boolean-editor";
+import { NullEditor } from "./null-editor";
+import { StringEditor } from "./string-editor";
 
 export class Editor extends React.Component<common.Props<common.Schema, common.ValueType>, {}> {
-    public render() {
+    render() {
         switch (this.props.schema.type) {
             case "object":
                 return <ObjectEditor {...this.props as common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>} />;

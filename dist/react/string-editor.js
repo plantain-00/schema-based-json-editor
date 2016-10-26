@@ -1,14 +1,14 @@
 "use strict";
 var React = require("react");
 var common = require("../common");
-var title_editor_1 = require("./title.editor");
-var NumberEditor = (function (_super) {
-    __extends(NumberEditor, _super);
-    function NumberEditor(props) {
+var title_editor_1 = require("./title-editor");
+var StringEditor = (function (_super) {
+    __extends(StringEditor, _super);
+    function StringEditor(props) {
         var _this = this;
         _super.call(this, props);
         this.onChange = function (e) {
-            _this.value = _this.props.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
+            _this.value = e.target.value;
             _this.validate();
             _this.props.updateValue(_this.value);
         };
@@ -31,53 +31,40 @@ var NumberEditor = (function (_super) {
         }
         this.validate();
     }
-    NumberEditor.prototype.componentDidMount = function () {
+    StringEditor.prototype.componentDidMount = function () {
         if (this.value !== this.props.initialValue) {
             this.props.updateValue(this.value);
         }
     };
-    NumberEditor.prototype.validate = function () {
+    StringEditor.prototype.validate = function () {
         if (this.value !== undefined) {
-            if (this.props.schema.minimum !== undefined) {
-                if (this.props.schema.exclusiveMinimum) {
-                    if (this.value <= this.props.schema.minimum) {
-                        this.errorMessage = this.props.locale.error.largerThan.replace("{0}", String(this.props.schema.minimum));
-                        return;
-                    }
-                }
-                else {
-                    if (this.value < this.props.schema.minimum) {
-                        this.errorMessage = this.props.locale.error.minimum.replace("{0}", String(this.props.schema.minimum));
-                        return;
-                    }
-                }
+            if (this.props.schema.minLength !== undefined
+                && this.value.length < this.props.schema.minLength) {
+                this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
+                return;
             }
-            if (this.props.schema.maximum !== undefined) {
-                if (this.props.schema.exclusiveMaximum) {
-                    if (this.value >= this.props.schema.maximum) {
-                        this.errorMessage = this.props.locale.error.smallerThan.replace("{0}", String(this.props.schema.maximum));
-                        return;
-                    }
-                }
-                else {
-                    if (this.value > this.props.schema.maximum) {
-                        this.errorMessage = this.props.locale.error.maximum.replace("{0}", String(this.props.schema.maximum));
-                        return;
-                    }
-                }
+            if (this.props.schema.maxLength !== undefined
+                && this.value.length > this.props.schema.maxLength) {
+                this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
+                return;
+            }
+            if (this.props.schema.pattern !== undefined
+                && !this.value.match(this.props.schema.pattern)) {
+                this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
+                return;
             }
         }
         this.errorMessage = "";
     };
-    NumberEditor.prototype.render = function () {
+    StringEditor.prototype.render = function () {
         var control = null;
         if (this.value !== undefined) {
             if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
-                control = (React.createElement("input", {className: this.props.theme.formControl, type: "number", onChange: this.onChange, defaultValue: String(this.value), readOnly: this.props.readonly || this.props.schema.readonly}));
+                control = (React.createElement("input", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value, readOnly: this.props.readonly || this.props.schema.readonly}));
             }
             else {
                 var options = this.props.schema.enum.map(function (e, i) { return React.createElement("option", {key: i, value: e}, e); });
-                control = (React.createElement("select", {className: this.props.theme.formControl, type: "number", onChange: this.onChange, defaultValue: String(this.value)}, options));
+                control = (React.createElement("select", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value}, options));
             }
         }
         var errorDescription = null;
@@ -99,7 +86,7 @@ var NumberEditor = (function (_super) {
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description), 
             errorDescription));
     };
-    return NumberEditor;
+    return StringEditor;
 }(React.Component));
-exports.NumberEditor = NumberEditor;
-//# sourceMappingURL=number.editor.js.map
+exports.StringEditor = StringEditor;
+//# sourceMappingURL=string-editor.js.map

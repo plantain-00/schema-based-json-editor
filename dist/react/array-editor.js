@@ -138,4 +138,4 @@ var ArrayEditor = (function (_super) {
     return ArrayEditor;
 }(React.Component));
 exports.ArrayEditor = ArrayEditor;
-//# sourceMappingURL=array.editor.js.map
+//# sourceMappingURL=array-editor.js.map

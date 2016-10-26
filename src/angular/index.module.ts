@@ -2,11 +2,11 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 
-import { AppComponent } from "./app.component";
+import { JSONEditorComponent } from "./index.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule],
-    declarations: [AppComponent],
-    bootstrap: [AppComponent],
+    declarations: [JSONEditorComponent],
+    bootstrap: [JSONEditorComponent],
 })
-export class AppModule { }
+export class JSONEditorModule { }
