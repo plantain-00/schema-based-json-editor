@@ -8,8 +8,6 @@ before_script:
 script:
   - npm run test
   - npm run lint
-  - npm run bundle-vendor-css
-  - npm run copy-fonts
 env:
   - CXX=g++-4.8
 addons:
