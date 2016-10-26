@@ -4,7 +4,7 @@
 
 # schema-based-json-editor
 
-#### link styles of `dragula`
+#### link or bundle styles of `dragula`
 
 ```
 <link rel="stylesheet" href="node_modules/dragula/dist/dragula.min.css">
@@ -24,6 +24,10 @@ import { JSONEditor } from "schema-based-json-editor/dist/react/index";
     icon="fontawesome4"
     locale="zh-cn" />
 ```
+
+the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/react/index.html
+
+the source code of the demo: https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/react
 
 #### properties of the component
 

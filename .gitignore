@@ -40,3 +40,4 @@ jspm_packages
 *.js.map
 demo/**/*.js
 .vscode
+vendor.bundle.css
