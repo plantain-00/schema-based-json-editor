@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { JSONEditor } from "../../src/react/index";
+import { JSONEditor } from "../../dist/react/index";
 
 const schema = JSON.parse(`{
   "title": "Person",

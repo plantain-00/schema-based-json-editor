@@ -6,7 +6,7 @@ const toNumber: (value?: any) => number = require("lodash.tonumber");
 const toInteger: (value?: any) => number = require("lodash.tointeger");
 import * as dragula from "dragula";
 
-type CommonSchema = {
+export type CommonSchema = {
     $schema?: string;
     title?: string;
     description?: string;
@@ -14,20 +14,20 @@ type CommonSchema = {
     readonly?: boolean;
 }
 
-type ObjectSchema = CommonSchema & {
+export type ObjectSchema = CommonSchema & {
     type: "object";
     properties: { [name: string]: Schema };
     required?: string[];
 }
 
-type ArraySchema = CommonSchema & {
+export type ArraySchema = CommonSchema & {
     type: "array";
     items: Schema;
     minItems?: number;
     uniqueItems?: boolean;
 }
 
-type NumberSchema = CommonSchema & {
+export type NumberSchema = CommonSchema & {
     type: "number" | "integer";
     minimum?: number;
     exclusiveMinimum?: boolean;
@@ -36,7 +36,7 @@ type NumberSchema = CommonSchema & {
     enum?: number[];
 }
 
-type StringSchema = CommonSchema & {
+export type StringSchema = CommonSchema & {
     type: "string";
     format?: "color" | "date" | "datetime" | "datetime-local" | "time" | "month" | "email" | "uri" | "url" | "week" | "hostname" | "ipv4" | "ipv6";
     enum?: string[];
@@ -45,17 +45,17 @@ type StringSchema = CommonSchema & {
     pattern?: string;
 }
 
-type BooleanSchema = CommonSchema & {
+export type BooleanSchema = CommonSchema & {
     type: "boolean";
 }
 
-type NullSchema = CommonSchema & {
+export type NullSchema = CommonSchema & {
     type: "null";
 }
 
-type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema;
+export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema;
 
-type Theme = {
+export type Theme = {
     rowContainer: string;
     row: string;
     formControl: string;
@@ -103,7 +103,7 @@ function getTheme(name: string | undefined | Theme): Theme {
     return name;
 }
 
-type Locale = {
+export type Locale = {
     button: {
         collapse: string;
         expand: string;
@@ -169,7 +169,7 @@ function getLocale(name: string | undefined | Locale): Locale {
     return name;
 }
 
-type Icon = {
+export type Icon = {
     collapse: string | JSX.Element;
     expand: string | JSX.Element;
     add: string | JSX.Element;
@@ -267,7 +267,7 @@ class TitleEditor extends React.Component<{ title: string | undefined; onDelete?
     }
 }
 
-type ValueType = { [name: string]: any } | any[] | number | boolean | string | null
+export type ValueType = { [name: string]: any } | any[] | number | boolean | string | null
 
 type Props<TSchema extends CommonSchema, TValue> = {
     schema: TSchema;
