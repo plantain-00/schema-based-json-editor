@@ -8,8 +8,8 @@ var ArrayEditorComponent = (function () {
     }
     ArrayEditorComponent = __decorate([
         core_1.Component({
-            selector: "app",
-            templateUrl: "./app.html",
+            selector: "array-editor",
+            template: "",
         })
     ], ArrayEditorComponent);
     return ArrayEditorComponent;

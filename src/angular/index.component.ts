@@ -1,12 +1,10 @@
-import { Component } from "@angular/core";
-import * as common from "../common";
-
-export { common };
+import { Component, Input } from "@angular/core";
 
 @Component({
-    selector: "index",
-    templateUrl: "./index.html",
+    selector: "json-editor",
+    template: "hello world",
 })
 export class JSONEditorComponent {
+    @Input()
     lalala = "";
 }

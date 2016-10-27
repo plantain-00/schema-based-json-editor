@@ -3,8 +3,8 @@ import * as common from "../common";
 // import { Editor } from "./editor";
 
 @Component({
-    selector: "app",
-    templateUrl: "./app.html",
+    selector: "array-editor",
+    template: "",
 })
 export class ArrayEditorComponent {
     renderSwitch = 1;

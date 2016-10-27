@@ -4,9 +4,11 @@ import { FormsModule } from "@angular/forms";
 
 import { JSONEditorComponent } from "./index.component";
 
+import * as common from "../common";
+export { common };
+
 @NgModule({
     imports: [BrowserModule, FormsModule],
-    declarations: [JSONEditorComponent],
     bootstrap: [JSONEditorComponent],
 })
 export class JSONEditorModule { }
