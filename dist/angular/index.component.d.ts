@@ -1,3 +1,11 @@
+import { EventEmitter } from "@angular/core";
+import * as common from "../common";
 export declare class JSONEditorComponent {
-    lalala: string;
+    schema: common.Schema;
+    initialValue: common.ValueType;
+    updateValue: EventEmitter<{}>;
+    theme?: string;
+    icon?: string;
+    locale?: string;
+    readonly?: boolean;
 }

@@ -2,15 +2,33 @@
 var core_1 = require("@angular/core");
 var JSONEditorComponent = (function () {
     function JSONEditorComponent() {
-        this.lalala = "";
+        this.updateValue = new core_1.EventEmitter();
     }
     __decorate([
         core_1.Input()
-    ], JSONEditorComponent.prototype, "lalala", void 0);
+    ], JSONEditorComponent.prototype, "schema", void 0);
+    __decorate([
+        core_1.Input()
+    ], JSONEditorComponent.prototype, "initialValue", void 0);
+    __decorate([
+        core_1.Output()
+    ], JSONEditorComponent.prototype, "updateValue", void 0);
+    __decorate([
+        core_1.Input()
+    ], JSONEditorComponent.prototype, "theme", void 0);
+    __decorate([
+        core_1.Input()
+    ], JSONEditorComponent.prototype, "icon", void 0);
+    __decorate([
+        core_1.Input()
+    ], JSONEditorComponent.prototype, "locale", void 0);
+    __decorate([
+        core_1.Input()
+    ], JSONEditorComponent.prototype, "readonly", void 0);
     JSONEditorComponent = __decorate([
         core_1.Component({
             selector: "json-editor",
-            template: "hello world",
+            template: "{{this.theme}}",
         })
     ], JSONEditorComponent);
     return JSONEditorComponent;
