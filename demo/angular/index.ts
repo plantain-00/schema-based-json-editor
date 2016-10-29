@@ -6,8 +6,6 @@ import "tslib";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { enableProdMode } from "@angular/core";
 
-import { JSONEditorComponent } from "../../dist/angular/index.component";
-
 enableProdMode();
 
 import { Component } from "@angular/core";
@@ -125,20 +123,25 @@ const schema = JSON.parse(`{
     selector: "app",
     template: `
     <div>
-        <button (click)="showData()">show data in console</button>
-        <button (click)="showSchema()">show schema in console</button>
-        <json-editor schema="{{schema}}"
-            initialValue="{{initialValue}}"
-            (updateValue)="updateValue($event)"
-            theme="bootstrap3"
-            icon="fontawesome4"
-            locale="zh-cn">
-        </json-editor>
+        <button style="position: fixed; right: 20px; top: 20px" (click)="showData()">show data in console</button>
+        <div style="width: 800px; margin: 20px; float: left">
+          <json-editor schema="{{schema}}"
+              initialValue="{{initialValue}}"
+              (updateValue)="updateValue($event)"
+              theme="bootstrap3"
+              icon="fontawesome4"
+              locale="zh-cn">
+          </json-editor>
+        </div>
+        <pre style="width: 800px; margin: 20px; float: left">
+            {{schemaString}}
+        </pre>
     </div>
     `,
 })
 export class MainComponent {
     schema = schema;
+    schemaString = JSON.stringify(schema, null, "  ");
     initialValue = {};
     value: any;
     updateValue(value: any) {
@@ -155,10 +158,11 @@ export class MainComponent {
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
+import { JSONEditorComponent, BooleanEditorComponent } from "../../dist/angular/index.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule],
-    declarations: [MainComponent, JSONEditorComponent],
+    declarations: [MainComponent, JSONEditorComponent, BooleanEditorComponent],
     bootstrap: [MainComponent],
 })
 class MainModule { }

@@ -118,14 +118,18 @@ class Main extends React.Component<{}, {}> {
     public render() {
         return (
             <div>
-                <button onClick={() => console.log(this.value)}>show data in console</button>
-                <button onClick={() => console.log(schema)}>show schema in console</button>
-                <JSONEditor schema={schema}
-                    initialValue={initialValue}
-                    updateValue={value => this.value = value}
-                    theme="bootstrap3"
-                    icon="fontawesome4"
-                    locale="zh-cn" />
+                <button style={{ position: "fixed", right: "20px", top: "20px" }} onClick={() => console.log(this.value)}>show data in console</button>
+                <div style={{ width: "800px" , margin: "20px", float: "left" }}>
+                    <JSONEditor schema={schema}
+                        initialValue={initialValue}
+                        updateValue={value => this.value = value}
+                        theme="bootstrap3"
+                        icon="fontawesome4"
+                        locale="zh-cn" />
+                </div>
+                <pre style={{ float: "left", margin: "20px", width: "400px" }}>
+                    {JSON.stringify(schema, null, "  ")}
+                </pre>
             </div>
         );
     }

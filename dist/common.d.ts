@@ -97,7 +97,7 @@ export declare function getDefaultValue(schema: Schema, initialValue: ValueType 
 export declare const buttonGroupStyle: {
     marginLeft: string;
 };
-export declare type Props<TSchema extends CommonSchema, TValue> = {
+export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
     initialValue: TValue;
     title?: string;
@@ -108,4 +108,4 @@ export declare type Props<TSchema extends CommonSchema, TValue> = {
     onDelete?: () => void;
     readonly?: boolean;
     required?: boolean;
-};
+}

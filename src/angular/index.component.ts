@@ -3,7 +3,9 @@ import * as common from "../common";
 
 @Component({
     selector: "json-editor",
-    template: `{{this.theme}}`,
+    template: `
+      <boolean-editor schema="{{schema}}" initialValue="{{initialValue}}" title="{{title}}"></boolean-editor>
+    `,
 })
 export class JSONEditorComponent {
     @Input()
@@ -20,4 +22,16 @@ export class JSONEditorComponent {
     locale?: string;
     @Input()
     readonly?: boolean;
+    themeObject: common.Theme;
+    localeObject: common.Locale;
+    constructor() {
+        this.themeObject = common.getTheme(this.theme);
+        this.localeObject = common.getLocale(this.locale);
+    }
 }
+
+import {BooleanEditorComponent} from "./boolean-editor.component";
+export {BooleanEditorComponent};
+
+import {ArrayEditorComponent} from "./array-editor.component";
+export {ArrayEditorComponent};

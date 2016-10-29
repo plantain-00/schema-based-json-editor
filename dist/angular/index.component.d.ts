@@ -8,4 +8,11 @@ export declare class JSONEditorComponent {
     icon?: string;
     locale?: string;
     readonly?: boolean;
+    themeObject: common.Theme;
+    localeObject: common.Locale;
+    constructor();
 }
+import { BooleanEditorComponent } from "./boolean-editor.component";
+export { BooleanEditorComponent };
+import { ArrayEditorComponent } from "./array-editor.component";
+export { ArrayEditorComponent };
