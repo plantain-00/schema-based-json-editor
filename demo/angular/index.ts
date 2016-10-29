@@ -133,9 +133,7 @@ const schema = JSON.parse(`{
               locale="zh-cn">
           </json-editor>
         </div>
-        <pre style="width: 800px; margin: 20px; float: left">
-            {{schemaString}}
-        </pre>
+        <pre style="width: 800px; margin: 20px; float: left">{{schemaString}}</pre>
     </div>
     `,
 })

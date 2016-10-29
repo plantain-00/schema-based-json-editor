@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run build && tsc -p demo && webpack",
     "build": "tsc -p src",
-    "lint": "tslint **/*.tsx"
+    "lint": "tslint **/*.tsx",
+    "postinstall": "mkdir ./demo/css && cp -r ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cp -r ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/fonts/. ./demo/fonts"
   },
   "repository": {
     "type": "git",
