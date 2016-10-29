@@ -42,3 +42,4 @@ demo/**/*.js
 .vscode
 vendor.bundle.css
 demo/fonts
+demo/css/
