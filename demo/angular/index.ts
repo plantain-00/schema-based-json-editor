@@ -73,6 +73,7 @@ const schema = JSON.parse(`{
       "format": "table",
       "title": "Pets",
       "uniqueItems": true,
+      "minItems": 1,
       "items": {
         "type": "object",
         "title": "Pet",
@@ -123,7 +124,7 @@ const schema = JSON.parse(`{
     selector: "app",
     template: `
     <div>
-        <div style="width: 500px; margin: 20px; float: left">
+        <div style="width: 500px; margin: 10px; float: left">
           <json-editor schema="{{schema}}"
               initialValue="{{value}}"
               (updateValue)="updateValue($event)"
@@ -132,8 +133,8 @@ const schema = JSON.parse(`{
               locale="zh-cn">
           </json-editor>
         </div>
-        <pre style="width: 400px; margin: 20px; float: left">{{schemaString}}</pre>
-        <pre style="width: 400px; margin: 20px; float: left">{{value}}</pre>
+        <pre style="width: 400px; margin: 10px; float: left">{{schemaString}}</pre>
+        <pre style="width: 400px; margin: 10px; float: left">{{value}}</pre>
     </div>
     `,
 })

@@ -2,6 +2,7 @@
 require("tslib");
 exports.toNumber = require("lodash.tonumber");
 exports.toInteger = require("lodash.tointeger");
+var isArray = require("lodash.isarray");
 var dragula = require("dragula");
 exports.dragula = dragula;
 exports.themes = {
@@ -53,6 +54,8 @@ exports.defaultLocale = {
         maximum: "Value must be <= {0}.",
         largerThan: "Value must be > {0}.",
         smallerThan: "Value must be < {0}.",
+        minItems: "The length of the array must be >= {0}",
+        uniqueItems: "The item in {0} and {1} must not be same.",
     },
 };
 exports.locales = {
@@ -71,6 +74,8 @@ exports.locales = {
             maximum: "要求 <= {0}。",
             largerThan: "要求 > {0}。",
             smallerThan: "要求 < {0}。",
+            minItems: "数组的长度要求 >= {0}。",
+            uniqueItems: "{0} 和 {1} 的项不应该相同。",
         },
     },
 };
@@ -120,4 +125,44 @@ function getDefaultValue(schema, initialValue) {
 }
 exports.getDefaultValue = getDefaultValue;
 exports.buttonGroupStyle = { marginLeft: "10px" };
+function isSame(value1, value2) {
+    if (typeof value1 === "string"
+        || typeof value1 === "number"
+        || typeof value1 === "boolean"
+        || value1 === null
+        || value1 === undefined) {
+        return value1 === value2;
+    }
+    if (typeof value2 === "string"
+        || typeof value2 === "number"
+        || typeof value2 === "boolean"
+        || value2 === null
+        || value2 === undefined) {
+        return false;
+    }
+    if (isArray(value1)) {
+        if (isArray(value2) && value1.length === value2.length) {
+            for (var i = 0; i < value1.length; i++) {
+                if (!isSame(value1, value2)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    if (isArray(value2)
+        || Object.keys(value1).length !== Object.keys(value1).length) {
+        return false;
+    }
+    for (var key in value1) {
+        if (!isSame(value1[key], value2[key])) {
+            return false;
+        }
+    }
+    return true;
+}
+exports.isSame = isSame;
 //# sourceMappingURL=common.js.map

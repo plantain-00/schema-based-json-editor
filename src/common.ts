@@ -4,6 +4,7 @@ declare const require: (name: string) => any;
 
 export const toNumber: (value?: any) => number = require("lodash.tonumber");
 export const toInteger: (value?: any) => number = require("lodash.tointeger");
+const isArray: (value?: any) => boolean = require("lodash.isarray");
 
 import * as dragula from "dragula";
 export { dragula };
@@ -120,6 +121,8 @@ export type Locale = {
         maximum: string;
         largerThan: string;
         smallerThan: string;
+        minItems: string;
+        uniqueItems: string;
     },
 }
 
@@ -138,6 +141,8 @@ export const defaultLocale: Locale = {
         maximum: "Value must be <= {0}.",
         largerThan: "Value must be > {0}.",
         smallerThan: "Value must be < {0}.",
+        minItems: "The length of the array must be >= {0}",
+        uniqueItems: "The item in {0} and {1} must not be same.",
     },
 };
 
@@ -157,6 +162,8 @@ export const locales: { [name: string]: Locale } = {
             maximum: "要求 <= {0}。",
             largerThan: "要求 > {0}。",
             smallerThan: "要求 < {0}。",
+            minItems: "数组的长度要求 >= {0}。",
+            uniqueItems: "{0} 和 {1} 的项不应该相同。",
         },
     },
 };
@@ -215,7 +222,7 @@ export function getDefaultValue(schema: Schema, initialValue: ValueType | undefi
 
 export const buttonGroupStyle = { marginLeft: "10px" };
 
-export interface Props<TSchema extends CommonSchema, TValue>  {
+export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
     initialValue: TValue;
     title?: string;
@@ -226,4 +233,43 @@ export interface Props<TSchema extends CommonSchema, TValue>  {
     onDelete?: () => void;
     readonly?: boolean;
     required?: boolean;
+}
+
+export function isSame(value1: ValueType, value2: ValueType) {
+    if (typeof value1 === "string"
+        || typeof value1 === "number"
+        || typeof value1 === "boolean"
+        || value1 === null
+        || value1 === undefined) {
+        return value1 === value2;
+    }
+    if (typeof value2 === "string"
+        || typeof value2 === "number"
+        || typeof value2 === "boolean"
+        || value2 === null
+        || value2 === undefined) {
+        return false;
+    }
+    if (isArray(value1)) {
+        if (isArray(value2) && (value1 as ValueType[]).length === (value2 as ValueType[]).length) {
+            for (let i = 0; i < (value1 as ValueType[]).length; i++) {
+                if (!isSame((value1 as ValueType[]), (value2 as ValueType[]))) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    if (isArray(value2)
+        || Object.keys((value1 as { [name: string]: ValueType })).length !== Object.keys((value1 as { [name: string]: ValueType })).length) {
+        return false;
+    }
+    for (const key in value1) {
+        if (!isSame((value1 as { [name: string]: ValueType })[key], (value2 as { [name: string]: ValueType })[key])) {
+            return false;
+        }
+    }
+    return true;
 }

@@ -52,7 +52,6 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 #### todo list
 
 + object: propertyOrder, headerTemplate, fieldTemplate
-+ array: minItems, uniqueItems
 + code edit
 + angular2 component
 + vuejs component

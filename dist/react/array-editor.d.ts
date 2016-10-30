@@ -11,11 +11,13 @@ export declare class ArrayEditor extends React.Component<common.Props<common.Arr
     collapsed: boolean;
     value?: common.ValueType[];
     drak: common.dragula.Drake;
+    errorMessage: string;
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>);
     getDragulaContainer(): Element;
     componentDidMount(): void;
     componentWillUnmount(): void;
     collapseOrExpand: () => void;
     toggleOptional: () => void;
+    validate(): void;
     render(): JSX.Element;
 }

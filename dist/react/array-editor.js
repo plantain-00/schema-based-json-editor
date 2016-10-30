@@ -24,6 +24,7 @@ var ArrayEditor = (function (_super) {
             else {
                 _this.value = undefined;
             }
+            _this.validate();
             _this.setState({ value: _this.value }, function () {
                 var container = _this.getDragulaContainer();
                 _this.drak.containers = [container];
@@ -36,6 +37,7 @@ var ArrayEditor = (function (_super) {
         else {
             this.value = undefined;
         }
+        this.validate();
     }
     ArrayEditor.prototype.getDragulaContainer = function () {
         return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
@@ -75,6 +77,27 @@ var ArrayEditor = (function (_super) {
             this.drak.destroy();
         }
     };
+    ArrayEditor.prototype.validate = function () {
+        if (this.value !== undefined) {
+            if (this.props.schema.minItems !== undefined) {
+                if (this.value.length < this.props.schema.minItems) {
+                    this.errorMessage = this.props.locale.error.minItems.replace("{0}", String(this.props.schema.minItems));
+                    return;
+                }
+            }
+            if (this.props.schema.uniqueItems) {
+                for (var i = 1; i < this.value.length; i++) {
+                    for (var j = 0; j < i; j++) {
+                        if (common.isSame(this.value[i], this.value[j])) {
+                            this.errorMessage = this.props.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        this.errorMessage = "";
+    };
     ArrayEditor.prototype.render = function () {
         var _this = this;
         var childrenElement = null;
@@ -85,12 +108,14 @@ var ArrayEditor = (function (_super) {
                     _this.value[i] = value;
                     _this.setState({ value: _this.value });
                     _this.props.updateValue(_this.value);
+                    _this.validate();
                 };
                 var onDelete = function () {
                     _this.value.splice(i, 1);
                     _this.renderSwitch = -_this.renderSwitch;
                     _this.setState({ value: _this.value, renderSwitch: _this.renderSwitch });
                     _this.props.updateValue(_this.value);
+                    _this.validate();
                 };
                 var key = (1 + i) * this_1.renderSwitch;
                 itemElements.push((React.createElement("div", {key: key, "data-index": i, className: this_1.props.theme.rowContainer}, 
@@ -124,7 +149,11 @@ var ArrayEditor = (function (_super) {
                     "is undefined")
             ));
         }
-        return (React.createElement("div", null, 
+        var errorDescription = null;
+        if (this.errorMessage) {
+            errorDescription = React.createElement("p", {className: this.props.theme.help}, this.errorMessage);
+        }
+        return (React.createElement("div", {className: this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}, 
             React.createElement("h3", null, 
                 this.props.title || this.props.schema.title, 
                 React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
@@ -133,7 +162,8 @@ var ArrayEditor = (function (_super) {
                     deleteButton)), 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description), 
             optionalCheckbox, 
-            childrenElement));
+            childrenElement, 
+            errorDescription));
     };
     return ArrayEditor;
 }(React.Component));

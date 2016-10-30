@@ -65,6 +65,7 @@ const schema = JSON.parse(`{
       "format": "table",
       "title": "Pets",
       "uniqueItems": true,
+      "minItems": 1,
       "items": {
         "type": "object",
         "title": "Pet",
@@ -120,7 +121,7 @@ class Main extends React.Component<{}, {}> {
     render() {
         return (
             <div>
-                <div style={{ width: "500px", margin: "20px", float: "left" }}>
+                <div style={{ width: "500px", margin: "10px", float: "left" }}>
                     <JSONEditor schema={schema}
                         initialValue={this.value}
                         updateValue={value => this.updateValue(value)}
@@ -128,10 +129,10 @@ class Main extends React.Component<{}, {}> {
                         icon="fontawesome4"
                         locale="zh-cn" />
                 </div>
-                <pre style={{ float: "left", margin: "20px", width: "400px" }}>
+                <pre style={{ float: "left", margin: "10px", width: "400px" }}>
                     {JSON.stringify(schema, null, "  ")}
                 </pre>
-                <pre style={{ float: "left", margin: "20px", width: "400px" }}>
+                <pre style={{ float: "left", margin: "10px", width: "400px" }}>
                     {JSON.stringify(this.value, null, "  ")}
                 </pre>
             </div>

@@ -77,6 +77,8 @@ export declare type Locale = {
         maximum: string;
         largerThan: string;
         smallerThan: string;
+        minItems: string;
+        uniqueItems: string;
     };
 };
 export declare const defaultLocale: Locale;
@@ -109,3 +111,4 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     readonly?: boolean;
     required?: boolean;
 }
+export declare function isSame(value1: ValueType, value2: ValueType): boolean;

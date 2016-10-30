@@ -8,6 +8,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
     collapsed = false;
     value?: common.ValueType[];
     drak: common.dragula.Drake;
+    errorMessage: string;
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>) {
         super(props);
         if (this.props.required) {
@@ -15,6 +16,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         } else {
             this.value = undefined;
         }
+        this.validate();
     }
     getDragulaContainer() {
         return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
@@ -64,11 +66,34 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         } else {
             this.value = undefined;
         }
+        this.validate();
         this.setState({ value: this.value }, () => {
             const container = this.getDragulaContainer();
             this.drak.containers = [container];
         });
         this.props.updateValue(this.value);
+    }
+    validate() {
+        if (this.value !== undefined) {
+            if (this.props.schema.minItems !== undefined) {
+                if (this.value.length < this.props.schema.minItems) {
+                    this.errorMessage = this.props.locale.error.minItems.replace("{0}", String(this.props.schema.minItems));
+                    return;
+                }
+            }
+            if (this.props.schema.uniqueItems) {
+                for (let i = 1; i < this.value.length; i++) {
+                    for (let j = 0; j < i; j++) {
+                        if (common.isSame(this.value[i], this.value[j])) {
+                            this.errorMessage = this.props.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        this.errorMessage = "";
     }
     render() {
         let childrenElement: JSX.Element | null = null;
@@ -79,12 +104,14 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                     this.value![i] = value;
                     this.setState({ value: this.value });
                     this.props.updateValue(this.value);
+                    this.validate();
                 };
                 const onDelete = () => {
                     this.value!.splice(i, 1);
                     this.renderSwitch = -this.renderSwitch;
                     this.setState({ value: this.value, renderSwitch: this.renderSwitch });
                     this.props.updateValue(this.value);
+                    this.validate();
                 };
                 const key = (1 + i) * this.renderSwitch;
                 itemElements.push((
@@ -132,8 +159,12 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                 </div>
             );
         }
+        let errorDescription: JSX.Element | null = null;
+        if (this.errorMessage) {
+            errorDescription = <p className={this.props.theme.help}>{this.errorMessage}</p>;
+        }
         return (
-            <div>
+            <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <h3>
                     {this.props.title || this.props.schema.title}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
@@ -145,6 +176,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
                 {optionalCheckbox}
                 {childrenElement}
+                {errorDescription}
             </div>
         );
     }
