@@ -123,33 +123,26 @@ const schema = JSON.parse(`{
     selector: "app",
     template: `
     <div>
-        <button style="position: fixed; right: 20px; top: 20px" (click)="showData()">show data in console</button>
-        <div style="width: 800px; margin: 20px; float: left">
+        <div style="width: 500px; margin: 20px; float: left">
           <json-editor schema="{{schema}}"
-              initialValue="{{initialValue}}"
+              initialValue="{{value}}"
               (updateValue)="updateValue($event)"
               theme="bootstrap3"
               icon="fontawesome4"
               locale="zh-cn">
           </json-editor>
         </div>
-        <pre style="width: 800px; margin: 20px; float: left">{{schemaString}}</pre>
+        <pre style="width: 400px; margin: 20px; float: left">{{schemaString}}</pre>
+        <pre style="width: 400px; margin: 20px; float: left">{{value}}</pre>
     </div>
     `,
 })
 export class MainComponent {
     schema = schema;
     schemaString = JSON.stringify(schema, null, "  ");
-    initialValue = {};
-    value: any;
+    value: any = {};
     updateValue(value: any) {
         this.value = value;
-    }
-    showData() {
-        console.log(this.value);
-    }
-    showSchema() {
-        console.log(schema);
     }
 }
 

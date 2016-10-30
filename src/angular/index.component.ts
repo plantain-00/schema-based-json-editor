@@ -22,6 +22,7 @@ export class JSONEditorComponent {
     locale?: string;
     @Input()
     readonly?: boolean;
+
     themeObject: common.Theme;
     localeObject: common.Locale;
     constructor() {
@@ -30,8 +31,8 @@ export class JSONEditorComponent {
     }
 }
 
-import {BooleanEditorComponent} from "./boolean-editor.component";
-export {BooleanEditorComponent};
+import { BooleanEditorComponent } from "./boolean-editor.component";
+export { BooleanEditorComponent };
 
-import {ArrayEditorComponent} from "./array-editor.component";
-export {ArrayEditorComponent};
+import { ArrayEditorComponent } from "./array-editor.component";
+export { ArrayEditorComponent };

@@ -111,24 +111,28 @@ const schema = JSON.parse(`{
   }
 }`);
 
-const initialValue = {};
-
 class Main extends React.Component<{}, {}> {
-    public value: any;
-    public render() {
+    value: any = {};
+    updateValue(value: any) {
+        this.value = value;
+        this.setState({ value: this.value });
+    }
+    render() {
         return (
             <div>
-                <button style={{ position: "fixed", right: "20px", top: "20px" }} onClick={() => console.log(this.value)}>show data in console</button>
-                <div style={{ width: "800px" , margin: "20px", float: "left" }}>
+                <div style={{ width: "500px", margin: "20px", float: "left" }}>
                     <JSONEditor schema={schema}
-                        initialValue={initialValue}
-                        updateValue={value => this.value = value}
+                        initialValue={this.value}
+                        updateValue={value => this.updateValue(value)}
                         theme="bootstrap3"
                         icon="fontawesome4"
                         locale="zh-cn" />
                 </div>
                 <pre style={{ float: "left", margin: "20px", width: "400px" }}>
                     {JSON.stringify(schema, null, "  ")}
+                </pre>
+                <pre style={{ float: "left", margin: "20px", width: "400px" }}>
+                    {JSON.stringify(this.value, null, "  ")}
                 </pre>
             </div>
         );
