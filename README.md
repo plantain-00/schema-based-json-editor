@@ -57,6 +57,5 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 + vuejs component
 + object and array filter
 + boolean format: "checkbox" and "select"
-+ string format: "textarea" and options.input_height
 + array format: "tabs"
 + object and array: options.collapsed

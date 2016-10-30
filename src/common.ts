@@ -41,7 +41,7 @@ export type NumberSchema = CommonSchema & {
 
 export type StringSchema = CommonSchema & {
     type: "string";
-    format?: "color" | "date" | "datetime" | "datetime-local" | "time" | "month" | "email" | "uri" | "url" | "week" | "hostname" | "ipv4" | "ipv6";
+    format?: "textarea" | "color" | "date" | "datetime" | "datetime-local" | "time" | "month" | "email" | "uri" | "url" | "week" | "hostname" | "ipv4" | "ipv6";
     enum?: string[];
     minLength?: number;
     maxLength?: number;

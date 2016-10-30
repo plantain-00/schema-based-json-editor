@@ -44,6 +44,11 @@ const schema = JSON.parse(`{
         "female"
       ]
     },
+    "description": {
+      "type": "string",
+      "format": "textarea",
+      "default": "test"
+    },
     "location": {
       "type": "object",
       "title": "Location",

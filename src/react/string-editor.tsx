@@ -59,18 +59,28 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         let control: JSX.Element | null = null;
         if (this.value !== undefined) {
             if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
-                control = (
-                    <input className={this.props.theme.formControl}
-                        type={this.props.schema.format}
-                        onChange={this.onChange}
-                        defaultValue={this.value}
-                        readOnly={this.props.readonly || this.props.schema.readonly} />
-                );
+                if (this.props.schema.format === "textarea") {
+                    control = (
+                        <textarea className={this.props.theme.formControl}
+                            onChange={this.onChange}
+                            defaultValue={this.value}
+                            rows={5}
+                            readOnly={this.props.readonly || this.props.schema.readonly} >
+                        </textarea>
+                    );
+                } else {
+                    control = (
+                        <input className={this.props.theme.formControl}
+                            type={this.props.schema.format}
+                            onChange={this.onChange}
+                            defaultValue={this.value}
+                            readOnly={this.props.readonly || this.props.schema.readonly} />
+                    );
+                }
             } else {
                 const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
                 control = (
                     <select className={this.props.theme.formControl}
-                        type={this.props.schema.format}
                         onChange={this.onChange}
                         defaultValue={this.value}>
                         {options}

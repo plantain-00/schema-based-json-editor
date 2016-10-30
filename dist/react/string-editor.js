@@ -60,11 +60,16 @@ var StringEditor = (function (_super) {
         var control = null;
         if (this.value !== undefined) {
             if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
-                control = (React.createElement("input", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value, readOnly: this.props.readonly || this.props.schema.readonly}));
+                if (this.props.schema.format === "textarea") {
+                    control = (React.createElement("textarea", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value, rows: 5, readOnly: this.props.readonly || this.props.schema.readonly}));
+                }
+                else {
+                    control = (React.createElement("input", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value, readOnly: this.props.readonly || this.props.schema.readonly}));
+                }
             }
             else {
                 var options = this.props.schema.enum.map(function (e, i) { return React.createElement("option", {key: i, value: e}, e); });
-                control = (React.createElement("select", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value}, options));
+                control = (React.createElement("select", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value}, options));
             }
         }
         var errorDescription = null;

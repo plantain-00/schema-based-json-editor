@@ -5,7 +5,7 @@ import { JSONEditor } from "../../dist/react/index";
 const schema = JSON.parse(`{
   "title": "Person",
   "type": "object",
-  "required": ["name", "age", "location", "favorite_color", "pets"],
+  "required": ["name", "age", "location", "favorite_color", "pets", "description"],
   "properties": {
     "name": {
       "type": "string",
@@ -35,6 +35,11 @@ const schema = JSON.parse(`{
         "male",
         "female"
       ]
+    },
+    "description": {
+      "type": "string",
+      "format": "textarea",
+      "default": "test"
     },
     "location": {
       "type": "object",
