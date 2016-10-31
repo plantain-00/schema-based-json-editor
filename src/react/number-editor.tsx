@@ -15,13 +15,12 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
         this.validate();
     }
     componentDidMount() {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
     }
     onChange = (e: React.FormEvent<{ value: string }>) => {
         this.value = this.props.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
         this.validate();
+        this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
     validate() {

@@ -12,7 +12,7 @@ const schema = JSON.parse(`{
       "description": "First and Last name",
       "minLength": 4,
       "maxLength": 20,
-      "default": "Jeremy Dorn"
+      "default": "Sara"
     },
     "age": {
       "type": "integer",
@@ -52,15 +52,6 @@ const schema = JSON.parse(`{
         "state": {
           "type": "string",
           "default": "CA"
-        },
-        "citystate": {
-          "type": "string",
-          "description": "This is generated automatically from the previous two fields",
-          "template": "{{city}}, {{state}}",
-          "watch": {
-            "city": "location.city",
-            "state": "location.state"
-          }
         }
       },
       "required": ["state"]

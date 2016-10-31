@@ -99,6 +99,7 @@ export declare function getDefaultValue(schema: Schema, initialValue: ValueType 
 export declare const buttonGroupStyle: {
     marginLeft: string;
 };
+export declare const buttonGroupStyleString: string;
 export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
     initialValue: TValue;

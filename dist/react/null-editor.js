@@ -25,9 +25,7 @@ var NullEditor = (function (_super) {
         }
     }
     NullEditor.prototype.componentDidMount = function () {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
     };
     NullEditor.prototype.render = function () {
         var optionalCheckbox = null;

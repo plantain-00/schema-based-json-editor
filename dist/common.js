@@ -125,6 +125,7 @@ function getDefaultValue(schema, initialValue) {
 }
 exports.getDefaultValue = getDefaultValue;
 exports.buttonGroupStyle = { marginLeft: "10px" };
+exports.buttonGroupStyleString = "margin-left: 10px";
 function isSame(value1, value2) {
     if (typeof value1 === "string"
         || typeof value1 === "number"

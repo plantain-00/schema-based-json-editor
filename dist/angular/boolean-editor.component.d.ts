@@ -13,4 +13,10 @@ export declare class BooleanEditorComponent {
     required?: boolean;
     value?: boolean;
     constructor();
+    onChange(e: {
+        target: {
+            checked: boolean;
+        };
+    }): void;
+    toggleOptional(): void;
 }

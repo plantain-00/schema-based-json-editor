@@ -13,14 +13,14 @@ import { Component } from "@angular/core";
 const schema = JSON.parse(`{
   "title": "Person",
   "type": "object",
-  "required": ["name", "age", "location", "favorite_color", "pets"],
+  "required": ["name", "age", "location", "favorite_color", "pets", "description"],
   "properties": {
     "name": {
       "type": "string",
       "description": "First and Last name",
       "minLength": 4,
       "maxLength": 20,
-      "default": "Jeremy Dorn"
+      "default": "Sara"
     },
     "age": {
       "type": "integer",
@@ -60,15 +60,6 @@ const schema = JSON.parse(`{
         "state": {
           "type": "string",
           "default": "CA"
-        },
-        "citystate": {
-          "type": "string",
-          "description": "This is generated automatically from the previous two fields",
-          "template": "{{city}}, {{state}}",
-          "watch": {
-            "city": "location.city",
-            "state": "location.state"
-          }
         }
       },
       "required": ["state"]

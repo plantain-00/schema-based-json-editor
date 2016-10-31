@@ -22,9 +22,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
     }
     componentDidMount() {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
         const container = this.getDragulaContainer();
         this.drak = common.dragula([container]);
         this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {

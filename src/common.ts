@@ -221,6 +221,7 @@ export function getDefaultValue(schema: Schema, initialValue: ValueType | undefi
 }
 
 export const buttonGroupStyle = { marginLeft: "10px" };
+export const buttonGroupStyleString = "margin-left: 10px";
 
 export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;

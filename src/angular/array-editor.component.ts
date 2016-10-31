@@ -4,7 +4,40 @@ import * as common from "../common";
 
 @Component({
     selector: "array-editor",
-    template: "",
+    template: `
+    <div class="{{errorMessage ? theme.errorRow : theme.row}}">
+        <h3>
+            {{title || schema.title}}
+            <div class="{{theme.buttonGroup}}" style="{{common.buttonGroupStyleString}}">
+                <button class="{{theme.button}}" (click)="collapseOrExpand">{{collapsed ? icon.expand : icon.collapse"}}</button>
+                <button *ngIf="!readonly && value !== undefined" class="{{theme.button}}" (click)={addItem}>{{this.props.icon.add}}</button>
+                <button *ngIf="onDelete && !treadonly && !schema.readonly" class={{theme.button}} (click)="onDelete">{{icon.delete}}</button>
+            </div>
+        </h3>
+        <p class="{{theme.help}}">{{schema.description}}</p>
+        <div *ngIf="!required" class="{{theme.optionalCheckbox}}">
+            <label>
+                <input type="checkbox" (change)="toggleOptional" checked="{{this.value === undefined}}" />
+                is undefined
+            </label>
+        </div>
+        <div *ngIf="value !== undefined && !collapsed" class="{{theme.rowContainer}}">
+            <div *ngFor="let item of value" key={key} data-index={i} class="{{theme.rowContainer}}">
+                <editor schema={schema.items}
+                    title={String(i)}
+                    initialValue={this.value[i]}
+                    updateValue={onChange}
+                    theme="{{theme}}"
+                    icon="{{icon}"
+                    locale="{{locale}}"
+                    required="{{true}}"
+                    readonly="{{readonly || schema.readonly}}"
+                    (onDelete)="onDelete" />
+            </div>
+        </div>
+        <p *ngIf="errorMessage" class="{{theme.help}}">{{this.errorMessage}}</p>
+    </div>
+    `,
 })
 export class ArrayEditorComponent {
     @Input()
@@ -16,11 +49,11 @@ export class ArrayEditorComponent {
     @Output()
     updateValue = new EventEmitter();
     @Input()
-    theme: string;
+    theme: common.Theme;
     @Input()
-    icon: string;
+    icon: common.Icon;
     @Input()
-    locale: string;
+    locale: common.Locale;
     onDelete = new EventEmitter();
     @Input()
     readonly?: boolean;
@@ -31,6 +64,7 @@ export class ArrayEditorComponent {
     collapsed = false;
     value?: common.ValueType[];
     drak: common.dragula.Drake;
+    errorMessage: string;
 
     constructor() {
         if (this.required) {
@@ -89,6 +123,32 @@ export class ArrayEditorComponent {
         }
         // const container = this.getDragulaContainer();
         // this.drak.containers = [container];
+        this.updateValue.emit(this.value);
+    }
+    validate() {
+        if (this.value !== undefined) {
+            if (this.schema.minItems !== undefined) {
+                if (this.value.length < this.schema.minItems) {
+                    this.errorMessage = this.locale.error.minItems.replace("{0}", String(this.schema.minItems));
+                    return;
+                }
+            }
+            if (this.schema.uniqueItems) {
+                for (let i = 1; i < this.value.length; i++) {
+                    for (let j = 0; j < i; j++) {
+                        if (common.isSame(this.value[i], this.value[j])) {
+                            this.errorMessage = this.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        this.errorMessage = "";
+    }
+    addItem() {
+        this.value!.push(common.getDefaultValue(this.schema.items, undefined));
         this.updateValue.emit(this.value);
     }
 }

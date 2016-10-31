@@ -14,9 +14,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         }
     }
     componentDidMount() {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
     }
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
@@ -42,7 +40,10 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                     this.props.updateValue(this.value);
                 };
                 const schema = this.props.schema.properties[property];
-                this.value[property] = common.getDefaultValue(schema, this.value[property]) as { [name: string]: common.ValueType };
+                const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
+                if (required) {
+                    this.value[property] = common.getDefaultValue(schema, this.value[property]) as { [name: string]: common.ValueType };
+                }
                 propertyElements.push(<Editor key={property}
                     schema={schema}
                     title={schema.title || property}
@@ -51,7 +52,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                     theme={this.props.theme}
                     icon={this.props.icon}
                     locale={this.props.locale}
-                    required={this.props.schema.required && this.props.schema.required.some(r => r === property)}
+                    required={required}
                     readonly={this.props.readonly || this.props.schema.readonly} />);
             }
             childrenElement = (

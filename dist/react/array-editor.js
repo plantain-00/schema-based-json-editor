@@ -44,9 +44,7 @@ var ArrayEditor = (function (_super) {
     };
     ArrayEditor.prototype.componentDidMount = function () {
         var _this = this;
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
         var container = this.getDragulaContainer();
         this.drak = common.dragula([container]);
         this.drak.on("drop", function (el, target, source, sibling) {

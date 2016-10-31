@@ -9,6 +9,7 @@ var BooleanEditor = (function (_super) {
         _super.call(this, props);
         this.onChange = function (e) {
             _this.value = e.target.checked;
+            _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
         this.toggleOptional = function () {
@@ -29,9 +30,7 @@ var BooleanEditor = (function (_super) {
         }
     }
     BooleanEditor.prototype.componentDidMount = function () {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
     };
     BooleanEditor.prototype.render = function () {
         var control = null;

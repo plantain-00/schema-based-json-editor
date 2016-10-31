@@ -30,9 +30,7 @@ var ObjectEditor = (function (_super) {
         }
     }
     ObjectEditor.prototype.componentDidMount = function () {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
     };
     ObjectEditor.prototype.render = function () {
         var _this = this;
@@ -46,8 +44,11 @@ var ObjectEditor = (function (_super) {
                     _this.props.updateValue(_this.value);
                 };
                 var schema = this_1.props.schema.properties[property];
-                this_1.value[property] = common.getDefaultValue(schema, this_1.value[property]);
-                propertyElements.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_1.value[property], updateValue: onChange, theme: this_1.props.theme, icon: this_1.props.icon, locale: this_1.props.locale, required: this_1.props.schema.required && this_1.props.schema.required.some(function (r) { return r === property; }), readonly: this_1.props.readonly || this_1.props.schema.readonly}));
+                var required = this_1.props.schema.required && this_1.props.schema.required.some(function (r) { return r === property; });
+                if (required) {
+                    this_1.value[property] = common.getDefaultValue(schema, this_1.value[property]);
+                }
+                propertyElements.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_1.value[property], updateValue: onChange, theme: this_1.props.theme, icon: this_1.props.icon, locale: this_1.props.locale, required: required, readonly: this_1.props.readonly || this_1.props.schema.readonly}));
             };
             var this_1 = this;
             for (var property in this.props.schema.properties) {

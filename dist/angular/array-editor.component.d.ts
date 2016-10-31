@@ -6,9 +6,9 @@ export declare class ArrayEditorComponent {
     initialValue: common.ValueType[];
     title?: string;
     updateValue: EventEmitter<{}>;
-    theme: string;
-    icon: string;
-    locale: string;
+    theme: common.Theme;
+    icon: common.Icon;
+    locale: common.Locale;
     onDelete: EventEmitter<{}>;
     readonly?: boolean;
     required?: boolean;
@@ -16,9 +16,12 @@ export declare class ArrayEditorComponent {
     collapsed: boolean;
     value?: common.ValueType[];
     drak: common.dragula.Drake;
+    errorMessage: string;
     constructor();
     getDragulaContainer(): void;
     ngOnDestroy(): void;
     collapseOrExpand: () => void;
     toggleOptional: () => void;
+    validate(): void;
+    addItem(): void;
 }

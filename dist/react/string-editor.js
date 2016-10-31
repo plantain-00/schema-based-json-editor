@@ -10,6 +10,7 @@ var StringEditor = (function (_super) {
         this.onChange = function (e) {
             _this.value = e.target.value;
             _this.validate();
+            _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
         this.toggleOptional = function () {
@@ -32,9 +33,7 @@ var StringEditor = (function (_super) {
         this.validate();
     }
     StringEditor.prototype.componentDidMount = function () {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
     };
     StringEditor.prototype.validate = function () {
         if (this.value !== undefined) {

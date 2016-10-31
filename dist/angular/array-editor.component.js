@@ -65,6 +65,31 @@ var ArrayEditorComponent = (function () {
             this.drak.destroy();
         }
     };
+    ArrayEditorComponent.prototype.validate = function () {
+        if (this.value !== undefined) {
+            if (this.schema.minItems !== undefined) {
+                if (this.value.length < this.schema.minItems) {
+                    this.errorMessage = this.locale.error.minItems.replace("{0}", String(this.schema.minItems));
+                    return;
+                }
+            }
+            if (this.schema.uniqueItems) {
+                for (var i = 1; i < this.value.length; i++) {
+                    for (var j = 0; j < i; j++) {
+                        if (common.isSame(this.value[i], this.value[j])) {
+                            this.errorMessage = this.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        this.errorMessage = "";
+    };
+    ArrayEditorComponent.prototype.addItem = function () {
+        this.value.push(common.getDefaultValue(this.schema.items, undefined));
+        this.updateValue.emit(this.value);
+    };
     __decorate([
         core_1.Input()
     ], ArrayEditorComponent.prototype, "schema", void 0);
@@ -95,7 +120,7 @@ var ArrayEditorComponent = (function () {
     ArrayEditorComponent = __decorate([
         core_1.Component({
             selector: "array-editor",
-            template: "",
+            template: "\n    <div class=\"{{errorMessage ? theme.errorRow : theme.row}}\">\n        <h3>\n            {{title || schema.title}}\n            <div class=\"{{theme.buttonGroup}}\" style=\"{{common.buttonGroupStyleString}}\">\n                <button class=\"{{theme.button}}\" (click)=\"collapseOrExpand\">{{collapsed ? icon.expand : icon.collapse\"}}</button>\n                <button *ngIf=\"!readonly && value !== undefined\" class=\"{{theme.button}}\" (click)={addItem}>{{this.props.icon.add}}</button>\n                <button *ngIf=\"onDelete && !treadonly && !schema.readonly\" class={{theme.button}} (click)=\"onDelete\">{{icon.delete}}</button>\n            </div>\n        </h3>\n        <p class=\"{{theme.help}}\">{{schema.description}}</p>\n        <div *ngIf=\"!required\" class=\"{{theme.optionalCheckbox}}\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional\" checked=\"{{this.value === undefined}}\" />\n                is undefined\n            </label>\n        </div>\n        <div *ngIf=\"value !== undefined && !collapsed\" class=\"{{theme.rowContainer}}\">\n            <div *ngFor=\"let item of value\" key={key} data-index={i} class=\"{{theme.rowContainer}}\">\n                <editor schema={schema.items}\n                    title={String(i)}\n                    initialValue={this.value[i]}\n                    updateValue={onChange}\n                    theme=\"{{theme}}\"\n                    icon=\"{{icon}\"\n                    locale=\"{{locale}}\"\n                    required=\"{{true}}\"\n                    readonly=\"{{readonly || schema.readonly}}\"\n                    (onDelete)=\"onDelete\" />\n            </div>\n        </div>\n        <p *ngIf=\"errorMessage\" class=\"{{theme.help}}\">{{this.errorMessage}}</p>\n    </div>\n    ",
         })
     ], ArrayEditorComponent);
     return ArrayEditorComponent;

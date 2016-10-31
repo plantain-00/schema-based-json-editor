@@ -10,6 +10,7 @@ var NumberEditor = (function (_super) {
         this.onChange = function (e) {
             _this.value = _this.props.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
             _this.validate();
+            _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
         this.toggleOptional = function () {
@@ -32,9 +33,7 @@ var NumberEditor = (function (_super) {
         this.validate();
     }
     NumberEditor.prototype.componentDidMount = function () {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
     };
     NumberEditor.prototype.validate = function () {
         if (this.value !== undefined) {

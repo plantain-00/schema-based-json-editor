@@ -13,12 +13,11 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
         }
     }
     componentDidMount() {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
     }
     onChange = (e: React.FormEvent<{ checked: boolean }>) => {
         this.value = e.target.checked;
+        this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
     toggleOptional = () => {

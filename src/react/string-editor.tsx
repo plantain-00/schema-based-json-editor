@@ -15,13 +15,12 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         this.validate();
     }
     componentDidMount() {
-        if (this.value !== this.props.initialValue) {
-            this.props.updateValue(this.value);
-        }
+        this.props.updateValue(this.value);
     }
     onChange = (e: React.FormEvent<{ value: string }>) => {
         this.value = e.target.value;
         this.validate();
+        this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
     validate() {
