@@ -20,6 +20,7 @@ export declare class ArrayEditorComponent {
     constructor();
     getDragulaContainer(): void;
     ngOnDestroy(): void;
+    trackByFunction(index: number, value: common.ValueType): number;
     collapseOrExpand: () => void;
     toggleOptional: () => void;
     validate(): void;

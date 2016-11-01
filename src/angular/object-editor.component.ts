@@ -6,30 +6,30 @@ import * as common from "../common";
     template: `
     <div>
         <h3>
-            {this.props.title || this.props.schema.title}
-            <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                <button className={this.props.theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon.expand : this.props.icon.collapse}</button>
-                <button *ngIf="onDelete && !readonly && !schema.readonly" className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>
+            {{title || schema.title}}
+            <div [class]="theme.buttonGroup" [style="common.buttonGroupStyle">
+                <button [class]="theme.button" (click)="collapseOrExpand">{{collapsed ? icon.expand : icon.collapse}}</button>
+                <button *ngIf="onDelete && !readonly && !schema.readonly" [class]="theme.button" (click)="onDelete">{{icon.delete}}</button>
             </div>
         </h3>
-        <p className={this.props.theme.help}>{this.props.schema.description}</p>
-        <div *ngIf="!required" className={this.props.theme.optionalCheckbox}>
+        <p [class]="theme.help">{{schema.description}}</p>
+        <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
-        <div *ngIf="!collapsed && value !== undefined" className={this.props.theme.rowContainer}>
-            <editor *ngFor="let property of schema.properties" key={property}
-                schema={schema}
-                title={schema.title || property}
-                initialValue={this.value[property]}
-                updateValue={onChange}
-                theme={this.props.theme}
-                icon={this.props.icon}
-                locale={this.props.locale}
-                required={required}
-                readonly={this.props.readonly || this.props.schema.readonly}>
+        <div *ngIf="!collapsed && value !== undefined" [class]="theme.rowContainer">
+            <editor *ngFor="let property of properties; let i = index; trackBy: trackByFunction"
+                [schema]="schema"
+                [title]="schema.title || property.name"
+                [initialValue]="value[property.name]"
+                (updateValue)="onChange"
+                [theme]="theme"
+                [icon]="icon"
+                [locale]="locale"
+                [required]="required"
+                [readonly]="readonly || schema.readonly">
             </editor>
         </div>
     </div >
@@ -59,14 +59,23 @@ export class ObjectEditorComponent {
 
     collapsed = false;
     value?: { [name: string]: common.ValueType };
+    properties: { name: string; value: common.ValueType }[] = [];
     constructor() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
         for (const property in this.schema.properties) {
             const schema = this.schema.properties[property];
             const required = this.schema.required && this.schema.required.some(r => r === property);
             this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
+
+            this.properties.push({
+                name: property,
+                value: schema,
+            });
         }
         this.updateValue.emit(this.value);
+    }
+    trackByFunction(index: number, value: { [name: string]: common.ValueType }) {
+        return index;
     }
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;

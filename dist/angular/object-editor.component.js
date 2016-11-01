@@ -6,6 +6,7 @@ var ObjectEditorComponent = (function () {
         var _this = this;
         this.updateValue = new core_1.EventEmitter();
         this.collapsed = false;
+        this.properties = [];
         this.collapseOrExpand = function () {
             _this.collapsed = !_this.collapsed;
         };
@@ -23,6 +24,10 @@ var ObjectEditorComponent = (function () {
             var schema = this_1.schema.properties[property];
             var required = this_1.schema.required && this_1.schema.required.some(function (r) { return r === property; });
             this_1.value[property] = common.getDefaultValue(required, schema, this_1.value[property]);
+            this_1.properties.push({
+                name: property,
+                value: schema,
+            });
         };
         var this_1 = this;
         for (var property in this.schema.properties) {
@@ -30,6 +35,9 @@ var ObjectEditorComponent = (function () {
         }
         this.updateValue.emit(this.value);
     }
+    ObjectEditorComponent.prototype.trackByFunction = function (index, value) {
+        return index;
+    };
     __decorate([
         core_1.Input()
     ], ObjectEditorComponent.prototype, "schema", void 0);
@@ -63,7 +71,7 @@ var ObjectEditorComponent = (function () {
     ObjectEditorComponent = __decorate([
         core_1.Component({
             selector: "object-editor",
-            template: "\n    <div>\n        <h3>\n            {this.props.title || this.props.schema.title}\n            <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>\n                <button className={this.props.theme.button} onClick={this.collapseOrExpand}>{this.collapsed ? this.props.icon.expand : this.props.icon.collapse}</button>\n                <button *ngIf=\"onDelete && !readonly && !schema.readonly\" className={this.props.theme.button} onClick={this.props.onDelete}>{this.props.icon.delete}</button>\n            </div>\n        </h3>\n        <p className={this.props.theme.help}>{this.props.schema.description}</p>\n        <div *ngIf=\"!required\" className={this.props.theme.optionalCheckbox}>\n            <label>\n                <input type=\"checkbox\" onChange={this.toggleOptional} checked={this.value === undefined} />\n                is undefined\n            </label>\n        </div>\n        <div *ngIf=\"!collapsed && value !== undefined\" className={this.props.theme.rowContainer}>\n            <editor *ngFor=\"let property of schema.properties\" key={property}\n                schema={schema}\n                title={schema.title || property}\n                initialValue={this.value[property]}\n                updateValue={onChange}\n                theme={this.props.theme}\n                icon={this.props.icon}\n                locale={this.props.locale}\n                required={required}\n                readonly={this.props.readonly || this.props.schema.readonly}>\n            </editor>\n        </div>\n    </div >\n    ",
+            template: "\n    <div>\n        <h3>\n            {{title || schema.title}}\n            <div [class]=\"theme.buttonGroup\" [style=\"common.buttonGroupStyle\">\n                <button [class]=\"theme.button\" (click)=\"collapseOrExpand\">{{collapsed ? icon.expand : icon.collapse}}</button>\n                <button *ngIf=\"onDelete && !readonly && !schema.readonly\" [class]=\"theme.button\" (click)=\"onDelete\">{{icon.delete}}</button>\n            </div>\n        </h3>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <div *ngIf=\"!collapsed && value !== undefined\" [class]=\"theme.rowContainer\">\n            <editor *ngFor=\"let property of properties; let i = index; trackBy: trackByFunction\"\n                [schema]=\"schema\"\n                [title]=\"schema.title || property.name\"\n                [initialValue]=\"value[property.name]\"\n                (updateValue)=\"onChange\"\n                [theme]=\"theme\"\n                [icon]=\"icon\"\n                [locale]=\"locale\"\n                [required]=\"required\"\n                [readonly]=\"readonly || schema.readonly\">\n            </editor>\n        </div>\n    </div >\n    ",
         })
     ], ObjectEditorComponent);
     return ObjectEditorComponent;

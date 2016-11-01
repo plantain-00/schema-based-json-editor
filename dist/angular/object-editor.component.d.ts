@@ -17,7 +17,14 @@ export declare class ObjectEditorComponent {
     value?: {
         [name: string]: common.ValueType;
     };
+    properties: {
+        name: string;
+        value: common.ValueType;
+    }[];
     constructor();
+    trackByFunction(index: number, value: {
+        [name: string]: common.ValueType;
+    }): number;
     collapseOrExpand: () => void;
     toggleOptional: () => void;
 }

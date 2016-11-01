@@ -8,34 +8,35 @@ import * as common from "../common";
     <div class="{{errorMessage ? theme.errorRow : theme.row}}">
         <h3>
             {{title || schema.title}}
-            <div class="{{theme.buttonGroup}}" style="{{common.buttonGroupStyleString}}">
-                <button class="{{theme.button}}" (click)="collapseOrExpand">{{collapsed ? icon.expand : icon.collapse"}}</button>
-                <button *ngIf="!readonly && value !== undefined" class="{{theme.button}}" (click)={addItem}>{{this.props.icon.add}}</button>
-                <button *ngIf="onDelete && !treadonly && !schema.readonly" class={{theme.button}} (click)="onDelete">{{icon.delete}}</button>
+            <div [class]="theme.buttonGroup" [style]="common.buttonGroupStyleString">
+                <button [class]="theme.button" (click)="collapseOrExpand">{{collapsed ? icon.expand : icon.collapse}}</button>
+                <button *ngIf="!readonly && value !== undefined" [class]="theme.button" (click)="addItem">{{icon.add}}</button>
+                <button *ngIf="onDelete && !treadonly && !schema.readonly" [class]="theme.button" (click)="onDelete">{{icon.delete}}</button>
             </div>
         </h3>
-        <p class="{{theme.help}}">{{schema.description}}</p>
-        <div *ngIf="!required" class="{{theme.optionalCheckbox}}">
+        <p [class]="theme.help">{{schema.description}}</p>
+        <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" (change)="toggleOptional" checked="{{this.value === undefined}}" />
+                <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
-        <div *ngIf="value !== undefined && !collapsed" class="{{theme.rowContainer}}">
-            <div *ngFor="let item of value" key={key} data-index={i} class="{{theme.rowContainer}}">
-                <editor schema={schema.items}
-                    title={String(i)}
-                    initialValue={this.value[i]}
-                    updateValue={onChange}
-                    theme="{{theme}}"
-                    icon="{{icon}"
-                    locale="{{locale}}"
-                    required="{{true}}"
-                    readonly="{{readonly || schema.readonly}}"
-                    (onDelete)="onDelete" />
+        <div *ngIf="value !== undefined && !collapsed" [class]="theme.rowContainer">
+            <div *ngFor="let item of value; let i = index; trackBy:trackByFunction" [attr.data-index]="i" [class]="theme.rowContainer">
+                <editor [schema]="schema.items"
+                    [title]="i"
+                    [initialValue]="value[i]"
+                    (updateValue)="onChange"
+                    [theme]="theme"
+                    [icon]="icon"
+                    [locale]="locale"
+                    [required]="true"
+                    [readonly]="readonly || schema.readonly"
+                    (onDelete)="onDelete">
+                </editor>
             </div>
         </div>
-        <p *ngIf="errorMessage" class="{{theme.help}}">{{this.errorMessage}}</p>
+        <p *ngIf="errorMessage" [class]="theme.help">{{errorMessage}}</p>
     </div>
     `,
 })
@@ -65,7 +66,6 @@ export class ArrayEditorComponent {
     value?: common.ValueType[];
     drak: common.dragula.Drake;
     errorMessage: string;
-
     constructor() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
 
@@ -93,17 +93,17 @@ export class ArrayEditorComponent {
         //     }
         // });
     }
-
     getDragulaContainer() {
         // return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
     }
-
     ngOnDestroy() {
         if (this.drak) {
             this.drak.destroy();
         }
     }
-
+    trackByFunction(index: number, value: common.ValueType) {
+        return (1 + index) * this.renderSwitch;
+    }
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         // const container = this.getDragulaContainer();
@@ -142,7 +142,7 @@ export class ArrayEditorComponent {
         this.errorMessage = "";
     }
     addItem() {
-        this.value!.push(common.getDefaultValue(true, this.schema.items, undefined)!);
+        this.value!.push(common.getDefaultValue(true, this.schema.items, undefined) !);
         this.updateValue.emit(this.value);
     }
 }

@@ -4,24 +4,24 @@ import * as common from "../common";
 @Component({
     selector: "boolean-editor",
     template: `
-    <div className={this.props.theme.row}>
-        <title-editor {...this.props} />
-        <div *ngIf="!required" className={this.props.theme.optionalCheckbox}>
+    <div [class]="theme.row">
+        <title-editor></title-editor>
+        <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
-        <div *ngIf="value !== undefined" className={this.props.theme.optionalCheckbox}>
+        <div *ngIf="value !== undefined" [class]="theme.optionalCheckbox">
             <label>
                 <input type="checkbox"
-                    onChange={this.onChange}
-                    checked={this.value}
-                    readOnly={this.props.readonly || this.props.schema.readonly} />
-                {this.props.title}
+                    (change)="onChange"
+                    [checked]="value"
+                    [readOnly]="readonly || schema.readonly" />
+                {{title}}
             </label>
         </div>
-        <p className={this.props.theme.help}>{this.props.schema.description}</p>
+        <p [class]="theme.help">{{schema.description}}</p>
     </div>
     `,
 })

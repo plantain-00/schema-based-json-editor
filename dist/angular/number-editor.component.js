@@ -12,6 +12,9 @@ var NumberEditorComponent = (function () {
         this.validate();
         this.updateValue.emit(this.value);
     };
+    NumberEditorComponent.prototype.trackByFunction = function (index, value) {
+        return index;
+    };
     NumberEditorComponent.prototype.validate = function () {
         if (this.value !== undefined) {
             if (this.schema.minimum !== undefined) {
@@ -87,7 +90,7 @@ var NumberEditorComponent = (function () {
     NumberEditorComponent = __decorate([
         core_1.Component({
             selector: "number-editor",
-            template: "\n    <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>\n        <title-editor {...this.props}></title-editor>\n        <div *ngIf=\"!this.required\" className={this.props.theme.optionalCheckbox}>\n            <label>\n                <input type=\"checkbox\" onChange={this.toggleOptional} checked={this.value === undefined} />\n                is undefined\n            </label>\n        </div>\n        <input *ngIf=\"value !== undefined && (schema.enum === undefined || readonly || schema.readonly)\"\n            className={this.props.theme.formControl}\n            type=\"number\"\n            onChange={this.onChange}\n            defaultValue={String(this.value)}\n            readOnly={this.props.readonly || this.props.schema.readonly} />\n        <select *ngIf=\"value !== undefined && (schema.enum !== undefined && !readonly && !schema.readonly)\"\n            className={this.props.theme.formControl}\n            type=\"number\"\n            onChange={this.onChange}\n            defaultValue={String(this.value)} >\n            <option *ngFor=\"let e of schema.enum\" key={i} value={e} >{e}</option>\n        </select>\n        <p className={this.props.theme.help}>{this.props.schema.description}</p>\n        <p *ngIf=\"errorMessage\" className={this.props.theme.help}>{this.errorMessage}</p>\n    </div>\n    ",
+            template: "\n    <div [class]=\"errorMessage ? theme.errorRow : theme.row\">\n        <title-editor></title-editor>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <input *ngIf=\"value !== undefined && (schema.enum === undefined || readonly || schema.readonly)\"\n            [class]=\"theme.formControl\"\n            type=\"number\"\n            (change)=\"onChange\"\n            [defaultValue]=\"value\"\n            [readOnly]=\"readonly || schema.readonly\" />\n        <select *ngIf=\"value !== undefined && (schema.enum !== undefined && !readonly && !schema.readonly)\"\n            [class]=\"theme.formControl\"\n            type=\"number\"\n            (change)=\"onChange\">\n            <option *ngFor=\"let e of schema.enum; let i = index; trackBy:trackByFunction\"\n                [value]=\"e\"\n                [selected]=\"value === e\">\n                {{e}}\n            </option>\n        </select>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <p *ngIf=\"errorMessage\" [class]=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
         })
     ], NumberEditorComponent);
     return NumberEditorComponent;

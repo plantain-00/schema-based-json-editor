@@ -5,14 +5,14 @@ import * as common from "../common";
     selector: "null-editor",
     template: `
     <div>
-        <title-editor {...this.props}></title-editor>
-        <div *ngIf="!this.required" className={this.props.theme.optionalCheckbox}>
+        <title-editor></title-editor>
+        <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
-        <p className={this.props.theme.help}>{this.props.schema.description}</p>
+        <p [class]="theme.help">{{schema.description}}</p>
     </div>
     `,
 })

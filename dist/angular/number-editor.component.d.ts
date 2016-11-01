@@ -19,6 +19,7 @@ export declare class NumberEditorComponent {
             value: string;
         };
     }): void;
+    trackByFunction(index: number, value: number): number;
     validate(): void;
     toggleOptional(): void;
 }

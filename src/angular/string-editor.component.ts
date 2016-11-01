@@ -4,35 +4,38 @@ import * as common from "../common";
 @Component({
     selector: "string-editor",
     template: `
-    <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
-        <title-editor {...this.props}></title-editor>
-        <div *ngIf="!required" className={this.props.theme.optionalCheckbox}>
+    <div [class]="errorMessage ? theme.errorRow : theme.row">
+        <title-editor></title-editor>
+        <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                <input type="checkbox" (onChange)="toggleOptional" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
         <textarea *ngIf="value !== undefined && (schema.enum === undefined || readonly || schema.readonly) && schema.format === 'textarea'"
-            className={this.props.theme.formControl}
-            onChange={this.onChange}
-            defaultValue={this.value}
-            rows={5}
-            readOnly={this.props.readonly || this.props.schema.readonly} >
+            [class]="theme.formControl"
+            (change)="onChange"
+            rows="5"
+            [readOnly]="readonly || schema.readonly">
+            {{value}}
         </textarea>
         <input *ngIf="value !== undefined && (schema.enum === undefined || readonly || schema.readonly) && schema.format !== 'textarea'"
-            className={this.props.theme.formControl}
-            type={this.props.schema.format}
-            onChange={this.onChange}
-            defaultValue={this.value}
-            readOnly={this.props.readonly || this.props.schema.readonly} />
+            [class]="theme.formControl"
+            [type]="schema.format"
+            (change)="onChange"
+            [defaultValue]="value"
+            [readOnly]="readonly || schema.readonly" />
         <select *ngIf="value !== undefined && (schema.enum !== undefined && readonly && schema.readonly)"
-            className={this.props.theme.formControl}
-            onChange={this.onChange}
-            defaultValue={this.value}>
-            <option *ngFor="let e of schema.enum" key={i} value={e} >{e}</option>
+            [class]="theme.formControl"
+            (change)="onChange">
+            <option *ngFor="let e of schema.enum; let i = index; trackBy:trackByFunction"
+                [value]="e"
+                [selected]="value === e">
+                {{e}}
+            </option>
         </select>
-        <p className={this.props.theme.help}>{this.props.schema.description}</p>
-        <p *ngIf="errorMessage" className={this.props.theme.help}>{this.errorMessage}</p>
+        <p [class]="theme.help">{{schema.description}}</p>
+        <p *ngIf="errorMessage" [class]="theme.help">{{errorMessage}}</p>
     </div>
     `,
 })
@@ -99,5 +102,8 @@ export class StringEditorComponent {
             this.value = undefined;
         }
         this.updateValue.emit(this.value);
+    }
+    trackByFunction(index: number, value: { [name: string]: common.ValueType }) {
+        return index;
     }
 }

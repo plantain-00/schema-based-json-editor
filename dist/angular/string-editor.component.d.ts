@@ -21,4 +21,7 @@ export declare class StringEditorComponent {
     }): void;
     validate(): void;
     toggleOptional: () => void;
+    trackByFunction(index: number, value: {
+        [name: string]: common.ValueType;
+    }): number;
 }

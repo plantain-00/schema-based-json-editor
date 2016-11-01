@@ -4,12 +4,36 @@ import * as common from "../common";
 @Component({
     selector: "json-editor",
     template: `
-    <object-editor *ngIf="schema.type === 'object'" schema="{{schema}}" initialValue="{{initialValue}}" title="{{title}}"></object-editor>
-    <array-editor *ngIf="schema.type === 'array'" schema="{{schema}}" initialValue="{{initialValue}}" title="{{title}}"></array-editor>
-    <number-editor *ngIf="schema.type === 'number' || schema.type === 'integer'" schema="{{schema}}" initialValue="{{initialValue}}" title="{{title}}"></number-editor>
-    <boolean-editor *ngIf="schema.type === 'boolean'" schema="{{schema}}" initialValue="{{initialValue}}" title="{{title}}"></boolean-editor>
-    <null-editor *ngIf="schema.type === 'null'" schema="{{schema}}" initialValue="{{initialValue}}" title="{{title}}"></null-editor>
-    <string-editor *ngIf="schema.type === 'string'" schema="{{schema}}" initialValue="{{initialValue}}" title="{{title}}"></string-editor>
+    <object-editor *ngIf="schema.type === 'object'"
+        [schema]="schema"
+        [initialValue]="initialValue"
+        [title]="title">
+    </object-editor>
+    <array-editor *ngIf="schema.type === 'array'"
+        [schema]="schema"
+        [initialValue]="initialValue"
+        [title]="title">
+    </array-editor>
+    <number-editor *ngIf="schema.type === 'number' || schema.type === 'integer'"
+        [schema]="schema"
+        [initialValue]="initialValue"
+        [title]="title">
+    </number-editor>
+    <boolean-editor *ngIf="schema.type === 'boolean'"
+        [schema]="schema"
+        [initialValue]="initialValue"
+        [title]="title">
+    </boolean-editor>
+    <null-editor *ngIf="schema.type === 'null'"
+        [schema]="schema"
+        [initialValue]="initialValue"
+        [title]="title">
+    </null-editor>
+    <string-editor *ngIf="schema.type === 'string'"
+        [schema]="schema"
+        [initialValue]="initialValue"
+        [title]="title">
+    </string-editor>
     `,
 })
 export class JSONEditorComponent {

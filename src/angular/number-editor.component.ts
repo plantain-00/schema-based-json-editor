@@ -4,29 +4,32 @@ import * as common from "../common";
 @Component({
     selector: "number-editor",
     template: `
-    <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
-        <title-editor {...this.props}></title-editor>
-        <div *ngIf="!this.required" className={this.props.theme.optionalCheckbox}>
+    <div [class]="errorMessage ? theme.errorRow : theme.row">
+        <title-editor></title-editor>
+        <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
         <input *ngIf="value !== undefined && (schema.enum === undefined || readonly || schema.readonly)"
-            className={this.props.theme.formControl}
+            [class]="theme.formControl"
             type="number"
-            onChange={this.onChange}
-            defaultValue={String(this.value)}
-            readOnly={this.props.readonly || this.props.schema.readonly} />
+            (change)="onChange"
+            [defaultValue]="value"
+            [readOnly]="readonly || schema.readonly" />
         <select *ngIf="value !== undefined && (schema.enum !== undefined && !readonly && !schema.readonly)"
-            className={this.props.theme.formControl}
+            [class]="theme.formControl"
             type="number"
-            onChange={this.onChange}
-            defaultValue={String(this.value)} >
-            <option *ngFor="let e of schema.enum" key={i} value={e} >{e}</option>
+            (change)="onChange">
+            <option *ngFor="let e of schema.enum; let i = index; trackBy:trackByFunction"
+                [value]="e"
+                [selected]="value === e">
+                {{e}}
+            </option>
         </select>
-        <p className={this.props.theme.help}>{this.props.schema.description}</p>
-        <p *ngIf="errorMessage" className={this.props.theme.help}>{this.errorMessage}</p>
+        <p [class]="theme.help">{{schema.description}}</p>
+        <p *ngIf="errorMessage" [class]="theme.help">{{errorMessage}}</p>
     </div>
     `,
 })
@@ -62,6 +65,9 @@ export class NumberEditorComponent {
         this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
         this.validate();
         this.updateValue.emit(this.value);
+    }
+    trackByFunction(index: number, value: number) {
+        return index;
     }
     validate() {
         if (this.value !== undefined) {
