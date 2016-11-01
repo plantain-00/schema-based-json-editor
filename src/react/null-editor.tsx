@@ -6,18 +6,14 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
     value?: null;
     constructor(props: common.Props<common.ArraySchema, null>) {
         super(props);
-        if (this.props.required) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as null;
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as null;
     }
     componentDidMount() {
         this.props.updateValue(this.value);
     }
     toggleOptional = () => {
         if (this.value === undefined) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as null;
+            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as null;
         } else {
             this.value = undefined;
         }

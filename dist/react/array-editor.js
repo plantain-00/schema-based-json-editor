@@ -19,7 +19,7 @@ var ArrayEditor = (function (_super) {
         };
         this.toggleOptional = function () {
             if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(_this.props.schema, _this.props.initialValue);
+                _this.value = common.getDefaultValue(true, _this.props.schema, _this.props.initialValue);
             }
             else {
                 _this.value = undefined;
@@ -31,12 +31,7 @@ var ArrayEditor = (function (_super) {
             });
             _this.props.updateValue(_this.value);
         };
-        if (this.props.required) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue);
-        }
-        else {
-            this.value = undefined;
-        }
+        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         this.validate();
     }
     ArrayEditor.prototype.getDragulaContainer = function () {
@@ -133,7 +128,7 @@ var ArrayEditor = (function (_super) {
         var addButton = null;
         if (!this.props.readonly && this.value !== undefined) {
             var addItem = function () {
-                _this.value.push(common.getDefaultValue(_this.props.schema.items, undefined));
+                _this.value.push(common.getDefaultValue(true, _this.props.schema.items, undefined));
                 _this.setState({ value: _this.value });
                 _this.props.updateValue(_this.value);
             };

@@ -16,7 +16,7 @@ var ArrayEditorComponent = (function () {
         };
         this.toggleOptional = function () {
             if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(_this.schema, _this.initialValue);
+                _this.value = common.getDefaultValue(true, _this.schema, _this.initialValue);
             }
             else {
                 _this.value = undefined;
@@ -25,15 +25,8 @@ var ArrayEditorComponent = (function () {
             // this.drak.containers = [container];
             _this.updateValue.emit(_this.value);
         };
-        if (this.required) {
-            this.value = common.getDefaultValue(this.schema, this.initialValue);
-        }
-        else {
-            this.value = undefined;
-        }
-        if (this.value !== this.initialValue) {
-            this.updateValue.emit(this.value);
-        }
+        this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
+        this.updateValue.emit(this.value);
         // const container = this.getDragulaContainer();
         // this.drak = common.dragula([container]);
         // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
@@ -87,7 +80,7 @@ var ArrayEditorComponent = (function () {
         this.errorMessage = "";
     };
     ArrayEditorComponent.prototype.addItem = function () {
-        this.value.push(common.getDefaultValue(this.schema.items, undefined));
+        this.value.push(common.getDefaultValue(true, this.schema.items, undefined));
         this.updateValue.emit(this.value);
     };
     __decorate([

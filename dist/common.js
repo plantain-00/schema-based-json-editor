@@ -2,7 +2,6 @@
 require("tslib");
 exports.toNumber = require("lodash.tonumber");
 exports.toInteger = require("lodash.tointeger");
-var isArray = require("lodash.isarray");
 var dragula = require("dragula");
 exports.dragula = dragula;
 exports.themes = {
@@ -89,7 +88,10 @@ function getLocale(name) {
     return name;
 }
 exports.getLocale = getLocale;
-function getDefaultValue(schema, initialValue) {
+function getDefaultValue(required, schema, initialValue) {
+    if (!required) {
+        return undefined;
+    }
     if (initialValue !== undefined) {
         return initialValue;
     }
@@ -141,8 +143,8 @@ function isSame(value1, value2) {
         || value2 === undefined) {
         return false;
     }
-    if (isArray(value1)) {
-        if (isArray(value2) && value1.length === value2.length) {
+    if (Array.isArray(value1)) {
+        if (Array.isArray(value2) && value1.length === value2.length) {
             for (var i = 0; i < value1.length; i++) {
                 if (!isSame(value1, value2)) {
                     return false;
@@ -154,7 +156,7 @@ function isSame(value1, value2) {
             return false;
         }
     }
-    if (isArray(value2)
+    if (Array.isArray(value2)
         || Object.keys(value1).length !== Object.keys(value1).length) {
         return false;
     }

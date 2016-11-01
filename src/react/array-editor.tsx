@@ -11,11 +11,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
     errorMessage: string;
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>) {
         super(props);
-        if (this.props.required) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as common.ValueType[];
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[];
         this.validate();
     }
     getDragulaContainer() {
@@ -60,7 +56,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
     }
     toggleOptional = () => {
         if (this.value === undefined) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as common.ValueType[];
+            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as common.ValueType[];
         } else {
             this.value = undefined;
         }
@@ -140,7 +136,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         let addButton: JSX.Element | null = null;
         if (!this.props.readonly && this.value !== undefined) {
             const addItem = () => {
-                this.value!.push(common.getDefaultValue(this.props.schema.items, undefined));
+                this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined)!);
                 this.setState({ value: this.value });
                 this.props.updateValue(this.value);
             };

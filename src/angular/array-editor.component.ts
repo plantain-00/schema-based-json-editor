@@ -67,15 +67,9 @@ export class ArrayEditorComponent {
     errorMessage: string;
 
     constructor() {
-        if (this.required) {
-            this.value = common.getDefaultValue(this.schema, this.initialValue) as common.ValueType[];
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
 
-        if (this.value !== this.initialValue) {
-            this.updateValue.emit(this.value);
-        }
+        this.updateValue.emit(this.value);
         // const container = this.getDragulaContainer();
         // this.drak = common.dragula([container]);
         // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
@@ -117,7 +111,7 @@ export class ArrayEditorComponent {
     }
     toggleOptional = () => {
         if (this.value === undefined) {
-            this.value = common.getDefaultValue(this.schema, this.initialValue) as common.ValueType[];
+            this.value = common.getDefaultValue(true, this.schema, this.initialValue) as common.ValueType[];
         } else {
             this.value = undefined;
         }
@@ -148,7 +142,7 @@ export class ArrayEditorComponent {
         this.errorMessage = "";
     }
     addItem() {
-        this.value!.push(common.getDefaultValue(this.schema.items, undefined));
+        this.value!.push(common.getDefaultValue(true, this.schema.items, undefined)!);
         this.updateValue.emit(this.value);
     }
 }

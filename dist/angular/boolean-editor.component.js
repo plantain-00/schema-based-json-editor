@@ -4,15 +4,8 @@ var common = require("../common");
 var BooleanEditorComponent = (function () {
     function BooleanEditorComponent() {
         this.updateValue = new core_1.EventEmitter();
-        if (this.required) {
-            this.value = common.getDefaultValue(this.schema, this.initialValue);
-        }
-        else {
-            this.value = undefined;
-        }
-        if (this.value !== this.initialValue) {
-            this.updateValue.emit(this.value);
-        }
+        this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
+        this.updateValue.emit(this.value);
     }
     BooleanEditorComponent.prototype.onChange = function (e) {
         this.value = e.target.checked;
@@ -20,7 +13,7 @@ var BooleanEditorComponent = (function () {
     };
     BooleanEditorComponent.prototype.toggleOptional = function () {
         if (this.value === undefined) {
-            this.value = common.getDefaultValue(this.schema, this.initialValue === undefined);
+            this.value = common.getDefaultValue(true, this.schema, this.initialValue === undefined);
         }
         else {
             this.value = undefined;

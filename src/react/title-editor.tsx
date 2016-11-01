@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as common from "../common";
 
-export class TitleEditor extends React.Component<{ title: string | undefined; onDelete?: () => void; theme: common.Theme; icon: common.Icon; locale: common.Locale }, {}> {
+export class TitleEditor extends React.Component<{ title?: string; onDelete?: () => void; theme: common.Theme; icon: common.Icon; locale: common.Locale }, {}> {
     render() {
         if (this.props.title) {
             let deleteButton: JSX.Element | null = null;

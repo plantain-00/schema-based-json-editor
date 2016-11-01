@@ -42,19 +42,19 @@ function getIcon(name, locale) {
 }
 var JSONEditor = (function (_super) {
     __extends(JSONEditor, _super);
-    function JSONEditor() {
-        _super.apply(this, arguments);
+    function JSONEditor(props) {
+        _super.call(this, props);
+        this.theme = common.getTheme(this.props.theme);
+        this.locale = common.getLocale(this.props.locale);
+        this.icon = getIcon(this.props.icon, this.locale);
     }
     JSONEditor.prototype.render = function () {
-        var theme = common.getTheme(this.props.theme);
-        var locale = common.getLocale(this.props.locale);
-        var icon = getIcon(this.props.icon, locale);
         var props = {
             updateValue: this.props.updateValue,
             readonly: this.props.readonly,
-            theme: theme,
-            locale: locale,
-            icon: icon,
+            theme: this.theme,
+            locale: this.locale,
+            icon: this.icon,
             required: true,
         };
         switch (this.props.schema.type) {

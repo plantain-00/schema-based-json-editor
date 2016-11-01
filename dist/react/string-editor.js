@@ -8,14 +8,14 @@ var StringEditor = (function (_super) {
         var _this = this;
         _super.call(this, props);
         this.onChange = function (e) {
-            _this.value = e.target.value;
+            _this.value = e.currentTarget.value;
             _this.validate();
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
         this.toggleOptional = function () {
             if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(_this.props.schema, _this.props.initialValue);
+                _this.value = common.getDefaultValue(true, _this.props.schema, _this.props.initialValue);
                 _this.validate();
             }
             else {
@@ -24,12 +24,7 @@ var StringEditor = (function (_super) {
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
-        if (this.props.required) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue);
-        }
-        else {
-            this.value = undefined;
-        }
+        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         this.validate();
     }
     StringEditor.prototype.componentDidMount = function () {

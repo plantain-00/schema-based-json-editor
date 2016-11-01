@@ -49,14 +49,8 @@ export class BooleanEditorComponent {
 
     value?: boolean;
     constructor() {
-        if (this.required) {
-            this.value = common.getDefaultValue(this.schema, this.initialValue) as boolean;
-        } else {
-            this.value = undefined;
-        }
-        if (this.value !== this.initialValue) {
-            this.updateValue.emit(this.value);
-        }
+        this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
+        this.updateValue.emit(this.value);
     }
     onChange(e: { target: { checked: boolean } }) {
         this.value = e.target.checked;
@@ -64,7 +58,7 @@ export class BooleanEditorComponent {
     }
     toggleOptional() {
         if (this.value === undefined) {
-            this.value = common.getDefaultValue(this.schema, this.initialValue === undefined) as boolean;
+            this.value = common.getDefaultValue(true, this.schema, this.initialValue === undefined) as boolean;
         } else {
             this.value = undefined;
         }

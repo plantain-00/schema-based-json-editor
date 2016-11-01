@@ -2,7 +2,7 @@
 import * as React from "react";
 import * as common from "../common";
 export declare class TitleEditor extends React.Component<{
-    title: string | undefined;
+    title?: string;
     onDelete?: () => void;
     theme: common.Theme;
     icon: common.Icon;

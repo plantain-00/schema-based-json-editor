@@ -8,14 +8,14 @@ var NumberEditor = (function (_super) {
         var _this = this;
         _super.call(this, props);
         this.onChange = function (e) {
-            _this.value = _this.props.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
+            _this.value = _this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
             _this.validate();
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
         this.toggleOptional = function () {
             if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(_this.props.schema, _this.props.initialValue);
+                _this.value = common.getDefaultValue(true, _this.props.schema, _this.props.initialValue);
                 _this.validate();
             }
             else {
@@ -24,12 +24,7 @@ var NumberEditor = (function (_super) {
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
-        if (this.props.required) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue);
-        }
-        else {
-            this.value = undefined;
-        }
+        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         this.validate();
     }
     NumberEditor.prototype.componentDidMount = function () {

@@ -7,18 +7,14 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
     errorMessage: string;
     constructor(props: common.Props<common.ArraySchema, string>) {
         super(props);
-        if (this.props.required) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as string;
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string;
         this.validate();
     }
     componentDidMount() {
         this.props.updateValue(this.value);
     }
     onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = e.target.value;
+        this.value = e.currentTarget.value;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value);
@@ -46,7 +42,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
     }
     toggleOptional = () => {
         if (this.value === undefined) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as string;
+            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as string;
             this.validate();
         } else {
             this.value = undefined;

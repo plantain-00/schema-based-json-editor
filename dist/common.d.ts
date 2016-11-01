@@ -95,7 +95,7 @@ export declare type Icon = {
 export declare type ValueType = {
     [name: string]: any;
 } | any[] | number | boolean | string | null;
-export declare function getDefaultValue(schema: Schema, initialValue: ValueType | undefined): ValueType;
+export declare function getDefaultValue(required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined;
 export declare const buttonGroupStyle: {
     marginLeft: string;
 };

@@ -31,7 +31,6 @@
     "@angular/upgrade": "^2.0.2",
     "core-js": "^2.4.1",
     "dragula": "^3.7.2",
-    "lodash.isarray": "^4.0.0",
     "lodash.tointeger": "^4.0.4",
     "lodash.tonumber": "^4.0.3",
     "react": "^15.3.2",

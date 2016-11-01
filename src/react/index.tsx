@@ -43,7 +43,7 @@ function getIcon(name: string | undefined | common.Icon, locale: common.Locale):
     return name;
 }
 
-export class JSONEditor extends React.Component<{
+export type Props = {
     schema: common.Schema;
     initialValue: common.ValueType;
     updateValue: (value?: common.ValueType) => void;
@@ -51,17 +51,25 @@ export class JSONEditor extends React.Component<{
     icon?: string;
     locale?: string;
     readonly?: boolean;
-}, {}> {
+}
+
+export class JSONEditor extends React.Component<Props, {}> {
+    theme: common.Theme;
+    locale: common.Locale;
+    icon: common.Icon;
+    constructor(props: Props) {
+        super(props);
+        this.theme = common.getTheme(this.props.theme);
+        this.locale = common.getLocale(this.props.locale);
+        this.icon = getIcon(this.props.icon, this.locale);
+    }
     render() {
-        const theme = common.getTheme(this.props.theme);
-        const locale = common.getLocale(this.props.locale);
-        const icon = getIcon(this.props.icon, locale);
         const props = {
             updateValue: this.props.updateValue,
             readonly: this.props.readonly,
-            theme,
-            locale,
-            icon,
+            theme: this.theme,
+            locale: this.locale,
+            icon: this.icon,
             required: true,
         };
         switch (this.props.schema.type) {

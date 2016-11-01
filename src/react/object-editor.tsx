@@ -7,11 +7,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     value?: { [name: string]: common.ValueType };
     constructor(props: common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>) {
         super(props);
-        if (this.props.required) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
     }
     componentDidMount() {
         this.props.updateValue(this.value);
@@ -22,7 +18,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     }
     toggleOptional = () => {
         if (this.value === undefined) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
+            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
         } else {
             this.value = undefined;
         }
@@ -41,9 +37,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                 };
                 const schema = this.props.schema.properties[property];
                 const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
-                if (required) {
-                    this.value[property] = common.getDefaultValue(schema, this.value[property]) as { [name: string]: common.ValueType };
-                }
+                this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
                 propertyElements.push(<Editor key={property}
                     schema={schema}
                     title={schema.title || property}

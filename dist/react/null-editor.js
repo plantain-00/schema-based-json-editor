@@ -9,7 +9,7 @@ var NullEditor = (function (_super) {
         _super.call(this, props);
         this.toggleOptional = function () {
             if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(_this.props.schema, _this.props.initialValue);
+                _this.value = common.getDefaultValue(true, _this.props.schema, _this.props.initialValue);
             }
             else {
                 _this.value = undefined;
@@ -17,12 +17,7 @@ var NullEditor = (function (_super) {
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
-        if (this.props.required) {
-            this.value = common.getDefaultValue(this.props.schema, this.props.initialValue);
-        }
-        else {
-            this.value = undefined;
-        }
+        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
     }
     NullEditor.prototype.componentDidMount = function () {
         this.props.updateValue(this.value);

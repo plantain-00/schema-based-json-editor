@@ -4,7 +4,6 @@ declare const require: (name: string) => any;
 
 export const toNumber: (value?: any) => number = require("lodash.tonumber");
 export const toInteger: (value?: any) => number = require("lodash.tointeger");
-const isArray: (value?: any) => boolean = require("lodash.isarray");
 
 import * as dragula from "dragula";
 export { dragula };
@@ -187,7 +186,10 @@ export type Icon = {
 
 export type ValueType = { [name: string]: any } | any[] | number | boolean | string | null;
 
-export function getDefaultValue(schema: Schema, initialValue: ValueType | undefined): ValueType {
+export function getDefaultValue(required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {
+    if (!required) {
+        return undefined;
+    }
     if (initialValue !== undefined) {
         return initialValue;
     }
@@ -251,8 +253,8 @@ export function isSame(value1: ValueType, value2: ValueType) {
         || value2 === undefined) {
         return false;
     }
-    if (isArray(value1)) {
-        if (isArray(value2) && (value1 as ValueType[]).length === (value2 as ValueType[]).length) {
+    if (Array.isArray(value1)) {
+        if (Array.isArray(value2) && (value1 as ValueType[]).length === (value2 as ValueType[]).length) {
             for (let i = 0; i < (value1 as ValueType[]).length; i++) {
                 if (!isSame((value1 as ValueType[]), (value2 as ValueType[]))) {
                     return false;
@@ -263,7 +265,7 @@ export function isSame(value1: ValueType, value2: ValueType) {
             return false;
         }
     }
-    if (isArray(value2)
+    if (Array.isArray(value2)
         || Object.keys((value1 as { [name: string]: ValueType })).length !== Object.keys((value1 as { [name: string]: ValueType })).length) {
         return false;
     }
