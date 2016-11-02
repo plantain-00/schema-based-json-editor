@@ -31,7 +31,7 @@ var NullEditor = (function (_super) {
                     "is undefined")
             ));
         }
-        return (React.createElement("div", null, 
+        return (React.createElement("div", {className: this.props.theme.row}, 
             React.createElement(title_editor_1.TitleEditor, __assign({}, this.props)), 
             optionalCheckbox, 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description)));

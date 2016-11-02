@@ -9,7 +9,8 @@ import * as common from "../common";
             (onDelete)="onDelete"
             [theme]="theme"
             [icon]="icon"
-            [locale]="locale">
+            [locale]="locale"
+            [hasDeleteButton]="hasDeleteButton">
         </title-editor>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
@@ -46,11 +47,13 @@ export class BooleanEditorComponent {
     @Input()
     locale: common.Locale;
     @Output()
-    onDelete?: () => void;
+    onDelete = new EventEmitter();
     @Input()
     readonly?: boolean;
     @Input()
     required?: boolean;
+    @Input()
+    hasDeleteButton: boolean;
 
     value?: boolean;
     ngOnInit() {

@@ -10,117 +10,13 @@ enableProdMode();
 
 import { Component } from "@angular/core";
 
-const schema: any = {
-    title: "Person",
-    type: "object",
-    required: ["name", "age", "location", "favorite_color", "pets", "description"],
-    properties: {
-        name: {
-            type: "string",
-            description: "First and Last name",
-            minLength: 4,
-            maxLength: 20,
-            default: "Sara",
-        },
-        age: {
-            type: "integer",
-            default: 25,
-            minimum: 18,
-            maximum: 99,
-        },
-        isOld: {
-            type: "boolean",
-        },
-        favorite_color: {
-            type: "string",
-            format: "color",
-            title: "favorite color",
-            default: "#ffa500",
-        },
-        gender: {
-            type: "string",
-            enum: [
-                "male",
-                "female",
-            ],
-        },
-        description: {
-            type: "string",
-            format: "textarea",
-            default: "test",
-        },
-        location: {
-            type: "object",
-            title: "Location",
-            properties: {
-                city: {
-                    type: "string",
-                    default: "San Francisco",
-                },
-                state: {
-                    type: "string",
-                    default: "CA",
-                },
-            },
-            required: ["state"],
-        },
-        pets: {
-            type: "array",
-            format: "table",
-            title: "Pets",
-            uniqueItems: true,
-            minItems: 1,
-            items: {
-                type: "object",
-                title: "Pet",
-                required: ["type", "name"],
-                properties: {
-                    type: {
-                        type: "string",
-                        enum: [
-                            "cat",
-                            "dog",
-                            "bird",
-                            "reptile",
-                            "other",
-                        ],
-                        default: "dog",
-                    },
-                    name: {
-                        type: "string",
-                        default: "test",
-                    },
-                },
-            },
-            default: [
-                {
-                    type: "dog",
-                    name: "A",
-                },
-                {
-                    type: "dog",
-                    name: "B",
-                },
-            ],
-        },
-        numbers: {
-            type: "array",
-            format: "table",
-            title: "Numbers",
-            uniqueItems: true,
-            items: {
-                type: "number",
-                title: "Number",
-            },
-        },
-    },
-};
+import { schema } from "../schema";
 
 @Component({
     selector: "app",
     template: `
     <div>
-        <div style="width: 500px; margin: 10px; float: left">
+        <div style="width: 500px; margin: 10px; float: left" class="bootstrap3-row-container">
           <json-editor [schema]="schema"
               [initialValue]="value"
               (updateValue)="updateValue($event)"

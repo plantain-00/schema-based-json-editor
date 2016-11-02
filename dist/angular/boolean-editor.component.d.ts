@@ -8,9 +8,10 @@ export declare class BooleanEditorComponent {
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;
-    onDelete?: () => void;
+    onDelete: EventEmitter<{}>;
     readonly?: boolean;
     required?: boolean;
+    hasDeleteButton: boolean;
     value?: boolean;
     ngOnInit(): void;
     onChange(e: {

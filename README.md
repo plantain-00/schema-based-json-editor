@@ -29,6 +29,33 @@ the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/rea
 
 the source code of the demo: https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/react
 
+#### angular2 component demo
+
+```js
+import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, TitleEditorComponent, IconComponent } from "schema-based-json-editor/dist/angular/index";
+
+@NgModule({
+    imports: [BrowserModule, FormsModule],
+    declarations: [MainComponent, JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, TitleEditorComponent, IconComponent],
+    bootstrap: [MainComponent],
+})
+class MainModule { }
+```
+
+```jsx
+<json-editor [schema]="schema"
+    [initialValue]="value"
+    (updateValue)="updateValue($event)"
+    theme="bootstrap3"
+    icon="fontawesome4"
+    locale="zh-cn">
+</json-editor>
+```
+
+the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/angular/index.html
+
+the source code of the demo: https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/angular
+
 #### properties of the component
 
 + schema: the json schema object

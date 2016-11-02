@@ -82,7 +82,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
             );
         }
         return (
-            <div>
+            <div className={this.props.theme.row}>
                 <h3>
                     {this.props.title || this.props.schema.title}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>

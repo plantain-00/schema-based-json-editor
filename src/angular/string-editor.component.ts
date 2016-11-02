@@ -9,7 +9,8 @@ import * as common from "../common";
             (onDelete)="onDelete"
             [theme]="theme"
             [icon]="icon"
-            [locale]="locale">
+            [locale]="locale"
+            [hasDeleteButton]="hasDeleteButton">
         </title-editor>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
@@ -58,11 +59,13 @@ export class StringEditorComponent {
     @Input()
     locale: common.Locale;
     @Output()
-    onDelete?: () => void;
+    onDelete = new EventEmitter();
     @Input()
     readonly?: boolean;
     @Input()
     required?: boolean;
+    @Input()
+    hasDeleteButton: boolean;
 
     value?: string;
     errorMessage: string;
@@ -98,7 +101,7 @@ export class StringEditorComponent {
                 return;
             }
             if (this.schema.pattern !== undefined
-                && !this.value.match(this.schema.pattern)) {
+                && !new RegExp(this.schema.pattern).test(this.value)) {
                 this.errorMessage = this.locale.error.pattern.replace("{0}", String(this.schema.pattern));
                 return;
             }

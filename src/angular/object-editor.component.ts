@@ -4,14 +4,14 @@ import * as common from "../common";
 @Component({
     selector: "object-editor",
     template: `
-    <div>
+    <div [class]="theme.row">
         <h3>
             {{title || schema.title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
                 <button [class]="theme.button" (click)="collapseOrExpand">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button *ngIf="onDelete && !readonly && !schema.readonly" [class]="theme.button" (click)="onDelete">{{icon.delete}}</button>
+                <button *ngIf="hasDeleteButton()" [class]="theme.button" (click)="onDelete()">{{icon.delete}}</button>
             </div>
         </h3>
         <p [class]="theme.help">{{schema.description}}</p>
@@ -99,5 +99,8 @@ export class ObjectEditorComponent {
     onChange(property: string, value: common.ValueType) {
         this.value![property] = value;
         this.updateValue.emit(this.value);
+    }
+    hasDeleteButton() {
+        return this.onDelete && !this.readonly && !this.schema.readonly;
     }
 }

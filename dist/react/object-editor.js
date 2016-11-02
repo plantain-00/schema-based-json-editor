@@ -74,7 +74,7 @@ var ObjectEditor = (function (_super) {
                     "is undefined")
             ));
         }
-        return (React.createElement("div", null, 
+        return (React.createElement("div", {className: this.props.theme.row}, 
             React.createElement("h3", null, 
                 this.props.title || this.props.schema.title, 
                 React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 

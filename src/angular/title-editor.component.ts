@@ -7,7 +7,7 @@ import * as common from "../common";
     <label *ngIf="title" [class]="theme.label">
         {{title}}
         <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-            <button *ngIf="onDelete" [class]="theme.button" (click)="onDelete">
+            <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="deleteThis()">
                 <icon [icon]="icon" [text]="icon.delete"></icon>
             </button>
         </div>
@@ -18,13 +18,18 @@ export class TitleEditorComponent {
     @Input()
     title?: string;
     @Output()
-    onDelete?= new EventEmitter();
+    onDelete = new EventEmitter();
     @Input()
     theme: common.Theme;
     @Input()
     icon: common.Icon;
     @Input()
     locale: common.Locale;
+    @Input()
+    hasDeleteButton: boolean;
 
     buttonGroupStyle = common.buttonGroupStyle;
+    deleteThis() {
+        this.onDelete!.emit();
+    }
 }

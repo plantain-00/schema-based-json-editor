@@ -32,7 +32,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
                 return;
             }
             if (this.props.schema.pattern !== undefined
-                && !this.value.match(this.props.schema.pattern)) {
+                && !new RegExp(this.props.schema.pattern).test(this.value)) {
                 this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
                 return;
             }

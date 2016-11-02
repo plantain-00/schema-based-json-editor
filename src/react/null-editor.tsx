@@ -33,7 +33,7 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
             );
         }
         return (
-            <div>
+            <div className={this.props.theme.row}>
                 <TitleEditor {...this.props} />
                 {optionalCheckbox}
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>

@@ -8,9 +8,10 @@ export declare class NullEditorComponent {
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;
-    onDelete?: () => void;
+    onDelete: EventEmitter<{}>;
     readonly?: boolean;
     required?: boolean;
+    hasDeleteButton: boolean;
     value?: null;
     ngOnInit(): void;
     toggleOptional(): void;

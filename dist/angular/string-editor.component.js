@@ -5,6 +5,7 @@ var StringEditorComponent = (function () {
     function StringEditorComponent() {
         var _this = this;
         this.updateValue = new core_1.EventEmitter();
+        this.onDelete = new core_1.EventEmitter();
         this.toggleOptional = function () {
             if (_this.value === undefined) {
                 _this.value = common.getDefaultValue(true, _this.schema, _this.initialValue);
@@ -48,7 +49,7 @@ var StringEditorComponent = (function () {
                 return;
             }
             if (this.schema.pattern !== undefined
-                && !this.value.match(this.schema.pattern)) {
+                && !new RegExp(this.schema.pattern).test(this.value)) {
                 this.errorMessage = this.locale.error.pattern.replace("{0}", String(this.schema.pattern));
                 return;
             }
@@ -88,10 +89,13 @@ var StringEditorComponent = (function () {
     __decorate([
         core_1.Input()
     ], StringEditorComponent.prototype, "required", void 0);
+    __decorate([
+        core_1.Input()
+    ], StringEditorComponent.prototype, "hasDeleteButton", void 0);
     StringEditorComponent = __decorate([
         core_1.Component({
             selector: "string-editor",
-            template: "\n    <div [class]=\"errorMessage ? theme.errorRow : theme.row\">\n        <title-editor [title]=\"title\"\n            (onDelete)=\"onDelete\"\n            [theme]=\"theme\"\n            [icon]=\"icon\"\n            [locale]=\"locale\">\n        </title-editor>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (onChange)=\"toggleOptional\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <textarea *ngIf=\"useTextArea()\"\n            [class]=\"theme.formControl\"\n            (keyup)=\"onChange($event)\"\n            rows=\"5\"\n            [readOnly]=\"readonly || schema.readonly\">{{value}}</textarea>\n        <input *ngIf=\"useInput()\"\n            [class]=\"theme.formControl\"\n            [type]=\"schema.format\"\n            (keyup)=\"onChange($event)\"\n            [defaultValue]=\"value\"\n            [readOnly]=\"readonly || schema.readonly\" />\n        <select *ngIf=\"useSelect()\"\n            [class]=\"theme.formControl\"\n            (change)=\"onChange($event)\">\n            <option *ngFor=\"let e of schema.enum; let i = index; trackBy:trackByFunction\"\n                [value]=\"e\"\n                [selected]=\"value === e\">\n                {{e}}\n            </option>\n        </select>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <p *ngIf=\"errorMessage\" [class]=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
+            template: "\n    <div [class]=\"errorMessage ? theme.errorRow : theme.row\">\n        <title-editor [title]=\"title\"\n            (onDelete)=\"onDelete\"\n            [theme]=\"theme\"\n            [icon]=\"icon\"\n            [locale]=\"locale\"\n            [hasDeleteButton]=\"hasDeleteButton\">\n        </title-editor>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (onChange)=\"toggleOptional\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <textarea *ngIf=\"useTextArea()\"\n            [class]=\"theme.formControl\"\n            (keyup)=\"onChange($event)\"\n            rows=\"5\"\n            [readOnly]=\"readonly || schema.readonly\">{{value}}</textarea>\n        <input *ngIf=\"useInput()\"\n            [class]=\"theme.formControl\"\n            [type]=\"schema.format\"\n            (keyup)=\"onChange($event)\"\n            [defaultValue]=\"value\"\n            [readOnly]=\"readonly || schema.readonly\" />\n        <select *ngIf=\"useSelect()\"\n            [class]=\"theme.formControl\"\n            (change)=\"onChange($event)\">\n            <option *ngFor=\"let e of schema.enum; let i = index; trackBy:trackByFunction\"\n                [value]=\"e\"\n                [selected]=\"value === e\">\n                {{e}}\n            </option>\n        </select>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <p *ngIf=\"errorMessage\" [class]=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
         })
     ], StringEditorComponent);
     return StringEditorComponent;

@@ -32,4 +32,5 @@ export declare class ObjectEditorComponent {
     collapseOrExpand: () => void;
     toggleOptional: () => void;
     onChange(property: string, value: common.ValueType): void;
+    hasDeleteButton(): boolean | undefined;
 }
