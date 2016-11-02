@@ -88,9 +88,26 @@ function getLocale(name) {
     return name;
 }
 exports.getLocale = getLocale;
-function getIcon(name, locale, icons) {
+var icons = {
+    "bootstrap3": {
+        isText: false,
+        collapse: "glyphicon glyphicon-chevron-down",
+        expand: "glyphicon glyphicon-chevron-right",
+        add: "glyphicon glyphicon-plus",
+        delete: "glyphicon glyphicon-remove",
+    },
+    "fontawesome4": {
+        isText: false,
+        collapse: "fa fa-caret-square-o-down",
+        expand: "fa fa-caret-square-o-right",
+        add: "fa fa-plus",
+        delete: "fa fa-times",
+    },
+};
+function getIcon(name, locale) {
     if (name === undefined) {
         return {
+            isText: true,
             collapse: locale.button.collapse,
             expand: locale.button.expand,
             add: locale.button.add,
@@ -99,6 +116,7 @@ function getIcon(name, locale, icons) {
     }
     if (typeof name === "string") {
         return icons[name] || {
+            isText: true,
             collapse: locale.button.collapse,
             expand: locale.button.expand,
             add: locale.button.add,

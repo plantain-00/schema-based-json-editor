@@ -8,7 +8,9 @@ import * as common from "../common";
         <h3>
             {{title || schema.title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <button [class]="theme.button" (click)="collapseOrExpand">{{collapsed ? icon.expand : icon.collapsed}}</button>
+                <button [class]="theme.button" (click)="collapseOrExpand">
+                    <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
+                </button>
                 <button *ngIf="onDelete && !readonly && !schema.readonly" [class]="theme.button" (click)="onDelete">{{icon.delete}}</button>
             </div>
         </h3>

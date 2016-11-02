@@ -8,41 +8,6 @@ import { BooleanEditor } from "./boolean-editor";
 import { NullEditor } from "./null-editor";
 import { StringEditor } from "./string-editor";
 
-export const icons: { [name: string]: common.Icon } = {
-    "bootstrap3": {
-        collapse: <i className="glyphicon glyphicon-chevron-down"></i> as string | JSX.Element,
-        expand: <i className="glyphicon glyphicon-chevron-right"></i> as string | JSX.Element,
-        add: <i className="glyphicon glyphicon-plus"></i> as string | JSX.Element,
-        delete: <i className="glyphicon glyphicon-remove"></i> as string | JSX.Element,
-    },
-    "fontawesome4": {
-        collapse: <i className="fa fa-caret-square-o-down"></i> as string | JSX.Element,
-        expand: <i className="fa fa-caret-square-o-right"></i> as string | JSX.Element,
-        add: <i className="fa fa-plus"></i> as string | JSX.Element,
-        delete: <i className="fa fa-times"></i> as string | JSX.Element,
-    },
-};
-
-function getIcon(name: string | undefined | common.Icon, locale: common.Locale): common.Icon {
-    if (name === undefined) {
-        return {
-            collapse: locale.button.collapse,
-            expand: locale.button.expand,
-            add: locale.button.add,
-            delete: locale.button.delete,
-        };
-    }
-    if (typeof name === "string") {
-        return icons[name] || {
-            collapse: locale.button.collapse,
-            expand: locale.button.expand,
-            add: locale.button.add,
-            delete: locale.button.delete,
-        };
-    }
-    return name;
-}
-
 export type Props = {
     schema: common.Schema;
     initialValue: common.ValueType;
@@ -61,7 +26,7 @@ export class JSONEditor extends React.Component<Props, {}> {
         super(props);
         this.theme = common.getTheme(this.props.theme);
         this.locale = common.getLocale(this.props.locale);
-        this.icon = getIcon(this.props.icon, this.locale);
+        this.icon = common.getIcon(this.props.icon, this.locale);
     }
     render() {
         const props = {

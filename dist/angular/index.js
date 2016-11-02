@@ -1,20 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
 var common = require("../common");
-exports.icons = {
-    "bootstrap3": {
-        collapse: "<i className=\"glyphicon glyphicon-chevron-down\"></i>",
-        expand: "<i className=\"glyphicon glyphicon-chevron-right\"></i> as string | JSX.Element",
-        add: "<i className=\"glyphicon glyphicon-plus\"></i> as string | JSX.Element",
-        delete: "<i className=\"glyphicon glyphicon-remove\"></i> as string | JSX.Element",
-    },
-    "fontawesome4": {
-        collapse: "<i className=\"fa fa-caret-square-o-down\"></i>",
-        expand: "<i className=\"fa fa-caret-square-o-right\"></i>",
-        add: "<i className=\"fa fa-plus\"></i>",
-        delete: "<i className=\"fa fa-times\"></i>",
-    },
-};
 var JSONEditorComponent = (function () {
     function JSONEditorComponent() {
         this.updateValue = new core_1.EventEmitter();
@@ -22,7 +8,7 @@ var JSONEditorComponent = (function () {
     JSONEditorComponent.prototype.ngOnInit = function () {
         this.themeObject = common.getTheme(this.theme);
         this.localeObject = common.getLocale(this.locale);
-        this.iconObject = common.getIcon(this.icon, this.localeObject, exports.icons);
+        this.iconObject = common.getIcon(this.icon, this.localeObject);
     };
     __decorate([
         core_1.Input()
@@ -70,4 +56,6 @@ var string_editor_component_1 = require("./string-editor.component");
 exports.StringEditorComponent = string_editor_component_1.StringEditorComponent;
 var title_editor_component_1 = require("./title-editor.component");
 exports.TitleEditorComponent = title_editor_component_1.TitleEditorComponent;
+var icon_component_1 = require("./icon.component");
+exports.IconComponent = icon_component_1.IconComponent;
 //# sourceMappingURL=index.js.map

@@ -1,21 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
 
-export const icons: { [name: string]: common.Icon } = {
-    "bootstrap3": {
-        collapse: `<i className="glyphicon glyphicon-chevron-down"></i>`,
-        expand: `<i className="glyphicon glyphicon-chevron-right"></i> as string | JSX.Element`,
-        add: `<i className="glyphicon glyphicon-plus"></i> as string | JSX.Element`,
-        delete: `<i className="glyphicon glyphicon-remove"></i> as string | JSX.Element`,
-    },
-    "fontawesome4": {
-        collapse: `<i className="fa fa-caret-square-o-down"></i>`,
-        expand: `<i className="fa fa-caret-square-o-right"></i>`,
-        add: `<i className="fa fa-plus"></i>`,
-        delete: `<i className="fa fa-times"></i>`,
-    },
-};
-
 @Component({
     selector: "json-editor",
     template: `
@@ -91,7 +76,7 @@ export class JSONEditorComponent {
     ngOnInit() {
         this.themeObject = common.getTheme(this.theme);
         this.localeObject = common.getLocale(this.locale);
-        this.iconObject = common.getIcon(this.icon, this.localeObject, icons);
+        this.iconObject = common.getIcon(this.icon, this.localeObject);
     }
 }
 
@@ -118,3 +103,6 @@ export { StringEditorComponent };
 
 import { TitleEditorComponent } from "./title-editor.component";
 export { TitleEditorComponent };
+
+import { IconComponent } from "./icon.component";
+export { IconComponent };

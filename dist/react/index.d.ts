@@ -1,9 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
 import * as common from "../common";
-export declare const icons: {
-    [name: string]: common.Icon;
-};
 export declare type Props = {
     schema: common.Schema;
     initialValue: common.ValueType;

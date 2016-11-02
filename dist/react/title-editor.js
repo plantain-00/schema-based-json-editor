@@ -1,6 +1,7 @@
 "use strict";
 var React = require("react");
 var common = require("../common");
+var icon_1 = require("./icon");
 var TitleEditor = (function (_super) {
     __extends(TitleEditor, _super);
     function TitleEditor() {
@@ -10,7 +11,9 @@ var TitleEditor = (function (_super) {
         if (this.props.title) {
             var deleteButton = null;
             if (this.props.onDelete) {
-                deleteButton = React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, this.props.icon.delete);
+                deleteButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
+                    React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
+                ));
             }
             return (React.createElement("label", {className: this.props.theme.label}, 
                 this.props.title, 

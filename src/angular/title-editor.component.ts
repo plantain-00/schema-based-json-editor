@@ -7,7 +7,9 @@ import * as common from "../common";
     <label *ngIf="title" [class]="theme.label">
         {{title}}
         <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-            <button *ngIf="onDelete" [class]="theme.button" (click)="onDelete">{{icon.delete}}</button>
+            <button *ngIf="onDelete" [class]="theme.button" (click)="onDelete">
+                <icon [icon]="icon" [text]="icon.delete"></icon>
+            </button>
         </div>
     </label>
     `,

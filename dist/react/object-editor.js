@@ -2,6 +2,7 @@
 var React = require("react");
 var common = require("../common");
 var editor_1 = require("./editor");
+var icon_1 = require("./icon");
 var ObjectEditor = (function (_super) {
     __extends(ObjectEditor, _super);
     function ObjectEditor(props) {
@@ -63,7 +64,9 @@ var ObjectEditor = (function (_super) {
         }
         var deleteButton = null;
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
-            deleteButton = React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, this.props.icon.delete);
+            deleteButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
+                React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
+            ));
         }
         var optionalCheckbox = null;
         if (!this.props.required) {
@@ -77,7 +80,9 @@ var ObjectEditor = (function (_super) {
             React.createElement("h3", null, 
                 this.props.title || this.props.schema.title, 
                 React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
-                    React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, this.collapsed ? this.props.icon.expand : this.props.icon.collapse), 
+                    React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, 
+                        React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.collapsed ? this.props.icon.expand : this.props.icon.collapse})
+                    ), 
                     deleteButton)), 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description), 
             optionalCheckbox, 

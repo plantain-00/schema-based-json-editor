@@ -24,7 +24,7 @@ var TitleEditorComponent = (function () {
     TitleEditorComponent = __decorate([
         core_1.Component({
             selector: "title-editor",
-            template: "\n    <label *ngIf=\"title\" [class]=\"theme.label\">\n        {{title}}\n        <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyle\">\n            <button *ngIf=\"onDelete\" [class]=\"theme.button\" (click)=\"onDelete\">{{icon.delete}}</button>\n        </div>\n    </label>\n    ",
+            template: "\n    <label *ngIf=\"title\" [class]=\"theme.label\">\n        {{title}}\n        <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyle\">\n            <button *ngIf=\"onDelete\" [class]=\"theme.button\" (click)=\"onDelete\">\n                <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n            </button>\n        </div>\n    </label>\n    ",
         })
     ], TitleEditorComponent);
     return TitleEditorComponent;

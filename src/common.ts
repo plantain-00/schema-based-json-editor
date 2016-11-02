@@ -178,15 +178,34 @@ export function getLocale(name: string | undefined | Locale): Locale {
 }
 
 export type Icon = {
-    collapse: string | JSX.Element;
-    expand: string | JSX.Element;
-    add: string | JSX.Element;
-    delete: string | JSX.Element;
+    isText: boolean;
+    collapse: string;
+    expand: string;
+    add: string;
+    delete: string;
 }
 
-export function getIcon(name: string | undefined | Icon, locale: Locale, icons: { [name: string]: Icon }): Icon {
+const icons: { [name: string]: Icon } = {
+    "bootstrap3": {
+        isText: false,
+        collapse: "glyphicon glyphicon-chevron-down",
+        expand: "glyphicon glyphicon-chevron-right",
+        add: "glyphicon glyphicon-plus",
+        delete: "glyphicon glyphicon-remove",
+    },
+    "fontawesome4": {
+        isText: false,
+        collapse: "fa fa-caret-square-o-down",
+        expand: "fa fa-caret-square-o-right",
+        add: "fa fa-plus",
+        delete: "fa fa-times",
+    },
+};
+
+export function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
     if (name === undefined) {
         return {
+            isText: true,
             collapse: locale.button.collapse,
             expand: locale.button.expand,
             add: locale.button.add,
@@ -195,6 +214,7 @@ export function getIcon(name: string | undefined | Icon, locale: Locale, icons: 
     }
     if (typeof name === "string") {
         return icons[name] || {
+            isText: true,
             collapse: locale.button.collapse,
             expand: locale.button.expand,
             add: locale.button.add,

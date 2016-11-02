@@ -1,8 +1,5 @@
 import { EventEmitter } from "@angular/core";
 import * as common from "../common";
-export declare const icons: {
-    [name: string]: common.Icon;
-};
 export declare class JSONEditorComponent {
     schema: common.Schema;
     initialValue: common.ValueType;
@@ -32,3 +29,5 @@ import { StringEditorComponent } from "./string-editor.component";
 export { StringEditorComponent };
 import { TitleEditorComponent } from "./title-editor.component";
 export { TitleEditorComponent };
+import { IconComponent } from "./icon.component";
+export { IconComponent };
