@@ -25,6 +25,7 @@ export declare class ObjectEditorComponent {
         marginLeft: string;
     };
     ngOnInit(): void;
+    isRequired(property: string): boolean | undefined;
     trackByFunction(index: number, value: {
         [name: string]: common.ValueType;
     }): number;

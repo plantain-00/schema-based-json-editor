@@ -10,7 +10,8 @@ import * as common from "../common";
         [title]="title"
         [theme]="themeObject"
         [locale]="localeObject"
-        [icon]="iconObject">
+        [icon]="iconObject"
+        [required]="true">
     </object-editor>
     <array-editor *ngIf="schema.type === 'array'"
         [schema]="schema"
@@ -18,7 +19,8 @@ import * as common from "../common";
         [title]="title"
         [theme]="themeObject"
         [locale]="localeObject"
-        [icon]="iconObject">
+        [icon]="iconObject"
+        [required]="true">
     </array-editor>
     <number-editor *ngIf="schema.type === 'number' || schema.type === 'integer'"
         [schema]="schema"
@@ -26,7 +28,8 @@ import * as common from "../common";
         [title]="title"
         [theme]="themeObject"
         [locale]="localeObject"
-        [icon]="iconObject">
+        [icon]="iconObject"
+        [required]="true">
     </number-editor>
     <boolean-editor *ngIf="schema.type === 'boolean'"
         [schema]="schema"
@@ -34,7 +37,8 @@ import * as common from "../common";
         [title]="title"
         [theme]="themeObject"
         [locale]="localeObject"
-        [icon]="iconObject">
+        [icon]="iconObject"
+        [required]="true">
     </boolean-editor>
     <null-editor *ngIf="schema.type === 'null'"
         [schema]="schema"
@@ -42,7 +46,8 @@ import * as common from "../common";
         [title]="title"
         [theme]="themeObject"
         [locale]="localeObject"
-        [icon]="iconObject">
+        [icon]="iconObject"
+        [required]="true">
     </null-editor>
     <string-editor *ngIf="schema.type === 'string'"
         [schema]="schema"
@@ -50,7 +55,8 @@ import * as common from "../common";
         [title]="title"
         [theme]="themeObject"
         [locale]="localeObject"
-        [icon]="iconObject">
+        [icon]="iconObject"
+        [required]="true">
     </string-editor>
     `,
 })

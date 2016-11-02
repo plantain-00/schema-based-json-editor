@@ -17,6 +17,7 @@ export declare class ArrayEditorComponent {
     value?: common.ValueType[];
     drak: common.dragula.Drake;
     errorMessage: string;
+    buttonGroupStyleString: string;
     ngOnInit(): void;
     getDragulaContainer(): void;
     ngOnDestroy(): void;

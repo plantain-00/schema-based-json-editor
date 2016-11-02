@@ -30,7 +30,7 @@ import * as common from "../common";
                 [theme]="theme"
                 [icon]="icon"
                 [locale]="locale"
-                [required]="required"
+                [required]="isRequired(property.name)"
                 [readonly]="readonly || schema.readonly">
             </editor>
         </div>
@@ -78,6 +78,9 @@ export class ObjectEditorComponent {
             }
         }
         this.updateValue.emit(this.value);
+    }
+    isRequired(property: string) {
+        return this.schema.required && this.schema.required.some(r => r === property);
     }
     trackByFunction(index: number, value: { [name: string]: common.ValueType }) {
         return index;

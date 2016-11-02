@@ -7,7 +7,7 @@ import * as common from "../common";
     <div class="{{errorMessage ? theme.errorRow : theme.row}}">
         <h3>
             {{title || schema.title}}
-            <div [class]="theme.buttonGroup" [style]="common.buttonGroupStyleString">
+            <div [class]="theme.buttonGroup" [style]="buttonGroupStyleString">
                 <button [class]="theme.button" (click)="collapseOrExpand">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
@@ -71,6 +71,7 @@ export class ArrayEditorComponent {
     value?: common.ValueType[];
     drak: common.dragula.Drake;
     errorMessage: string;
+    buttonGroupStyleString = common.buttonGroupStyleString;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
 
