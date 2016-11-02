@@ -17,7 +17,7 @@ export declare class ArrayEditorComponent {
     value?: common.ValueType[];
     drak: common.dragula.Drake;
     errorMessage: string;
-    constructor();
+    ngOnInit(): void;
     getDragulaContainer(): void;
     ngOnDestroy(): void;
     trackByFunction(index: number, value: common.ValueType): number;

@@ -4,9 +4,11 @@ var common = require("../common");
 var BooleanEditorComponent = (function () {
     function BooleanEditorComponent() {
         this.updateValue = new core_1.EventEmitter();
+    }
+    BooleanEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
         this.updateValue.emit(this.value);
-    }
+    };
     BooleanEditorComponent.prototype.onChange = function (e) {
         this.value = e.target.checked;
         this.updateValue.emit(this.value);

@@ -88,6 +88,26 @@ function getLocale(name) {
     return name;
 }
 exports.getLocale = getLocale;
+function getIcon(name, locale, icons) {
+    if (name === undefined) {
+        return {
+            collapse: locale.button.collapse,
+            expand: locale.button.expand,
+            add: locale.button.add,
+            delete: locale.button.delete,
+        };
+    }
+    if (typeof name === "string") {
+        return icons[name] || {
+            collapse: locale.button.collapse,
+            expand: locale.button.expand,
+            add: locale.button.add,
+            delete: locale.button.delete,
+        };
+    }
+    return name;
+}
+exports.getIcon = getIcon;
 function getDefaultValue(required, schema, initialValue) {
     if (!required) {
         return undefined;

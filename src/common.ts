@@ -184,6 +184,26 @@ export type Icon = {
     delete: string | JSX.Element;
 }
 
+export function getIcon(name: string | undefined | Icon, locale: Locale, icons: { [name: string]: Icon }): Icon {
+    if (name === undefined) {
+        return {
+            collapse: locale.button.collapse,
+            expand: locale.button.expand,
+            add: locale.button.add,
+            delete: locale.button.delete,
+        };
+    }
+    if (typeof name === "string") {
+        return icons[name] || {
+            collapse: locale.button.collapse,
+            expand: locale.button.expand,
+            add: locale.button.add,
+            delete: locale.button.delete,
+        };
+    }
+    return name;
+}
+
 export type ValueType = { [name: string]: any } | any[] | number | boolean | string | null;
 
 export function getDefaultValue(required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {

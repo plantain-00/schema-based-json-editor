@@ -6,7 +6,7 @@ import * as common from "../common";
     template: `
     <label *ngIf="title" [class]="theme.label">
         {{title}}
-        <div [class]="theme.buttonGroup" [style]="common.buttonGroupStyle">
+        <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
             <button *ngIf="onDelete" [class]="theme.button" (click)="onDelete">{{icon.delete}}</button>
         </div>
     </label>
@@ -23,4 +23,6 @@ export class TitleEditorComponent {
     icon: common.Icon;
     @Input()
     locale: common.Locale;
+
+    buttonGroupStyle = common.buttonGroupStyle;
 }

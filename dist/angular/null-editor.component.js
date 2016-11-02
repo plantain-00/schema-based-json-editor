@@ -4,9 +4,11 @@ var common = require("../common");
 var NullEditorComponent = (function () {
     function NullEditorComponent() {
         this.updateValue = new core_1.EventEmitter();
+    }
+    NullEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
         // this.updateValue.emit(this.value);
-    }
+    };
     NullEditorComponent.prototype.toggleOptional = function () {
         if (this.value === undefined) {
             this.value = common.getDefaultValue(true, this.schema, this.initialValue);

@@ -66,7 +66,7 @@ export class ArrayEditorComponent {
     value?: common.ValueType[];
     drak: common.dragula.Drake;
     errorMessage: string;
-    constructor() {
+    ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
 
         this.updateValue.emit(this.value);

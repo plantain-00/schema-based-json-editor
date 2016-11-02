@@ -13,7 +13,7 @@ export declare class StringEditorComponent {
     required?: boolean;
     value?: string;
     errorMessage: string;
-    constructor();
+    ngOnInit(): void;
     onChange(e: {
         target: {
             value: string;

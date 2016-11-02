@@ -12,7 +12,7 @@ export declare class BooleanEditorComponent {
     readonly?: boolean;
     required?: boolean;
     value?: boolean;
-    constructor();
+    ngOnInit(): void;
     onChange(e: {
         target: {
             checked: boolean;

@@ -6,4 +6,7 @@ export declare class TitleEditorComponent {
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;
+    buttonGroupStyle: {
+        marginLeft: string;
+    };
 }

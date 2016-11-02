@@ -57,7 +57,7 @@ export class NumberEditorComponent {
 
     value?: number;
     errorMessage: string;
-    constructor() {
+    ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
         // this.updateValue.emit(this.value);
     }

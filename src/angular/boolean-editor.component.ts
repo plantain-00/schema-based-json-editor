@@ -48,7 +48,7 @@ export class BooleanEditorComponent {
     required?: boolean;
 
     value?: boolean;
-    constructor() {
+    ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
         this.updateValue.emit(this.value);
     }

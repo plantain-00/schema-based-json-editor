@@ -1,5 +1,8 @@
 import { EventEmitter } from "@angular/core";
 import * as common from "../common";
+export declare const icons: {
+    [name: string]: common.Icon;
+};
 export declare class JSONEditorComponent {
     schema: common.Schema;
     initialValue: common.ValueType;
@@ -8,37 +11,10 @@ export declare class JSONEditorComponent {
     icon?: string;
     locale?: string;
     readonly?: boolean;
-    themeObject: {
-        rowContainer: string;
-        row: string;
-        formControl: string;
-        button: string;
-        help: string;
-        errorRow: string;
-        label: string;
-        optionalCheckbox: string;
-        buttonGroup: string;
-    };
-    localeObject: {
-        button: {
-            collapse: string;
-            expand: string;
-            add: string;
-            delete: string;
-        };
-        error: {
-            minLength: string;
-            maxLength: string;
-            pattern: string;
-            minimum: string;
-            maximum: string;
-            largerThan: string;
-            smallerThan: string;
-            minItems: string;
-            uniqueItems: string;
-        };
-    };
-    constructor();
+    themeObject: common.Theme;
+    localeObject: common.Locale;
+    iconObject: common.Icon;
+    ngOnInit(): void;
 }
 import { BooleanEditorComponent } from "./boolean-editor.component";
 export { BooleanEditorComponent };

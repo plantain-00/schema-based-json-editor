@@ -1,8 +1,10 @@
 "use strict";
 var core_1 = require("@angular/core");
+var common = require("../common");
 var TitleEditorComponent = (function () {
     function TitleEditorComponent() {
         this.onDelete = new core_1.EventEmitter();
+        this.buttonGroupStyle = common.buttonGroupStyle;
     }
     __decorate([
         core_1.Input()
@@ -22,7 +24,7 @@ var TitleEditorComponent = (function () {
     TitleEditorComponent = __decorate([
         core_1.Component({
             selector: "title-editor",
-            template: "\n    <label *ngIf=\"title\" [class]=\"theme.label\">\n        {{title}}\n        <div [class]=\"theme.buttonGroup\" [style]=\"common.buttonGroupStyle\">\n            <button *ngIf=\"onDelete\" [class]=\"theme.button\" (click)=\"onDelete\">{{icon.delete}}</button>\n        </div>\n    </label>\n    ",
+            template: "\n    <label *ngIf=\"title\" [class]=\"theme.label\">\n        {{title}}\n        <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyle\">\n            <button *ngIf=\"onDelete\" [class]=\"theme.button\" (click)=\"onDelete\">{{icon.delete}}</button>\n        </div>\n    </label>\n    ",
         })
     ], TitleEditorComponent);
     return TitleEditorComponent;

@@ -7,8 +7,8 @@ import * as common from "../common";
     <div>
         <h3>
             {{title || schema.title}}
-            <div [class]="theme.buttonGroup" [style="common.buttonGroupStyle">
-                <button [class]="theme.button" (click)="collapseOrExpand">{{collapsed ? icon.expand : icon.collapse}}</button>
+            <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
+                <button [class]="theme.button" (click)="collapseOrExpand">{{collapsed ? icon.expand : icon.collapsed}}</button>
                 <button *ngIf="onDelete && !readonly && !schema.readonly" [class]="theme.button" (click)="onDelete">{{icon.delete}}</button>
             </div>
         </h3>
@@ -20,9 +20,9 @@ import * as common from "../common";
             </label>
         </div>
         <div *ngIf="!collapsed && value !== undefined" [class]="theme.rowContainer">
-            <editor *ngFor="let property of properties; let i = index; trackBy: trackByFunction"
-                [schema]="schema"
-                [title]="schema.title || property.name"
+            <editor *ngFor="let property of properties; trackBy: trackByFunction"
+                [schema]="property.value"
+                [title]="property.value.title || property.name"
                 [initialValue]="value[property.name]"
                 (updateValue)="onChange"
                 [theme]="theme"
@@ -60,17 +60,20 @@ export class ObjectEditorComponent {
     collapsed = false;
     value?: { [name: string]: common.ValueType };
     properties: { name: string; value: common.ValueType }[] = [];
-    constructor() {
+    buttonGroupStyle = common.buttonGroupStyle;
+    ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
-        for (const property in this.schema.properties) {
-            const schema = this.schema.properties[property];
-            const required = this.schema.required && this.schema.required.some(r => r === property);
-            this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
+        if (!this.collapsed && this.value !== undefined) {
+            for (const property in this.schema.properties) {
+                const schema = this.schema.properties[property];
+                const required = this.schema.required && this.schema.required.some(r => r === property);
+                this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
 
-            this.properties.push({
-                name: property,
-                value: schema,
-            });
+                this.properties.push({
+                    name: property,
+                    value: schema,
+                });
+            }
         }
         this.updateValue.emit(this.value);
     }

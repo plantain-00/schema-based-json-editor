@@ -12,6 +12,6 @@ export declare class NullEditorComponent {
     readonly?: boolean;
     required?: boolean;
     value?: null;
-    constructor();
+    ngOnInit(): void;
     toggleOptional(): void;
 }

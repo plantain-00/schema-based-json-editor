@@ -21,7 +21,10 @@ export declare class ObjectEditorComponent {
         name: string;
         value: common.ValueType;
     }[];
-    constructor();
+    buttonGroupStyle: {
+        marginLeft: string;
+    };
+    ngOnInit(): void;
     trackByFunction(index: number, value: {
         [name: string]: common.ValueType;
     }): number;

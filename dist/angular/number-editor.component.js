@@ -4,9 +4,11 @@ var common = require("../common");
 var NumberEditorComponent = (function () {
     function NumberEditorComponent() {
         this.updateValue = new core_1.EventEmitter();
+    }
+    NumberEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
         // this.updateValue.emit(this.value);
-    }
+    };
     NumberEditorComponent.prototype.onChange = function (e) {
         this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
         this.validate();

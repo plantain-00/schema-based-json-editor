@@ -121,8 +121,8 @@ const schema: any = {
     template: `
     <div>
         <div style="width: 500px; margin: 10px; float: left">
-          <json-editor schema="{{schema}}"
-              initialValue="{{value}}"
+          <json-editor [schema]="schema"
+              [initialValue]="value"
               (updateValue)="updateValue($event)"
               theme="bootstrap3"
               icon="fontawesome4"
@@ -130,7 +130,7 @@ const schema: any = {
           </json-editor>
         </div>
         <pre style="width: 400px; margin: 10px; float: left">{{schemaString}}</pre>
-        <pre style="width: 400px; margin: 10px; float: left">{{value}}</pre>
+        <pre style="width: 400px; margin: 10px; float: left">{{getValueString()}}</pre>
     </div>
     `,
 })
@@ -138,6 +138,9 @@ export class MainComponent {
     schema = schema;
     schemaString = JSON.stringify(schema, null, "  ");
     value: any = {};
+    getValueString() {
+        return JSON.stringify(this.value, null, "  ");
+    }
     updateValue(value: any) {
         this.value = value;
     }

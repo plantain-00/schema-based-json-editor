@@ -92,6 +92,9 @@ export declare type Icon = {
     add: string | JSX.Element;
     delete: string | JSX.Element;
 };
+export declare function getIcon(name: string | undefined | Icon, locale: Locale, icons: {
+    [name: string]: Icon;
+}): Icon;
 export declare type ValueType = {
     [name: string]: any;
 } | any[] | number | boolean | string | null;

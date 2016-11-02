@@ -15,10 +15,12 @@ var StringEditorComponent = (function () {
             }
             _this.updateValue.emit(_this.value);
         };
+    }
+    StringEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
         this.validate();
         this.updateValue.emit(this.value);
-    }
+    };
     StringEditorComponent.prototype.onChange = function (e) {
         this.value = e.target.value;
         this.validate();

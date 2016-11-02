@@ -25,6 +25,8 @@ var ArrayEditorComponent = (function () {
             // this.drak.containers = [container];
             _this.updateValue.emit(_this.value);
         };
+    }
+    ArrayEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
         this.updateValue.emit(this.value);
         // const container = this.getDragulaContainer();
@@ -49,7 +51,7 @@ var ArrayEditorComponent = (function () {
         //         this.props.updateValue(this.value);
         //     }
         // });
-    }
+    };
     ArrayEditorComponent.prototype.getDragulaContainer = function () {
         // return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
     };

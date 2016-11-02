@@ -13,7 +13,7 @@ export declare class NumberEditorComponent {
     required?: boolean;
     value?: number;
     errorMessage: string;
-    constructor();
+    ngOnInit(): void;
     onChange(e: {
         target: {
             value: string;

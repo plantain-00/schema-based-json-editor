@@ -39,7 +39,7 @@ export class NullEditorComponent {
     required?: boolean;
 
     value?: null;
-    constructor() {
+    ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
         // this.updateValue.emit(this.value);
     }
