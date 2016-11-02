@@ -39,8 +39,6 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
             const propertyElements: JSX.Element[] = [];
             for (const property in this.props.schema.properties) {
                 const onChange = (value: common.ValueType) => {
-                    console.log(value);
-                    console.log(this.value);
                     this.value![property] = value;
                     this.setState({ value: this.value });
                     this.props.updateValue(this.value);

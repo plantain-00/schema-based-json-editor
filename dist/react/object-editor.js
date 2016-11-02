@@ -46,8 +46,6 @@ var ObjectEditor = (function (_super) {
             var propertyElements = [];
             var _loop_2 = function(property) {
                 var onChange = function (value) {
-                    console.log(value);
-                    console.log(_this.value);
                     _this.value[property] = value;
                     _this.setState({ value: _this.value });
                     _this.props.updateValue(_this.value);

@@ -4,6 +4,7 @@ declare const require: (name: string) => any;
 
 export const toNumber: (value?: any) => number = require("lodash.tonumber");
 export const toInteger: (value?: any) => number = require("lodash.tointeger");
+export const debounce: (func: (...args: any[]) => any, wait: number) => (...args: any[]) => any = require("lodash.debounce");
 
 import * as dragula from "dragula";
 export { dragula };

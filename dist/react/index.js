@@ -10,14 +10,18 @@ var string_editor_1 = require("./string-editor");
 var JSONEditor = (function (_super) {
     __extends(JSONEditor, _super);
     function JSONEditor(props) {
+        var _this = this;
         _super.call(this, props);
+        this.updateValue = common.debounce(function (value) {
+            _this.props.updateValue(value);
+        }, 100);
         this.theme = common.getTheme(this.props.theme);
         this.locale = common.getLocale(this.props.locale);
         this.icon = common.getIcon(this.props.icon, this.locale);
     }
     JSONEditor.prototype.render = function () {
         var props = {
-            updateValue: this.props.updateValue,
+            updateValue: this.updateValue,
             readonly: this.props.readonly,
             theme: this.theme,
             locale: this.locale,

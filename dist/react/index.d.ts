@@ -14,6 +14,7 @@ export declare class JSONEditor extends React.Component<Props, {}> {
     theme: common.Theme;
     locale: common.Locale;
     icon: common.Icon;
+    updateValue: (...args: any[]) => any;
     constructor(props: Props);
     render(): JSX.Element | null;
 }

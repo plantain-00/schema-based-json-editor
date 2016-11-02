@@ -1,6 +1,7 @@
 import "tslib";
 export declare const toNumber: (value?: any) => number;
 export declare const toInteger: (value?: any) => number;
+export declare const debounce: (func: (...args: any[]) => any, wait: number) => (...args: any[]) => any;
 import * as dragula from "dragula";
 export { dragula };
 export declare type CommonSchema = {

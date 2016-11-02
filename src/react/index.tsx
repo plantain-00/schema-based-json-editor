@@ -22,6 +22,9 @@ export class JSONEditor extends React.Component<Props, {}> {
     theme: common.Theme;
     locale: common.Locale;
     icon: common.Icon;
+    updateValue = common.debounce((value: any) => {
+        this.props.updateValue(value);
+    }, 100);
     constructor(props: Props) {
         super(props);
         this.theme = common.getTheme(this.props.theme);
@@ -30,7 +33,7 @@ export class JSONEditor extends React.Component<Props, {}> {
     }
     render() {
         const props = {
-            updateValue: this.props.updateValue,
+            updateValue: this.updateValue,
             readonly: this.props.readonly,
             theme: this.theme,
             locale: this.locale,

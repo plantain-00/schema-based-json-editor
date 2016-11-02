@@ -2,6 +2,7 @@
 require("tslib");
 exports.toNumber = require("lodash.tonumber");
 exports.toInteger = require("lodash.tointeger");
+exports.debounce = require("lodash.debounce");
 var dragula = require("dragula");
 exports.dragula = dragula;
 exports.themes = {
