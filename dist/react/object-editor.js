@@ -23,6 +23,17 @@ var ObjectEditor = (function (_super) {
             _this.props.updateValue(_this.value);
         };
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
+        if (!this.collapsed && this.value !== undefined) {
+            var _loop_1 = function(property) {
+                var schema = this_1.props.schema.properties[property];
+                var required = this_1.props.schema.required && this_1.props.schema.required.some(function (r) { return r === property; });
+                this_1.value[property] = common.getDefaultValue(required, schema, this_1.value[property]);
+            };
+            var this_1 = this;
+            for (var property in this.props.schema.properties) {
+                _loop_1(property);
+            }
+        }
     }
     ObjectEditor.prototype.componentDidMount = function () {
         this.props.updateValue(this.value);
@@ -32,20 +43,21 @@ var ObjectEditor = (function (_super) {
         var childrenElement = null;
         if (!this.collapsed && this.value !== undefined) {
             var propertyElements = [];
-            var _loop_1 = function(property) {
+            var _loop_2 = function(property) {
                 var onChange = function (value) {
+                    console.log(value);
+                    console.log(_this.value);
                     _this.value[property] = value;
                     _this.setState({ value: _this.value });
                     _this.props.updateValue(_this.value);
                 };
-                var schema = this_1.props.schema.properties[property];
-                var required = this_1.props.schema.required && this_1.props.schema.required.some(function (r) { return r === property; });
-                this_1.value[property] = common.getDefaultValue(required, schema, this_1.value[property]);
-                propertyElements.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_1.value[property], updateValue: onChange, theme: this_1.props.theme, icon: this_1.props.icon, locale: this_1.props.locale, required: required, readonly: this_1.props.readonly || this_1.props.schema.readonly}));
+                var schema = this_2.props.schema.properties[property];
+                var required = this_2.props.schema.required && this_2.props.schema.required.some(function (r) { return r === property; });
+                propertyElements.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_2.value[property], updateValue: onChange, theme: this_2.props.theme, icon: this_2.props.icon, locale: this_2.props.locale, required: required, readonly: this_2.props.readonly || this_2.props.schema.readonly}));
             };
-            var this_1 = this;
+            var this_2 = this;
             for (var property in this.props.schema.properties) {
-                _loop_1(property);
+                _loop_2(property);
             }
             childrenElement = (React.createElement("div", {className: this.props.theme.rowContainer}, propertyElements));
         }

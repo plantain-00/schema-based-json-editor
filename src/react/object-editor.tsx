@@ -8,6 +8,13 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     constructor(props: common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
+        if (!this.collapsed && this.value !== undefined) {
+            for (const property in this.props.schema.properties) {
+                const schema = this.props.schema.properties[property];
+                const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
+                this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
+            }
+        }
     }
     componentDidMount() {
         this.props.updateValue(this.value);
@@ -31,13 +38,14 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
             const propertyElements: JSX.Element[] = [];
             for (const property in this.props.schema.properties) {
                 const onChange = (value: common.ValueType) => {
+                    console.log(value);
+                    console.log(this.value);
                     this.value![property] = value;
                     this.setState({ value: this.value });
                     this.props.updateValue(this.value);
                 };
                 const schema = this.props.schema.properties[property];
                 const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
-                this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
                 propertyElements.push(<Editor key={property}
                     schema={schema}
                     title={schema.title || property}
