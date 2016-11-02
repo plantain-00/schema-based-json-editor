@@ -11,7 +11,8 @@ import * as common from "../common";
         [theme]="theme"
         [locale]="locale"
         [icon]="icon"
-        [required]="required">
+        [required]="required"
+        (updateValue)="updateValueFunction($event)">
     </object-editor>
     <array-editor *ngIf="schema.type === 'array'"
         [schema]="schema"
@@ -20,7 +21,8 @@ import * as common from "../common";
         [theme]="theme"
         [locale]="locale"
         [icon]="icon"
-        [required]="required">
+        [required]="required"
+        (updateValue)="updateValueFunction($event)">
     </array-editor>
     <number-editor *ngIf="schema.type === 'number' || schema.type === 'integer'"
         [schema]="schema"
@@ -29,7 +31,8 @@ import * as common from "../common";
         [theme]="theme"
         [locale]="locale"
         [icon]="icon"
-        [required]="required">
+        [required]="required"
+        (updateValue)="updateValueFunction($event)">
     </number-editor>
     <boolean-editor *ngIf="schema.type === 'boolean'"
         [schema]="schema"
@@ -38,7 +41,8 @@ import * as common from "../common";
         [theme]="theme"
         [locale]="locale"
         [icon]="icon"
-        [required]="required">
+        [required]="required"
+        (updateValue)="updateValueFunction($event)">
     </boolean-editor>
     <null-editor *ngIf="schema.type === 'null'"
         [schema]="schema"
@@ -47,7 +51,8 @@ import * as common from "../common";
         [theme]="theme"
         [locale]="locale"
         [icon]="icon"
-        [required]="required">
+        [required]="required"
+        (updateValue)="updateValueFunction($event)">
     </null-editor>
     <string-editor *ngIf="schema.type === 'string'"
         [schema]="schema"
@@ -56,7 +61,8 @@ import * as common from "../common";
         [theme]="theme"
         [locale]="locale"
         [icon]="icon"
-        [required]="required">
+        [required]="required"
+        (updateValue)="updateValueFunction($event)">
     </string-editor>
     `,
 })
@@ -80,4 +86,8 @@ export class EditorComponent {
     readonly?: boolean;
     @Input()
     required?: boolean;
+
+    updateValueFunction(value: any) {
+        this.updateValue.emit(value);
+    }
 }

@@ -51,7 +51,7 @@ var NullEditorComponent = (function () {
     NullEditorComponent = __decorate([
         core_1.Component({
             selector: "null-editor",
-            template: "\n    <div>\n        <title-editor></title-editor>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n    </div>\n    ",
+            template: "\n    <div>\n        <title-editor [title]=\"title\"\n            (onDelete)=\"onDelete\"\n            [theme]=\"theme\"\n            [icon]=\"icon\"\n            [locale]=\"locale\">\n        </title-editor>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n    </div>\n    ",
         })
     ], NullEditorComponent);
     return NullEditorComponent;

@@ -14,6 +14,9 @@ export declare class StringEditorComponent {
     value?: string;
     errorMessage: string;
     ngOnInit(): void;
+    useTextArea(): boolean | undefined;
+    useInput(): boolean | undefined;
+    useSelect(): boolean;
     onChange(e: {
         target: {
             value: string;

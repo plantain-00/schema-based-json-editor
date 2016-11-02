@@ -11,6 +11,7 @@ export declare class JSONEditorComponent {
     themeObject: common.Theme;
     localeObject: common.Locale;
     iconObject: common.Icon;
+    updateValueFunction: (...args: any[]) => any;
     ngOnInit(): void;
 }
 import { BooleanEditorComponent } from "./boolean-editor.component";

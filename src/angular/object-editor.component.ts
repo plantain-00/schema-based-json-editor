@@ -26,7 +26,7 @@ import * as common from "../common";
                 [schema]="property.value"
                 [title]="property.value.title || property.name"
                 [initialValue]="value[property.name]"
-                (updateValue)="onChange"
+                (updateValue)="onChange(property.name, $event)"
                 [theme]="theme"
                 [icon]="icon"
                 [locale]="locale"
@@ -94,6 +94,10 @@ export class ObjectEditorComponent {
         } else {
             this.value = undefined;
         }
+        this.updateValue.emit(this.value);
+    }
+    onChange(property: string, value: common.ValueType) {
+        this.value![property] = value;
         this.updateValue.emit(this.value);
     }
 }

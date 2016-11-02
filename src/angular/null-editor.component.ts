@@ -5,7 +5,12 @@ import * as common from "../common";
     selector: "null-editor",
     template: `
     <div>
-        <title-editor></title-editor>
+        <title-editor [title]="title"
+            (onDelete)="onDelete"
+            [theme]="theme"
+            [icon]="icon"
+            [locale]="locale">
+        </title-editor>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
                 <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />

@@ -5,20 +5,25 @@ import * as common from "../common";
     selector: "number-editor",
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <title-editor></title-editor>
+        <title-editor [title]="title"
+            (onDelete)="onDelete"
+            [theme]="theme"
+            [icon]="icon"
+            [locale]="locale">
+        </title-editor>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
                 <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
-        <input *ngIf="value !== undefined && (schema.enum === undefined || readonly || schema.readonly)"
+        <input *ngIf="useInput()"
             [class]="theme.formControl"
             type="number"
-            (change)="onChange"
+            (keyup)="onChange($event)"
             [defaultValue]="value"
             [readOnly]="readonly || schema.readonly" />
-        <select *ngIf="value !== undefined && (schema.enum !== undefined && !readonly && !schema.readonly)"
+        <select *ngIf="useSelect()"
             [class]="theme.formControl"
             type="number"
             (change)="onChange">
@@ -60,6 +65,12 @@ export class NumberEditorComponent {
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
         // this.updateValue.emit(this.value);
+    }
+    useInput() {
+        return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly);
+    }
+    useSelect() {
+        return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
     }
     onChange(e: { target: { value: string } }) {
         this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);

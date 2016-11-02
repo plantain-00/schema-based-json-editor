@@ -31,4 +31,5 @@ export declare class ObjectEditorComponent {
     }): number;
     collapseOrExpand: () => void;
     toggleOptional: () => void;
+    onChange(property: string, value: common.ValueType): void;
 }
