@@ -1,8 +1,14 @@
 [![Dependency Status](https://david-dm.org/plantain-00/schema-based-json-editor.svg)](https://david-dm.org/plantain-00/schema-based-json-editor)
 [![devDependency Status](https://david-dm.org/plantain-00/schema-based-json-editor/dev-status.svg)](https://david-dm.org/plantain-00/schema-based-json-editor#info=devDependencies)
 [![Build Status](https://travis-ci.org/plantain-00/schema-based-json-editor.svg?branch=master)](https://travis-ci.org/plantain-00/schema-based-json-editor)
+[![npm version](https://badge.fury.io/js/schema-based-json-editor.svg)](https://badge.fury.io/js/schema-based-json-editor)
+[![Downloads](https://img.shields.io/npm/dm/schema-based-json-editor.svg)](https://www.npmjs.com/package/schema-based-json-editor)
 
 # schema-based-json-editor
+
+#### install
+
+`npm i schema-based-json-editor`
 
 #### link or bundle styles of `dragula`
 
@@ -70,6 +76,7 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 
 + reactjs component
 + angular2 component
++ vuejs component
 + common schema fields: title, description, default, readonly
 + object schema fields: properties, required
 + array schema fields: items, minItems, uniqueItems
@@ -79,4 +86,3 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 #### todo list
 
 + vuejs component
-+ published to npm
