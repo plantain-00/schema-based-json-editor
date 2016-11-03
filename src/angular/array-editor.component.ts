@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import * as common from "../common";
 
 @Component({
@@ -26,7 +26,7 @@ import * as common from "../common";
                 is undefined
             </label>
         </div>
-        <div *ngIf="value !== undefined && !collapsed" [class]="theme.rowContainer">
+        <div #drakContainer *ngIf="value !== undefined && !collapsed" [class]="theme.rowContainer">
             <div *ngFor="let item of value; let i = index; trackBy:trackByFunction" [attr.data-index]="i" [class]="theme.rowContainer">
                 <editor [schema]="schema.items"
                     [title]="i"
@@ -70,6 +70,9 @@ export class ArrayEditorComponent {
     @Input()
     hasDeleteButton: boolean;
 
+    @ViewChild("drakContainer")
+    drakContainer: ElementRef;
+
     renderSwitch = 1;
     collapsed = false;
     value?: common.ValueType[];
@@ -78,33 +81,33 @@ export class ArrayEditorComponent {
     buttonGroupStyleString = common.buttonGroupStyleString;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
-
         this.updateValue.emit(this.value);
-        // const container = this.getDragulaContainer();
-        // this.drak = common.dragula([container]);
-        // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
-        //     if (this.value) {
-        //         const fromIndex = +el.dataset["index"];
-        //         if (sibling) {
-        //             const toIndex = +sibling.dataset["index"];
-        //             this.value.splice(toIndex, 0, this.value[fromIndex]);
-        //             if (fromIndex > toIndex) {
-        //                 this.value.splice(fromIndex + 1, 1);
-        //             } else {
-        //                 this.value.splice(fromIndex, 1);
-        //             }
-        //         } else {
-        //             this.value.push(this.value[fromIndex]);
-        //             this.value.splice(fromIndex, 1);
-        //         }
-        //         this.renderSwitch = -this.renderSwitch;
-        //         this.setState({ value: this.value, renderSwitch: this.renderSwitch });
-        //         this.props.updateValue(this.value);
-        //     }
-        // });
+    }
+    ngAfterViewInit() {
+        const container = this.getDragulaContainer();
+        this.drak = common.dragula([container]);
+        this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+            if (this.value) {
+                const fromIndex = +el.dataset["index"];
+                if (sibling) {
+                    const toIndex = +sibling.dataset["index"];
+                    this.value.splice(toIndex, 0, this.value[fromIndex]);
+                    if (fromIndex > toIndex) {
+                        this.value.splice(fromIndex + 1, 1);
+                    } else {
+                        this.value.splice(fromIndex, 1);
+                    }
+                } else {
+                    this.value.push(this.value[fromIndex]);
+                    this.value.splice(fromIndex, 1);
+                }
+                this.renderSwitch = -this.renderSwitch;
+                this.updateValue.emit(this.value);
+            }
+        });
     }
     getDragulaContainer() {
-        // return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
+        return this.drakContainer.nativeElement;
     }
     ngOnDestroy() {
         if (this.drak) {
@@ -116,8 +119,8 @@ export class ArrayEditorComponent {
     };
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
-        // const container = this.getDragulaContainer();
-        // this.drak.containers = [container];
+        const container = this.getDragulaContainer();
+        this.drak.containers = [container];
     }
     toggleOptional = () => {
         if (this.value === undefined) {
@@ -125,8 +128,8 @@ export class ArrayEditorComponent {
         } else {
             this.value = undefined;
         }
-        // const container = this.getDragulaContainer();
-        // this.drak.containers = [container];
+        const container = this.getDragulaContainer();
+        this.drak.containers = [container];
         this.updateValue.emit(this.value);
     }
     validate() {

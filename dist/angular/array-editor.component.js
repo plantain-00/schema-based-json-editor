@@ -14,8 +14,8 @@ var ArrayEditorComponent = (function () {
         };
         this.collapseOrExpand = function () {
             _this.collapsed = !_this.collapsed;
-            // const container = this.getDragulaContainer();
-            // this.drak.containers = [container];
+            var container = _this.getDragulaContainer();
+            _this.drak.containers = [container];
         };
         this.toggleOptional = function () {
             if (_this.value === undefined) {
@@ -24,39 +24,43 @@ var ArrayEditorComponent = (function () {
             else {
                 _this.value = undefined;
             }
-            // const container = this.getDragulaContainer();
-            // this.drak.containers = [container];
+            var container = _this.getDragulaContainer();
+            _this.drak.containers = [container];
             _this.updateValue.emit(_this.value);
         };
     }
     ArrayEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
         this.updateValue.emit(this.value);
-        // const container = this.getDragulaContainer();
-        // this.drak = common.dragula([container]);
-        // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
-        //     if (this.value) {
-        //         const fromIndex = +el.dataset["index"];
-        //         if (sibling) {
-        //             const toIndex = +sibling.dataset["index"];
-        //             this.value.splice(toIndex, 0, this.value[fromIndex]);
-        //             if (fromIndex > toIndex) {
-        //                 this.value.splice(fromIndex + 1, 1);
-        //             } else {
-        //                 this.value.splice(fromIndex, 1);
-        //             }
-        //         } else {
-        //             this.value.push(this.value[fromIndex]);
-        //             this.value.splice(fromIndex, 1);
-        //         }
-        //         this.renderSwitch = -this.renderSwitch;
-        //         this.setState({ value: this.value, renderSwitch: this.renderSwitch });
-        //         this.props.updateValue(this.value);
-        //     }
-        // });
+    };
+    ArrayEditorComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        var container = this.getDragulaContainer();
+        this.drak = common.dragula([container]);
+        this.drak.on("drop", function (el, target, source, sibling) {
+            if (_this.value) {
+                var fromIndex = +el.dataset["index"];
+                if (sibling) {
+                    var toIndex = +sibling.dataset["index"];
+                    _this.value.splice(toIndex, 0, _this.value[fromIndex]);
+                    if (fromIndex > toIndex) {
+                        _this.value.splice(fromIndex + 1, 1);
+                    }
+                    else {
+                        _this.value.splice(fromIndex, 1);
+                    }
+                }
+                else {
+                    _this.value.push(_this.value[fromIndex]);
+                    _this.value.splice(fromIndex, 1);
+                }
+                _this.renderSwitch = -_this.renderSwitch;
+                _this.updateValue.emit(_this.value);
+            }
+        });
     };
     ArrayEditorComponent.prototype.getDragulaContainer = function () {
-        // return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
+        return this.drakContainer.nativeElement;
     };
     ArrayEditorComponent.prototype.ngOnDestroy = function () {
         if (this.drak) {
@@ -135,10 +139,13 @@ var ArrayEditorComponent = (function () {
     __decorate([
         core_1.Input()
     ], ArrayEditorComponent.prototype, "hasDeleteButton", void 0);
+    __decorate([
+        core_1.ViewChild("drakContainer")
+    ], ArrayEditorComponent.prototype, "drakContainer", void 0);
     ArrayEditorComponent = __decorate([
         core_1.Component({
             selector: "array-editor",
-            template: "\n    <div class=\"{{errorMessage ? theme.errorRow : theme.row}}\">\n        <h3>\n            {{title || schema.title}}\n            <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyleString\">\n                <button [class]=\"theme.button\" (click)=\"collapseOrExpand()\">\n                    <icon [icon]=\"icon\" [text]=\"collapsed ? icon.expand : icon.collapse\"></icon>\n                </button>\n                <button *ngIf=\"!readonly && value !== undefined\" [class]=\"theme.button\" (click)=\"addItem()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.add\"></icon>\n                </button>\n                <button *ngIf=\"hasDeleteButtonFunction()\" [class]=\"theme.button\" (click)=\"onDelete.emit()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </h3>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <div *ngIf=\"value !== undefined && !collapsed\" [class]=\"theme.rowContainer\">\n            <div *ngFor=\"let item of value; let i = index; trackBy:trackByFunction\" [attr.data-index]=\"i\" [class]=\"theme.rowContainer\">\n                <editor [schema]=\"schema.items\"\n                    [title]=\"i\"\n                    [initialValue]=\"value[i]\"\n                    (updateValue)=\"onChange(i, $event)\"\n                    [theme]=\"theme\"\n                    [icon]=\"icon\"\n                    [locale]=\"locale\"\n                    [required]=\"true\"\n                    [readonly]=\"readonly || schema.readonly\"\n                    (onDelete)=\"onDeleteFunction(i)\"\n                    [hasDeleteButton]=\"true\">\n                </editor>\n            </div>\n        </div>\n        <p *ngIf=\"errorMessage\" [class]=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
+            template: "\n    <div class=\"{{errorMessage ? theme.errorRow : theme.row}}\">\n        <h3>\n            {{title || schema.title}}\n            <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyleString\">\n                <button [class]=\"theme.button\" (click)=\"collapseOrExpand()\">\n                    <icon [icon]=\"icon\" [text]=\"collapsed ? icon.expand : icon.collapse\"></icon>\n                </button>\n                <button *ngIf=\"!readonly && value !== undefined\" [class]=\"theme.button\" (click)=\"addItem()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.add\"></icon>\n                </button>\n                <button *ngIf=\"hasDeleteButtonFunction()\" [class]=\"theme.button\" (click)=\"onDelete.emit()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </h3>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <div #drakContainer *ngIf=\"value !== undefined && !collapsed\" [class]=\"theme.rowContainer\">\n            <div *ngFor=\"let item of value; let i = index; trackBy:trackByFunction\" [attr.data-index]=\"i\" [class]=\"theme.rowContainer\">\n                <editor [schema]=\"schema.items\"\n                    [title]=\"i\"\n                    [initialValue]=\"value[i]\"\n                    (updateValue)=\"onChange(i, $event)\"\n                    [theme]=\"theme\"\n                    [icon]=\"icon\"\n                    [locale]=\"locale\"\n                    [required]=\"true\"\n                    [readonly]=\"readonly || schema.readonly\"\n                    (onDelete)=\"onDeleteFunction(i)\"\n                    [hasDeleteButton]=\"true\">\n                </editor>\n            </div>\n        </div>\n        <p *ngIf=\"errorMessage\" [class]=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
         })
     ], ArrayEditorComponent);
     return ArrayEditorComponent;

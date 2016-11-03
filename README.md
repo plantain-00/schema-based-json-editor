@@ -80,4 +80,3 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 
 + vuejs component
 + published to npm
-+ angular2 drag and drop

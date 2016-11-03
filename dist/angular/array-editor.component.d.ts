@@ -1,5 +1,5 @@
 /// <reference types="dragula" />
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, ElementRef } from "@angular/core";
 import * as common from "../common";
 export declare class ArrayEditorComponent {
     schema: common.ArraySchema;
@@ -13,6 +13,7 @@ export declare class ArrayEditorComponent {
     readonly?: boolean;
     required?: boolean;
     hasDeleteButton: boolean;
+    drakContainer: ElementRef;
     renderSwitch: number;
     collapsed: boolean;
     value?: common.ValueType[];
@@ -20,7 +21,8 @@ export declare class ArrayEditorComponent {
     errorMessage: string;
     buttonGroupStyleString: string;
     ngOnInit(): void;
-    getDragulaContainer(): void;
+    ngAfterViewInit(): void;
+    getDragulaContainer(): any;
     ngOnDestroy(): void;
     trackByFunction: (index: number, value: common.ValueType) => number;
     collapseOrExpand: () => void;
