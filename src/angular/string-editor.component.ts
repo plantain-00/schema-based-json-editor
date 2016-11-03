@@ -20,13 +20,13 @@ import * as common from "../common";
         </div>
         <textarea *ngIf="useTextArea()"
             [class]="theme.formControl"
-            (keyup)="onChange($event)"
+            (change)="onChange($event)"
             rows="5"
             [readOnly]="readonly || schema.readonly">{{value}}</textarea>
         <input *ngIf="useInput()"
             [class]="theme.formControl"
             [type]="schema.format"
-            (keyup)="onChange($event)"
+            (change)="onChange($event)"
             [defaultValue]="value"
             [readOnly]="readonly || schema.readonly" />
         <select *ngIf="useSelect()"

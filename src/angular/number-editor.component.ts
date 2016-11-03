@@ -21,7 +21,7 @@ import * as common from "../common";
         <input *ngIf="useInput()"
             [class]="theme.formControl"
             type="number"
-            (keyup)="onChange($event)"
+            (change)="onChange($event)"
             [defaultValue]="value"
             [readOnly]="readonly || schema.readonly" />
         <select *ngIf="useSelect()"
