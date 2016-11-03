@@ -9,6 +9,9 @@ var ArrayEditorComponent = (function () {
         this.renderSwitch = 1;
         this.collapsed = false;
         this.buttonGroupStyleString = common.buttonGroupStyleString;
+        this.trackByFunction = function (index, value) {
+            return (1 + index) * _this.renderSwitch;
+        };
         this.collapseOrExpand = function () {
             _this.collapsed = !_this.collapsed;
             // const container = this.getDragulaContainer();
@@ -59,9 +62,6 @@ var ArrayEditorComponent = (function () {
         if (this.drak) {
             this.drak.destroy();
         }
-    };
-    ArrayEditorComponent.prototype.trackByFunction = function (index, value) {
-        return (1 + index) * this.renderSwitch;
     };
     ArrayEditorComponent.prototype.validate = function () {
         if (this.value !== undefined) {

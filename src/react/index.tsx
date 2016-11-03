@@ -19,10 +19,10 @@ export type Props = {
 }
 
 export class JSONEditor extends React.Component<Props, {}> {
-    theme: common.Theme;
-    locale: common.Locale;
-    icon: common.Icon;
-    updateValue = common.debounce((value: any) => {
+    private theme: common.Theme;
+    private locale: common.Locale;
+    private icon: common.Icon;
+    private updateValue = common.debounce((value: any) => {
         this.props.updateValue(value);
     }, 100);
     constructor(props: Props) {

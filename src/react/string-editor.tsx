@@ -3,51 +3,14 @@ import * as common from "../common";
 import { TitleEditor } from "./title-editor";
 
 export class StringEditor extends React.Component<common.Props<common.StringSchema, string>, {}> {
-    value?: string;
-    errorMessage: string;
+    private value?: string;
+    private errorMessage: string;
     constructor(props: common.Props<common.ArraySchema, string>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string;
         this.validate();
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
-    }
-    onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = e.currentTarget.value;
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value);
-    }
-    validate() {
-        if (this.value !== undefined) {
-            if (this.props.schema.minLength !== undefined
-                && this.value.length < this.props.schema.minLength) {
-                this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
-                return;
-            }
-            if (this.props.schema.maxLength !== undefined
-                && this.value.length > this.props.schema.maxLength) {
-                this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
-                return;
-            }
-            if (this.props.schema.pattern !== undefined
-                && !new RegExp(this.props.schema.pattern).test(this.value)) {
-                this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
-                return;
-            }
-        }
-
-        this.errorMessage = "";
-    }
-    toggleOptional = () => {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as string;
-            this.validate();
-        } else {
-            this.value = undefined;
-        }
-        this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
     render() {
@@ -108,5 +71,42 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
                 {errorDescription}
             </div>
         );
+    }
+    private onChange = (e: React.FormEvent<{ value: string }>) => {
+        this.value = e.currentTarget.value;
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
+    }
+    private validate() {
+        if (this.value !== undefined) {
+            if (this.props.schema.minLength !== undefined
+                && this.value.length < this.props.schema.minLength) {
+                this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
+                return;
+            }
+            if (this.props.schema.maxLength !== undefined
+                && this.value.length > this.props.schema.maxLength) {
+                this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
+                return;
+            }
+            if (this.props.schema.pattern !== undefined
+                && !new RegExp(this.props.schema.pattern).test(this.value)) {
+                this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
+                return;
+            }
+        }
+
+        this.errorMessage = "";
+    }
+    private toggleOptional = () => {
+        if (this.value === undefined) {
+            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as string;
+            this.validate();
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
     }
 }

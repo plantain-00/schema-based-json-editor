@@ -111,9 +111,9 @@ export class ArrayEditorComponent {
             this.drak.destroy();
         }
     }
-    trackByFunction(index: number, value: common.ValueType) {
+    trackByFunction = (index: number, value: common.ValueType) => {
         return (1 + index) * this.renderSwitch;
-    }
+    };
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         // const container = this.getDragulaContainer();

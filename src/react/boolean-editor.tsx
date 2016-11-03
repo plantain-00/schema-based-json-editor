@@ -3,26 +3,12 @@ import * as common from "../common";
 import { TitleEditor } from "./title-editor";
 
 export class BooleanEditor extends React.Component<common.Props<common.BooleanSchema, boolean>, {}> {
-    value?: boolean;
+    private value?: boolean;
     constructor(props: common.Props<common.ArraySchema, boolean>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as boolean;
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
-    }
-    onChange = (e: React.FormEvent<{ checked: boolean }>) => {
-        this.value = e.currentTarget.checked;
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value);
-    }
-    toggleOptional = () => {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue === undefined) as boolean;
-        } else {
-            this.value = undefined;
-        }
-        this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
     render() {
@@ -59,5 +45,19 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
             </div>
         );
+    }
+    private onChange = (e: React.FormEvent<{ checked: boolean }>) => {
+        this.value = e.currentTarget.checked;
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
+    }
+    private toggleOptional = () => {
+        if (this.value === undefined) {
+            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue === undefined) as boolean;
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
     }
 }

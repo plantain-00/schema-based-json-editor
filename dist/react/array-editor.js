@@ -35,9 +35,6 @@ var ArrayEditor = (function (_super) {
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         this.validate();
     }
-    ArrayEditor.prototype.getDragulaContainer = function () {
-        return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
-    };
     ArrayEditor.prototype.componentDidMount = function () {
         var _this = this;
         this.props.updateValue(this.value);
@@ -70,27 +67,6 @@ var ArrayEditor = (function (_super) {
         if (this.drak) {
             this.drak.destroy();
         }
-    };
-    ArrayEditor.prototype.validate = function () {
-        if (this.value !== undefined) {
-            if (this.props.schema.minItems !== undefined) {
-                if (this.value.length < this.props.schema.minItems) {
-                    this.errorMessage = this.props.locale.error.minItems.replace("{0}", String(this.props.schema.minItems));
-                    return;
-                }
-            }
-            if (this.props.schema.uniqueItems) {
-                for (var i = 1; i < this.value.length; i++) {
-                    for (var j = 0; j < i; j++) {
-                        if (common.isSame(this.value[i], this.value[j])) {
-                            this.errorMessage = this.props.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-        this.errorMessage = "";
     };
     ArrayEditor.prototype.render = function () {
         var _this = this;
@@ -164,6 +140,30 @@ var ArrayEditor = (function (_super) {
             optionalCheckbox, 
             childrenElement, 
             errorDescription));
+    };
+    ArrayEditor.prototype.getDragulaContainer = function () {
+        return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
+    };
+    ArrayEditor.prototype.validate = function () {
+        if (this.value !== undefined) {
+            if (this.props.schema.minItems !== undefined) {
+                if (this.value.length < this.props.schema.minItems) {
+                    this.errorMessage = this.props.locale.error.minItems.replace("{0}", String(this.props.schema.minItems));
+                    return;
+                }
+            }
+            if (this.props.schema.uniqueItems) {
+                for (var i = 1; i < this.value.length; i++) {
+                    for (var j = 0; j < i; j++) {
+                        if (common.isSame(this.value[i], this.value[j])) {
+                            this.errorMessage = this.props.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        this.errorMessage = "";
     };
     return ArrayEditor;
 }(React.Component));

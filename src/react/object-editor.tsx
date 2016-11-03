@@ -4,8 +4,8 @@ import { Editor } from "./editor";
 import { Icon } from "./icon";
 
 export class ObjectEditor extends React.Component<common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
-    collapsed = false;
-    value?: { [name: string]: common.ValueType };
+    private collapsed = false;
+    private value?: { [name: string]: common.ValueType };
     constructor(props: common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
@@ -18,19 +18,6 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         }
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
-    }
-    collapseOrExpand = () => {
-        this.collapsed = !this.collapsed;
-        this.setState({ collapsed: this.collapsed });
-    }
-    toggleOptional = () => {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
-        } else {
-            this.value = undefined;
-        }
-        this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
     render() {
@@ -97,5 +84,18 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                 {childrenElement}
             </div >
         );
+    }
+    private collapseOrExpand = () => {
+        this.collapsed = !this.collapsed;
+        this.setState({ collapsed: this.collapsed });
+    }
+    private toggleOptional = () => {
+        if (this.value === undefined) {
+            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
     }
 }

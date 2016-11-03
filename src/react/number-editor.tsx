@@ -3,62 +3,14 @@ import * as common from "../common";
 import { TitleEditor } from "./title-editor";
 
 export class NumberEditor extends React.Component<common.Props<common.NumberSchema, number>, {}> {
-    value?: number;
-    errorMessage: string;
+    private value?: number;
+    private errorMessage: string;
     constructor(props: common.Props<common.ArraySchema, number>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as number;
         this.validate();
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
-    }
-    onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value);
-    }
-    validate() {
-        if (this.value !== undefined) {
-            if (this.props.schema.minimum !== undefined) {
-                if (this.props.schema.exclusiveMinimum) {
-                    if (this.value <= this.props.schema.minimum) {
-                        this.errorMessage = this.props.locale.error.largerThan.replace("{0}", String(this.props.schema.minimum));
-                        return;
-                    }
-                } else {
-                    if (this.value < this.props.schema.minimum) {
-                        this.errorMessage = this.props.locale.error.minimum.replace("{0}", String(this.props.schema.minimum));
-                        return;
-                    }
-                }
-            }
-            if (this.props.schema.maximum !== undefined) {
-                if (this.props.schema.exclusiveMaximum) {
-                    if (this.value >= this.props.schema.maximum) {
-                        this.errorMessage = this.props.locale.error.smallerThan.replace("{0}", String(this.props.schema.maximum));
-                        return;
-                    }
-                } else {
-                    if (this.value > this.props.schema.maximum) {
-                        this.errorMessage = this.props.locale.error.maximum.replace("{0}", String(this.props.schema.maximum));
-                        return;
-                    }
-                }
-            }
-        }
-
-        this.errorMessage = "";
-    }
-    toggleOptional = () => {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as number;
-            this.validate();
-        } else {
-            this.value = undefined;
-        }
-        this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
     render() {
@@ -108,5 +60,53 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
                 {errorDescription}
             </div>
         );
+    }
+    private onChange = (e: React.FormEvent<{ value: string }>) => {
+        this.value = this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
+    }
+    private validate() {
+        if (this.value !== undefined) {
+            if (this.props.schema.minimum !== undefined) {
+                if (this.props.schema.exclusiveMinimum) {
+                    if (this.value <= this.props.schema.minimum) {
+                        this.errorMessage = this.props.locale.error.largerThan.replace("{0}", String(this.props.schema.minimum));
+                        return;
+                    }
+                } else {
+                    if (this.value < this.props.schema.minimum) {
+                        this.errorMessage = this.props.locale.error.minimum.replace("{0}", String(this.props.schema.minimum));
+                        return;
+                    }
+                }
+            }
+            if (this.props.schema.maximum !== undefined) {
+                if (this.props.schema.exclusiveMaximum) {
+                    if (this.value >= this.props.schema.maximum) {
+                        this.errorMessage = this.props.locale.error.smallerThan.replace("{0}", String(this.props.schema.maximum));
+                        return;
+                    }
+                } else {
+                    if (this.value > this.props.schema.maximum) {
+                        this.errorMessage = this.props.locale.error.maximum.replace("{0}", String(this.props.schema.maximum));
+                        return;
+                    }
+                }
+            }
+        }
+
+        this.errorMessage = "";
+    }
+    private toggleOptional = () => {
+        if (this.value === undefined) {
+            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as number;
+            this.validate();
+        } else {
+            this.value = undefined;
+        }
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value);
     }
 }

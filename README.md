@@ -78,8 +78,6 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 
 #### todo list
 
-+ angular2 component
 + vuejs component
 + published to npm
 + angular2 drag and drop
-+ angular2 delete rerender problem

@@ -5,18 +5,15 @@ import { Editor } from "./editor";
 import { Icon } from "./icon";
 
 export class ArrayEditor extends React.Component<common.Props<common.ArraySchema, common.ValueType[]>, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
-    renderSwitch = 1;
-    collapsed = false;
-    value?: common.ValueType[];
-    drak: common.dragula.Drake;
-    errorMessage: string;
+    private renderSwitch = 1;
+    private collapsed = false;
+    private value?: common.ValueType[];
+    private drak: common.dragula.Drake;
+    private errorMessage: string;
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[];
         this.validate();
-    }
-    getDragulaContainer() {
-        return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
     }
     componentDidMount() {
         this.props.updateValue(this.value);
@@ -47,48 +44,6 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         if (this.drak) {
             this.drak.destroy();
         }
-    }
-    collapseOrExpand = () => {
-        this.collapsed = !this.collapsed;
-        this.setState({ collapsed: this.collapsed }, () => {
-            const container = this.getDragulaContainer();
-            this.drak.containers = [container];
-        });
-    }
-    toggleOptional = () => {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as common.ValueType[];
-        } else {
-            this.value = undefined;
-        }
-        this.validate();
-        this.setState({ value: this.value }, () => {
-            const container = this.getDragulaContainer();
-            this.drak.containers = [container];
-        });
-        this.props.updateValue(this.value);
-    }
-    validate() {
-        if (this.value !== undefined) {
-            if (this.props.schema.minItems !== undefined) {
-                if (this.value.length < this.props.schema.minItems) {
-                    this.errorMessage = this.props.locale.error.minItems.replace("{0}", String(this.props.schema.minItems));
-                    return;
-                }
-            }
-            if (this.props.schema.uniqueItems) {
-                for (let i = 1; i < this.value.length; i++) {
-                    for (let j = 0; j < i; j++) {
-                        if (common.isSame(this.value[i], this.value[j])) {
-                            this.errorMessage = this.props.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-
-        this.errorMessage = "";
     }
     render() {
         let childrenElement: JSX.Element | null = null;
@@ -184,5 +139,50 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                 {errorDescription}
             </div>
         );
+    }
+    private getDragulaContainer() {
+        return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
+    }
+    private collapseOrExpand = () => {
+        this.collapsed = !this.collapsed;
+        this.setState({ collapsed: this.collapsed }, () => {
+            const container = this.getDragulaContainer();
+            this.drak.containers = [container];
+        });
+    }
+    private toggleOptional = () => {
+        if (this.value === undefined) {
+            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as common.ValueType[];
+        } else {
+            this.value = undefined;
+        }
+        this.validate();
+        this.setState({ value: this.value }, () => {
+            const container = this.getDragulaContainer();
+            this.drak.containers = [container];
+        });
+        this.props.updateValue(this.value);
+    }
+    private validate() {
+        if (this.value !== undefined) {
+            if (this.props.schema.minItems !== undefined) {
+                if (this.value.length < this.props.schema.minItems) {
+                    this.errorMessage = this.props.locale.error.minItems.replace("{0}", String(this.props.schema.minItems));
+                    return;
+                }
+            }
+            if (this.props.schema.uniqueItems) {
+                for (let i = 1; i < this.value.length; i++) {
+                    for (let j = 0; j < i; j++) {
+                        if (common.isSame(this.value[i], this.value[j])) {
+                            this.errorMessage = this.props.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        this.errorMessage = "";
     }
 }

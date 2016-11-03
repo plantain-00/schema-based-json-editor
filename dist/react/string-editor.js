@@ -30,26 +30,6 @@ var StringEditor = (function (_super) {
     StringEditor.prototype.componentDidMount = function () {
         this.props.updateValue(this.value);
     };
-    StringEditor.prototype.validate = function () {
-        if (this.value !== undefined) {
-            if (this.props.schema.minLength !== undefined
-                && this.value.length < this.props.schema.minLength) {
-                this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
-                return;
-            }
-            if (this.props.schema.maxLength !== undefined
-                && this.value.length > this.props.schema.maxLength) {
-                this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
-                return;
-            }
-            if (this.props.schema.pattern !== undefined
-                && !new RegExp(this.props.schema.pattern).test(this.value)) {
-                this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
-                return;
-            }
-        }
-        this.errorMessage = "";
-    };
     StringEditor.prototype.render = function () {
         var control = null;
         if (this.value !== undefined) {
@@ -84,6 +64,26 @@ var StringEditor = (function (_super) {
             control, 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description), 
             errorDescription));
+    };
+    StringEditor.prototype.validate = function () {
+        if (this.value !== undefined) {
+            if (this.props.schema.minLength !== undefined
+                && this.value.length < this.props.schema.minLength) {
+                this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
+                return;
+            }
+            if (this.props.schema.maxLength !== undefined
+                && this.value.length > this.props.schema.maxLength) {
+                this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
+                return;
+            }
+            if (this.props.schema.pattern !== undefined
+                && !new RegExp(this.props.schema.pattern).test(this.value)) {
+                this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
+                return;
+            }
+        }
+        this.errorMessage = "";
     };
     return StringEditor;
 }(React.Component));
