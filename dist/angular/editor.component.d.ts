@@ -11,5 +11,5 @@ export declare class EditorComponent {
     onDelete: EventEmitter<{}>;
     readonly?: boolean;
     required?: boolean;
-    updateValueFunction(value: any): void;
+    hasDeleteButton: boolean;
 }

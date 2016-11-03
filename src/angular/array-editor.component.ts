@@ -8,13 +8,13 @@ import * as common from "../common";
         <h3>
             {{title || schema.title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyleString">
-                <button [class]="theme.button" (click)="collapseOrExpand">
+                <button [class]="theme.button" (click)="collapseOrExpand()">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button *ngIf="!readonly && value !== undefined" [class]="theme.button" (click)="addItem">
+                <button *ngIf="!readonly && value !== undefined" [class]="theme.button" (click)="addItem()">
                     <icon [icon]="icon" [text]="icon.add"></icon>
                 </button>
-                <button *ngIf="onDelete && !treadonly && !schema.readonly" [class]="theme.button" (click)="onDelete">
+                <button *ngIf="hasDeleteButtonFunction()" [class]="theme.button" (click)="onDelete.emit()">
                     <icon [icon]="icon" [text]="icon.delete"></icon>
                 </button>
             </div>
@@ -22,7 +22,7 @@ import * as common from "../common";
         <p [class]="theme.help">{{schema.description}}</p>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />
+                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
@@ -31,13 +31,14 @@ import * as common from "../common";
                 <editor [schema]="schema.items"
                     [title]="i"
                     [initialValue]="value[i]"
-                    (updateValue)="onChange"
+                    (updateValue)="onChange(i, $event)"
                     [theme]="theme"
                     [icon]="icon"
                     [locale]="locale"
                     [required]="true"
                     [readonly]="readonly || schema.readonly"
-                    (onDelete)="onDelete">
+                    (onDelete)="onDeleteFunction(i)"
+                    [hasDeleteButton]="true">
                 </editor>
             </div>
         </div>
@@ -60,11 +61,14 @@ export class ArrayEditorComponent {
     icon: common.Icon;
     @Input()
     locale: common.Locale;
+    @Output()
     onDelete = new EventEmitter();
     @Input()
     readonly?: boolean;
     @Input()
     required?: boolean;
+    @Input()
+    hasDeleteButton: boolean;
 
     renderSwitch = 1;
     collapsed = false;
@@ -150,5 +154,19 @@ export class ArrayEditorComponent {
     addItem() {
         this.value!.push(common.getDefaultValue(true, this.schema.items, undefined) !);
         this.updateValue.emit(this.value);
+    }
+    hasDeleteButtonFunction() {
+        return this.hasDeleteButton && !this.readonly && !this.schema.readonly;
+    }
+    onDeleteFunction(i: number) {
+        this.value!.splice(i, 1);
+        this.renderSwitch = -this.renderSwitch;
+        this.updateValue.emit(this.value);
+        this.validate();
+    }
+    onChange(i: number, value: common.ValueType) {
+        this.value![i] = value;
+        this.updateValue.emit(this.value);
+        this.validate();
     }
 }

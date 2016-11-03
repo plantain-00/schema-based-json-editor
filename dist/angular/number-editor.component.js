@@ -8,7 +8,7 @@ var NumberEditorComponent = (function () {
     }
     NumberEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
-        // this.updateValue.emit(this.value);
+        this.updateValue.emit(this.value);
     };
     NumberEditorComponent.prototype.useInput = function () {
         return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly);
@@ -64,7 +64,7 @@ var NumberEditorComponent = (function () {
         else {
             this.value = undefined;
         }
-        // this.updateValue.emit(this.value);
+        this.updateValue.emit(this.value);
     };
     __decorate([
         core_1.Input()
@@ -102,7 +102,7 @@ var NumberEditorComponent = (function () {
     NumberEditorComponent = __decorate([
         core_1.Component({
             selector: "number-editor",
-            template: "\n    <div [class]=\"errorMessage ? theme.errorRow : theme.row\">\n        <title-editor [title]=\"title\"\n            (onDelete)=\"onDelete\"\n            [theme]=\"theme\"\n            [icon]=\"icon\"\n            [locale]=\"locale\"\n            [hasDeleteButton]=\"hasDeleteButton\">\n        </title-editor>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <input *ngIf=\"useInput()\"\n            [class]=\"theme.formControl\"\n            type=\"number\"\n            (keyup)=\"onChange($event)\"\n            [defaultValue]=\"value\"\n            [readOnly]=\"readonly || schema.readonly\" />\n        <select *ngIf=\"useSelect()\"\n            [class]=\"theme.formControl\"\n            type=\"number\"\n            (change)=\"onChange\">\n            <option *ngFor=\"let e of schema.enum; let i = index; trackBy:trackByFunction\"\n                [value]=\"e\"\n                [selected]=\"value === e\">\n                {{e}}\n            </option>\n        </select>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <p *ngIf=\"errorMessage\" [class]=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
+            template: "\n    <div [class]=\"errorMessage ? theme.errorRow : theme.row\">\n        <title-editor [title]=\"title\"\n            (onDelete)=\"onDelete.emit()\"\n            [theme]=\"theme\"\n            [icon]=\"icon\"\n            [locale]=\"locale\"\n            [hasDeleteButton]=\"hasDeleteButton\">\n        </title-editor>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <input *ngIf=\"useInput()\"\n            [class]=\"theme.formControl\"\n            type=\"number\"\n            (keyup)=\"onChange($event)\"\n            [defaultValue]=\"value\"\n            [readOnly]=\"readonly || schema.readonly\" />\n        <select *ngIf=\"useSelect()\"\n            [class]=\"theme.formControl\"\n            type=\"number\"\n            (change)=\"onChange\">\n            <option *ngFor=\"let e of schema.enum; let i = index; trackBy:trackByFunction\"\n                [value]=\"e\"\n                [selected]=\"value === e\">\n                {{e}}\n            </option>\n        </select>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <p *ngIf=\"errorMessage\" [class]=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
         })
     ], NumberEditorComponent);
     return NumberEditorComponent;

@@ -2,20 +2,6 @@ export const schema: any = {
     type: "object",
     title: "A Title example",
     description: "a description example",
-    required: [
-        "stringExample",
-        "booleanExample",
-        "numberExample",
-        "integerExample",
-        "nullExample",
-        "objectExample",
-        "arrayExample",
-        "readOnlyExample",
-        "enumExample",
-        "colorExample",
-        "textareaExample",
-        "patternExample",
-    ],
     properties: {
         stringExample: {
             type: "string",
@@ -66,6 +52,7 @@ export const schema: any = {
                 },
             },
             default: {},
+            required: ["propertyExample1", "propertyExample2"],
         },
         arrayExample: {
             type: "array",
@@ -108,4 +95,18 @@ export const schema: any = {
             default: "abc",
         },
     },
+    required: [
+        "stringExample",
+        "booleanExample",
+        "numberExample",
+        "integerExample",
+        "nullExample",
+        "objectExample",
+        "arrayExample",
+        "readOnlyExample",
+        "enumExample",
+        "colorExample",
+        "textareaExample",
+        "patternExample",
+    ],
 };

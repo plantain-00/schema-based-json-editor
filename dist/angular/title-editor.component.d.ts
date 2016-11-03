@@ -10,5 +10,4 @@ export declare class TitleEditorComponent {
     buttonGroupStyle: {
         marginLeft: string;
     };
-    deleteThis(): void;
 }

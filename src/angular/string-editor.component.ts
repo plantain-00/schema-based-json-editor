@@ -6,7 +6,7 @@ import * as common from "../common";
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
         <title-editor [title]="title"
-            (onDelete)="onDelete"
+            (onDelete)="onDelete.emit()"
             [theme]="theme"
             [icon]="icon"
             [locale]="locale"
@@ -14,7 +14,7 @@ import * as common from "../common";
         </title-editor>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" (onChange)="toggleOptional" [checked]="value === undefined" />
+                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>

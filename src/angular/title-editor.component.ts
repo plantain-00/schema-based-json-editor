@@ -4,10 +4,10 @@ import * as common from "../common";
 @Component({
     selector: "title-editor",
     template: `
-    <label *ngIf="title" [class]="theme.label">
+    <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
         {{title}}
         <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-            <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="deleteThis()">
+            <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
                 <icon [icon]="icon" [text]="icon.delete"></icon>
             </button>
         </div>
@@ -29,7 +29,4 @@ export class TitleEditorComponent {
     hasDeleteButton: boolean;
 
     buttonGroupStyle = common.buttonGroupStyle;
-    deleteThis() {
-        this.onDelete!.emit();
-    }
 }

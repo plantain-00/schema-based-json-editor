@@ -8,16 +8,16 @@ import * as common from "../common";
         <h3>
             {{title || schema.title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <button [class]="theme.button" (click)="collapseOrExpand">
+                <button [class]="theme.button" (click)="collapseOrExpand()">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button *ngIf="hasDeleteButton()" [class]="theme.button" (click)="onDelete()">{{icon.delete}}</button>
+                <button *ngIf="hasDeleteButtonFunction()" [class]="theme.button" (click)="onDelete.emit()">{{icon.delete}}</button>
             </div>
         </h3>
         <p [class]="theme.help">{{schema.description}}</p>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />
+                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
@@ -53,11 +53,13 @@ export class ObjectEditorComponent {
     @Input()
     locale: common.Locale;
     @Output()
-    onDelete?: () => void;
+    onDelete = new EventEmitter();
     @Input()
     readonly?: boolean;
     @Input()
     required?: boolean;
+    @Input()
+    hasDeleteButton: boolean;
 
     collapsed = false;
     value?: { [name: string]: common.ValueType };
@@ -100,7 +102,7 @@ export class ObjectEditorComponent {
         this.value![property] = value;
         this.updateValue.emit(this.value);
     }
-    hasDeleteButton() {
-        return this.onDelete && !this.readonly && !this.schema.readonly;
+    hasDeleteButtonFunction() {
+        return this.hasDeleteButton && !this.readonly && !this.schema.readonly;
     }
 }

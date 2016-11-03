@@ -12,7 +12,9 @@ import * as common from "../common";
         [locale]="locale"
         [icon]="icon"
         [required]="required"
-        (updateValue)="updateValueFunction($event)">
+        (updateValue)="updateValue.emit($event)"
+        (onDelete)="onDelete.emit()"
+        [hasDeleteButton]="hasDeleteButton">
     </object-editor>
     <array-editor *ngIf="schema.type === 'array'"
         [schema]="schema"
@@ -22,7 +24,9 @@ import * as common from "../common";
         [locale]="locale"
         [icon]="icon"
         [required]="required"
-        (updateValue)="updateValueFunction($event)">
+        (updateValue)="updateValue.emit($event)"
+        (onDelete)="onDelete.emit()"
+        [hasDeleteButton]="hasDeleteButton">
     </array-editor>
     <number-editor *ngIf="schema.type === 'number' || schema.type === 'integer'"
         [schema]="schema"
@@ -32,7 +36,9 @@ import * as common from "../common";
         [locale]="locale"
         [icon]="icon"
         [required]="required"
-        (updateValue)="updateValueFunction($event)">
+        (updateValue)="updateValue.emit($event)"
+        (onDelete)="onDelete.emit()"
+        [hasDeleteButton]="hasDeleteButton">
     </number-editor>
     <boolean-editor *ngIf="schema.type === 'boolean'"
         [schema]="schema"
@@ -42,7 +48,9 @@ import * as common from "../common";
         [locale]="locale"
         [icon]="icon"
         [required]="required"
-        (updateValue)="updateValueFunction($event)">
+        (updateValue)="updateValue.emit($event)"
+        (onDelete)="onDelete.emit()"
+        [hasDeleteButton]="hasDeleteButton">
     </boolean-editor>
     <null-editor *ngIf="schema.type === 'null'"
         [schema]="schema"
@@ -52,7 +60,9 @@ import * as common from "../common";
         [locale]="locale"
         [icon]="icon"
         [required]="required"
-        (updateValue)="updateValueFunction($event)">
+        (updateValue)="updateValue.emit($event)"
+        (onDelete)="onDelete.emit()"
+        [hasDeleteButton]="hasDeleteButton">
     </null-editor>
     <string-editor *ngIf="schema.type === 'string'"
         [schema]="schema"
@@ -62,7 +72,9 @@ import * as common from "../common";
         [locale]="locale"
         [icon]="icon"
         [required]="required"
-        (updateValue)="updateValueFunction($event)">
+        (updateValue)="updateValue.emit($event)"
+        (onDelete)="onDelete.emit()"
+        [hasDeleteButton]="hasDeleteButton">
     </string-editor>
     `,
 })
@@ -81,13 +93,12 @@ export class EditorComponent {
     icon: common.Icon;
     @Input()
     locale: common.Locale;
+    @Output()
     onDelete = new EventEmitter();
     @Input()
     readonly?: boolean;
     @Input()
     required?: boolean;
-
-    updateValueFunction(value: any) {
-        this.updateValue.emit(value);
-    }
+    @Input()
+    hasDeleteButton: boolean;
 }

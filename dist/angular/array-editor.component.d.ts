@@ -12,6 +12,7 @@ export declare class ArrayEditorComponent {
     onDelete: EventEmitter<{}>;
     readonly?: boolean;
     required?: boolean;
+    hasDeleteButton: boolean;
     renderSwitch: number;
     collapsed: boolean;
     value?: common.ValueType[];
@@ -26,4 +27,7 @@ export declare class ArrayEditorComponent {
     toggleOptional: () => void;
     validate(): void;
     addItem(): void;
+    hasDeleteButtonFunction(): boolean;
+    onDeleteFunction(i: number): void;
+    onChange(i: number, value: common.ValueType): void;
 }

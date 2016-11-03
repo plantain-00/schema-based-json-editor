@@ -10,9 +10,10 @@ export declare class ObjectEditorComponent {
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;
-    onDelete?: () => void;
+    onDelete: EventEmitter<{}>;
     readonly?: boolean;
     required?: boolean;
+    hasDeleteButton: boolean;
     collapsed: boolean;
     value?: {
         [name: string]: common.ValueType;
@@ -32,5 +33,5 @@ export declare class ObjectEditorComponent {
     collapseOrExpand: () => void;
     toggleOptional: () => void;
     onChange(property: string, value: common.ValueType): void;
-    hasDeleteButton(): boolean | undefined;
+    hasDeleteButtonFunction(): boolean;
 }

@@ -6,7 +6,7 @@ import * as common from "../common";
     template: `
     <div [class]="theme.row">
         <title-editor [title]="title"
-            (onDelete)="onDelete"
+            (onDelete)="onDelete.emit()"
             [theme]="theme"
             [icon]="icon"
             [locale]="locale"
@@ -14,7 +14,7 @@ import * as common from "../common";
         </title-editor>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" (change)="toggleOptional" [checked]="value === undefined" />
+                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" />
                 is undefined
             </label>
         </div>
@@ -49,7 +49,7 @@ export class NullEditorComponent {
     value?: null;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
-        // this.updateValue.emit(this.value);
+        this.updateValue.emit(this.value as any);
     }
     toggleOptional() {
         if (this.value === undefined) {
@@ -57,6 +57,6 @@ export class NullEditorComponent {
         } else {
             this.value = undefined;
         }
-        // this.updateValue.emit(this.value);
+        this.updateValue.emit(this.value as any);
     }
 }
