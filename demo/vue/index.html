@@ -28,8 +28,8 @@
 	<div id="container">
 		<div style="width: 500px; margin: 10px; float: left" class="bootstrap3-row-container">
           <json-editor :schema="schema"
-              :initialValue="value"
-              @updateValue="updateValue"
+              :initial-value="value"
+              @updateValue="updateValue(arguments[0])"
               theme="bootstrap3"
               icon="fontawesome4"
               locale="zh-cn">

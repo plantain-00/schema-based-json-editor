@@ -32,15 +32,15 @@ export const arrayEditor = {
             <div v-for="(item, i) in value" :key="(1 + i) * renderSwitch" :data-index="i" :class="theme.rowContainer">
                 <editor :schema="schema.items"
                     :title="i"
-                    :initialValue="value[i]"
-                    @updateValue="onChange(i, $event)"
+                    :initial-value="value[i]"
+                    @updateValue="onChange(i, arguments[0])"
                     :theme="theme"
                     :icon="icon"
                     :locale="locale"
                     :required="true"
                     :readonly="readonly || schema.readonly"
                     @onDelete="onDeleteFunction(i)"
-                    :hasDeleteButton="true">
+                    :has-delete-button="true">
                 </editor>
             </div>
         </div>
@@ -92,8 +92,8 @@ export const arrayEditor = {
         },
         collapseOrExpand(this: any) {
             this.collapsed = !this.collapsed;
-            const container = this.getDragulaContainer();
-            this.drak.containers = [container];
+            // const container = this.getDragulaContainer();
+            // this.drak.containers = [container];
         },
         toggleOptional(this: any) {
             if (this.value === undefined) {

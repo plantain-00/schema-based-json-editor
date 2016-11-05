@@ -28,14 +28,14 @@ export const objectEditor = {
                 :key="i"
                 :schema="propertySchema"
                 :title="propertySchema.title || property"
-                :initialValue="value[property]"
-                @updateValue="onChange(property, $event)"
+                :initial-value="value[property]"
+                @updateValue="onChange(property, arguments[0])"
                 :theme="theme"
                 :icon="icon"
                 :locale="locale"
                 :required="isRequired(property)"
                 :readonly="readonly || schema.readonly"
-                :hasDeleteButton="hasDeleteButton">
+                :has-delete-button="hasDeleteButton">
             </editor>
         </div>
     </div >

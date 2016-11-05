@@ -85,4 +85,4 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 
 #### todo list
 
-+ vuejs component
++ vuejs component: update value; drag and drop for array; type limit; update value and validate in constructor

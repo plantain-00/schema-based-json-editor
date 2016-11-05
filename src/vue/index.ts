@@ -30,70 +30,72 @@ Vue.component("json-editor", {
     <div>
         <object-editor v-if="schema.type === 'object'"
             :schema="schema"
-            :initialValue="initialValue"
+            :initial-value="initialValue"
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction">
+            @updateValue="updateValueFunction(arguments[0])">
         </object-editor>
         <array-editor v-if="schema.type === 'array'"
             :schema="schema"
-            :initialValue="initialValue"
+            :initial-value="initialValue"
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction()">
+            @updateValue="updateValueFunction(arguments[0])">
         </array-editor>
         <number-editor v-if="schema.type === 'number' || schema.type === 'integer'"
             :schema="schema"
-            :initialValue="initialValue"
+            :initial-value="initialValue"
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction()">
+            @updateValue="updateValueFunction(arguments[0])">
         </number-editor>
         <boolean-editor v-if="schema.type === 'boolean'"
             :schema="schema"
-            :initialValue="initialValue"
+            :initial-value="initialValue"
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction()">
+            @updateValue="updateValueFunction(arguments[0])">
         </boolean-editor>
         <null-editor v-if="schema.type === 'null'"
             :schema="schema"
-            :initialValue="initialValue"
+            :initial-value="initialValue"
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction()">
+            @updateValue="updateValueFunction(arguments[0])">
         </null-editor>
         <string-editor v-if="schema.type === 'string'"
             :schema="schema"
-            :initialValue="initialValue"
+            :initial-value="initialValue"
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction()">
+            @updateValue="updateValueFunction(arguments[0])">
         </string-editor>
     </div>
     `,
-    props: ["schema", "initialValue", "updateValue", "theme", "icon", "locale", "readonly"],
-    data: function(this: any) {
+    props: ["schema", "initialValue", "theme", "icon", "locale", "readonly"],
+    data: function (this: any) {
         const localeObject = common.getLocale(this.locale);
         return {
             themeObject: common.getTheme(this.theme),
             localeObject,
             iconObject: common.getIcon(this.icon, localeObject),
-            updateValueFunction: common.debounce((value: any) => {
-                this.$emit("updateValue", value);
-            }, 100),
         };
+    },
+    methods: {
+        updateValueFunction: common.debounce(function (this: any, value: any) {
+            this.$emit("updateValue", value);
+        }, 100),
     },
 });

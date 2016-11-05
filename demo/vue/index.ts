@@ -9,17 +9,17 @@ import "../../dist/vue/index";
 
 new Vue({
     el: "#container",
-    data: function() {
+    data: function () {
         return {
             schema,
             value: {},
         };
     },
     computed: {
-        schemaString: function() {
+        schemaString: function () {
             return JSON.stringify(schema, null, "  ");
         },
-        valueString: function(this: any) {
+        valueString: function (this: any) {
             return JSON.stringify(this.value, null, "  ");
         },
     },
