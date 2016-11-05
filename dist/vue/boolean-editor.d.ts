@@ -1,8 +1,8 @@
 export declare const booleanEditor: {
     template: string;
     props: string[];
-    data: () => {
-        value: undefined;
+    data: (this: any) => {
+        value: boolean;
     };
     methods: {
         onChange(this: any, e: {

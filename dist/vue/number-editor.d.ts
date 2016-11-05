@@ -1,8 +1,8 @@
 export declare const numberEditor: {
     template: string;
     props: string[];
-    data: () => {
-        value: undefined;
+    data: (this: any) => {
+        value: number;
         errorMessage: undefined;
     };
     methods: {

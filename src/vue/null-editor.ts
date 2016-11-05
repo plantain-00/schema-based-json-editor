@@ -8,7 +8,8 @@ export const nullEditor = {
     template: `
     <div :class="theme.row">
         <title-editor :title="title"
-            @onDelete="onDelete()"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton"
             :theme="theme"
             :icon="icon"
             :locale="locale">
@@ -22,12 +23,12 @@ export const nullEditor = {
         <p :class="theme.help">{{schema.description}}</p>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "updateValue", "theme", "icon", "locale", "onDelete", "readonly", "required"],
-    data: function () {
-        //  this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
-        //  this.updateValue.emit(this.value as any);
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    data: function (this: any) {
+        const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
+        // this.$emit("updateValue", value);
         return {
-            value: undefined,
+            value,
         };
     },
     methods: {
@@ -37,7 +38,7 @@ export const nullEditor = {
             } else {
                 this.value = undefined;
             }
-            this.updateValue(this.value as any);
+            this.$emit("updateValue", this.value);
         },
     },
 };

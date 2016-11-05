@@ -2,10 +2,10 @@ import * as common from "../common";
 export declare const arrayEditor: {
     template: string;
     props: string[];
-    data: () => {
+    data: (this: any) => {
         renderSwitch: number;
         collapsed: boolean;
-        value: undefined;
+        value: common.ValueType[];
         drak: undefined;
         errorMessage: undefined;
         buttonGroupStyleString: string;

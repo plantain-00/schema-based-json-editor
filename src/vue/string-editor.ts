@@ -8,7 +8,8 @@ export const stringEditor = {
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
         <title-editor :title="title"
-            @onDelete="onDelete()"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton"
             :theme="theme"
             :icon="icon"
             :locale="locale">
@@ -30,7 +31,7 @@ export const stringEditor = {
             :type="schema.format"
             @change="onChange($event)"
             @keyup="onChange($event)"
-            :defaultValue="value"
+            :value="value"
             :readOnly="readonly || schema.readonly" />
         <select v-if="useSelect()"
             :class="theme.formControl"
@@ -46,11 +47,11 @@ export const stringEditor = {
         <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "updateValue", "theme", "icon", "locale", "onDelete", "readonly", "required"],
-    data: function (this: any) {
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    data: function(this: any) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         // this.validate();
-        // this.updateValue.emit(this.value);
+        // this.$emit("updateValue", value);
         return {
             value,
             errorMessage: undefined,
@@ -69,7 +70,7 @@ export const stringEditor = {
         onChange(this: any, e: { target: { value: string } }) {
             this.value = e.target.value;
             this.validate();
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
         validate(this: any) {
             if (this.value !== undefined) {
@@ -99,7 +100,7 @@ export const stringEditor = {
             } else {
                 this.value = undefined;
             }
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
     },
 };

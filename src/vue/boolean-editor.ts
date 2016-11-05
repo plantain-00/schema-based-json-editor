@@ -8,7 +8,8 @@ export const booleanEditor = {
     template: `
     <div :class="theme.row">
         <title-editor :title="title"
-            @onDelete="onDelete()"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton"
             :theme="theme"
             :icon="icon"
             :locale="locale">
@@ -31,18 +32,18 @@ export const booleanEditor = {
         <p :class="theme.help">{{schema.description}}</p>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "updateValue", "theme", "icon", "locale", "onDelete", "readonly", "required"],
-    data: function () {
-        // this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
-        // this.updateValue.emit(this.value);
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    data: function (this: any) {
+        const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
+        // this.$emit("updateValue", value);
         return {
-            value: undefined,
+            value,
         };
     },
     methods: {
         onChange(this: any, e: { target: { checked: boolean } }) {
             this.value = e.target.checked;
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
         toggleOptional(this: any) {
             if (this.value === undefined) {
@@ -50,7 +51,7 @@ export const booleanEditor = {
             } else {
                 this.value = undefined;
             }
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
     },
 };

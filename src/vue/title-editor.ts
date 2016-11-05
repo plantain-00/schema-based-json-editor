@@ -9,13 +9,13 @@ export const titleEditor = {
     <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
         {{title}}
         <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-            <button v-if="onDelete" :class="theme.button" @click="onDelete()">
+            <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('onDelete')">
                 <icon :icon="icon" :text="icon.delete"></icon>
             </button>
         </div>
     </label>
     `,
-    props: ["title", "onDelete", "theme", "icon", "locale"],
+    props: ["title", "theme", "icon", "locale", "hasDeleteButton"],
     data: function () {
         return {
             buttonGroupStyle: common.buttonGroupStyle,

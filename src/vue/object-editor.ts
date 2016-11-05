@@ -13,7 +13,7 @@ export const objectEditor = {
                 <button :class="theme.button" @click="collapseOrExpand()">
                     <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button v-if="onDelete && !readonly && !schema.readonly" :class="theme.button" @click="onDelete()">{{icon.delete}}</button>
+                <button v-if="hasDeleteButton && !readonly && !schema.readonly" :class="theme.button" @click="$emit('onDelete')">{{icon.delete}}</button>
             </div>
         </h3>
         <p :class="theme.help">{{schema.description}}</p>
@@ -34,12 +34,13 @@ export const objectEditor = {
                 :icon="icon"
                 :locale="locale"
                 :required="isRequired(property)"
-                :readonly="readonly || schema.readonly">
+                :readonly="readonly || schema.readonly"
+                :hasDeleteButton="hasDeleteButton">
             </editor>
         </div>
     </div >
     `,
-    props: ["schema", "initialValue", "title", "updateValue", "theme", "icon", "locale", "onDelete", "readonly", "required"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function (this: any) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
         if (!this.collapsed && value !== undefined) {
@@ -49,7 +50,7 @@ export const objectEditor = {
                 value[property] = common.getDefaultValue(required, schema, value[property]) as { [name: string]: common.ValueType };
             }
         }
-        // this.updateValue(value);
+        // this.$emit("updateValue", this.value);
         return {
             collapsed: false,
             value,
@@ -69,11 +70,11 @@ export const objectEditor = {
             } else {
                 this.value = undefined;
             }
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
         onChange(this: any, property: string, value: common.ValueType) {
             this.value![property] = value;
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
     },
 };

@@ -5,7 +5,7 @@
 export const editor = {
     template: `
     <div>
-        <object-editor v-if="schema.type === 'object'"
+    <object-editor v-if="schema.type === 'object'"
             :schema="schema"
             :initialValue="initialValue"
             :title="title"
@@ -13,8 +13,9 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="updateValue($event)"
-            @onDelete="onDelete()">
+            @updateValue="$emit('updateValue', arguments[0])"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton">
         </object-editor>
         <array-editor v-if="schema.type === 'array'"
             :schema="schema"
@@ -24,8 +25,9 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="updateValue($event)"
-            @onDelete="onDelete()">
+            @updateValue="$emit('updateValue', arguments[0])"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton">
         </array-editor>
         <number-editor v-if="schema.type === 'number' || schema.type === 'integer'"
             :schema="schema"
@@ -35,8 +37,9 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="updateValue($event)"
-            @onDelete="onDelete()">
+            @updateValue="$emit('updateValue', arguments[0])"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton">
         </number-editor>
         <boolean-editor v-if="schema.type === 'boolean'"
             :schema="schema"
@@ -46,8 +49,9 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="updateValue($event)"
-            @onDelete="onDelete()">
+            @updateValue="$emit('updateValue', arguments[0])"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton">
         </boolean-editor>
         <null-editor v-if="schema.type === 'null'"
             :schema="schema"
@@ -57,8 +61,9 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="updateValue($event)"
-            @onDelete="onDelete()">
+            @updateValue="$emit('updateValue', arguments[0])"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton">
         </null-editor>
         <string-editor v-if="schema.type === 'string'"
             :schema="schema"
@@ -68,10 +73,11 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="updateValue($event)"
-            @onDelete="onDelete()">
+            @updateValue="$emit('updateValue', arguments[0])"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton">
         </string-editor>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "updateValue", "theme", "icon", "locale", "onDelete", "readonly", "required"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
 };

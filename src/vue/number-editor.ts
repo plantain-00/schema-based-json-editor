@@ -8,7 +8,8 @@ export const numberEditor = {
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
         <title-editor :title="title"
-            @onDelete="onDelete()"
+            @onDelete="$emit('onDelete')"
+            :hasDeleteButton="hasDeleteButton"
             :theme="theme"
             :icon="icon"
             :locale="locale">
@@ -24,7 +25,7 @@ export const numberEditor = {
             type="number"
             @change="onChange($event)"
             @keyup="onChange($event)"
-            :defaultValue="value"
+            :value="value"
             :readOnly="readonly || schema.readonly" />
         <select v-if="useSelect()"
             :class="theme.formControl"
@@ -41,12 +42,12 @@ export const numberEditor = {
         <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "updateValue", "theme", "icon", "locale", "onDelete", "readonly", "required"],
-    data: function () {
-        // this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
-        // this.updateValue.emit(this.value);
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    data: function (this: any) {
+        const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
+        // this.$emit("updateValue", value);
         return {
-            value: undefined,
+            value,
             errorMessage: undefined,
         };
     },
@@ -60,7 +61,7 @@ export const numberEditor = {
         onChange(this: any, e: { target: { value: string } }) {
             this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
             this.validate();
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
         validate(this: any) {
             if (this.value !== undefined) {
@@ -100,7 +101,7 @@ export const numberEditor = {
             } else {
                 this.value = undefined;
             }
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
     },
 };

@@ -35,7 +35,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction()">
+            @updateValue="updateValueFunction">
         </object-editor>
         <array-editor v-if="schema.type === 'array'"
             :schema="schema"
@@ -92,7 +92,7 @@ Vue.component("json-editor", {
             localeObject,
             iconObject: common.getIcon(this.icon, localeObject),
             updateValueFunction: common.debounce((value: any) => {
-                this.updateValue(value);
+                this.$emit("updateValue", value);
             }, 100),
         };
     },

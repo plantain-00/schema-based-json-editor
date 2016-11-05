@@ -16,7 +16,7 @@ export const arrayEditor = {
                 <button v-if="!readonly && value !== undefined" :class="theme.button" @click="addItem()">
                     <icon :icon="icon" :text="icon.add"></icon>
                 </button>
-                <button v-if="onDelete && !readonly && !schema.readonly" :class="theme.button" @click="onDelete()">
+                <button v-if="hasDeleteButton && !readonly && !schema.readonly" :class="theme.button" @click="$emit('onDelete')">
                     <icon :icon="icon" :text="icon.delete"></icon>
                 </button>
             </div>
@@ -28,7 +28,7 @@ export const arrayEditor = {
                 is undefined
             </label>
         </div>
-        <div #drakContainer v-if="value !== undefined && !collapsed" :class="theme.rowContainer">
+        <div v-if="value !== undefined && !collapsed" :class="theme.rowContainer">
             <div v-for="(item, i) in value" :key="(1 + i) * renderSwitch" :data-index="i" :class="theme.rowContainer">
                 <editor :schema="schema.items"
                     :title="i"
@@ -39,18 +39,18 @@ export const arrayEditor = {
                     :locale="locale"
                     :required="true"
                     :readonly="readonly || schema.readonly"
-                    @onDelete="onDeleteFunction(i)">
+                    @onDelete="onDeleteFunction(i)"
+                    :hasDeleteButton="true">
                 </editor>
             </div>
         </div>
         <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "updateValue", "theme", "icon", "locale", "onDelete", "readonly", "required"],
-    data: function () {
-        // this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
-        // this.updateValue.emit(this.value);
-
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    data: function(this: any) {
+        const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
+        // this.$emit("updateValue", value);
         // const container = this.getDragulaContainer();
         // this.drak = common.dragula([container]);
         // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
@@ -69,13 +69,13 @@ export const arrayEditor = {
         //             this.value.splice(fromIndex, 1);
         //         }
         //         this.renderSwitch = -this.renderSwitch;
-        //         this.updateValue.emit(this.value);
+        //         this.$emit("updateValue", this.value);
         //     }
         // });
         return {
             renderSwitch: 1,
             collapsed: false,
-            value: undefined,
+            value,
             drak: undefined,
             errorMessage: undefined,
             buttonGroupStyleString: common.buttonGroupStyleString,
@@ -103,7 +103,7 @@ export const arrayEditor = {
             }
             const container = this.getDragulaContainer();
             this.drak.containers = [container];
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
         validate(this: any) {
             if (this.value !== undefined) {
@@ -129,17 +129,17 @@ export const arrayEditor = {
         },
         addItem(this: any) {
             this.value!.push(common.getDefaultValue(true, this.schema.items, undefined) !);
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
         onDeleteFunction(this: any, i: number) {
             this.value!.splice(i, 1);
             this.renderSwitch = -this.renderSwitch;
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
             this.validate();
         },
         onChange(this: any, i: number, value: common.ValueType) {
             this.value![i] = value;
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
             this.validate();
         },
     },

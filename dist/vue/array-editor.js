@@ -4,11 +4,11 @@ var common = require("../common");
 /* tslint:disable:no-unused-new */
 /* tslint:disable:object-literal-shorthand */
 exports.arrayEditor = {
-    template: "\n    <div :class=\"errorMessage ? theme.errorRow : theme.row\">\n        <h3>\n            {{title || schema.title}}\n            <div :class=\"theme.buttonGroup\" :style=\"buttonGroupStyleString\">\n                <button :class=\"theme.button\" @click=\"collapseOrExpand()\">\n                    <icon :icon=\"icon\" :text=\"collapsed ? icon.expand : icon.collapse\"></icon>\n                </button>\n                <button v-if=\"!readonly && value !== undefined\" :class=\"theme.button\" @click=\"addItem()\">\n                    <icon :icon=\"icon\" :text=\"icon.add\"></icon>\n                </button>\n                <button v-if=\"onDelete && !readonly && !schema.readonly\" :class=\"theme.button\" @click=\"onDelete()\">\n                    <icon :icon=\"icon\" :text=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </h3>\n        <p :class=\"theme.help\">{{schema.description}}</p>\n        <div v-if=\"!required\" :class=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" @change=\"toggleOptional()\" :checked=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <div #drakContainer v-if=\"value !== undefined && !collapsed\" :class=\"theme.rowContainer\">\n            <div v-for=\"(item, i) in value\" :key=\"(1 + i) * renderSwitch\" :data-index=\"i\" :class=\"theme.rowContainer\">\n                <editor :schema=\"schema.items\"\n                    :title=\"i\"\n                    :initialValue=\"value[i]\"\n                    @updateValue=\"onChange(i, $event)\"\n                    :theme=\"theme\"\n                    :icon=\"icon\"\n                    :locale=\"locale\"\n                    :required=\"true\"\n                    :readonly=\"readonly || schema.readonly\"\n                    @onDelete=\"onDeleteFunction(i)\">\n                </editor>\n            </div>\n        </div>\n        <p v-if=\"errorMessage\" :class=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
-    props: ["schema", "initialValue", "title", "updateValue", "theme", "icon", "locale", "onDelete", "readonly", "required"],
+    template: "\n    <div :class=\"errorMessage ? theme.errorRow : theme.row\">\n        <h3>\n            {{title || schema.title}}\n            <div :class=\"theme.buttonGroup\" :style=\"buttonGroupStyleString\">\n                <button :class=\"theme.button\" @click=\"collapseOrExpand()\">\n                    <icon :icon=\"icon\" :text=\"collapsed ? icon.expand : icon.collapse\"></icon>\n                </button>\n                <button v-if=\"!readonly && value !== undefined\" :class=\"theme.button\" @click=\"addItem()\">\n                    <icon :icon=\"icon\" :text=\"icon.add\"></icon>\n                </button>\n                <button v-if=\"hasDeleteButton && !readonly && !schema.readonly\" :class=\"theme.button\" @click=\"$emit('onDelete')\">\n                    <icon :icon=\"icon\" :text=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </h3>\n        <p :class=\"theme.help\">{{schema.description}}</p>\n        <div v-if=\"!required\" :class=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" @change=\"toggleOptional()\" :checked=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <div v-if=\"value !== undefined && !collapsed\" :class=\"theme.rowContainer\">\n            <div v-for=\"(item, i) in value\" :key=\"(1 + i) * renderSwitch\" :data-index=\"i\" :class=\"theme.rowContainer\">\n                <editor :schema=\"schema.items\"\n                    :title=\"i\"\n                    :initialValue=\"value[i]\"\n                    @updateValue=\"onChange(i, $event)\"\n                    :theme=\"theme\"\n                    :icon=\"icon\"\n                    :locale=\"locale\"\n                    :required=\"true\"\n                    :readonly=\"readonly || schema.readonly\"\n                    @onDelete=\"onDeleteFunction(i)\"\n                    :hasDeleteButton=\"true\">\n                </editor>\n            </div>\n        </div>\n        <p v-if=\"errorMessage\" :class=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function () {
-        // this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
-        // this.updateValue.emit(this.value);
+        var value = common.getDefaultValue(this.required, this.schema, this.initialValue);
+        // this.$emit("updateValue", value);
         // const container = this.getDragulaContainer();
         // this.drak = common.dragula([container]);
         // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
@@ -27,13 +27,13 @@ exports.arrayEditor = {
         //             this.value.splice(fromIndex, 1);
         //         }
         //         this.renderSwitch = -this.renderSwitch;
-        //         this.updateValue.emit(this.value);
+        //         this.$emit("updateValue", this.value);
         //     }
         // });
         return {
             renderSwitch: 1,
             collapsed: false,
-            value: undefined,
+            value: value,
             drak: undefined,
             errorMessage: undefined,
             buttonGroupStyleString: common.buttonGroupStyleString,
@@ -62,7 +62,7 @@ exports.arrayEditor = {
             }
             var container = this.getDragulaContainer();
             this.drak.containers = [container];
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
         validate: function () {
             if (this.value !== undefined) {
@@ -87,17 +87,17 @@ exports.arrayEditor = {
         },
         addItem: function () {
             this.value.push(common.getDefaultValue(true, this.schema.items, undefined));
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
         },
         onDeleteFunction: function (i) {
             this.value.splice(i, 1);
             this.renderSwitch = -this.renderSwitch;
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
             this.validate();
         },
         onChange: function (i, value) {
             this.value[i] = value;
-            this.updateValue(this.value);
+            this.$emit("updateValue", this.value);
             this.validate();
         },
     },
