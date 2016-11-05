@@ -35,7 +35,7 @@ Vue.component("json-editor", {
     },
     methods: {
         updateValueFunction: common.debounce(function (value) {
-            this.$emit("updateValue", value);
+            this.$emit("update-value", value);
         }, 100),
     },
 });

@@ -54,5 +54,4 @@ import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, Edit
 })
 class MainModule { }
 
-
 platformBrowserDynamic().bootstrapModule(MainModule);

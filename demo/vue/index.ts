@@ -10,27 +10,23 @@ import "../../dist/vue/index";
 type This = {
     schema: any;
     value: any;
+    valueString: any;
 }
 
 new Vue({
     el: "#container",
-    data: function () {
+    data() {
+        const value = {};
         return {
             schema,
-            value: {},
+            value,
+            valueString: JSON.stringify(value, null, "  "),
+            schemaString: JSON.stringify(schema, null, "  "),
         };
-    },
-    computed: {
-        schemaString: function () {
-            return JSON.stringify(schema, null, "  ");
-        },
-        valueString: function (this: This) {
-            return JSON.stringify(this.value, null, "  ");
-        },
     },
     methods: {
         updateValue(this: This, value: any) {
-            this.value = value;
+            this.valueString = JSON.stringify(this.value, null, "  ");
         },
     },
 });
