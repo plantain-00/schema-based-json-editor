@@ -8,7 +8,7 @@ export const nullEditor = {
     template: `
     <div :class="theme.row">
         <title-editor :title="title"
-            @onDelete="$emit('onDelete')"
+            @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton"
             :theme="theme"
             :icon="icon"
@@ -26,7 +26,7 @@ export const nullEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
-        this.$emit("updateValue", value);
+        this.$emit("update-value", value);
         return {
             value,
         };
@@ -38,7 +38,7 @@ export const nullEditor = {
             } else {
                 this.value = undefined;
             }
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
         },
     },
 };

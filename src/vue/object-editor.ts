@@ -13,7 +13,7 @@ export const objectEditor = {
                 <button :class="theme.button" @click="collapseOrExpand()">
                     <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button v-if="hasDeleteButton && !readonly && !schema.readonly" :class="theme.button" @click="$emit('onDelete')">{{icon.delete}}</button>
+                <button v-if="hasDeleteButton && !readonly && !schema.readonly" :class="theme.button" @click="$emit('delete')">{{icon.delete}}</button>
             </div>
         </h3>
         <p :class="theme.help">{{schema.description}}</p>
@@ -29,7 +29,7 @@ export const objectEditor = {
                 :schema="propertySchema"
                 :title="propertySchema.title || property"
                 :initial-value="value[property]"
-                @updateValue="onChange(property, arguments[0])"
+                @update-value="onChange(property, arguments[0])"
                 :theme="theme"
                 :icon="icon"
                 :locale="locale"
@@ -50,7 +50,7 @@ export const objectEditor = {
                 value[property] = common.getDefaultValue(required, schema, value[property]) as { [name: string]: common.ValueType };
             }
         }
-        this.$emit("updateValue", value);
+        this.$emit("update-value", value);
         return {
             collapsed: false,
             value,
@@ -70,11 +70,11 @@ export const objectEditor = {
             } else {
                 this.value = undefined;
             }
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
         },
         onChange(this: This, property: string, value: common.ValueType) {
             this.value![property] = value;
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
         },
     },
 };

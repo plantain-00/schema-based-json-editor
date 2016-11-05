@@ -9,7 +9,7 @@ export const titleEditor = {
     <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
         {{title}}
         <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-            <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('onDelete')">
+            <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">
                 <icon :icon="icon" :text="icon.delete"></icon>
             </button>
         </div>

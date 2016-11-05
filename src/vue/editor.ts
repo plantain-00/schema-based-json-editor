@@ -13,8 +13,8 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="$emit('updateValue', arguments[0])"
-            @onDelete="$emit('onDelete')"
+            @update-value="$emit('update-value', arguments[0])"
+            @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton">
         </object-editor>
         <array-editor v-if="schema.type === 'array'"
@@ -25,8 +25,8 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="$emit('updateValue', arguments[0])"
-            @onDelete="$emit('onDelete')"
+            @update-value="$emit('update-value', arguments[0])"
+            @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton">
         </array-editor>
         <number-editor v-if="schema.type === 'number' || schema.type === 'integer'"
@@ -37,8 +37,8 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="$emit('updateValue', arguments[0])"
-            @onDelete="$emit('onDelete')"
+            @update-value="$emit('update-value', arguments[0])"
+            @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton">
         </number-editor>
         <boolean-editor v-if="schema.type === 'boolean'"
@@ -49,8 +49,8 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="$emit('updateValue', arguments[0])"
-            @onDelete="$emit('onDelete')"
+            @update-value="$emit('update-value', arguments[0])"
+            @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton">
         </boolean-editor>
         <null-editor v-if="schema.type === 'null'"
@@ -61,8 +61,8 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="$emit('updateValue', arguments[0])"
-            @onDelete="$emit('onDelete')"
+            @update-value="$emit('update-value', arguments[0])"
+            @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton">
         </null-editor>
         <string-editor v-if="schema.type === 'string'"
@@ -73,8 +73,8 @@ export const editor = {
             :locale="locale"
             :icon="icon"
             :required="required"
-            @updateValue="$emit('updateValue', arguments[0])"
-            @onDelete="$emit('onDelete')"
+            @update-value="$emit('update-value', arguments[0])"
+            @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton">
         </string-editor>
     </div>

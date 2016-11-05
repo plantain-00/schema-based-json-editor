@@ -8,7 +8,7 @@ export const numberEditor = {
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
         <title-editor :title="title"
-            @onDelete="$emit('onDelete')"
+            @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton"
             :theme="theme"
             :icon="icon"
@@ -45,7 +45,7 @@ export const numberEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
-        this.$emit("updateValue", value);
+        this.$emit("update-value", value);
         return {
             value,
             errorMessage: undefined,
@@ -61,7 +61,7 @@ export const numberEditor = {
         onChange(this: This, e: { target: { value: string } }) {
             this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
             this.validate();
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
         },
         validate(this: This) {
             if (this.value !== undefined) {
@@ -101,7 +101,7 @@ export const numberEditor = {
             } else {
                 this.value = undefined;
             }
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
         },
     },
 };

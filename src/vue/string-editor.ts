@@ -8,7 +8,7 @@ export const stringEditor = {
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
         <title-editor :title="title"
-            @onDelete="$emit('onDelete')"
+            @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton"
             :theme="theme"
             :icon="icon"
@@ -50,7 +50,7 @@ export const stringEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
-        this.$emit("updateValue", value);
+        this.$emit("update-value", value);
         return {
             value,
             errorMessage: undefined,
@@ -72,7 +72,7 @@ export const stringEditor = {
         onChange(this: This, e: { target: { value: string } }) {
             this.value = e.target.value;
             this.validate();
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
         },
         validate(this: This) {
             if (this.value !== undefined) {
@@ -102,7 +102,7 @@ export const stringEditor = {
             } else {
                 this.value = undefined;
             }
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
         },
     },
 };

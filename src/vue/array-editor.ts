@@ -16,7 +16,7 @@ export const arrayEditor = {
                 <button v-if="!readonly && value !== undefined" :class="theme.button" @click="addItem()">
                     <icon :icon="icon" :text="icon.add"></icon>
                 </button>
-                <button v-if="hasDeleteButton && !readonly && !schema.readonly" :class="theme.button" @click="$emit('onDelete')">
+                <button v-if="hasDeleteButton && !readonly && !schema.readonly" :class="theme.button" @click="$emit('delete')">
                     <icon :icon="icon" :text="icon.delete"></icon>
                 </button>
             </div>
@@ -33,13 +33,13 @@ export const arrayEditor = {
                 <editor :schema="schema.items"
                     :title="i"
                     :initial-value="value[i]"
-                    @updateValue="onChange(i, arguments[0])"
+                    @update-value="onChange(i, arguments[0])"
                     :theme="theme"
                     :icon="icon"
                     :locale="locale"
                     :required="true"
                     :readonly="readonly || schema.readonly"
-                    @onDelete="onDeleteFunction(i)"
+                    @delete="onDeleteFunction(i)"
                     :has-delete-button="true">
                 </editor>
             </div>
@@ -50,7 +50,7 @@ export const arrayEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function(this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
-        this.$emit("updateValue", value);
+        this.$emit("update-value", value);
         // const container = this.getDragulaContainer();
         // this.drak = common.dragula([container]);
         // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
@@ -69,7 +69,7 @@ export const arrayEditor = {
         //             this.value.splice(fromIndex, 1);
         //         }
         //         this.renderSwitch = -this.renderSwitch;
-        //         this.$emit("updateValue", this.value);
+        //         this.$emit("update-value", this.value);
         //     }
         // });
         return {
@@ -103,7 +103,7 @@ export const arrayEditor = {
             }
             // const container = this.getDragulaContainer();
             // this.drak.containers = [container];
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
         },
         validate(this: This) {
             if (this.value !== undefined) {
@@ -129,17 +129,17 @@ export const arrayEditor = {
         },
         addItem(this: This) {
             this.value!.push(common.getDefaultValue(true, this.schema.items, undefined) !);
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
         },
         onDeleteFunction(this: This, i: number) {
             this.value!.splice(i, 1);
             this.renderSwitch = -this.renderSwitch;
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
             this.validate();
         },
         onChange(this: This, i: number, value: common.ValueType) {
             this.value![i] = value;
-            this.$emit("updateValue", this.value);
+            this.$emit("update-value", this.value);
             this.validate();
         },
     },

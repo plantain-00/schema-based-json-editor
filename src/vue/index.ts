@@ -35,7 +35,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])">
         </object-editor>
         <array-editor v-if="schema.type === 'array'"
             :schema="schema"
@@ -44,7 +44,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])">
         </array-editor>
         <number-editor v-if="schema.type === 'number' || schema.type === 'integer'"
             :schema="schema"
@@ -53,7 +53,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])">
         </number-editor>
         <boolean-editor v-if="schema.type === 'boolean'"
             :schema="schema"
@@ -62,7 +62,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])">
         </boolean-editor>
         <null-editor v-if="schema.type === 'null'"
             :schema="schema"
@@ -71,7 +71,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])">
         </null-editor>
         <string-editor v-if="schema.type === 'string'"
             :schema="schema"
@@ -80,7 +80,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @updateValue="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])">
         </string-editor>
     </div>
     `,
