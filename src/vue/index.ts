@@ -85,7 +85,7 @@ Vue.component("json-editor", {
     </div>
     `,
     props: ["schema", "initialValue", "theme", "icon", "locale", "readonly"],
-    data: function (this: any) {
+    data: function(this: This) {
         const localeObject = common.getLocale(this.locale);
         return {
             themeObject: common.getTheme(this.theme),
@@ -94,8 +94,15 @@ Vue.component("json-editor", {
         };
     },
     methods: {
-        updateValueFunction: common.debounce(function (this: any, value: any) {
+        updateValueFunction: common.debounce(function(this: This, value: any) {
             this.$emit("updateValue", value);
         }, 100),
     },
 });
+
+export type This = {
+    $emit: (event: string, ...args: any[]) => void;
+    locale: common.Locale;
+    theme: common.Theme;
+    icon: common.Icon;
+}

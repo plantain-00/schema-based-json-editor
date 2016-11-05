@@ -48,7 +48,7 @@ export const arrayEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function (this: any) {
+    data: function(this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.$emit("updateValue", value);
         // const container = this.getDragulaContainer();
@@ -81,32 +81,31 @@ export const arrayEditor = {
             buttonGroupStyleString: common.buttonGroupStyleString,
         };
     },
-    beforeDestroy(this: any) {
+    beforeDestroy(this: This) {
         if (this.drak) {
             this.drak.destroy();
         }
     },
     methods: {
-        getDragulaContainer(this: any) {
-            return this.drakContainer.nativeElement;
+        getDragulaContainer(this: This) {
+            // return this.drakContainer.nativeElement;
         },
-
-        collapseOrExpand(this: any) {
+        collapseOrExpand(this: This) {
             this.collapsed = !this.collapsed;
             // const container = this.getDragulaContainer();
             // this.drak.containers = [container];
         },
-        toggleOptional(this: any) {
+        toggleOptional(this: This) {
             if (this.value === undefined) {
                 this.value = common.getDefaultValue(true, this.schema, this.initialValue) as common.ValueType[];
             } else {
                 this.value = undefined;
             }
-            const container = this.getDragulaContainer();
-            this.drak.containers = [container];
+            // const container = this.getDragulaContainer();
+            // this.drak.containers = [container];
             this.$emit("updateValue", this.value);
         },
-        validate(this: any) {
+        validate(this: This) {
             if (this.value !== undefined) {
                 if (this.schema.minItems !== undefined) {
                     if (this.value.length < this.schema.minItems) {
@@ -128,20 +127,34 @@ export const arrayEditor = {
 
             this.errorMessage = "";
         },
-        addItem(this: any) {
+        addItem(this: This) {
             this.value!.push(common.getDefaultValue(true, this.schema.items, undefined) !);
             this.$emit("updateValue", this.value);
         },
-        onDeleteFunction(this: any, i: number) {
+        onDeleteFunction(this: This, i: number) {
             this.value!.splice(i, 1);
             this.renderSwitch = -this.renderSwitch;
             this.$emit("updateValue", this.value);
             this.validate();
         },
-        onChange(this: any, i: number, value: common.ValueType) {
+        onChange(this: This, i: number, value: common.ValueType) {
             this.value![i] = value;
             this.$emit("updateValue", this.value);
             this.validate();
         },
     },
 };
+
+export type This = {
+    drak: common.dragula.Drake;
+    $emit: (event: string, ...args: any[]) => void;
+    required: boolean;
+    schema: any;
+    initialValue: common.ValueType[];
+    value?: common.ValueType[];
+    collapsed: boolean;
+    errorMessage?: string;
+    locale: common.Locale;
+    renderSwitch: number;
+    validate: () => void;
+}

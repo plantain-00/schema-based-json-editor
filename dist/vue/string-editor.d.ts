@@ -1,21 +1,33 @@
+import * as common from "../common";
 export declare const stringEditor: {
     template: string;
     props: string[];
-    data: (this: any) => {
+    data: (this: This) => {
         value: string;
         errorMessage: undefined;
     };
-    beforeMount(this: any): void;
+    beforeMount(this: This): void;
     methods: {
-        useTextArea(this: any): boolean;
-        useInput(this: any): boolean;
-        useSelect(this: any): boolean;
-        onChange(this: any, e: {
+        useTextArea(this: This): boolean;
+        useInput(this: This): boolean;
+        useSelect(this: This): boolean;
+        onChange(this: This, e: {
             target: {
                 value: string;
             };
         }): void;
-        validate(this: any): void;
-        toggleOptional(this: any): void;
+        validate(this: This): void;
+        toggleOptional(this: This): void;
     };
+};
+export declare type This = {
+    $emit: (event: string, ...args: any[]) => void;
+    validate: () => void;
+    value?: string;
+    errorMessage?: string;
+    schema: any;
+    initialValue: string;
+    locale: common.Locale;
+    readonly: boolean;
+    required: boolean;
 };

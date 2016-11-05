@@ -7,6 +7,11 @@ import "../../dist/vue/index";
 /* tslint:disable:no-unused-new */
 /* tslint:disable:object-literal-shorthand */
 
+type This = {
+    schema: any;
+    value: any;
+}
+
 new Vue({
     el: "#container",
     data: function () {
@@ -19,12 +24,12 @@ new Vue({
         schemaString: function () {
             return JSON.stringify(schema, null, "  ");
         },
-        valueString: function (this: any) {
+        valueString: function (this: This) {
             return JSON.stringify(this.value, null, "  ");
         },
     },
     methods: {
-        updateValue(this: any, value: any) {
+        updateValue(this: This, value: any) {
             this.value = value;
         },
     },

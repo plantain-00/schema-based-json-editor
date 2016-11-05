@@ -46,7 +46,7 @@ exports.arrayEditor = {
     },
     methods: {
         getDragulaContainer: function () {
-            return this.drakContainer.nativeElement;
+            // return this.drakContainer.nativeElement;
         },
         collapseOrExpand: function () {
             this.collapsed = !this.collapsed;
@@ -60,8 +60,8 @@ exports.arrayEditor = {
             else {
                 this.value = undefined;
             }
-            var container = this.getDragulaContainer();
-            this.drak.containers = [container];
+            // const container = this.getDragulaContainer();
+            // this.drak.containers = [container];
             this.$emit("updateValue", this.value);
         },
         validate: function () {

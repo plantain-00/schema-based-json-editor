@@ -43,7 +43,7 @@ export const numberEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function (this: any) {
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
         this.$emit("updateValue", value);
         return {
@@ -52,18 +52,18 @@ export const numberEditor = {
         };
     },
     methods: {
-        useInput(this: any) {
+        useInput(this: This) {
             return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly);
         },
-        useSelect(this: any) {
+        useSelect(this: This) {
             return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
         },
-        onChange(this: any, e: { target: { value: string } }) {
+        onChange(this: This, e: { target: { value: string } }) {
             this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
             this.validate();
             this.$emit("updateValue", this.value);
         },
-        validate(this: any) {
+        validate(this: This) {
             if (this.value !== undefined) {
                 if (this.schema.minimum !== undefined) {
                     if (this.schema.exclusiveMinimum) {
@@ -95,7 +95,7 @@ export const numberEditor = {
 
             this.errorMessage = "";
         },
-        toggleOptional(this: any) {
+        toggleOptional(this: This) {
             if (this.value === undefined) {
                 this.value = common.getDefaultValue(true, this.schema, this.initialValue) as number;
             } else {
@@ -105,3 +105,15 @@ export const numberEditor = {
         },
     },
 };
+
+export type This = {
+    $emit: (event: string, ...args: any[]) => void;
+    value?: number;
+    errorMessage?: string;
+    schema: any;
+    initialValue: number;
+    locale: common.Locale;
+    validate: () => void;
+    readonly: boolean;
+    required: boolean;
+}

@@ -33,7 +33,7 @@ export const booleanEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function (this: any) {
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
         this.$emit("updateValue", value);
         return {
@@ -41,11 +41,11 @@ export const booleanEditor = {
         };
     },
     methods: {
-        onChange(this: any, e: { target: { checked: boolean } }) {
+        onChange(this: This, e: { target: { checked: boolean } }) {
             this.value = e.target.checked;
             this.$emit("updateValue", this.value);
         },
-        toggleOptional(this: any) {
+        toggleOptional(this: This) {
             if (this.value === undefined) {
                 this.value = common.getDefaultValue(true, this.schema, this.initialValue === undefined) as boolean;
             } else {
@@ -55,3 +55,11 @@ export const booleanEditor = {
         },
     },
 };
+
+export type This = {
+    $emit: (event: string, ...args: any[]) => void;
+    required: boolean;
+    schema: any;
+    initialValue: boolean;
+    value?: boolean;
+}

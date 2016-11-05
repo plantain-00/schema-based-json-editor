@@ -2,7 +2,7 @@ import * as common from "../common";
 export declare const objectEditor: {
     template: string;
     props: string[];
-    data: (this: any) => {
+    data: (this: This) => {
         collapsed: boolean;
         value: {
             [name: string]: common.ValueType;
@@ -12,9 +12,19 @@ export declare const objectEditor: {
         };
     };
     methods: {
-        isRequired(this: any, property: string): any;
-        collapseOrExpand(this: any): void;
-        toggleOptional(this: any): void;
-        onChange(this: any, property: string, value: common.ValueType): void;
+        isRequired(this: This, property: string): any;
+        collapseOrExpand(this: This): void;
+        toggleOptional(this: This): void;
+        onChange(this: This, property: string, value: common.ValueType): void;
     };
+};
+export declare type This = {
+    $emit: (event: string, ...args: any[]) => void;
+    value?: {
+        [name: string]: common.ValueType;
+    };
+    collapsed: boolean;
+    schema: any;
+    initialValue: any;
+    required: boolean;
 };

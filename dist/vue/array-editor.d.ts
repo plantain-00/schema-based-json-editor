@@ -1,8 +1,9 @@
+/// <reference types="dragula" />
 import * as common from "../common";
 export declare const arrayEditor: {
     template: string;
     props: string[];
-    data: (this: any) => {
+    data: (this: This) => {
         renderSwitch: number;
         collapsed: boolean;
         value: common.ValueType[];
@@ -10,14 +11,27 @@ export declare const arrayEditor: {
         errorMessage: undefined;
         buttonGroupStyleString: string;
     };
-    beforeDestroy(this: any): void;
+    beforeDestroy(this: This): void;
     methods: {
-        getDragulaContainer(this: any): any;
-        collapseOrExpand(this: any): void;
-        toggleOptional(this: any): void;
-        validate(this: any): void;
-        addItem(this: any): void;
-        onDeleteFunction(this: any, i: number): void;
-        onChange(this: any, i: number, value: common.ValueType): void;
+        getDragulaContainer(this: This): void;
+        collapseOrExpand(this: This): void;
+        toggleOptional(this: This): void;
+        validate(this: This): void;
+        addItem(this: This): void;
+        onDeleteFunction(this: This, i: number): void;
+        onChange(this: This, i: number, value: common.ValueType): void;
     };
+};
+export declare type This = {
+    drak: common.dragula.Drake;
+    $emit: (event: string, ...args: any[]) => void;
+    required: boolean;
+    schema: any;
+    initialValue: common.ValueType[];
+    value?: common.ValueType[];
+    collapsed: boolean;
+    errorMessage?: string;
+    locale: common.Locale;
+    renderSwitch: number;
+    validate: () => void;
 };

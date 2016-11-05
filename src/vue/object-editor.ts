@@ -41,7 +41,7 @@ export const objectEditor = {
     </div >
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function (this: any) {
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
         if (!this.collapsed && value !== undefined) {
             for (const property in this.schema.properties) {
@@ -58,13 +58,13 @@ export const objectEditor = {
         };
     },
     methods: {
-        isRequired(this: any, property: string) {
+        isRequired(this: This, property: string) {
             return this.schema.required && this.schema.required.some((r: any) => r === property);
         },
-        collapseOrExpand(this: any) {
+        collapseOrExpand(this: This) {
             this.collapsed = !this.collapsed;
         },
-        toggleOptional(this: any) {
+        toggleOptional(this: This) {
             if (this.value === undefined) {
                 this.value = common.getDefaultValue(true, this.schema, this.initialValue) as { [name: string]: common.ValueType };
             } else {
@@ -72,9 +72,18 @@ export const objectEditor = {
             }
             this.$emit("updateValue", this.value);
         },
-        onChange(this: any, property: string, value: common.ValueType) {
+        onChange(this: This, property: string, value: common.ValueType) {
             this.value![property] = value;
             this.$emit("updateValue", this.value);
         },
     },
 };
+
+export type This = {
+    $emit: (event: string, ...args: any[]) => void;
+    value?: { [name: string]: common.ValueType };
+    collapsed: boolean;
+    schema: any;
+    initialValue: any;
+    required: boolean;
+}

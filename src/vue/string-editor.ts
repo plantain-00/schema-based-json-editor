@@ -48,7 +48,7 @@ export const stringEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function (this: any) {
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         this.$emit("updateValue", value);
         return {
@@ -56,25 +56,25 @@ export const stringEditor = {
             errorMessage: undefined,
         };
     },
-    beforeMount(this: any) {
+    beforeMount(this: This) {
         this.validate();
     },
     methods: {
-        useTextArea(this: any) {
+        useTextArea(this: This) {
             return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly) && this.schema.format === "textarea";
         },
-        useInput(this: any) {
+        useInput(this: This) {
             return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly) && this.schema.format !== "textarea";
         },
-        useSelect(this: any) {
+        useSelect(this: This) {
             return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
         },
-        onChange(this: any, e: { target: { value: string } }) {
+        onChange(this: This, e: { target: { value: string } }) {
             this.value = e.target.value;
             this.validate();
             this.$emit("updateValue", this.value);
         },
-        validate(this: any) {
+        validate(this: This) {
             if (this.value !== undefined) {
                 if (this.schema.minLength !== undefined
                     && this.value.length < this.schema.minLength) {
@@ -95,7 +95,7 @@ export const stringEditor = {
 
             this.errorMessage = "";
         },
-        toggleOptional(this: any) {
+        toggleOptional(this: This) {
             if (this.value === undefined) {
                 this.value = common.getDefaultValue(true, this.schema, this.initialValue) as string;
                 this.validate();
@@ -106,3 +106,15 @@ export const stringEditor = {
         },
     },
 };
+
+export type This = {
+    $emit: (event: string, ...args: any[]) => void;
+    validate: () => void;
+    value?: string;
+    errorMessage?: string;
+    schema: any;
+    initialValue: string;
+    locale: common.Locale;
+    readonly: boolean;
+    required: boolean;
+}

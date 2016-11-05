@@ -24,7 +24,7 @@ export const nullEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function (this: any) {
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
         this.$emit("updateValue", value);
         return {
@@ -32,7 +32,7 @@ export const nullEditor = {
         };
     },
     methods: {
-        toggleOptional(this: any) {
+        toggleOptional(this: This) {
             if (this.value === undefined) {
                 this.value = common.getDefaultValue(true, this.schema, this.initialValue) as null;
             } else {
@@ -42,3 +42,11 @@ export const nullEditor = {
         },
     },
 };
+
+export type This = {
+    $emit: (event: string, ...args: any[]) => void;
+    value?: null;
+    schema: any;
+    initialValue: null;
+    required: boolean;
+}
