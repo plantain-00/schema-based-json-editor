@@ -48,9 +48,9 @@ export const arrayEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function(this: any) {
+    data: function (this: any) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
-        // this.$emit("updateValue", value);
+        this.$emit("updateValue", value);
         // const container = this.getDragulaContainer();
         // this.drak = common.dragula([container]);
         // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
@@ -81,15 +81,16 @@ export const arrayEditor = {
             buttonGroupStyleString: common.buttonGroupStyleString,
         };
     },
+    beforeDestroy(this: any) {
+        if (this.drak) {
+            this.drak.destroy();
+        }
+    },
     methods: {
         getDragulaContainer(this: any) {
             return this.drakContainer.nativeElement;
         },
-        ngOnDestroy(this: any) {
-            if (this.drak) {
-                this.drak.destroy();
-            }
-        },
+
         collapseOrExpand(this: any) {
             this.collapsed = !this.collapsed;
             // const container = this.getDragulaContainer();

@@ -10,9 +10,9 @@ export declare const arrayEditor: {
         errorMessage: undefined;
         buttonGroupStyleString: string;
     };
+    beforeDestroy(this: any): void;
     methods: {
         getDragulaContainer(this: any): any;
-        ngOnDestroy(this: any): void;
         collapseOrExpand(this: any): void;
         toggleOptional(this: any): void;
         validate(this: any): void;

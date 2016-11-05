@@ -48,14 +48,16 @@ export const stringEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function(this: any) {
+    data: function (this: any) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
-        // this.validate();
-        // this.$emit("updateValue", value);
+        this.$emit("updateValue", value);
         return {
             value,
             errorMessage: undefined,
         };
+    },
+    beforeMount(this: any) {
+        this.validate();
     },
     methods: {
         useTextArea(this: any) {

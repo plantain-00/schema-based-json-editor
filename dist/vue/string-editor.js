@@ -8,12 +8,14 @@ exports.stringEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function () {
         var value = common.getDefaultValue(this.required, this.schema, this.initialValue);
-        // this.validate();
-        // this.$emit("updateValue", value);
+        this.$emit("updateValue", value);
         return {
             value: value,
             errorMessage: undefined,
         };
+    },
+    beforeMount: function () {
+        this.validate();
     },
     methods: {
         useTextArea: function () {

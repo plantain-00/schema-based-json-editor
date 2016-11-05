@@ -35,7 +35,7 @@ export const booleanEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function (this: any) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
-        // this.$emit("updateValue", value);
+        this.$emit("updateValue", value);
         return {
             value,
         };

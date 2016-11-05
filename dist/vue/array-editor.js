@@ -8,7 +8,7 @@ exports.arrayEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function () {
         var value = common.getDefaultValue(this.required, this.schema, this.initialValue);
-        // this.$emit("updateValue", value);
+        this.$emit("updateValue", value);
         // const container = this.getDragulaContainer();
         // this.drak = common.dragula([container]);
         // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
@@ -39,14 +39,14 @@ exports.arrayEditor = {
             buttonGroupStyleString: common.buttonGroupStyleString,
         };
     },
+    beforeDestroy: function () {
+        if (this.drak) {
+            this.drak.destroy();
+        }
+    },
     methods: {
         getDragulaContainer: function () {
             return this.drakContainer.nativeElement;
-        },
-        ngOnDestroy: function () {
-            if (this.drak) {
-                this.drak.destroy();
-            }
         },
         collapseOrExpand: function () {
             this.collapsed = !this.collapsed;

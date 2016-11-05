@@ -19,7 +19,7 @@ exports.objectEditor = {
                 _loop_1(property);
             }
         }
-        // this.$emit("updateValue", this.value);
+        this.$emit("updateValue", value);
         return {
             collapsed: false,
             value: value,

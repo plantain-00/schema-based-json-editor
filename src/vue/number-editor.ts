@@ -45,7 +45,7 @@ export const numberEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function (this: any) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
-        // this.$emit("updateValue", value);
+        this.$emit("updateValue", value);
         return {
             value,
             errorMessage: undefined,

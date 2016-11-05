@@ -50,7 +50,7 @@ export const objectEditor = {
                 value[property] = common.getDefaultValue(required, schema, value[property]) as { [name: string]: common.ValueType };
             }
         }
-        // this.$emit("updateValue", this.value);
+        this.$emit("updateValue", value);
         return {
             collapsed: false,
             value,

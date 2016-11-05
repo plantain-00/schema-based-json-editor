@@ -26,7 +26,7 @@ export const nullEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function (this: any) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
-        // this.$emit("updateValue", value);
+        this.$emit("updateValue", value);
         return {
             value,
         };

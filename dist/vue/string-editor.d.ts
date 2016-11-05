@@ -5,6 +5,7 @@ export declare const stringEditor: {
         value: string;
         errorMessage: undefined;
     };
+    beforeMount(this: any): void;
     methods: {
         useTextArea(this: any): boolean;
         useInput(this: any): boolean;
