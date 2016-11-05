@@ -23,7 +23,6 @@ export declare class ArrayEditorComponent {
     getValue(): common.ValueType[];
     ngOnInit(): void;
     ngAfterViewInit(): void;
-    getDragulaContainer(): HTMLElement | undefined;
     ngOnDestroy(): void;
     trackByFunction: (index: number, value: common.ValueType) => number;
     collapseOrExpand: () => void;

@@ -12,9 +12,11 @@ export declare const arrayEditor: {
         buttonGroupStyleString: string;
     };
     beforeDestroy(this: This): void;
+    computed: {
+        getValue(this: This): common.ValueType[];
+    };
     mounted(this: This): void;
     methods: {
-        getDragulaContainer(this: This): HTMLElement;
         collapseOrExpand(this: This): void;
         toggleOptional(this: This): void;
         validate(this: This): void;
@@ -36,5 +38,4 @@ export declare type This = {
     renderSwitch: number;
     validate: () => void;
     $el: HTMLElement;
-    getDragulaContainer: () => HTMLElement;
 };

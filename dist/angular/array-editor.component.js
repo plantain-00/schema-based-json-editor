@@ -37,35 +37,31 @@ var ArrayEditorComponent = (function () {
     };
     ArrayEditorComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        var container = this.getDragulaContainer();
-        this.drak = common.dragula([container]);
-        this.drak.on("drop", function (el, target, source, sibling) {
-            if (_this.value) {
-                var fromIndex = +el.dataset["index"];
-                if (sibling) {
-                    var toIndex = +sibling.dataset["index"];
-                    _this.value.splice(toIndex, 0, _this.value[fromIndex]);
-                    if (fromIndex > toIndex) {
-                        _this.value.splice(fromIndex + 1, 1);
+        if (this.drakContainer) {
+            var container = this.drakContainer.nativeElement;
+            this.drak = common.dragula([container]);
+            this.drak.on("drop", function (el, target, source, sibling) {
+                if (_this.value) {
+                    var fromIndex = +el.dataset["index"];
+                    if (sibling) {
+                        var toIndex = +sibling.dataset["index"];
+                        _this.value.splice(toIndex, 0, _this.value[fromIndex]);
+                        if (fromIndex > toIndex) {
+                            _this.value.splice(fromIndex + 1, 1);
+                        }
+                        else {
+                            _this.value.splice(fromIndex, 1);
+                        }
                     }
                     else {
+                        _this.value.push(_this.value[fromIndex]);
                         _this.value.splice(fromIndex, 1);
                     }
+                    _this.renderSwitch = -_this.renderSwitch;
+                    _this.updateValue.emit(_this.value);
                 }
-                else {
-                    _this.value.push(_this.value[fromIndex]);
-                    _this.value.splice(fromIndex, 1);
-                }
-                _this.renderSwitch = -_this.renderSwitch;
-                _this.updateValue.emit(_this.value);
-            }
-        });
-    };
-    ArrayEditorComponent.prototype.getDragulaContainer = function () {
-        if (this.drakContainer) {
-            return this.drakContainer.nativeElement;
+            });
         }
-        return undefined;
     };
     ArrayEditorComponent.prototype.ngOnDestroy = function () {
         if (this.drak) {

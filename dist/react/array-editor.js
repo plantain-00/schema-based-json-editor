@@ -13,10 +13,7 @@ var ArrayEditor = (function (_super) {
         this.collapsed = false;
         this.collapseOrExpand = function () {
             _this.collapsed = !_this.collapsed;
-            _this.setState({ collapsed: _this.collapsed }, function () {
-                var container = _this.getDragulaContainer();
-                _this.drak.containers = [container];
-            });
+            _this.setState({ collapsed: _this.collapsed });
         };
         this.toggleOptional = function () {
             if (_this.value === undefined) {
@@ -26,10 +23,7 @@ var ArrayEditor = (function (_super) {
                 _this.value = undefined;
             }
             _this.validate();
-            _this.setState({ value: _this.value }, function () {
-                var container = _this.getDragulaContainer();
-                _this.drak.containers = [container];
-            });
+            _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
@@ -38,7 +32,7 @@ var ArrayEditor = (function (_super) {
     ArrayEditor.prototype.componentDidMount = function () {
         var _this = this;
         this.props.updateValue(this.value);
-        var container = this.getDragulaContainer();
+        var container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
         this.drak = common.dragula([container]);
         this.drak.on("drop", function (el, target, source, sibling) {
             if (_this.value) {
@@ -98,6 +92,9 @@ var ArrayEditor = (function (_super) {
             }
             childrenElement = (React.createElement("div", {className: this.props.theme.rowContainer}, itemElements));
         }
+        else {
+            childrenElement = (React.createElement("div", {className: this.props.theme.rowContainer}));
+        }
         var deleteButton = null;
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
             deleteButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
@@ -140,9 +137,6 @@ var ArrayEditor = (function (_super) {
             optionalCheckbox, 
             childrenElement, 
             errorDescription));
-    };
-    ArrayEditor.prototype.getDragulaContainer = function () {
-        return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
     };
     ArrayEditor.prototype.validate = function () {
         if (this.value !== undefined) {

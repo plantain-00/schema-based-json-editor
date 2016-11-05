@@ -91,33 +91,29 @@ export class ArrayEditorComponent {
         this.updateValue.emit(this.value);
     }
     ngAfterViewInit() {
-        const container = this.getDragulaContainer();
-        this.drak = common.dragula([container]);
-        this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
-            if (this.value) {
-                const fromIndex = +el.dataset["index"];
-                if (sibling) {
-                    const toIndex = +sibling.dataset["index"];
-                    this.value.splice(toIndex, 0, this.value[fromIndex]);
-                    if (fromIndex > toIndex) {
-                        this.value.splice(fromIndex + 1, 1);
+        if (this.drakContainer) {
+            const container = this.drakContainer.nativeElement as HTMLElement;
+            this.drak = common.dragula([container]);
+            this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+                if (this.value) {
+                    const fromIndex = +el.dataset["index"];
+                    if (sibling) {
+                        const toIndex = +sibling.dataset["index"];
+                        this.value.splice(toIndex, 0, this.value[fromIndex]);
+                        if (fromIndex > toIndex) {
+                            this.value.splice(fromIndex + 1, 1);
+                        } else {
+                            this.value.splice(fromIndex, 1);
+                        }
                     } else {
+                        this.value.push(this.value[fromIndex]);
                         this.value.splice(fromIndex, 1);
                     }
-                } else {
-                    this.value.push(this.value[fromIndex]);
-                    this.value.splice(fromIndex, 1);
+                    this.renderSwitch = -this.renderSwitch;
+                    this.updateValue.emit(this.value);
                 }
-                this.renderSwitch = -this.renderSwitch;
-                this.updateValue.emit(this.value);
-            }
-        });
-    }
-    getDragulaContainer() {
-        if (this.drakContainer) {
-            return this.drakContainer.nativeElement as HTMLElement;
+            });
         }
-        return undefined;
     }
     ngOnDestroy() {
         if (this.drak) {

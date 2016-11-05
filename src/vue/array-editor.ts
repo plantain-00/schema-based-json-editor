@@ -1,4 +1,3 @@
-import * as Vue from "vue";
 import * as common from "../common";
 
 /* tslint:disable:only-arrow-functions */
@@ -29,8 +28,8 @@ export const arrayEditor = {
                 is undefined
             </label>
         </div>
-        <div v-if="value !== undefined && !collapsed" :class="theme.rowContainer">
-            <div v-for="(item, i) in value" :key="(1 + i) * renderSwitch" :data-index="i" :class="theme.rowContainer">
+        <div :class="theme.rowContainer">
+            <div v-for="(item, i) in getValue" :key="(1 + i) * renderSwitch" :data-index="i" :class="theme.rowContainer">
                 <editor :schema="schema.items"
                     :title="i"
                     :initial-value="value[i]"
@@ -66,8 +65,17 @@ export const arrayEditor = {
             this.drak.destroy();
         }
     },
+    computed: {
+        getValue(this: This) {
+            if (this.value !== undefined && !this.collapsed) {
+                return this.value;
+
+            }
+            return [];
+        },
+    },
     mounted(this: This) {
-        const container = this.getDragulaContainer();
+        const container = this.$el.childNodes[6] as HTMLElement;
         this.drak = common.dragula([container]);
         this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
             if (this.value) {
@@ -90,17 +98,8 @@ export const arrayEditor = {
         });
     },
     methods: {
-        getDragulaContainer(this: This) {
-            return this.$el.childNodes[6] as HTMLElement;
-        },
         collapseOrExpand(this: This) {
             this.collapsed = !this.collapsed;
-            Vue.nextTick(() => {
-                const container = this.getDragulaContainer();
-                if (container) {
-                    this.drak.containers = [container];
-                }
-            });
         },
         toggleOptional(this: This) {
             if (this.value === undefined) {
@@ -108,12 +107,6 @@ export const arrayEditor = {
             } else {
                 this.value = undefined;
             }
-            Vue.nextTick(() => {
-                const container = this.getDragulaContainer();
-                if (container) {
-                    this.drak.containers = [container];
-                }
-            });
             this.$emit("update-value", this.value);
         },
         validate(this: This) {
@@ -169,5 +162,4 @@ export type This = {
     renderSwitch: number;
     validate: () => void;
     $el: HTMLElement;
-    getDragulaContainer: () => HTMLElement;
 }

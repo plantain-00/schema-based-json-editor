@@ -17,7 +17,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
     }
     componentDidMount() {
         this.props.updateValue(this.value);
-        const container = this.getDragulaContainer();
+        const container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as HTMLElement;
         this.drak = common.dragula([container]);
         this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
             if (this.value) {
@@ -84,6 +84,10 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                     {itemElements}
                 </div>
             );
+        } else {
+            childrenElement = (
+                <div className={this.props.theme.rowContainer}></div>
+            );
         }
         let deleteButton: JSX.Element | null = null;
         if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
@@ -140,15 +144,9 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             </div>
         );
     }
-    private getDragulaContainer() {
-        return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as HTMLElement;
-    }
     private collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
-        this.setState({ collapsed: this.collapsed }, () => {
-            const container = this.getDragulaContainer();
-            this.drak.containers = [container];
-        });
+        this.setState({ collapsed: this.collapsed });
     }
     private toggleOptional = () => {
         if (this.value === undefined) {
@@ -157,10 +155,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             this.value = undefined;
         }
         this.validate();
-        this.setState({ value: this.value }, () => {
-            const container = this.getDragulaContainer();
-            this.drak.containers = [container];
-        });
+        this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }
     private validate() {

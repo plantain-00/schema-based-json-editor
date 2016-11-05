@@ -15,7 +15,6 @@ export declare class ArrayEditor extends React.Component<common.Props<common.Arr
     componentDidMount(): void;
     componentWillUnmount(): void;
     render(): JSX.Element;
-    private getDragulaContainer();
     private collapseOrExpand;
     private toggleOptional;
     private validate();
