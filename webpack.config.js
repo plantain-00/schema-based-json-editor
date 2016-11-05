@@ -4,7 +4,8 @@ const path = require("path");
 module.exports = {
     entry: {
         react: "./demo/react/index",
-        angular: "./demo/angular/index"
+        angular: "./demo/angular/index",
+        vue: "./demo/vue/index"
     },
     output: {
         path: path.join(__dirname, "demo"),
@@ -26,5 +27,10 @@ module.exports = {
         //         comments: false,
         //     },
         // })
-    ]
+    ],
+    resolve: {
+        alias: {
+            "vue$": "vue/dist/vue.js"
+        }
+    }
 };

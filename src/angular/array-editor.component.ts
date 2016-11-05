@@ -4,7 +4,7 @@ import * as common from "../common";
 @Component({
     selector: "array-editor",
     template: `
-    <div class="{{errorMessage ? theme.errorRow : theme.row}}">
+    <div [class]="errorMessage ? theme.errorRow : theme.row">
         <h3>
             {{title || schema.title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyleString">

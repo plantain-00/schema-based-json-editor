@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/dragula.min.css">
+	<style>
+		* {
+			font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif;
+			-webkit-font-smoothing: antialiased;
+		}
+		
+		input,
+		textarea {
+			font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+		}
+		
+		.bootstrap3-row-container {
+			padding: 9px 25px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="container">
+		<div style="width: 500px; margin: 10px; float: left" class="bootstrap3-row-container">
+          <json-editor :schema="schema"
+              :initialValue="value"
+              @updateValue="updateValue"
+              theme="bootstrap3"
+              icon="fontawesome4"
+              locale="zh-cn">
+          </json-editor>
+        </div>
+        <pre style="width: 400px; margin: 10px; float: left">{{schemaString}}</pre>
+        <pre style="width: 400px; margin: 10px; float: left">{{valueString}}</pre>
+	</div>
+	<script src="../vue.bundle.js"></script>
+</body>
+
+</html>
