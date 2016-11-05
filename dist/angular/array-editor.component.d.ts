@@ -20,9 +20,10 @@ export declare class ArrayEditorComponent {
     drak: common.dragula.Drake;
     errorMessage: string;
     buttonGroupStyleString: string;
+    getValue(): common.ValueType[];
     ngOnInit(): void;
     ngAfterViewInit(): void;
-    getDragulaContainer(): any;
+    getDragulaContainer(): HTMLElement | undefined;
     ngOnDestroy(): void;
     trackByFunction: (index: number, value: common.ValueType) => number;
     collapseOrExpand: () => void;

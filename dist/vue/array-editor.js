@@ -1,4 +1,5 @@
 "use strict";
+var Vue = require("vue");
 var common = require("../common");
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */
@@ -9,27 +10,6 @@ exports.arrayEditor = {
     data: function () {
         var value = common.getDefaultValue(this.required, this.schema, this.initialValue);
         this.$emit("update-value", value);
-        // const container = this.getDragulaContainer();
-        // this.drak = common.dragula([container]);
-        // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
-        //     if (this.value) {
-        //         const fromIndex = +el.dataset["index"];
-        //         if (sibling) {
-        //             const toIndex = +sibling.dataset["index"];
-        //             this.value.splice(toIndex, 0, this.value[fromIndex]);
-        //             if (fromIndex > toIndex) {
-        //                 this.value.splice(fromIndex + 1, 1);
-        //             } else {
-        //                 this.value.splice(fromIndex, 1);
-        //             }
-        //         } else {
-        //             this.value.push(this.value[fromIndex]);
-        //             this.value.splice(fromIndex, 1);
-        //         }
-        //         this.renderSwitch = -this.renderSwitch;
-        //         this.$emit("update-value", this.value);
-        //     }
-        // });
         return {
             renderSwitch: 1,
             collapsed: false,
@@ -44,24 +24,60 @@ exports.arrayEditor = {
             this.drak.destroy();
         }
     },
+    mounted: function () {
+        var _this = this;
+        var container = this.getDragulaContainer();
+        this.drak = common.dragula([container]);
+        this.drak.on("drop", function (el, target, source, sibling) {
+            if (_this.value) {
+                var fromIndex = +el.dataset["index"];
+                if (sibling) {
+                    var toIndex = +sibling.dataset["index"];
+                    _this.value.splice(toIndex, 0, _this.value[fromIndex]);
+                    if (fromIndex > toIndex) {
+                        _this.value.splice(fromIndex + 1, 1);
+                    }
+                    else {
+                        _this.value.splice(fromIndex, 1);
+                    }
+                }
+                else {
+                    _this.value.push(_this.value[fromIndex]);
+                    _this.value.splice(fromIndex, 1);
+                }
+                _this.renderSwitch = -_this.renderSwitch;
+                _this.$emit("update-value", _this.value);
+            }
+        });
+    },
     methods: {
         getDragulaContainer: function () {
-            // return this.drakContainer.nativeElement;
+            return this.$el.childNodes[6];
         },
         collapseOrExpand: function () {
+            var _this = this;
             this.collapsed = !this.collapsed;
-            // const container = this.getDragulaContainer();
-            // this.drak.containers = [container];
+            Vue.nextTick(function () {
+                var container = _this.getDragulaContainer();
+                if (container) {
+                    _this.drak.containers = [container];
+                }
+            });
         },
         toggleOptional: function () {
+            var _this = this;
             if (this.value === undefined) {
                 this.value = common.getDefaultValue(true, this.schema, this.initialValue);
             }
             else {
                 this.value = undefined;
             }
-            // const container = this.getDragulaContainer();
-            // this.drak.containers = [container];
+            Vue.nextTick(function () {
+                var container = _this.getDragulaContainer();
+                if (container) {
+                    _this.drak.containers = [container];
+                }
+            });
             this.$emit("update-value", this.value);
         },
         validate: function () {

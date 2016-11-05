@@ -1,3 +1,4 @@
+import * as Vue from "vue";
 import * as common from "../common";
 
 /* tslint:disable:only-arrow-functions */
@@ -51,27 +52,6 @@ export const arrayEditor = {
     data: function(this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.$emit("update-value", value);
-        // const container = this.getDragulaContainer();
-        // this.drak = common.dragula([container]);
-        // this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
-        //     if (this.value) {
-        //         const fromIndex = +el.dataset["index"];
-        //         if (sibling) {
-        //             const toIndex = +sibling.dataset["index"];
-        //             this.value.splice(toIndex, 0, this.value[fromIndex]);
-        //             if (fromIndex > toIndex) {
-        //                 this.value.splice(fromIndex + 1, 1);
-        //             } else {
-        //                 this.value.splice(fromIndex, 1);
-        //             }
-        //         } else {
-        //             this.value.push(this.value[fromIndex]);
-        //             this.value.splice(fromIndex, 1);
-        //         }
-        //         this.renderSwitch = -this.renderSwitch;
-        //         this.$emit("update-value", this.value);
-        //     }
-        // });
         return {
             renderSwitch: 1,
             collapsed: false,
@@ -86,14 +66,41 @@ export const arrayEditor = {
             this.drak.destroy();
         }
     },
+    mounted(this: This) {
+        const container = this.getDragulaContainer();
+        this.drak = common.dragula([container]);
+        this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+            if (this.value) {
+                const fromIndex = +el.dataset["index"];
+                if (sibling) {
+                    const toIndex = +sibling.dataset["index"];
+                    this.value.splice(toIndex, 0, this.value[fromIndex]);
+                    if (fromIndex > toIndex) {
+                        this.value.splice(fromIndex + 1, 1);
+                    } else {
+                        this.value.splice(fromIndex, 1);
+                    }
+                } else {
+                    this.value.push(this.value[fromIndex]);
+                    this.value.splice(fromIndex, 1);
+                }
+                this.renderSwitch = -this.renderSwitch;
+                this.$emit("update-value", this.value);
+            }
+        });
+    },
     methods: {
         getDragulaContainer(this: This) {
-            // return this.drakContainer.nativeElement;
+            return this.$el.childNodes[6] as HTMLElement;
         },
         collapseOrExpand(this: This) {
             this.collapsed = !this.collapsed;
-            // const container = this.getDragulaContainer();
-            // this.drak.containers = [container];
+            Vue.nextTick(() => {
+                const container = this.getDragulaContainer();
+                if (container) {
+                    this.drak.containers = [container];
+                }
+            });
         },
         toggleOptional(this: This) {
             if (this.value === undefined) {
@@ -101,8 +108,12 @@ export const arrayEditor = {
             } else {
                 this.value = undefined;
             }
-            // const container = this.getDragulaContainer();
-            // this.drak.containers = [container];
+            Vue.nextTick(() => {
+                const container = this.getDragulaContainer();
+                if (container) {
+                    this.drak.containers = [container];
+                }
+            });
             this.$emit("update-value", this.value);
         },
         validate(this: This) {
@@ -157,4 +168,6 @@ export type This = {
     locale: common.Locale;
     renderSwitch: number;
     validate: () => void;
+    $el: HTMLElement;
+    getDragulaContainer: () => HTMLElement;
 }

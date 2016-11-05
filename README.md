@@ -102,7 +102,3 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 + array schema fields: items, minItems, uniqueItems
 + number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum
 + string schema fields: format, enum, minLength, maxLength, pattern
-
-#### todo list
-
-+ vuejs component: drag and drop for array

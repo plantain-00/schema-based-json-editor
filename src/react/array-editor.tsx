@@ -141,7 +141,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         );
     }
     private getDragulaContainer() {
-        return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as Element;
+        return ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as HTMLElement;
     }
     private collapseOrExpand = () => {
         this.collapsed = !this.collapsed;

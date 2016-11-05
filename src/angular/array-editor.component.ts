@@ -26,8 +26,8 @@ import * as common from "../common";
                 is undefined
             </label>
         </div>
-        <div #drakContainer *ngIf="value !== undefined && !collapsed" [class]="theme.rowContainer">
-            <div *ngFor="let item of value; let i = index; trackBy:trackByFunction" [attr.data-index]="i" [class]="theme.rowContainer">
+        <div #drakContainer [class]="theme.rowContainer">
+            <div *ngFor="let item of getValue(); let i = index; trackBy:trackByFunction" [attr.data-index]="i" [class]="theme.rowContainer">
                 <editor [schema]="schema.items"
                     [title]="i"
                     [initialValue]="value[i]"
@@ -79,6 +79,13 @@ export class ArrayEditorComponent {
     drak: common.dragula.Drake;
     errorMessage: string;
     buttonGroupStyleString = common.buttonGroupStyleString;
+    getValue() {
+        if (this.value !== undefined && !this.collapsed) {
+            return this.value;
+
+        }
+        return [];
+    }
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.updateValue.emit(this.value);
@@ -107,7 +114,10 @@ export class ArrayEditorComponent {
         });
     }
     getDragulaContainer() {
-        return this.drakContainer.nativeElement;
+        if (this.drakContainer) {
+            return this.drakContainer.nativeElement as HTMLElement;
+        }
+        return undefined;
     }
     ngOnDestroy() {
         if (this.drak) {
@@ -119,8 +129,6 @@ export class ArrayEditorComponent {
     };
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
-        const container = this.getDragulaContainer();
-        this.drak.containers = [container];
     }
     toggleOptional = () => {
         if (this.value === undefined) {
@@ -128,8 +136,6 @@ export class ArrayEditorComponent {
         } else {
             this.value = undefined;
         }
-        const container = this.getDragulaContainer();
-        this.drak.containers = [container];
         this.updateValue.emit(this.value);
     }
     validate() {
