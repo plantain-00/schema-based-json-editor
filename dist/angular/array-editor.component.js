@@ -16,12 +16,8 @@ var ArrayEditorComponent = (function () {
             _this.collapsed = !_this.collapsed;
         };
         this.toggleOptional = function () {
-            if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(true, _this.schema, _this.initialValue);
-            }
-            else {
-                _this.value = undefined;
-            }
+            _this.value = common.toggleOptional(_this.value, _this.schema, _this.initialValue);
+            _this.validate();
             _this.updateValue.emit(_this.value);
         };
     }
@@ -42,21 +38,7 @@ var ArrayEditorComponent = (function () {
             this.drak = common.dragula([container]);
             this.drak.on("drop", function (el, target, source, sibling) {
                 if (_this.value) {
-                    var fromIndex = +el.dataset["index"];
-                    if (sibling) {
-                        var toIndex = +sibling.dataset["index"];
-                        _this.value.splice(toIndex, 0, _this.value[fromIndex]);
-                        if (fromIndex > toIndex) {
-                            _this.value.splice(fromIndex + 1, 1);
-                        }
-                        else {
-                            _this.value.splice(fromIndex, 1);
-                        }
-                    }
-                    else {
-                        _this.value.push(_this.value[fromIndex]);
-                        _this.value.splice(fromIndex, 1);
-                    }
+                    common.switchItem(_this.value, el, sibling);
                     _this.renderSwitch = -_this.renderSwitch;
                     _this.updateValue.emit(_this.value);
                 }
@@ -69,25 +51,7 @@ var ArrayEditorComponent = (function () {
         }
     };
     ArrayEditorComponent.prototype.validate = function () {
-        if (this.value !== undefined) {
-            if (this.schema.minItems !== undefined) {
-                if (this.value.length < this.schema.minItems) {
-                    this.errorMessage = this.locale.error.minItems.replace("{0}", String(this.schema.minItems));
-                    return;
-                }
-            }
-            if (this.schema.uniqueItems) {
-                for (var i = 1; i < this.value.length; i++) {
-                    for (var j = 0; j < i; j++) {
-                        if (common.isSame(this.value[i], this.value[j])) {
-                            this.errorMessage = this.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-        this.errorMessage = "";
+        this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
     };
     ArrayEditorComponent.prototype.addItem = function () {
         this.value.push(common.getDefaultValue(true, this.schema.items, undefined));

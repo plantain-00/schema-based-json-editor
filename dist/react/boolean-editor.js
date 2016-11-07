@@ -13,12 +13,7 @@ var BooleanEditor = (function (_super) {
             _this.props.updateValue(_this.value);
         };
         this.toggleOptional = function () {
-            if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(true, _this.props.schema, _this.props.initialValue === undefined);
-            }
-            else {
-                _this.value = undefined;
-            }
+            _this.value = common.toggleOptional(_this.value, _this.props.schema, _this.props.initialValue);
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };

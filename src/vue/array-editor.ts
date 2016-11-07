@@ -48,7 +48,7 @@ export const arrayEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function(this: This) {
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.$emit("update-value", value);
         return {
@@ -79,19 +79,7 @@ export const arrayEditor = {
         this.drak = common.dragula([container]);
         this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
             if (this.value) {
-                const fromIndex = +el.dataset["index"];
-                if (sibling) {
-                    const toIndex = +sibling.dataset["index"];
-                    this.value.splice(toIndex, 0, this.value[fromIndex]);
-                    if (fromIndex > toIndex) {
-                        this.value.splice(fromIndex + 1, 1);
-                    } else {
-                        this.value.splice(fromIndex, 1);
-                    }
-                } else {
-                    this.value.push(this.value[fromIndex]);
-                    this.value.splice(fromIndex, 1);
-                }
+                common.switchItem(this.value, el, sibling);
                 this.renderSwitch = -this.renderSwitch;
                 this.$emit("update-value", this.value);
             }
@@ -102,34 +90,12 @@ export const arrayEditor = {
             this.collapsed = !this.collapsed;
         },
         toggleOptional(this: This) {
-            if (this.value === undefined) {
-                this.value = common.getDefaultValue(true, this.schema, this.initialValue) as common.ValueType[];
-            } else {
-                this.value = undefined;
-            }
+            this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as common.ValueType[] | undefined;
+            this.validate();
             this.$emit("update-value", this.value);
         },
         validate(this: This) {
-            if (this.value !== undefined) {
-                if (this.schema.minItems !== undefined) {
-                    if (this.value.length < this.schema.minItems) {
-                        this.errorMessage = this.locale.error.minItems.replace("{0}", String(this.schema.minItems));
-                        return;
-                    }
-                }
-                if (this.schema.uniqueItems) {
-                    for (let i = 1; i < this.value.length; i++) {
-                        for (let j = 0; j < i; j++) {
-                            if (common.isSame(this.value[i], this.value[j])) {
-                                this.errorMessage = this.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-
-            this.errorMessage = "";
+            this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
         },
         addItem(this: This) {
             this.value!.push(common.getDefaultValue(true, this.schema.items, undefined) !);

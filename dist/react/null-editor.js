@@ -8,12 +8,7 @@ var NullEditor = (function (_super) {
         var _this = this;
         _super.call(this, props);
         this.toggleOptional = function () {
-            if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(true, _this.props.schema, _this.props.initialValue);
-            }
-            else {
-                _this.value = undefined;
-            }
+            _this.value = common.toggleOptional(_this.value, _this.props.schema, _this.props.initialValue);
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };

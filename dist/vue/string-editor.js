@@ -33,33 +33,11 @@ exports.stringEditor = {
             this.$emit("update-value", this.value);
         },
         validate: function () {
-            if (this.value !== undefined) {
-                if (this.schema.minLength !== undefined
-                    && this.value.length < this.schema.minLength) {
-                    this.errorMessage = this.locale.error.minLength.replace("{0}", String(this.schema.minLength));
-                    return;
-                }
-                if (this.schema.maxLength !== undefined
-                    && this.value.length > this.schema.maxLength) {
-                    this.errorMessage = this.locale.error.maxLength.replace("{0}", String(this.schema.maxLength));
-                    return;
-                }
-                if (this.schema.pattern !== undefined
-                    && !new RegExp(this.schema.pattern).test(this.value)) {
-                    this.errorMessage = this.locale.error.pattern.replace("{0}", String(this.schema.pattern));
-                    return;
-                }
-            }
-            this.errorMessage = "";
+            this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
         },
         toggleOptional: function () {
-            if (this.value === undefined) {
-                this.value = common.getDefaultValue(true, this.schema, this.initialValue);
-                this.validate();
-            }
-            else {
-                this.value = undefined;
-            }
+            this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
+            this.validate();
             this.$emit("update-value", this.value);
         },
     },

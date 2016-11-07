@@ -85,43 +85,11 @@ export class NumberEditorComponent {
         return index;
     }
     validate() {
-        if (this.value !== undefined) {
-            if (this.schema.minimum !== undefined) {
-                if (this.schema.exclusiveMinimum) {
-                    if (this.value <= this.schema.minimum) {
-                        this.errorMessage = this.locale.error.largerThan.replace("{0}", String(this.schema.minimum));
-                        return;
-                    }
-                } else {
-                    if (this.value < this.schema.minimum) {
-                        this.errorMessage = this.locale.error.minimum.replace("{0}", String(this.schema.minimum));
-                        return;
-                    }
-                }
-            }
-            if (this.schema.maximum !== undefined) {
-                if (this.schema.exclusiveMaximum) {
-                    if (this.value >= this.schema.maximum) {
-                        this.errorMessage = this.locale.error.smallerThan.replace("{0}", String(this.schema.maximum));
-                        return;
-                    }
-                } else {
-                    if (this.value > this.schema.maximum) {
-                        this.errorMessage = this.locale.error.maximum.replace("{0}", String(this.schema.maximum));
-                        return;
-                    }
-                }
-            }
-        }
-
-        this.errorMessage = "";
+        this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
     }
     toggleOptional() {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.schema, this.initialValue) as number;
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
+        this.validate();
         this.updateValue.emit(this.value);
     }
 }

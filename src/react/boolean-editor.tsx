@@ -52,11 +52,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
         this.props.updateValue(this.value);
     }
     private toggleOptional = () => {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue === undefined) as boolean;
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as boolean | undefined;
         this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }

@@ -15,12 +15,7 @@ var BooleanEditorComponent = (function () {
         this.updateValue.emit(this.value);
     };
     BooleanEditorComponent.prototype.toggleOptional = function () {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.schema, this.initialValue === undefined);
-        }
-        else {
-            this.value = undefined;
-        }
+        this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
         this.updateValue.emit(this.value);
     };
     __decorate([

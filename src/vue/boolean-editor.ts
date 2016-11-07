@@ -46,11 +46,7 @@ export const booleanEditor = {
             this.$emit("update-value", this.value);
         },
         toggleOptional(this: This) {
-            if (this.value === undefined) {
-                this.value = common.getDefaultValue(true, this.schema, this.initialValue === undefined) as boolean;
-            } else {
-                this.value = undefined;
-            }
+            this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as boolean | undefined;
             this.$emit("update-value", this.value);
         },
     },

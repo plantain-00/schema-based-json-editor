@@ -206,5 +206,99 @@ function isSame(value1, value2) {
     }
     return true;
 }
-exports.isSame = isSame;
+function switchItem(value, el, sibling) {
+    var fromIndex = +el.dataset["index"];
+    if (sibling) {
+        var toIndex = +sibling.dataset["index"];
+        value.splice(toIndex, 0, value[fromIndex]);
+        if (fromIndex > toIndex) {
+            value.splice(fromIndex + 1, 1);
+        }
+        else {
+            value.splice(fromIndex, 1);
+        }
+    }
+    else {
+        value.push(value[fromIndex]);
+        value.splice(fromIndex, 1);
+    }
+}
+exports.switchItem = switchItem;
+function getErrorMessageOfArray(value, schema, locale) {
+    if (value !== undefined) {
+        if (schema.minItems !== undefined) {
+            if (value.length < schema.minItems) {
+                return locale.error.minItems.replace("{0}", String(schema.minItems));
+            }
+        }
+        if (schema.uniqueItems) {
+            for (var i = 1; i < value.length; i++) {
+                for (var j = 0; j < i; j++) {
+                    if (isSame(value[i], value[j])) {
+                        return locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
+                    }
+                }
+            }
+        }
+    }
+    return "";
+}
+exports.getErrorMessageOfArray = getErrorMessageOfArray;
+function getErrorMessageOfNumber(value, schema, locale) {
+    if (value !== undefined) {
+        if (schema.minimum !== undefined) {
+            if (schema.exclusiveMinimum) {
+                if (value <= schema.minimum) {
+                    return locale.error.largerThan.replace("{0}", String(schema.minimum));
+                }
+            }
+            else {
+                if (value < schema.minimum) {
+                    return locale.error.minimum.replace("{0}", String(schema.minimum));
+                }
+            }
+        }
+        if (schema.maximum !== undefined) {
+            if (schema.exclusiveMaximum) {
+                if (value >= schema.maximum) {
+                    return locale.error.smallerThan.replace("{0}", String(schema.maximum));
+                }
+            }
+            else {
+                if (value > schema.maximum) {
+                    return locale.error.maximum.replace("{0}", String(schema.maximum));
+                }
+            }
+        }
+    }
+    return "";
+}
+exports.getErrorMessageOfNumber = getErrorMessageOfNumber;
+function getErrorMessageOfString(value, schema, locale) {
+    if (value !== undefined) {
+        if (schema.minLength !== undefined
+            && value.length < schema.minLength) {
+            return locale.error.minLength.replace("{0}", String(schema.minLength));
+        }
+        if (schema.maxLength !== undefined
+            && value.length > schema.maxLength) {
+            return locale.error.maxLength.replace("{0}", String(schema.maxLength));
+        }
+        if (schema.pattern !== undefined
+            && !new RegExp(schema.pattern).test(value)) {
+            return locale.error.pattern.replace("{0}", String(schema.pattern));
+        }
+    }
+    return "";
+}
+exports.getErrorMessageOfString = getErrorMessageOfString;
+function toggleOptional(value, schema, initialValue) {
+    if (value === undefined) {
+        return getDefaultValue(true, schema, initialValue);
+    }
+    else {
+        return undefined;
+    }
+}
+exports.toggleOptional = toggleOptional;
 //# sourceMappingURL=common.js.map

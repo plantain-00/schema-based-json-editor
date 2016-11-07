@@ -11,12 +11,7 @@ var NullEditorComponent = (function () {
         this.updateValue.emit(this.value);
     };
     NullEditorComponent.prototype.toggleOptional = function () {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.schema, this.initialValue);
-        }
-        else {
-            this.value = undefined;
-        }
+        this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
         this.updateValue.emit(this.value);
     };
     __decorate([

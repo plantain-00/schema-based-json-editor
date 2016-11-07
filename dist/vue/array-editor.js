@@ -37,21 +37,7 @@ exports.arrayEditor = {
         this.drak = common.dragula([container]);
         this.drak.on("drop", function (el, target, source, sibling) {
             if (_this.value) {
-                var fromIndex = +el.dataset["index"];
-                if (sibling) {
-                    var toIndex = +sibling.dataset["index"];
-                    _this.value.splice(toIndex, 0, _this.value[fromIndex]);
-                    if (fromIndex > toIndex) {
-                        _this.value.splice(fromIndex + 1, 1);
-                    }
-                    else {
-                        _this.value.splice(fromIndex, 1);
-                    }
-                }
-                else {
-                    _this.value.push(_this.value[fromIndex]);
-                    _this.value.splice(fromIndex, 1);
-                }
+                common.switchItem(_this.value, el, sibling);
                 _this.renderSwitch = -_this.renderSwitch;
                 _this.$emit("update-value", _this.value);
             }
@@ -62,34 +48,12 @@ exports.arrayEditor = {
             this.collapsed = !this.collapsed;
         },
         toggleOptional: function () {
-            if (this.value === undefined) {
-                this.value = common.getDefaultValue(true, this.schema, this.initialValue);
-            }
-            else {
-                this.value = undefined;
-            }
+            this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
+            this.validate();
             this.$emit("update-value", this.value);
         },
         validate: function () {
-            if (this.value !== undefined) {
-                if (this.schema.minItems !== undefined) {
-                    if (this.value.length < this.schema.minItems) {
-                        this.errorMessage = this.locale.error.minItems.replace("{0}", String(this.schema.minItems));
-                        return;
-                    }
-                }
-                if (this.schema.uniqueItems) {
-                    for (var i = 1; i < this.value.length; i++) {
-                        for (var j = 0; j < i; j++) {
-                            if (common.isSame(this.value[i], this.value[j])) {
-                                this.errorMessage = this.locale.error.uniqueItems.replace("{0}", String(j)).replace("{1}", String(i));
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-            this.errorMessage = "";
+            this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
         },
         addItem: function () {
             this.value.push(common.getDefaultValue(true, this.schema.items, undefined));

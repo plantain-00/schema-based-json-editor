@@ -13,12 +13,7 @@ var ObjectEditorComponent = (function () {
             _this.collapsed = !_this.collapsed;
         };
         this.toggleOptional = function () {
-            if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(true, _this.schema, _this.initialValue);
-            }
-            else {
-                _this.value = undefined;
-            }
+            _this.value = common.toggleOptional(_this.value, _this.schema, _this.initialValue);
             _this.updateValue.emit(_this.value);
         };
     }

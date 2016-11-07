@@ -32,11 +32,7 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
         );
     }
     private toggleOptional = () => {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as null;
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as null | undefined;
         this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }

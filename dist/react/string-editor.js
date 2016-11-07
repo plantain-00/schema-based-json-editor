@@ -14,13 +14,8 @@ var StringEditor = (function (_super) {
             _this.props.updateValue(_this.value);
         };
         this.toggleOptional = function () {
-            if (_this.value === undefined) {
-                _this.value = common.getDefaultValue(true, _this.props.schema, _this.props.initialValue);
-                _this.validate();
-            }
-            else {
-                _this.value = undefined;
-            }
+            _this.value = common.toggleOptional(_this.value, _this.props.schema, _this.props.initialValue);
+            _this.validate();
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value);
         };
@@ -66,24 +61,7 @@ var StringEditor = (function (_super) {
             errorDescription));
     };
     StringEditor.prototype.validate = function () {
-        if (this.value !== undefined) {
-            if (this.props.schema.minLength !== undefined
-                && this.value.length < this.props.schema.minLength) {
-                this.errorMessage = this.props.locale.error.minLength.replace("{0}", String(this.props.schema.minLength));
-                return;
-            }
-            if (this.props.schema.maxLength !== undefined
-                && this.value.length > this.props.schema.maxLength) {
-                this.errorMessage = this.props.locale.error.maxLength.replace("{0}", String(this.props.schema.maxLength));
-                return;
-            }
-            if (this.props.schema.pattern !== undefined
-                && !new RegExp(this.props.schema.pattern).test(this.value)) {
-                this.errorMessage = this.props.locale.error.pattern.replace("{0}", String(this.props.schema.pattern));
-                return;
-            }
-        }
-        this.errorMessage = "";
+        this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);
     };
     return StringEditor;
 }(React.Component));

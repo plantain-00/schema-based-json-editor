@@ -65,11 +65,7 @@ export const objectEditor = {
             this.collapsed = !this.collapsed;
         },
         toggleOptional(this: This) {
-            if (this.value === undefined) {
-                this.value = common.getDefaultValue(true, this.schema, this.initialValue) as { [name: string]: common.ValueType };
-            } else {
-                this.value = undefined;
-            }
+            this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as { [name: string]: common.ValueType } | undefined;
             this.$emit("update-value", this.value);
         },
         onChange(this: This, property: string, value: common.ValueType) {

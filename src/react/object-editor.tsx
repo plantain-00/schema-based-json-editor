@@ -90,11 +90,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         this.setState({ collapsed: this.collapsed });
     }
     private toggleOptional = () => {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType } | undefined;
         this.setState({ value: this.value });
         this.props.updateValue(this.value);
     }

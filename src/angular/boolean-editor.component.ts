@@ -65,11 +65,7 @@ export class BooleanEditorComponent {
         this.updateValue.emit(this.value);
     }
     toggleOptional() {
-        if (this.value === undefined) {
-            this.value = common.getDefaultValue(true, this.schema, this.initialValue === undefined) as boolean;
-        } else {
-            this.value = undefined;
-        }
+        this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as boolean | undefined;
         this.updateValue.emit(this.value);
     }
 }

@@ -15,12 +15,7 @@ exports.nullEditor = {
     },
     methods: {
         toggleOptional: function () {
-            if (this.value === undefined) {
-                this.value = common.getDefaultValue(true, this.schema, this.initialValue);
-            }
-            else {
-                this.value = undefined;
-            }
+            this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
             this.$emit("update-value", this.value);
         },
     },
