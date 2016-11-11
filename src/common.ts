@@ -1,10 +1,10 @@
 import "tslib";
 
-declare const require: (name: string) => any;
+import * as toNumber from "lodash/toNumber";
+import * as toInteger from "lodash/toInteger";
+import * as debounce from "lodash/debounce";
 
-export const toNumber: (value?: any) => number = require("lodash.tonumber");
-export const toInteger: (value?: any) => number = require("lodash.tointeger");
-export const debounce: (func: (...args: any[]) => any, wait: number) => (...args: any[]) => any = require("lodash.debounce");
+export { toNumber, toInteger, debounce };
 
 import * as dragula from "dragula";
 export { dragula };

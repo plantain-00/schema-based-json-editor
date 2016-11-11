@@ -88,6 +88,8 @@ export class JSONEditorComponent {
         this.iconObject = common.getIcon(this.icon, this.localeObject);
     }
 }
+import { Cancelable } from "lodash";
+export type Cancelable = Cancelable;
 
 import { BooleanEditorComponent } from "./boolean-editor.component";
 export { BooleanEditorComponent };

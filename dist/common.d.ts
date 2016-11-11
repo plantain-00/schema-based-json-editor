@@ -1,7 +1,8 @@
 import "tslib";
-export declare const toNumber: (value?: any) => number;
-export declare const toInteger: (value?: any) => number;
-export declare const debounce: (func: (...args: any[]) => any, wait: number) => (...args: any[]) => any;
+import * as toNumber from "lodash/toNumber";
+import * as toInteger from "lodash/toInteger";
+import * as debounce from "lodash/debounce";
+export { toNumber, toInteger, debounce };
 import * as dragula from "dragula";
 export { dragula };
 export declare type CommonSchema = {

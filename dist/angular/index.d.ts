@@ -1,3 +1,4 @@
+/// <reference types="lodash" />
 import { EventEmitter } from "@angular/core";
 import * as common from "../common";
 export declare class JSONEditorComponent {
@@ -11,9 +12,11 @@ export declare class JSONEditorComponent {
     themeObject: common.Theme;
     localeObject: common.Locale;
     iconObject: common.Icon;
-    updateValueFunction: (...args: any[]) => any;
+    updateValueFunction: ((value: any) => void) & Cancelable;
     ngOnInit(): void;
 }
+import { Cancelable } from "lodash";
+export declare type Cancelable = Cancelable;
 import { BooleanEditorComponent } from "./boolean-editor.component";
 export { BooleanEditorComponent };
 import { ArrayEditorComponent } from "./array-editor.component";
