@@ -15,11 +15,14 @@ export declare const objectEditor: {
         isRequired(this: This, property: string): any;
         collapseOrExpand(this: This): void;
         toggleOptional(this: This): void;
-        onChange(this: This, property: string, value: common.ValueType): void;
+        onChange(this: This, property: string, {value, isValid}: {
+            value: common.ValueType;
+            isValid: boolean;
+        }): void;
     };
 };
 export declare type This = {
-    $emit: (event: string, ...args: any[]) => void;
+    $emit: (event: string, args: common.ValidityValue<common.ValueType | undefined>) => void;
     value?: {
         [name: string]: common.ValueType;
     };

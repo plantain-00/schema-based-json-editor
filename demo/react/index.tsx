@@ -16,9 +16,7 @@ class Main extends React.Component<{}, {}> {
             <div>
                 <div style={{ float: "left", margin: "10px", width: "400px" }}>
                     Schema:
-                    <pre>
-                        {JSON.stringify(schema, null, "  ")}
-                    </pre>
+                    <pre>{JSON.stringify(schema, null, "  ")}</pre>
                 </div>
                 <div style={{ width: "500px", margin: "10px", float: "left" }} className="bootstrap3-row-container">
                     GUI:
@@ -31,13 +29,9 @@ class Main extends React.Component<{}, {}> {
                 </div>
                 <div style={{ float: "left", margin: "10px", width: "400px" }}>
                     Value Is Valid:
-                    <pre>
-                        {String(this.isValid)}
-                    </pre>
+                    <pre>{String(this.isValid)}</pre>
                     Value:
-                    <pre>
-                        {JSON.stringify(this.value, null, "  ")}
-                    </pre>
+                    <pre>{JSON.stringify(this.value, null, "  ")}</pre>
                 </div>
             </div>
         );

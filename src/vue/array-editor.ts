@@ -48,13 +48,14 @@ export const arrayEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function (this: This) {
+    data: function(this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
-        this.$emit("update-value", value);
+        this.$emit("update-value", { value, isValid: !this.errorMessage });
         return {
             renderSwitch: 1,
             collapsed: false,
             value,
+            isValid: false,
             drak: undefined,
             errorMessage: undefined,
             buttonGroupStyleString: common.buttonGroupStyleString,
@@ -81,7 +82,7 @@ export const arrayEditor = {
             if (this.value) {
                 common.switchItem(this.value, el, sibling);
                 this.renderSwitch = -this.renderSwitch;
-                this.$emit("update-value", this.value);
+                this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
             }
         });
     },
@@ -92,32 +93,32 @@ export const arrayEditor = {
         toggleOptional(this: This) {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as common.ValueType[] | undefined;
             this.validate();
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
         validate(this: This) {
             this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
         },
         addItem(this: This) {
             this.value!.push(common.getDefaultValue(true, this.schema.items, undefined) !);
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
         onDeleteFunction(this: This, i: number) {
             this.value!.splice(i, 1);
             this.renderSwitch = -this.renderSwitch;
-            this.$emit("update-value", this.value);
             this.validate();
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
-        onChange(this: This, i: number, value: common.ValueType) {
+        onChange(this: This, i: number, {value, isValid}: common.ValidityValue<common.ValueType>) {
             this.value![i] = value;
-            this.$emit("update-value", this.value);
             this.validate();
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && isValid });
         },
     },
 };
 
 export type This = {
     drak: common.dragula.Drake;
-    $emit: (event: string, ...args: any[]) => void;
+    $emit: (event: string, args: common.ValidityValue<common.ValueType[] | undefined>) => void;
     required: boolean;
     schema: any;
     initialValue: common.ValueType[];

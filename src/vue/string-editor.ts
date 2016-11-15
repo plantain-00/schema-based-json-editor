@@ -48,9 +48,9 @@ export const stringEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function(this: This) {
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
-        this.$emit("update-value", value);
+        this.$emit("update-value", { value, isValid: !this.errorMessage });
         return {
             value,
             errorMessage: undefined,
@@ -72,7 +72,7 @@ export const stringEditor = {
         onChange(this: This, e: { target: { value: string } }) {
             this.value = e.target.value;
             this.validate();
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
         validate(this: This) {
             this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
@@ -80,13 +80,13 @@ export const stringEditor = {
         toggleOptional(this: This) {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;
             this.validate();
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
     },
 };
 
 export type This = {
-    $emit: (event: string, ...args: any[]) => void;
+    $emit: (event: string, args: common.ValidityValue<common.ValueType | undefined>) => void;
     validate: () => void;
     value?: string;
     errorMessage?: string;

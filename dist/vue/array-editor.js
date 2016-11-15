@@ -8,11 +8,12 @@ exports.arrayEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function () {
         var value = common.getDefaultValue(this.required, this.schema, this.initialValue);
-        this.$emit("update-value", value);
+        this.$emit("update-value", { value: value, isValid: !this.errorMessage });
         return {
             renderSwitch: 1,
             collapsed: false,
             value: value,
+            isValid: false,
             drak: undefined,
             errorMessage: undefined,
             buttonGroupStyleString: common.buttonGroupStyleString,
@@ -39,7 +40,7 @@ exports.arrayEditor = {
             if (_this.value) {
                 common.switchItem(_this.value, el, sibling);
                 _this.renderSwitch = -_this.renderSwitch;
-                _this.$emit("update-value", _this.value);
+                _this.$emit("update-value", { value: _this.value, isValid: !_this.errorMessage });
             }
         });
     },
@@ -50,25 +51,26 @@ exports.arrayEditor = {
         toggleOptional: function () {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
             this.validate();
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
         validate: function () {
             this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
         },
         addItem: function () {
             this.value.push(common.getDefaultValue(true, this.schema.items, undefined));
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
         onDeleteFunction: function (i) {
             this.value.splice(i, 1);
             this.renderSwitch = -this.renderSwitch;
-            this.$emit("update-value", this.value);
             this.validate();
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
-        onChange: function (i, value) {
+        onChange: function (i, _a) {
+            var value = _a.value, isValid = _a.isValid;
             this.value[i] = value;
-            this.$emit("update-value", this.value);
             this.validate();
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && isValid });
         },
     },
 };

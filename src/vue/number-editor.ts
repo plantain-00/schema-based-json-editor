@@ -45,7 +45,7 @@ export const numberEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
-        this.$emit("update-value", value);
+        this.$emit("update-value", { value, isValid: !this.errorMessage });
         return {
             value,
             errorMessage: undefined,
@@ -61,7 +61,7 @@ export const numberEditor = {
         onChange(this: This, e: { target: { value: string } }) {
             this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
             this.validate();
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
         validate(this: This) {
             this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
@@ -69,13 +69,13 @@ export const numberEditor = {
         toggleOptional(this: This) {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
             this.validate();
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
     },
 };
 
 export type This = {
-    $emit: (event: string, ...args: any[]) => void;
+    $emit: (event: string, args: common.ValidityValue<number | undefined>) => void;
     value?: number;
     errorMessage?: string;
     schema: any;

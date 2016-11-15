@@ -94,14 +94,14 @@ Vue.component("json-editor", {
         };
     },
     methods: {
-        updateValueFunction: common.debounce(function (this: This, value: any) {
-            this.$emit("update-value", value);
+        updateValueFunction: common.debounce(function (this: This, validityValue: common.ValidityValue<common.ValueType>) {
+            this.$emit("update-value", validityValue);
         }, 100),
     },
 });
 
 export type This = {
-    $emit: (event: string, ...args: any[]) => void;
+    $emit: (event: string, args: common.ValidityValue<common.ValueType>) => void;
     locale: common.Locale;
     theme: common.Theme;
     icon: common.Icon;

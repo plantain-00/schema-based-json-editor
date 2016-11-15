@@ -19,7 +19,7 @@ export declare const numberEditor: {
     };
 };
 export declare type This = {
-    $emit: (event: string, ...args: any[]) => void;
+    $emit: (event: string, args: common.ValidityValue<number | undefined>) => void;
     value?: number;
     errorMessage?: string;
     schema: any;

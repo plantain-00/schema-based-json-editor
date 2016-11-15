@@ -21,7 +21,7 @@ export declare const stringEditor: {
     };
 };
 export declare type This = {
-    $emit: (event: string, ...args: any[]) => void;
+    $emit: (event: string, args: common.ValidityValue<common.ValueType | undefined>) => void;
     validate: () => void;
     value?: string;
     errorMessage?: string;

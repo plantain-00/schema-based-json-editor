@@ -19,7 +19,7 @@ exports.objectEditor = {
                 _loop_1(property);
             }
         }
-        this.$emit("update-value", value);
+        this.$emit("update-value", { value: value, isValid: true });
         return {
             collapsed: false,
             value: value,
@@ -35,11 +35,12 @@ exports.objectEditor = {
         },
         toggleOptional: function () {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: true });
         },
-        onChange: function (property, value) {
+        onChange: function (property, _a) {
+            var value = _a.value, isValid = _a.isValid;
             this.value[property] = value;
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: isValid });
         },
     },
 };

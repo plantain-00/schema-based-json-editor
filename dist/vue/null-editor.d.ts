@@ -1,3 +1,4 @@
+import * as common from "../common";
 export declare const nullEditor: {
     template: string;
     props: string[];
@@ -9,7 +10,7 @@ export declare const nullEditor: {
     };
 };
 export declare type This = {
-    $emit: (event: string, ...args: any[]) => void;
+    $emit: (event: string, args: common.ValidityValue<null | undefined>) => void;
     value?: null;
     schema: any;
     initialValue: null;

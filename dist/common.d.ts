@@ -122,3 +122,7 @@ export declare function getErrorMessageOfString(value: string | undefined, schem
 export declare function toggleOptional(value: ValueType | undefined, schema: Schema, initialValue: any): string | number | boolean | any[] | {
     [name: string]: any;
 } | null | undefined;
+export declare type ValidityValue<T> = {
+    value: T;
+    isValid: boolean;
+};

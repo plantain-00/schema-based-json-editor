@@ -472,3 +472,8 @@ export function toggleOptional(value: ValueType | undefined, schema: Schema, ini
         return undefined;
     }
 }
+
+export type ValidityValue<T> = {
+    value: T;
+    isValid: boolean;
+}

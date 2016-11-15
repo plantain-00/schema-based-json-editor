@@ -8,7 +8,7 @@ exports.nullEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function () {
         var value = common.getDefaultValue(this.required, this.schema, this.initialValue);
-        this.$emit("update-value", value);
+        this.$emit("update-value", { value: value, isValid: true });
         return {
             value: value,
         };
@@ -16,7 +16,7 @@ exports.nullEditor = {
     methods: {
         toggleOptional: function () {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: true });
         },
     },
 };

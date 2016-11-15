@@ -25,7 +25,7 @@ import { JSONEditor } from "schema-based-json-editor/dist/react/index";
 ```jsx
 <JSONEditor schema={schema}
     initialValue={initialValue}
-    updateValue={value => this.value = value}
+    updateValue={(value, isValid) => this.updateValue(value, isValid)}
     theme="bootstrap3"
     icon="fontawesome4"
     locale="zh-cn" />

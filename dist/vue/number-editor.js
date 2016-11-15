@@ -8,7 +8,7 @@ exports.numberEditor = {
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function () {
         var value = common.getDefaultValue(this.required, this.schema, this.initialValue);
-        this.$emit("update-value", value);
+        this.$emit("update-value", { value: value, isValid: !this.errorMessage });
         return {
             value: value,
             errorMessage: undefined,
@@ -24,7 +24,7 @@ exports.numberEditor = {
         onChange: function (e) {
             this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
             this.validate();
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
         validate: function () {
             this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
@@ -32,7 +32,7 @@ exports.numberEditor = {
         toggleOptional: function () {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
             this.validate();
-            this.$emit("update-value", this.value);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
         },
     },
 };
