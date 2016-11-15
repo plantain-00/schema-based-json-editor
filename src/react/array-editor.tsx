@@ -10,13 +10,14 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
     private value?: common.ValueType[];
     private drak: common.dragula.Drake;
     private errorMessage: string;
+    private invalidIndexes: number[] = [];
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[];
         this.validate();
     }
     componentDidMount() {
-        this.props.updateValue(this.value, !this.errorMessage);
+        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
         const container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as HTMLElement;
         this.drak = common.dragula([container]);
         this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
@@ -24,7 +25,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                 common.switchItem(this.value, el, sibling);
                 this.renderSwitch = -this.renderSwitch;
                 this.setState({ value: this.value, renderSwitch: this.renderSwitch });
-                this.props.updateValue(this.value, !this.errorMessage);
+                this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
             }
         });
     }
@@ -42,14 +43,15 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                     this.value![i] = value;
                     this.setState({ value: this.value });
                     this.validate();
-                    this.props.updateValue(this.value, !this.errorMessage && isValid);
+                    common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
+                    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
                 };
                 const onDelete = () => {
                     this.value!.splice(i, 1);
                     this.renderSwitch = -this.renderSwitch;
                     this.setState({ value: this.value, renderSwitch: this.renderSwitch });
                     this.validate();
-                    this.props.updateValue(this.value, !this.errorMessage);
+                    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
                 };
                 const key = (1 + i) * this.renderSwitch;
                 itemElements.push((
@@ -90,7 +92,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             const addItem = () => {
                 this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined) !);
                 this.setState({ value: this.value });
-                this.props.updateValue(this.value, !this.errorMessage);
+                this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
             };
             addButton = (
                 <button className={this.props.theme.button} onClick={addItem}>
@@ -140,7 +142,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as common.ValueType[] | undefined;
         this.validate();
         this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
+        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
     private validate() {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.props.schema, this.props.locale);

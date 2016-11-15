@@ -11,6 +11,7 @@ export declare class ObjectEditor extends React.Component<common.Props<common.Ob
 }> {
     private collapsed;
     private value?;
+    private invalidProperties;
     constructor(props: common.Props<common.ObjectSchema, {
         [name: string]: common.ValueType;
     }>);

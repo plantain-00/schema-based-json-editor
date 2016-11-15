@@ -17,7 +17,7 @@ export declare const booleanEditor: {
 export declare type This = {
     $emit: (event: string, args: common.ValidityValue<boolean | undefined>) => void;
     required: boolean;
-    schema: any;
+    schema: common.BooleanSchema;
     initialValue: boolean;
     value?: boolean;
 };

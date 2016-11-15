@@ -78,7 +78,7 @@ export type This = {
     $emit: (event: string, args: common.ValidityValue<number | undefined>) => void;
     value?: number;
     errorMessage?: string;
-    schema: any;
+    schema: common.NumberSchema;
     initialValue: number;
     locale: common.Locale;
     validate: () => void;

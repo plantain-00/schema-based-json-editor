@@ -9,12 +9,13 @@ var ObjectEditorComponent = (function () {
         this.collapsed = false;
         this.properties = [];
         this.buttonGroupStyle = common.buttonGroupStyle;
+        this.invalidProperties = [];
         this.collapseOrExpand = function () {
             _this.collapsed = !_this.collapsed;
         };
         this.toggleOptional = function () {
             _this.value = common.toggleOptional(_this.value, _this.schema, _this.initialValue);
-            _this.updateValue.emit({ value: _this.value, isValid: true });
+            _this.updateValue.emit({ value: _this.value, isValid: _this.invalidProperties.length === 0 });
         };
     }
     ObjectEditorComponent.prototype.ngOnInit = function () {
@@ -34,7 +35,7 @@ var ObjectEditorComponent = (function () {
                 _loop_1(property);
             }
         }
-        this.updateValue.emit({ value: this.value, isValid: true });
+        this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     };
     ObjectEditorComponent.prototype.isRequired = function (property) {
         return this.schema.required && this.schema.required.some(function (r) { return r === property; });
@@ -45,7 +46,8 @@ var ObjectEditorComponent = (function () {
     ObjectEditorComponent.prototype.onChange = function (property, _a) {
         var value = _a.value, isValid = _a.isValid;
         this.value[property] = value;
-        this.updateValue.emit({ value: this.value, isValid: isValid });
+        common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
+        this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     };
     ObjectEditorComponent.prototype.hasDeleteButtonFunction = function () {
         return this.hasDeleteButton && !this.readonly && !this.schema.readonly;

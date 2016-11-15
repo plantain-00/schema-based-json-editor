@@ -14,11 +14,11 @@ class Main extends React.Component<{}, {}> {
     render() {
         return (
             <div>
-                <div style={{ float: "left", margin: "10px", width: "400px" }}>
+                <div style={{ float: "left", margin: "10px", width: "400px", overflowY: "scroll", height: "600px" }}>
                     Schema:
                     <pre>{JSON.stringify(schema, null, "  ")}</pre>
                 </div>
-                <div style={{ width: "500px", margin: "10px", float: "left" }} className="bootstrap3-row-container">
+                <div style={{ width: "500px", margin: "10px", float: "left", overflowY: "scroll", height: "600px" }} className="bootstrap3-row-container">
                     GUI:
                     <JSONEditor schema={schema}
                         initialValue={this.value}
@@ -27,11 +27,9 @@ class Main extends React.Component<{}, {}> {
                         icon="fontawesome4"
                         locale="zh-cn" />
                 </div>
-                <div style={{ float: "left", margin: "10px", width: "400px" }}>
-                    Value Is Valid:
-                    <pre>{String(this.isValid)}</pre>
+                <div style={{ float: "left", margin: "10px", width: "400px", overflowY: "scroll", height: "600px" }}>
                     Value:
-                    <pre>{JSON.stringify(this.value, null, "  ")}</pre>
+                    <pre style={{ color: this.isValid ? "black" : "red" }}>{JSON.stringify(this.value, null, "  ")}</pre>
                 </div>
             </div>
         );

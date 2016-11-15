@@ -16,6 +16,7 @@ exports.arrayEditor = {
             drak: undefined,
             errorMessage: undefined,
             buttonGroupStyleString: common.buttonGroupStyleString,
+            invalidIndexes: [],
         };
     },
     beforeDestroy: function () {
@@ -39,7 +40,7 @@ exports.arrayEditor = {
             if (_this.value) {
                 common.switchItem(_this.value, el, sibling);
                 _this.renderSwitch = -_this.renderSwitch;
-                _this.$emit("update-value", { value: _this.value, isValid: !_this.errorMessage });
+                _this.$emit("update-value", { value: _this.value, isValid: !_this.errorMessage && _this.invalidIndexes.length === 0 });
             }
         });
     },
@@ -50,26 +51,27 @@ exports.arrayEditor = {
         toggleOptional: function () {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
             this.validate();
-            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
         },
         validate: function () {
             this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
         },
         addItem: function () {
             this.value.push(common.getDefaultValue(true, this.schema.items, undefined));
-            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
         },
         onDeleteFunction: function (i) {
             this.value.splice(i, 1);
             this.renderSwitch = -this.renderSwitch;
             this.validate();
-            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
         },
         onChange: function (i, _a) {
             var value = _a.value, isValid = _a.isValid;
             this.value[i] = value;
             this.validate();
-            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && isValid });
+            common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
+            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
         },
     },
 };

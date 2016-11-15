@@ -9,10 +9,10 @@ import * as common from "../../dist/common";
 /* tslint:disable:object-literal-shorthand */
 
 type This = {
-    schema: any;
+    schema: common.Schema;
     value: any;
-    isValidString: string;
-    valueString: any;
+    color: string;
+    valueString: string;
 }
 
 new Vue({
@@ -22,7 +22,7 @@ new Vue({
         return {
             schema,
             value,
-            isValidString: "false",
+            color: "black",
             valueString: JSON.stringify(value, null, "  "),
             schemaString: JSON.stringify(schema, null, "  "),
         };
@@ -30,7 +30,7 @@ new Vue({
     methods: {
         updateValue(this: This, {value, isValid}: common.ValidityValue<common.ValueType>) {
             this.valueString = JSON.stringify(value, null, "  ");
-            this.isValidString = String(isValid);
+            this.color = isValid ? "black" : "red";
         },
     },
 });

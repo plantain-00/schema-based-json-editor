@@ -11,6 +11,7 @@ var ArrayEditor = (function (_super) {
         _super.call(this, props);
         this.renderSwitch = 1;
         this.collapsed = false;
+        this.invalidIndexes = [];
         this.collapseOrExpand = function () {
             _this.collapsed = !_this.collapsed;
             _this.setState({ collapsed: _this.collapsed });
@@ -19,14 +20,14 @@ var ArrayEditor = (function (_super) {
             _this.value = common.toggleOptional(_this.value, _this.props.schema, _this.props.initialValue);
             _this.validate();
             _this.setState({ value: _this.value });
-            _this.props.updateValue(_this.value, !_this.errorMessage);
+            _this.props.updateValue(_this.value, !_this.errorMessage && _this.invalidIndexes.length === 0);
         };
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         this.validate();
     }
     ArrayEditor.prototype.componentDidMount = function () {
         var _this = this;
-        this.props.updateValue(this.value, !this.errorMessage);
+        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
         var container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
         this.drak = common.dragula([container]);
         this.drak.on("drop", function (el, target, source, sibling) {
@@ -34,7 +35,7 @@ var ArrayEditor = (function (_super) {
                 common.switchItem(_this.value, el, sibling);
                 _this.renderSwitch = -_this.renderSwitch;
                 _this.setState({ value: _this.value, renderSwitch: _this.renderSwitch });
-                _this.props.updateValue(_this.value, !_this.errorMessage);
+                _this.props.updateValue(_this.value, !_this.errorMessage && _this.invalidIndexes.length === 0);
             }
         });
     };
@@ -53,14 +54,15 @@ var ArrayEditor = (function (_super) {
                     _this.value[i] = value;
                     _this.setState({ value: _this.value });
                     _this.validate();
-                    _this.props.updateValue(_this.value, !_this.errorMessage && isValid);
+                    common.recordInvalidIndexesOfArray(_this.invalidIndexes, isValid, i);
+                    _this.props.updateValue(_this.value, !_this.errorMessage && _this.invalidIndexes.length === 0);
                 };
                 var onDelete = function () {
                     _this.value.splice(i, 1);
                     _this.renderSwitch = -_this.renderSwitch;
                     _this.setState({ value: _this.value, renderSwitch: _this.renderSwitch });
                     _this.validate();
-                    _this.props.updateValue(_this.value, !_this.errorMessage);
+                    _this.props.updateValue(_this.value, !_this.errorMessage && _this.invalidIndexes.length === 0);
                 };
                 var key = (1 + i) * this_1.renderSwitch;
                 itemElements.push((React.createElement("div", {key: key, "data-index": i, className: this_1.props.theme.rowContainer}, 
@@ -87,7 +89,7 @@ var ArrayEditor = (function (_super) {
             var addItem = function () {
                 _this.value.push(common.getDefaultValue(true, _this.props.schema.items, undefined));
                 _this.setState({ value: _this.value });
-                _this.props.updateValue(_this.value, !_this.errorMessage);
+                _this.props.updateValue(_this.value, !_this.errorMessage && _this.invalidIndexes.length === 0);
             };
             addButton = (React.createElement("button", {className: this.props.theme.button, onClick: addItem}, 
                 React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.add})

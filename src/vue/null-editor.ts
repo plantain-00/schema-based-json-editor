@@ -42,7 +42,7 @@ export const nullEditor = {
 export type This = {
     $emit: (event: string, args: common.ValidityValue<null | undefined>) => void;
     value?: null;
-    schema: any;
+    schema: common.NullSchema;
     initialValue: null;
     required: boolean;
 }

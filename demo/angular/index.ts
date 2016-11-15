@@ -18,11 +18,11 @@ import * as common from "../../dist/common";
     selector: "app",
     template: `
     <div>
-        <div style="width: 400px; margin: 10px; float: left">
+        <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
             Schema:
             <pre>{{schemaString}}</pre>
         </div>
-        <div style="width: 500px; margin: 10px; float: left" class="bootstrap3-row-container">
+        <div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
             GUI:
             <json-editor [schema]="schema"
                 [initialValue]="value"
@@ -32,11 +32,9 @@ import * as common from "../../dist/common";
                 locale="zh-cn">
             </json-editor>
         </div>
-        <div style="width: 400px; margin: 10px; float: left">
-            Value Is Valid:
-            <pre>{{getIsValidString()}}</pre>
+        <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
             Value:
-            <pre>{{getValueString()}}</pre>
+            <pre [style.color]="color">{{getValueString()}}</pre>
         </div>
     </div>
     `,
@@ -45,16 +43,13 @@ export class MainComponent {
     schema = schema;
     schemaString = JSON.stringify(schema, null, "  ");
     value: any = {};
-    isValid = false;
+    color = "black";
     getValueString() {
         return JSON.stringify(this.value, null, "  ");
     }
     updateValue({value, isValid}: common.ValidityValue<common.ValueType>) {
         this.value = value;
-        this.isValid = isValid;
-    }
-    getIsValidString() {
-        return String(this.isValid);
+        this.color = isValid ? "black" : "red";
     }
 }
 

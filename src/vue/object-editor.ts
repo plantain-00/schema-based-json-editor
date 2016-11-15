@@ -55,6 +55,7 @@ export const objectEditor = {
             collapsed: false,
             value,
             buttonGroupStyle: common.buttonGroupStyle,
+            invalidProperties: [],
         };
     },
     methods: {
@@ -66,11 +67,12 @@ export const objectEditor = {
         },
         toggleOptional(this: This) {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as { [name: string]: common.ValueType } | undefined;
-            this.$emit("update-value", { value: this.value, isValid: true });
+            this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
         },
         onChange(this: This, property: string, {value, isValid}: common.ValidityValue<common.ValueType>) {
             this.value![property] = value;
-            this.$emit("update-value", { value: this.value, isValid });
+            common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
+            this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
         },
     },
 };
@@ -79,7 +81,8 @@ export type This = {
     $emit: (event: string, args: common.ValidityValue<{ [name: string]: common.ValueType } | undefined>) => void;
     value?: { [name: string]: common.ValueType };
     collapsed: boolean;
-    schema: any;
+    schema: common.ObjectSchema;
     initialValue: any;
     required: boolean;
+    invalidProperties: string[];
 }

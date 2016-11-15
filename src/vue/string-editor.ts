@@ -90,7 +90,7 @@ export type This = {
     validate: () => void;
     value?: string;
     errorMessage?: string;
-    schema: any;
+    schema: common.StringSchema;
     initialValue: string;
     locale: common.Locale;
     readonly: boolean;

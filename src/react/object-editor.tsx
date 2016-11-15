@@ -6,6 +6,7 @@ import { Icon } from "./icon";
 export class ObjectEditor extends React.Component<common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
     private collapsed = false;
     private value?: { [name: string]: common.ValueType };
+    private invalidProperties: string[] = [];
     constructor(props: common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
@@ -18,7 +19,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         }
     }
     componentDidMount() {
-        this.props.updateValue(this.value, true);
+        this.props.updateValue(this.value, this.invalidProperties.length === 0);
     }
     render() {
         let childrenElement: JSX.Element | null = null;
@@ -28,7 +29,8 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                 const onChange = (value: common.ValueType, isValid: boolean) => {
                     this.value![property] = value;
                     this.setState({ value: this.value });
-                    this.props.updateValue(this.value, isValid);
+                    common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
+                    this.props.updateValue(this.value, this.invalidProperties.length === 0);
                 };
                 const schema = this.props.schema.properties[property];
                 const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
@@ -92,6 +94,6 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType } | undefined;
         this.setState({ value: this.value });
-        this.props.updateValue(this.value, true);
+        this.props.updateValue(this.value, this.invalidProperties.length === 0);
     }
 }

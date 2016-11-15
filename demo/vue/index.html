@@ -26,11 +26,11 @@
 
 <body>
 	<div id="container">
-		<div style="width: 400px; margin: 10px; float: left">
+		<div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
 			Schema:
 			<pre>{{schemaString}}</pre>
 		</div>
-		<div style="width: 500px; margin: 10px; float: left" class="bootstrap3-row-container">
+		<div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
 			GUI:
 			<json-editor :schema="schema"
 			    :initial-value="value"
@@ -40,11 +40,9 @@
 				locale="zh-cn">
 			</json-editor>
 		</div>
-		<div style="width: 400px; margin: 10px; float: left">
-			Value Is Valid:
-            <pre>{{isValidString}}</pre>
+		<div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
             Value:
-			<pre>{{valueString}}</pre>
+			<pre :style="{color: color}">{{valueString}}</pre>
 		</div>
 	</div>
 	<script src="../vue.bundle.js"></script>

@@ -10,9 +10,10 @@ export declare const objectEditor: {
         buttonGroupStyle: {
             marginLeft: string;
         };
+        invalidProperties: never[];
     };
     methods: {
-        isRequired(this: This, property: string): any;
+        isRequired(this: This, property: string): boolean | undefined;
         collapseOrExpand(this: This): void;
         toggleOptional(this: This): void;
         onChange(this: This, property: string, {value, isValid}: {
@@ -29,7 +30,8 @@ export declare type This = {
         [name: string]: common.ValueType;
     };
     collapsed: boolean;
-    schema: any;
+    schema: common.ObjectSchema;
     initialValue: any;
     required: boolean;
+    invalidProperties: string[];
 };

@@ -11,6 +11,7 @@ export declare class ArrayEditor extends React.Component<common.Props<common.Arr
     private value?;
     private drak;
     private errorMessage;
+    private invalidIndexes;
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>);
     componentDidMount(): void;
     componentWillUnmount(): void;

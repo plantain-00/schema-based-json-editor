@@ -30,6 +30,7 @@ export declare class ObjectEditorComponent {
     buttonGroupStyle: {
         marginLeft: string;
     };
+    invalidProperties: string[];
     ngOnInit(): void;
     isRequired(property: string): boolean | undefined;
     trackByFunction(index: number, value: {

@@ -65,6 +65,7 @@ export class ObjectEditorComponent {
     value?: { [name: string]: common.ValueType };
     properties: { name: string; value: common.ValueType }[] = [];
     buttonGroupStyle = common.buttonGroupStyle;
+    invalidProperties: string[] = [];
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
         if (!this.collapsed && this.value !== undefined) {
@@ -79,7 +80,7 @@ export class ObjectEditorComponent {
                 });
             }
         }
-        this.updateValue.emit({ value: this.value, isValid: true });
+        this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     }
     isRequired(property: string) {
         return this.schema.required && this.schema.required.some(r => r === property);
@@ -92,11 +93,12 @@ export class ObjectEditorComponent {
     }
     toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as { [name: string]: common.ValueType } | undefined;
-        this.updateValue.emit({ value: this.value, isValid: true });
+        this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     }
     onChange(property: string, {value, isValid}: common.ValidityValue<{ [name: string]: common.ValueType }>) {
         this.value![property] = value;
-        this.updateValue.emit({ value: this.value, isValid });
+        common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
+        this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     }
     hasDeleteButtonFunction() {
         return this.hasDeleteButton && !this.readonly && !this.schema.readonly;

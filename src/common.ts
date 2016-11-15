@@ -477,3 +477,29 @@ export type ValidityValue<T> = {
     value: T;
     isValid: boolean;
 }
+
+export function recordInvalidPropertiesOfObject(invalidProperties: string[], isValid: boolean, property: string) {
+    const index = invalidProperties.indexOf(property);
+    if (isValid) {
+        if (index !== -1) {
+            invalidProperties.splice(index, 1);
+        }
+    } else {
+        if (index === -1) {
+            invalidProperties.push(property);
+        }
+    }
+}
+
+export function recordInvalidIndexesOfArray(invalidIndexes: number[], isValid: boolean, i: number) {
+    const index = invalidIndexes.indexOf(i);
+    if (isValid) {
+        if (index !== -1) {
+            invalidIndexes.splice(index, 1);
+        }
+    } else {
+        if (index === -1) {
+            invalidIndexes.push(i);
+        }
+    }
+}

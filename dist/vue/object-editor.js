@@ -24,6 +24,7 @@ exports.objectEditor = {
             collapsed: false,
             value: value,
             buttonGroupStyle: common.buttonGroupStyle,
+            invalidProperties: [],
         };
     },
     methods: {
@@ -35,12 +36,13 @@ exports.objectEditor = {
         },
         toggleOptional: function () {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
-            this.$emit("update-value", { value: this.value, isValid: true });
+            this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
         },
         onChange: function (property, _a) {
             var value = _a.value, isValid = _a.isValid;
             this.value[property] = value;
-            this.$emit("update-value", { value: this.value, isValid: isValid });
+            common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
+            this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
         },
     },
 };

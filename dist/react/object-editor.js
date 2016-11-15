@@ -9,6 +9,7 @@ var ObjectEditor = (function (_super) {
         var _this = this;
         _super.call(this, props);
         this.collapsed = false;
+        this.invalidProperties = [];
         this.collapseOrExpand = function () {
             _this.collapsed = !_this.collapsed;
             _this.setState({ collapsed: _this.collapsed });
@@ -16,7 +17,7 @@ var ObjectEditor = (function (_super) {
         this.toggleOptional = function () {
             _this.value = common.toggleOptional(_this.value, _this.props.schema, _this.props.initialValue);
             _this.setState({ value: _this.value });
-            _this.props.updateValue(_this.value, true);
+            _this.props.updateValue(_this.value, _this.invalidProperties.length === 0);
         };
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         if (!this.collapsed && this.value !== undefined) {
@@ -32,7 +33,7 @@ var ObjectEditor = (function (_super) {
         }
     }
     ObjectEditor.prototype.componentDidMount = function () {
-        this.props.updateValue(this.value, true);
+        this.props.updateValue(this.value, this.invalidProperties.length === 0);
     };
     ObjectEditor.prototype.render = function () {
         var _this = this;
@@ -43,7 +44,8 @@ var ObjectEditor = (function (_super) {
                 var onChange = function (value, isValid) {
                     _this.value[property] = value;
                     _this.setState({ value: _this.value });
-                    _this.props.updateValue(_this.value, isValid);
+                    common.recordInvalidPropertiesOfObject(_this.invalidProperties, isValid, property);
+                    _this.props.updateValue(_this.value, _this.invalidProperties.length === 0);
                 };
                 var schema = this_2.props.schema.properties[property];
                 var required = this_2.props.schema.required && this_2.props.schema.required.some(function (r) { return r === property; });

@@ -23,6 +23,7 @@ export declare class ArrayEditorComponent {
     drak: common.dragula.Drake;
     errorMessage: string;
     buttonGroupStyleString: string;
+    invalidIndexes: number[];
     getValue(): common.ValueType[];
     ngOnInit(): void;
     ngAfterViewInit(): void;

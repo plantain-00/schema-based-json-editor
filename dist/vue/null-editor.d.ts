@@ -12,7 +12,7 @@ export declare const nullEditor: {
 export declare type This = {
     $emit: (event: string, args: common.ValidityValue<null | undefined>) => void;
     value?: null;
-    schema: any;
+    schema: common.NullSchema;
     initialValue: null;
     required: boolean;
 };

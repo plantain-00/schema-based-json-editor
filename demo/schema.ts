@@ -1,4 +1,6 @@
-export const schema: any = {
+import * as common from "../dist/common";
+
+export const schema: common.Schema = {
     type: "object",
     title: "A Title example",
     description: "a description example",
@@ -60,6 +62,7 @@ export const schema: any = {
             description: "a array description example",
             items: {
                 type: "string",
+                minLength: 10,
             },
             default: ["default item 1", "default item 2"],
             minItems: 1,

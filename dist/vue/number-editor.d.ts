@@ -7,7 +7,7 @@ export declare const numberEditor: {
         errorMessage: undefined;
     };
     methods: {
-        useInput(this: This): any;
+        useInput(this: This): boolean | undefined;
         useSelect(this: This): boolean;
         onChange(this: This, e: {
             target: {
@@ -22,7 +22,7 @@ export declare type This = {
     $emit: (event: string, args: common.ValidityValue<number | undefined>) => void;
     value?: number;
     errorMessage?: string;
-    schema: any;
+    schema: common.NumberSchema;
     initialValue: number;
     locale: common.Locale;
     validate: () => void;

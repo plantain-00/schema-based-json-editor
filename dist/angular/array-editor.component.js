@@ -9,6 +9,7 @@ var ArrayEditorComponent = (function () {
         this.renderSwitch = 1;
         this.collapsed = false;
         this.buttonGroupStyleString = common.buttonGroupStyleString;
+        this.invalidIndexes = [];
         this.trackByFunction = function (index, value) {
             return (1 + index) * _this.renderSwitch;
         };
@@ -18,7 +19,7 @@ var ArrayEditorComponent = (function () {
         this.toggleOptional = function () {
             _this.value = common.toggleOptional(_this.value, _this.schema, _this.initialValue);
             _this.validate();
-            _this.updateValue.emit({ value: _this.value, isValid: !_this.errorMessage });
+            _this.updateValue.emit({ value: _this.value, isValid: !_this.errorMessage && _this.invalidIndexes.length === 0 });
         };
     }
     ArrayEditorComponent.prototype.getValue = function () {
@@ -29,7 +30,7 @@ var ArrayEditorComponent = (function () {
     };
     ArrayEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
-        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     };
     ArrayEditorComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
@@ -40,7 +41,7 @@ var ArrayEditorComponent = (function () {
                 if (_this.value) {
                     common.switchItem(_this.value, el, sibling);
                     _this.renderSwitch = -_this.renderSwitch;
-                    _this.updateValue.emit({ value: _this.value, isValid: !_this.errorMessage });
+                    _this.updateValue.emit({ value: _this.value, isValid: !_this.errorMessage && _this.invalidIndexes.length === 0 });
                 }
             });
         }
@@ -55,7 +56,7 @@ var ArrayEditorComponent = (function () {
     };
     ArrayEditorComponent.prototype.addItem = function () {
         this.value.push(common.getDefaultValue(true, this.schema.items, undefined));
-        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     };
     ArrayEditorComponent.prototype.hasDeleteButtonFunction = function () {
         return this.hasDeleteButton && !this.readonly && !this.schema.readonly;
@@ -64,13 +65,14 @@ var ArrayEditorComponent = (function () {
         this.value.splice(i, 1);
         this.renderSwitch = -this.renderSwitch;
         this.validate();
-        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     };
     ArrayEditorComponent.prototype.onChange = function (i, _a) {
         var value = _a.value, isValid = _a.isValid;
         this.value[i] = value;
         this.validate();
-        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && isValid });
+        common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     };
     __decorate([
         core_1.Input()

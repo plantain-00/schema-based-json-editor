@@ -369,4 +369,32 @@ function toggleOptional(value, schema, initialValue) {
     }
 }
 exports.toggleOptional = toggleOptional;
+function recordInvalidPropertiesOfObject(invalidProperties, isValid, property) {
+    var index = invalidProperties.indexOf(property);
+    if (isValid) {
+        if (index !== -1) {
+            invalidProperties.splice(index, 1);
+        }
+    }
+    else {
+        if (index === -1) {
+            invalidProperties.push(property);
+        }
+    }
+}
+exports.recordInvalidPropertiesOfObject = recordInvalidPropertiesOfObject;
+function recordInvalidIndexesOfArray(invalidIndexes, isValid, i) {
+    var index = invalidIndexes.indexOf(i);
+    if (isValid) {
+        if (index !== -1) {
+            invalidIndexes.splice(index, 1);
+        }
+    }
+    else {
+        if (index === -1) {
+            invalidIndexes.push(i);
+        }
+    }
+}
+exports.recordInvalidIndexesOfArray = recordInvalidIndexesOfArray;
 //# sourceMappingURL=common.js.map
