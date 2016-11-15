@@ -12,21 +12,32 @@ import { Component } from "@angular/core";
 
 import { schema } from "../schema";
 
+import * as common from "../../dist/common";
+
 @Component({
     selector: "app",
     template: `
     <div>
-        <div style="width: 500px; margin: 10px; float: left" class="bootstrap3-row-container">
-          <json-editor [schema]="schema"
-              [initialValue]="value"
-              (updateValue)="updateValue($event)"
-              theme="bootstrap3"
-              icon="fontawesome4"
-              locale="zh-cn">
-          </json-editor>
+        <div style="width: 400px; margin: 10px; float: left">
+            Schema:
+            <pre>{{schemaString}}</pre>
         </div>
-        <pre style="width: 400px; margin: 10px; float: left">{{schemaString}}</pre>
-        <pre style="width: 400px; margin: 10px; float: left">{{getValueString()}}</pre>
+        <div style="width: 500px; margin: 10px; float: left" class="bootstrap3-row-container">
+            GUI:
+            <json-editor [schema]="schema"
+                [initialValue]="value"
+                (updateValue)="updateValue($event)"
+                theme="bootstrap3"
+                icon="fontawesome4"
+                locale="zh-cn">
+            </json-editor>
+        </div>
+        <div style="width: 400px; margin: 10px; float: left">
+            Value Is Valid:
+            <pre>{{getIsValidString()}}</pre>
+            Value:
+            <pre>{{getValueString()}}</pre>
+        </div>
     </div>
     `,
 })
@@ -34,11 +45,16 @@ export class MainComponent {
     schema = schema;
     schemaString = JSON.stringify(schema, null, "  ");
     value: any = {};
+    isValid = false;
     getValueString() {
         return JSON.stringify(this.value, null, "  ");
     }
-    updateValue(value: any) {
+    updateValue({value, isValid}: common.ValidityValue<common.ValueType>) {
         this.value = value;
+        this.isValid = isValid;
+    }
+    getIsValidString() {
+        return String(this.isValid);
     }
 }
 

@@ -9,7 +9,7 @@ export const schema: any = {
             description: "a string description example",
             default: "a default string example",
             minLength: 20,
-            maxLength: 30,
+            maxLength: 25,
         },
         booleanExample: {
             type: "boolean",

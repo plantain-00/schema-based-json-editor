@@ -54,7 +54,7 @@ export class ArrayEditorComponent {
     @Input()
     title?: string;
     @Output()
-    updateValue = new EventEmitter();
+    updateValue = new EventEmitter<common.ValidityValue<common.ValueType[] | undefined>>();
     @Input()
     theme: common.Theme;
     @Input()
@@ -88,7 +88,7 @@ export class ArrayEditorComponent {
     }
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     ngAfterViewInit() {
         if (this.drakContainer) {
@@ -98,7 +98,7 @@ export class ArrayEditorComponent {
                 if (this.value) {
                     common.switchItem(this.value, el, sibling);
                     this.renderSwitch = -this.renderSwitch;
-                    this.updateValue.emit(this.value);
+                    this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
                 }
             });
         }
@@ -117,14 +117,14 @@ export class ArrayEditorComponent {
     toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as common.ValueType[] | undefined;
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
     }
     addItem() {
         this.value!.push(common.getDefaultValue(true, this.schema.items, undefined) !);
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     hasDeleteButtonFunction() {
         return this.hasDeleteButton && !this.readonly && !this.schema.readonly;
@@ -132,12 +132,12 @@ export class ArrayEditorComponent {
     onDeleteFunction(i: number) {
         this.value!.splice(i, 1);
         this.renderSwitch = -this.renderSwitch;
-        this.updateValue.emit(this.value);
         this.validate();
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
-    onChange(i: number, value: common.ValueType) {
+    onChange(i: number, {value, isValid}: common.ValidityValue<common.ValueType>) {
         this.value![i] = value;
-        this.updateValue.emit(this.value);
         this.validate();
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && isValid });
     }
 }

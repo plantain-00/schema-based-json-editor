@@ -7,7 +7,6 @@ export declare const arrayEditor: {
         renderSwitch: number;
         collapsed: boolean;
         value: common.ValueType[];
-        isValid: boolean;
         drak: undefined;
         errorMessage: undefined;
         buttonGroupStyleString: string;

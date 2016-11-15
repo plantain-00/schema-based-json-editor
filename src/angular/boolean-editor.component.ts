@@ -39,7 +39,7 @@ export class BooleanEditorComponent {
     @Input()
     title?: string;
     @Output()
-    updateValue = new EventEmitter();
+    updateValue = new EventEmitter<common.ValidityValue<boolean | undefined>>();
     @Input()
     theme: common.Theme;
     @Input()
@@ -58,14 +58,14 @@ export class BooleanEditorComponent {
     value?: boolean;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: true });
     }
     onChange(e: { target: { checked: boolean } }) {
         this.value = e.target.checked;
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: true });
     }
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as boolean | undefined;
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: true });
     }
 }

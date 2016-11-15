@@ -55,7 +55,6 @@ export const arrayEditor = {
             renderSwitch: 1,
             collapsed: false,
             value,
-            isValid: false,
             drak: undefined,
             errorMessage: undefined,
             buttonGroupStyleString: common.buttonGroupStyleString,

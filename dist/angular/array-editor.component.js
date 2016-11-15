@@ -18,7 +18,7 @@ var ArrayEditorComponent = (function () {
         this.toggleOptional = function () {
             _this.value = common.toggleOptional(_this.value, _this.schema, _this.initialValue);
             _this.validate();
-            _this.updateValue.emit(_this.value);
+            _this.updateValue.emit({ value: _this.value, isValid: !_this.errorMessage });
         };
     }
     ArrayEditorComponent.prototype.getValue = function () {
@@ -29,7 +29,7 @@ var ArrayEditorComponent = (function () {
     };
     ArrayEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     };
     ArrayEditorComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
@@ -40,7 +40,7 @@ var ArrayEditorComponent = (function () {
                 if (_this.value) {
                     common.switchItem(_this.value, el, sibling);
                     _this.renderSwitch = -_this.renderSwitch;
-                    _this.updateValue.emit(_this.value);
+                    _this.updateValue.emit({ value: _this.value, isValid: !_this.errorMessage });
                 }
             });
         }
@@ -55,7 +55,7 @@ var ArrayEditorComponent = (function () {
     };
     ArrayEditorComponent.prototype.addItem = function () {
         this.value.push(common.getDefaultValue(true, this.schema.items, undefined));
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     };
     ArrayEditorComponent.prototype.hasDeleteButtonFunction = function () {
         return this.hasDeleteButton && !this.readonly && !this.schema.readonly;
@@ -63,13 +63,14 @@ var ArrayEditorComponent = (function () {
     ArrayEditorComponent.prototype.onDeleteFunction = function (i) {
         this.value.splice(i, 1);
         this.renderSwitch = -this.renderSwitch;
-        this.updateValue.emit(this.value);
         this.validate();
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     };
-    ArrayEditorComponent.prototype.onChange = function (i, value) {
+    ArrayEditorComponent.prototype.onChange = function (i, _a) {
+        var value = _a.value, isValid = _a.isValid;
         this.value[i] = value;
-        this.updateValue.emit(this.value);
         this.validate();
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && isValid });
     };
     __decorate([
         core_1.Input()

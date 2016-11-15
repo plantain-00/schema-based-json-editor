@@ -4,7 +4,10 @@ export declare class StringEditorComponent {
     schema: common.StringSchema;
     initialValue: string;
     title?: string;
-    updateValue: EventEmitter<{}>;
+    updateValue: EventEmitter<{
+        value: string | undefined;
+        isValid: boolean;
+    }>;
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;

@@ -48,7 +48,7 @@ export class NumberEditorComponent {
     @Input()
     title?: string;
     @Output()
-    updateValue = new EventEmitter();
+    updateValue = new EventEmitter<common.ValidityValue<number | undefined>>();
     @Input()
     theme: common.Theme;
     @Input()
@@ -68,7 +68,7 @@ export class NumberEditorComponent {
     errorMessage: string;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     useInput() {
         return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly);
@@ -79,7 +79,7 @@ export class NumberEditorComponent {
     onChange(e: { target: { value: string } }) {
         this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     trackByFunction(index: number, value: number) {
         return index;
@@ -90,6 +90,6 @@ export class NumberEditorComponent {
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
 }

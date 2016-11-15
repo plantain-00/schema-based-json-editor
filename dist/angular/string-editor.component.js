@@ -9,13 +9,13 @@ var StringEditorComponent = (function () {
         this.toggleOptional = function () {
             _this.value = common.toggleOptional(_this.value, _this.schema, _this.initialValue);
             _this.validate();
-            _this.updateValue.emit(_this.value);
+            _this.updateValue.emit({ value: _this.value, isValid: !_this.errorMessage });
         };
     }
     StringEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     };
     StringEditorComponent.prototype.useTextArea = function () {
         return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly) && this.schema.format === "textarea";
@@ -29,7 +29,7 @@ var StringEditorComponent = (function () {
     StringEditorComponent.prototype.onChange = function (e) {
         this.value = e.target.value;
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     };
     StringEditorComponent.prototype.validate = function () {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);

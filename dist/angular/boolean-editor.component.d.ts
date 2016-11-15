@@ -4,7 +4,10 @@ export declare class BooleanEditorComponent {
     schema: common.BooleanSchema;
     initialValue: boolean;
     title?: string;
-    updateValue: EventEmitter<{}>;
+    updateValue: EventEmitter<{
+        value: boolean | undefined;
+        isValid: boolean;
+    }>;
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;

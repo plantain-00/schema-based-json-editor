@@ -86,7 +86,7 @@ export class EditorComponent {
     @Input()
     title?: string;
     @Output()
-    updateValue = new EventEmitter();
+    updateValue = new EventEmitter<common.ValidityValue<common.ValueType>>();
     @Input()
     theme: common.Theme;
     @Input()

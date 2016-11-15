@@ -8,7 +8,7 @@ var NumberEditorComponent = (function () {
     }
     NumberEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     };
     NumberEditorComponent.prototype.useInput = function () {
         return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly);
@@ -19,7 +19,7 @@ var NumberEditorComponent = (function () {
     NumberEditorComponent.prototype.onChange = function (e) {
         this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     };
     NumberEditorComponent.prototype.trackByFunction = function (index, value) {
         return index;
@@ -30,7 +30,7 @@ var NumberEditorComponent = (function () {
     NumberEditorComponent.prototype.toggleOptional = function () {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue);
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     };
     __decorate([
         core_1.Input()

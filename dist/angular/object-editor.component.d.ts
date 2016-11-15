@@ -6,7 +6,12 @@ export declare class ObjectEditorComponent {
         [name: string]: common.ValueType;
     };
     title?: string;
-    updateValue: EventEmitter<{}>;
+    updateValue: EventEmitter<{
+        value: {
+            [name: string]: common.ValueType;
+        } | undefined;
+        isValid: boolean;
+    }>;
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;
@@ -32,6 +37,8 @@ export declare class ObjectEditorComponent {
     }): number;
     collapseOrExpand: () => void;
     toggleOptional: () => void;
-    onChange(property: string, value: common.ValueType): void;
+    onChange(property: string, {value, isValid}: common.ValidityValue<{
+        [name: string]: common.ValueType;
+    }>): void;
     hasDeleteButtonFunction(): boolean;
 }

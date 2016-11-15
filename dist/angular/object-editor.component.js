@@ -14,7 +14,7 @@ var ObjectEditorComponent = (function () {
         };
         this.toggleOptional = function () {
             _this.value = common.toggleOptional(_this.value, _this.schema, _this.initialValue);
-            _this.updateValue.emit(_this.value);
+            _this.updateValue.emit({ value: _this.value, isValid: true });
         };
     }
     ObjectEditorComponent.prototype.ngOnInit = function () {
@@ -34,7 +34,7 @@ var ObjectEditorComponent = (function () {
                 _loop_1(property);
             }
         }
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: true });
     };
     ObjectEditorComponent.prototype.isRequired = function (property) {
         return this.schema.required && this.schema.required.some(function (r) { return r === property; });
@@ -42,9 +42,10 @@ var ObjectEditorComponent = (function () {
     ObjectEditorComponent.prototype.trackByFunction = function (index, value) {
         return index;
     };
-    ObjectEditorComponent.prototype.onChange = function (property, value) {
+    ObjectEditorComponent.prototype.onChange = function (property, _a) {
+        var value = _a.value, isValid = _a.isValid;
         this.value[property] = value;
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: isValid });
     };
     ObjectEditorComponent.prototype.hasDeleteButtonFunction = function () {
         return this.hasDeleteButton && !this.readonly && !this.schema.readonly;

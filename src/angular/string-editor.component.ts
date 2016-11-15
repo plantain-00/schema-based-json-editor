@@ -53,7 +53,7 @@ export class StringEditorComponent {
     @Input()
     title?: string;
     @Output()
-    updateValue = new EventEmitter();
+    updateValue = new EventEmitter<common.ValidityValue<string | undefined>>();
     @Input()
     theme: common.Theme;
     @Input()
@@ -74,7 +74,7 @@ export class StringEditorComponent {
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     useTextArea() {
         return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly) && this.schema.format === "textarea";
@@ -88,7 +88,7 @@ export class StringEditorComponent {
     onChange(e: { target: { value: string } }) {
         this.value = e.target.value;
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
@@ -96,7 +96,7 @@ export class StringEditorComponent {
     toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;
         this.validate();
-        this.updateValue.emit(this.value);
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     trackByFunction(index: number, value: { [name: string]: common.ValueType }) {
         return index;

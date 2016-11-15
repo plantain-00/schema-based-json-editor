@@ -4,7 +4,10 @@ export declare class NullEditorComponent {
     schema: common.NullSchema;
     initialValue: null;
     title?: string;
-    updateValue: EventEmitter<{}>;
+    updateValue: EventEmitter<{
+        value: null | undefined;
+        isValid: boolean;
+    }>;
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;

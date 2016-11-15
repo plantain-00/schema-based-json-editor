@@ -66,7 +66,7 @@ export class JSONEditorComponent {
     @Input()
     initialValue: common.ValueType;
     @Output()
-    updateValue = new EventEmitter();
+    updateValue = new EventEmitter<common.ValidityValue<common.ValueType | undefined>>();
     @Input()
     theme?: string;
     @Input()
@@ -79,7 +79,7 @@ export class JSONEditorComponent {
     themeObject: common.Theme;
     localeObject: common.Locale;
     iconObject: common.Icon;
-    updateValueFunction = common.debounce((value: any) => {
+    updateValueFunction = common.debounce((value: common.ValidityValue<common.ValueType | undefined>) => {
         this.updateValue.emit(value);
     }, 100);
     ngOnInit() {

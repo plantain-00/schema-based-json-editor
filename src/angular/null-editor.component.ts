@@ -30,7 +30,7 @@ export class NullEditorComponent {
     @Input()
     title?: string;
     @Output()
-    updateValue = new EventEmitter();
+    updateValue = new EventEmitter<common.ValidityValue<null | undefined>>();
     @Input()
     theme: common.Theme;
     @Input()
@@ -49,10 +49,10 @@ export class NullEditorComponent {
     value?: null;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
-        this.updateValue.emit(this.value as any);
+        this.updateValue.emit({ value: this.value, isValid: true });
     }
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as null | undefined;
-        this.updateValue.emit(this.value as any);
+        this.updateValue.emit({ value: this.value, isValid: true });
     }
 }

@@ -4,7 +4,12 @@ import * as common from "../common";
 export declare class JSONEditorComponent {
     schema: common.Schema;
     initialValue: common.ValueType;
-    updateValue: EventEmitter<{}>;
+    updateValue: EventEmitter<{
+        value: string | number | boolean | any[] | {
+            [name: string]: any;
+        } | null | undefined;
+        isValid: boolean;
+    }>;
     theme?: string;
     icon?: string;
     locale?: string;
@@ -12,7 +17,12 @@ export declare class JSONEditorComponent {
     themeObject: common.Theme;
     localeObject: common.Locale;
     iconObject: common.Icon;
-    updateValueFunction: ((value: any) => void) & Cancelable;
+    updateValueFunction: ((value: {
+        value: string | number | boolean | any[] | {
+            [name: string]: any;
+        } | null | undefined;
+        isValid: boolean;
+    }) => void) & Cancelable;
     ngOnInit(): void;
 }
 import { Cancelable } from "lodash";

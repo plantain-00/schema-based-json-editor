@@ -4,7 +4,10 @@ export declare class EditorComponent {
     schema: common.ArraySchema;
     initialValue: common.ValueType[];
     title?: string;
-    updateValue: EventEmitter<{}>;
+    updateValue: EventEmitter<{
+        value: common.ValueType;
+        isValid: boolean;
+    }>;
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;

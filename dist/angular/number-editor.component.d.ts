@@ -4,7 +4,10 @@ export declare class NumberEditorComponent {
     schema: common.NumberSchema;
     initialValue: number;
     title?: string;
-    updateValue: EventEmitter<{}>;
+    updateValue: EventEmitter<{
+        value: number | undefined;
+        isValid: boolean;
+    }>;
     theme: common.Theme;
     icon: common.Icon;
     locale: common.Locale;

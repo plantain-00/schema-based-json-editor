@@ -22,7 +22,9 @@ export declare const objectEditor: {
     };
 };
 export declare type This = {
-    $emit: (event: string, args: common.ValidityValue<common.ValueType | undefined>) => void;
+    $emit: (event: string, args: common.ValidityValue<{
+        [name: string]: common.ValueType;
+    } | undefined>) => void;
     value?: {
         [name: string]: common.ValueType;
     };
