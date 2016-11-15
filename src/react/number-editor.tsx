@@ -11,7 +11,7 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
         this.validate();
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
     }
     render() {
         let control: JSX.Element | null = null;
@@ -65,7 +65,7 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
         this.value = this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
         this.validate();
         this.setState({ value: this.value });
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
     }
     private validate() {
         this.errorMessage = common.getErrorMessageOfNumber(this.value, this.props.schema, this.props.locale);
@@ -74,6 +74,6 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as number | undefined;
         this.validate();
         this.setState({ value: this.value });
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
     }
 }

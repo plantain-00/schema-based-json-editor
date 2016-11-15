@@ -10,12 +10,12 @@ var NullEditor = (function (_super) {
         this.toggleOptional = function () {
             _this.value = common.toggleOptional(_this.value, _this.props.schema, _this.props.initialValue);
             _this.setState({ value: _this.value });
-            _this.props.updateValue(_this.value);
+            _this.props.updateValue(_this.value, true);
         };
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
     }
     NullEditor.prototype.componentDidMount = function () {
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, true);
     };
     NullEditor.prototype.render = function () {
         var optionalCheckbox = null;

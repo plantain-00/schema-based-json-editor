@@ -11,19 +11,19 @@ var NumberEditor = (function (_super) {
             _this.value = _this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
             _this.validate();
             _this.setState({ value: _this.value });
-            _this.props.updateValue(_this.value);
+            _this.props.updateValue(_this.value, !_this.errorMessage);
         };
         this.toggleOptional = function () {
             _this.value = common.toggleOptional(_this.value, _this.props.schema, _this.props.initialValue);
             _this.validate();
             _this.setState({ value: _this.value });
-            _this.props.updateValue(_this.value);
+            _this.props.updateValue(_this.value, !_this.errorMessage);
         };
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         this.validate();
     }
     NumberEditor.prototype.componentDidMount = function () {
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
     };
     NumberEditor.prototype.render = function () {
         var control = null;

@@ -4,7 +4,7 @@ import * as common from "../common";
 export declare type Props = {
     schema: common.Schema;
     initialValue: common.ValueType;
-    updateValue: (value?: common.ValueType) => void;
+    updateValue: (value: common.ValueType | undefined, isValid: boolean) => void;
     theme?: string;
     icon?: string;
     locale?: string;

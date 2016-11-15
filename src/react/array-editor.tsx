@@ -16,7 +16,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         this.validate();
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
         const container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as HTMLElement;
         this.drak = common.dragula([container]);
         this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
@@ -24,7 +24,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                 common.switchItem(this.value, el, sibling);
                 this.renderSwitch = -this.renderSwitch;
                 this.setState({ value: this.value, renderSwitch: this.renderSwitch });
-                this.props.updateValue(this.value);
+                this.props.updateValue(this.value, !this.errorMessage);
             }
         });
     }
@@ -38,18 +38,18 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         if (this.value !== undefined && !this.collapsed) {
             const itemElements: JSX.Element[] = [];
             for (let i = 0; i < this.value.length; i++) {
-                const onChange = (value: common.ValueType) => {
+                const onChange = (value: common.ValueType, isValid: boolean) => {
                     this.value![i] = value;
                     this.setState({ value: this.value });
-                    this.props.updateValue(this.value);
                     this.validate();
+                    this.props.updateValue(this.value, !this.errorMessage && isValid);
                 };
                 const onDelete = () => {
                     this.value!.splice(i, 1);
                     this.renderSwitch = -this.renderSwitch;
                     this.setState({ value: this.value, renderSwitch: this.renderSwitch });
-                    this.props.updateValue(this.value);
                     this.validate();
+                    this.props.updateValue(this.value, !this.errorMessage);
                 };
                 const key = (1 + i) * this.renderSwitch;
                 itemElements.push((
@@ -90,7 +90,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             const addItem = () => {
                 this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined) !);
                 this.setState({ value: this.value });
-                this.props.updateValue(this.value);
+                this.props.updateValue(this.value, !this.errorMessage);
             };
             addButton = (
                 <button className={this.props.theme.button} onClick={addItem}>
@@ -140,7 +140,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as common.ValueType[] | undefined;
         this.validate();
         this.setState({ value: this.value });
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
     }
     private validate() {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.props.schema, this.props.locale);

@@ -9,7 +9,7 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as null;
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, true);
     }
     render() {
         let optionalCheckbox: JSX.Element | null = null;
@@ -34,6 +34,6 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
     private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as null | undefined;
         this.setState({ value: this.value });
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, true);
     }
 }

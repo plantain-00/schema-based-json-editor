@@ -19,14 +19,14 @@ var ArrayEditor = (function (_super) {
             _this.value = common.toggleOptional(_this.value, _this.props.schema, _this.props.initialValue);
             _this.validate();
             _this.setState({ value: _this.value });
-            _this.props.updateValue(_this.value);
+            _this.props.updateValue(_this.value, !_this.errorMessage);
         };
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         this.validate();
     }
     ArrayEditor.prototype.componentDidMount = function () {
         var _this = this;
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
         var container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
         this.drak = common.dragula([container]);
         this.drak.on("drop", function (el, target, source, sibling) {
@@ -34,7 +34,7 @@ var ArrayEditor = (function (_super) {
                 common.switchItem(_this.value, el, sibling);
                 _this.renderSwitch = -_this.renderSwitch;
                 _this.setState({ value: _this.value, renderSwitch: _this.renderSwitch });
-                _this.props.updateValue(_this.value);
+                _this.props.updateValue(_this.value, !_this.errorMessage);
             }
         });
     };
@@ -49,18 +49,18 @@ var ArrayEditor = (function (_super) {
         if (this.value !== undefined && !this.collapsed) {
             var itemElements = [];
             var _loop_1 = function(i) {
-                var onChange = function (value) {
+                var onChange = function (value, isValid) {
                     _this.value[i] = value;
                     _this.setState({ value: _this.value });
-                    _this.props.updateValue(_this.value);
                     _this.validate();
+                    _this.props.updateValue(_this.value, !_this.errorMessage && isValid);
                 };
                 var onDelete = function () {
                     _this.value.splice(i, 1);
                     _this.renderSwitch = -_this.renderSwitch;
                     _this.setState({ value: _this.value, renderSwitch: _this.renderSwitch });
-                    _this.props.updateValue(_this.value);
                     _this.validate();
+                    _this.props.updateValue(_this.value, !_this.errorMessage);
                 };
                 var key = (1 + i) * this_1.renderSwitch;
                 itemElements.push((React.createElement("div", {key: key, "data-index": i, className: this_1.props.theme.rowContainer}, 
@@ -87,7 +87,7 @@ var ArrayEditor = (function (_super) {
             var addItem = function () {
                 _this.value.push(common.getDefaultValue(true, _this.props.schema.items, undefined));
                 _this.setState({ value: _this.value });
-                _this.props.updateValue(_this.value);
+                _this.props.updateValue(_this.value, !_this.errorMessage);
             };
             addButton = (React.createElement("button", {className: this.props.theme.button, onClick: addItem}, 
                 React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.add})

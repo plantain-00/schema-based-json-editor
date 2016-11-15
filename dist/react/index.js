@@ -12,8 +12,8 @@ var JSONEditor = (function (_super) {
     function JSONEditor(props) {
         var _this = this;
         _super.call(this, props);
-        this.updateValue = common.debounce(function (value) {
-            _this.props.updateValue(value);
+        this.updateValue = common.debounce(function (value, isValid) {
+            _this.props.updateValue(value, isValid);
         }, 100);
         this.theme = common.getTheme(this.props.theme);
         this.locale = common.getLocale(this.props.locale);

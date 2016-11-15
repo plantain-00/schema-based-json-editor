@@ -3,6 +3,7 @@ import "tslib";
 import * as toNumber from "lodash/toNumber";
 import * as toInteger from "lodash/toInteger";
 import * as debounce from "lodash/debounce";
+import * as isObject from "lodash/isObject";
 
 export { toNumber, toInteger, debounce };
 
@@ -228,14 +229,78 @@ export function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
 export type ValueType = { [name: string]: any } | any[] | number | boolean | string | null;
 
 export function getDefaultValue(required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {
+    if (initialValue !== undefined) {
+        switch (schema.type) {
+            case "object":
+                if (isObject(initialValue)) {
+                    return initialValue;
+                }
+                break;
+            case "array":
+                if (Array.isArray(initialValue)) {
+                    return initialValue;
+                }
+                break;
+            case "number":
+            case "integer":
+                if (typeof initialValue === "number") {
+                    return initialValue;
+                }
+                break;
+            case "boolean":
+                if (typeof initialValue === "boolean") {
+                    return initialValue;
+                }
+                break;
+            case "string":
+                if (typeof initialValue === "string") {
+                    return initialValue;
+                }
+                break;
+            case "null":
+            default:
+                if (initialValue === null) {
+                    return initialValue;
+                }
+        }
+    }
     if (!required) {
         return undefined;
     }
-    if (initialValue !== undefined) {
-        return initialValue;
-    }
     if (schema.default !== undefined) {
-        return schema.default;
+        switch (schema.type) {
+            case "object":
+                if (isObject(schema.default)) {
+                    return schema.default;
+                }
+                break;
+            case "array":
+                if (Array.isArray(schema.default)) {
+                    return schema.default;
+                }
+                break;
+            case "number":
+            case "integer":
+                if (typeof schema.default === "number") {
+                    return schema.default;
+                }
+                break;
+            case "boolean":
+                if (typeof schema.default === "boolean") {
+                    return schema.default;
+                }
+                break;
+            case "string":
+                if (typeof schema.default === "string") {
+                    return schema.default;
+                }
+                break;
+            case "null":
+            default:
+                if (schema.default === null) {
+                    return schema.default;
+                }
+        }
     }
     switch (schema.type) {
         case "object":
@@ -270,7 +335,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
     initialValue: TValue;
     title?: string;
-    updateValue: (value?: TValue) => void;
+    updateValue: (value: TValue | undefined, isValid: boolean) => void;
     theme: Theme;
     icon: Icon;
     locale: Locale;

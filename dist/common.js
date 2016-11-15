@@ -6,6 +6,7 @@ var toInteger = require("lodash/toInteger");
 exports.toInteger = toInteger;
 var debounce = require("lodash/debounce");
 exports.debounce = debounce;
+var isObject = require("lodash/isObject");
 var dragula = require("dragula");
 exports.dragula = dragula;
 exports.themes = {
@@ -131,14 +132,78 @@ function getIcon(name, locale) {
 }
 exports.getIcon = getIcon;
 function getDefaultValue(required, schema, initialValue) {
+    if (initialValue !== undefined) {
+        switch (schema.type) {
+            case "object":
+                if (isObject(initialValue)) {
+                    return initialValue;
+                }
+                break;
+            case "array":
+                if (Array.isArray(initialValue)) {
+                    return initialValue;
+                }
+                break;
+            case "number":
+            case "integer":
+                if (typeof initialValue === "number") {
+                    return initialValue;
+                }
+                break;
+            case "boolean":
+                if (typeof initialValue === "boolean") {
+                    return initialValue;
+                }
+                break;
+            case "string":
+                if (typeof initialValue === "string") {
+                    return initialValue;
+                }
+                break;
+            case "null":
+            default:
+                if (initialValue === null) {
+                    return initialValue;
+                }
+        }
+    }
     if (!required) {
         return undefined;
     }
-    if (initialValue !== undefined) {
-        return initialValue;
-    }
     if (schema.default !== undefined) {
-        return schema.default;
+        switch (schema.type) {
+            case "object":
+                if (isObject(schema.default)) {
+                    return schema.default;
+                }
+                break;
+            case "array":
+                if (Array.isArray(schema.default)) {
+                    return schema.default;
+                }
+                break;
+            case "number":
+            case "integer":
+                if (typeof schema.default === "number") {
+                    return schema.default;
+                }
+                break;
+            case "boolean":
+                if (typeof schema.default === "boolean") {
+                    return schema.default;
+                }
+                break;
+            case "string":
+                if (typeof schema.default === "string") {
+                    return schema.default;
+                }
+                break;
+            case "null":
+            default:
+                if (schema.default === null) {
+                    return schema.default;
+                }
+        }
     }
     switch (schema.type) {
         case "object":

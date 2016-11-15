@@ -107,7 +107,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
     initialValue: TValue;
     title?: string;
-    updateValue: (value?: TValue) => void;
+    updateValue: (value: TValue | undefined, isValid: boolean) => void;
     theme: Theme;
     icon: Icon;
     locale: Locale;

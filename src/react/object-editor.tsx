@@ -18,17 +18,17 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         }
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, true);
     }
     render() {
         let childrenElement: JSX.Element | null = null;
         if (!this.collapsed && this.value !== undefined) {
             const propertyElements: JSX.Element[] = [];
             for (const property in this.props.schema.properties) {
-                const onChange = (value: common.ValueType) => {
+                const onChange = (value: common.ValueType, isValid: boolean) => {
                     this.value![property] = value;
                     this.setState({ value: this.value });
-                    this.props.updateValue(this.value);
+                    this.props.updateValue(this.value, isValid);
                 };
                 const schema = this.props.schema.properties[property];
                 const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
@@ -92,6 +92,6 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType } | undefined;
         this.setState({ value: this.value });
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, true);
     }
 }

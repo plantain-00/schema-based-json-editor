@@ -11,7 +11,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         this.validate();
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
     }
     render() {
         let control: JSX.Element | null = null;
@@ -76,7 +76,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         this.value = e.currentTarget.value;
         this.validate();
         this.setState({ value: this.value });
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
     }
     private validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);
@@ -85,6 +85,6 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as string | undefined;
         this.validate();
         this.setState({ value: this.value });
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, !this.errorMessage);
     }
 }

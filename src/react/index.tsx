@@ -11,7 +11,7 @@ import { StringEditor } from "./string-editor";
 export type Props = {
     schema: common.Schema;
     initialValue: common.ValueType;
-    updateValue: (value?: common.ValueType) => void;
+    updateValue: (value: common.ValueType | undefined, isValid: boolean) => void;
     theme?: string;
     icon?: string;
     locale?: string;
@@ -22,8 +22,8 @@ export class JSONEditor extends React.Component<Props, {}> {
     private theme: common.Theme;
     private locale: common.Locale;
     private icon: common.Icon;
-    private updateValue = common.debounce((value: any) => {
-        this.props.updateValue(value);
+    private updateValue = common.debounce((value: any, isValid: boolean) => {
+        this.props.updateValue(value, isValid);
     }, 100);
     constructor(props: Props) {
         super(props);

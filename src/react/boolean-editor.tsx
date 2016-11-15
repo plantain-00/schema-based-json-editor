@@ -9,7 +9,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as boolean;
     }
     componentDidMount() {
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, true);
     }
     render() {
         let control: JSX.Element | null = null;
@@ -49,11 +49,11 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
     private onChange = (e: React.FormEvent<{ checked: boolean }>) => {
         this.value = e.currentTarget.checked;
         this.setState({ value: this.value });
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, true);
     }
     private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as boolean | undefined;
         this.setState({ value: this.value });
-        this.props.updateValue(this.value);
+        this.props.updateValue(this.value, true);
     }
 }
