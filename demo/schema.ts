@@ -62,7 +62,7 @@ export const schema: common.Schema = {
             description: "a array description example",
             items: {
                 type: "string",
-                minLength: 10,
+                maxLength: 15,
             },
             default: ["default item 1", "default item 2"],
             minItems: 1,
