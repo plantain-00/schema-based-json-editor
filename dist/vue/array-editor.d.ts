@@ -1,5 +1,6 @@
 /// <reference types="dragula" />
 import * as common from "../common";
+import * as dragula from "dragula";
 export declare const arrayEditor: {
     template: string;
     props: string[];
@@ -30,7 +31,7 @@ export declare const arrayEditor: {
     };
 };
 export declare type This = {
-    drak: common.dragula.Drake;
+    drak: dragula.Drake;
     $emit: (event: string, args: common.ValidityValue<common.ValueType[] | undefined>) => void;
     required: boolean;
     schema: common.ArraySchema;

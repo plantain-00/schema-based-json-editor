@@ -1,6 +1,7 @@
 /// <reference types="dragula" />
 import { EventEmitter, ElementRef } from "@angular/core";
 import * as common from "../common";
+import * as dragula from "dragula";
 export declare class ArrayEditorComponent {
     schema: common.ArraySchema;
     initialValue: common.ValueType[];
@@ -20,7 +21,7 @@ export declare class ArrayEditorComponent {
     renderSwitch: number;
     collapsed: boolean;
     value?: common.ValueType[];
-    drak: common.dragula.Drake;
+    drak: dragula.Drake;
     errorMessage: string;
     buttonGroupStyleString: string;
     invalidIndexes: number[];

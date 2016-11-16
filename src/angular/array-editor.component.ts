@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import * as common from "../common";
+import * as dragula from "dragula";
 
 @Component({
     selector: "array-editor",
@@ -76,7 +77,7 @@ export class ArrayEditorComponent {
     renderSwitch = 1;
     collapsed = false;
     value?: common.ValueType[];
-    drak: common.dragula.Drake;
+    drak: dragula.Drake;
     errorMessage: string;
     buttonGroupStyleString = common.buttonGroupStyleString;
     invalidIndexes: number[] = [];
@@ -94,7 +95,7 @@ export class ArrayEditorComponent {
     ngAfterViewInit() {
         if (this.drakContainer) {
             const container = this.drakContainer.nativeElement as HTMLElement;
-            this.drak = common.dragula([container]);
+            this.drak = dragula([container]);
             this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
                 if (this.value) {
                     common.switchItem(this.value, el, sibling);

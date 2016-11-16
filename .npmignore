@@ -1,6 +1,7 @@
 .vscode
 demo
 src
+spec
 tslint.json
 .travis.yml
 tsconfig.json

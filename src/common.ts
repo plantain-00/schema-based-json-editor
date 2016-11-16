@@ -7,9 +7,6 @@ import * as isObject from "lodash/isObject";
 
 export { toNumber, toInteger, debounce };
 
-import * as dragula from "dragula";
-export { dragula };
-
 export type CommonSchema = {
     $schema?: string;
     title?: string;

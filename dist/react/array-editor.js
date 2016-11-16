@@ -4,6 +4,7 @@ var ReactDOM = require("react-dom");
 var common = require("../common");
 var editor_1 = require("./editor");
 var icon_1 = require("./icon");
+var dragula = require("dragula");
 var ArrayEditor = (function (_super) {
     __extends(ArrayEditor, _super);
     function ArrayEditor(props) {
@@ -29,7 +30,7 @@ var ArrayEditor = (function (_super) {
         var _this = this;
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
         var container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
-        this.drak = common.dragula([container]);
+        this.drak = dragula([container]);
         this.drak.on("drop", function (el, target, source, sibling) {
             if (_this.value) {
                 common.switchItem(_this.value, el, sibling);

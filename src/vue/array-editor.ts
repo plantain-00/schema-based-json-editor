@@ -1,4 +1,5 @@
 import * as common from "../common";
+import * as dragula from "dragula";
 
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */
@@ -70,14 +71,13 @@ export const arrayEditor = {
         getValue(this: This) {
             if (this.value !== undefined && !this.collapsed) {
                 return this.value;
-
             }
             return [];
         },
     },
     mounted(this: This) {
         const container = this.$el.childNodes[6] as HTMLElement;
-        this.drak = common.dragula([container]);
+        this.drak = dragula([container]);
         this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
             if (this.value) {
                 common.switchItem(this.value, el, sibling);
@@ -118,7 +118,7 @@ export const arrayEditor = {
 };
 
 export type This = {
-    drak: common.dragula.Drake;
+    drak: dragula.Drake;
     $emit: (event: string, args: common.ValidityValue<common.ValueType[] | undefined>) => void;
     required: boolean;
     schema: common.ArraySchema;

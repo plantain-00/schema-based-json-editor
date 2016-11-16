@@ -7,8 +7,6 @@ exports.toInteger = toInteger;
 var debounce = require("lodash/debounce");
 exports.debounce = debounce;
 var isObject = require("lodash/isObject");
-var dragula = require("dragula");
-exports.dragula = dragula;
 exports.themes = {
     "bootstrap3": {
         rowContainer: "well bootstrap3-row-container",

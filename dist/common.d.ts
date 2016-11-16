@@ -3,8 +3,6 @@ import * as toNumber from "lodash/toNumber";
 import * as toInteger from "lodash/toInteger";
 import * as debounce from "lodash/debounce";
 export { toNumber, toInteger, debounce };
-import * as dragula from "dragula";
-export { dragula };
 export declare type CommonSchema = {
     $schema?: string;
     title?: string;

@@ -1,6 +1,7 @@
 "use strict";
 var core_1 = require("@angular/core");
 var common = require("../common");
+var dragula = require("dragula");
 var ArrayEditorComponent = (function () {
     function ArrayEditorComponent() {
         var _this = this;
@@ -36,7 +37,7 @@ var ArrayEditorComponent = (function () {
         var _this = this;
         if (this.drakContainer) {
             var container = this.drakContainer.nativeElement;
-            this.drak = common.dragula([container]);
+            this.drak = dragula([container]);
             this.drak.on("drop", function (el, target, source, sibling) {
                 if (_this.value) {
                     common.switchItem(_this.value, el, sibling);

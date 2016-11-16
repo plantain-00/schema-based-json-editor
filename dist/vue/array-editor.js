@@ -1,5 +1,6 @@
 "use strict";
 var common = require("../common");
+var dragula = require("dragula");
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */
 /* tslint:disable:object-literal-shorthand */
@@ -35,7 +36,7 @@ exports.arrayEditor = {
     mounted: function () {
         var _this = this;
         var container = this.$el.childNodes[6];
-        this.drak = common.dragula([container]);
+        this.drak = dragula([container]);
         this.drak.on("drop", function (el, target, source, sibling) {
             if (_this.value) {
                 common.switchItem(_this.value, el, sibling);

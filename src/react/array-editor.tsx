@@ -3,12 +3,13 @@ import * as ReactDOM from "react-dom";
 import * as common from "../common";
 import { Editor } from "./editor";
 import { Icon } from "./icon";
+import * as dragula from "dragula";
 
 export class ArrayEditor extends React.Component<common.Props<common.ArraySchema, common.ValueType[]>, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
     private renderSwitch = 1;
     private collapsed = false;
     private value?: common.ValueType[];
-    private drak: common.dragula.Drake;
+    private drak: dragula.Drake;
     private errorMessage: string;
     private invalidIndexes: number[] = [];
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>) {
@@ -19,7 +20,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
         const container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3] as HTMLElement;
-        this.drak = common.dragula([container]);
+        this.drak = dragula([container]);
         this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
             if (this.value) {
                 common.switchItem(this.value, el, sibling);
