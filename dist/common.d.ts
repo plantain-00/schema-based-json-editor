@@ -113,6 +113,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     readonly?: boolean;
     required?: boolean;
 }
+export declare function isSame(value1: ValueType, value2: ValueType): boolean;
 export declare function switchItem(value: any[], el: HTMLElement, sibling: HTMLElement | null): void;
 export declare function getErrorMessageOfArray(value: any[] | undefined, schema: ArraySchema, locale: Locale): string;
 export declare function getErrorMessageOfNumber(value: number | undefined, schema: NumberSchema, locale: Locale): string;

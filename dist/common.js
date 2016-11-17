@@ -251,7 +251,7 @@ function isSame(value1, value2) {
     if (Array.isArray(value1)) {
         if (Array.isArray(value2) && value1.length === value2.length) {
             for (var i = 0; i < value1.length; i++) {
-                if (!isSame(value1, value2)) {
+                if (!isSame(value1[i], value2[i])) {
                     return false;
                 }
             }
@@ -272,6 +272,7 @@ function isSame(value1, value2) {
     }
     return true;
 }
+exports.isSame = isSame;
 function switchItem(value, el, sibling) {
     var fromIndex = +el.dataset["index"];
     if (sibling) {

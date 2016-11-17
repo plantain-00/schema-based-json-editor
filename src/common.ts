@@ -341,7 +341,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     required?: boolean;
 }
 
-function isSame(value1: ValueType, value2: ValueType) {
+export function isSame(value1: ValueType, value2: ValueType) {
     if (typeof value1 === "string"
         || typeof value1 === "number"
         || typeof value1 === "boolean"
@@ -359,7 +359,7 @@ function isSame(value1: ValueType, value2: ValueType) {
     if (Array.isArray(value1)) {
         if (Array.isArray(value2) && (value1 as ValueType[]).length === (value2 as ValueType[]).length) {
             for (let i = 0; i < (value1 as ValueType[]).length; i++) {
-                if (!isSame((value1 as ValueType[]), (value2 as ValueType[]))) {
+                if (!isSame((value1 as ValueType[])[i], (value2 as ValueType[])[i])) {
                     return false;
                 }
             }
