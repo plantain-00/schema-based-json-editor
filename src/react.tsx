@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import * as common from "../common";
-import { ObjectEditor } from "./object-editor";
-import { ArrayEditor } from "./array-editor";
-import { NumberEditor } from "./number-editor";
-import { BooleanEditor } from "./boolean-editor";
-import { NullEditor } from "./null-editor";
-import { StringEditor } from "./string-editor";
+import * as common from "./common";
+import { ObjectEditor } from "./react/object-editor";
+import { ArrayEditor } from "./react/array-editor";
+import { NumberEditor } from "./react/number-editor";
+import { BooleanEditor } from "./react/boolean-editor";
+import { NullEditor } from "./react/null-editor";
+import { StringEditor } from "./react/string-editor";
 
 export type Props = {
     schema: common.Schema;
@@ -16,7 +16,7 @@ export type Props = {
     icon?: string;
     locale?: string;
     readonly?: boolean;
-}
+};
 
 export class JSONEditor extends React.Component<Props, {}> {
     private theme: common.Theme;

@@ -112,7 +112,7 @@ export class ArrayEditorComponent {
     }
     trackByFunction = (index: number, value: common.ValueType) => {
         return (1 + index) * this.renderSwitch;
-    };
+    }
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
     }

@@ -1,12 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { JSONEditor } from "../../dist/react/index";
+import { JSONEditor } from "../../dist/react";
 import { schema } from "../schema";
 
 class Main extends React.Component<{}, {}> {
     value: any = {};
     isValid = false;
-    updateValue(value: any, isValid: boolean) {
+    updateValue = (value: any, isValid: boolean) => {
         this.value = value;
         this.isValid = isValid;
         this.setState({ value: this.value });
@@ -22,7 +22,7 @@ class Main extends React.Component<{}, {}> {
                     GUI:
                     <JSONEditor schema={schema}
                         initialValue={this.value}
-                        updateValue={(value, isValid) => this.updateValue(value, isValid)}
+                        updateValue={this.updateValue}
                         theme="bootstrap3"
                         icon="fontawesome4"
                         locale="zh-cn" />

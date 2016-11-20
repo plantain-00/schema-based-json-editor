@@ -19,13 +19,13 @@
 #### reactjs component demo
 
 ```js
-import { JSONEditor } from "schema-based-json-editor/dist/react/index";
+import { JSONEditor } from "schema-based-json-editor/dist/react";
 ```
 
 ```jsx
 <JSONEditor schema={schema}
     initialValue={initialValue}
-    updateValue={(value, isValid) => this.updateValue(value, isValid)}
+    updateValue={this.updateValue}
     theme="bootstrap3"
     icon="fontawesome4"
     locale="zh-cn" />
@@ -38,7 +38,7 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 #### angular2 component demo
 
 ```js
-import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, TitleEditorComponent, IconComponent } from "schema-based-json-editor/dist/angular/index";
+import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, TitleEditorComponent, IconComponent } from "schema-based-json-editor/dist/angular";
 
 @NgModule({
     imports: [BrowserModule, FormsModule],
@@ -65,7 +65,7 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 #### vuejs component demo
 
 ```js
-import "schema-based-json-editor/dist/vue/index";
+import "schema-based-json-editor/dist/vue";
 ```
 
 ```jsx

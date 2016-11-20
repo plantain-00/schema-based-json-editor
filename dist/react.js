@@ -1,12 +1,12 @@
 "use strict";
 var React = require("react");
-var common = require("../common");
-var object_editor_1 = require("./object-editor");
-var array_editor_1 = require("./array-editor");
-var number_editor_1 = require("./number-editor");
-var boolean_editor_1 = require("./boolean-editor");
-var null_editor_1 = require("./null-editor");
-var string_editor_1 = require("./string-editor");
+var common = require("./common");
+var object_editor_1 = require("./react/object-editor");
+var array_editor_1 = require("./react/array-editor");
+var number_editor_1 = require("./react/number-editor");
+var boolean_editor_1 = require("./react/boolean-editor");
+var null_editor_1 = require("./react/null-editor");
+var string_editor_1 = require("./react/string-editor");
 var JSONEditor = (function (_super) {
     __extends(JSONEditor, _super);
     function JSONEditor(props) {
@@ -49,4 +49,4 @@ var JSONEditor = (function (_super) {
     return JSONEditor;
 }(React.Component));
 exports.JSONEditor = JSONEditor;
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=react.js.map

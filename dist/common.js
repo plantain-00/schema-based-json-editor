@@ -91,6 +91,7 @@ function getLocale(name) {
     return name;
 }
 exports.getLocale = getLocale;
+;
 var icons = {
     "bootstrap3": {
         isText: false,

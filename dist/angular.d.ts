@@ -1,6 +1,6 @@
 /// <reference types="lodash" />
 import { EventEmitter } from "@angular/core";
-import * as common from "../common";
+import * as common from "./common";
 export declare class JSONEditorComponent {
     schema: common.Schema;
     initialValue: common.ValueType;
@@ -27,21 +27,21 @@ export declare class JSONEditorComponent {
 }
 import { Cancelable } from "lodash";
 export declare type Cancelable = Cancelable;
-import { BooleanEditorComponent } from "./boolean-editor.component";
+import { BooleanEditorComponent } from "./angular/boolean-editor.component";
 export { BooleanEditorComponent };
-import { ArrayEditorComponent } from "./array-editor.component";
+import { ArrayEditorComponent } from "./angular/array-editor.component";
 export { ArrayEditorComponent };
-import { EditorComponent } from "./editor.component";
+import { EditorComponent } from "./angular/editor.component";
 export { EditorComponent };
-import { NullEditorComponent } from "./null-editor.component";
+import { NullEditorComponent } from "./angular/null-editor.component";
 export { NullEditorComponent };
-import { NumberEditorComponent } from "./number-editor.component";
+import { NumberEditorComponent } from "./angular/number-editor.component";
 export { NumberEditorComponent };
-import { ObjectEditorComponent } from "./object-editor.component";
+import { ObjectEditorComponent } from "./angular/object-editor.component";
 export { ObjectEditorComponent };
-import { StringEditorComponent } from "./string-editor.component";
+import { StringEditorComponent } from "./angular/string-editor.component";
 export { StringEditorComponent };
-import { TitleEditorComponent } from "./title-editor.component";
+import { TitleEditorComponent } from "./angular/title-editor.component";
 export { TitleEditorComponent };
-import { IconComponent } from "./icon.component";
+import { IconComponent } from "./angular/icon.component";
 export { IconComponent };

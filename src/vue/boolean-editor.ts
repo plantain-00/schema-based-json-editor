@@ -58,4 +58,4 @@ export type This = {
     schema: common.BooleanSchema;
     initialValue: boolean;
     value?: boolean;
-}
+};

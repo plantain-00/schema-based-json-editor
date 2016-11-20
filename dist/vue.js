@@ -1,15 +1,15 @@
 "use strict";
 var Vue = require("vue");
-var common = require("../common");
-var array_editor_1 = require("./array-editor");
-var boolean_editor_1 = require("./boolean-editor");
-var editor_1 = require("./editor");
-var icon_1 = require("./icon");
-var null_editor_1 = require("./null-editor");
-var number_editor_1 = require("./number-editor");
-var object_editor_1 = require("./object-editor");
-var string_editor_1 = require("./string-editor");
-var title_editor_1 = require("./title-editor");
+var common = require("./common");
+var array_editor_1 = require("./vue/array-editor");
+var boolean_editor_1 = require("./vue/boolean-editor");
+var editor_1 = require("./vue/editor");
+var icon_1 = require("./vue/icon");
+var null_editor_1 = require("./vue/null-editor");
+var number_editor_1 = require("./vue/number-editor");
+var object_editor_1 = require("./vue/object-editor");
+var string_editor_1 = require("./vue/string-editor");
+var title_editor_1 = require("./vue/title-editor");
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */
 /* tslint:disable:object-literal-shorthand */
@@ -39,4 +39,4 @@ Vue.component("json-editor", {
         }, 100),
     },
 });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=vue.js.map

@@ -1,15 +1,15 @@
 import * as Vue from "vue";
-import * as common from "../common";
+import * as common from "./common";
 
-import { arrayEditor } from "./array-editor";
-import { booleanEditor } from "./boolean-editor";
-import { editor } from "./editor";
-import { icon } from "./icon";
-import { nullEditor } from "./null-editor";
-import { numberEditor } from "./number-editor";
-import { objectEditor } from "./object-editor";
-import { stringEditor } from "./string-editor";
-import { titleEditor } from "./title-editor";
+import { arrayEditor } from "./vue/array-editor";
+import { booleanEditor } from "./vue/boolean-editor";
+import { editor } from "./vue/editor";
+import { icon } from "./vue/icon";
+import { nullEditor } from "./vue/null-editor";
+import { numberEditor } from "./vue/number-editor";
+import { objectEditor } from "./vue/object-editor";
+import { stringEditor } from "./vue/string-editor";
+import { titleEditor } from "./vue/title-editor";
 
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */
@@ -105,4 +105,4 @@ export type This = {
     locale: common.Locale;
     theme: common.Theme;
     icon: common.Icon;
-}
+};

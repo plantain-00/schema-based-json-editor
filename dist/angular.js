@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
-var common = require("../common");
+var common = require("./common");
 var JSONEditorComponent = (function () {
     function JSONEditorComponent() {
         var _this = this;
@@ -44,22 +44,22 @@ var JSONEditorComponent = (function () {
     return JSONEditorComponent;
 }());
 exports.JSONEditorComponent = JSONEditorComponent;
-var boolean_editor_component_1 = require("./boolean-editor.component");
+var boolean_editor_component_1 = require("./angular/boolean-editor.component");
 exports.BooleanEditorComponent = boolean_editor_component_1.BooleanEditorComponent;
-var array_editor_component_1 = require("./array-editor.component");
+var array_editor_component_1 = require("./angular/array-editor.component");
 exports.ArrayEditorComponent = array_editor_component_1.ArrayEditorComponent;
-var editor_component_1 = require("./editor.component");
+var editor_component_1 = require("./angular/editor.component");
 exports.EditorComponent = editor_component_1.EditorComponent;
-var null_editor_component_1 = require("./null-editor.component");
+var null_editor_component_1 = require("./angular/null-editor.component");
 exports.NullEditorComponent = null_editor_component_1.NullEditorComponent;
-var number_editor_component_1 = require("./number-editor.component");
+var number_editor_component_1 = require("./angular/number-editor.component");
 exports.NumberEditorComponent = number_editor_component_1.NumberEditorComponent;
-var object_editor_component_1 = require("./object-editor.component");
+var object_editor_component_1 = require("./angular/object-editor.component");
 exports.ObjectEditorComponent = object_editor_component_1.ObjectEditorComponent;
-var string_editor_component_1 = require("./string-editor.component");
+var string_editor_component_1 = require("./angular/string-editor.component");
 exports.StringEditorComponent = string_editor_component_1.StringEditorComponent;
-var title_editor_component_1 = require("./title-editor.component");
+var title_editor_component_1 = require("./angular/title-editor.component");
 exports.TitleEditorComponent = title_editor_component_1.TitleEditorComponent;
-var icon_component_1 = require("./icon.component");
+var icon_component_1 = require("./angular/icon.component");
 exports.IconComponent = icon_component_1.IconComponent;
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=angular.js.map

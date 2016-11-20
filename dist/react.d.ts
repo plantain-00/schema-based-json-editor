@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from "react";
-import * as common from "../common";
+import * as common from "./common";
 export declare type Props = {
     schema: common.Schema;
     initialValue: common.ValueType;

@@ -13,20 +13,20 @@ export type CommonSchema = {
     description?: string;
     default?: ValueType;
     readonly?: boolean;
-}
+};
 
 export type ObjectSchema = CommonSchema & {
     type: "object";
     properties: { [name: string]: Schema };
     required?: string[];
-}
+};
 
 export type ArraySchema = CommonSchema & {
     type: "array";
     items: Schema;
     minItems?: number;
     uniqueItems?: boolean;
-}
+};
 
 export type NumberSchema = CommonSchema & {
     type: "number" | "integer";
@@ -35,7 +35,7 @@ export type NumberSchema = CommonSchema & {
     maximum?: number;
     exclusiveMaximum?: boolean;
     enum?: number[];
-}
+};
 
 export type StringSchema = CommonSchema & {
     type: "string";
@@ -44,15 +44,15 @@ export type StringSchema = CommonSchema & {
     minLength?: number;
     maxLength?: number;
     pattern?: string;
-}
+};
 
 export type BooleanSchema = CommonSchema & {
     type: "boolean";
-}
+};
 
 export type NullSchema = CommonSchema & {
     type: "null";
-}
+};
 
 export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema;
 
@@ -66,7 +66,7 @@ export type Theme = {
     label: string;
     optionalCheckbox: string;
     buttonGroup: string;
-}
+};
 
 export const themes: { [name: string]: Theme } = {
     "bootstrap3": {
@@ -122,7 +122,7 @@ export type Locale = {
         minItems: string;
         uniqueItems: string;
     },
-}
+};
 
 export const defaultLocale: Locale = {
     button: {
@@ -174,7 +174,7 @@ export function getLocale(name: string | undefined | Locale): Locale {
         return locales[name] || defaultLocale;
     }
     return name;
-}
+};
 
 export type Icon = {
     isText: boolean;
@@ -182,7 +182,7 @@ export type Icon = {
     expand: string;
     add: string;
     delete: string;
-}
+};
 
 const icons: { [name: string]: Icon } = {
     "bootstrap3": {
@@ -473,7 +473,7 @@ export function toggleOptional(value: ValueType | undefined, schema: Schema, ini
 export type ValidityValue<T> = {
     value: T;
     isValid: boolean;
-}
+};
 
 export function recordInvalidPropertiesOfObject(invalidProperties: string[], isValid: boolean, property: string) {
     const index = invalidProperties.indexOf(property);

@@ -95,4 +95,4 @@ export type This = {
     locale: common.Locale;
     readonly: boolean;
     required: boolean;
-}
+};

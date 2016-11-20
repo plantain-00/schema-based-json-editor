@@ -131,4 +131,4 @@ export type This = {
     validate: () => void;
     $el: HTMLElement;
     invalidIndexes: number[];
-}
+};

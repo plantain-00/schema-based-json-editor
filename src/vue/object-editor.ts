@@ -85,4 +85,4 @@ export type This = {
     initialValue: any;
     required: boolean;
     invalidProperties: string[];
-}
+};
