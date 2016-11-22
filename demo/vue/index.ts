@@ -25,6 +25,7 @@ new Vue({
             color: "black",
             valueString: JSON.stringify(value, null, "  "),
             schemaString: JSON.stringify(schema, null, "  "),
+            locale: navigator.language ? navigator.language.toLowerCase() : undefined,
         };
     },
     methods: {
