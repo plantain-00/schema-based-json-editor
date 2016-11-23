@@ -7,13 +7,17 @@ import * as common from "../common";
 export const stringEditor = {
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
-        <title-editor :title="title"
-            @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton"
-            :theme="theme"
-            :icon="icon"
-            :locale="locale">
-        </title-editor>
+        <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
+            {{title}}
+            <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+                <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">
+                    <icon :icon="icon" :text="icon.delete"></icon>
+                </button>
+                <button v-if="isImageUrl" :class="theme.button" @click="collapseOrExpand()">
+                    <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
+                </button>
+            </div>
+        </label>
         <div v-if="!required" :class="theme.optionalCheckbox">
             <label>
                 <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" />
@@ -43,6 +47,7 @@ export const stringEditor = {
                 {{e}}
             </option>
         </select>
+        <img v-if="isImageUrl && !collapsed" :src="value" />
         <p :class="theme.help">{{schema.description}}</p>
         <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
     </div>
@@ -54,6 +59,9 @@ export const stringEditor = {
         return {
             value,
             errorMessage: undefined,
+            isImageUrl: false,
+            buttonGroupStyle: common.buttonGroupStyle,
+            collapsed: false,
         };
     },
     beforeMount(this: This) {
@@ -76,11 +84,15 @@ export const stringEditor = {
         },
         validate(this: This) {
             this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
+            this.isImageUrl = common.isImageUrl(this.value);
         },
         toggleOptional(this: This) {
             this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;
             this.validate();
             this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+        },
+        collapseOrExpand(this: This) {
+            this.collapsed = !this.collapsed;
         },
     },
 };
@@ -95,4 +107,6 @@ export type This = {
     locale: common.Locale;
     readonly: boolean;
     required: boolean;
+    isImageUrl: boolean;
+    collapsed: boolean;
 };

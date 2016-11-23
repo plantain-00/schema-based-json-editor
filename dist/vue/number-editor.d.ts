@@ -5,6 +5,9 @@ export declare const numberEditor: {
     data: (this: This) => {
         value: number;
         errorMessage: undefined;
+        buttonGroupStyle: {
+            marginLeft: string;
+        };
     };
     methods: {
         useInput(this: This): boolean | undefined;

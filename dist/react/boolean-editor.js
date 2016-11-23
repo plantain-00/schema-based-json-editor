@@ -1,7 +1,7 @@
 "use strict";
 var React = require("react");
 var common = require("../common");
-var title_editor_1 = require("./title-editor");
+var icon_1 = require("./icon");
 var BooleanEditor = (function (_super) {
     __extends(BooleanEditor, _super);
     function BooleanEditor(props) {
@@ -39,8 +39,19 @@ var BooleanEditor = (function (_super) {
                     "is undefined")
             ));
         }
+        var deleteButton = null;
+        if (this.props.onDelete) {
+            deleteButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
+                React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
+            ));
+        }
+        var titleView = null;
+        if (this.props.title) {
+            titleView = (React.createElement("label", {className: this.props.theme.label}, this.props.title));
+        }
         return (React.createElement("div", {className: this.props.theme.row}, 
-            React.createElement(title_editor_1.TitleEditor, __assign({}, this.props)), 
+            titleView, 
+            React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, deleteButton), 
             optionalCheckbox, 
             control, 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description)));

@@ -500,3 +500,17 @@ export function recordInvalidIndexesOfArray(invalidIndexes: number[], isValid: b
         }
     }
 }
+
+const imageExtensions = [".png", ".jpg", ".bmp", ".gif"];
+
+export function isImageUrl(value?: string) {
+    if (!value || value.length <= "https://".length) {
+        return false;
+    }
+    if (value.substr(0, "http://".length) !== "http://"
+        && value.substr(0, "https://".length) !== "https://") {
+        return false;
+    }
+    const extensionName = value.substr(value.length - 4, 4);
+    return imageExtensions.indexOf(extensionName) !== -1;
+}

@@ -7,13 +7,14 @@ import * as common from "../common";
 export const nullEditor = {
     template: `
     <div :class="theme.row">
-        <title-editor :title="title"
-            @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton"
-            :theme="theme"
-            :icon="icon"
-            :locale="locale">
-        </title-editor>
+        <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
+            {{title}}
+            <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+                <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">
+                    <icon :icon="icon" :text="icon.delete"></icon>
+                </button>
+            </div>
+        </label>
         <div v-if="!required" :class="theme.optionalCheckbox">
             <label>
                 <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" />
@@ -29,6 +30,7 @@ export const nullEditor = {
         this.$emit("update-value", { value, isValid: true });
         return {
             value,
+            buttonGroupStyle: common.buttonGroupStyle,
         };
     },
     methods: {

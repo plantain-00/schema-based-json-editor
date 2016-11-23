@@ -16,6 +16,9 @@ export declare class NullEditorComponent {
     required?: boolean;
     hasDeleteButton: boolean;
     value?: null;
+    buttonGroupStyle: {
+        marginLeft: string;
+    };
     ngOnInit(): void;
     toggleOptional(): void;
 }

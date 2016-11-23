@@ -41,7 +41,5 @@ import { ObjectEditorComponent } from "./angular/object-editor.component";
 export { ObjectEditorComponent };
 import { StringEditorComponent } from "./angular/string-editor.component";
 export { StringEditorComponent };
-import { TitleEditorComponent } from "./angular/title-editor.component";
-export { TitleEditorComponent };
 import { IconComponent } from "./angular/icon.component";
 export { IconComponent };

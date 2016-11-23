@@ -127,3 +127,4 @@ export declare type ValidityValue<T> = {
 };
 export declare function recordInvalidPropertiesOfObject(invalidProperties: string[], isValid: boolean, property: string): void;
 export declare function recordInvalidIndexesOfArray(invalidIndexes: number[], isValid: boolean, i: number): void;
+export declare function isImageUrl(value?: string): boolean;

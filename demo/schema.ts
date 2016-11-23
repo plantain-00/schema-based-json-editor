@@ -97,6 +97,10 @@ export const schema: common.Schema = {
             pattern: "^[A-z]{3}$",
             default: "abc",
         },
+        imagePreviewExample: {
+            type: "string",
+            default: "http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg",
+        },
     },
     required: [
         "stringExample",
@@ -111,5 +115,6 @@ export const schema: common.Schema = {
         "colorExample",
         "textareaExample",
         "patternExample",
+        "imagePreviewExample",
     ],
 };

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as common from "../common";
-import { TitleEditor } from "./title-editor";
+import { Icon } from "./icon";
 
 export class NullEditor extends React.Component<common.Props<common.NullSchema, null>, {}> {
     private value?: null;
@@ -23,9 +23,28 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
                 </div>
             );
         }
+        let deleteButton: JSX.Element | null = null;
+        if (this.props.onDelete) {
+            deleteButton = (
+                <button className={this.props.theme.button} onClick={this.props.onDelete}>
+                    <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
+                </button>
+            );
+        }
+        let titleView: JSX.Element | null = null;
+        if (this.props.title) {
+            titleView = (
+                <label className={this.props.theme.label}>
+                    {this.props.title}
+                </label>
+            );
+        }
         return (
             <div className={this.props.theme.row}>
-                <TitleEditor {...this.props} />
+                {titleView}
+                <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+                    {deleteButton}
+                </div>
                 {optionalCheckbox}
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
             </div>

@@ -5,13 +5,14 @@ import * as common from "../common";
     selector: "number-editor",
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <title-editor [title]="title"
-            (onDelete)="onDelete.emit()"
-            [theme]="theme"
-            [icon]="icon"
-            [locale]="locale"
-            [hasDeleteButton]="hasDeleteButton">
-        </title-editor>
+        <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
+            {{title}}
+            <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
+                <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
+                    <icon [icon]="icon" [text]="icon.delete"></icon>
+                </button>
+            </div>
+        </label>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
                 <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" />
@@ -66,6 +67,7 @@ export class NumberEditorComponent {
 
     value?: number;
     errorMessage: string;
+    buttonGroupStyle = common.buttonGroupStyle;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });

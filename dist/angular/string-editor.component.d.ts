@@ -17,6 +17,11 @@ export declare class StringEditorComponent {
     hasDeleteButton: boolean;
     value?: string;
     errorMessage: string;
+    isImageUrl: boolean;
+    buttonGroupStyle: {
+        marginLeft: string;
+    };
+    collapsed: boolean;
     ngOnInit(): void;
     useTextArea(): boolean | undefined;
     useInput(): boolean | undefined;
@@ -31,4 +36,5 @@ export declare class StringEditorComponent {
     trackByFunction(index: number, value: {
         [name: string]: common.ValueType;
     }): number;
+    collapseOrExpand: () => void;
 }

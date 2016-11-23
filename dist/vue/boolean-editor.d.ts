@@ -4,6 +4,9 @@ export declare const booleanEditor: {
     props: string[];
     data: (this: This) => {
         value: boolean;
+        buttonGroupStyle: {
+            marginLeft: string;
+        };
     };
     methods: {
         onChange(this: This, e: {

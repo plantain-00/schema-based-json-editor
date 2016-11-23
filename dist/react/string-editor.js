@@ -1,12 +1,13 @@
 "use strict";
 var React = require("react");
 var common = require("../common");
-var title_editor_1 = require("./title-editor");
+var icon_1 = require("./icon");
 var StringEditor = (function (_super) {
     __extends(StringEditor, _super);
     function StringEditor(props) {
         var _this = this;
         _super.call(this, props);
+        this.collapsed = false;
         this.onChange = function (e) {
             _this.value = e.currentTarget.value;
             _this.validate();
@@ -18,6 +19,10 @@ var StringEditor = (function (_super) {
             _this.validate();
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value, !_this.errorMessage);
+        };
+        this.collapseOrExpand = function () {
+            _this.collapsed = !_this.collapsed;
+            _this.setState({ collapsed: _this.collapsed });
         };
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         this.validate();
@@ -53,15 +58,40 @@ var StringEditor = (function (_super) {
                     "is undefined")
             ));
         }
+        var imagePreview = null;
+        if (this.isImageUrl && !this.collapsed) {
+            imagePreview = React.createElement("img", {src: this.value});
+        }
+        var deleteButton = null;
+        if (this.props.onDelete) {
+            deleteButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
+                React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
+            ));
+        }
+        var titleView = null;
+        if (this.props.title) {
+            titleView = (React.createElement("label", {className: this.props.theme.label}, this.props.title));
+        }
+        var previewImageButton = null;
+        if (this.isImageUrl) {
+            previewImageButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, 
+                React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.collapsed ? this.props.icon.expand : this.props.icon.collapse})
+            ));
+        }
         return (React.createElement("div", {className: this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}, 
-            React.createElement(title_editor_1.TitleEditor, __assign({}, this.props)), 
+            titleView, 
+            React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
+                deleteButton, 
+                previewImageButton), 
             optionalCheckbox, 
             control, 
+            imagePreview, 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description), 
             errorDescription));
     };
     StringEditor.prototype.validate = function () {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);
+        this.isImageUrl = common.isImageUrl(this.value);
     };
     return StringEditor;
 }(React.Component));

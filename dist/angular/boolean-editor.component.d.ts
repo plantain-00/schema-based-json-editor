@@ -16,6 +16,9 @@ export declare class BooleanEditorComponent {
     required?: boolean;
     hasDeleteButton: boolean;
     value?: boolean;
+    buttonGroupStyle: {
+        marginLeft: string;
+    };
     ngOnInit(): void;
     onChange(e: {
         target: {

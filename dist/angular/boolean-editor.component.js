@@ -5,6 +5,7 @@ var BooleanEditorComponent = (function () {
     function BooleanEditorComponent() {
         this.updateValue = new core_1.EventEmitter();
         this.onDelete = new core_1.EventEmitter();
+        this.buttonGroupStyle = common.buttonGroupStyle;
     }
     BooleanEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
@@ -54,7 +55,7 @@ var BooleanEditorComponent = (function () {
     BooleanEditorComponent = __decorate([
         core_1.Component({
             selector: "boolean-editor",
-            template: "\n    <div [class]=\"theme.row\">\n        <title-editor [title]=\"title\"\n            (onDelete)=\"onDelete.emit()\"\n            [theme]=\"theme\"\n            [icon]=\"icon\"\n            [locale]=\"locale\"\n            [hasDeleteButton]=\"hasDeleteButton\">\n        </title-editor>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <div *ngIf=\"value !== undefined\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\"\n                    (change)=\"onChange($event)\"\n                    [checked]=\"value\"\n                    [readOnly]=\"readonly || schema.readonly\" />\n                {{title}}\n            </label>\n        </div>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n    </div>\n    ",
+            template: "\n    <div [class]=\"theme.row\">\n        <label *ngIf=\"title !== undefined && title !== null && title !== ''\" [class]=\"theme.label\">\n            {{title}}\n            <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyle\">\n                <button *ngIf=\"hasDeleteButton\" [class]=\"theme.button\" (click)=\"onDelete.emit()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </label>\n        <div *ngIf=\"!required\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" />\n                is undefined\n            </label>\n        </div>\n        <div *ngIf=\"value !== undefined\" [class]=\"theme.optionalCheckbox\">\n            <label>\n                <input type=\"checkbox\"\n                    (change)=\"onChange($event)\"\n                    [checked]=\"value\"\n                    [readOnly]=\"readonly || schema.readonly\" />\n                {{title}}\n            </label>\n        </div>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n    </div>\n    ",
         })
     ], BooleanEditorComponent);
     return BooleanEditorComponent;

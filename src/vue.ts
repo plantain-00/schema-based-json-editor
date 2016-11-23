@@ -9,7 +9,6 @@ import { nullEditor } from "./vue/null-editor";
 import { numberEditor } from "./vue/number-editor";
 import { objectEditor } from "./vue/object-editor";
 import { stringEditor } from "./vue/string-editor";
-import { titleEditor } from "./vue/title-editor";
 
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */
@@ -23,7 +22,6 @@ Vue.component("null-editor", nullEditor);
 Vue.component("numberEditor", numberEditor);
 Vue.component("objectEditor", objectEditor);
 Vue.component("stringEditor", stringEditor);
-Vue.component("title-editor", titleEditor);
 
 Vue.component("json-editor", {
     template: `

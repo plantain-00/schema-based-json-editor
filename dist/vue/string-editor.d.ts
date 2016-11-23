@@ -5,6 +5,11 @@ export declare const stringEditor: {
     data: (this: This) => {
         value: string;
         errorMessage: undefined;
+        isImageUrl: boolean;
+        buttonGroupStyle: {
+            marginLeft: string;
+        };
+        collapsed: boolean;
     };
     beforeMount(this: This): void;
     methods: {
@@ -18,6 +23,7 @@ export declare const stringEditor: {
         }): void;
         validate(this: This): void;
         toggleOptional(this: This): void;
+        collapseOrExpand(this: This): void;
     };
 };
 export declare type This = {
@@ -30,4 +36,6 @@ export declare type This = {
     locale: common.Locale;
     readonly: boolean;
     required: boolean;
+    isImageUrl: boolean;
+    collapsed: boolean;
 };

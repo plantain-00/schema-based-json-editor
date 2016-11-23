@@ -17,6 +17,9 @@ export declare class NumberEditorComponent {
     hasDeleteButton: boolean;
     value?: number;
     errorMessage: string;
+    buttonGroupStyle: {
+        marginLeft: string;
+    };
     ngOnInit(): void;
     useInput(): boolean | undefined;
     useSelect(): boolean;

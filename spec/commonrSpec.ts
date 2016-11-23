@@ -119,3 +119,19 @@ describe("recordInvalidIndexesOfArray", () => {
         expect(invalidIndexes).toEqual([0, 2, 1]);
     });
 });
+
+describe("isImageUrl", () => {
+    it("should be true", () => {
+        expect(common.isImageUrl("http://www.example.com/a.png")).toEqual(true);
+        expect(common.isImageUrl("https://www.example.com/a.png")).toEqual(true);
+        expect(common.isImageUrl("http://www.example.com/a.jpg")).toEqual(true);
+        expect(common.isImageUrl("http://www.example.com/a.gif")).toEqual(true);
+        expect(common.isImageUrl("http://www.example.com/a.bmp")).toEqual(true);
+    });
+    it("should be false", () => {
+        expect(common.isImageUrl(undefined)).toEqual(false);
+        expect(common.isImageUrl("abc")).toEqual(false);
+        expect(common.isImageUrl("htt://www.example.com/a.png")).toEqual(false);
+        expect(common.isImageUrl("http://www.example.com/a.html")).toEqual(false);
+    });
+});

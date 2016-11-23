@@ -5,13 +5,17 @@ import * as common from "../common";
     selector: "string-editor",
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <title-editor [title]="title"
-            (onDelete)="onDelete.emit()"
-            [theme]="theme"
-            [icon]="icon"
-            [locale]="locale"
-            [hasDeleteButton]="hasDeleteButton">
-        </title-editor>
+        <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
+            {{title}}
+            <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
+                <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
+                    <icon [icon]="icon" [text]="icon.delete"></icon>
+                </button>
+                <button *ngIf="isImageUrl" [class]="theme.button" (click)="collapseOrExpand()">
+                    <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
+                </button>
+            </div>
+        </label>
         <div *ngIf="!required" [class]="theme.optionalCheckbox">
             <label>
                 <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" />
@@ -40,6 +44,7 @@ import * as common from "../common";
                 {{e}}
             </option>
         </select>
+        <img *ngIf="isImageUrl && !collapsed" [src]="value" />
         <p [class]="theme.help">{{schema.description}}</p>
         <p *ngIf="errorMessage" [class]="theme.help">{{errorMessage}}</p>
     </div>
@@ -71,6 +76,9 @@ export class StringEditorComponent {
 
     value?: string;
     errorMessage: string;
+    isImageUrl: boolean;
+    buttonGroupStyle = common.buttonGroupStyle;
+    collapsed = false;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         this.validate();
@@ -92,6 +100,7 @@ export class StringEditorComponent {
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
+        this.isImageUrl = common.isImageUrl(this.value);
     }
     toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;
@@ -100,5 +109,8 @@ export class StringEditorComponent {
     }
     trackByFunction(index: number, value: { [name: string]: common.ValueType }) {
         return index;
+    }
+    collapseOrExpand = () => {
+        this.collapsed = !this.collapsed;
     }
 }
