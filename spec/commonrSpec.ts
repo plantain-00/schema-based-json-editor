@@ -135,3 +135,13 @@ describe("isImageUrl", () => {
         expect(common.isImageUrl("http://www.example.com/a.html")).toEqual(false);
     });
 });
+
+describe("getLocale", () => {
+    it("should be true", () => {
+        expect(common.getLocale(undefined)).toEqual(common.defaultLocale);
+        expect(common.getLocale("en")).toEqual(common.defaultLocale);
+        expect(common.getLocale("zh-cn")).toEqual(common.locales["zh-cn"]);
+        expect(common.getLocale("zh-CN")).toEqual(common.locales["zh-cn"]);
+        expect(common.getLocale(common.defaultLocale)).toEqual(common.defaultLocale);
+    });
+});

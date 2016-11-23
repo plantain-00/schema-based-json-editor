@@ -86,7 +86,7 @@ function getLocale(name) {
         return exports.defaultLocale;
     }
     if (typeof name === "string") {
-        return exports.locales[name] || exports.defaultLocale;
+        return exports.locales[name.toLowerCase()] || exports.defaultLocale;
     }
     return name;
 }

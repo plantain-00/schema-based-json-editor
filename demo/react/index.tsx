@@ -6,7 +6,7 @@ import { schema } from "../schema";
 class Main extends React.Component<{}, {}> {
     value: any = {};
     isValid = false;
-    locale = navigator.language ? navigator.language.toLowerCase() : undefined;
+    locale = navigator.language;
     updateValue = (value: any, isValid: boolean) => {
         this.value = value;
         this.isValid = isValid;

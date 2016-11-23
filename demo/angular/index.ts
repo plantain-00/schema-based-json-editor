@@ -44,7 +44,7 @@ export class MainComponent {
     schemaString = JSON.stringify(schema, null, "  ");
     value: any = {};
     color = "black";
-    locale = navigator.language ? navigator.language.toLowerCase() : undefined;
+    locale = navigator.language;
     getValueString() {
         return JSON.stringify(this.value, null, "  ");
     }

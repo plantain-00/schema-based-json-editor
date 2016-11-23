@@ -171,7 +171,7 @@ export function getLocale(name: string | undefined | Locale): Locale {
         return defaultLocale;
     }
     if (typeof name === "string") {
-        return locales[name] || defaultLocale;
+        return locales[name.toLowerCase()] || defaultLocale;
     }
     return name;
 };
