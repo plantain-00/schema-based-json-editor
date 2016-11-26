@@ -7,7 +7,7 @@ import { NumberEditor } from "./react/number-editor";
 import { BooleanEditor } from "./react/boolean-editor";
 import { NullEditor } from "./react/null-editor";
 import { StringEditor } from "./react/string-editor";
-import { hljs, dragula } from "./lib";
+import { hljs, dragula } from "../typings/lib";
 
 export type Props = {
     schema: common.Schema;

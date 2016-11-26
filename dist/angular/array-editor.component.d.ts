@@ -2,7 +2,7 @@
 /// <reference types="highlight.js" />
 import { EventEmitter, ElementRef } from "@angular/core";
 import * as common from "../common";
-import { hljs, dragula } from "../lib";
+import { hljs, dragula } from "../../typings/lib";
 export declare class ArrayEditorComponent {
     schema: common.ArraySchema;
     initialValue: common.ValueType[];

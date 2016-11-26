@@ -1,6 +1,6 @@
 /// <reference types="highlight.js" />
 import * as common from "./common";
-import { hljs } from "./lib";
+import { hljs } from "../typings/lib";
 export declare type This = {
     $emit: (event: string, args: common.ValidityValue<common.ValueType>) => void;
     locale: common.Locale;

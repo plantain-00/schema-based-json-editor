@@ -85,7 +85,7 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 + icon: optional, support "bootstrap3" and "fontawesome4" for now
 + locale: optional, support "zh-cn" for now
 + readonly: optional, a boolean value
-+ dragula: optional the `dragula` library object if you want to reorder array by drag and drop
++ dragula: optional, the `dragula` library object if you want to reorder array by drag and drop
 + markdownit: optional, the `markdown-it` library object if you want to preview markdown
 + hljs: optional, the `highlight.js` library object if you want to highlight code
 + forceHttps: optional, a boolean value, if true, the preview url of images will be `https://` rather than `http://`

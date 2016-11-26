@@ -3,7 +3,7 @@
 /// <reference types="react" />
 import * as React from "react";
 import * as common from "./common";
-import { hljs, dragula } from "./lib";
+import { hljs, dragula } from "../typings/lib";
 export declare type Props = {
     schema: common.Schema;
     initialValue: common.ValueType;

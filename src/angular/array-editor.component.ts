@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import * as common from "../common";
-import { hljs, dragula } from "../lib";
+import { hljs, dragula } from "../../typings/lib";
 
 @Component({
     selector: "array-editor",

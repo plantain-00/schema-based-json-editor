@@ -1,7 +1,7 @@
 import * as Vue from "vue";
 import * as common from "./common";
 
-import { hljs } from "./lib";
+import { hljs } from "../typings/lib";
 
 import { arrayEditor } from "./vue/array-editor";
 import { booleanEditor } from "./vue/boolean-editor";

@@ -103,7 +103,7 @@ export declare type ValueType = {
 export declare function getDefaultValue(required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined;
 export declare const buttonGroupStyle: React.CSSProperties;
 export declare const buttonGroupStyleString: string;
-import { hljs as hljsLib, React, dragula } from "./lib";
+import { hljs as hljsLib, React, dragula } from "../typings/lib";
 export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
     initialValue: TValue;

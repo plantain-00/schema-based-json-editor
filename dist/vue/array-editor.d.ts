@@ -1,6 +1,6 @@
 /// <reference types="dragula" />
 import * as common from "../common";
-import { dragula } from "../lib";
+import { dragula } from "../../typings/lib";
 export declare const arrayEditor: {
     template: string;
     props: string[];

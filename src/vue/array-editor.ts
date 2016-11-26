@@ -1,5 +1,5 @@
 import * as common from "../common";
-import { dragula } from "../lib";
+import { dragula } from "../../typings/lib";
 
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */

@@ -1,5 +1,5 @@
 import * as common from "../common";
-import { hljs } from "../lib";
+import { hljs } from "../../typings/lib";
 
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */
