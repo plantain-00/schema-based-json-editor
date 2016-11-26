@@ -36,6 +36,7 @@ Vue.component("json-editor", {
             :icon="iconObject"
             :required="true"
             @update-value="updateValueFunction(arguments[0])"
+            :dragula="dragula"
             :md="md"
             :hljs="hljs"
             :forceHttps="forceHttps">
@@ -48,6 +49,7 @@ Vue.component("json-editor", {
             :icon="iconObject"
             :required="true"
             @update-value="updateValueFunction(arguments[0])"
+            :dragula="dragula"
             :md="md"
             :hljs="hljs"
             :forceHttps="forceHttps">
@@ -59,10 +61,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])"
-            :md="md"
-            :hljs="hljs"
-            :forceHttps="forceHttps">
+            @update-value="updateValueFunction(arguments[0])">
         </number-editor>
         <boolean-editor v-if="schema.type === 'boolean'"
             :schema="schema"
@@ -71,10 +70,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])"
-            :md="md"
-            :hljs="hljs"
-            :forceHttps="forceHttps">
+            @update-value="updateValueFunction(arguments[0])">
         </boolean-editor>
         <null-editor v-if="schema.type === 'null'"
             :schema="schema"
@@ -83,10 +79,7 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])"
-            :md="md"
-            :hljs="hljs"
-            :forceHttps="forceHttps">
+            @update-value="updateValueFunction(arguments[0])">
         </null-editor>
         <string-editor v-if="schema.type === 'string'"
             :schema="schema"
@@ -96,13 +89,14 @@ Vue.component("json-editor", {
             :icon="iconObject"
             :required="true"
             @update-value="updateValueFunction(arguments[0])"
+            :dragula="dragula"
             :md="md"
             :hljs="hljs"
             :forceHttps="forceHttps">
         </string-editor>
     </div>
     `,
-    props: ["schema", "initialValue", "theme", "icon", "locale", "readonly", "markdownit", "hljs", "forceHttps"],
+    props: ["schema", "initialValue", "theme", "icon", "locale", "readonly", "dragula", "markdownit", "hljs", "forceHttps"],
     data: function (this: This) {
         const localeObject = common.getLocale(this.locale);
         return {

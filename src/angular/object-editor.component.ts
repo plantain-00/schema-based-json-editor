@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
-import { hljs } from "../lib";
+import { hljs, dragula } from "../lib";
 
 @Component({
     selector: "object-editor",
@@ -34,6 +34,7 @@ import { hljs } from "../lib";
                 [locale]="locale"
                 [required]="isRequired(property.name)"
                 [readonly]="readonly || schema.readonly"
+                [dragula]="dragula"
                 [md]="md"
                 [hljs]="hljs"
                 [forceHttps]="forceHttps">
@@ -65,6 +66,8 @@ export class ObjectEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    dragula?: typeof dragula;
     @Input()
     md?: any;
     @Input()

@@ -4,7 +4,6 @@ var ReactDOM = require("react-dom");
 var common = require("../common");
 var editor_1 = require("./editor");
 var icon_1 = require("./icon");
-var dragula = require("dragula");
 var ArrayEditor = (function (_super) {
     __extends(ArrayEditor, _super);
     function ArrayEditor(props) {
@@ -29,16 +28,18 @@ var ArrayEditor = (function (_super) {
     ArrayEditor.prototype.componentDidMount = function () {
         var _this = this;
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-        var container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
-        this.drak = dragula([container]);
-        this.drak.on("drop", function (el, target, source, sibling) {
-            if (_this.value) {
-                common.switchItem(_this.value, el, sibling);
-                _this.renderSwitch = -_this.renderSwitch;
-                _this.setState({ value: _this.value, renderSwitch: _this.renderSwitch });
-                _this.props.updateValue(_this.value, !_this.errorMessage && _this.invalidIndexes.length === 0);
-            }
-        });
+        if (this.props.dragula) {
+            var container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
+            this.drak = this.props.dragula([container]);
+            this.drak.on("drop", function (el, target, source, sibling) {
+                if (_this.value) {
+                    common.switchItem(_this.value, el, sibling);
+                    _this.renderSwitch = -_this.renderSwitch;
+                    _this.setState({ value: _this.value, renderSwitch: _this.renderSwitch });
+                    _this.props.updateValue(_this.value, !_this.errorMessage && _this.invalidIndexes.length === 0);
+                }
+            });
+        }
     };
     ArrayEditor.prototype.componentWillUnmount = function () {
         if (this.drak) {
@@ -67,7 +68,7 @@ var ArrayEditor = (function (_super) {
                 };
                 var key = (1 + i) * this_1.renderSwitch;
                 itemElements.push((React.createElement("div", {key: key, "data-index": i, className: this_1.props.theme.rowContainer}, 
-                    React.createElement(editor_1.Editor, {schema: this_1.props.schema.items, title: String(i), initialValue: this_1.value[i], updateValue: onChange, theme: this_1.props.theme, icon: this_1.props.icon, locale: this_1.props.locale, required: true, readonly: this_1.props.readonly || this_1.props.schema.readonly, onDelete: onDelete, md: this_1.props.md, hljs: this_1.props.hljs, forceHttps: this_1.props.forceHttps})
+                    React.createElement(editor_1.Editor, {schema: this_1.props.schema.items, title: String(i), initialValue: this_1.value[i], updateValue: onChange, theme: this_1.props.theme, icon: this_1.props.icon, locale: this_1.props.locale, required: true, readonly: this_1.props.readonly || this_1.props.schema.readonly, onDelete: onDelete, dragula: this_1.props.dragula, md: this_1.props.md, hljs: this_1.props.hljs, forceHttps: this_1.props.forceHttps})
                 )));
             };
             var this_1 = this;

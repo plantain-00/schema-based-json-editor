@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import * as common from "../common";
-import * as dragula from "dragula";
-import {hljs} from "../lib";
+import { hljs, dragula } from "../lib";
 
 @Component({
     selector: "array-editor",
@@ -41,6 +40,7 @@ import {hljs} from "../lib";
                     [readonly]="readonly || schema.readonly"
                     (onDelete)="onDeleteFunction(i)"
                     [hasDeleteButton]="true"
+                    [dragula]="dragula"
                     [md]="md"
                     [hljs]="hljs"
                     [forceHttps]="forceHttps">
@@ -75,6 +75,8 @@ export class ArrayEditorComponent {
     @Input()
     hasDeleteButton: boolean;
     @Input()
+    dragula?: typeof dragula;
+    @Input()
     md?: any;
     @Input()
     hljs?: typeof hljs;
@@ -87,7 +89,7 @@ export class ArrayEditorComponent {
     renderSwitch = 1;
     collapsed = false;
     value?: common.ValueType[];
-    drak: dragula.Drake;
+    drak?: dragula.Drake;
     errorMessage: string;
     buttonGroupStyleString = common.buttonGroupStyleString;
     invalidIndexes: number[] = [];
@@ -103,9 +105,9 @@ export class ArrayEditorComponent {
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     }
     ngAfterViewInit() {
-        if (this.drakContainer) {
+        if (this.drakContainer && this.dragula) {
             const container = this.drakContainer.nativeElement as HTMLElement;
-            this.drak = dragula([container]);
+            this.drak = this.dragula([container]);
             this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
                 if (this.value) {
                     common.switchItem(this.value, el, sibling);

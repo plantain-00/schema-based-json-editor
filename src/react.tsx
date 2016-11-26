@@ -7,7 +7,7 @@ import { NumberEditor } from "./react/number-editor";
 import { BooleanEditor } from "./react/boolean-editor";
 import { NullEditor } from "./react/null-editor";
 import { StringEditor } from "./react/string-editor";
-import { hljs } from "./lib";
+import { hljs, dragula } from "./lib";
 
 export type Props = {
     schema: common.Schema;
@@ -17,6 +17,7 @@ export type Props = {
     icon?: string;
     locale?: string;
     readonly?: boolean;
+    dragula?: typeof dragula;
     markdownit?: any;
     hljs?: typeof hljs;
     forceHttps?: boolean;
@@ -45,6 +46,7 @@ export class JSONEditor extends React.Component<Props, {}> {
             locale: this.locale,
             icon: this.icon,
             required: true,
+            dragula: this.props.dragula,
             md: this.md,
             hljs: this.props.hljs,
             forceHttps: this.props.forceHttps,

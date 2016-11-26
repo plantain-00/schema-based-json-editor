@@ -334,7 +334,7 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
 export const buttonGroupStyle: React.CSSProperties = { marginLeft: "10px" };
 export const buttonGroupStyleString = "margin-left: 10px";
 
-import { hljs as hljsLib, React } from "./lib";
+import { hljs as hljsLib, React, dragula } from "./lib";
 
 export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
@@ -347,6 +347,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     onDelete?: () => void;
     readonly?: boolean;
     required?: boolean;
+    dragula?: typeof dragula;
     md?: any;
     hljs?: typeof hljsLib;
     forceHttps?: boolean;

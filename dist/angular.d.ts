@@ -1,8 +1,9 @@
+/// <reference types="dragula" />
 /// <reference types="highlight.js" />
 /// <reference types="lodash" />
 import { EventEmitter } from "@angular/core";
 import * as common from "./common";
-import { hljs } from "./lib";
+import { hljs, dragula } from "./lib";
 export declare class JSONEditorComponent {
     schema: common.Schema;
     initialValue: common.ValueType;
@@ -16,6 +17,7 @@ export declare class JSONEditorComponent {
     icon?: string;
     locale?: string;
     readonly?: boolean;
+    dragula?: typeof dragula;
     markdownit?: any;
     hljs?: typeof hljs;
     forceHttps?: boolean;

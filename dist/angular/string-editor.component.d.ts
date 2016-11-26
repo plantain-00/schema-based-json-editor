@@ -1,7 +1,8 @@
+/// <reference types="dragula" />
 /// <reference types="highlight.js" />
 import { EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { hljs } from "../lib";
+import { hljs, dragula } from "../lib";
 export declare class StringEditorComponent {
     schema: common.StringSchema;
     initialValue: string;
@@ -17,6 +18,7 @@ export declare class StringEditorComponent {
     readonly?: boolean;
     required?: boolean;
     hasDeleteButton: boolean;
+    dragula?: typeof dragula;
     md?: any;
     hljs?: typeof hljs;
     forceHttps?: boolean;

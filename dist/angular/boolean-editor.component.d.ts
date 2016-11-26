@@ -1,7 +1,5 @@
-/// <reference types="highlight.js" />
 import { EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { hljs } from "../lib";
 export declare class BooleanEditorComponent {
     schema: common.BooleanSchema;
     initialValue: boolean;
@@ -17,9 +15,6 @@ export declare class BooleanEditorComponent {
     readonly?: boolean;
     required?: boolean;
     hasDeleteButton: boolean;
-    md?: any;
-    hljs?: typeof hljs;
-    forceHttps?: boolean;
     value?: boolean;
     buttonGroupStyle: string;
     ngOnInit(): void;

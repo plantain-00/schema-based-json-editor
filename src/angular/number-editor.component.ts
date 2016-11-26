@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
-import { hljs } from "../lib";
 
 @Component({
     selector: "number-editor",
@@ -66,12 +65,6 @@ export class NumberEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
-    @Input()
-    md?: any;
-    @Input()
-    hljs?: typeof hljs;
-    @Input()
-    forceHttps?: boolean;
 
     value?: number;
     errorMessage: string;

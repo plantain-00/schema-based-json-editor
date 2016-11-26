@@ -49,7 +49,7 @@ var ObjectEditor = (function (_super) {
                 };
                 var schema = this_2.props.schema.properties[property];
                 var required = this_2.props.schema.required && this_2.props.schema.required.some(function (r) { return r === property; });
-                propertyElements.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_2.value[property], updateValue: onChange, theme: this_2.props.theme, icon: this_2.props.icon, locale: this_2.props.locale, required: required, readonly: this_2.props.readonly || this_2.props.schema.readonly, md: this_2.props.md, hljs: this_2.props.hljs, forceHttps: this_2.props.forceHttps}));
+                propertyElements.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_2.value[property], updateValue: onChange, theme: this_2.props.theme, icon: this_2.props.icon, locale: this_2.props.locale, required: required, readonly: this_2.props.readonly || this_2.props.schema.readonly, dragula: this_2.props.dragula, md: this_2.props.md, hljs: this_2.props.hljs, forceHttps: this_2.props.forceHttps}));
             };
             var this_2 = this;
             for (var property in this.props.schema.properties) {

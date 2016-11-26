@@ -1,7 +1,8 @@
+/// <reference types="dragula" />
 /// <reference types="highlight.js" />
 import { EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { hljs } from "../lib";
+import { hljs, dragula } from "../lib";
 export declare class EditorComponent {
     schema: common.ArraySchema;
     initialValue: common.ValueType[];
@@ -17,6 +18,7 @@ export declare class EditorComponent {
     readonly?: boolean;
     required?: boolean;
     hasDeleteButton: boolean;
+    dragula?: typeof dragula;
     md?: any;
     hljs?: typeof hljs;
     forceHttps?: boolean;

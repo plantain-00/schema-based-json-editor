@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { hljs } from "../lib";
+import { hljs, dragula } from "../lib";
 
 @Component({
     selector: "editor",
@@ -16,6 +16,7 @@ import { hljs } from "../lib";
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
         [hasDeleteButton]="hasDeleteButton"
+        [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
         [forceHttps]="forceHttps">
@@ -31,6 +32,7 @@ import { hljs } from "../lib";
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
         [hasDeleteButton]="hasDeleteButton"
+        [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
         [forceHttps]="forceHttps">
@@ -45,10 +47,7 @@ import { hljs } from "../lib";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps">
+        [hasDeleteButton]="hasDeleteButton">
     </number-editor>
     <boolean-editor *ngIf="schema.type === 'boolean'"
         [schema]="schema"
@@ -60,10 +59,7 @@ import { hljs } from "../lib";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps">
+        [hasDeleteButton]="hasDeleteButton">
     </boolean-editor>
     <null-editor *ngIf="schema.type === 'null'"
         [schema]="schema"
@@ -75,10 +71,7 @@ import { hljs } from "../lib";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps">
+        [hasDeleteButton]="hasDeleteButton">
     </null-editor>
     <string-editor *ngIf="schema.type === 'string'"
         [schema]="schema"
@@ -91,6 +84,7 @@ import { hljs } from "../lib";
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
         [hasDeleteButton]="hasDeleteButton"
+        [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
         [forceHttps]="forceHttps">
@@ -120,6 +114,8 @@ export class EditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    dragula?: typeof dragula;
     @Input()
     md?: any;
     @Input()

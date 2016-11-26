@@ -1,5 +1,5 @@
 import * as common from "../common";
-import * as dragula from "dragula";
+import { dragula } from "../lib";
 
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */
@@ -42,6 +42,7 @@ export const arrayEditor = {
                     :readonly="readonly || schema.readonly"
                     @delete="onDeleteFunction(i)"
                     :has-delete-button="true"
+                    :dragula="dragula"
                     :md="md"
                     :hljs="hljs"
                     :forceHttps="forceHttps">
@@ -51,8 +52,8 @@ export const arrayEditor = {
         <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "md", "hljs", "forceHttps"],
-    data: function(this: This) {
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.$emit("update-value", { value, isValid: !this.errorMessage });
         return {
@@ -79,15 +80,19 @@ export const arrayEditor = {
         },
     },
     mounted(this: This) {
-        const container = this.$el.childNodes[6] as HTMLElement;
-        this.drak = dragula([container]);
-        this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
-            if (this.value) {
-                common.switchItem(this.value, el, sibling);
-                this.renderSwitch = -this.renderSwitch;
-                this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
+        if (this.dragula) {
+            const container = this.$el.childNodes[4] as HTMLElement;
+            if (container) {
+                this.drak = this.dragula([container]);
+                this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+                    if (this.value) {
+                        common.switchItem(this.value, el, sibling);
+                        this.renderSwitch = -this.renderSwitch;
+                        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
+                    }
+                });
             }
-        });
+        }
     },
     methods: {
         collapseOrExpand(this: This) {
@@ -121,7 +126,8 @@ export const arrayEditor = {
 };
 
 export type This = {
-    drak: dragula.Drake;
+    dragula?: typeof dragula;
+    drak?: dragula.Drake;
     $emit: (event: string, args: common.ValidityValue<common.ValueType[] | undefined>) => void;
     required: boolean;
     schema: common.ArraySchema;

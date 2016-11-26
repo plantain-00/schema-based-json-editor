@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
-import { hljs } from "../lib";
+import { hljs, dragula } from "../lib";
 
 @Component({
     selector: "string-editor",
@@ -83,6 +83,8 @@ export class StringEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    dragula?: typeof dragula;
     @Input()
     md?: any;
     @Input()

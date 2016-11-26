@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {
-    "dragula": "^3.7.2",
     "lodash": "^4.17.2",
     "tslib": "^1.1.0"
   },
@@ -51,6 +50,7 @@
     "@types/vue": "^1.0.31",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "dragula": "^3.7.2",
     "font-awesome": "^4.6.3",
     "highlight.js": "^9.8.0",
     "jasmine": "^2.5.2",

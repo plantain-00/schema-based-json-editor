@@ -9,7 +9,7 @@ export declare class ArrayEditor extends React.Component<common.Props<common.Arr
     private renderSwitch;
     private collapsed;
     private value?;
-    private drak;
+    private drak?;
     private errorMessage;
     private invalidIndexes;
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>);

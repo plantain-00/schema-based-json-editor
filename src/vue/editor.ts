@@ -16,6 +16,7 @@ export const editor = {
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton"
+            :dragula="dragula"
             :md="md"
             :hljs="hljs"
             :forceHttps="forceHttps">
@@ -31,6 +32,7 @@ export const editor = {
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton"
+            :dragula="dragula"
             :md="md"
             :hljs="hljs"
             :forceHttps="forceHttps">
@@ -45,10 +47,7 @@ export const editor = {
             :required="required"
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton"
-            :md="md"
-            :hljs="hljs"
-            :forceHttps="forceHttps">
+            :has-delete-button="hasDeleteButton">
         </number-editor>
         <boolean-editor v-if="schema.type === 'boolean'"
             :schema="schema"
@@ -60,10 +59,7 @@ export const editor = {
             :required="required"
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton"
-            :md="md"
-            :hljs="hljs"
-            :forceHttps="forceHttps">
+            :has-delete-button="hasDeleteButton">
         </boolean-editor>
         <null-editor v-if="schema.type === 'null'"
             :schema="schema"
@@ -75,10 +71,7 @@ export const editor = {
             :required="required"
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton"
-            :md="md"
-            :hljs="hljs"
-            :forceHttps="forceHttps">
+            :has-delete-button="hasDeleteButton">
         </null-editor>
         <string-editor v-if="schema.type === 'string'"
             :schema="schema"
@@ -91,11 +84,12 @@ export const editor = {
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
             :has-delete-button="hasDeleteButton"
+            :dragula="dragula"
             :md="md"
             :hljs="hljs"
             :forceHttps="forceHttps">
         </string-editor>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "md", "hljs", "forceHttps"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
 };

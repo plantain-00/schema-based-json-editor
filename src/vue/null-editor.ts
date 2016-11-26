@@ -24,7 +24,7 @@ export const nullEditor = {
         <p :class="theme.help">{{schema.description}}</p>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "md", "hljs", "forceHttps"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
     data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
         this.$emit("update-value", { value, isValid: true });

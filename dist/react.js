@@ -28,6 +28,7 @@ var JSONEditor = (function (_super) {
             locale: this.locale,
             icon: this.icon,
             required: true,
+            dragula: this.props.dragula,
             md: this.md,
             hljs: this.props.hljs,
             forceHttps: this.props.forceHttps,

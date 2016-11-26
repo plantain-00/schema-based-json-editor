@@ -1,7 +1,5 @@
-/// <reference types="highlight.js" />
 import { EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { hljs } from "../lib";
 export declare class NumberEditorComponent {
     schema: common.NumberSchema;
     initialValue: number;
@@ -17,9 +15,6 @@ export declare class NumberEditorComponent {
     readonly?: boolean;
     required?: boolean;
     hasDeleteButton: boolean;
-    md?: any;
-    hljs?: typeof hljs;
-    forceHttps?: boolean;
     value?: number;
     errorMessage: string;
     buttonGroupStyle: string;

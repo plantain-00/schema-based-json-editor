@@ -5,6 +5,7 @@ import "../../dist/vue";
 import * as common from "../../dist/common";
 
 declare const require: any;
+import * as dragula from "dragula";
 const markdownit = require("markdown-it");
 import * as hljs from "highlight.js";
 
@@ -30,6 +31,7 @@ new Vue({
             valueString: JSON.stringify(value, null, "  "),
             schemaString: JSON.stringify(schema, null, "  "),
             locale: navigator.language,
+            dragula,
             markdownit,
             hljs,
         };

@@ -44,6 +44,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                     locale={this.props.locale}
                     required={required}
                     readonly={this.props.readonly || this.props.schema.readonly}
+                    dragula={this.props.dragula}
                     md={this.props.md}
                     hljs={this.props.hljs}
                     forceHttps={this.props.forceHttps} />);

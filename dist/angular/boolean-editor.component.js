@@ -52,15 +52,6 @@ var BooleanEditorComponent = (function () {
     __decorate([
         core_1.Input()
     ], BooleanEditorComponent.prototype, "hasDeleteButton", void 0);
-    __decorate([
-        core_1.Input()
-    ], BooleanEditorComponent.prototype, "md", void 0);
-    __decorate([
-        core_1.Input()
-    ], BooleanEditorComponent.prototype, "hljs", void 0);
-    __decorate([
-        core_1.Input()
-    ], BooleanEditorComponent.prototype, "forceHttps", void 0);
     BooleanEditorComponent = __decorate([
         core_1.Component({
             selector: "boolean-editor",

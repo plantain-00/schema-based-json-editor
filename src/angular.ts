@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "./common";
-import { hljs } from "./lib";
+import { hljs, dragula } from "./lib";
 
 @Component({
     selector: "json-editor",
@@ -13,6 +13,7 @@ import { hljs } from "./lib";
         [icon]="iconObject"
         [required]="true"
         (updateValue)="updateValueFunction($event)"
+        [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
         [forceHttps]="forceHttps">
@@ -25,6 +26,7 @@ import { hljs } from "./lib";
         [icon]="iconObject"
         [required]="true"
         (updateValue)="updateValueFunction($event)"
+        [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
         [forceHttps]="forceHttps">
@@ -36,10 +38,7 @@ import { hljs } from "./lib";
         [locale]="localeObject"
         [icon]="iconObject"
         [required]="true"
-        (updateValue)="updateValueFunction($event)"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps">
+        (updateValue)="updateValueFunction($event)">
     </number-editor>
     <boolean-editor *ngIf="schema.type === 'boolean'"
         [schema]="schema"
@@ -48,10 +47,7 @@ import { hljs } from "./lib";
         [locale]="localeObject"
         [icon]="iconObject"
         [required]="true"
-        (updateValue)="updateValueFunction($event)"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps">
+        (updateValue)="updateValueFunction($event)">
     </boolean-editor>
     <null-editor *ngIf="schema.type === 'null'"
         [schema]="schema"
@@ -60,10 +56,7 @@ import { hljs } from "./lib";
         [locale]="localeObject"
         [icon]="iconObject"
         [required]="true"
-        (updateValue)="updateValueFunction($event)"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps">
+        (updateValue)="updateValueFunction($event)">
     </null-editor>
     <string-editor *ngIf="schema.type === 'string'"
         [schema]="schema"
@@ -73,6 +66,7 @@ import { hljs } from "./lib";
         [icon]="iconObject"
         [required]="true"
         (updateValue)="updateValueFunction($event)"
+        [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
         [forceHttps]="forceHttps">
@@ -94,6 +88,8 @@ export class JSONEditorComponent {
     locale?: string;
     @Input()
     readonly?: boolean;
+    @Input()
+    dragula?: typeof dragula;
     @Input()
     markdownit?: any;
     @Input()

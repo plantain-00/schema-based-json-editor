@@ -142,6 +142,9 @@ var StringEditorComponent = (function () {
     ], StringEditorComponent.prototype, "hasDeleteButton", void 0);
     __decorate([
         core_1.Input()
+    ], StringEditorComponent.prototype, "dragula", void 0);
+    __decorate([
+        core_1.Input()
     ], StringEditorComponent.prototype, "md", void 0);
     __decorate([
         core_1.Input()
