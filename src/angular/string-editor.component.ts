@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
 import { hljs } from "../lib";
 
@@ -7,6 +7,7 @@ import { hljs } from "../lib";
     styles: [
         `.schema-based-json-editor-image-preview {${common.imagePreviewStyleString}}`,
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
         <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
@@ -15,7 +16,7 @@ import { hljs } from "../lib";
                 <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
                     <icon [icon]="icon" [text]="icon.delete"></icon>
                 </button>
-                <button *ngIf="canPreview()" [class]="theme.button" (click)="collapseOrExpand()">
+                <button *ngIf="canPreview" [class]="theme.button" (click)="collapseOrExpand()">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
             </div>
@@ -26,20 +27,20 @@ import { hljs } from "../lib";
                 is undefined
             </label>
         </div>
-        <textarea *ngIf="useTextArea()"
+        <textarea *ngIf="useTextArea"
             [class]="theme.formControl"
             (change)="onChange($event)"
             (keyup)="onChange($event)"
             rows="5"
             [readOnly]="readonly || schema.readonly">{{value}}</textarea>
-        <input *ngIf="useInput()"
+        <input *ngIf="useInput"
             [class]="theme.formControl"
             [type]="schema.format"
             (change)="onChange($event)"
             (keyup)="onChange($event)"
             [defaultValue]="value"
             [readOnly]="readonly || schema.readonly" />
-        <select *ngIf="useSelect()"
+        <select *ngIf="useSelect"
             [class]="theme.formControl"
             (change)="onChange($event)">
             <option *ngFor="let e of schema.enum; let i = index; trackBy:trackByFunction"
@@ -48,12 +49,12 @@ import { hljs } from "../lib";
                 {{e}}
             </option>
         </select>
-        <img *ngIf="value && !collapsed && canPreviewImage()"
+        <img *ngIf="value && !collapsed && canPreviewImage"
             class="schema-based-json-editor-image-preview"
-            [src]="getImageUrl()" />
-        <div *ngIf="value && !collapsed && canPreviewMarkdown()" [innerHTML]="getMarkdown()">
+            [src]="getImageUrl" />
+        <div *ngIf="value && !collapsed && canPreviewMarkdown" [innerHTML]="getMarkdown">
         </div>
-        <pre *ngIf="value && !collapsed && canPreviewCode()"><code [innerHTML]="getCode()"></code></pre>
+        <pre *ngIf="value && !collapsed && canPreviewCode"><code [innerHTML]="getCode"></code></pre>
         <p [class]="theme.help">{{schema.description}}</p>
         <p *ngIf="errorMessage" [class]="theme.help">{{errorMessage}}</p>
     </div>
@@ -98,38 +99,38 @@ export class StringEditorComponent {
         this.validate();
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
-    useTextArea() {
+    get useTextArea() {
         return this.value !== undefined
             && (this.schema.enum === undefined || this.readonly || this.schema.readonly)
             && (this.schema.format === "textarea" || this.schema.format === "code" || this.schema.format === "markdown");
     }
-    useInput() {
+    get useInput() {
         return this.value !== undefined
             && (this.schema.enum === undefined || this.readonly || this.schema.readonly)
             && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
     }
-    useSelect() {
+    get useSelect() {
         return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
     }
-    canPreviewImage() {
+    get canPreviewImage() {
         return common.isImageUrl(this.value);
     }
-    canPreviewMarkdown() {
+    get canPreviewMarkdown() {
         return this.md && this.schema.format === "markdown";
     }
-    canPreviewCode() {
+    get canPreviewCode() {
         return this.hljs && this.schema.format === "code";
     }
-    canPreview() {
-        return this.value && (this.canPreviewImage() || this.canPreviewMarkdown() || this.canPreviewCode());
+    get canPreview() {
+        return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
     }
-    getImageUrl() {
+    get getImageUrl() {
         return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
     }
-    getMarkdown() {
+    get getMarkdown() {
         return this.md.render(this.value);
     }
-    getCode() {
+    get getCode() {
         return this.hljs!.highlightAuto(this.value!).value;
     }
     onChange(e: { target: { value: string } }) {

@@ -24,8 +24,8 @@ export declare class NumberEditorComponent {
     errorMessage: string;
     buttonGroupStyle: string;
     ngOnInit(): void;
-    useInput(): boolean | undefined;
-    useSelect(): boolean;
+    readonly useInput: boolean | undefined;
+    readonly useSelect: boolean;
     onChange(e: {
         target: {
             value: string;

@@ -25,16 +25,16 @@ export declare class StringEditorComponent {
     buttonGroupStyle: string;
     collapsed: boolean;
     ngOnInit(): void;
-    useTextArea(): boolean | undefined;
-    useInput(): boolean | undefined;
-    useSelect(): boolean;
-    canPreviewImage(): boolean;
-    canPreviewMarkdown(): boolean;
-    canPreviewCode(): boolean | undefined;
-    canPreview(): boolean | "" | undefined;
-    getImageUrl(): string | undefined;
-    getMarkdown(): any;
-    getCode(): string;
+    readonly useTextArea: boolean | undefined;
+    readonly useInput: boolean | undefined;
+    readonly useSelect: boolean;
+    readonly canPreviewImage: boolean;
+    readonly canPreviewMarkdown: boolean;
+    readonly canPreviewCode: boolean | undefined;
+    readonly canPreview: boolean | "" | undefined;
+    readonly getImageUrl: string | undefined;
+    readonly getMarkdown: any;
+    readonly getCode: string;
     onChange(e: {
         target: {
             value: string;

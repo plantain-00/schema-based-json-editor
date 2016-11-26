@@ -14,7 +14,7 @@ export const stringEditor = {
                 <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">
                     <icon :icon="icon" :text="icon.delete"></icon>
                 </button>
-                <button v-if="value && !collapsed && canPreviewImage()" :class="theme.button" @click="collapseOrExpand()">
+                <button v-if="canPreview" :class="theme.button" @click="collapseOrExpand()">
                     <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
             </div>
@@ -25,20 +25,20 @@ export const stringEditor = {
                 is undefined
             </label>
         </div>
-        <textarea v-if="useTextArea()"
+        <textarea v-if="useTextArea"
             :class="theme.formControl"
             @change="onChange($event)"
             @keyup="onChange($event)"
             rows="5"
             :readOnly="readonly || schema.readonly">{{value}}</textarea>
-        <input v-if="useInput()"
+        <input v-if="useInput"
             :class="theme.formControl"
             :type="schema.format"
             @change="onChange($event)"
             @keyup="onChange($event)"
             :value="value"
             :readOnly="readonly || schema.readonly" />
-        <select v-if="useSelect()"
+        <select v-if="useSelect"
             :class="theme.formControl"
             @change="onChange($event)">
             <option v-for="(e, i) in schema.enum"
@@ -48,17 +48,17 @@ export const stringEditor = {
                 {{e}}
             </option>
         </select>
-        <img v-if="value && !collapsed && canPreviewImage()"
+        <img v-if="value && !collapsed && canPreviewImage"
             :style="imagePreviewStyle"
-            :src="getImageUrl()" />
-        <div v-if="value && !collapsed && canPreviewMarkdown()" v-html="getMarkdown()"></div>
-        <pre v-if="value && !collapsed && canPreviewCode()"><code v-html="getCode()"></code></pre>
+            :src="getImageUrl" />
+        <div v-if="value && !collapsed && canPreviewMarkdown" v-html="getMarkdown"></div>
+        <pre v-if="value && !collapsed && canPreviewCode"><code v-html="getCode"></code></pre>
         <p :class="theme.help">{{schema.description}}</p>
         <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "md", "hljs", "forceHttps"],
-    data: function (this: This) {
+    data: function(this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         this.$emit("update-value", { value, isValid: !this.errorMessage });
         return {
@@ -72,7 +72,19 @@ export const stringEditor = {
     beforeMount(this: This) {
         this.validate();
     },
-    methods: {
+    computed: {
+        canPreviewImage(this: This) {
+            return common.isImageUrl(this.value);
+        },
+        canPreviewMarkdown(this: This) {
+            return this.md && this.schema.format === "markdown";
+        },
+        canPreviewCode(this: This) {
+            return this.hljs && this.schema.format === "code";
+        },
+        canPreview(this: This) {
+            return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
+        },
         useTextArea(this: This) {
             return this.value !== undefined
                 && (this.schema.enum === undefined || this.readonly || this.schema.readonly)
@@ -86,6 +98,17 @@ export const stringEditor = {
         useSelect(this: This) {
             return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
         },
+        getImageUrl(this: This) {
+            return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
+        },
+        getMarkdown(this: This) {
+            return this.md.render(this.value);
+        },
+        getCode(this: This) {
+            return this.hljs!.highlightAuto(this.value!).value;
+        },
+    },
+    methods: {
         onChange(this: This, e: { target: { value: string } }) {
             this.value = e.target.value;
             this.validate();
@@ -101,27 +124,6 @@ export const stringEditor = {
         },
         collapseOrExpand(this: This) {
             this.collapsed = !this.collapsed;
-        },
-        canPreviewImage(this: This) {
-            return common.isImageUrl(this.value);
-        },
-        canPreviewMarkdown(this: This) {
-            return this.md && this.schema.format === "markdown";
-        },
-        canPreviewCode(this: This) {
-            return this.hljs && this.schema.format === "code";
-        },
-        canPreview(this: This) {
-            return this.value && (this.canPreviewImage() || this.canPreviewMarkdown() || this.canPreviewCode());
-        },
-        getImageUrl(this: This) {
-            return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
-        },
-        getMarkdown(this: This) {
-            return this.md.render(this.value);
-        },
-        getCode(this: This) {
-            return this.hljs!.highlightAuto(this.value!).value;
         },
     },
 };
@@ -140,7 +142,7 @@ export type This = {
     md: any;
     hljs: typeof hljs;
     forceHttps: boolean;
-    canPreviewImage: () => boolean;
-    canPreviewMarkdown: () => boolean;
-    canPreviewCode: () => boolean;
+    canPreviewImage: boolean;
+    canPreviewMarkdown: boolean;
+    canPreviewCode: boolean;
 };

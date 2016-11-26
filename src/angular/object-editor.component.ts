@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
-import {hljs} from "../lib";
+import { hljs } from "../lib";
 
 @Component({
     selector: "object-editor",
@@ -12,7 +12,7 @@ import {hljs} from "../lib";
                 <button [class]="theme.button" (click)="collapseOrExpand()">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button *ngIf="hasDeleteButtonFunction()" [class]="theme.button" (click)="onDelete.emit()">{{icon.delete}}</button>
+                <button *ngIf="hasDeleteButtonFunction" [class]="theme.button" (click)="onDelete.emit()">{{icon.delete}}</button>
             </div>
         </h3>
         <p [class]="theme.help">{{schema.description}}</p>
@@ -110,7 +110,7 @@ export class ObjectEditorComponent {
         common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
         this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     }
-    hasDeleteButtonFunction() {
+    get hasDeleteButtonFunction() {
         return this.hasDeleteButton && !this.readonly && !this.schema.readonly;
     }
 }

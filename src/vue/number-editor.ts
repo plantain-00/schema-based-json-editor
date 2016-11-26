@@ -21,14 +21,14 @@ export const numberEditor = {
                 is undefined
             </label>
         </div>
-        <input v-if="useInput()"
+        <input v-if="useInput"
             :class="theme.formControl"
             type="number"
             @change="onChange($event)"
             @keyup="onChange($event)"
             :value="value"
             :readOnly="readonly || schema.readonly" />
-        <select v-if="useSelect()"
+        <select v-if="useSelect"
             :class="theme.formControl"
             type="number"
             @change="onChange($event)">
@@ -53,13 +53,15 @@ export const numberEditor = {
             buttonGroupStyle: common.buttonGroupStyleString,
         };
     },
-    methods: {
+    computed: {
         useInput(this: This) {
             return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly);
         },
         useSelect(this: This) {
             return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
         },
+    },
+    methods: {
         onChange(this: This, e: { target: { value: string } }) {
             this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
             this.validate();

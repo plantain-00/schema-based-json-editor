@@ -44,5 +44,5 @@ export declare class ObjectEditorComponent {
     onChange(property: string, {value, isValid}: common.ValidityValue<{
         [name: string]: common.ValueType;
     }>): void;
-    hasDeleteButtonFunction(): boolean;
+    readonly hasDeleteButtonFunction: boolean;
 }

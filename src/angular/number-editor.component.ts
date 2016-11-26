@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
-import {hljs} from "../lib";
+import { hljs } from "../lib";
 
 @Component({
     selector: "number-editor",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
         <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
@@ -20,14 +21,14 @@ import {hljs} from "../lib";
                 is undefined
             </label>
         </div>
-        <input *ngIf="useInput()"
+        <input *ngIf="useInput"
             [class]="theme.formControl"
             type="number"
             (change)="onChange($event)"
             (keyup)="onChange($event)"
             [defaultValue]="value"
             [readOnly]="readonly || schema.readonly" />
-        <select *ngIf="useSelect()"
+        <select *ngIf="useSelect"
             [class]="theme.formControl"
             type="number"
             (change)="onChange">
@@ -79,10 +80,10 @@ export class NumberEditorComponent {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
-    useInput() {
+    get useInput() {
         return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly);
     }
-    useSelect() {
+    get useSelect() {
         return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
     }
     onChange(e: { target: { value: string } }) {

@@ -12,10 +12,19 @@ export declare const stringEditor: {
         imagePreviewStyle: string;
     };
     beforeMount(this: This): void;
-    methods: {
+    computed: {
+        canPreviewImage(this: This): boolean;
+        canPreviewMarkdown(this: This): boolean;
+        canPreviewCode(this: This): boolean;
+        canPreview(this: This): boolean | "" | undefined;
         useTextArea(this: This): boolean | undefined;
         useInput(this: This): boolean | undefined;
         useSelect(this: This): boolean;
+        getImageUrl(this: This): string | undefined;
+        getMarkdown(this: This): any;
+        getCode(this: This): string;
+    };
+    methods: {
         onChange(this: This, e: {
             target: {
                 value: string;
@@ -24,13 +33,6 @@ export declare const stringEditor: {
         validate(this: This): void;
         toggleOptional(this: This): void;
         collapseOrExpand(this: This): void;
-        canPreviewImage(this: This): boolean;
-        canPreviewMarkdown(this: This): boolean;
-        canPreviewCode(this: This): boolean;
-        canPreview(this: This): boolean | "" | undefined;
-        getImageUrl(this: This): string | undefined;
-        getMarkdown(this: This): any;
-        getCode(this: This): string;
     };
 };
 export declare type This = {
@@ -47,7 +49,7 @@ export declare type This = {
     md: any;
     hljs: typeof hljs;
     forceHttps: boolean;
-    canPreviewImage: () => boolean;
-    canPreviewMarkdown: () => boolean;
-    canPreviewCode: () => boolean;
+    canPreviewImage: boolean;
+    canPreviewMarkdown: boolean;
+    canPreviewCode: boolean;
 };

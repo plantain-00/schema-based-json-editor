@@ -7,9 +7,11 @@ export declare const numberEditor: {
         errorMessage: undefined;
         buttonGroupStyle: string;
     };
-    methods: {
+    computed: {
         useInput(this: This): boolean | undefined;
         useSelect(this: This): boolean;
+    };
+    methods: {
         onChange(this: This, e: {
             target: {
                 value: string;
