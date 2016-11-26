@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
 import { hljs } from "../lib";
 
 @Component({
     selector: "object-editor",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div [class]="theme.row">
         <h3>
@@ -16,9 +17,9 @@ import { hljs } from "../lib";
             </div>
         </h3>
         <p [class]="theme.help">{{schema.description}}</p>
-        <div *ngIf="!required" [class]="theme.optionalCheckbox">
+        <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" />
+                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
                 is undefined
             </label>
         </div>

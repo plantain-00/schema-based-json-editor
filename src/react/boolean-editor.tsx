@@ -20,18 +20,21 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                         <input type="checkbox"
                             onChange={this.onChange}
                             checked={this.value}
-                            readOnly={this.props.readonly || this.props.schema.readonly} />
+                            disabled={this.props.readonly || this.props.schema.readonly} />
                         {this.props.title}
                     </label>
                 </div>
             );
         }
         let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required) {
+        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
             optionalCheckbox = (
                 <div className={this.props.theme.optionalCheckbox}>
                     <label>
-                        <input type="checkbox" onChange={this.toggleOptional} checked={this.value === undefined} />
+                        <input type="checkbox"
+                            onChange={this.toggleOptional}
+                            checked={this.value === undefined}
+                            disabled={this.props.readonly || this.props.schema.readonly} />
                         is undefined
                     </label>
                 </div>

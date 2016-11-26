@@ -68,8 +68,17 @@ export const schema: common.Schema = {
             minItems: 1,
             uniqueItems: true,
         },
-
         readOnlyExample: {
+            type: "string",
+            readonly: true,
+            default: "abc",
+        },
+        readOnlyExample2: {
+            type: "string",
+            readonly: true,
+            default: "abc",
+        },
+        readOnlyExample3: {
             type: "string",
             readonly: true,
         },

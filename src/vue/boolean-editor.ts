@@ -15,9 +15,9 @@ export const booleanEditor = {
                 </button>
             </div>
         </label>
-        <div v-if="!required" :class="theme.optionalCheckbox">
+        <div v-if="!required && (value === undefined || !schema.readonly)" :class="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" />
+                <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="readonly || schema.readonly" />
                 is undefined
             </label>
         </div>
@@ -26,7 +26,7 @@ export const booleanEditor = {
                 <input type="checkbox"
                     @change="onChange($event)"
                     :checked="value"
-                    :readOnly="readonly || schema.readonly" />
+                    :disabled="readonly || schema.readonly" />
                 {{title}}
             </label>
         </div>

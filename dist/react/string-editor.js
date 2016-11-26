@@ -53,10 +53,10 @@ var StringEditor = (function (_super) {
             errorDescription = React.createElement("p", {className: this.props.theme.help}, this.errorMessage);
         }
         var optionalCheckbox = null;
-        if (!this.props.required) {
+        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
             optionalCheckbox = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
                 React.createElement("label", null, 
-                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined}), 
+                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: this.props.readonly || this.props.schema.readonly}), 
                     "is undefined")
             ));
         }

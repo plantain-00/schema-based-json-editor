@@ -21,9 +21,9 @@ import { hljs } from "../lib";
                 </button>
             </div>
         </label>
-        <div *ngIf="!required" [class]="theme.optionalCheckbox">
+        <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" />
+                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
                 is undefined
             </label>
         </div>

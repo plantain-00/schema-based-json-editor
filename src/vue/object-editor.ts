@@ -17,9 +17,9 @@ export const objectEditor = {
             </div>
         </h3>
         <p :class="theme.help">{{schema.description}}</p>
-        <div v-if="!required" :class="theme.optionalCheckbox">
+        <div v-if="!required && (value === undefined || !schema.readonly)" :class="theme.optionalCheckbox">
             <label>
-                <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" />
+                <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="readonly || schema.readonly" />
                 is undefined
             </label>
         </div>
