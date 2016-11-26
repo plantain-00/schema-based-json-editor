@@ -66,6 +66,7 @@ export type Theme = {
     label: string;
     optionalCheckbox: string;
     buttonGroup: string;
+    radiobox: string;
 };
 
 export const themes: { [name: string]: Theme } = {
@@ -79,6 +80,7 @@ export const themes: { [name: string]: Theme } = {
         label: "control-label",
         optionalCheckbox: "checkbox",
         buttonGroup: "btn-group",
+        radiobox: "radio-inline",
     },
 };
 
@@ -92,6 +94,7 @@ const defaultTheme: Theme = {
     label: "",
     optionalCheckbox: "",
     buttonGroup: "",
+    radiobox: "",
 };
 
 export function getTheme(name: string | undefined | Theme): Theme {

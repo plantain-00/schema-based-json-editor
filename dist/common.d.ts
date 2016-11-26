@@ -58,6 +58,7 @@ export declare type Theme = {
     label: string;
     optionalCheckbox: string;
     buttonGroup: string;
+    radiobox: string;
 };
 export declare const themes: {
     [name: string]: Theme;

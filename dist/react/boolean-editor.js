@@ -8,7 +8,7 @@ var BooleanEditor = (function (_super) {
         var _this = this;
         _super.call(this, props);
         this.onChange = function (e) {
-            _this.value = e.currentTarget.checked;
+            _this.value = !_this.value;
             _this.setState({ value: _this.value });
             _this.props.updateValue(_this.value, true);
         };
@@ -25,11 +25,17 @@ var BooleanEditor = (function (_super) {
     BooleanEditor.prototype.render = function () {
         var control = null;
         if (this.value !== undefined) {
-            control = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
-                React.createElement("label", null, 
-                    React.createElement("input", {type: "checkbox", onChange: this.onChange, checked: this.value, disabled: this.props.readonly || this.props.schema.readonly}), 
-                    this.props.title)
-            ));
+            control = (React.createElement("div", null, 
+                React.createElement("div", {className: this.props.theme.radiobox}, 
+                    React.createElement("label", null, 
+                        React.createElement("input", {type: "radio", onChange: this.onChange, checked: this.value, disabled: this.props.readonly || this.props.schema.readonly}), 
+                        "true")
+                ), 
+                React.createElement("div", {className: this.props.theme.radiobox}, 
+                    React.createElement("label", null, 
+                        React.createElement("input", {type: "radio", onChange: this.onChange, checked: !this.value, disabled: this.props.readonly || this.props.schema.readonly}), 
+                        "false")
+                )));
         }
         var optionalCheckbox = null;
         if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {

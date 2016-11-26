@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
-import {hljs} from "../lib";
+import { hljs } from "../lib";
 
 @Component({
     selector: "boolean-editor",
@@ -20,14 +20,25 @@ import {hljs} from "../lib";
                 </button>
             </div>
         </label>
-        <div *ngIf="value !== undefined" [class]="theme.optionalCheckbox">
-            <label>
-                <input type="checkbox"
-                    (change)="onChange($event)"
-                    [checked]="value"
-                    [disabled]="readonly || schema.readonly" />
-                {{title}}
-            </label>
+        <div *ngIf="value !== undefined">
+            <div [class]="theme.radiobox">
+                <label>
+                    <input type="radio"
+                        (change)="onChange($event)"
+                        [checked]="value"
+                        [disabled]="readonly || schema.readonly" />
+                    true
+                </label>
+            </div>
+            <div [class]="theme.radiobox">
+                <label>
+                    <input type="radio"
+                        (change)="onChange($event)"
+                        [checked]="!value"
+                        [disabled]="readonly || schema.readonly" />
+                    false
+                </label>
+            </div>
         </div>
         <p [class]="theme.help">{{schema.description}}</p>
     </div>
@@ -70,7 +81,7 @@ export class BooleanEditorComponent {
         this.updateValue.emit({ value: this.value, isValid: true });
     }
     onChange(e: { target: { checked: boolean } }) {
-        this.value = e.target.checked;
+        this.value = !this.value;
         this.updateValue.emit({ value: this.value, isValid: true });
     }
     toggleOptional() {

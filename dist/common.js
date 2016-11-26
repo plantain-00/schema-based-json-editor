@@ -18,6 +18,7 @@ exports.themes = {
         label: "control-label",
         optionalCheckbox: "checkbox",
         buttonGroup: "btn-group",
+        radiobox: "radio-inline",
     },
 };
 var defaultTheme = {
@@ -30,6 +31,7 @@ var defaultTheme = {
     label: "",
     optionalCheckbox: "",
     buttonGroup: "",
+    radiobox: "",
 };
 function getTheme(name) {
     if (name === undefined) {

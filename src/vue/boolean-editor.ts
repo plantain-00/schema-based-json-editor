@@ -21,14 +21,25 @@ export const booleanEditor = {
                 </button>
             </div>
         </label>
-        <div v-if="value !== undefined" :class="theme.optionalCheckbox">
-            <label>
-                <input type="checkbox"
-                    @change="onChange($event)"
-                    :checked="value"
-                    :disabled="readonly || schema.readonly" />
-                {{title}}
-            </label>
+        <div v-if="value !== undefined">
+            <div :class="theme.radiobox">
+                <label>
+                    <input type="radio"
+                        @change="onChange($event)"
+                        :checked="value"
+                        :disabled="readonly || schema.readonly" />
+                    true
+                </label>
+            </div>
+            <div :class="theme.radiobox">
+                <label>
+                    <input type="radio"
+                        @change="onChange($event)"
+                        :checked="!value"
+                        :disabled="readonly || schema.readonly" />
+                    false
+                </label>
+            </div>
         </div>
         <p :class="theme.help">{{schema.description}}</p>
     </div>
@@ -44,7 +55,7 @@ export const booleanEditor = {
     },
     methods: {
         onChange(this: This, e: { target: { checked: boolean } }) {
-            this.value = e.target.checked;
+            this.value = !this.value;
             this.$emit("update-value", { value: this.value, isValid: true });
         },
         toggleOptional(this: This) {

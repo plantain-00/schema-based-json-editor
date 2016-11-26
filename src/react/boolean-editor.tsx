@@ -15,14 +15,25 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
         let control: JSX.Element | null = null;
         if (this.value !== undefined) {
             control = (
-                <div className={this.props.theme.optionalCheckbox}>
-                    <label>
-                        <input type="checkbox"
-                            onChange={this.onChange}
-                            checked={this.value}
-                            disabled={this.props.readonly || this.props.schema.readonly} />
-                        {this.props.title}
-                    </label>
+                <div>
+                    <div className={this.props.theme.radiobox}>
+                        <label>
+                            <input type="radio"
+                                onChange={this.onChange}
+                                checked={this.value}
+                                disabled={this.props.readonly || this.props.schema.readonly} />
+                            true
+                        </label>
+                    </div>
+                    <div className={this.props.theme.radiobox}>
+                        <label>
+                            <input type="radio"
+                                onChange={this.onChange}
+                                checked={!this.value}
+                                disabled={this.props.readonly || this.props.schema.readonly} />
+                            false
+                        </label>
+                    </div>
                 </div>
             );
         }
@@ -69,7 +80,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
         );
     }
     private onChange = (e: React.FormEvent<{ checked: boolean }>) => {
-        this.value = e.currentTarget.checked;
+        this.value = !this.value;
         this.setState({ value: this.value });
         this.props.updateValue(this.value, true);
     }

@@ -92,6 +92,9 @@ export const schema: common.Schema = {
         optionalExample: {
             type: "string",
         },
+        booleanOptionalExample: {
+            type: "boolean",
+        },
         colorExample: {
             type: "string",
             format: "color",
