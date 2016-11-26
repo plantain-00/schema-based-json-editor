@@ -11,6 +11,12 @@ export const arrayEditor = {
         <h3>
             {{title || schema.title}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyleString">
+                <div v-if="!required && (value === undefined || !schema.readonly)" :class="theme.optionalCheckbox">
+                    <label>
+                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="readonly || schema.readonly" />
+                        is undefined
+                    </label>
+                </div>
                 <button :class="theme.button" @click="collapseOrExpand()">
                     <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
@@ -23,12 +29,6 @@ export const arrayEditor = {
             </div>
         </h3>
         <p :class="theme.help">{{schema.description}}</p>
-        <div v-if="!required && (value === undefined || !schema.readonly)" :class="theme.optionalCheckbox">
-            <label>
-                <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="readonly || schema.readonly" />
-                is undefined
-            </label>
-        </div>
         <div :class="theme.rowContainer">
             <div v-for="(item, i) in getValue" :key="(1 + i) * renderSwitch" :data-index="i" :class="theme.rowContainer">
                 <editor :schema="schema.items"

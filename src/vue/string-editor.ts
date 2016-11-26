@@ -11,6 +11,12 @@ export const stringEditor = {
         <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
             {{title}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+                <div v-if="!required && (value === undefined || !schema.readonly)" :class="theme.optionalCheckbox">
+                    <label>
+                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="readonly || schema.readonly" />
+                        is undefined
+                    </label>
+                </div>
                 <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">
                     <icon :icon="icon" :text="icon.delete"></icon>
                 </button>
@@ -19,12 +25,6 @@ export const stringEditor = {
                 </button>
             </div>
         </label>
-        <div v-if="!required && (value === undefined || !schema.readonly)" :class="theme.optionalCheckbox">
-            <label>
-                <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="readonly || schema.readonly" />
-                is undefined
-            </label>
-        </div>
         <textarea v-if="useTextArea"
             :class="theme.formControl"
             @change="onChange($event)"

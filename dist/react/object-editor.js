@@ -75,12 +75,12 @@ var ObjectEditor = (function (_super) {
             React.createElement("h3", null, 
                 this.props.title || this.props.schema.title, 
                 React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
+                    optionalCheckbox, 
                     React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, 
                         React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.collapsed ? this.props.icon.expand : this.props.icon.collapse})
                     ), 
                     deleteButton)), 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description), 
-            optionalCheckbox, 
             childrenElement));
     };
     return ObjectEditor;

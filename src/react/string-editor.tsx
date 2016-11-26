@@ -114,10 +114,10 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 {titleView}
                 <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+                    {optionalCheckbox}
                     {deleteButton}
                     {previewButton}
                 </div>
-                {optionalCheckbox}
                 {control}
                 {imagePreview}
                 {markdownPreview}

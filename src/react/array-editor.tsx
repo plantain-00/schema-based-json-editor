@@ -127,6 +127,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                 <h3>
                     {this.props.title || this.props.schema.title}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+                        {optionalCheckbox}
                         <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
                             <Icon icon={this.props.icon} text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}></Icon>
                         </button>
@@ -135,7 +136,6 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                     </div>
                 </h3>
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
-                {optionalCheckbox}
                 {childrenElement}
                 {errorDescription}
             </div>

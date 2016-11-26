@@ -38,8 +38,9 @@ var NullEditor = (function (_super) {
         }
         return (React.createElement("div", {className: this.props.theme.row}, 
             titleView, 
-            React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, deleteButton), 
-            optionalCheckbox, 
+            React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
+                optionalCheckbox, 
+                deleteButton), 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description)));
     };
     return NullEditor;

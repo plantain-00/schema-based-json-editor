@@ -10,6 +10,12 @@ import { hljs } from "../lib";
         <h3>
             {{title || schema.title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
+                <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
+                    <label>
+                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
+                        is undefined
+                    </label>
+                </div>
                 <button [class]="theme.button" (click)="collapseOrExpand()">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
@@ -17,12 +23,6 @@ import { hljs } from "../lib";
             </div>
         </h3>
         <p [class]="theme.help">{{schema.description}}</p>
-        <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
-            <label>
-                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
-                is undefined
-            </label>
-        </div>
         <div *ngIf="!collapsed && value !== undefined" [class]="theme.rowContainer">
             <editor *ngFor="let property of properties; trackBy: trackByFunction"
                 [schema]="property.value"

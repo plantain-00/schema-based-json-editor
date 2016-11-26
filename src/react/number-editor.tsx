@@ -74,9 +74,9 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 {titleView}
                 <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+                    {optionalCheckbox}
                     {deleteButton}
                 </div>
-                {optionalCheckbox}
                 {control}
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
                 {errorDescription}

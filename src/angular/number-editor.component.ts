@@ -10,17 +10,17 @@ import { hljs } from "../lib";
         <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
             {{title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
+                <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
+                    <label>
+                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
+                        is undefined
+                    </label>
+                </div>
                 <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
                     <icon [icon]="icon" [text]="icon.delete"></icon>
                 </button>
             </div>
         </label>
-        <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
-            <label>
-                <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
-                is undefined
-            </label>
-        </div>
         <input *ngIf="useInput"
             [class]="theme.formControl"
             type="number"
