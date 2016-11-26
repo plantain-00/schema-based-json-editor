@@ -78,7 +78,7 @@ export const themes: { [name: string]: Theme } = {
         help: "help-block",
         errorRow: "row has-error",
         label: "control-label",
-        optionalCheckbox: "checkbox",
+        optionalCheckbox: "checkbox pull-left",
         buttonGroup: "btn-group",
         radiobox: "radio-inline",
     },

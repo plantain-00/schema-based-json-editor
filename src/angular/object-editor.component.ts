@@ -19,7 +19,9 @@ import { hljs, dragula } from "../../typings/lib";
                 <button [class]="theme.button" (click)="collapseOrExpand()">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button *ngIf="hasDeleteButtonFunction" [class]="theme.button" (click)="onDelete.emit()">{{icon.delete}}</button>
+                <button *ngIf="hasDeleteButtonFunction" [class]="theme.button" (click)="onDelete.emit()">
+                    <icon [icon]="icon" [text]="icon.delete"></icon>
+                </button>
             </div>
         </h3>
         <p [class]="theme.help">{{schema.description}}</p>

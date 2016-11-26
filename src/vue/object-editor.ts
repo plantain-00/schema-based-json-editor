@@ -19,7 +19,9 @@ export const objectEditor = {
                 <button :class="theme.button" @click="collapseOrExpand()">
                     <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button v-if="hasDeleteButton && !readonly && !schema.readonly" :class="theme.button" @click="$emit('delete')">{{icon.delete}}</button>
+                <button v-if="hasDeleteButton && !readonly && !schema.readonly" :class="theme.button" @click="$emit('delete')">
+                    <icon :icon="icon" :text="icon.delete"></icon>
+                </button>
             </div>
         </h3>
         <p :class="theme.help">{{schema.description}}</p>

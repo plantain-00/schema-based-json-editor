@@ -123,6 +123,102 @@ export const schema: common.Schema = {
             format: "code",
             default: "function foo(bar) {\n    console.log(bar);\n}\n",
         },
+        performanceExample: {
+            type: "array",
+            items: {
+                type: "object",
+                properties: {
+                    markdownExample: {
+                        type: "string",
+                        format: "markdown",
+                        default: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    },
+                    codeExample: {
+                        type: "string",
+                        format: "code",
+                        default: "function foo(bar) {\n    console.log(bar);\n}\n",
+                    },
+                },
+            },
+            default: [
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+                {
+                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
+                },
+            ],
+        },
     },
     required: [
         "stringExample",
@@ -140,5 +236,6 @@ export const schema: common.Schema = {
         "imagePreviewExample",
         "markdownExample",
         "codeExample",
+        "performanceExample",
     ],
 };

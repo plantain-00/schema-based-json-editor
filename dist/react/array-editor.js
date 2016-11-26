@@ -29,7 +29,7 @@ var ArrayEditor = (function (_super) {
         var _this = this;
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
         if (this.props.dragula) {
-            var container = ReactDOM.findDOMNode(this).childNodes[this.props.required ? 2 : 3];
+            var container = ReactDOM.findDOMNode(this).childNodes[2];
             this.drak = this.props.dragula([container]);
             this.drak.on("drop", function (el, target, source, sibling) {
                 if (_this.value) {
