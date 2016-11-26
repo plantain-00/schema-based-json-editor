@@ -30,7 +30,8 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            "vue$": "vue/dist/vue.js"
+            "vue$": "vue/dist/vue.js",
+            "markdown-it": "markdown-it/dist/markdown-it.min.js"
         }
     }
 };

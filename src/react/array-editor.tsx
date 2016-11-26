@@ -66,7 +66,10 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                             locale={this.props.locale}
                             required={true}
                             readonly={this.props.readonly || this.props.schema.readonly}
-                            onDelete={onDelete} />
+                            onDelete={onDelete}
+                            md={this.props.md}
+                            hljs={this.props.hljs}
+                            forceHttps={this.props.forceHttps} />
                     </div>
                 ));
             }

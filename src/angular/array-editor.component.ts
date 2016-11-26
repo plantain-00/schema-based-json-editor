@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import * as common from "../common";
 import * as dragula from "dragula";
+import {hljs} from "../lib";
 
 @Component({
     selector: "array-editor",
@@ -39,7 +40,10 @@ import * as dragula from "dragula";
                     [required]="true"
                     [readonly]="readonly || schema.readonly"
                     (onDelete)="onDeleteFunction(i)"
-                    [hasDeleteButton]="true">
+                    [hasDeleteButton]="true"
+                    [md]="md"
+                    [hljs]="hljs"
+                    [forceHttps]="forceHttps">
                 </editor>
             </div>
         </div>
@@ -70,6 +74,12 @@ export class ArrayEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    md?: any;
+    @Input()
+    hljs?: typeof hljs;
+    @Input()
+    forceHttps?: boolean;
 
     @ViewChild("drakContainer")
     drakContainer: ElementRef;

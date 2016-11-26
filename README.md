@@ -91,6 +91,9 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 + icon: optional, support "bootstrap3" and "fontawesome4" for now
 + locale: optional, support "zh-cn" for now
 + readonly: optional, a boolean value
++ markdownit: optional, the `markdown-it` library object if you want to preview markdown
++ hljs: optional, the `highlight.js` library object if you want to highlight code
++ forceHttps: optional, a boolean value, if true, the preview url of images will be `https://` rather than `http://`
 
 #### features
 
@@ -102,6 +105,7 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 + array schema fields: items, minItems, uniqueItems
 + number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum
 + string schema fields: format, enum, minLength, maxLength, pattern
++ image preview, code highlight, markdown preview
 
 #### change logs
 

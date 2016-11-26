@@ -5,7 +5,7 @@ var NumberEditorComponent = (function () {
     function NumberEditorComponent() {
         this.updateValue = new core_1.EventEmitter();
         this.onDelete = new core_1.EventEmitter();
-        this.buttonGroupStyle = common.buttonGroupStyle;
+        this.buttonGroupStyle = common.buttonGroupStyleString;
     }
     NumberEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
@@ -66,6 +66,15 @@ var NumberEditorComponent = (function () {
     __decorate([
         core_1.Input()
     ], NumberEditorComponent.prototype, "hasDeleteButton", void 0);
+    __decorate([
+        core_1.Input()
+    ], NumberEditorComponent.prototype, "md", void 0);
+    __decorate([
+        core_1.Input()
+    ], NumberEditorComponent.prototype, "hljs", void 0);
+    __decorate([
+        core_1.Input()
+    ], NumberEditorComponent.prototype, "forceHttps", void 0);
     NumberEditorComponent = __decorate([
         core_1.Component({
             selector: "number-editor",

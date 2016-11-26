@@ -1,13 +1,13 @@
 {
   "name": "schema-based-json-editor",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "A reactjs, angular2 and vuejs component of schema based json editor.",
   "main": "index.js",
   "scripts": {
     "build": "npm run tsc && tsc -p demo && webpack",
     "tsc": "tsc -p src",
     "lint": "tslint \"src/**/*.tsx\" \"demo/**/*.tsx\" \"src/**/*.ts\" \"demo/**/*.ts\" \"spec/**/*.ts\"",
-    "static": "mkdir ./demo/css && cp -r ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cp -r ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/fonts/. ./demo/fonts",
+    "static": "mkdir ./demo/css && cp -r ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cp -r ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/fonts/. ./demo/fonts && mkdir ./demo/css/highlight.js && cp -r ./node_modules/highlight.js/styles/default.css ./demo/css/highlight.js/",
     "test": "tsc -p spec && jasmine"
   },
   "repository": {
@@ -43,6 +43,7 @@
     "@angular/router": "^3.2.1",
     "@angular/upgrade": "^2.2.1",
     "@types/dragula": "^2.1.29",
+    "@types/highlight.js": "^9.1.8",
     "@types/jasmine": "^2.5.38",
     "@types/lodash": "^4.14.38",
     "@types/react": "^0.14.49",
@@ -51,7 +52,9 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "font-awesome": "^4.6.3",
+    "highlight.js": "^9.8.0",
     "jasmine": "^2.5.2",
+    "markdown-it": "^8.1.0",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
     "rxjs": "5.0.0-beta.12",

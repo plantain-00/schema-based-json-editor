@@ -1,15 +1,15 @@
+/// <reference types="highlight.js" />
 import * as common from "../common";
+import { hljs } from "../lib";
 export declare const stringEditor: {
     template: string;
     props: string[];
     data: (this: This) => {
         value: string;
         errorMessage: undefined;
-        isImageUrl: boolean;
-        buttonGroupStyle: {
-            marginLeft: string;
-        };
+        buttonGroupStyle: string;
         collapsed: boolean;
+        imagePreviewStyle: string;
     };
     beforeMount(this: This): void;
     methods: {
@@ -24,6 +24,13 @@ export declare const stringEditor: {
         validate(this: This): void;
         toggleOptional(this: This): void;
         collapseOrExpand(this: This): void;
+        canPreviewImage(this: This): boolean;
+        canPreviewMarkdown(this: This): boolean;
+        canPreviewCode(this: This): boolean;
+        canPreview(this: This): boolean | "" | undefined;
+        getImageUrl(this: This): string | undefined;
+        getMarkdown(this: This): any;
+        getCode(this: This): string;
     };
 };
 export declare type This = {
@@ -36,6 +43,11 @@ export declare type This = {
     locale: common.Locale;
     readonly: boolean;
     required: boolean;
-    isImageUrl: boolean;
     collapsed: boolean;
+    md: any;
+    hljs: typeof hljs;
+    forceHttps: boolean;
+    canPreviewImage: () => boolean;
+    canPreviewMarkdown: () => boolean;
+    canPreviewCode: () => boolean;
 };

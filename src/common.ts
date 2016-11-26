@@ -39,7 +39,7 @@ export type NumberSchema = CommonSchema & {
 
 export type StringSchema = CommonSchema & {
     type: "string";
-    format?: "textarea" | "color" | "date" | "datetime" | "datetime-local" | "time" | "month" | "email" | "uri" | "url" | "week" | "hostname" | "ipv4" | "ipv6";
+    format?: "textarea" | "color" | "date" | "datetime" | "datetime-local" | "time" | "month" | "email" | "uri" | "url" | "week" | "hostname" | "ipv4" | "ipv6" | "code" | "markdown";
     enum?: string[];
     minLength?: number;
     maxLength?: number;
@@ -325,8 +325,10 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
     }
 }
 
-export const buttonGroupStyle = { marginLeft: "10px" };
+export const buttonGroupStyle: React.CSSProperties = { marginLeft: "10px" };
 export const buttonGroupStyleString = "margin-left: 10px";
+
+import { hljs as hljsLib, React } from "./lib";
 
 export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
@@ -339,6 +341,9 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     onDelete?: () => void;
     readonly?: boolean;
     required?: boolean;
+    md?: any;
+    hljs?: typeof hljsLib;
+    forceHttps?: boolean;
 }
 
 export function isSame(value1: ValueType, value2: ValueType) {
@@ -513,4 +518,71 @@ export function isImageUrl(value?: string) {
     }
     const extensionName = value.substr(value.length - 4, 4);
     return imageExtensions.indexOf(extensionName) !== -1;
+}
+
+export function replaceProtocal(src: string) {
+    if (src.indexOf("http://") === 0 && src.indexOf("http://localhost") !== 0) {
+        return "https://" + src.substring("http://".length);
+    }
+    return src;
+}
+
+export const imagePreviewStyleString = "display: block; height: auto; margin: 6px 0; max-width: 100%;";
+export const imagePreviewStyle: React.CSSProperties = {
+    display: "block",
+    height: "auto",
+    margin: "6px 0",
+    maxWidth: "100%",
+};
+
+export function initializeMarkdown(markdownit: any, hljs: typeof hljsLib | undefined, forceHttps: boolean | undefined) {
+    if (!markdownit) {
+        return undefined;
+    }
+    const md = markdownit({
+        linkify: true,
+        highlight: (str: string, lang: string) => {
+            if (hljs) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return hljs.highlight(lang, str).value;
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+                try {
+                    return hljs.highlightAuto(str).value;
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            return "";
+        },
+    });
+
+    md.renderer.rules.image = (tokens: any, index: number, options: any, env: any, s: any) => {
+        const token = tokens[index];
+        const aIndex = token.attrIndex("src");
+        if (forceHttps) {
+            token.attrs[aIndex][1] = replaceProtocal(token.attrs[aIndex][1]);
+        }
+        token.attrPush(["style", imagePreviewStyleString]);
+
+        return md.renderer.rules.image(tokens, index, options, env, s);
+    };
+
+    let defaultLinkRender: any;
+    if (md.renderer.rules.link_open) {
+        defaultLinkRender = md.renderer.rules.link_open;
+    } else {
+        defaultLinkRender = (tokens: any, index: number, options: any, env: any, s: any) => {
+            return s.renderToken(tokens, index, options);
+        };
+    }
+    md.renderer.rules.link_open = (tokens: any, index: number, options: any, env: any, s: any) => {
+        tokens[index].attrPush(["target", "_blank"]);
+        tokens[index].attrPush(["rel", "nofollow"]);
+        return defaultLinkRender(tokens, index, options, env, s);
+    };
+    return md;
 }

@@ -35,12 +35,15 @@ export const objectEditor = {
                 :locale="locale"
                 :required="isRequired(property)"
                 :readonly="readonly || schema.readonly"
-                :has-delete-button="hasDeleteButton">
+                :has-delete-button="hasDeleteButton"
+                :md="md"
+                :hljs="hljs"
+                :forceHttps="forceHttps">
             </editor>
         </div>
     </div >
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "md", "hljs", "forceHttps"],
     data: function(this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
         if (!this.collapsed && value !== undefined) {
@@ -54,7 +57,7 @@ export const objectEditor = {
         return {
             collapsed: false,
             value,
-            buttonGroupStyle: common.buttonGroupStyle,
+            buttonGroupStyle: common.buttonGroupStyleString,
             invalidProperties: [],
         };
     },

@@ -15,7 +15,10 @@ export const editor = {
             :required="required"
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton">
+            :has-delete-button="hasDeleteButton"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </object-editor>
         <array-editor v-if="schema.type === 'array'"
             :schema="schema"
@@ -27,7 +30,10 @@ export const editor = {
             :required="required"
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton">
+            :has-delete-button="hasDeleteButton"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </array-editor>
         <number-editor v-if="schema.type === 'number' || schema.type === 'integer'"
             :schema="schema"
@@ -39,7 +45,10 @@ export const editor = {
             :required="required"
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton">
+            :has-delete-button="hasDeleteButton"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </number-editor>
         <boolean-editor v-if="schema.type === 'boolean'"
             :schema="schema"
@@ -51,7 +60,10 @@ export const editor = {
             :required="required"
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton">
+            :has-delete-button="hasDeleteButton"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </boolean-editor>
         <null-editor v-if="schema.type === 'null'"
             :schema="schema"
@@ -63,7 +75,10 @@ export const editor = {
             :required="required"
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton">
+            :has-delete-button="hasDeleteButton"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </null-editor>
         <string-editor v-if="schema.type === 'string'"
             :schema="schema"
@@ -75,9 +90,12 @@ export const editor = {
             :required="required"
             @update-value="$emit('update-value', arguments[0])"
             @delete="$emit('delete')"
-            :has-delete-button="hasDeleteButton">
+            :has-delete-button="hasDeleteButton"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </string-editor>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "md", "hljs", "forceHttps"],
 };

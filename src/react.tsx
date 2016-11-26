@@ -7,6 +7,7 @@ import { NumberEditor } from "./react/number-editor";
 import { BooleanEditor } from "./react/boolean-editor";
 import { NullEditor } from "./react/null-editor";
 import { StringEditor } from "./react/string-editor";
+import { hljs } from "./lib";
 
 export type Props = {
     schema: common.Schema;
@@ -16,6 +17,9 @@ export type Props = {
     icon?: string;
     locale?: string;
     readonly?: boolean;
+    markdownit?: any;
+    hljs?: typeof hljs;
+    forceHttps?: boolean;
 };
 
 export class JSONEditor extends React.Component<Props, {}> {
@@ -25,11 +29,13 @@ export class JSONEditor extends React.Component<Props, {}> {
     private updateValue = common.debounce((value: any, isValid: boolean) => {
         this.props.updateValue(value, isValid);
     }, 100);
+    private md: any;
     constructor(props: Props) {
         super(props);
         this.theme = common.getTheme(this.props.theme);
         this.locale = common.getLocale(this.props.locale);
         this.icon = common.getIcon(this.props.icon, this.locale);
+        this.md = common.initializeMarkdown(this.props.markdownit, this.props.hljs, this.props.forceHttps);
     }
     render() {
         const props = {
@@ -39,7 +45,11 @@ export class JSONEditor extends React.Component<Props, {}> {
             locale: this.locale,
             icon: this.icon,
             required: true,
+            md: this.md,
+            hljs: this.props.hljs,
+            forceHttps: this.props.forceHttps,
         };
+
         switch (this.props.schema.type) {
             case "object":
                 return <ObjectEditor schema={this.props.schema}

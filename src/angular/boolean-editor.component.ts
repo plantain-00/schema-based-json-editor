@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
+import {hljs} from "../lib";
 
 @Component({
     selector: "boolean-editor",
@@ -55,9 +56,15 @@ export class BooleanEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    md?: any;
+    @Input()
+    hljs?: typeof hljs;
+    @Input()
+    forceHttps?: boolean;
 
     value?: boolean;
-    buttonGroupStyle = common.buttonGroupStyle;
+    buttonGroupStyle = common.buttonGroupStyleString;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
         this.updateValue.emit({ value: this.value, isValid: true });

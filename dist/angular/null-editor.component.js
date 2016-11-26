@@ -5,7 +5,7 @@ var NullEditorComponent = (function () {
     function NullEditorComponent() {
         this.updateValue = new core_1.EventEmitter();
         this.onDelete = new core_1.EventEmitter();
-        this.buttonGroupStyle = common.buttonGroupStyle;
+        this.buttonGroupStyle = common.buttonGroupStyleString;
     }
     NullEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
@@ -48,6 +48,15 @@ var NullEditorComponent = (function () {
     __decorate([
         core_1.Input()
     ], NullEditorComponent.prototype, "hasDeleteButton", void 0);
+    __decorate([
+        core_1.Input()
+    ], NullEditorComponent.prototype, "md", void 0);
+    __decorate([
+        core_1.Input()
+    ], NullEditorComponent.prototype, "hljs", void 0);
+    __decorate([
+        core_1.Input()
+    ], NullEditorComponent.prototype, "forceHttps", void 0);
     NullEditorComponent = __decorate([
         core_1.Component({
             selector: "null-editor",

@@ -43,7 +43,10 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                     icon={this.props.icon}
                     locale={this.props.locale}
                     required={required}
-                    readonly={this.props.readonly || this.props.schema.readonly} />);
+                    readonly={this.props.readonly || this.props.schema.readonly}
+                    md={this.props.md}
+                    hljs={this.props.hljs}
+                    forceHttps={this.props.forceHttps} />);
             }
             childrenElement = (
                 <div className={this.props.theme.rowContainer}>

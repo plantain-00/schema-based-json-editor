@@ -1,7 +1,9 @@
+/// <reference types="highlight.js" />
 /// <reference types="dragula" />
 import { EventEmitter, ElementRef } from "@angular/core";
 import * as common from "../common";
 import * as dragula from "dragula";
+import { hljs } from "../lib";
 export declare class ArrayEditorComponent {
     schema: common.ArraySchema;
     initialValue: common.ValueType[];
@@ -17,6 +19,9 @@ export declare class ArrayEditorComponent {
     readonly?: boolean;
     required?: boolean;
     hasDeleteButton: boolean;
+    md?: any;
+    hljs?: typeof hljs;
+    forceHttps?: boolean;
     drakContainer: ElementRef;
     renderSwitch: number;
     collapsed: boolean;

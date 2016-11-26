@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
+import {hljs} from "../lib";
 
 @Component({
     selector: "object-editor",
@@ -31,7 +32,10 @@ import * as common from "../common";
                 [icon]="icon"
                 [locale]="locale"
                 [required]="isRequired(property.name)"
-                [readonly]="readonly || schema.readonly">
+                [readonly]="readonly || schema.readonly"
+                [md]="md"
+                [hljs]="hljs"
+                [forceHttps]="forceHttps">
             </editor>
         </div>
     </div >
@@ -60,11 +64,17 @@ export class ObjectEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    md?: any;
+    @Input()
+    hljs?: typeof hljs;
+    @Input()
+    forceHttps?: boolean;
 
     collapsed = false;
     value?: { [name: string]: common.ValueType };
     properties: { name: string; value: common.ValueType }[] = [];
-    buttonGroupStyle = common.buttonGroupStyle;
+    buttonGroupStyle = common.buttonGroupStyleString;
     invalidProperties: string[] = [];
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };

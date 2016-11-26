@@ -67,7 +67,7 @@ var ArrayEditor = (function (_super) {
                 };
                 var key = (1 + i) * this_1.renderSwitch;
                 itemElements.push((React.createElement("div", {key: key, "data-index": i, className: this_1.props.theme.rowContainer}, 
-                    React.createElement(editor_1.Editor, {schema: this_1.props.schema.items, title: String(i), initialValue: this_1.value[i], updateValue: onChange, theme: this_1.props.theme, icon: this_1.props.icon, locale: this_1.props.locale, required: true, readonly: this_1.props.readonly || this_1.props.schema.readonly, onDelete: onDelete})
+                    React.createElement(editor_1.Editor, {schema: this_1.props.schema.items, title: String(i), initialValue: this_1.value[i], updateValue: onChange, theme: this_1.props.theme, icon: this_1.props.icon, locale: this_1.props.locale, required: true, readonly: this_1.props.readonly || this_1.props.schema.readonly, onDelete: onDelete, md: this_1.props.md, hljs: this_1.props.hljs, forceHttps: this_1.props.forceHttps})
                 )));
             };
             var this_1 = this;

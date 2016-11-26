@@ -2,6 +2,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { JSONEditor } from "../../dist/react";
 import { schema } from "../schema";
+declare const require: any;
+const markdownit = require("markdown-it");
+import * as hljs from "highlight.js";
 
 class Main extends React.Component<{}, {}> {
     value: any = {};
@@ -26,7 +29,10 @@ class Main extends React.Component<{}, {}> {
                         updateValue={this.updateValue}
                         theme="bootstrap3"
                         icon="fontawesome4"
-                        locale={this.locale} />
+                        locale={this.locale}
+                        markdownit={markdownit}
+                        hljs={hljs}
+                        forceHttps={false} />
                 </div>
                 <div style={{ float: "left", margin: "10px", width: "400px", overflowY: "scroll", height: "600px" }}>
                     Value:

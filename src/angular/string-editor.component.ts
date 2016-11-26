@@ -1,8 +1,12 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
+import { hljs } from "../lib";
 
 @Component({
     selector: "string-editor",
+    styles: [
+        `.schema-based-json-editor-image-preview {${common.imagePreviewStyleString}}`,
+    ],
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
         <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
@@ -11,7 +15,7 @@ import * as common from "../common";
                 <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
                     <icon [icon]="icon" [text]="icon.delete"></icon>
                 </button>
-                <button *ngIf="isImageUrl" [class]="theme.button" (click)="collapseOrExpand()">
+                <button *ngIf="canPreview()" [class]="theme.button" (click)="collapseOrExpand()">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
             </div>
@@ -44,7 +48,12 @@ import * as common from "../common";
                 {{e}}
             </option>
         </select>
-        <img *ngIf="isImageUrl && !collapsed" [src]="value" />
+        <img *ngIf="value && !collapsed && canPreviewImage()"
+            class="schema-based-json-editor-image-preview"
+            [src]="getImageUrl()" />
+        <div *ngIf="value && !collapsed && canPreviewMarkdown()" [innerHTML]="getMarkdown()">
+        </div>
+        <pre *ngIf="value && !collapsed && canPreviewCode()"><code [innerHTML]="getCode()"></code></pre>
         <p [class]="theme.help">{{schema.description}}</p>
         <p *ngIf="errorMessage" [class]="theme.help">{{errorMessage}}</p>
     </div>
@@ -73,11 +82,16 @@ export class StringEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    md?: any;
+    @Input()
+    hljs?: typeof hljs;
+    @Input()
+    forceHttps?: boolean;
 
     value?: string;
     errorMessage: string;
-    isImageUrl: boolean;
-    buttonGroupStyle = common.buttonGroupStyle;
+    buttonGroupStyle = common.buttonGroupStyleString;
     collapsed = false;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
@@ -85,13 +99,38 @@ export class StringEditorComponent {
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     useTextArea() {
-        return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly) && this.schema.format === "textarea";
+        return this.value !== undefined
+            && (this.schema.enum === undefined || this.readonly || this.schema.readonly)
+            && (this.schema.format === "textarea" || this.schema.format === "code" || this.schema.format === "markdown");
     }
     useInput() {
-        return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly) && this.schema.format !== "textarea";
+        return this.value !== undefined
+            && (this.schema.enum === undefined || this.readonly || this.schema.readonly)
+            && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
     }
     useSelect() {
         return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
+    }
+    canPreviewImage() {
+        return common.isImageUrl(this.value);
+    }
+    canPreviewMarkdown() {
+        return this.md && this.schema.format === "markdown";
+    }
+    canPreviewCode() {
+        return this.hljs && this.schema.format === "code";
+    }
+    canPreview() {
+        return this.value && (this.canPreviewImage() || this.canPreviewMarkdown() || this.canPreviewCode());
+    }
+    getImageUrl() {
+        return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
+    }
+    getMarkdown() {
+        return this.md.render(this.value);
+    }
+    getCode() {
+        return this.hljs!.highlightAuto(this.value!).value;
     }
     onChange(e: { target: { value: string } }) {
         this.value = e.target.value;
@@ -100,7 +139,6 @@ export class StringEditorComponent {
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
-        this.isImageUrl = common.isImageUrl(this.value);
     }
     toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;

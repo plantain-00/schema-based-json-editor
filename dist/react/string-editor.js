@@ -34,7 +34,9 @@ var StringEditor = (function (_super) {
         var control = null;
         if (this.value !== undefined) {
             if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
-                if (this.props.schema.format === "textarea") {
+                if (this.props.schema.format === "textarea"
+                    || this.props.schema.format === "code"
+                    || this.props.schema.format === "markdown") {
                     control = (React.createElement("textarea", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value, rows: 5, readOnly: this.props.readonly || this.props.schema.readonly}));
                 }
                 else {
@@ -58,10 +60,6 @@ var StringEditor = (function (_super) {
                     "is undefined")
             ));
         }
-        var imagePreview = null;
-        if (this.isImageUrl && !this.collapsed) {
-            imagePreview = React.createElement("img", {src: this.value});
-        }
         var deleteButton = null;
         if (this.props.onDelete) {
             deleteButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
@@ -72,26 +70,49 @@ var StringEditor = (function (_super) {
         if (this.props.title) {
             titleView = (React.createElement("label", {className: this.props.theme.label}, this.props.title));
         }
-        var previewImageButton = null;
-        if (this.isImageUrl) {
-            previewImageButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, 
+        var canPreviewImage = common.isImageUrl(this.value);
+        var canPreviewMarkdown = this.props.md && this.props.schema.format === "markdown";
+        var canPreviewCode = this.props.hljs && this.props.schema.format === "code";
+        var previewButton = null;
+        if (this.value && (canPreviewImage || canPreviewMarkdown || canPreviewCode)) {
+            previewButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, 
                 React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.collapsed ? this.props.icon.expand : this.props.icon.collapse})
             ));
+        }
+        var imagePreview = null;
+        var markdownPreview = null;
+        var codePreview = null;
+        if (this.value && !this.collapsed) {
+            if (canPreviewImage) {
+                var url = this.props.forceHttps ? common.replaceProtocal(this.value) : this.value;
+                imagePreview = React.createElement("img", {style: common.imagePreviewStyle, src: url});
+            }
+            else if (canPreviewMarkdown) {
+                var html = this.props.md.render(this.value);
+                markdownPreview = React.createElement("div", {dangerouslySetInnerHTML: { __html: html }});
+            }
+            else if (canPreviewCode) {
+                var html = this.props.hljs.highlightAuto(this.value).value;
+                codePreview = React.createElement("pre", null, 
+                    React.createElement("code", {dangerouslySetInnerHTML: { __html: html }})
+                );
+            }
         }
         return (React.createElement("div", {className: this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}, 
             titleView, 
             React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
                 deleteButton, 
-                previewImageButton), 
+                previewButton), 
             optionalCheckbox, 
             control, 
             imagePreview, 
+            markdownPreview, 
+            codePreview, 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description), 
             errorDescription));
     };
     StringEditor.prototype.validate = function () {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);
-        this.isImageUrl = common.isImageUrl(this.value);
     };
     return StringEditor;
 }(React.Component));

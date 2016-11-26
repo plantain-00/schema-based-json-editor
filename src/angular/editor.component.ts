@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
+import { hljs } from "../lib";
 
 @Component({
     selector: "editor",
@@ -14,7 +15,10 @@ import * as common from "../common";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton">
+        [hasDeleteButton]="hasDeleteButton"
+        [md]="md"
+        [hljs]="hljs"
+        [forceHttps]="forceHttps">
     </object-editor>
     <array-editor *ngIf="schema.type === 'array'"
         [schema]="schema"
@@ -26,7 +30,10 @@ import * as common from "../common";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton">
+        [hasDeleteButton]="hasDeleteButton"
+        [md]="md"
+        [hljs]="hljs"
+        [forceHttps]="forceHttps">
     </array-editor>
     <number-editor *ngIf="schema.type === 'number' || schema.type === 'integer'"
         [schema]="schema"
@@ -38,7 +45,10 @@ import * as common from "../common";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton">
+        [hasDeleteButton]="hasDeleteButton"
+        [md]="md"
+        [hljs]="hljs"
+        [forceHttps]="forceHttps">
     </number-editor>
     <boolean-editor *ngIf="schema.type === 'boolean'"
         [schema]="schema"
@@ -50,7 +60,10 @@ import * as common from "../common";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton">
+        [hasDeleteButton]="hasDeleteButton"
+        [md]="md"
+        [hljs]="hljs"
+        [forceHttps]="forceHttps">
     </boolean-editor>
     <null-editor *ngIf="schema.type === 'null'"
         [schema]="schema"
@@ -62,7 +75,10 @@ import * as common from "../common";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton">
+        [hasDeleteButton]="hasDeleteButton"
+        [md]="md"
+        [hljs]="hljs"
+        [forceHttps]="forceHttps">
     </null-editor>
     <string-editor *ngIf="schema.type === 'string'"
         [schema]="schema"
@@ -74,7 +90,10 @@ import * as common from "../common";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton">
+        [hasDeleteButton]="hasDeleteButton"
+        [md]="md"
+        [hljs]="hljs"
+        [forceHttps]="forceHttps">
     </string-editor>
     `,
 })
@@ -101,4 +120,10 @@ export class EditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    md?: any;
+    @Input()
+    hljs?: typeof hljs;
+    @Input()
+    forceHttps?: boolean;
 }

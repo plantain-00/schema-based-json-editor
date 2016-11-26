@@ -41,14 +41,17 @@ export const arrayEditor = {
                     :required="true"
                     :readonly="readonly || schema.readonly"
                     @delete="onDeleteFunction(i)"
-                    :has-delete-button="true">
+                    :has-delete-button="true"
+                    :md="md"
+                    :hljs="hljs"
+                    :forceHttps="forceHttps">
                 </editor>
             </div>
         </div>
         <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "md", "hljs", "forceHttps"],
     data: function(this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.$emit("update-value", { value, isValid: !this.errorMessage });

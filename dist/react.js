@@ -18,6 +18,7 @@ var JSONEditor = (function (_super) {
         this.theme = common.getTheme(this.props.theme);
         this.locale = common.getLocale(this.props.locale);
         this.icon = common.getIcon(this.props.icon, this.locale);
+        this.md = common.initializeMarkdown(this.props.markdownit, this.props.hljs, this.props.forceHttps);
     }
     JSONEditor.prototype.render = function () {
         var props = {
@@ -27,6 +28,9 @@ var JSONEditor = (function (_super) {
             locale: this.locale,
             icon: this.icon,
             required: true,
+            md: this.md,
+            hljs: this.props.hljs,
+            forceHttps: this.props.forceHttps,
         };
         switch (this.props.schema.type) {
             case "object":

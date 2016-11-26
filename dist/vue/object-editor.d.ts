@@ -7,9 +7,7 @@ export declare const objectEditor: {
         value: {
             [name: string]: common.ValueType;
         };
-        buttonGroupStyle: {
-            marginLeft: string;
-        };
+        buttonGroupStyle: string;
         invalidProperties: never[];
     };
     methods: {

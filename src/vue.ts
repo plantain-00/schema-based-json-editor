@@ -1,6 +1,8 @@
 import * as Vue from "vue";
 import * as common from "./common";
 
+import { hljs } from "./lib";
+
 import { arrayEditor } from "./vue/array-editor";
 import { booleanEditor } from "./vue/boolean-editor";
 import { editor } from "./vue/editor";
@@ -33,7 +35,10 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </object-editor>
         <array-editor v-if="schema.type === 'array'"
             :schema="schema"
@@ -42,7 +47,10 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </array-editor>
         <number-editor v-if="schema.type === 'number' || schema.type === 'integer'"
             :schema="schema"
@@ -51,7 +59,10 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </number-editor>
         <boolean-editor v-if="schema.type === 'boolean'"
             :schema="schema"
@@ -60,7 +71,10 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </boolean-editor>
         <null-editor v-if="schema.type === 'null'"
             :schema="schema"
@@ -69,7 +83,10 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </null-editor>
         <string-editor v-if="schema.type === 'string'"
             :schema="schema"
@@ -78,17 +95,21 @@ Vue.component("json-editor", {
             :locale="localeObject"
             :icon="iconObject"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])">
+            @update-value="updateValueFunction(arguments[0])"
+            :md="md"
+            :hljs="hljs"
+            :forceHttps="forceHttps">
         </string-editor>
     </div>
     `,
-    props: ["schema", "initialValue", "theme", "icon", "locale", "readonly"],
+    props: ["schema", "initialValue", "theme", "icon", "locale", "readonly", "markdownit", "hljs", "forceHttps"],
     data: function (this: This) {
         const localeObject = common.getLocale(this.locale);
         return {
             themeObject: common.getTheme(this.theme),
             localeObject,
             iconObject: common.getIcon(this.icon, localeObject),
+            md: common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps),
         };
     },
     methods: {
@@ -103,4 +124,7 @@ export type This = {
     locale: common.Locale;
     theme: common.Theme;
     icon: common.Icon;
+    markdownit: any;
+    hljs: typeof hljs;
+    forceHttps: boolean;
 };

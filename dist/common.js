@@ -410,4 +410,70 @@ function isImageUrl(value) {
     return imageExtensions.indexOf(extensionName) !== -1;
 }
 exports.isImageUrl = isImageUrl;
+function replaceProtocal(src) {
+    if (src.indexOf("http://") === 0 && src.indexOf("http://localhost") !== 0) {
+        return "https://" + src.substring("http://".length);
+    }
+    return src;
+}
+exports.replaceProtocal = replaceProtocal;
+exports.imagePreviewStyleString = "display: block; height: auto; margin: 6px 0; max-width: 100%;";
+exports.imagePreviewStyle = {
+    display: "block",
+    height: "auto",
+    margin: "6px 0",
+    maxWidth: "100%",
+};
+function initializeMarkdown(markdownit, hljs, forceHttps) {
+    if (!markdownit) {
+        return undefined;
+    }
+    var md = markdownit({
+        linkify: true,
+        highlight: function (str, lang) {
+            if (hljs) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return hljs.highlight(lang, str).value;
+                    }
+                    catch (error) {
+                        console.log(error);
+                    }
+                }
+                try {
+                    return hljs.highlightAuto(str).value;
+                }
+                catch (error) {
+                    console.log(error);
+                }
+            }
+            return "";
+        },
+    });
+    md.renderer.rules.image = function (tokens, index, options, env, s) {
+        var token = tokens[index];
+        var aIndex = token.attrIndex("src");
+        if (forceHttps) {
+            token.attrs[aIndex][1] = replaceProtocal(token.attrs[aIndex][1]);
+        }
+        token.attrPush(["style", exports.imagePreviewStyleString]);
+        return md.renderer.rules.image(tokens, index, options, env, s);
+    };
+    var defaultLinkRender;
+    if (md.renderer.rules.link_open) {
+        defaultLinkRender = md.renderer.rules.link_open;
+    }
+    else {
+        defaultLinkRender = function (tokens, index, options, env, s) {
+            return s.renderToken(tokens, index, options);
+        };
+    }
+    md.renderer.rules.link_open = function (tokens, index, options, env, s) {
+        tokens[index].attrPush(["target", "_blank"]);
+        tokens[index].attrPush(["rel", "nofollow"]);
+        return defaultLinkRender(tokens, index, options, env, s);
+    };
+    return md;
+}
+exports.initializeMarkdown = initializeMarkdown;
 //# sourceMappingURL=common.js.map

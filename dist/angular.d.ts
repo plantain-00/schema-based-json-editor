@@ -1,6 +1,8 @@
+/// <reference types="highlight.js" />
 /// <reference types="lodash" />
 import { EventEmitter } from "@angular/core";
 import * as common from "./common";
+import { hljs } from "./lib";
 export declare class JSONEditorComponent {
     schema: common.Schema;
     initialValue: common.ValueType;
@@ -14,9 +16,13 @@ export declare class JSONEditorComponent {
     icon?: string;
     locale?: string;
     readonly?: boolean;
+    markdownit?: any;
+    hljs?: typeof hljs;
+    forceHttps?: boolean;
     themeObject: common.Theme;
     localeObject: common.Locale;
     iconObject: common.Icon;
+    md: any;
     updateValueFunction: ((value: {
         value: string | number | boolean | any[] | {
             [name: string]: any;

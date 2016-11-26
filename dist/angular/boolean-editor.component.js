@@ -5,7 +5,7 @@ var BooleanEditorComponent = (function () {
     function BooleanEditorComponent() {
         this.updateValue = new core_1.EventEmitter();
         this.onDelete = new core_1.EventEmitter();
-        this.buttonGroupStyle = common.buttonGroupStyle;
+        this.buttonGroupStyle = common.buttonGroupStyleString;
     }
     BooleanEditorComponent.prototype.ngOnInit = function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
@@ -52,6 +52,15 @@ var BooleanEditorComponent = (function () {
     __decorate([
         core_1.Input()
     ], BooleanEditorComponent.prototype, "hasDeleteButton", void 0);
+    __decorate([
+        core_1.Input()
+    ], BooleanEditorComponent.prototype, "md", void 0);
+    __decorate([
+        core_1.Input()
+    ], BooleanEditorComponent.prototype, "hljs", void 0);
+    __decorate([
+        core_1.Input()
+    ], BooleanEditorComponent.prototype, "forceHttps", void 0);
     BooleanEditorComponent = __decorate([
         core_1.Component({
             selector: "boolean-editor",

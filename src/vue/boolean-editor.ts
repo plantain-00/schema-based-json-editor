@@ -33,13 +33,13 @@ export const booleanEditor = {
         <p :class="theme.help">{{schema.description}}</p>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "md", "hljs", "forceHttps"],
     data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
         this.$emit("update-value", { value, isValid: true });
         return {
             value,
-            buttonGroupStyle: common.buttonGroupStyle,
+            buttonGroupStyle: common.buttonGroupStyleString,
         };
     },
     methods: {

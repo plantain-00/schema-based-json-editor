@@ -4,6 +4,10 @@ import { schema } from "../schema";
 import "../../dist/vue";
 import * as common from "../../dist/common";
 
+declare const require: any;
+const markdownit = require("markdown-it");
+import * as hljs from "highlight.js";
+
 /* tslint:disable:only-arrow-functions */
 /* tslint:disable:no-unused-new */
 /* tslint:disable:object-literal-shorthand */
@@ -26,6 +30,8 @@ new Vue({
             valueString: JSON.stringify(value, null, "  "),
             schemaString: JSON.stringify(schema, null, "  "),
             locale: navigator.language,
+            markdownit,
+            hljs,
         };
     },
     methods: {

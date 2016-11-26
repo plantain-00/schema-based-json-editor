@@ -145,3 +145,11 @@ describe("getLocale", () => {
         expect(common.getLocale(common.defaultLocale)).toEqual(common.defaultLocale);
     });
 });
+
+describe("replaceProtocal", () => {
+    it("should be true", () => {
+        expect(common.replaceProtocal("http://example/a.png")).toEqual("https://example/a.png");
+        expect(common.replaceProtocal("https://example/a.png")).toEqual("https://example/a.png");
+        expect(common.replaceProtocal("ws://example/a.png")).toEqual("ws://example/a.png");
+    });
+});

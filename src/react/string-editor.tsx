@@ -5,7 +5,6 @@ import { Icon } from "./icon";
 export class StringEditor extends React.Component<common.Props<common.StringSchema, string>, {}> {
     private value?: string;
     private errorMessage: string;
-    private isImageUrl: boolean;
     private collapsed = false;
     constructor(props: common.Props<common.ArraySchema, string>) {
         super(props);
@@ -19,7 +18,9 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         let control: JSX.Element | null = null;
         if (this.value !== undefined) {
             if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
-                if (this.props.schema.format === "textarea") {
+                if (this.props.schema.format === "textarea"
+                    || this.props.schema.format === "code"
+                    || this.props.schema.format === "markdown") {
                     control = (
                         <textarea className={this.props.theme.formControl}
                             onChange={this.onChange}
@@ -64,10 +65,6 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
                 </div>
             );
         }
-        let imagePreview: JSX.Element | null = null;
-        if (this.isImageUrl && !this.collapsed) {
-            imagePreview = <img src={this.value} />;
-        }
         let deleteButton: JSX.Element | null = null;
         if (this.props.onDelete) {
             deleteButton = (
@@ -84,24 +81,44 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
                 </label>
             );
         }
-        let previewImageButton: JSX.Element | null = null;
-        if (this.isImageUrl) {
-            previewImageButton = (
+        const canPreviewImage = common.isImageUrl(this.value);
+        const canPreviewMarkdown = this.props.md && this.props.schema.format === "markdown";
+        const canPreviewCode = this.props.hljs && this.props.schema.format === "code";
+        let previewButton: JSX.Element | null = null;
+        if (this.value && (canPreviewImage || canPreviewMarkdown || canPreviewCode)) {
+            previewButton = (
                 <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
                     <Icon icon={this.props.icon} text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}></Icon>
                 </button>
             );
+        }
+        let imagePreview: JSX.Element | null = null;
+        let markdownPreview: JSX.Element | null = null;
+        let codePreview: JSX.Element | null = null;
+        if (this.value && !this.collapsed) {
+            if (canPreviewImage) {
+                const url = this.props.forceHttps ? common.replaceProtocal(this.value) : this.value;
+                imagePreview = <img style={common.imagePreviewStyle} src={url} />;
+            } else if (canPreviewMarkdown) {
+                const html = this.props.md.render(this.value);
+                markdownPreview = <div dangerouslySetInnerHTML={{ __html: html }}></div>;
+            } else if (canPreviewCode) {
+                const html = this.props.hljs!.highlightAuto(this.value).value;
+                codePreview = <pre><code dangerouslySetInnerHTML={{ __html: html }}></code></pre>;
+            }
         }
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 {titleView}
                 <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
                     {deleteButton}
-                    {previewImageButton}
+                    {previewButton}
                 </div>
                 {optionalCheckbox}
                 {control}
                 {imagePreview}
+                {markdownPreview}
+                {codePreview}
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
                 {errorDescription}
             </div>
@@ -115,7 +132,6 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
     }
     private validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);
-        this.isImageUrl = common.isImageUrl(this.value);
     }
     private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as string | undefined;

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
+import {hljs} from "../lib";
 
 @Component({
     selector: "null-editor",
@@ -46,9 +47,15 @@ export class NullEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    md?: any;
+    @Input()
+    hljs?: typeof hljs;
+    @Input()
+    forceHttps?: boolean;
 
     value?: null;
-    buttonGroupStyle = common.buttonGroupStyle;
+    buttonGroupStyle = common.buttonGroupStyleString;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null;
         this.updateValue.emit({ value: this.value, isValid: true });

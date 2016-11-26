@@ -4,9 +4,7 @@ export declare const nullEditor: {
     props: string[];
     data: (this: This) => {
         value: null;
-        buttonGroupStyle: {
-            marginLeft: string;
-        };
+        buttonGroupStyle: string;
     };
     methods: {
         toggleOptional(this: This): void;
