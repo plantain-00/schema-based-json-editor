@@ -71,6 +71,8 @@ export declare type Locale = {
         expand: string;
         add: string;
         delete: string;
+        lock: string;
+        unlock: string;
     };
     error: {
         minLength: string;
@@ -82,6 +84,9 @@ export declare type Locale = {
         smallerThan: string;
         minItems: string;
         uniqueItems: string;
+    };
+    info: {
+        notExists: string;
     };
 };
 export declare const defaultLocale: Locale;
@@ -95,6 +100,8 @@ export declare type Icon = {
     expand: string;
     add: string;
     delete: string;
+    lock: string;
+    unlock: string;
 };
 export declare function getIcon(name: string | undefined | Icon, locale: Locale): Icon;
 export declare type ValueType = {

@@ -50,7 +50,7 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
                             onChange={this.toggleOptional}
                             checked={this.value === undefined}
                             disabled={isReadOnly} />
-                        is undefined
+                        {this.props.locale.info.notExists}
                     </label>
                 </div>
             );

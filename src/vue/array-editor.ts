@@ -14,7 +14,7 @@ export const arrayEditor = {
                 <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
-                        is undefined
+                        {{locale.info.notExists}}
                     </label>
                 </div>
                 <button :class="theme.button" @click="collapseOrExpand()">

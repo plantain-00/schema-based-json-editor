@@ -47,7 +47,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                             onChange={this.toggleOptional}
                             checked={this.value === undefined}
                             disabled={isReadOnly} />
-                        is undefined
+                        {this.props.locale.info.notExists}
                     </label>
                 </div>
             );

@@ -13,7 +13,7 @@ export const booleanEditor = {
                 <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
-                        is undefined
+                        {{locale.info.notExists}}
                     </label>
                 </div>
                 <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">

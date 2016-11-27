@@ -10,6 +10,7 @@ export declare const stringEditor: {
         buttonGroupStyle: string;
         collapsed: boolean;
         imagePreviewStyle: string;
+        locked: boolean;
     };
     beforeMount(this: This): void;
     computed: {
@@ -20,6 +21,7 @@ export declare const stringEditor: {
         useTextArea(this: This): boolean;
         useInput(this: This): boolean;
         useSelect(this: This): boolean;
+        hasLockButton(this: This): boolean;
         getImageUrl(this: This): string | undefined;
         getMarkdown(this: This): any;
         getCode(this: This): string;
@@ -34,6 +36,7 @@ export declare const stringEditor: {
         validate(this: This): void;
         toggleOptional(this: This): void;
         collapseOrExpand(this: This): void;
+        toggleLocked(this: This): void;
     };
 };
 export declare type This = {
@@ -54,4 +57,5 @@ export declare type This = {
     canPreviewMarkdown: boolean;
     canPreviewCode: boolean;
     isReadOnly: boolean;
+    locked: boolean;
 };

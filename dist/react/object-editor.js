@@ -69,7 +69,7 @@ var ObjectEditor = (function (_super) {
             optionalCheckbox = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
                 React.createElement("label", null, 
                     React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: isReadOnly}), 
-                    "is undefined")
+                    this.props.locale.info.notExists)
             ));
         }
         return (React.createElement("div", {className: this.props.theme.row}, 

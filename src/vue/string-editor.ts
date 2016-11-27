@@ -14,7 +14,7 @@ export const stringEditor = {
                 <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
-                        is undefined
+                        {{locale.info.notExists}}
                     </label>
                 </div>
                 <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">
@@ -22,6 +22,9 @@ export const stringEditor = {
                 </button>
                 <button v-if="canPreview" :class="theme.button" @click="collapseOrExpand()">
                     <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
+                </button>
+                <button v-if="hasLockButton" :class="theme.button" @click="toggleLocked()">
+                    <icon :icon="icon" :text="locked ? icon.unlock : icon.lock"></icon>
                 </button>
             </div>
         </label>
@@ -58,7 +61,7 @@ export const stringEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
-    data: function (this: This) {
+    data: function(this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         this.$emit("update-value", { value, isValid: !this.errorMessage });
         return {
@@ -67,6 +70,7 @@ export const stringEditor = {
             buttonGroupStyle: common.buttonGroupStyleString,
             collapsed: false,
             imagePreviewStyle: common.imagePreviewStyleString,
+            locked: true,
         };
     },
     beforeMount(this: This) {
@@ -86,9 +90,10 @@ export const stringEditor = {
             return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
         },
         useTextArea(this: This) {
+            const isUnlockedCodeOrMarkdown = (this.schema.format === "code" || this.schema.format === "markdown") && (!this.locked);
             return this.value !== undefined
                 && (this.schema.enum === undefined || this.isReadOnly)
-                && (this.schema.format === "textarea" || this.schema.format === "code" || this.schema.format === "markdown");
+                && (this.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
         },
         useInput(this: This) {
             return this.value !== undefined
@@ -97,6 +102,11 @@ export const stringEditor = {
         },
         useSelect(this: This) {
             return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
+        },
+        hasLockButton(this: This) {
+            return this.value !== undefined
+                && (this.schema.enum === undefined || this.isReadOnly)
+                && (this.schema.format === "code" || this.schema.format === "markdown");
         },
         getImageUrl(this: This) {
             return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
@@ -128,6 +138,9 @@ export const stringEditor = {
         collapseOrExpand(this: This) {
             this.collapsed = !this.collapsed;
         },
+        toggleLocked(this: This) {
+            this.locked = !this.locked;
+        },
     },
 };
 
@@ -149,4 +162,5 @@ export type This = {
     canPreviewMarkdown: boolean;
     canPreviewCode: boolean;
     isReadOnly: boolean;
+    locked: boolean;
 };

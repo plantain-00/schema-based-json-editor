@@ -8,6 +8,7 @@ var StringEditor = (function (_super) {
         var _this = this;
         _super.call(this, props);
         this.collapsed = false;
+        this.locked = true;
         this.onChange = function (e) {
             _this.value = e.currentTarget.value;
             _this.validate();
@@ -24,6 +25,10 @@ var StringEditor = (function (_super) {
             _this.collapsed = !_this.collapsed;
             _this.setState({ collapsed: _this.collapsed });
         };
+        this.toggleLocked = function () {
+            _this.locked = !_this.locked;
+            _this.setState({ locked: _this.locked });
+        };
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue);
         this.validate();
     }
@@ -33,12 +38,20 @@ var StringEditor = (function (_super) {
     StringEditor.prototype.render = function () {
         var isReadOnly = this.props.readonly || this.props.schema.readonly;
         var control = null;
+        var lockButton = null;
         if (this.value !== undefined) {
             if (this.props.schema.enum === undefined || isReadOnly) {
-                if (this.props.schema.format === "textarea"
-                    || this.props.schema.format === "code"
-                    || this.props.schema.format === "markdown") {
+                if (this.props.schema.format === "textarea") {
                     control = (React.createElement("textarea", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value, rows: 5, readOnly: isReadOnly}));
+                }
+                else if (this.props.schema.format === "code"
+                    || this.props.schema.format === "markdown") {
+                    if (!this.locked) {
+                        control = (React.createElement("textarea", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value, rows: 5, readOnly: isReadOnly}));
+                    }
+                    lockButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.toggleLocked}, 
+                        React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.locked ? this.props.icon.unlock : this.props.icon.lock})
+                    ));
                 }
                 else {
                     control = (React.createElement("input", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value, readOnly: isReadOnly}));
@@ -58,7 +71,7 @@ var StringEditor = (function (_super) {
             optionalCheckbox = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
                 React.createElement("label", null, 
                     React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: isReadOnly}), 
-                    "is undefined")
+                    this.props.locale.info.notExists)
             ));
         }
         var deleteButton = null;
@@ -104,7 +117,8 @@ var StringEditor = (function (_super) {
             React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
                 optionalCheckbox, 
                 deleteButton, 
-                previewButton), 
+                previewButton, 
+                lockButton), 
             control, 
             imagePreview, 
             markdownPreview, 

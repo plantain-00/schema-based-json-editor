@@ -5,6 +5,7 @@ export declare class StringEditor extends React.Component<common.Props<common.St
     private value?;
     private errorMessage;
     private collapsed;
+    private locked;
     constructor(props: common.Props<common.ArraySchema, string>);
     componentDidMount(): void;
     render(): JSX.Element;
@@ -12,4 +13,5 @@ export declare class StringEditor extends React.Component<common.Props<common.St
     private validate();
     private toggleOptional;
     private collapseOrExpand;
+    private toggleLocked;
 }

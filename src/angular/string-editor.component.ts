@@ -16,7 +16,7 @@ import { hljs, dragula } from "../../typings/lib";
                 <div *ngIf="!required && (value === undefined || !isReadOnly)" [class]="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
-                        is undefined
+                        {{locale.info.notExists}}
                     </label>
                 </div>
                 <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
@@ -24,6 +24,9 @@ import { hljs, dragula } from "../../typings/lib";
                 </button>
                 <button *ngIf="canPreview" [class]="theme.button" (click)="collapseOrExpand()">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
+                </button>
+                <button *ngIf="hasLockButton" [class]="theme.button" (click)="toggleLocked()">
+                    <icon [icon]="icon" [text]="locked ? icon.unlock : icon.lock"></icon>
                 </button>
             </div>
         </label>
@@ -96,15 +99,17 @@ export class StringEditorComponent {
     errorMessage: string;
     buttonGroupStyle = common.buttonGroupStyleString;
     collapsed = false;
+    locked = true;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         this.validate();
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     get useTextArea() {
+        const isUnlockedCodeOrMarkdown = (this.schema.format === "code" || this.schema.format === "markdown") && (!this.locked);
         return this.value !== undefined
             && (this.schema.enum === undefined || this.isReadOnly)
-            && (this.schema.format === "textarea" || this.schema.format === "code" || this.schema.format === "markdown");
+            && (this.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
     }
     get useInput() {
         return this.value !== undefined
@@ -113,6 +118,11 @@ export class StringEditorComponent {
     }
     get useSelect() {
         return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
+    }
+    get hasLockButton() {
+        return this.value !== undefined
+            && (this.schema.enum === undefined || this.isReadOnly)
+            && (this.schema.format === "code" || this.schema.format === "markdown");
     }
     get canPreviewImage() {
         return common.isImageUrl(this.value);
@@ -156,5 +166,8 @@ export class StringEditorComponent {
     }
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
+    }
+    toggleLocked = () => {
+        this.locked = !this.locked;
     }
 }

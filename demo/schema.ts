@@ -73,14 +73,10 @@ export const schema: common.Schema = {
             readonly: true,
             default: "abc",
         },
-        readOnlyExample2: {
+        readOnlyAndOptionalExample: {
             type: "string",
             readonly: true,
             default: "abc",
-        },
-        readOnlyExample3: {
-            type: "string",
-            readonly: true,
         },
         enumExample: {
             type: "string",
@@ -91,6 +87,10 @@ export const schema: common.Schema = {
         },
         optionalExample: {
             type: "string",
+        },
+        optionalAndDefaultExample: {
+            type: "string",
+            default: "abc",
         },
         booleanOptionalExample: {
             type: "boolean",
@@ -122,102 +122,6 @@ export const schema: common.Schema = {
             type: "string",
             format: "code",
             default: "function foo(bar) {\n    console.log(bar);\n}\n",
-        },
-        performanceExample: {
-            type: "array",
-            items: {
-                type: "object",
-                properties: {
-                    markdownExample: {
-                        type: "string",
-                        format: "markdown",
-                        default: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    },
-                    codeExample: {
-                        type: "string",
-                        format: "code",
-                        default: "function foo(bar) {\n    console.log(bar);\n}\n",
-                    },
-                },
-            },
-            default: [
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-                {
-                    markdownExample: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
-                    codeExample: "function foo(bar) {\n    console.log(bar);\n}\n",
-                },
-            ],
         },
     },
     required: [
