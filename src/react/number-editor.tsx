@@ -3,8 +3,8 @@ import * as common from "../common";
 import { Icon } from "./icon";
 
 export class NumberEditor extends React.Component<common.Props<common.NumberSchema, number>, {}> {
-    private value?: number;
-    private errorMessage: string;
+    value?: number;
+    errorMessage: string;
     constructor(props: common.Props<common.ArraySchema, number>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as number;
@@ -14,63 +14,49 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
         this.props.updateValue(this.value, !this.errorMessage);
     }
     render() {
-        const isReadOnly = this.props.readonly || this.props.schema.readonly;
-        let control: JSX.Element | null = null;
-        if (this.value !== undefined) {
-            if (this.props.schema.enum === undefined || isReadOnly) {
-                control = (
-                    <input className={this.props.theme.formControl}
-                        type="number"
-                        onChange={this.onChange}
-                        defaultValue={String(this.value)}
-                        readOnly={isReadOnly} />
-                );
-            } else {
-                const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
-                control = (
-                    <select className={this.props.theme.formControl}
-                        type="number"
-                        onChange={this.onChange}
-                        defaultValue={String(this.value)} >
-                        {options}
-                    </select>
-                );
-            }
-        }
-        let errorDescription: JSX.Element | null = null;
-        if (this.errorMessage) {
-            errorDescription = <p className={this.props.theme.help}>{this.errorMessage}</p>;
-        }
-        let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
-            optionalCheckbox = (
-                <div className={this.props.theme.optionalCheckbox}>
-                    <label>
-                        <input type="checkbox"
-                            onChange={this.toggleOptional}
-                            checked={this.value === undefined}
-                            disabled={isReadOnly} />
-                        {this.props.locale.info.notExists}
-                    </label>
-                </div>
-            );
-        }
-        let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete) {
-            deleteButton = (
-                <button className={this.props.theme.button} onClick={this.props.onDelete}>
-                    <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
-                </button>
-            );
-        }
-        let titleView: JSX.Element | null = null;
-        if (this.props.title) {
-            titleView = (
-                <label className={this.props.theme.label}>
-                    {this.props.title}
+        const input = this.useInput ? (
+            <input className={this.props.theme.formControl}
+                type="number"
+                onChange={this.onChange}
+                defaultValue={String(this.value)}
+                readOnly={this.isReadOnly} />
+        ) : null;
+
+        const select = this.useSelect ? (
+            <select className={this.props.theme.formControl}
+                type="number"
+                onChange={this.onChange}
+                defaultValue={String(this.value)} >
+                {this.props.schema.enum!.map((e, i) => <option key={i} value={e} >{e}</option>)}
+            </select>
+        ) : null;
+
+        const errorDescription = this.errorMessage ? <p className={this.props.theme.help}>{this.errorMessage}</p> : null;
+
+        const optionalCheckbox = this.hasOptionalCheckbox ? (
+            <div className={this.props.theme.optionalCheckbox}>
+                <label>
+                    <input type="checkbox"
+                        onChange={this.toggleOptional}
+                        checked={this.value === undefined}
+                        disabled={this.isReadOnly} />
+                    {this.props.locale.info.notExists}
                 </label>
-            );
-        }
+            </div>
+        ) : null;
+
+        const deleteButton = this.props.onDelete ? (
+            <button className={this.props.theme.button} onClick={this.props.onDelete}>
+                <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
+            </button>
+        ) : null;
+
+        const titleView = this.props.title ? (
+            <label className={this.props.theme.label}>
+                {this.props.title}
+            </label>
+        ) : null;
+
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 {titleView}
@@ -78,25 +64,38 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
                     {optionalCheckbox}
                     {deleteButton}
                 </div>
-                {control}
+                {input}
+                {select}
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
                 {errorDescription}
             </div>
         );
     }
-    private onChange = (e: React.FormEvent<{ value: string }>) => {
+    onChange = (e: React.FormEvent<{ value: string }>) => {
         this.value = this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage);
     }
-    private validate() {
+    validate() {
         this.errorMessage = common.getErrorMessageOfNumber(this.value, this.props.schema, this.props.locale);
     }
-    private toggleOptional = () => {
+    toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as number | undefined;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage);
+    }
+    get useInput() {
+        return this.value !== undefined && (this.props.schema.enum === undefined || this.isReadOnly);
+    }
+    get useSelect() {
+        return this.value !== undefined && (this.props.schema.enum !== undefined && !this.isReadOnly);
+    }
+    get isReadOnly() {
+        return this.props.readonly || this.props.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return this.props.required && (this.value === undefined || !this.isReadOnly);
     }
 }

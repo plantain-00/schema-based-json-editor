@@ -11,6 +11,7 @@ export declare const numberEditor: {
         useInput(this: This): boolean;
         useSelect(this: This): boolean;
         isReadOnly(this: This): boolean | undefined;
+        hasOptionalCheckbox(this: This): boolean;
     };
     methods: {
         onChange(this: This, e: {

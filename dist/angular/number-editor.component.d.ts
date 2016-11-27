@@ -22,6 +22,7 @@ export declare class NumberEditorComponent {
     readonly useInput: boolean | undefined;
     readonly useSelect: boolean;
     readonly isReadOnly: boolean | undefined;
+    readonly hasOptionalCheckbox: boolean | undefined;
     onChange(e: {
         target: {
             value: string;

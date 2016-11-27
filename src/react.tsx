@@ -23,14 +23,17 @@ export type Props = {
     forceHttps?: boolean;
 };
 
+import { Cancelable } from "lodash";
+export type Cancelable = Cancelable;
+
 export class JSONEditor extends React.Component<Props, {}> {
-    private theme: common.Theme;
-    private locale: common.Locale;
-    private icon: common.Icon;
-    private updateValue = common.debounce((value: any, isValid: boolean) => {
+    theme: common.Theme;
+    locale: common.Locale;
+    icon: common.Icon;
+    md: any;
+    updateValue = common.debounce((value: any, isValid: boolean) => {
         this.props.updateValue(value, isValid);
     }, 100);
-    private md: any;
     constructor(props: Props) {
         super(props);
         this.theme = common.getTheme(this.props.theme);

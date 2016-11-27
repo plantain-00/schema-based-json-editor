@@ -3,10 +3,10 @@ import * as common from "../common";
 import { Icon } from "./icon";
 
 export class StringEditor extends React.Component<common.Props<common.StringSchema, string>, {}> {
-    private value?: string;
-    private errorMessage: string;
-    private collapsed = false;
-    private locked = true;
+    value?: string;
+    errorMessage: string;
+    collapsed = false;
+    locked = true;
     constructor(props: common.Props<common.ArraySchema, string>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string;
@@ -16,118 +16,75 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         this.props.updateValue(this.value, !this.errorMessage);
     }
     render() {
-        const isReadOnly = this.props.readonly || this.props.schema.readonly;
-        let control: JSX.Element | null = null;
-        let lockButton: JSX.Element | null = null;
-        if (this.value !== undefined) {
-            if (this.props.schema.enum === undefined || isReadOnly) {
-                if (this.props.schema.format === "textarea") {
-                    control = (
-                        <textarea className={this.props.theme.formControl}
-                            onChange={this.onChange}
-                            defaultValue={this.value}
-                            rows={5}
-                            readOnly={isReadOnly} >
-                        </textarea>
-                    );
-                } else if (this.props.schema.format === "code"
-                    || this.props.schema.format === "markdown") {
-                    if (!this.locked) {
-                        control = (
-                            <textarea className={this.props.theme.formControl}
-                                onChange={this.onChange}
-                                defaultValue={this.value}
-                                rows={5}
-                                readOnly={isReadOnly} >
-                            </textarea>
-                        );
-                    }
-                    lockButton = (
-                        <button className={this.props.theme.button} onClick={this.toggleLocked}>
-                            <Icon icon={this.props.icon} text={this.locked ? this.props.icon.unlock : this.props.icon.lock}></Icon>
-                        </button>
-                    );
-                } else {
-                    control = (
-                        <input className={this.props.theme.formControl}
-                            type={this.props.schema.format}
-                            onChange={this.onChange}
-                            defaultValue={this.value}
-                            readOnly={isReadOnly} />
-                    );
-                }
-            } else {
-                const options = this.props.schema.enum.map((e, i) => <option key={i} value={e} >{e}</option>);
-                control = (
-                    <select className={this.props.theme.formControl}
-                        onChange={this.onChange}
-                        defaultValue={this.value}>
-                        {options}
-                    </select>
-                );
-            }
-        }
+        const textarea = this.useTextArea ? (
+            <textarea className={this.props.theme.formControl}
+                onChange={this.onChange}
+                defaultValue={this.value}
+                rows={5}
+                readOnly={this.isReadOnly} >
+            </textarea>
+        ) : null;
 
-        let errorDescription: JSX.Element | null = null;
-        if (this.errorMessage) {
-            errorDescription = <p className={this.props.theme.help}>{this.errorMessage}</p>;
-        }
-        let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
-            optionalCheckbox = (
-                <div className={this.props.theme.optionalCheckbox}>
-                    <label>
-                        <input type="checkbox"
-                            onChange={this.toggleOptional}
-                            checked={this.value === undefined}
-                            disabled={isReadOnly} />
-                        {this.props.locale.info.notExists}
-                    </label>
-                </div>
-            );
-        }
-        let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete) {
-            deleteButton = (
-                <button className={this.props.theme.button} onClick={this.props.onDelete}>
-                    <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
-                </button>
-            );
-        }
-        let titleView: JSX.Element | null = null;
-        if (this.props.title) {
-            titleView = (
-                <label className={this.props.theme.label}>
-                    {this.props.title}
+        const input = this.useInput ? (
+            <input className={this.props.theme.formControl}
+                type={this.props.schema.format}
+                onChange={this.onChange}
+                defaultValue={this.value}
+                readOnly={this.isReadOnly} />
+        ) : null;
+
+        const select = this.useSelect ? (
+            <select className={this.props.theme.formControl}
+                onChange={this.onChange}
+                defaultValue={this.value}>
+                {this.props.schema.enum!.map((e, i) => <option key={i} value={e} >{e}</option>)}
+            </select>
+        ) : null;
+
+        const lockButton = this.hasLockButton ? (
+            <button className={this.props.theme.button} onClick={this.toggleLocked}>
+                <Icon icon={this.props.icon} text={this.locked ? this.props.icon.unlock : this.props.icon.lock}></Icon>
+            </button>
+        ) : null;
+
+        const errorDescription = this.errorMessage ? <p className={this.props.theme.help}>{this.errorMessage}</p> : null;
+
+        const optionalCheckbox = this.hasOptionalCheckbox ? (
+            <div className={this.props.theme.optionalCheckbox}>
+                <label>
+                    <input type="checkbox"
+                        onChange={this.toggleOptional}
+                        checked={this.value === undefined}
+                        disabled={this.isReadOnly} />
+                    {this.props.locale.info.notExists}
                 </label>
-            );
-        }
-        const canPreviewImage = common.isImageUrl(this.value);
-        const canPreviewMarkdown = this.props.md && this.props.schema.format === "markdown";
-        const canPreviewCode = this.props.hljs && this.props.schema.format === "code";
-        let previewButton: JSX.Element | null = null;
-        if (this.value && (canPreviewImage || canPreviewMarkdown || canPreviewCode)) {
-            previewButton = (
-                <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
-                    <Icon icon={this.props.icon} text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}></Icon>
-                </button>
-            );
-        }
-        let imagePreview: JSX.Element | null = null;
-        let markdownPreview: JSX.Element | null = null;
-        let codePreview: JSX.Element | null = null;
-        if (this.value && !this.collapsed) {
-            if (canPreviewImage) {
-                const url = this.props.forceHttps ? common.replaceProtocal(this.value) : this.value;
-                imagePreview = <img style={common.imagePreviewStyle} src={url} />;
-            } else if (canPreviewMarkdown) {
-                const html = this.props.md.render(this.value);
-                markdownPreview = <div dangerouslySetInnerHTML={{ __html: html }}></div>;
-            } else if (canPreviewCode) {
-                const html = this.props.hljs!.highlightAuto(this.value).value;
-                codePreview = <pre><code dangerouslySetInnerHTML={{ __html: html }}></code></pre>;
-            }
-        }
+            </div>
+        ) : null;
+
+        const deleteButton = this.props.onDelete ? (
+            <button className={this.props.theme.button} onClick={this.props.onDelete}>
+                <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
+            </button>
+        ) : null;
+
+        const titleView = this.props.title ? (
+            <label className={this.props.theme.label}>
+                {this.props.title}
+            </label>
+        ) : null;
+
+        const previewButton = this.canPreview ? (
+            <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
+                <Icon icon={this.props.icon} text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}></Icon>
+            </button>
+        ) : null;
+
+        const imagePreview = this.willPreviewImage ? <img style={common.imagePreviewStyle} src={this.getImageUrl} /> : null;
+
+        const markdownPreview = this.willPreviewMarkdown ? <div dangerouslySetInnerHTML={{ __html: this.getMarkdown }}></div> : null;
+
+        const codePreview = this.willPreviewCode ? <pre><code dangerouslySetInnerHTML={{ __html: this.getCode }}></code></pre> : null;
+
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 {titleView}
@@ -137,7 +94,9 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
                     {previewButton}
                     {lockButton}
                 </div>
-                {control}
+                {textarea}
+                {input}
+                {select}
                 {imagePreview}
                 {markdownPreview}
                 {codePreview}
@@ -146,26 +105,81 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
             </div>
         );
     }
-    private onChange = (e: React.FormEvent<{ value: string }>) => {
+    get isReadOnly() {
+        return this.props.readonly || this.props.schema.readonly;
+    }
+    get useTextArea() {
+        const isUnlockedCodeOrMarkdown = (this.props.schema.format === "code" || this.props.schema.format === "markdown") && (!this.locked);
+        return this.value !== undefined
+            && (this.props.schema.enum === undefined || this.isReadOnly)
+            && (this.props.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
+    }
+    get useInput() {
+        return this.value !== undefined
+            && (this.props.schema.enum === undefined || this.isReadOnly)
+            && (this.props.schema.format !== "textarea" && this.props.schema.format !== "code" && this.props.schema.format !== "markdown");
+    }
+    get useSelect() {
+        return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly;
+    }
+    get hasLockButton() {
+        return this.value !== undefined
+            && (this.props.schema.enum === undefined || this.isReadOnly)
+            && (this.props.schema.format === "code" || this.props.schema.format === "markdown");
+    }
+    get hasOptionalCheckbox() {
+        return !this.props.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get canPreviewImage() {
+        return common.isImageUrl(this.value);
+    }
+    get canPreviewMarkdown() {
+        return this.props.md && this.props.schema.format === "markdown";
+    }
+    get canPreviewCode() {
+        return this.props.hljs && this.props.schema.format === "code";
+    }
+    get canPreview() {
+        return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
+    }
+    get getImageUrl() {
+        return this.props.forceHttps ? common.replaceProtocal(this.value!) : this.value;
+    }
+    get getMarkdown() {
+        return this.props.md.render(this.value);
+    }
+    get getCode() {
+        return this.props.hljs!.highlightAuto(this.value!).value;
+    }
+    get willPreviewImage() {
+        return this.value && !this.collapsed && this.canPreviewImage;
+    }
+    get willPreviewMarkdown() {
+        return this.value && !this.collapsed && this.canPreviewMarkdown;
+    }
+    get willPreviewCode() {
+        return this.value && !this.collapsed && this.canPreviewCode;
+    }
+    onChange = (e: React.FormEvent<{ value: string }>) => {
         this.value = e.currentTarget.value;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage);
     }
-    private validate() {
+    validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);
     }
-    private toggleOptional = () => {
+    toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as string | undefined;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage);
     }
-    private collapseOrExpand = () => {
+    collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
-    private toggleLocked = () => {
+    toggleLocked = () => {
         this.locked = !this.locked;
         this.setState({ locked: this.locked });
     }

@@ -8,6 +8,7 @@ export declare const booleanEditor: {
     };
     computed: {
         isReadOnly(this: This): boolean | undefined;
+        hasOptionalCheckbox(this: This): boolean;
     };
     methods: {
         onChange(this: This, e: {
@@ -25,4 +26,5 @@ export declare type This = {
     initialValue: boolean;
     value?: boolean;
     readonly: boolean;
+    isReadOnly: boolean;
 };

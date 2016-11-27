@@ -8,10 +8,10 @@ import { hljs } from "../../typings/lib";
 export const stringEditor = {
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
-        <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
+        <label v-if="title" :class="theme.label">
             {{title}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
+                <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
                         {{locale.info.notExists}}
@@ -51,11 +51,11 @@ export const stringEditor = {
                 {{e}}
             </option>
         </select>
-        <img v-if="value && !collapsed && canPreviewImage"
+        <img v-if="willPreviewImage"
             :style="imagePreviewStyle"
             :src="getImageUrl" />
-        <div v-if="value && !collapsed && canPreviewMarkdown" v-html="getMarkdown"></div>
-        <pre v-if="value && !collapsed && canPreviewCode"><code v-html="getCode"></code></pre>
+        <div v-if="willPreviewMarkdown" v-html="getMarkdown"></div>
+        <pre v-if="willPreviewCode"><code v-html="getCode"></code></pre>
         <p :class="theme.help">{{schema.description}}</p>
         <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
     </div>
@@ -101,7 +101,7 @@ export const stringEditor = {
                 && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
         },
         useSelect(this: This) {
-            return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
+            return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly;
         },
         hasLockButton(this: This) {
             return this.value !== undefined
@@ -119,6 +119,18 @@ export const stringEditor = {
         },
         isReadOnly(this: This) {
             return this.readonly || this.schema.readonly;
+        },
+        hasOptionalCheckbox(this: This) {
+            return !this.required && (this.value === undefined || !this.isReadOnly);
+        },
+        willPreviewImage(this: This) {
+            return this.value && !this.collapsed && this.canPreviewImage;
+        },
+        willPreviewMarkdown(this: This) {
+            return this.value && !this.collapsed && this.canPreviewMarkdown;
+        },
+        willPreviewCode(this: This) {
+            return this.value && !this.collapsed && this.canPreviewCode;
         },
     },
     methods: {

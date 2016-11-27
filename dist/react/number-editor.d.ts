@@ -2,12 +2,18 @@
 import * as React from "react";
 import * as common from "../common";
 export declare class NumberEditor extends React.Component<common.Props<common.NumberSchema, number>, {}> {
-    private value?;
-    private errorMessage;
+    value?: number;
+    errorMessage: string;
     constructor(props: common.Props<common.ArraySchema, number>);
     componentDidMount(): void;
     render(): JSX.Element;
-    private onChange;
-    private validate();
-    private toggleOptional;
+    onChange: (e: React.FormEvent<{
+        value: string;
+    }>) => void;
+    validate(): void;
+    toggleOptional: () => void;
+    readonly useInput: boolean | undefined;
+    readonly useSelect: boolean;
+    readonly isReadOnly: boolean | undefined;
+    readonly hasOptionalCheckbox: boolean | undefined;
 }

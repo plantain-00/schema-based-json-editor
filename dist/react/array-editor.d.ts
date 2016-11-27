@@ -1,22 +1,32 @@
 /// <reference types="react" />
+/// <reference types="dragula" />
 import * as React from "react";
 import * as common from "../common";
+import { dragula } from "../../typings/lib";
 export declare class ArrayEditor extends React.Component<common.Props<common.ArraySchema, common.ValueType[]>, {
     value?: common.ValueType[];
     collapsed?: boolean;
     renderSwitch?: number;
 }> {
-    private renderSwitch;
-    private collapsed;
-    private value?;
-    private drak?;
-    private errorMessage;
-    private invalidIndexes;
+    renderSwitch: number;
+    collapsed: boolean;
+    value?: common.ValueType[];
+    drak?: dragula.Drake;
+    errorMessage: string;
+    invalidIndexes: number[];
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>);
     componentDidMount(): void;
     componentWillUnmount(): void;
     render(): JSX.Element;
-    private collapseOrExpand;
-    private toggleOptional;
-    private validate();
+    collapseOrExpand: () => void;
+    toggleOptional: () => void;
+    validate(): void;
+    addItem: () => void;
+    onChange: (i: number, value: common.ValueType, isValid: boolean) => void;
+    onDeleteFunction: (i: number) => void;
+    readonly isReadOnly: boolean | undefined;
+    readonly hasOptionalCheckbox: boolean;
+    readonly hasDeleteButton: boolean | undefined;
+    readonly hasAddButton: boolean;
+    readonly getValue: common.ValueType[];
 }

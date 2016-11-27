@@ -10,7 +10,7 @@ export const objectEditor = {
         <h3>
             {{title || schema.title}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
+                <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
                         {{locale.info.notExists}}
@@ -19,7 +19,7 @@ export const objectEditor = {
                 <button :class="theme.button" @click="collapseOrExpand()">
                     <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button v-if="hasDeleteButton && !isReadOnly" :class="theme.button" @click="$emit('delete')">
+                <button v-if="hasDeleteButtonFunction" :class="theme.button" @click="$emit('delete')">
                     <icon :icon="icon" :text="icon.delete"></icon>
                 </button>
             </div>
@@ -68,6 +68,12 @@ export const objectEditor = {
         isReadOnly(this: This) {
             return this.readonly || this.schema.readonly;
         },
+        hasDeleteButtonFunction(this: This) {
+            return this.hasDeleteButton && !this.isReadOnly;
+        },
+        hasOptionalCheckbox(this: This) {
+            return !this.required && (this.value === undefined || !this.isReadOnly);
+        },
     },
     methods: {
         isRequired(this: This, property: string) {
@@ -97,4 +103,6 @@ export type This = {
     required: boolean;
     invalidProperties: string[];
     readonly: boolean;
+    isReadOnly: boolean;
+    hasDeleteButton: boolean;
 };

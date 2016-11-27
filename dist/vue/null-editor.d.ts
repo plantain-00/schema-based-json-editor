@@ -8,6 +8,7 @@ export declare const nullEditor: {
     };
     computed: {
         isReadOnly(this: This): boolean | undefined;
+        hasOptionalCheckbox(this: This): boolean;
     };
     methods: {
         toggleOptional(this: This): void;
@@ -20,4 +21,5 @@ export declare type This = {
     initialValue: null;
     required: boolean;
     readonly: boolean;
+    isReadOnly: boolean;
 };

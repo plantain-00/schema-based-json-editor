@@ -3,7 +3,7 @@ import * as common from "../common";
 import { Icon } from "./icon";
 
 export class BooleanEditor extends React.Component<common.Props<common.BooleanSchema, boolean>, {}> {
-    private value?: boolean;
+    value?: boolean;
     constructor(props: common.Props<common.ArraySchema, boolean>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as boolean;
@@ -12,62 +12,53 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
         this.props.updateValue(this.value, true);
     }
     render() {
-        const isReadOnly = this.props.readonly || this.props.schema.readonly;
-        let control: JSX.Element | null = null;
-        if (this.value !== undefined) {
-            control = (
-                <div>
-                    <div className={this.props.theme.radiobox}>
-                        <label>
-                            <input type="radio"
-                                onChange={this.onChange}
-                                checked={this.value}
-                                disabled={isReadOnly} />
-                            true
-                        </label>
-                    </div>
-                    <div className={this.props.theme.radiobox}>
-                        <label>
-                            <input type="radio"
-                                onChange={this.onChange}
-                                checked={!this.value}
-                                disabled={isReadOnly} />
-                            false
-                        </label>
-                    </div>
-                </div>
-            );
-        }
-        let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
-            optionalCheckbox = (
-                <div className={this.props.theme.optionalCheckbox}>
+        const control = this.value !== undefined ? (
+            <div>
+                <div className={this.props.theme.radiobox}>
                     <label>
-                        <input type="checkbox"
-                            onChange={this.toggleOptional}
-                            checked={this.value === undefined}
-                            disabled={isReadOnly} />
-                        {this.props.locale.info.notExists}
-                    </label>
+                        <input type="radio"
+                            onChange={this.onChange}
+                            checked={this.value}
+                            disabled={this.isReadOnly} />
+                        true
+                        </label>
                 </div>
-            );
-        }
-        let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete) {
-            deleteButton = (
-                <button className={this.props.theme.button} onClick={this.props.onDelete}>
-                    <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
-                </button>
-            );
-        }
-        let titleView: JSX.Element | null = null;
-        if (this.props.title) {
-            titleView = (
-                <label className={this.props.theme.label}>
-                    {this.props.title}
+                <div className={this.props.theme.radiobox}>
+                    <label>
+                        <input type="radio"
+                            onChange={this.onChange}
+                            checked={!this.value}
+                            disabled={this.isReadOnly} />
+                        false
+                        </label>
+                </div>
+            </div>
+        ) : null;
+
+        const optionalCheckbox = this.hasOptionalCheckbox ? (
+            <div className={this.props.theme.optionalCheckbox}>
+                <label>
+                    <input type="checkbox"
+                        onChange={this.toggleOptional}
+                        checked={this.value === undefined}
+                        disabled={this.isReadOnly} />
+                    {this.props.locale.info.notExists}
                 </label>
-            );
-        }
+            </div>
+        ) : null;
+
+        const deleteButton = this.props.onDelete ? (
+            <button className={this.props.theme.button} onClick={this.props.onDelete}>
+                <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
+            </button>
+        ) : null;
+
+        const titleView = this.props.title ? (
+            <label className={this.props.theme.label}>
+                {this.props.title}
+            </label>
+        ) : null;
+
         return (
             <div className={this.props.theme.row}>
                 {titleView}
@@ -80,14 +71,20 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
             </div>
         );
     }
-    private onChange = (e: React.FormEvent<{ checked: boolean }>) => {
+    onChange = (e: React.FormEvent<{ checked: boolean }>) => {
         this.value = !this.value;
         this.setState({ value: this.value });
         this.props.updateValue(this.value, true);
     }
-    private toggleOptional = () => {
+    toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as boolean | undefined;
         this.setState({ value: this.value });
         this.props.updateValue(this.value, true);
+    }
+    get isReadOnly() {
+        return this.props.readonly || this.props.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return !this.props.required && (this.value === undefined || !this.isReadOnly);
     }
 }

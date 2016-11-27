@@ -4,9 +4,9 @@ import { Editor } from "./editor";
 import { Icon } from "./icon";
 
 export class ObjectEditor extends React.Component<common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
-    private collapsed = false;
-    private value?: { [name: string]: common.ValueType };
-    private invalidProperties: string[] = [];
+    collapsed = false;
+    value?: { [name: string]: common.ValueType };
+    invalidProperties: string[] = [];
     constructor(props: common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
@@ -22,62 +22,46 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         this.props.updateValue(this.value, this.invalidProperties.length === 0);
     }
     render() {
-        const isReadOnly = this.props.readonly || this.props.schema.readonly;
-        let childrenElement: JSX.Element | null = null;
+        const childrenElement: JSX.Element[] = [];
         if (!this.collapsed && this.value !== undefined) {
-            const propertyElements: JSX.Element[] = [];
             for (const property in this.props.schema.properties) {
-                const onChange = (value: common.ValueType, isValid: boolean) => {
-                    this.value![property] = value;
-                    this.setState({ value: this.value });
-                    common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
-                    this.props.updateValue(this.value, this.invalidProperties.length === 0);
-                };
                 const schema = this.props.schema.properties[property];
                 const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
-                propertyElements.push(<Editor key={property}
+                childrenElement.push(<Editor key={property}
                     schema={schema}
                     title={schema.title || property}
                     initialValue={this.value[property]}
-                    updateValue={onChange}
+                    updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(property, value, isValid)}
                     theme={this.props.theme}
                     icon={this.props.icon}
                     locale={this.props.locale}
                     required={required}
-                    readonly={isReadOnly}
+                    readonly={this.isReadOnly}
                     dragula={this.props.dragula}
                     md={this.props.md}
                     hljs={this.props.hljs}
                     forceHttps={this.props.forceHttps} />);
             }
-            childrenElement = (
-                <div className={this.props.theme.rowContainer}>
-                    {propertyElements}
-                </div>
-            );
         }
-        let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete && !isReadOnly) {
-            deleteButton = (
-                <button className={this.props.theme.button} onClick={this.props.onDelete}>
-                    <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
-                </button>
-            );
-        }
-        let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
-            optionalCheckbox = (
-                <div className={this.props.theme.optionalCheckbox}>
-                    <label>
-                        <input type="checkbox"
-                            onChange={this.toggleOptional}
-                            checked={this.value === undefined}
-                            disabled={isReadOnly} />
-                        {this.props.locale.info.notExists}
-                    </label>
-                </div>
-            );
-        }
+
+        const deleteButton = this.hasDeleteButtonFunction ? (
+            <button className={this.props.theme.button} onClick={this.props.onDelete}>
+                <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
+            </button>
+        ) : null;
+
+        const optionalCheckbox = this.hasOptionalCheckbox ? (
+            <div className={this.props.theme.optionalCheckbox}>
+                <label>
+                    <input type="checkbox"
+                        onChange={this.toggleOptional}
+                        checked={this.value === undefined}
+                        disabled={this.isReadOnly} />
+                    {this.props.locale.info.notExists}
+                </label>
+            </div>
+        ) : null;
+
         return (
             <div className={this.props.theme.row}>
                 <h3>
@@ -91,17 +75,34 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                     </div>
                 </h3>
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
-                {childrenElement}
+                <div className={this.props.theme.rowContainer}>
+                    {childrenElement}
+                </div>
             </div >
         );
     }
-    private collapseOrExpand = () => {
+    collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
-    private toggleOptional = () => {
+    toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType } | undefined;
         this.setState({ value: this.value });
         this.props.updateValue(this.value, this.invalidProperties.length === 0);
+    }
+    onChange = (property: string, value: common.ValueType, isValid: boolean) => {
+        this.value![property] = value;
+        this.setState({ value: this.value });
+        common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
+        this.props.updateValue(this.value, this.invalidProperties.length === 0);
+    }
+    get hasDeleteButtonFunction() {
+        return this.props.onDelete && !this.isReadOnly;
+    }
+    get isReadOnly() {
+        return this.props.readonly || this.props.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return !this.props.required && (this.value === undefined || !this.isReadOnly);
     }
 }

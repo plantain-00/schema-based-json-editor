@@ -11,7 +11,7 @@ export const arrayEditor = {
         <h3>
             {{title || schema.title}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyleString">
-                <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
+                <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
                         {{locale.info.notExists}}
@@ -20,7 +20,7 @@ export const arrayEditor = {
                 <button :class="theme.button" @click="collapseOrExpand()">
                     <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button v-if="!isReadOnly && value !== undefined" :class="theme.button" @click="addItem()">
+                <button v-if="hasAddButton" :class="theme.button" @click="addItem()">
                     <icon :icon="icon" :text="icon.add"></icon>
                 </button>
                 <button v-if="hasDeleteButton && !isReadOnly" :class="theme.button" @click="$emit('delete')">
@@ -53,7 +53,7 @@ export const arrayEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
-    data: function (this: This) {
+    data: function(this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.$emit("update-value", { value, isValid: !this.errorMessage });
         return {
@@ -80,6 +80,12 @@ export const arrayEditor = {
         },
         isReadOnly(this: This) {
             return this.readonly || this.schema.readonly;
+        },
+        hasOptionalCheckbox(this: This) {
+            return !this.required && (this.value === undefined || !this.isReadOnly);
+        },
+        hasAddButton(this: This) {
+            return !this.isReadOnly && this.value !== undefined;
         },
     },
     mounted(this: This) {
@@ -144,4 +150,5 @@ export type This = {
     $el: HTMLElement;
     invalidIndexes: number[];
     readonly: boolean;
+    isReadOnly: boolean;
 };

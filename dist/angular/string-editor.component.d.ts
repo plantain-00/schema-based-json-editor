@@ -40,6 +40,10 @@ export declare class StringEditorComponent {
     readonly getMarkdown: any;
     readonly getCode: string;
     readonly isReadOnly: boolean | undefined;
+    readonly hasOptionalCheckbox: boolean;
+    readonly willPreviewImage: boolean | "" | undefined;
+    readonly willPreviewMarkdown: boolean | "" | undefined;
+    readonly willPreviewCode: boolean | "" | undefined;
     onChange(e: {
         target: {
             value: string;

@@ -12,6 +12,8 @@ export declare const objectEditor: {
     };
     computed: {
         isReadOnly(this: This): boolean | undefined;
+        hasDeleteButtonFunction(this: This): boolean;
+        hasOptionalCheckbox(this: This): boolean;
     };
     methods: {
         isRequired(this: This, property: string): boolean | undefined;
@@ -36,4 +38,6 @@ export declare type This = {
     required: boolean;
     invalidProperties: string[];
     readonly: boolean;
+    isReadOnly: boolean;
+    hasDeleteButton: boolean;
 };

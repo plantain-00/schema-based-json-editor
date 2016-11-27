@@ -20,4 +20,5 @@ export declare class NullEditorComponent {
     ngOnInit(): void;
     toggleOptional(): void;
     readonly isReadOnly: boolean | undefined;
+    readonly hasOptionalCheckbox: boolean;
 }

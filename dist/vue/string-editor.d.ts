@@ -26,6 +26,10 @@ export declare const stringEditor: {
         getMarkdown(this: This): any;
         getCode(this: This): string;
         isReadOnly(this: This): boolean | undefined;
+        hasOptionalCheckbox(this: This): boolean;
+        willPreviewImage(this: This): boolean | "" | undefined;
+        willPreviewMarkdown(this: This): boolean | "" | undefined;
+        willPreviewCode(this: This): boolean | "" | undefined;
     };
     methods: {
         onChange(this: This, e: {

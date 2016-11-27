@@ -10,7 +10,7 @@ import { hljs, dragula } from "../../typings/lib";
         <h3>
             {{title || schema.title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <div *ngIf="!required && (value === undefined || !isReadOnly)" [class]="theme.optionalCheckbox">
+                <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
                         {{locale.info.notExists}}
@@ -121,5 +121,8 @@ export class ObjectEditorComponent {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return !this.required && (this.value === undefined || !this.isReadOnly);
     }
 }

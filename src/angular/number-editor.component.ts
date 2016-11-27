@@ -9,7 +9,7 @@ import * as common from "../common";
         <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
             {{title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <div *ngIf="!required && (value === undefined || !isReadOnly)" [class]="theme.optionalCheckbox">
+                <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
                         {{locale.info.notExists}}
@@ -81,6 +81,9 @@ export class NumberEditorComponent {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return this.required && (this.value === undefined || !this.isReadOnly);
     }
     onChange(e: { target: { value: string } }) {
         this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);

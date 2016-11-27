@@ -10,10 +10,10 @@ import { hljs, dragula } from "../../typings/lib";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
+        <label *ngIf="title" [class]="theme.label">
             {{title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <div *ngIf="!required && (value === undefined || !isReadOnly)" [class]="theme.optionalCheckbox">
+                <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
                         {{locale.info.notExists}}
@@ -52,12 +52,12 @@ import { hljs, dragula } from "../../typings/lib";
                 {{e}}
             </option>
         </select>
-        <img *ngIf="value && !collapsed && canPreviewImage"
+        <img *ngIf="willPreviewImage"
             class="schema-based-json-editor-image-preview"
             [src]="getImageUrl" />
-        <div *ngIf="value && !collapsed && canPreviewMarkdown" [innerHTML]="getMarkdown">
+        <div *ngIf="willPreviewMarkdown" [innerHTML]="getMarkdown">
         </div>
-        <pre *ngIf="value && !collapsed && canPreviewCode"><code [innerHTML]="getCode"></code></pre>
+        <pre *ngIf="willPreviewCode"><code [innerHTML]="getCode"></code></pre>
         <p [class]="theme.help">{{schema.description}}</p>
         <p *ngIf="errorMessage" [class]="theme.help">{{errorMessage}}</p>
     </div>
@@ -117,7 +117,7 @@ export class StringEditorComponent {
             && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
     }
     get useSelect() {
-        return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
+        return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly;
     }
     get hasLockButton() {
         return this.value !== undefined
@@ -147,6 +147,18 @@ export class StringEditorComponent {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return !this.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get willPreviewImage() {
+        return this.value && !this.collapsed && this.canPreviewImage;
+    }
+    get willPreviewMarkdown() {
+        return this.value && !this.collapsed && this.canPreviewMarkdown;
+    }
+    get willPreviewCode() {
+        return this.value && !this.collapsed && this.canPreviewCode;
     }
     onChange(e: { target: { value: string } }) {
         this.value = e.target.value;

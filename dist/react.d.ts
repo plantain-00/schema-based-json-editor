@@ -1,5 +1,6 @@
 /// <reference types="dragula" />
 /// <reference types="highlight.js" />
+/// <reference types="lodash" />
 /// <reference types="react" />
 import * as React from "react";
 import * as common from "./common";
@@ -17,12 +18,14 @@ export declare type Props = {
     hljs?: typeof hljs;
     forceHttps?: boolean;
 };
+import { Cancelable } from "lodash";
+export declare type Cancelable = Cancelable;
 export declare class JSONEditor extends React.Component<Props, {}> {
-    private theme;
-    private locale;
-    private icon;
-    private updateValue;
-    private md;
+    theme: common.Theme;
+    locale: common.Locale;
+    icon: common.Icon;
+    md: any;
+    updateValue: ((value: any, isValid: boolean) => void) & Cancelable;
     constructor(props: Props);
     render(): JSX.Element | null;
 }

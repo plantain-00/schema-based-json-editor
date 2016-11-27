@@ -3,14 +3,15 @@ import * as ReactDOM from "react-dom";
 import * as common from "../common";
 import { Editor } from "./editor";
 import { Icon } from "./icon";
+import { dragula } from "../../typings/lib";
 
 export class ArrayEditor extends React.Component<common.Props<common.ArraySchema, common.ValueType[]>, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
-    private renderSwitch = 1;
-    private collapsed = false;
-    private value?: common.ValueType[];
-    private drak?: dragula.Drake;
-    private errorMessage: string;
-    private invalidIndexes: number[] = [];
+    renderSwitch = 1;
+    collapsed = false;
+    value?: common.ValueType[];
+    drak?: dragula.Drake;
+    errorMessage: string;
+    invalidIndexes: number[] = [];
     constructor(props: common.Props<common.ArraySchema, common.ValueType[]>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[];
@@ -38,94 +39,53 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         }
     }
     render() {
-        const isReadOnly = this.props.readonly || this.props.schema.readonly;
-        let childrenElement: JSX.Element | null = null;
-        if (this.value !== undefined && !this.collapsed) {
-            const itemElements: JSX.Element[] = [];
-            for (let i = 0; i < this.value.length; i++) {
-                const onChange = (value: common.ValueType, isValid: boolean) => {
-                    this.value![i] = value;
-                    this.setState({ value: this.value });
-                    this.validate();
-                    common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
-                    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-                };
-                const onDelete = () => {
-                    this.value!.splice(i, 1);
-                    this.renderSwitch = -this.renderSwitch;
-                    this.setState({ value: this.value, renderSwitch: this.renderSwitch });
-                    this.validate();
-                    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-                };
-                const key = (1 + i) * this.renderSwitch;
-                itemElements.push((
-                    <div key={key} data-index={i} className={this.props.theme.rowContainer}>
-                        <Editor schema={this.props.schema.items}
-                            title={String(i)}
-                            initialValue={this.value[i]}
-                            updateValue={onChange}
-                            theme={this.props.theme}
-                            icon={this.props.icon}
-                            locale={this.props.locale}
-                            required={true}
-                            readonly={isReadOnly}
-                            onDelete={onDelete}
-                            dragula={this.props.dragula}
-                            md={this.props.md}
-                            hljs={this.props.hljs}
-                            forceHttps={this.props.forceHttps} />
-                    </div>
-                ));
-            }
-            childrenElement = (
-                <div className={this.props.theme.rowContainer}>
-                    {itemElements}
+        const childrenElement: JSX.Element[] = this.getValue.map((e, i) => {
+            return (
+                <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
+                    <Editor schema={this.props.schema.items}
+                        title={String(i)}
+                        initialValue={this.getValue[i]}
+                        updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(i, value, isValid)}
+                        theme={this.props.theme}
+                        icon={this.props.icon}
+                        locale={this.props.locale}
+                        required={true}
+                        readonly={this.isReadOnly}
+                        onDelete={() => this.onDeleteFunction(i)}
+                        dragula={this.props.dragula}
+                        md={this.props.md}
+                        hljs={this.props.hljs}
+                        forceHttps={this.props.forceHttps} />
                 </div>
             );
-        } else {
-            childrenElement = (
-                <div className={this.props.theme.rowContainer}></div>
-            );
-        }
-        let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete && !isReadOnly) {
-            deleteButton = (
-                <button className={this.props.theme.button} onClick={this.props.onDelete}>
-                    <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
-                </button>
-            );
-        }
-        let addButton: JSX.Element | null = null;
-        if (!isReadOnly && this.value !== undefined) {
-            const addItem = () => {
-                this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined) !);
-                this.setState({ value: this.value });
-                this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-            };
-            addButton = (
-                <button className={this.props.theme.button} onClick={addItem}>
-                    <Icon icon={this.props.icon} text={this.props.icon.add}></Icon>
-                </button>
-            );
-        }
-        let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
-            optionalCheckbox = (
-                <div className={this.props.theme.optionalCheckbox}>
-                    <label>
-                        <input type="checkbox"
-                            onChange={this.toggleOptional}
-                            checked={this.value === undefined}
-                            disabled={isReadOnly} />
-                        {this.props.locale.info.notExists}
-                    </label>
-                </div>
-            );
-        }
-        let errorDescription: JSX.Element | null = null;
-        if (this.errorMessage) {
-            errorDescription = <p className={this.props.theme.help}>{this.errorMessage}</p>;
-        }
+        });
+
+        const deleteButton = this.hasDeleteButton ? (
+            <button className={this.props.theme.button} onClick={this.props.onDelete}>
+                <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
+            </button>
+        ) : null;
+
+        const addButton = this.hasAddButton ? (
+            <button className={this.props.theme.button} onClick={this.addItem}>
+                <Icon icon={this.props.icon} text={this.props.icon.add}></Icon>
+            </button>
+        ) : null;
+
+        const optionalCheckbox = this.hasOptionalCheckbox ? (
+            <div className={this.props.theme.optionalCheckbox}>
+                <label>
+                    <input type="checkbox"
+                        onChange={this.toggleOptional}
+                        checked={this.value === undefined}
+                        disabled={this.isReadOnly} />
+                    {this.props.locale.info.notExists}
+                </label>
+            </div>
+        ) : null;
+
+        const errorDescription = this.errorMessage ? <p className={this.props.theme.help}>{this.errorMessage}</p> : null;
+
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <h3>
@@ -140,22 +100,61 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                     </div>
                 </h3>
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
-                {childrenElement}
+                <div className={this.props.theme.rowContainer}>
+                    {childrenElement}
+                </div>
                 {errorDescription}
             </div>
         );
     }
-    private collapseOrExpand = () => {
+    collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
-    private toggleOptional = () => {
+    toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as common.ValueType[] | undefined;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
-    private validate() {
+    validate() {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.props.schema, this.props.locale);
+    }
+    addItem = () => {
+        this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined) !);
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
+    }
+    onChange = (i: number, value: common.ValueType, isValid: boolean) => {
+        this.value![i] = value;
+        this.setState({ value: this.value });
+        this.validate();
+        common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
+        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
+    }
+    onDeleteFunction = (i: number) => {
+        this.value!.splice(i, 1);
+        this.renderSwitch = -this.renderSwitch;
+        this.setState({ value: this.value, renderSwitch: this.renderSwitch });
+        this.validate();
+        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
+    }
+    get isReadOnly() {
+        return this.props.readonly || this.props.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return !this.props.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get hasDeleteButton() {
+        return this.props.onDelete && !this.isReadOnly;
+    }
+    get hasAddButton() {
+        return !this.isReadOnly && this.value !== undefined;
+    }
+    get getValue() {
+        if (this.value !== undefined && !this.collapsed) {
+            return this.value;
+        }
+        return [];
     }
 }

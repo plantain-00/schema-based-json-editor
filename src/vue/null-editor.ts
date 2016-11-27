@@ -10,7 +10,7 @@ export const nullEditor = {
         <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
             {{title}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
+                <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
                     <label>
                         <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
                         {{locale.info.notExists}}
@@ -37,6 +37,9 @@ export const nullEditor = {
         isReadOnly(this: This) {
             return this.readonly || this.schema.readonly;
         },
+        hasOptionalCheckbox(this: This) {
+            return !this.required && (this.value === undefined || !this.isReadOnly);
+        },
     },
     methods: {
         toggleOptional(this: This) {
@@ -53,4 +56,5 @@ export type This = {
     initialValue: null;
     required: boolean;
     readonly: boolean;
+    isReadOnly: boolean;
 };

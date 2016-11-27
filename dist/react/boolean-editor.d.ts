@@ -2,10 +2,14 @@
 import * as React from "react";
 import * as common from "../common";
 export declare class BooleanEditor extends React.Component<common.Props<common.BooleanSchema, boolean>, {}> {
-    private value?;
+    value?: boolean;
     constructor(props: common.Props<common.ArraySchema, boolean>);
     componentDidMount(): void;
     render(): JSX.Element;
-    private onChange;
-    private toggleOptional;
+    onChange: (e: React.FormEvent<{
+        checked: boolean;
+    }>) => void;
+    toggleOptional: () => void;
+    readonly isReadOnly: boolean | undefined;
+    readonly hasOptionalCheckbox: boolean;
 }

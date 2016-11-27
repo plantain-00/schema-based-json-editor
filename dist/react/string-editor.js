@@ -36,82 +36,30 @@ var StringEditor = (function (_super) {
         this.props.updateValue(this.value, !this.errorMessage);
     };
     StringEditor.prototype.render = function () {
-        var isReadOnly = this.props.readonly || this.props.schema.readonly;
-        var control = null;
-        var lockButton = null;
-        if (this.value !== undefined) {
-            if (this.props.schema.enum === undefined || isReadOnly) {
-                if (this.props.schema.format === "textarea") {
-                    control = (React.createElement("textarea", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value, rows: 5, readOnly: isReadOnly}));
-                }
-                else if (this.props.schema.format === "code"
-                    || this.props.schema.format === "markdown") {
-                    if (!this.locked) {
-                        control = (React.createElement("textarea", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value, rows: 5, readOnly: isReadOnly}));
-                    }
-                    lockButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.toggleLocked}, 
-                        React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.locked ? this.props.icon.unlock : this.props.icon.lock})
-                    ));
-                }
-                else {
-                    control = (React.createElement("input", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value, readOnly: isReadOnly}));
-                }
-            }
-            else {
-                var options = this.props.schema.enum.map(function (e, i) { return React.createElement("option", {key: i, value: e}, e); });
-                control = (React.createElement("select", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value}, options));
-            }
-        }
-        var errorDescription = null;
-        if (this.errorMessage) {
-            errorDescription = React.createElement("p", {className: this.props.theme.help}, this.errorMessage);
-        }
-        var optionalCheckbox = null;
-        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
-            optionalCheckbox = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
-                React.createElement("label", null, 
-                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: isReadOnly}), 
-                    this.props.locale.info.notExists)
-            ));
-        }
-        var deleteButton = null;
-        if (this.props.onDelete) {
-            deleteButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
-                React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
-            ));
-        }
-        var titleView = null;
-        if (this.props.title) {
-            titleView = (React.createElement("label", {className: this.props.theme.label}, this.props.title));
-        }
-        var canPreviewImage = common.isImageUrl(this.value);
-        var canPreviewMarkdown = this.props.md && this.props.schema.format === "markdown";
-        var canPreviewCode = this.props.hljs && this.props.schema.format === "code";
-        var previewButton = null;
-        if (this.value && (canPreviewImage || canPreviewMarkdown || canPreviewCode)) {
-            previewButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, 
-                React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.collapsed ? this.props.icon.expand : this.props.icon.collapse})
-            ));
-        }
-        var imagePreview = null;
-        var markdownPreview = null;
-        var codePreview = null;
-        if (this.value && !this.collapsed) {
-            if (canPreviewImage) {
-                var url = this.props.forceHttps ? common.replaceProtocal(this.value) : this.value;
-                imagePreview = React.createElement("img", {style: common.imagePreviewStyle, src: url});
-            }
-            else if (canPreviewMarkdown) {
-                var html = this.props.md.render(this.value);
-                markdownPreview = React.createElement("div", {dangerouslySetInnerHTML: { __html: html }});
-            }
-            else if (canPreviewCode) {
-                var html = this.props.hljs.highlightAuto(this.value).value;
-                codePreview = React.createElement("pre", null, 
-                    React.createElement("code", {dangerouslySetInnerHTML: { __html: html }})
-                );
-            }
-        }
+        var textarea = this.useTextArea ? (React.createElement("textarea", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value, rows: 5, readOnly: this.isReadOnly})) : null;
+        var input = this.useInput ? (React.createElement("input", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value, readOnly: this.isReadOnly})) : null;
+        var select = this.useSelect ? (React.createElement("select", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value}, this.props.schema.enum.map(function (e, i) { return React.createElement("option", {key: i, value: e}, e); }))) : null;
+        var lockButton = this.hasLockButton ? (React.createElement("button", {className: this.props.theme.button, onClick: this.toggleLocked}, 
+            React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.locked ? this.props.icon.unlock : this.props.icon.lock})
+        )) : null;
+        var errorDescription = this.errorMessage ? React.createElement("p", {className: this.props.theme.help}, this.errorMessage) : null;
+        var optionalCheckbox = this.hasOptionalCheckbox ? (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
+            React.createElement("label", null, 
+                React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: this.isReadOnly}), 
+                this.props.locale.info.notExists)
+        )) : null;
+        var deleteButton = this.props.onDelete ? (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
+            React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
+        )) : null;
+        var titleView = this.props.title ? (React.createElement("label", {className: this.props.theme.label}, this.props.title)) : null;
+        var previewButton = this.canPreview ? (React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, 
+            React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.collapsed ? this.props.icon.expand : this.props.icon.collapse})
+        )) : null;
+        var imagePreview = this.willPreviewImage ? React.createElement("img", {style: common.imagePreviewStyle, src: this.getImageUrl}) : null;
+        var markdownPreview = this.willPreviewMarkdown ? React.createElement("div", {dangerouslySetInnerHTML: { __html: this.getMarkdown }}) : null;
+        var codePreview = this.willPreviewCode ? React.createElement("pre", null, 
+            React.createElement("code", {dangerouslySetInnerHTML: { __html: this.getCode }})
+        ) : null;
         return (React.createElement("div", {className: this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}, 
             titleView, 
             React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
@@ -119,13 +67,134 @@ var StringEditor = (function (_super) {
                 deleteButton, 
                 previewButton, 
                 lockButton), 
-            control, 
+            textarea, 
+            input, 
+            select, 
             imagePreview, 
             markdownPreview, 
             codePreview, 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description), 
             errorDescription));
     };
+    Object.defineProperty(StringEditor.prototype, "isReadOnly", {
+        get: function () {
+            return this.props.readonly || this.props.schema.readonly;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "useTextArea", {
+        get: function () {
+            var isUnlockedCodeOrMarkdown = (this.props.schema.format === "code" || this.props.schema.format === "markdown") && (!this.locked);
+            return this.value !== undefined
+                && (this.props.schema.enum === undefined || this.isReadOnly)
+                && (this.props.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "useInput", {
+        get: function () {
+            return this.value !== undefined
+                && (this.props.schema.enum === undefined || this.isReadOnly)
+                && (this.props.schema.format !== "textarea" && this.props.schema.format !== "code" && this.props.schema.format !== "markdown");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "useSelect", {
+        get: function () {
+            return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "hasLockButton", {
+        get: function () {
+            return this.value !== undefined
+                && (this.props.schema.enum === undefined || this.isReadOnly)
+                && (this.props.schema.format === "code" || this.props.schema.format === "markdown");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "hasOptionalCheckbox", {
+        get: function () {
+            return !this.props.required && (this.value === undefined || !this.isReadOnly);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "canPreviewImage", {
+        get: function () {
+            return common.isImageUrl(this.value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "canPreviewMarkdown", {
+        get: function () {
+            return this.props.md && this.props.schema.format === "markdown";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "canPreviewCode", {
+        get: function () {
+            return this.props.hljs && this.props.schema.format === "code";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "canPreview", {
+        get: function () {
+            return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "getImageUrl", {
+        get: function () {
+            return this.props.forceHttps ? common.replaceProtocal(this.value) : this.value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "getMarkdown", {
+        get: function () {
+            return this.props.md.render(this.value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "getCode", {
+        get: function () {
+            return this.props.hljs.highlightAuto(this.value).value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "willPreviewImage", {
+        get: function () {
+            return this.value && !this.collapsed && this.canPreviewImage;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "willPreviewMarkdown", {
+        get: function () {
+            return this.value && !this.collapsed && this.canPreviewMarkdown;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StringEditor.prototype, "willPreviewCode", {
+        get: function () {
+            return this.value && !this.collapsed && this.canPreviewCode;
+        },
+        enumerable: true,
+        configurable: true
+    });
     StringEditor.prototype.validate = function () {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);
     };
