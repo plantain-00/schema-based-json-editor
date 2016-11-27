@@ -27,5 +27,5 @@ export declare class JSONEditor extends React.Component<Props, {}> {
     md: any;
     updateValue: ((value: any, isValid: boolean) => void) & Cancelable;
     constructor(props: Props);
-    render(): JSX.Element | null;
+    render(): JSX.Element;
 }

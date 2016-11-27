@@ -28,8 +28,7 @@ Vue.component("stringEditor", stringEditor);
 Vue.component("json-editor", {
     template: `
     <div>
-        <object-editor v-if="schema.type === 'object'"
-            :schema="schema"
+        <editor :schema="schema"
             :initial-value="initialValue"
             :theme="themeObject"
             :locale="localeObject"
@@ -41,65 +40,7 @@ Vue.component("json-editor", {
             :md="md"
             :hljs="hljs"
             :forceHttps="forceHttps">
-        </object-editor>
-        <array-editor v-if="schema.type === 'array'"
-            :schema="schema"
-            :initial-value="initialValue"
-            :theme="themeObject"
-            :locale="localeObject"
-            :icon="iconObject"
-            :readonly="readonly"
-            :required="true"
-            @update-value="updateValueFunction(arguments[0])"
-            :dragula="dragula"
-            :md="md"
-            :hljs="hljs"
-            :forceHttps="forceHttps">
-        </array-editor>
-        <number-editor v-if="schema.type === 'number' || schema.type === 'integer'"
-            :schema="schema"
-            :initial-value="initialValue"
-            :theme="themeObject"
-            :locale="localeObject"
-            :icon="iconObject"
-            :readonly="readonly"
-            :required="true"
-            @update-value="updateValueFunction(arguments[0])">
-        </number-editor>
-        <boolean-editor v-if="schema.type === 'boolean'"
-            :schema="schema"
-            :initial-value="initialValue"
-            :theme="themeObject"
-            :locale="localeObject"
-            :icon="iconObject"
-            :readonly="readonly"
-            :required="true"
-            @update-value="updateValueFunction(arguments[0])">
-        </boolean-editor>
-        <null-editor v-if="schema.type === 'null'"
-            :schema="schema"
-            :initial-value="initialValue"
-            :theme="themeObject"
-            :locale="localeObject"
-            :icon="iconObject"
-            :readonly="readonly"
-            :required="true"
-            @update-value="updateValueFunction(arguments[0])">
-        </null-editor>
-        <string-editor v-if="schema.type === 'string'"
-            :schema="schema"
-            :initial-value="initialValue"
-            :theme="themeObject"
-            :locale="localeObject"
-            :icon="iconObject"
-            :readonly="readonly"
-            :required="true"
-            @update-value="updateValueFunction(arguments[0])"
-            :dragula="dragula"
-            :md="md"
-            :hljs="hljs"
-            :forceHttps="forceHttps">
-        </string-editor>
+        </editor>
     </div>
     `,
     props: ["schema", "initialValue", "theme", "icon", "locale", "readonly", "dragula", "markdownit", "hljs", "forceHttps"],
