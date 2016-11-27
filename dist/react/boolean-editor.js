@@ -27,12 +27,12 @@ var BooleanEditor = (function (_super) {
             React.createElement("div", {className: this.props.theme.radiobox}, 
                 React.createElement("label", null, 
                     React.createElement("input", {type: "radio", onChange: this.onChange, checked: this.value, disabled: this.isReadOnly}), 
-                    "true")
+                    this.props.locale.info.true)
             ), 
             React.createElement("div", {className: this.props.theme.radiobox}, 
                 React.createElement("label", null, 
                     React.createElement("input", {type: "radio", onChange: this.onChange, checked: !this.value, disabled: this.isReadOnly}), 
-                    "false")
+                    this.props.locale.info.false)
             ))) : null;
         var optionalCheckbox = this.hasOptionalCheckbox ? (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
             React.createElement("label", null, 

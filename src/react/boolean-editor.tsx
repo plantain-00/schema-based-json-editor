@@ -20,7 +20,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                             onChange={this.onChange}
                             checked={this.value}
                             disabled={this.isReadOnly} />
-                        true
+                        {this.props.locale.info.true}
                         </label>
                 </div>
                 <div className={this.props.theme.radiobox}>
@@ -29,7 +29,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                             onChange={this.onChange}
                             checked={!this.value}
                             disabled={this.isReadOnly} />
-                        false
+                        {this.props.locale.info.false}
                         </label>
                 </div>
             </div>

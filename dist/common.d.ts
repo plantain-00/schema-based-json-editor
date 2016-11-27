@@ -87,6 +87,8 @@ export declare type Locale = {
     };
     info: {
         notExists: string;
+        true: string;
+        false: string;
     };
 };
 export declare const defaultLocale: Locale;

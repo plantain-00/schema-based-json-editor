@@ -65,6 +65,8 @@ exports.defaultLocale = {
     },
     info: {
         notExists: "not exists",
+        true: "true",
+        false: "false",
     },
 };
 exports.locales = {
@@ -90,6 +92,8 @@ exports.locales = {
         },
         info: {
             notExists: "不存在",
+            true: "是",
+            false: "否",
         },
     },
 };

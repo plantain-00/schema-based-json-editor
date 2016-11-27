@@ -129,6 +129,8 @@ export type Locale = {
     },
     info: {
         notExists: string;
+        true: string;
+        false: string;
     },
 };
 
@@ -154,6 +156,8 @@ export const defaultLocale: Locale = {
     },
     info: {
         notExists: "not exists",
+        true: "true",
+        false: "false",
     },
 };
 
@@ -180,6 +184,8 @@ export const locales: { [name: string]: Locale } = {
         },
         info: {
             notExists: "不存在",
+            true: "是",
+            false: "否",
         },
     },
 };

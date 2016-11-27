@@ -26,7 +26,7 @@ import * as common from "../common";
                         (change)="onChange($event)"
                         [checked]="value"
                         [disabled]="isReadOnly" />
-                    true
+                    {{locale.info.true}}
                 </label>
             </div>
             <div [class]="theme.radiobox">
@@ -35,7 +35,7 @@ import * as common from "../common";
                         (change)="onChange($event)"
                         [checked]="!value"
                         [disabled]="isReadOnly" />
-                    false
+                    {{locale.info.false}}
                 </label>
             </div>
         </div>

@@ -153,3 +153,22 @@ describe("replaceProtocal", () => {
         expect(common.replaceProtocal("ws://example/a.png")).toEqual("ws://example/a.png");
     });
 });
+
+describe("findTitle", () => {
+    it("should be true", () => {
+        expect(common.findTitle(undefined)).toEqual(undefined);
+        expect(common.findTitle({ a: "b" })).toEqual("b");
+        expect(common.findTitle({ a: 1 })).toEqual(undefined);
+        expect(common.findTitle({ a: "", b: "c" })).toEqual("c");
+        expect(common.findTitle({ a: "bbbbbcccccdddddeeeeeffff" })).toEqual("bbbbbcccccdddddeeeee...");
+        expect(common.findTitle({ a: "bbbbbcccccdddddeeeeefff" })).toEqual("bbbbbcccccdddddeeeeefff");
+    });
+});
+
+describe("getTitle", () => {
+    it("should be true", () => {
+        expect(common.getTitle(undefined)).toEqual("");
+        expect(common.getTitle(0, 1)).toEqual("0");
+        expect(common.getTitle(null, 0, 1)).toEqual("0");
+    });
+});
