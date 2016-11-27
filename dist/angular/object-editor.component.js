@@ -70,6 +70,16 @@ var ObjectEditorComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ObjectEditorComponent.prototype, "titleToShow", {
+        get: function () {
+            if (this.hasDeleteButton) {
+                return common.getTitle(common.findTitle(this.value), this.title, this.schema.title);
+            }
+            return common.getTitle(this.title, this.schema.title);
+        },
+        enumerable: true,
+        configurable: true
+    });
     __decorate([
         core_1.Input()
     ], ObjectEditorComponent.prototype, "schema", void 0);
@@ -119,7 +129,7 @@ var ObjectEditorComponent = (function () {
         core_1.Component({
             selector: "object-editor",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-            template: "\n    <div [class]=\"theme.row\">\n        <h3>\n            {{title || schema.title}}\n            <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyle\">\n                <div *ngIf=\"hasOptionalCheckbox\" [class]=\"theme.optionalCheckbox\">\n                    <label>\n                        <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" [disabled]=\"isReadOnly\" />\n                        {{locale.info.notExists}}\n                    </label>\n                </div>\n                <button [class]=\"theme.button\" (click)=\"collapseOrExpand()\">\n                    <icon [icon]=\"icon\" [text]=\"collapsed ? icon.expand : icon.collapse\"></icon>\n                </button>\n                <button *ngIf=\"hasDeleteButtonFunction\" [class]=\"theme.button\" (click)=\"onDelete.emit()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </h3>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <div *ngIf=\"!collapsed && value !== undefined\" [class]=\"theme.rowContainer\">\n            <editor *ngFor=\"let property of properties; trackBy: trackByFunction\"\n                [schema]=\"property.value\"\n                [title]=\"property.value.title || property.name\"\n                [initialValue]=\"value[property.name]\"\n                (updateValue)=\"onChange(property.name, $event)\"\n                [theme]=\"theme\"\n                [icon]=\"icon\"\n                [locale]=\"locale\"\n                [required]=\"isRequired(property.name)\"\n                [readonly]=\"isReadOnly\"\n                [dragula]=\"dragula\"\n                [md]=\"md\"\n                [hljs]=\"hljs\"\n                [forceHttps]=\"forceHttps\">\n            </editor>\n        </div>\n    </div >\n    ",
+            template: "\n    <div [class]=\"theme.row\">\n        <h3>\n            {{titleToShow}}\n            <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyle\">\n                <div *ngIf=\"hasOptionalCheckbox\" [class]=\"theme.optionalCheckbox\">\n                    <label>\n                        <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" [disabled]=\"isReadOnly\" />\n                        {{locale.info.notExists}}\n                    </label>\n                </div>\n                <button [class]=\"theme.button\" (click)=\"collapseOrExpand()\">\n                    <icon [icon]=\"icon\" [text]=\"collapsed ? icon.expand : icon.collapse\"></icon>\n                </button>\n                <button *ngIf=\"hasDeleteButtonFunction\" [class]=\"theme.button\" (click)=\"onDelete.emit()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </h3>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <div *ngIf=\"!collapsed && value !== undefined\" [class]=\"theme.rowContainer\">\n            <editor *ngFor=\"let property of properties; trackBy: trackByFunction\"\n                [schema]=\"property.value\"\n                [title]=\"property.value.title || property.name\"\n                [initialValue]=\"value[property.name]\"\n                (updateValue)=\"onChange(property.name, $event)\"\n                [theme]=\"theme\"\n                [icon]=\"icon\"\n                [locale]=\"locale\"\n                [required]=\"isRequired(property.name)\"\n                [readonly]=\"isReadOnly\"\n                [dragula]=\"dragula\"\n                [md]=\"md\"\n                [hljs]=\"hljs\"\n                [forceHttps]=\"forceHttps\">\n            </editor>\n        </div>\n    </div >\n    ",
         })
     ], ObjectEditorComponent);
     return ObjectEditorComponent;

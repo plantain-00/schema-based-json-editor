@@ -9,6 +9,7 @@ export declare const nullEditor: {
     computed: {
         isReadOnly(this: This): boolean | undefined;
         hasOptionalCheckbox(this: This): boolean;
+        titleToShow(this: This): string;
     };
     methods: {
         toggleOptional(this: This): void;
@@ -22,4 +23,5 @@ export declare type This = {
     required: boolean;
     readonly: boolean;
     isReadOnly: boolean;
+    title: string;
 };

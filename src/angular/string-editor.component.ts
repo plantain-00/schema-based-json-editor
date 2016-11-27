@@ -10,8 +10,8 @@ import { hljs, dragula } from "../../typings/lib";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <label *ngIf="title" [class]="theme.label">
-            {{title}}
+        <label *ngIf="titleToShow" [class]="theme.label">
+            {{titleToShow}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
                 <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
                     <label>
@@ -159,6 +159,9 @@ export class StringEditorComponent {
     }
     get willPreviewCode() {
         return this.value && !this.collapsed && this.canPreviewCode;
+    }
+    get titleToShow() {
+        return common.getTitle(this.title, this.schema.title);
     }
     onChange(e: { target: { value: string } }) {
         this.value = e.target.value;

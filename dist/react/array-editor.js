@@ -67,11 +67,9 @@ var ArrayEditor = (function (_super) {
     };
     ArrayEditor.prototype.render = function () {
         var _this = this;
-        var childrenElement = this.getValue.map(function (e, i) {
-            return (React.createElement("div", {key: (1 + i) * _this.renderSwitch, "data-index": i, className: _this.props.theme.rowContainer}, 
-                React.createElement(editor_1.Editor, {schema: _this.props.schema.items, title: String(i), initialValue: _this.getValue[i], updateValue: function (value, isValid) { return _this.onChange(i, value, isValid); }, theme: _this.props.theme, icon: _this.props.icon, locale: _this.props.locale, required: true, readonly: _this.isReadOnly, onDelete: function () { return _this.onDeleteFunction(i); }, dragula: _this.props.dragula, md: _this.props.md, hljs: _this.props.hljs, forceHttps: _this.props.forceHttps})
-            ));
-        });
+        var childrenElement = this.getValue.map(function (e, i) { return (React.createElement("div", {key: (1 + i) * _this.renderSwitch, "data-index": i, className: _this.props.theme.rowContainer}, 
+            React.createElement(editor_1.Editor, {schema: _this.props.schema.items, title: String(i), initialValue: _this.getValue[i], updateValue: function (value, isValid) { return _this.onChange(i, value, isValid); }, theme: _this.props.theme, icon: _this.props.icon, locale: _this.props.locale, required: true, readonly: _this.isReadOnly, onDelete: function () { return _this.onDeleteFunction(i); }, dragula: _this.props.dragula, md: _this.props.md, hljs: _this.props.hljs, forceHttps: _this.props.forceHttps})
+        )); });
         var deleteButton = this.hasDeleteButton ? (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
             React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
         )) : null;
@@ -86,7 +84,7 @@ var ArrayEditor = (function (_super) {
         var errorDescription = this.errorMessage ? React.createElement("p", {className: this.props.theme.help}, this.errorMessage) : null;
         return (React.createElement("div", {className: this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}, 
             React.createElement("h3", null, 
-                this.props.title || this.props.schema.title, 
+                this.titleToShow, 
                 React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
                     optionalCheckbox, 
                     React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, 
@@ -135,6 +133,13 @@ var ArrayEditor = (function (_super) {
                 return this.value;
             }
             return [];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ArrayEditor.prototype, "titleToShow", {
+        get: function () {
+            return common.getTitle(this.props.title, this.props.schema.title);
         },
         enumerable: true,
         configurable: true

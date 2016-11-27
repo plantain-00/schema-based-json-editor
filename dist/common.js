@@ -496,4 +496,37 @@ function initializeMarkdown(markdownit, hljs, forceHttps) {
     return md;
 }
 exports.initializeMarkdown = initializeMarkdown;
+function findTitle(value) {
+    if (value) {
+        for (var key in value) {
+            var title = value[key];
+            if (typeof title === "string" && title.length > 0) {
+                if (title.length > 23) {
+                    return title.substring(0, 20) + "...";
+                }
+                return title;
+            }
+            else {
+                continue;
+            }
+        }
+    }
+    return undefined;
+}
+exports.findTitle = findTitle;
+function getTitle() {
+    var titles = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        titles[_i - 0] = arguments[_i];
+    }
+    for (var _a = 0, titles_1 = titles; _a < titles_1.length; _a++) {
+        var title = titles_1[_a];
+        if (title === undefined || title === null) {
+            continue;
+        }
+        return String(title);
+    }
+    return "";
+}
+exports.getTitle = getTitle;
 //# sourceMappingURL=common.js.map

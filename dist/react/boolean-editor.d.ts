@@ -12,4 +12,5 @@ export declare class BooleanEditor extends React.Component<common.Props<common.B
     toggleOptional: () => void;
     readonly isReadOnly: boolean | undefined;
     readonly hasOptionalCheckbox: boolean;
+    readonly titleToShow: string;
 }

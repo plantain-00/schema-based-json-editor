@@ -49,4 +49,5 @@ export declare class ObjectEditorComponent {
     readonly hasDeleteButtonFunction: boolean;
     readonly isReadOnly: boolean | undefined;
     readonly hasOptionalCheckbox: boolean;
+    readonly titleToShow: string;
 }

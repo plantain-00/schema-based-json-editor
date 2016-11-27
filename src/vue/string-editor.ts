@@ -8,8 +8,8 @@ import { hljs } from "../../typings/lib";
 export const stringEditor = {
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
-        <label v-if="title" :class="theme.label">
-            {{title}}
+        <label v-if="titleToShow" :class="theme.label">
+            {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
                 <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
                     <label>
@@ -132,6 +132,9 @@ export const stringEditor = {
         willPreviewCode(this: This) {
             return this.value && !this.collapsed && this.canPreviewCode;
         },
+        titleToShow(this: This) {
+            return common.getTitle(this.title, this.schema.title);
+        },
     },
     methods: {
         onChange(this: This, e: { target: { value: string } }) {
@@ -175,4 +178,5 @@ export type This = {
     canPreviewCode: boolean;
     isReadOnly: boolean;
     locked: boolean;
+    title: string;
 };

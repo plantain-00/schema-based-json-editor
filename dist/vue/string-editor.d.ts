@@ -30,6 +30,7 @@ export declare const stringEditor: {
         willPreviewImage(this: This): boolean | "" | undefined;
         willPreviewMarkdown(this: This): boolean | "" | undefined;
         willPreviewCode(this: This): boolean | "" | undefined;
+        titleToShow(this: This): string;
     };
     methods: {
         onChange(this: This, e: {
@@ -62,4 +63,5 @@ export declare type This = {
     canPreviewCode: boolean;
     isReadOnly: boolean;
     locked: boolean;
+    title: string;
 };

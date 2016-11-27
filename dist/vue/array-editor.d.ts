@@ -19,6 +19,7 @@ export declare const arrayEditor: {
         isReadOnly(this: This): boolean | undefined;
         hasOptionalCheckbox(this: This): boolean;
         hasAddButton(this: This): boolean;
+        titleToShow(this: This): string;
     };
     mounted(this: This): void;
     methods: {
@@ -50,4 +51,5 @@ export declare type This = {
     invalidIndexes: number[];
     readonly: boolean;
     isReadOnly: boolean;
+    title: string;
 };

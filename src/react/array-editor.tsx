@@ -39,26 +39,24 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         }
     }
     render() {
-        const childrenElement: JSX.Element[] = this.getValue.map((e, i) => {
-            return (
-                <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
-                    <Editor schema={this.props.schema.items}
-                        title={String(i)}
-                        initialValue={this.getValue[i]}
-                        updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(i, value, isValid)}
-                        theme={this.props.theme}
-                        icon={this.props.icon}
-                        locale={this.props.locale}
-                        required={true}
-                        readonly={this.isReadOnly}
-                        onDelete={() => this.onDeleteFunction(i)}
-                        dragula={this.props.dragula}
-                        md={this.props.md}
-                        hljs={this.props.hljs}
-                        forceHttps={this.props.forceHttps} />
-                </div>
-            );
-        });
+        const childrenElement: JSX.Element[] = this.getValue.map((e, i) => (
+            <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
+                <Editor schema={this.props.schema.items}
+                    title={String(i)}
+                    initialValue={this.getValue[i]}
+                    updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(i, value, isValid)}
+                    theme={this.props.theme}
+                    icon={this.props.icon}
+                    locale={this.props.locale}
+                    required={true}
+                    readonly={this.isReadOnly}
+                    onDelete={() => this.onDeleteFunction(i)}
+                    dragula={this.props.dragula}
+                    md={this.props.md}
+                    hljs={this.props.hljs}
+                    forceHttps={this.props.forceHttps} />
+            </div>
+        ));
 
         const deleteButton = this.hasDeleteButton ? (
             <button className={this.props.theme.button} onClick={this.props.onDelete}>
@@ -89,7 +87,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <h3>
-                    {this.props.title || this.props.schema.title}
+                    {this.titleToShow}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
                         {optionalCheckbox}
                         <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
@@ -156,5 +154,8 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             return this.value;
         }
         return [];
+    }
+    get titleToShow() {
+        return common.getTitle(this.props.title, this.props.schema.title);
     }
 }

@@ -618,3 +618,30 @@ export function initializeMarkdown(markdownit: any, hljs: typeof hljsLib | undef
     };
     return md;
 }
+
+export function findTitle(value: { [name: string]: ValueType } | undefined) {
+    if (value) {
+        for (const key in value) {
+            const title = value[key];
+            if (typeof title === "string" && title.length > 0) {
+                if (title.length > 23) {
+                    return title.substring(0, 20) + "...";
+                }
+                return title;
+            } else {
+                continue;
+            }
+        }
+    }
+    return undefined;
+}
+
+export function getTitle(...titles: any[]) {
+    for (const title of titles) {
+        if (title === undefined || title === null) {
+            continue;
+        }
+        return String(title);
+    }
+    return "";
+}

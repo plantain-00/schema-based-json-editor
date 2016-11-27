@@ -25,6 +25,7 @@ export declare class StringEditor extends React.Component<common.Props<common.St
     readonly willPreviewImage: boolean | "" | undefined;
     readonly willPreviewMarkdown: boolean | "" | undefined;
     readonly willPreviewCode: boolean | "" | undefined;
+    readonly titleToShow: string;
     onChange: (e: React.FormEvent<{
         value: string;
     }>) => void;

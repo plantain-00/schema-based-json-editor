@@ -22,7 +22,9 @@ export declare class ObjectEditor extends React.Component<common.Props<common.Ob
     collapseOrExpand: () => void;
     toggleOptional: () => void;
     onChange: (property: string, value: common.ValueType, isValid: boolean) => void;
+    isRequired(property: string): boolean | undefined;
     readonly hasDeleteButtonFunction: boolean | undefined;
     readonly isReadOnly: boolean | undefined;
     readonly hasOptionalCheckbox: boolean;
+    readonly titleToShow: string;
 }

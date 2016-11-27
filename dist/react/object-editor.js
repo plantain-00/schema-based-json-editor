@@ -47,8 +47,7 @@ var ObjectEditor = (function (_super) {
         if (!this.collapsed && this.value !== undefined) {
             var _loop_2 = function(property) {
                 var schema = this_2.props.schema.properties[property];
-                var required = this_2.props.schema.required && this_2.props.schema.required.some(function (r) { return r === property; });
-                childrenElement.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_2.value[property], updateValue: function (value, isValid) { return _this.onChange(property, value, isValid); }, theme: this_2.props.theme, icon: this_2.props.icon, locale: this_2.props.locale, required: required, readonly: this_2.isReadOnly, dragula: this_2.props.dragula, md: this_2.props.md, hljs: this_2.props.hljs, forceHttps: this_2.props.forceHttps}));
+                childrenElement.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_2.value[property], updateValue: function (value, isValid) { return _this.onChange(property, value, isValid); }, theme: this_2.props.theme, icon: this_2.props.icon, locale: this_2.props.locale, required: this_2.isRequired(property), readonly: this_2.isReadOnly, dragula: this_2.props.dragula, md: this_2.props.md, hljs: this_2.props.hljs, forceHttps: this_2.props.forceHttps}));
             };
             var this_2 = this;
             for (var property in this.props.schema.properties) {
@@ -65,7 +64,7 @@ var ObjectEditor = (function (_super) {
         )) : null;
         return (React.createElement("div", {className: this.props.theme.row}, 
             React.createElement("h3", null, 
-                this.props.title || this.props.schema.title, 
+                this.titleToShow, 
                 React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
                     optionalCheckbox, 
                     React.createElement("button", {className: this.props.theme.button, onClick: this.collapseOrExpand}, 
@@ -74,6 +73,9 @@ var ObjectEditor = (function (_super) {
                     deleteButton)), 
             React.createElement("p", {className: this.props.theme.help}, this.props.schema.description), 
             React.createElement("div", {className: this.props.theme.rowContainer}, childrenElement)));
+    };
+    ObjectEditor.prototype.isRequired = function (property) {
+        return this.props.schema.required && this.props.schema.required.some(function (r) { return r === property; });
     };
     Object.defineProperty(ObjectEditor.prototype, "hasDeleteButtonFunction", {
         get: function () {
@@ -92,6 +94,16 @@ var ObjectEditor = (function (_super) {
     Object.defineProperty(ObjectEditor.prototype, "hasOptionalCheckbox", {
         get: function () {
             return !this.props.required && (this.value === undefined || !this.isReadOnly);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ObjectEditor.prototype, "titleToShow", {
+        get: function () {
+            if (this.props.onDelete) {
+                return common.getTitle(common.findTitle(this.value), this.props.title, this.props.schema.title);
+            }
+            return common.getTitle(this.props.title, this.props.schema.title);
         },
         enumerable: true,
         configurable: true

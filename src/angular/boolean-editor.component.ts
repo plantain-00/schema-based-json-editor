@@ -5,8 +5,8 @@ import * as common from "../common";
     selector: "boolean-editor",
     template: `
     <div [class]="theme.row">
-        <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
-            {{title}}
+        <label *ngIf="titleToShow" [class]="theme.label">
+            {{titleToShow}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
                 <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
                     <label>
@@ -86,5 +86,8 @@ export class BooleanEditorComponent {
     }
     get hasOptionalCheckbox() {
         return !this.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get titleToShow() {
+        return common.getTitle(this.title, this.schema.title);
     }
 }

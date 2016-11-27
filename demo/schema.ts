@@ -123,6 +123,31 @@ export const schema: common.Schema = {
             format: "code",
             default: "function foo(bar) {\n    console.log(bar);\n}\n",
         },
+        itemTitleExample: {
+            type: "array",
+            items: {
+                type: "object",
+                properties: {
+                    propertyExample1: {
+                        type: "string",
+                    },
+                    propertyExample2: {
+                        type: "number",
+                    },
+                },
+                required: ["propertyExample1", "propertyExample2"],
+            },
+            default: [
+                {
+                    propertyExample1: "foo",
+                    propertyExample2: 1,
+                },
+                {
+                    propertyExample1: "bar",
+                    propertyExample2: 2,
+                },
+            ],
+        },
     },
     required: [
         "stringExample",
@@ -141,5 +166,6 @@ export const schema: common.Schema = {
         "markdownExample",
         "codeExample",
         "performanceExample",
+        "itemTitleExample",
     ],
 };

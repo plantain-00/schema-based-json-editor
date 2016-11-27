@@ -12,6 +12,7 @@ export declare const numberEditor: {
         useSelect(this: This): boolean;
         isReadOnly(this: This): boolean | undefined;
         hasOptionalCheckbox(this: This): boolean;
+        titleToShow(this: This): string;
     };
     methods: {
         onChange(this: This, e: {
@@ -34,4 +35,5 @@ export declare type This = {
     readonly: boolean;
     required: boolean;
     isReadOnly: boolean;
+    title: string;
 };

@@ -1,6 +1,6 @@
 {
   "name": "schema-based-json-editor",
-  "version": "3.2.2",
+  "version": "3.3.0",
   "description": "A reactjs, angular2 and vuejs component of schema based json editor.",
   "main": "index.js",
   "scripts": {

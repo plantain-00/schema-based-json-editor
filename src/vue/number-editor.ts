@@ -7,8 +7,8 @@ import * as common from "../common";
 export const numberEditor = {
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
-        <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
-            {{title}}
+        <label v-if="titleToShow" :class="theme.label">
+            {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
                 <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
                     <label>
@@ -64,7 +64,10 @@ export const numberEditor = {
             return this.readonly || this.schema.readonly;
         },
         hasOptionalCheckbox(this: This) {
-            return this.required && (this.value === undefined || !this.isReadOnly);
+            return !this.required && (this.value === undefined || !this.isReadOnly);
+        },
+        titleToShow(this: This) {
+            return common.getTitle(this.title, this.schema.title);
         },
     },
     methods: {
@@ -95,4 +98,5 @@ export type This = {
     readonly: boolean;
     required: boolean;
     isReadOnly: boolean;
+    title: string;
 };

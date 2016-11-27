@@ -29,4 +29,5 @@ export declare class ArrayEditor extends React.Component<common.Props<common.Arr
     readonly hasDeleteButton: boolean | undefined;
     readonly hasAddButton: boolean;
     readonly getValue: common.ValueType[];
+    readonly titleToShow: string;
 }

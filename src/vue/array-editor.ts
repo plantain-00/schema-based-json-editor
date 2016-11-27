@@ -9,7 +9,7 @@ export const arrayEditor = {
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
         <h3>
-            {{title || schema.title}}
+            {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyleString">
                 <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
                     <label>
@@ -53,7 +53,7 @@ export const arrayEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
-    data: function(this: This) {
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.$emit("update-value", { value, isValid: !this.errorMessage });
         return {
@@ -86,6 +86,9 @@ export const arrayEditor = {
         },
         hasAddButton(this: This) {
             return !this.isReadOnly && this.value !== undefined;
+        },
+        titleToShow(this: This) {
+            return common.getTitle(this.title, this.schema.title);
         },
     },
     mounted(this: This) {
@@ -151,4 +154,5 @@ export type This = {
     invalidIndexes: number[];
     readonly: boolean;
     isReadOnly: boolean;
+    title: string;
 };

@@ -7,7 +7,7 @@ import { hljs, dragula } from "../../typings/lib";
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
         <h3>
-            {{title || schema.title}}
+            {{titleToShow}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyleString">
                 <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
                     <label>
@@ -114,6 +114,9 @@ export class ArrayEditorComponent {
     }
     get hasAddButton() {
         return !this.isReadOnly && this.value !== undefined;
+    }
+    get titleToShow() {
+        return common.getTitle(this.title, this.schema.title);
     }
     ngAfterViewInit() {
         if (this.drakContainer && this.dragula) {

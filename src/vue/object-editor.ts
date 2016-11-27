@@ -8,7 +8,7 @@ export const objectEditor = {
     template: `
     <div :class="theme.row">
         <h3>
-            {{title || schema.title}}
+            {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
                 <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
                     <label>
@@ -37,7 +37,6 @@ export const objectEditor = {
                 :locale="locale"
                 :required="isRequired(property)"
                 :readonly="isReadOnly"
-                :has-delete-button="hasDeleteButton"
                 :dragula="dragula"
                 :md="md"
                 :hljs="hljs"
@@ -74,6 +73,12 @@ export const objectEditor = {
         hasOptionalCheckbox(this: This) {
             return !this.required && (this.value === undefined || !this.isReadOnly);
         },
+        titleToShow(this: This) {
+            if (this.hasDeleteButton) {
+                return common.getTitle(common.findTitle(this.value), this.title, this.schema.title);
+            }
+            return common.getTitle(this.title, this.schema.title);
+        },
     },
     methods: {
         isRequired(this: This, property: string) {
@@ -105,4 +110,5 @@ export type This = {
     readonly: boolean;
     isReadOnly: boolean;
     hasDeleteButton: boolean;
+    title: string;
 };

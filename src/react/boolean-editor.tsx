@@ -55,7 +55,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
 
         const titleView = this.props.title ? (
             <label className={this.props.theme.label}>
-                {this.props.title}
+                {this.titleToShow}
             </label>
         ) : null;
 
@@ -86,5 +86,8 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
     }
     get hasOptionalCheckbox() {
         return !this.props.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get titleToShow() {
+        return common.getTitle(this.props.title, this.props.schema.title);
     }
 }

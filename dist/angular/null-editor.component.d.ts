@@ -21,4 +21,5 @@ export declare class NullEditorComponent {
     toggleOptional(): void;
     readonly isReadOnly: boolean | undefined;
     readonly hasOptionalCheckbox: boolean;
+    readonly titleToShow: string;
 }

@@ -9,4 +9,5 @@ export declare class NullEditor extends React.Component<common.Props<common.Null
     toggleOptional: () => void;
     readonly isReadOnly: boolean | undefined;
     readonly hasOptionalCheckbox: boolean;
+    readonly titleToShow: string;
 }

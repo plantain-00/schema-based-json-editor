@@ -15,5 +15,6 @@ export declare class NumberEditor extends React.Component<common.Props<common.Nu
     readonly useInput: boolean | undefined;
     readonly useSelect: boolean;
     readonly isReadOnly: boolean | undefined;
-    readonly hasOptionalCheckbox: boolean | undefined;
+    readonly hasOptionalCheckbox: boolean;
+    readonly titleToShow: string;
 }

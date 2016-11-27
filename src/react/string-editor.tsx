@@ -69,7 +69,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
 
         const titleView = this.props.title ? (
             <label className={this.props.theme.label}>
-                {this.props.title}
+                {this.titleToShow}
             </label>
         ) : null;
 
@@ -159,6 +159,9 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
     }
     get willPreviewCode() {
         return this.value && !this.collapsed && this.canPreviewCode;
+    }
+    get titleToShow() {
+        return common.getTitle(this.props.title, this.props.schema.title);
     }
     onChange = (e: React.FormEvent<{ value: string }>) => {
         this.value = e.currentTarget.value;

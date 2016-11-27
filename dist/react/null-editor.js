@@ -26,7 +26,7 @@ var NullEditor = (function (_super) {
         var deleteButton = this.props.onDelete ? (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
             React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
         )) : null;
-        var titleView = this.props.title ? (React.createElement("label", {className: this.props.theme.label}, this.props.title)) : null;
+        var titleView = this.props.title ? (React.createElement("label", {className: this.props.theme.label}, this.titleToShow)) : null;
         return (React.createElement("div", {className: this.props.theme.row}, 
             titleView, 
             React.createElement("div", {className: this.props.theme.buttonGroup, style: common.buttonGroupStyle}, 
@@ -44,6 +44,13 @@ var NullEditor = (function (_super) {
     Object.defineProperty(NullEditor.prototype, "hasOptionalCheckbox", {
         get: function () {
             return !this.props.required && (this.value === undefined || !this.isReadOnly);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NullEditor.prototype, "titleToShow", {
+        get: function () {
+            return common.getTitle(this.props.title, this.props.schema.title);
         },
         enumerable: true,
         configurable: true

@@ -26,7 +26,6 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         if (!this.collapsed && this.value !== undefined) {
             for (const property in this.props.schema.properties) {
                 const schema = this.props.schema.properties[property];
-                const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
                 childrenElement.push(<Editor key={property}
                     schema={schema}
                     title={schema.title || property}
@@ -35,7 +34,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                     theme={this.props.theme}
                     icon={this.props.icon}
                     locale={this.props.locale}
-                    required={required}
+                    required={this.isRequired(property)}
                     readonly={this.isReadOnly}
                     dragula={this.props.dragula}
                     md={this.props.md}
@@ -65,7 +64,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         return (
             <div className={this.props.theme.row}>
                 <h3>
-                    {this.props.title || this.props.schema.title}
+                    {this.titleToShow}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
                         {optionalCheckbox}
                         <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
@@ -96,6 +95,9 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
         this.props.updateValue(this.value, this.invalidProperties.length === 0);
     }
+    isRequired(property: string) {
+        return this.props.schema.required && this.props.schema.required.some(r => r === property);
+    }
     get hasDeleteButtonFunction() {
         return this.props.onDelete && !this.isReadOnly;
     }
@@ -104,5 +106,11 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     }
     get hasOptionalCheckbox() {
         return !this.props.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get titleToShow() {
+        if (this.props.onDelete) {
+            return common.getTitle(common.findTitle(this.value), this.props.title, this.props.schema.title);
+        }
+        return common.getTitle(this.props.title, this.props.schema.title);
     }
 }

@@ -146,3 +146,7 @@ export declare function replaceProtocal(src: string): string;
 export declare const imagePreviewStyleString: string;
 export declare const imagePreviewStyle: React.CSSProperties;
 export declare function initializeMarkdown(markdownit: any, hljs: typeof hljsLib | undefined, forceHttps: boolean | undefined): any;
+export declare function findTitle(value: {
+    [name: string]: ValueType;
+} | undefined): string | undefined;
+export declare function getTitle(...titles: any[]): string;

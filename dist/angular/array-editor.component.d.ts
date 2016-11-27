@@ -36,6 +36,7 @@ export declare class ArrayEditorComponent {
     readonly hasOptionalCheckbox: boolean;
     readonly hasDeleteButtonFunction: boolean;
     readonly hasAddButton: boolean;
+    readonly titleToShow: string;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     trackByFunction: (index: number, value: common.ValueType) => number;

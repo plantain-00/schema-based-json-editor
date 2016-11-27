@@ -6,8 +6,8 @@ import * as common from "../common";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
-            {{title}}
+        <label *ngIf="titleToShow" [class]="theme.label">
+            {{titleToShow}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
                 <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
                     <label>
@@ -83,7 +83,10 @@ export class NumberEditorComponent {
         return this.readonly || this.schema.readonly;
     }
     get hasOptionalCheckbox() {
-        return this.required && (this.value === undefined || !this.isReadOnly);
+        return !this.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get titleToShow() {
+        return common.getTitle(this.title, this.schema.title);
     }
     onChange(e: { target: { value: string } }) {
         this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);

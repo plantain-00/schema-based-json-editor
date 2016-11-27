@@ -29,6 +29,13 @@ var NullEditorComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(NullEditorComponent.prototype, "titleToShow", {
+        get: function () {
+            return common.getTitle(this.title, this.schema.title);
+        },
+        enumerable: true,
+        configurable: true
+    });
     __decorate([
         core_1.Input()
     ], NullEditorComponent.prototype, "schema", void 0);
@@ -65,7 +72,7 @@ var NullEditorComponent = (function () {
     NullEditorComponent = __decorate([
         core_1.Component({
             selector: "null-editor",
-            template: "\n    <div [class]=\"theme.row\">\n        <label *ngIf=\"title !== undefined && title !== null && title !== ''\" [class]=\"theme.label\">\n            {{title}}\n            <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyle\">\n                <div *ngIf=\"hasOptionalCheckbox\" [class]=\"theme.optionalCheckbox\">\n                    <label>\n                        <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" [disabled]=\"isReadOnly\" />\n                        {{locale.info.notExists}}\n                    </label>\n                </div>\n                <button *ngIf=\"hasDeleteButton\" [class]=\"theme.button\" (click)=\"onDelete.emit()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </label>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n    </div>\n    ",
+            template: "\n    <div [class]=\"theme.row\">\n        <label *ngIf=\"titleToShow\" [class]=\"theme.label\">\n            {{titleToShow}}\n            <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyle\">\n                <div *ngIf=\"hasOptionalCheckbox\" [class]=\"theme.optionalCheckbox\">\n                    <label>\n                        <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" [disabled]=\"isReadOnly\" />\n                        {{locale.info.notExists}}\n                    </label>\n                </div>\n                <button *ngIf=\"hasDeleteButton\" [class]=\"theme.button\" (click)=\"onDelete.emit()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </label>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n    </div>\n    ",
         })
     ], NullEditorComponent);
     return NullEditorComponent;

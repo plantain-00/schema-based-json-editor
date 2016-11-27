@@ -8,7 +8,7 @@ import { hljs, dragula } from "../../typings/lib";
     template: `
     <div [class]="theme.row">
         <h3>
-            {{title || schema.title}}
+            {{titleToShow}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
                 <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
                     <label>
@@ -124,5 +124,11 @@ export class ObjectEditorComponent {
     }
     get hasOptionalCheckbox() {
         return !this.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get titleToShow() {
+        if (this.hasDeleteButton) {
+            return common.getTitle(common.findTitle(this.value), this.title, this.schema.title);
+        }
+        return common.getTitle(this.title, this.schema.title);
     }
 }
