@@ -38,6 +38,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
         }
     }
     render() {
+        const isReadOnly = this.props.readonly || this.props.schema.readonly;
         let childrenElement: JSX.Element | null = null;
         if (this.value !== undefined && !this.collapsed) {
             const itemElements: JSX.Element[] = [];
@@ -67,7 +68,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                             icon={this.props.icon}
                             locale={this.props.locale}
                             required={true}
-                            readonly={this.props.readonly || this.props.schema.readonly}
+                            readonly={isReadOnly}
                             onDelete={onDelete}
                             dragula={this.props.dragula}
                             md={this.props.md}
@@ -87,7 +88,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             );
         }
         let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
+        if (this.props.onDelete && !isReadOnly) {
             deleteButton = (
                 <button className={this.props.theme.button} onClick={this.props.onDelete}>
                     <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
@@ -95,7 +96,7 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             );
         }
         let addButton: JSX.Element | null = null;
-        if (!this.props.readonly && this.value !== undefined) {
+        if (!isReadOnly && this.value !== undefined) {
             const addItem = () => {
                 this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined) !);
                 this.setState({ value: this.value });
@@ -108,14 +109,14 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             );
         }
         let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (
                 <div className={this.props.theme.optionalCheckbox}>
                     <label>
                         <input type="checkbox"
                             onChange={this.toggleOptional}
                             checked={this.value === undefined}
-                            disabled={this.props.readonly || this.props.schema.readonly} />
+                            disabled={isReadOnly} />
                         is undefined
                     </label>
                 </div>

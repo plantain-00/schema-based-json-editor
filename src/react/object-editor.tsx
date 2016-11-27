@@ -22,6 +22,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         this.props.updateValue(this.value, this.invalidProperties.length === 0);
     }
     render() {
+        const isReadOnly = this.props.readonly || this.props.schema.readonly;
         let childrenElement: JSX.Element | null = null;
         if (!this.collapsed && this.value !== undefined) {
             const propertyElements: JSX.Element[] = [];
@@ -43,7 +44,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                     icon={this.props.icon}
                     locale={this.props.locale}
                     required={required}
-                    readonly={this.props.readonly || this.props.schema.readonly}
+                    readonly={isReadOnly}
                     dragula={this.props.dragula}
                     md={this.props.md}
                     hljs={this.props.hljs}
@@ -56,7 +57,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
             );
         }
         let deleteButton: JSX.Element | null = null;
-        if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
+        if (this.props.onDelete && !isReadOnly) {
             deleteButton = (
                 <button className={this.props.theme.button} onClick={this.props.onDelete}>
                     <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
@@ -64,14 +65,14 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
             );
         }
         let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (
                 <div className={this.props.theme.optionalCheckbox}>
                     <label>
                         <input type="checkbox"
                             onChange={this.toggleOptional}
                             checked={this.value === undefined}
-                            disabled={this.props.readonly || this.props.schema.readonly} />
+                            disabled={isReadOnly} />
                         is undefined
                     </label>
                 </div>

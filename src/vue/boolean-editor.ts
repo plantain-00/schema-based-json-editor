@@ -10,9 +10,9 @@ export const booleanEditor = {
         <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
             {{title}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <div v-if="!required && (value === undefined || !schema.readonly)" :class="theme.optionalCheckbox">
+                <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
                     <label>
-                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="readonly || schema.readonly" />
+                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
                         is undefined
                     </label>
                 </div>
@@ -27,7 +27,7 @@ export const booleanEditor = {
                     <input type="radio"
                         @change="onChange($event)"
                         :checked="value"
-                        :disabled="readonly || schema.readonly" />
+                        :disabled="isReadOnly" />
                     true
                 </label>
             </div>
@@ -36,7 +36,7 @@ export const booleanEditor = {
                     <input type="radio"
                         @change="onChange($event)"
                         :checked="!value"
-                        :disabled="readonly || schema.readonly" />
+                        :disabled="isReadOnly" />
                     false
                 </label>
             </div>
@@ -52,6 +52,11 @@ export const booleanEditor = {
             value,
             buttonGroupStyle: common.buttonGroupStyleString,
         };
+    },
+    computed: {
+        isReadOnly(this: This) {
+            return this.readonly || this.schema.readonly;
+        },
     },
     methods: {
         onChange(this: This, e: { target: { checked: boolean } }) {
@@ -71,4 +76,5 @@ export type This = {
     schema: common.BooleanSchema;
     initialValue: boolean;
     value?: boolean;
+    readonly: boolean;
 };

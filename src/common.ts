@@ -265,6 +265,10 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
         }
     }
 
+    if (!required) {
+        return undefined;
+    }
+
     if (schema.default !== undefined) {
         switch (schema.type) {
             case "object":
@@ -299,10 +303,6 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
                     return schema.default;
                 }
         }
-    }
-
-    if (!required) {
-        return undefined;
     }
 
     switch (schema.type) {

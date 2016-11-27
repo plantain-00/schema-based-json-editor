@@ -8,9 +8,9 @@ import * as common from "../common";
         <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
             {{title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
+                <div *ngIf="!required && (value === undefined || !isReadOnly)" [class]="theme.optionalCheckbox">
                     <label>
-                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
+                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
                         is undefined
                     </label>
                 </div>
@@ -56,5 +56,8 @@ export class NullEditorComponent {
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as null | undefined;
         this.updateValue.emit({ value: this.value, isValid: true });
+    }
+    get isReadOnly() {
+        return this.readonly || this.schema.readonly;
     }
 }

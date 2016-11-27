@@ -13,9 +13,9 @@ import { hljs, dragula } from "../../typings/lib";
         <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
             {{title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
+                <div *ngIf="!required && (value === undefined || !isReadOnly)" [class]="theme.optionalCheckbox">
                     <label>
-                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
+                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
                         is undefined
                     </label>
                 </div>
@@ -32,14 +32,14 @@ import { hljs, dragula } from "../../typings/lib";
             (change)="onChange($event)"
             (keyup)="onChange($event)"
             rows="5"
-            [readOnly]="readonly || schema.readonly">{{value}}</textarea>
+            [readOnly]="isReadOnly">{{value}}</textarea>
         <input *ngIf="useInput"
             [class]="theme.formControl"
             [type]="schema.format"
             (change)="onChange($event)"
             (keyup)="onChange($event)"
             [defaultValue]="value"
-            [readOnly]="readonly || schema.readonly" />
+            [readOnly]="isReadOnly" />
         <select *ngIf="useSelect"
             [class]="theme.formControl"
             (change)="onChange($event)">
@@ -103,16 +103,16 @@ export class StringEditorComponent {
     }
     get useTextArea() {
         return this.value !== undefined
-            && (this.schema.enum === undefined || this.readonly || this.schema.readonly)
+            && (this.schema.enum === undefined || this.isReadOnly)
             && (this.schema.format === "textarea" || this.schema.format === "code" || this.schema.format === "markdown");
     }
     get useInput() {
         return this.value !== undefined
-            && (this.schema.enum === undefined || this.readonly || this.schema.readonly)
+            && (this.schema.enum === undefined || this.isReadOnly)
             && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
     }
     get useSelect() {
-        return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
+        return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
     }
     get canPreviewImage() {
         return common.isImageUrl(this.value);
@@ -134,6 +134,9 @@ export class StringEditorComponent {
     }
     get getCode() {
         return this.hljs!.highlightAuto(this.value!).value;
+    }
+    get isReadOnly() {
+        return this.readonly || this.schema.readonly;
     }
     onChange(e: { target: { value: string } }) {
         this.value = e.target.value;

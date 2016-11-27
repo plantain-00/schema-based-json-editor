@@ -15,9 +15,10 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         this.props.updateValue(this.value, !this.errorMessage);
     }
     render() {
+        const isReadOnly = this.props.readonly || this.props.schema.readonly;
         let control: JSX.Element | null = null;
         if (this.value !== undefined) {
-            if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
+            if (this.props.schema.enum === undefined || isReadOnly) {
                 if (this.props.schema.format === "textarea"
                     || this.props.schema.format === "code"
                     || this.props.schema.format === "markdown") {
@@ -26,7 +27,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
                             onChange={this.onChange}
                             defaultValue={this.value}
                             rows={5}
-                            readOnly={this.props.readonly || this.props.schema.readonly} >
+                            readOnly={isReadOnly} >
                         </textarea>
                     );
                 } else {
@@ -35,7 +36,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
                             type={this.props.schema.format}
                             onChange={this.onChange}
                             defaultValue={this.value}
-                            readOnly={this.props.readonly || this.props.schema.readonly} />
+                            readOnly={isReadOnly} />
                     );
                 }
             } else {
@@ -55,14 +56,14 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
             errorDescription = <p className={this.props.theme.help}>{this.errorMessage}</p>;
         }
         let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (
                 <div className={this.props.theme.optionalCheckbox}>
                     <label>
                         <input type="checkbox"
                             onChange={this.toggleOptional}
                             checked={this.value === undefined}
-                            disabled={this.props.readonly || this.props.schema.readonly} />
+                            disabled={isReadOnly} />
                         is undefined
                     </label>
                 </div>

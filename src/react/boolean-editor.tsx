@@ -12,6 +12,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
         this.props.updateValue(this.value, true);
     }
     render() {
+        const isReadOnly = this.props.readonly || this.props.schema.readonly;
         let control: JSX.Element | null = null;
         if (this.value !== undefined) {
             control = (
@@ -21,7 +22,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                             <input type="radio"
                                 onChange={this.onChange}
                                 checked={this.value}
-                                disabled={this.props.readonly || this.props.schema.readonly} />
+                                disabled={isReadOnly} />
                             true
                         </label>
                     </div>
@@ -30,7 +31,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                             <input type="radio"
                                 onChange={this.onChange}
                                 checked={!this.value}
-                                disabled={this.props.readonly || this.props.schema.readonly} />
+                                disabled={isReadOnly} />
                             false
                         </label>
                     </div>
@@ -38,14 +39,14 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
             );
         }
         let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (
                 <div className={this.props.theme.optionalCheckbox}>
                     <label>
                         <input type="checkbox"
                             onChange={this.toggleOptional}
                             checked={this.value === undefined}
-                            disabled={this.props.readonly || this.props.schema.readonly} />
+                            disabled={isReadOnly} />
                         is undefined
                     </label>
                 </div>

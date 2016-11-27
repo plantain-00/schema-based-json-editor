@@ -32,6 +32,7 @@ export declare class ArrayEditorComponent {
     invalidIndexes: number[];
     getValue(): common.ValueType[];
     ngOnInit(): void;
+    readonly isReadOnly: boolean | undefined;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     trackByFunction: (index: number, value: common.ValueType) => number;

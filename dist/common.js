@@ -168,6 +168,9 @@ function getDefaultValue(required, schema, initialValue) {
                 }
         }
     }
+    if (!required) {
+        return undefined;
+    }
     if (schema.default !== undefined) {
         switch (schema.type) {
             case "object":
@@ -202,9 +205,6 @@ function getDefaultValue(required, schema, initialValue) {
                     return schema.default;
                 }
         }
-    }
-    if (!required) {
-        return undefined;
     }
     switch (schema.type) {
         case "object":

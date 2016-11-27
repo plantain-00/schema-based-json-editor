@@ -10,9 +10,9 @@ import { hljs, dragula } from "../../typings/lib";
         <h3>
             {{title || schema.title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
+                <div *ngIf="!required && (value === undefined || !isReadOnly)" [class]="theme.optionalCheckbox">
                     <label>
-                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
+                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
                         is undefined
                     </label>
                 </div>
@@ -35,7 +35,7 @@ import { hljs, dragula } from "../../typings/lib";
                 [icon]="icon"
                 [locale]="locale"
                 [required]="isRequired(property.name)"
-                [readonly]="readonly || schema.readonly"
+                [readonly]="isReadOnly"
                 [dragula]="dragula"
                 [md]="md"
                 [hljs]="hljs"
@@ -117,6 +117,9 @@ export class ObjectEditorComponent {
         this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.readonly && !this.schema.readonly;
+        return this.hasDeleteButton && !this.isReadOnly;
+    }
+    get isReadOnly() {
+        return this.readonly || this.schema.readonly;
     }
 }

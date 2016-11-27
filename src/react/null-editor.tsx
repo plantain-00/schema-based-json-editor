@@ -12,15 +12,16 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
         this.props.updateValue(this.value, true);
     }
     render() {
+        const isReadOnly = this.props.readonly || this.props.schema.readonly;
         let optionalCheckbox: JSX.Element | null = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (
                 <div className={this.props.theme.optionalCheckbox}>
                     <label>
                         <input type="checkbox"
                             onChange={this.toggleOptional}
                             checked={this.value === undefined}
-                            disabled={this.props.readonly || this.props.schema.readonly} />
+                            disabled={isReadOnly} />
                         is undefined
                     </label>
                 </div>

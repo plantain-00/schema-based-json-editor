@@ -48,6 +48,7 @@ var ArrayEditor = (function (_super) {
     };
     ArrayEditor.prototype.render = function () {
         var _this = this;
+        var isReadOnly = this.props.readonly || this.props.schema.readonly;
         var childrenElement = null;
         if (this.value !== undefined && !this.collapsed) {
             var itemElements = [];
@@ -68,7 +69,7 @@ var ArrayEditor = (function (_super) {
                 };
                 var key = (1 + i) * this_1.renderSwitch;
                 itemElements.push((React.createElement("div", {key: key, "data-index": i, className: this_1.props.theme.rowContainer}, 
-                    React.createElement(editor_1.Editor, {schema: this_1.props.schema.items, title: String(i), initialValue: this_1.value[i], updateValue: onChange, theme: this_1.props.theme, icon: this_1.props.icon, locale: this_1.props.locale, required: true, readonly: this_1.props.readonly || this_1.props.schema.readonly, onDelete: onDelete, dragula: this_1.props.dragula, md: this_1.props.md, hljs: this_1.props.hljs, forceHttps: this_1.props.forceHttps})
+                    React.createElement(editor_1.Editor, {schema: this_1.props.schema.items, title: String(i), initialValue: this_1.value[i], updateValue: onChange, theme: this_1.props.theme, icon: this_1.props.icon, locale: this_1.props.locale, required: true, readonly: isReadOnly, onDelete: onDelete, dragula: this_1.props.dragula, md: this_1.props.md, hljs: this_1.props.hljs, forceHttps: this_1.props.forceHttps})
                 )));
             };
             var this_1 = this;
@@ -81,13 +82,13 @@ var ArrayEditor = (function (_super) {
             childrenElement = (React.createElement("div", {className: this.props.theme.rowContainer}));
         }
         var deleteButton = null;
-        if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
+        if (this.props.onDelete && !isReadOnly) {
             deleteButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
                 React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
             ));
         }
         var addButton = null;
-        if (!this.props.readonly && this.value !== undefined) {
+        if (!isReadOnly && this.value !== undefined) {
             var addItem = function () {
                 _this.value.push(common.getDefaultValue(true, _this.props.schema.items, undefined));
                 _this.setState({ value: _this.value });
@@ -98,10 +99,10 @@ var ArrayEditor = (function (_super) {
             ));
         }
         var optionalCheckbox = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
                 React.createElement("label", null, 
-                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: this.props.readonly || this.props.schema.readonly}), 
+                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: isReadOnly}), 
                     "is undefined")
             ));
         }

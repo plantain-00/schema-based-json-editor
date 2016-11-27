@@ -23,25 +23,26 @@ var BooleanEditor = (function (_super) {
         this.props.updateValue(this.value, true);
     };
     BooleanEditor.prototype.render = function () {
+        var isReadOnly = this.props.readonly || this.props.schema.readonly;
         var control = null;
         if (this.value !== undefined) {
             control = (React.createElement("div", null, 
                 React.createElement("div", {className: this.props.theme.radiobox}, 
                     React.createElement("label", null, 
-                        React.createElement("input", {type: "radio", onChange: this.onChange, checked: this.value, disabled: this.props.readonly || this.props.schema.readonly}), 
+                        React.createElement("input", {type: "radio", onChange: this.onChange, checked: this.value, disabled: isReadOnly}), 
                         "true")
                 ), 
                 React.createElement("div", {className: this.props.theme.radiobox}, 
                     React.createElement("label", null, 
-                        React.createElement("input", {type: "radio", onChange: this.onChange, checked: !this.value, disabled: this.props.readonly || this.props.schema.readonly}), 
+                        React.createElement("input", {type: "radio", onChange: this.onChange, checked: !this.value, disabled: isReadOnly}), 
                         "false")
                 )));
         }
         var optionalCheckbox = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
                 React.createElement("label", null, 
-                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: this.props.readonly || this.props.schema.readonly}), 
+                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: isReadOnly}), 
                     "is undefined")
             ));
         }

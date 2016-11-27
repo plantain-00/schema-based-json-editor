@@ -32,6 +32,13 @@ var ArrayEditorComponent = (function () {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue);
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     };
+    Object.defineProperty(ArrayEditorComponent.prototype, "isReadOnly", {
+        get: function () {
+            return this.readonly || this.schema.readonly;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ArrayEditorComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
         if (this.drakContainer && this.dragula) {
@@ -59,7 +66,7 @@ var ArrayEditorComponent = (function () {
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     };
     ArrayEditorComponent.prototype.hasDeleteButtonFunction = function () {
-        return this.hasDeleteButton && !this.readonly && !this.schema.readonly;
+        return this.hasDeleteButton && !this.isReadOnly;
     };
     ArrayEditorComponent.prototype.onDeleteFunction = function (i) {
         this.value.splice(i, 1);
@@ -125,7 +132,7 @@ var ArrayEditorComponent = (function () {
     ArrayEditorComponent = __decorate([
         core_1.Component({
             selector: "array-editor",
-            template: "\n    <div [class]=\"errorMessage ? theme.errorRow : theme.row\">\n        <h3>\n            {{title || schema.title}}\n            <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyleString\">\n                <div *ngIf=\"!required && (value === undefined || !schema.readonly)\" [class]=\"theme.optionalCheckbox\">\n                    <label>\n                        <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" [disabled]=\"readonly || schema.readonly\" />\n                        is undefined\n                    </label>\n                </div>\n                <button [class]=\"theme.button\" (click)=\"collapseOrExpand()\">\n                    <icon [icon]=\"icon\" [text]=\"collapsed ? icon.expand : icon.collapse\"></icon>\n                </button>\n                <button *ngIf=\"!readonly && value !== undefined\" [class]=\"theme.button\" (click)=\"addItem()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.add\"></icon>\n                </button>\n                <button *ngIf=\"hasDeleteButtonFunction()\" [class]=\"theme.button\" (click)=\"onDelete.emit()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </h3>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <div #drakContainer [class]=\"theme.rowContainer\">\n            <div *ngFor=\"let item of getValue(); let i = index; trackBy:trackByFunction\" [attr.data-index]=\"i\" [class]=\"theme.rowContainer\">\n                <editor [schema]=\"schema.items\"\n                    [title]=\"i\"\n                    [initialValue]=\"value[i]\"\n                    (updateValue)=\"onChange(i, $event)\"\n                    [theme]=\"theme\"\n                    [icon]=\"icon\"\n                    [locale]=\"locale\"\n                    [required]=\"true\"\n                    [readonly]=\"readonly || schema.readonly\"\n                    (onDelete)=\"onDeleteFunction(i)\"\n                    [hasDeleteButton]=\"true\"\n                    [dragula]=\"dragula\"\n                    [md]=\"md\"\n                    [hljs]=\"hljs\"\n                    [forceHttps]=\"forceHttps\">\n                </editor>\n            </div>\n        </div>\n        <p *ngIf=\"errorMessage\" [class]=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
+            template: "\n    <div [class]=\"errorMessage ? theme.errorRow : theme.row\">\n        <h3>\n            {{title || schema.title}}\n            <div [class]=\"theme.buttonGroup\" [style]=\"buttonGroupStyleString\">\n                <div *ngIf=\"!required && (value === undefined || !isReadOnly)\" [class]=\"theme.optionalCheckbox\">\n                    <label>\n                        <input type=\"checkbox\" (change)=\"toggleOptional()\" [checked]=\"value === undefined\" [disabled]=\"isReadOnly\" />\n                        is undefined\n                    </label>\n                </div>\n                <button [class]=\"theme.button\" (click)=\"collapseOrExpand()\">\n                    <icon [icon]=\"icon\" [text]=\"collapsed ? icon.expand : icon.collapse\"></icon>\n                </button>\n                <button *ngIf=\"!isReadOnly && value !== undefined\" [class]=\"theme.button\" (click)=\"addItem()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.add\"></icon>\n                </button>\n                <button *ngIf=\"hasDeleteButtonFunction()\" [class]=\"theme.button\" (click)=\"onDelete.emit()\">\n                    <icon [icon]=\"icon\" [text]=\"icon.delete\"></icon>\n                </button>\n            </div>\n        </h3>\n        <p [class]=\"theme.help\">{{schema.description}}</p>\n        <div #drakContainer [class]=\"theme.rowContainer\">\n            <div *ngFor=\"let item of getValue(); let i = index; trackBy:trackByFunction\" [attr.data-index]=\"i\" [class]=\"theme.rowContainer\">\n                <editor [schema]=\"schema.items\"\n                    [title]=\"i\"\n                    [initialValue]=\"value[i]\"\n                    (updateValue)=\"onChange(i, $event)\"\n                    [theme]=\"theme\"\n                    [icon]=\"icon\"\n                    [locale]=\"locale\"\n                    [required]=\"true\"\n                    [readonly]=\"isReadOnly\"\n                    (onDelete)=\"onDeleteFunction(i)\"\n                    [hasDeleteButton]=\"true\"\n                    [dragula]=\"dragula\"\n                    [md]=\"md\"\n                    [hljs]=\"hljs\"\n                    [forceHttps]=\"forceHttps\">\n                </editor>\n            </div>\n        </div>\n        <p *ngIf=\"errorMessage\" [class]=\"theme.help\">{{errorMessage}}</p>\n    </div>\n    ",
         })
     ], ArrayEditorComponent);
     return ArrayEditorComponent;

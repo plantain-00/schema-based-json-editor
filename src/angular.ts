@@ -11,6 +11,7 @@ import { hljs, dragula } from "../typings/lib";
         [theme]="themeObject"
         [locale]="localeObject"
         [icon]="iconObject"
+        [readonly]="readonly"
         [required]="true"
         (updateValue)="updateValueFunction($event)"
         [dragula]="dragula"
@@ -24,6 +25,7 @@ import { hljs, dragula } from "../typings/lib";
         [theme]="themeObject"
         [locale]="localeObject"
         [icon]="iconObject"
+        [readonly]="readonly"
         [required]="true"
         (updateValue)="updateValueFunction($event)"
         [dragula]="dragula"
@@ -37,6 +39,7 @@ import { hljs, dragula } from "../typings/lib";
         [theme]="themeObject"
         [locale]="localeObject"
         [icon]="iconObject"
+        [readonly]="readonly"
         [required]="true"
         (updateValue)="updateValueFunction($event)">
     </number-editor>
@@ -46,6 +49,7 @@ import { hljs, dragula } from "../typings/lib";
         [theme]="themeObject"
         [locale]="localeObject"
         [icon]="iconObject"
+        [readonly]="readonly"
         [required]="true"
         (updateValue)="updateValueFunction($event)">
     </boolean-editor>
@@ -55,6 +59,7 @@ import { hljs, dragula } from "../typings/lib";
         [theme]="themeObject"
         [locale]="localeObject"
         [icon]="iconObject"
+        [readonly]="readonly"
         [required]="true"
         (updateValue)="updateValueFunction($event)">
     </null-editor>
@@ -64,6 +69,7 @@ import { hljs, dragula } from "../typings/lib";
         [theme]="themeObject"
         [locale]="localeObject"
         [icon]="iconObject"
+        [readonly]="readonly"
         [required]="true"
         (updateValue)="updateValueFunction($event)"
         [dragula]="dragula"

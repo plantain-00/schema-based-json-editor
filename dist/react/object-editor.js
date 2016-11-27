@@ -37,6 +37,7 @@ var ObjectEditor = (function (_super) {
     };
     ObjectEditor.prototype.render = function () {
         var _this = this;
+        var isReadOnly = this.props.readonly || this.props.schema.readonly;
         var childrenElement = null;
         if (!this.collapsed && this.value !== undefined) {
             var propertyElements = [];
@@ -49,7 +50,7 @@ var ObjectEditor = (function (_super) {
                 };
                 var schema = this_2.props.schema.properties[property];
                 var required = this_2.props.schema.required && this_2.props.schema.required.some(function (r) { return r === property; });
-                propertyElements.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_2.value[property], updateValue: onChange, theme: this_2.props.theme, icon: this_2.props.icon, locale: this_2.props.locale, required: required, readonly: this_2.props.readonly || this_2.props.schema.readonly, dragula: this_2.props.dragula, md: this_2.props.md, hljs: this_2.props.hljs, forceHttps: this_2.props.forceHttps}));
+                propertyElements.push(React.createElement(editor_1.Editor, {key: property, schema: schema, title: schema.title || property, initialValue: this_2.value[property], updateValue: onChange, theme: this_2.props.theme, icon: this_2.props.icon, locale: this_2.props.locale, required: required, readonly: isReadOnly, dragula: this_2.props.dragula, md: this_2.props.md, hljs: this_2.props.hljs, forceHttps: this_2.props.forceHttps}));
             };
             var this_2 = this;
             for (var property in this.props.schema.properties) {
@@ -58,16 +59,16 @@ var ObjectEditor = (function (_super) {
             childrenElement = (React.createElement("div", {className: this.props.theme.rowContainer}, propertyElements));
         }
         var deleteButton = null;
-        if (this.props.onDelete && !this.props.readonly && !this.props.schema.readonly) {
+        if (this.props.onDelete && !isReadOnly) {
             deleteButton = (React.createElement("button", {className: this.props.theme.button, onClick: this.props.onDelete}, 
                 React.createElement(icon_1.Icon, {icon: this.props.icon, text: this.props.icon.delete})
             ));
         }
         var optionalCheckbox = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
                 React.createElement("label", null, 
-                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: this.props.readonly || this.props.schema.readonly}), 
+                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: isReadOnly}), 
                     "is undefined")
             ));
         }

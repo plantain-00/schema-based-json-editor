@@ -8,9 +8,9 @@ import * as common from "../common";
         <label *ngIf="title !== undefined && title !== null && title !== ''" [class]="theme.label">
             {{title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
+                <div *ngIf="!required && (value === undefined || !isReadOnly)" [class]="theme.optionalCheckbox">
                     <label>
-                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
+                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
                         is undefined
                     </label>
                 </div>
@@ -25,7 +25,7 @@ import * as common from "../common";
                     <input type="radio"
                         (change)="onChange($event)"
                         [checked]="value"
-                        [disabled]="readonly || schema.readonly" />
+                        [disabled]="isReadOnly" />
                     true
                 </label>
             </div>
@@ -34,7 +34,7 @@ import * as common from "../common";
                     <input type="radio"
                         (change)="onChange($event)"
                         [checked]="!value"
-                        [disabled]="readonly || schema.readonly" />
+                        [disabled]="isReadOnly" />
                     false
                 </label>
             </div>
@@ -80,5 +80,8 @@ export class BooleanEditorComponent {
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as boolean | undefined;
         this.updateValue.emit({ value: this.value, isValid: true });
+    }
+    get isReadOnly() {
+        return this.readonly || this.schema.readonly;
     }
 }

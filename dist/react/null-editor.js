@@ -18,11 +18,12 @@ var NullEditor = (function (_super) {
         this.props.updateValue(this.value, true);
     };
     NullEditor.prototype.render = function () {
+        var isReadOnly = this.props.readonly || this.props.schema.readonly;
         var optionalCheckbox = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
                 React.createElement("label", null, 
-                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: this.props.readonly || this.props.schema.readonly}), 
+                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: isReadOnly}), 
                     "is undefined")
             ));
         }

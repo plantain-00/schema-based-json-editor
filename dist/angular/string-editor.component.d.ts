@@ -37,6 +37,7 @@ export declare class StringEditorComponent {
     readonly getImageUrl: string | undefined;
     readonly getMarkdown: any;
     readonly getCode: string;
+    readonly isReadOnly: boolean | undefined;
     onChange(e: {
         target: {
             value: string;

@@ -16,6 +16,7 @@ export declare const arrayEditor: {
     beforeDestroy(this: This): void;
     computed: {
         getValue(this: This): common.ValueType[];
+        isReadOnly(this: This): boolean | undefined;
     };
     mounted(this: This): void;
     methods: {
@@ -45,4 +46,5 @@ export declare type This = {
     validate: () => void;
     $el: HTMLElement;
     invalidIndexes: number[];
+    readonly: boolean;
 };

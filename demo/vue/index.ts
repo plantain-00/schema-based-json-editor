@@ -17,7 +17,7 @@ type This = {
     schema: common.Schema;
     value: any;
     color: string;
-    valueString: string;
+    valueHtml: string;
 };
 
 new Vue({
@@ -28,17 +28,17 @@ new Vue({
             schema,
             value,
             color: "black",
-            valueString: JSON.stringify(value, null, "  "),
-            schemaString: JSON.stringify(schema, null, "  "),
+            schemaHtml: hljs.highlight("json", JSON.stringify(schema, null, "  ")).value,
             locale: navigator.language,
             dragula,
             markdownit,
             hljs,
+            valueHtml: "",
         };
     },
     methods: {
         updateValue(this: This, {value, isValid}: common.ValidityValue<common.ValueType>) {
-            this.valueString = JSON.stringify(value, null, "  ");
+            this.valueHtml = hljs.highlight("json", JSON.stringify(value, null, "  ")).value;
             this.color = isValid ? "black" : "red";
         },
     },

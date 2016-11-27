@@ -9,16 +9,16 @@ import { hljs, dragula } from "../../typings/lib";
         <h3>
             {{title || schema.title}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyleString">
-                <div *ngIf="!required && (value === undefined || !schema.readonly)" [class]="theme.optionalCheckbox">
+                <div *ngIf="!required && (value === undefined || !isReadOnly)" [class]="theme.optionalCheckbox">
                     <label>
-                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="readonly || schema.readonly" />
+                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
                         is undefined
                     </label>
                 </div>
                 <button [class]="theme.button" (click)="collapseOrExpand()">
                     <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
-                <button *ngIf="!readonly && value !== undefined" [class]="theme.button" (click)="addItem()">
+                <button *ngIf="!isReadOnly && value !== undefined" [class]="theme.button" (click)="addItem()">
                     <icon [icon]="icon" [text]="icon.add"></icon>
                 </button>
                 <button *ngIf="hasDeleteButtonFunction()" [class]="theme.button" (click)="onDelete.emit()">
@@ -37,7 +37,7 @@ import { hljs, dragula } from "../../typings/lib";
                     [icon]="icon"
                     [locale]="locale"
                     [required]="true"
-                    [readonly]="readonly || schema.readonly"
+                    [readonly]="isReadOnly"
                     (onDelete)="onDeleteFunction(i)"
                     [hasDeleteButton]="true"
                     [dragula]="dragula"
@@ -104,6 +104,9 @@ export class ArrayEditorComponent {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     }
+    get isReadOnly() {
+        return this.readonly || this.schema.readonly;
+    }
     ngAfterViewInit() {
         if (this.drakContainer && this.dragula) {
             const container = this.drakContainer.nativeElement as HTMLElement;
@@ -141,7 +144,7 @@ export class ArrayEditorComponent {
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     }
     hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.readonly && !this.schema.readonly;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     onDeleteFunction(i: number) {
         this.value!.splice(i, 1);

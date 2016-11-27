@@ -34,6 +34,7 @@ Vue.component("json-editor", {
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
+            :readonly="readonly"
             :required="true"
             @update-value="updateValueFunction(arguments[0])"
             :dragula="dragula"
@@ -47,6 +48,7 @@ Vue.component("json-editor", {
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
+            :readonly="readonly"
             :required="true"
             @update-value="updateValueFunction(arguments[0])"
             :dragula="dragula"
@@ -60,6 +62,7 @@ Vue.component("json-editor", {
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
+            :readonly="readonly"
             :required="true"
             @update-value="updateValueFunction(arguments[0])">
         </number-editor>
@@ -69,6 +72,7 @@ Vue.component("json-editor", {
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
+            :readonly="readonly"
             :required="true"
             @update-value="updateValueFunction(arguments[0])">
         </boolean-editor>
@@ -78,6 +82,7 @@ Vue.component("json-editor", {
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
+            :readonly="readonly"
             :required="true"
             @update-value="updateValueFunction(arguments[0])">
         </null-editor>
@@ -87,6 +92,7 @@ Vue.component("json-editor", {
             :theme="themeObject"
             :locale="localeObject"
             :icon="iconObject"
+            :readonly="readonly"
             :required="true"
             @update-value="updateValueFunction(arguments[0])"
             :dragula="dragula"

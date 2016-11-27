@@ -6,6 +6,9 @@ export declare const nullEditor: {
         value: null;
         buttonGroupStyle: string;
     };
+    computed: {
+        isReadOnly(this: This): boolean | undefined;
+    };
     methods: {
         toggleOptional(this: This): void;
     };
@@ -16,4 +19,5 @@ export declare type This = {
     schema: common.NullSchema;
     initialValue: null;
     required: boolean;
+    readonly: boolean;
 };

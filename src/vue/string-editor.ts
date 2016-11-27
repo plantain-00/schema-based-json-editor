@@ -11,9 +11,9 @@ export const stringEditor = {
         <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
             {{title}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <div v-if="!required && (value === undefined || !schema.readonly)" :class="theme.optionalCheckbox">
+                <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
                     <label>
-                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="readonly || schema.readonly" />
+                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
                         is undefined
                     </label>
                 </div>
@@ -30,14 +30,14 @@ export const stringEditor = {
             @change="onChange($event)"
             @keyup="onChange($event)"
             rows="5"
-            :readOnly="readonly || schema.readonly">{{value}}</textarea>
+            :readOnly="isReadOnly">{{value}}</textarea>
         <input v-if="useInput"
             :class="theme.formControl"
             :type="schema.format"
             @change="onChange($event)"
             @keyup="onChange($event)"
             :value="value"
-            :readOnly="readonly || schema.readonly" />
+            :readOnly="isReadOnly" />
         <select v-if="useSelect"
             :class="theme.formControl"
             @change="onChange($event)">
@@ -58,7 +58,7 @@ export const stringEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
-    data: function(this: This) {
+    data: function (this: This) {
         const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         this.$emit("update-value", { value, isValid: !this.errorMessage });
         return {
@@ -87,16 +87,16 @@ export const stringEditor = {
         },
         useTextArea(this: This) {
             return this.value !== undefined
-                && (this.schema.enum === undefined || this.readonly || this.schema.readonly)
+                && (this.schema.enum === undefined || this.isReadOnly)
                 && (this.schema.format === "textarea" || this.schema.format === "code" || this.schema.format === "markdown");
         },
         useInput(this: This) {
             return this.value !== undefined
-                && (this.schema.enum === undefined || this.readonly || this.schema.readonly)
+                && (this.schema.enum === undefined || this.isReadOnly)
                 && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
         },
         useSelect(this: This) {
-            return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
+            return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
         },
         getImageUrl(this: This) {
             return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
@@ -106,6 +106,9 @@ export const stringEditor = {
         },
         getCode(this: This) {
             return this.hljs!.highlightAuto(this.value!).value;
+        },
+        isReadOnly(this: This) {
+            return this.readonly || this.schema.readonly;
         },
     },
     methods: {
@@ -145,4 +148,5 @@ export type This = {
     canPreviewImage: boolean;
     canPreviewMarkdown: boolean;
     canPreviewCode: boolean;
+    isReadOnly: boolean;
 };

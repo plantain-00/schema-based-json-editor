@@ -29,7 +29,7 @@
 	<div id="container">
 		<div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
 			Schema:
-			<pre>{{schemaString}}</pre>
+			<pre><code v-html="schemaHtml"></code></pre>
 		</div>
 		<div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
 			GUI:
@@ -47,7 +47,7 @@
 		</div>
 		<div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
             Value:
-			<pre :style="{color: color}">{{valueString}}</pre>
+			<pre :style="{borderColor: color}"><code v-html="valueHtml"></code></pre>
 		</div>
 	</div>
 	<script src="../vue.bundle.js"></script>

@@ -31,16 +31,17 @@ var StringEditor = (function (_super) {
         this.props.updateValue(this.value, !this.errorMessage);
     };
     StringEditor.prototype.render = function () {
+        var isReadOnly = this.props.readonly || this.props.schema.readonly;
         var control = null;
         if (this.value !== undefined) {
-            if (this.props.schema.enum === undefined || this.props.readonly || this.props.schema.readonly) {
+            if (this.props.schema.enum === undefined || isReadOnly) {
                 if (this.props.schema.format === "textarea"
                     || this.props.schema.format === "code"
                     || this.props.schema.format === "markdown") {
-                    control = (React.createElement("textarea", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value, rows: 5, readOnly: this.props.readonly || this.props.schema.readonly}));
+                    control = (React.createElement("textarea", {className: this.props.theme.formControl, onChange: this.onChange, defaultValue: this.value, rows: 5, readOnly: isReadOnly}));
                 }
                 else {
-                    control = (React.createElement("input", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value, readOnly: this.props.readonly || this.props.schema.readonly}));
+                    control = (React.createElement("input", {className: this.props.theme.formControl, type: this.props.schema.format, onChange: this.onChange, defaultValue: this.value, readOnly: isReadOnly}));
                 }
             }
             else {
@@ -53,10 +54,10 @@ var StringEditor = (function (_super) {
             errorDescription = React.createElement("p", {className: this.props.theme.help}, this.errorMessage);
         }
         var optionalCheckbox = null;
-        if (!this.props.required && (this.value === undefined || !this.props.schema.readonly)) {
+        if (!this.props.required && (this.value === undefined || !isReadOnly)) {
             optionalCheckbox = (React.createElement("div", {className: this.props.theme.optionalCheckbox}, 
                 React.createElement("label", null, 
-                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: this.props.readonly || this.props.schema.readonly}), 
+                    React.createElement("input", {type: "checkbox", onChange: this.toggleOptional, checked: this.value === undefined, disabled: isReadOnly}), 
                     "is undefined")
             ));
         }

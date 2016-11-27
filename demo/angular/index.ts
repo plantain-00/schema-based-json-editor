@@ -8,7 +8,7 @@ import { enableProdMode } from "@angular/core";
 
 enableProdMode();
 
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 
 import { schema } from "../schema";
 
@@ -21,11 +21,12 @@ import * as hljs from "highlight.js";
 
 @Component({
     selector: "app",
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div>
         <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
             Schema:
-            <pre>{{schemaString}}</pre>
+            <pre><code [innerHTML]="schemaHtml"></code></pre>
         </div>
         <div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
             GUI:
@@ -43,22 +44,22 @@ import * as hljs from "highlight.js";
         </div>
         <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
             Value:
-            <pre [style.color]="color">{{getValueString()}}</pre>
+            <pre [style.borderColor]="color"><code [innerHTML]="valueHtml"></code></pre>
         </div>
     </div>
     `,
 })
 export class MainComponent {
     schema = schema;
-    schemaString = JSON.stringify(schema, null, "  ");
+    schemaHtml = hljs.highlight("json", JSON.stringify(schema, null, "  ")).value;
     value: any = {};
     color = "black";
     locale = navigator.language;
     dragula = dragula;
     markdownit = markdownit;
     hljs = hljs;
-    getValueString() {
-        return JSON.stringify(this.value, null, "  ");
+    get valueHtml() {
+        return hljs.highlight("json", JSON.stringify(this.value, null, "  ")).value;
     }
     updateValue({value, isValid}: common.ValidityValue<common.ValueType>) {
         this.value = value;

@@ -10,9 +10,9 @@ export const numberEditor = {
         <label v-if="title !== undefined && title !== null && title !== ''" :class="theme.label">
             {{title}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <div v-if="!required && (value === undefined || !schema.readonly)" :class="theme.optionalCheckbox">
+                <div v-if="!required && (value === undefined || !isReadOnly)" :class="theme.optionalCheckbox">
                     <label>
-                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="readonly || schema.readonly" />
+                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
                         is undefined
                     </label>
                 </div>
@@ -27,7 +27,7 @@ export const numberEditor = {
             @change="onChange($event)"
             @keyup="onChange($event)"
             :value="value"
-            :readOnly="readonly || schema.readonly" />
+            :readOnly="isReadOnly" />
         <select v-if="useSelect"
             :class="theme.formControl"
             type="number"
@@ -55,10 +55,13 @@ export const numberEditor = {
     },
     computed: {
         useInput(this: This) {
-            return this.value !== undefined && (this.schema.enum === undefined || this.readonly || this.schema.readonly);
+            return this.value !== undefined && (this.schema.enum === undefined || this.isReadOnly);
         },
         useSelect(this: This) {
-            return this.value !== undefined && (this.schema.enum !== undefined && !this.readonly && !this.schema.readonly);
+            return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
+        },
+        isReadOnly(this: This) {
+            return this.readonly || this.schema.readonly;
         },
     },
     methods: {
@@ -88,4 +91,5 @@ export type This = {
     validate: () => void;
     readonly: boolean;
     required: boolean;
+    isReadOnly: boolean;
 };
