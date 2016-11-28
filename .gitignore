@@ -44,3 +44,4 @@ vendor.bundle.css
 demo/fonts
 demo/css/
 spec/**/*.js
+dist/
