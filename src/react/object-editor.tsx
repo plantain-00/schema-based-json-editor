@@ -45,12 +45,6 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
             }
         }
 
-        const deleteButton = this.hasDeleteButtonFunction ? (
-            <button className={this.props.theme.button} onClick={this.props.onDelete}>
-                <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
-            </button>
-        ) : null;
-
         return (
             <div className={this.props.theme.row}>
                 <h3>
@@ -62,10 +56,16 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                             theme={this.props.theme}
                             locale={this.props.locale}
                             toggleOptional={this.toggleOptional} />
-                        <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
-                            <Icon icon={this.props.icon} text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}></Icon>
-                        </button>
-                        {deleteButton}
+                        <Icon valid={true}
+                            onClick={this.collapseOrExpand}
+                            text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
+                            theme={this.props.theme}
+                            icon={this.props.icon} />
+                        <Icon valid={this.hasDeleteButtonFunction}
+                            onClick={this.props.onDelete!}
+                            text={this.props.icon.delete}
+                            theme={this.props.theme}
+                            icon={this.props.icon} />
                     </div>
                 </h3>
                 <Description theme={this.props.theme} message={this.props.schema.description} />
@@ -93,11 +93,11 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     isRequired(property: string) {
         return this.props.schema.required && this.props.schema.required.some(r => r === property);
     }
-    get hasDeleteButtonFunction() {
-        return this.props.onDelete && !this.isReadOnly;
-    }
     get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
+    }
+    get hasDeleteButtonFunction() {
+        return this.props.onDelete && !this.isReadOnly;
     }
     get titleToShow() {
         if (this.props.onDelete) {

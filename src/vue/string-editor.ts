@@ -16,15 +16,24 @@ import { hljs } from "../../typings/lib";
                     :locale="locale"
                     @toggleOptional="toggleOptional()">
                 </optional>
-                <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">
-                    <icon :icon="icon" :text="icon.delete"></icon>
-                </button>
-                <button v-if="canPreview" :class="theme.button" @click="collapseOrExpand()">
-                    <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
-                </button>
-                <button v-if="hasLockButton" :class="theme.button" @click="toggleLocked()">
-                    <icon :icon="icon" :text="locked ? icon.unlock : icon.lock"></icon>
-                </button>
+                <icon v-if="hasDeleteButtonFunction"
+                    @click="$emit('delete')"
+                    :text="icon.delete"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
+                <icon v-if="canPreview"
+                    @click="collapseOrExpand()"
+                    :text="collapsed ? icon.expand : icon.collapse"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
+                <icon v-if="hasLockButton"
+                    @click="toggleLocked()"
+                    :text="locked ? icon.unlock : icon.lock"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
             </div>
         </label>
         <textarea v-if="useTextArea"
@@ -98,7 +107,7 @@ export class StringEditor extends Vue {
         return this.hljs && this.schema.format === "code";
     }
     get canPreview() {
-        return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
+        return (!!this.value) && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
     }
     get useTextArea() {
         const isUnlockedCodeOrMarkdown = (this.schema.format === "code" || this.schema.format === "markdown") && (!this.locked);
@@ -130,6 +139,9 @@ export class StringEditor extends Vue {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
+    }
+    get hasDeleteButtonFunction() {
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get willPreviewImage() {
         return this.value && !this.collapsed && this.canPreviewImage;

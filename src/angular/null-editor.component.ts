@@ -15,9 +15,12 @@ import * as common from "../common";
                     [locale]="locale"
                     (toggleOptional)="toggleOptional()">
                 </optional>
-                <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
-                    <icon [icon]="icon" [text]="icon.delete"></icon>
-                </button>
+                <icon *ngIf="hasDeleteButtonFunction"
+                    (onClick)="onDelete.emit()"
+                    [text]="icon.delete"
+                    [theme]="theme"
+                    [icon]="icon">
+                </icon>
             </div>
         </label>
         <description [theme]="theme" [message]="schema.description"></description>
@@ -60,6 +63,9 @@ export class NullEditorComponent {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
+    }
+    get hasDeleteButtonFunction() {
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);

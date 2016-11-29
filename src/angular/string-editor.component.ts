@@ -20,15 +20,24 @@ import { hljs, dragula } from "../../typings/lib";
                     [locale]="locale"
                     (toggleOptional)="toggleOptional()">
                 </optional>
-                <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
-                    <icon [icon]="icon" [text]="icon.delete"></icon>
-                </button>
-                <button *ngIf="canPreview" [class]="theme.button" (click)="collapseOrExpand()">
-                    <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
-                </button>
-                <button *ngIf="hasLockButton" [class]="theme.button" (click)="toggleLocked()">
-                    <icon [icon]="icon" [text]="locked ? icon.unlock : icon.lock"></icon>
-                </button>
+                <icon *ngIf="hasDeleteButtonFunction"
+                    (onClick)="onDelete.emit()"
+                    [text]="icon.delete"
+                    [theme]="theme"
+                    [icon]="icon">
+                </icon>
+                <icon *ngIf="canPreview"
+                    (onClick)="collapseOrExpand()"
+                    [text]="collapsed ? icon.expand : icon.collapse"
+                    [theme]="theme"
+                    [icon]="icon">
+                </icon>
+                <icon *ngIf="hasLockButton"
+                    (onClick)="toggleLocked()"
+                    [text]="locked ? icon.unlock : icon.lock"
+                    [theme]="theme"
+                    [icon]="icon">
+                </icon>
             </div>
         </label>
         <textarea *ngIf="useTextArea"
@@ -135,7 +144,7 @@ export class StringEditorComponent {
         return this.hljs && this.schema.format === "code";
     }
     get canPreview() {
-        return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
+        return (!!this.value) && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
     }
     get getImageUrl() {
         return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
@@ -148,6 +157,9 @@ export class StringEditorComponent {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
+    }
+    get hasDeleteButtonFunction() {
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get willPreviewImage() {
         return this.value && !this.collapsed && this.canPreviewImage;

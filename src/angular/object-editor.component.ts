@@ -17,12 +17,17 @@ import { hljs, dragula } from "../../typings/lib";
                     [locale]="locale"
                     (toggleOptional)="toggleOptional()">
                 </optional>
-                <button [class]="theme.button" (click)="collapseOrExpand()">
-                    <icon [icon]="icon" [text]="collapsed ? icon.expand : icon.collapse"></icon>
-                </button>
-                <button *ngIf="hasDeleteButtonFunction" [class]="theme.button" (click)="onDelete.emit()">
-                    <icon [icon]="icon" [text]="icon.delete"></icon>
-                </button>
+                <icon (onClick)="collapseOrExpand()"
+                    [text]="collapsed ? icon.expand : icon.collapse"
+                    [theme]="theme"
+                    [icon]="icon">
+                </icon>
+                <icon *ngIf="hasDeleteButtonFunction"
+                    (onClick)="onDelete.emit()"
+                    [text]="icon.delete"
+                    [theme]="theme"
+                    [icon]="icon">
+                </icon>
             </div>
         </h3>
         <description [theme]="theme" [message]="schema.description"></description>

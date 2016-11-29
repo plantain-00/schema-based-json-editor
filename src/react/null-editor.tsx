@@ -14,12 +14,6 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
         this.props.updateValue(this.value, true);
     }
     render() {
-        const deleteButton = this.props.onDelete ? (
-            <button className={this.props.theme.button} onClick={this.props.onDelete}>
-                <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
-            </button>
-        ) : null;
-
         return (
             <div className={this.props.theme.row}>
                 <label className={this.props.theme.label}>
@@ -31,7 +25,11 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
                             theme={this.props.theme}
                             locale={this.props.locale}
                             toggleOptional={this.toggleOptional} />
-                        {deleteButton}
+                        <Icon valid={this.hasDeleteButtonFunction}
+                            onClick={this.props.onDelete!}
+                            text={this.props.icon.delete}
+                            theme={this.props.theme}
+                            icon={this.props.icon} />
                     </div>
                 </label>
                 <Description theme={this.props.theme} message={this.props.schema.description} />
@@ -45,6 +43,9 @@ export class NullEditor extends React.Component<common.Props<common.NullSchema, 
     }
     get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
+    }
+    get hasDeleteButtonFunction() {
+        return this.props.onDelete && !this.isReadOnly;
     }
     get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);

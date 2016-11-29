@@ -43,24 +43,6 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
             </select>
         ) : null;
 
-        const lockButton = this.hasLockButton ? (
-            <button className={this.props.theme.button} onClick={this.toggleLocked}>
-                <Icon icon={this.props.icon} text={this.locked ? this.props.icon.unlock : this.props.icon.lock}></Icon>
-            </button>
-        ) : null;
-
-        const deleteButton = this.props.onDelete ? (
-            <button className={this.props.theme.button} onClick={this.props.onDelete}>
-                <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
-            </button>
-        ) : null;
-
-        const previewButton = this.canPreview ? (
-            <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
-                <Icon icon={this.props.icon} text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}></Icon>
-            </button>
-        ) : null;
-
         const imagePreview = this.willPreviewImage ? <img style={common.imagePreviewStyle} src={this.getImageUrl} /> : null;
 
         const markdownPreview = this.willPreviewMarkdown ? <div dangerouslySetInnerHTML={{ __html: this.getMarkdown }}></div> : null;
@@ -78,9 +60,21 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
                             theme={this.props.theme}
                             locale={this.props.locale}
                             toggleOptional={this.toggleOptional} />
-                        {deleteButton}
-                        {previewButton}
-                        {lockButton}
+                        <Icon valid={this.hasDeleteButtonFunction}
+                            onClick={this.props.onDelete!}
+                            text={this.props.icon.delete}
+                            theme={this.props.theme}
+                            icon={this.props.icon} />
+                        <Icon valid={this.canPreview}
+                            onClick={this.collapseOrExpand}
+                            text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
+                            theme={this.props.theme}
+                            icon={this.props.icon} />
+                        <Icon valid={this.hasLockButton}
+                            onClick={this.toggleLocked}
+                            text={this.locked ? this.props.icon.unlock : this.props.icon.lock}
+                            theme={this.props.theme}
+                            icon={this.props.icon} />
                     </div>
                 </label>
                 {textarea}
@@ -96,6 +90,9 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
     }
     get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
+    }
+    get hasDeleteButtonFunction() {
+        return this.props.onDelete && !this.isReadOnly;
     }
     get useTextArea() {
         const isUnlockedCodeOrMarkdown = (this.props.schema.format === "code" || this.props.schema.format === "markdown") && (!this.locked);
@@ -126,7 +123,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         return this.props.hljs && this.props.schema.format === "code";
     }
     get canPreview() {
-        return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
+        return (!!this.value) && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
     }
     get getImageUrl() {
         return this.props.forceHttps ? common.replaceProtocal(this.value!) : this.value;

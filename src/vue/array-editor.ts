@@ -16,15 +16,24 @@ import { dragula, hljs } from "../../typings/lib";
                     :locale="locale"
                     @toggleOptional="toggleOptional()">
                 </optional>
-                <button :class="theme.button" @click="collapseOrExpand()">
-                    <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
-                </button>
-                <button v-if="hasAddButton" :class="theme.button" @click="addItem()">
-                    <icon :icon="icon" :text="icon.add"></icon>
-                </button>
-                <button v-if="hasDeleteButton && !isReadOnly" :class="theme.button" @click="$emit('delete')">
-                    <icon :icon="icon" :text="icon.delete"></icon>
-                </button>
+                <icon v-if="true"
+                    @click="collapseOrExpand()"
+                    :text="collapsed ? icon.expand : icon.collapse"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
+                <icon v-if="hasAddButton"
+                    @click="addItem()"
+                    :text="icon.add"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
+                <icon v-if="hasDeleteButtonFunction"
+                    @click="$emit('delete')"
+                    :text="icon.delete"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
             </div>
         </h3>
         <description :theme="theme" :message="schema.description" :notEmpty="true"></description>
@@ -89,6 +98,9 @@ export class ArrayEditor extends Vue {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
+    }
+    get hasDeleteButtonFunction() {
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get hasAddButton() {
         return !this.isReadOnly && this.value !== undefined;

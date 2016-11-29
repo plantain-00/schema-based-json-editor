@@ -15,9 +15,12 @@ import * as common from "../common";
                     :locale="locale"
                     @toggleOptional="toggleOptional()">
                 </optional>
-                <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">
-                    <icon :icon="icon" :text="icon.delete"></icon>
-                </button>
+                <icon v-if="hasDeleteButtonFunction"
+                    @click="$emit('delete')"
+                    :text="icon.delete"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
             </div>
         </label>
         <div v-if="value !== undefined">
@@ -66,6 +69,9 @@ export class BooleanEditor extends Vue {
 
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
+    }
+    get hasDeleteButtonFunction() {
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);

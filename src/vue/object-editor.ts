@@ -16,12 +16,18 @@ import { dragula, hljs } from "../../typings/lib";
                     :locale="locale"
                     @toggleOptional="toggleOptional()">
                 </optional>
-                <button :class="theme.button" @click="collapseOrExpand()">
-                    <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
-                </button>
-                <button v-if="hasDeleteButtonFunction" :class="theme.button" @click="$emit('delete')">
-                    <icon :icon="icon" :text="icon.delete"></icon>
-                </button>
+                <icon v-if="true"
+                    @click="collapseOrExpand()"
+                    :text="collapsed ? icon.expand : icon.collapse"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
+                <icon v-if="hasDeleteButtonFunction"
+                    @click="$emit('delete')"
+                    :text="icon.delete"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
             </div>
         </h3>
         <description :theme="theme" :message="schema.description"></description>
