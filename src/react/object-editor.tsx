@@ -2,6 +2,7 @@ import * as React from "react";
 import * as common from "../common";
 import { Editor } from "./editor";
 import { Icon } from "./icon";
+import { Optional } from "./optional";
 
 export class ObjectEditor extends React.Component<common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
     collapsed = false;
@@ -49,24 +50,17 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
             </button>
         ) : null;
 
-        const optionalCheckbox = this.hasOptionalCheckbox ? (
-            <div className={this.props.theme.optionalCheckbox}>
-                <label>
-                    <input type="checkbox"
-                        onChange={this.toggleOptional}
-                        checked={this.value === undefined}
-                        disabled={this.isReadOnly} />
-                    {this.props.locale.info.notExists}
-                </label>
-            </div>
-        ) : null;
-
         return (
             <div className={this.props.theme.row}>
                 <h3>
                     {this.titleToShow}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                        {optionalCheckbox}
+                        <Optional required={this.props.required}
+                            value={this.value}
+                            isReadOnly={this.isReadOnly}
+                            theme={this.props.theme}
+                            locale={this.props.locale}
+                            toggleOptional={this.toggleOptional} />
                         <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
                             <Icon icon={this.props.icon} text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}></Icon>
                         </button>
@@ -103,9 +97,6 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     }
     get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
-    }
-    get hasOptionalCheckbox() {
-        return !this.props.required && (this.value === undefined || !this.isReadOnly);
     }
     get titleToShow() {
         if (this.props.onDelete) {

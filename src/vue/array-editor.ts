@@ -9,12 +9,13 @@ import { dragula, hljs } from "../../typings/lib";
         <h3>
             {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyleString">
-                <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
-                    <label>
-                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
-                        {{locale.info.notExists}}
-                    </label>
-                </div>
+                <optional :required="required"
+                    :value="value"
+                    :isReadOnly="isReadOnly"
+                    :theme="theme"
+                    :locale="locale"
+                    @toggleOptional="toggleOptional()">
+                </optional>
                 <button :class="theme.button" @click="collapseOrExpand()">
                     <icon :icon="icon" :text="collapsed ? icon.expand : icon.collapse"></icon>
                 </button>
@@ -88,9 +89,6 @@ export class ArrayEditor extends Vue {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
-    }
-    get hasOptionalCheckbox() {
-        return !this.required && (this.value === undefined || !this.isReadOnly);
     }
     get hasAddButton() {
         return !this.isReadOnly && this.value !== undefined;

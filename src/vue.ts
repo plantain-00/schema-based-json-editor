@@ -12,6 +12,7 @@ import { NullEditor } from "./vue/null-editor";
 import { NumberEditor } from "./vue/number-editor";
 import { ObjectEditor } from "./vue/object-editor";
 import { StringEditor } from "./vue/string-editor";
+import { Optional } from "./vue/optional";
 
 Vue.component("array-editor", ArrayEditor);
 Vue.component("boolean-editor", BooleanEditor);
@@ -21,6 +22,7 @@ Vue.component("null-editor", NullEditor);
 Vue.component("numberEditor", NumberEditor);
 Vue.component("objectEditor", ObjectEditor);
 Vue.component("stringEditor", StringEditor);
+Vue.component("optional", Optional);
 
 @Component({
     template: `

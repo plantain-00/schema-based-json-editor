@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as common from "../common";
 import { Icon } from "./icon";
+import { Optional } from "./optional";
 
 export class StringEditor extends React.Component<common.Props<common.StringSchema, string>, {}> {
     value?: string;
@@ -49,28 +50,10 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
 
         const errorDescription = this.errorMessage ? <p className={this.props.theme.help}>{this.errorMessage}</p> : null;
 
-        const optionalCheckbox = this.hasOptionalCheckbox ? (
-            <div className={this.props.theme.optionalCheckbox}>
-                <label>
-                    <input type="checkbox"
-                        onChange={this.toggleOptional}
-                        checked={this.value === undefined}
-                        disabled={this.isReadOnly} />
-                    {this.props.locale.info.notExists}
-                </label>
-            </div>
-        ) : null;
-
         const deleteButton = this.props.onDelete ? (
             <button className={this.props.theme.button} onClick={this.props.onDelete}>
                 <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
             </button>
-        ) : null;
-
-        const titleView = this.props.title ? (
-            <label className={this.props.theme.label}>
-                {this.titleToShow}
-            </label>
         ) : null;
 
         const previewButton = this.canPreview ? (
@@ -87,13 +70,20 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
 
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
-                {titleView}
-                <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                    {optionalCheckbox}
-                    {deleteButton}
-                    {previewButton}
-                    {lockButton}
-                </div>
+                <label className={this.props.theme.label}>
+                    {this.titleToShow}
+                    <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+                        <Optional required={this.props.required}
+                            value={this.value}
+                            isReadOnly={this.isReadOnly}
+                            theme={this.props.theme}
+                            locale={this.props.locale}
+                            toggleOptional={this.toggleOptional} />
+                        {deleteButton}
+                        {previewButton}
+                        {lockButton}
+                    </div>
+                </label>
                 {textarea}
                 {input}
                 {select}
@@ -126,9 +116,6 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         return this.value !== undefined
             && (this.props.schema.enum === undefined || this.isReadOnly)
             && (this.props.schema.format === "code" || this.props.schema.format === "markdown");
-    }
-    get hasOptionalCheckbox() {
-        return !this.props.required && (this.value === undefined || !this.isReadOnly);
     }
     get canPreviewImage() {
         return common.isImageUrl(this.value);

@@ -32,11 +32,11 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 #### angular2 component demo
 
 ```js
-import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent } from "schema-based-json-editor/dist/angular";
+import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent } from "schema-based-json-editor/dist/angular";
 
 @NgModule({
     imports: [BrowserModule, FormsModule],
-    declarations: [MainComponent, JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent],
+    declarations: [MainComponent, JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent],
     bootstrap: [MainComponent],
 })
 class MainModule { }

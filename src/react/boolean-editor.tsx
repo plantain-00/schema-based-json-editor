@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as common from "../common";
 import { Icon } from "./icon";
+import { Optional } from "./optional";
 
 export class BooleanEditor extends React.Component<common.Props<common.BooleanSchema, boolean>, {}> {
     value?: boolean;
@@ -21,7 +22,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                             checked={this.value}
                             disabled={this.isReadOnly} />
                         {this.props.locale.info.true}
-                        </label>
+                    </label>
                 </div>
                 <div className={this.props.theme.radiobox}>
                     <label>
@@ -30,20 +31,8 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                             checked={!this.value}
                             disabled={this.isReadOnly} />
                         {this.props.locale.info.false}
-                        </label>
+                    </label>
                 </div>
-            </div>
-        ) : null;
-
-        const optionalCheckbox = this.hasOptionalCheckbox ? (
-            <div className={this.props.theme.optionalCheckbox}>
-                <label>
-                    <input type="checkbox"
-                        onChange={this.toggleOptional}
-                        checked={this.value === undefined}
-                        disabled={this.isReadOnly} />
-                    {this.props.locale.info.notExists}
-                </label>
             </div>
         ) : null;
 
@@ -53,19 +42,20 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
             </button>
         ) : null;
 
-        const titleView = this.props.title ? (
-            <label className={this.props.theme.label}>
-                {this.titleToShow}
-            </label>
-        ) : null;
-
         return (
             <div className={this.props.theme.row}>
-                {titleView}
-                <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                    {optionalCheckbox}
-                    {deleteButton}
-                </div>
+                <label className={this.props.theme.label}>
+                    {this.titleToShow}
+                    <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+                        <Optional required={this.props.required}
+                            value={this.value}
+                            isReadOnly={this.isReadOnly}
+                            theme={this.props.theme}
+                            locale={this.props.locale}
+                            toggleOptional={this.toggleOptional} />
+                        {deleteButton}
+                    </div>
+                </label>
                 {control}
                 <p className={this.props.theme.help}>{this.props.schema.description}</p>
             </div>
@@ -83,9 +73,6 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
     }
     get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
-    }
-    get hasOptionalCheckbox() {
-        return !this.props.required && (this.value === undefined || !this.isReadOnly);
     }
     get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);

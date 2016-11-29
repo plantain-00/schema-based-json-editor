@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import * as common from "../common";
 import { Editor } from "./editor";
 import { Icon } from "./icon";
+import { Optional } from "./optional";
 import { dragula } from "../../typings/lib";
 
 export class ArrayEditor extends React.Component<common.Props<common.ArraySchema, common.ValueType[]>, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
@@ -70,18 +71,6 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             </button>
         ) : null;
 
-        const optionalCheckbox = this.hasOptionalCheckbox ? (
-            <div className={this.props.theme.optionalCheckbox}>
-                <label>
-                    <input type="checkbox"
-                        onChange={this.toggleOptional}
-                        checked={this.value === undefined}
-                        disabled={this.isReadOnly} />
-                    {this.props.locale.info.notExists}
-                </label>
-            </div>
-        ) : null;
-
         const errorDescription = this.errorMessage ? <p className={this.props.theme.help}>{this.errorMessage}</p> : null;
 
         return (
@@ -89,7 +78,12 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                 <h3>
                     {this.titleToShow}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                        {optionalCheckbox}
+                        <Optional required={this.props.required}
+                            value={this.value}
+                            isReadOnly={this.isReadOnly}
+                            theme={this.props.theme}
+                            locale={this.props.locale}
+                            toggleOptional={this.toggleOptional} />
                         <button className={this.props.theme.button} onClick={this.collapseOrExpand}>
                             <Icon icon={this.props.icon} text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}></Icon>
                         </button>
@@ -139,9 +133,6 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
     }
     get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
-    }
-    get hasOptionalCheckbox() {
-        return !this.props.required && (this.value === undefined || !this.isReadOnly);
     }
     get hasDeleteButton() {
         return this.props.onDelete && !this.isReadOnly;

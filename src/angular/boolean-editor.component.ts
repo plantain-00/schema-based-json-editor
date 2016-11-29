@@ -5,15 +5,16 @@ import * as common from "../common";
     selector: "boolean-editor",
     template: `
     <div [class]="theme.row">
-        <label *ngIf="titleToShow" [class]="theme.label">
+        <label [class]="theme.label">
             {{titleToShow}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
-                    <label>
-                        <input type="checkbox" (change)="toggleOptional()" [checked]="value === undefined" [disabled]="isReadOnly" />
-                        {{locale.info.notExists}}
-                    </label>
-                </div>
+                <optional [required]="required"
+                    [value]="value"
+                    [isReadOnly]="isReadOnly"
+                    [theme]="theme"
+                    [locale]="locale"
+                    (toggleOptional)="toggleOptional()">
+                </optional>
                 <button *ngIf="hasDeleteButton" [class]="theme.button" (click)="onDelete.emit()">
                     <icon [icon]="icon" [text]="icon.delete"></icon>
                 </button>
@@ -83,9 +84,6 @@ export class BooleanEditorComponent {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
-    }
-    get hasOptionalCheckbox() {
-        return !this.required && (this.value === undefined || !this.isReadOnly);
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);

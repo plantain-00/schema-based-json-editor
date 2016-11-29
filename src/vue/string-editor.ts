@@ -6,15 +6,16 @@ import { hljs } from "../../typings/lib";
 @Component({
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
-        <label v-if="titleToShow" :class="theme.label">
+        <label :class="theme.label">
             {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
-                    <label>
-                        <input type="checkbox" @change="toggleOptional()" :checked="value === undefined" :disabled="isReadOnly" />
-                        {{locale.info.notExists}}
-                    </label>
-                </div>
+                <optional :required="required"
+                    :value="value"
+                    :isReadOnly="isReadOnly"
+                    :theme="theme"
+                    :locale="locale"
+                    @toggleOptional="toggleOptional()">
+                </optional>
                 <button v-if="hasDeleteButton" :class="theme.button" @click="$emit('delete')">
                     <icon :icon="icon" :text="icon.delete"></icon>
                 </button>
@@ -129,9 +130,6 @@ export class StringEditor extends Vue {
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
-    }
-    get hasOptionalCheckbox() {
-        return !this.required && (this.value === undefined || !this.isReadOnly);
     }
     get willPreviewImage() {
         return this.value && !this.collapsed && this.canPreviewImage;

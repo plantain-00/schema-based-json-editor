@@ -85,3 +85,6 @@ export { StringEditorComponent };
 
 import { IconComponent } from "./angular/icon.component";
 export { IconComponent };
+
+import { OptionalComponent } from "./angular/optional.component";
+export { OptionalComponent };
