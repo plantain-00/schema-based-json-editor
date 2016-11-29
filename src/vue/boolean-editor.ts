@@ -1,10 +1,8 @@
+import * as Vue from "vue";
+import Component from "vue-class-component";
 import * as common from "../common";
 
-/* tslint:disable:only-arrow-functions */
-/* tslint:disable:no-unused-new */
-/* tslint:disable:object-literal-shorthand */
-
-export const booleanEditor = {
+@Component({
     template: `
     <div :class="theme.row">
         <label v-if="titleToShow" :class="theme.label">
@@ -45,44 +43,42 @@ export const booleanEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function (this: This) {
-        const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
-        this.$emit("update-value", { value, isValid: true });
-        return {
-            value,
-            buttonGroupStyle: common.buttonGroupStyleString,
-        };
-    },
-    computed: {
-        isReadOnly(this: This) {
-            return this.readonly || this.schema.readonly;
-        },
-        hasOptionalCheckbox(this: This) {
-            return !this.required && (this.value === undefined || !this.isReadOnly);
-        },
-        titleToShow(this: This) {
-            return common.getTitle(this.title, this.schema.title);
-        },
-    },
-    methods: {
-        onChange(this: This, e: { target: { checked: boolean } }) {
-            this.value = !this.value;
-            this.$emit("update-value", { value: this.value, isValid: true });
-        },
-        toggleOptional(this: This) {
-            this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as boolean | undefined;
-            this.$emit("update-value", { value: this.value, isValid: true });
-        },
-    },
-};
-
-export type This = {
-    $emit: (event: string, args: common.ValidityValue<boolean | undefined>) => void;
-    required: boolean;
-    schema: common.BooleanSchema;
-    initialValue: boolean;
-    value?: boolean;
-    readonly: boolean;
-    isReadOnly: boolean;
+})
+export class BooleanEditor extends Vue {
+    schema: common.ArraySchema;
+    initialValue?: boolean;
     title: string;
-};
+    theme: common.Theme;
+    icon: common.Icon;
+    locale: common.Locale;
+    readonly: boolean;
+    required: boolean;
+    hasDeleteButton: boolean;
+
+    value?: boolean = false;
+    buttonGroupStyle = common.buttonGroupStyleString;
+
+    beforeMount() {
+        this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
+        this.$emit("update-value", { value: this.value, isValid: true });
+    }
+
+    get isReadOnly() {
+        return this.readonly || this.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return !this.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get titleToShow() {
+        return common.getTitle(this.title, this.schema.title);
+    }
+
+    onChange(e: { target: { checked: boolean } }) {
+        this.value = !this.value;
+        this.$emit("update-value", { value: this.value, isValid: true });
+    }
+    toggleOptional() {
+        this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as boolean | undefined;
+        this.$emit("update-value", { value: this.value, isValid: true });
+    }
+}

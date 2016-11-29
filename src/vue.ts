@@ -1,31 +1,28 @@
 import * as Vue from "vue";
+import Component from "vue-class-component";
 import * as common from "./common";
 
 import { hljs } from "../typings/lib";
 
-import { arrayEditor } from "./vue/array-editor";
-import { booleanEditor } from "./vue/boolean-editor";
-import { editor } from "./vue/editor";
-import { icon } from "./vue/icon";
-import { nullEditor } from "./vue/null-editor";
-import { numberEditor } from "./vue/number-editor";
-import { objectEditor } from "./vue/object-editor";
-import { stringEditor } from "./vue/string-editor";
+import { ArrayEditor } from "./vue/array-editor";
+import { BooleanEditor } from "./vue/boolean-editor";
+import { Editor } from "./vue/editor";
+import { Icon } from "./vue/icon";
+import { NullEditor } from "./vue/null-editor";
+import { NumberEditor } from "./vue/number-editor";
+import { ObjectEditor } from "./vue/object-editor";
+import { StringEditor } from "./vue/string-editor";
 
-/* tslint:disable:only-arrow-functions */
-/* tslint:disable:no-unused-new */
-/* tslint:disable:object-literal-shorthand */
+Vue.component("array-editor", ArrayEditor);
+Vue.component("boolean-editor", BooleanEditor);
+Vue.component("editor", Editor);
+Vue.component("icon", Icon);
+Vue.component("null-editor", NullEditor);
+Vue.component("numberEditor", NumberEditor);
+Vue.component("objectEditor", ObjectEditor);
+Vue.component("stringEditor", StringEditor);
 
-Vue.component("array-editor", arrayEditor);
-Vue.component("boolean-editor", booleanEditor);
-Vue.component("editor", editor);
-Vue.component("icon", icon);
-Vue.component("null-editor", nullEditor);
-Vue.component("numberEditor", numberEditor);
-Vue.component("objectEditor", objectEditor);
-Vue.component("stringEditor", stringEditor);
-
-Vue.component("json-editor", {
+@Component({
     template: `
     <div>
         <editor :schema="schema"
@@ -44,28 +41,29 @@ Vue.component("json-editor", {
     </div>
     `,
     props: ["schema", "initialValue", "theme", "icon", "locale", "readonly", "dragula", "markdownit", "hljs", "forceHttps"],
-    data: function (this: This) {
-        const localeObject = common.getLocale(this.locale);
-        return {
-            themeObject: common.getTheme(this.theme),
-            localeObject,
-            iconObject: common.getIcon(this.icon, localeObject),
-            md: common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps),
-        };
-    },
-    methods: {
-        updateValueFunction: common.debounce(function (this: This, validityValue: common.ValidityValue<common.ValueType>) {
-            this.$emit("update-value", validityValue);
-        }, 100),
-    },
-});
-
-export type This = {
-    $emit: (event: string, args: common.ValidityValue<common.ValueType>) => void;
-    locale: common.Locale;
-    theme: common.Theme;
-    icon: common.Icon;
+})
+class JSONEditor extends Vue {
+    theme: string;
+    locale: string;
+    icon: string;
     markdownit: any;
     hljs: typeof hljs;
     forceHttps: boolean;
-};
+
+    themeObject = common.getTheme(this.theme);
+    localeObject: common.Locale;
+    iconObject: common.Icon;
+    md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps);
+
+    updateValueFunction = common.debounce((validityValue: common.ValidityValue<common.ValueType>) => {
+        this.$emit("update-value", validityValue);
+    }, 100);
+
+    constructor() {
+        super();
+        this.localeObject = common.getLocale(this.locale);
+        this.iconObject = common.getIcon(this.icon, this.localeObject);
+    }
+}
+
+Vue.component("json-editor", JSONEditor);

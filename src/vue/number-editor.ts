@@ -1,10 +1,8 @@
+import * as Vue from "vue";
+import Component from "vue-class-component";
 import * as common from "../common";
 
-/* tslint:disable:only-arrow-functions */
-/* tslint:disable:no-unused-new */
-/* tslint:disable:object-literal-shorthand */
-
-export const numberEditor = {
+@Component({
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
         <label v-if="titleToShow" :class="theme.label">
@@ -44,59 +42,54 @@ export const numberEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
-    data: function (this: This) {
-        const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
-        this.$emit("update-value", { value, isValid: !this.errorMessage });
-        return {
-            value,
-            errorMessage: undefined,
-            buttonGroupStyle: common.buttonGroupStyleString,
-        };
-    },
-    computed: {
-        useInput(this: This) {
-            return this.value !== undefined && (this.schema.enum === undefined || this.isReadOnly);
-        },
-        useSelect(this: This) {
-            return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
-        },
-        isReadOnly(this: This) {
-            return this.readonly || this.schema.readonly;
-        },
-        hasOptionalCheckbox(this: This) {
-            return !this.required && (this.value === undefined || !this.isReadOnly);
-        },
-        titleToShow(this: This) {
-            return common.getTitle(this.title, this.schema.title);
-        },
-    },
-    methods: {
-        onChange(this: This, e: { target: { value: string } }) {
-            this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
-            this.validate();
-            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
-        },
-        validate(this: This) {
-            this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
-        },
-        toggleOptional(this: This) {
-            this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
-            this.validate();
-            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
-        },
-    },
-};
-
-export type This = {
-    $emit: (event: string, args: common.ValidityValue<number | undefined>) => void;
-    value?: number;
-    errorMessage?: string;
+})
+export class NumberEditor extends Vue {
     schema: common.NumberSchema;
-    initialValue: number;
+    initialValue?: number;
+    title: string;
+    theme: common.Theme;
+    icon: common.Icon;
     locale: common.Locale;
-    validate: () => void;
     readonly: boolean;
     required: boolean;
-    isReadOnly: boolean;
-    title: string;
-};
+    hasDeleteButton: boolean;
+
+    value?: number = 0;
+    errorMessage?: string = "";
+    buttonGroupStyle = common.buttonGroupStyleString;
+
+    beforeMount() {
+        this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
+        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }
+
+    get useInput() {
+        return this.value !== undefined && (this.schema.enum === undefined || this.isReadOnly);
+    }
+    get useSelect() {
+        return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
+    }
+    get isReadOnly() {
+        return this.readonly || this.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return !this.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get titleToShow() {
+        return common.getTitle(this.title, this.schema.title);
+    }
+
+    onChange(e: { target: { value: string } }) {
+        this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
+        this.validate();
+        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }
+    validate() {
+        this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
+    }
+    toggleOptional() {
+        this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
+        this.validate();
+        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }
+}

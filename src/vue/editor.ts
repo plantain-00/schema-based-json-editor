@@ -1,8 +1,7 @@
-/* tslint:disable:only-arrow-functions */
-/* tslint:disable:no-unused-new */
-/* tslint:disable:object-literal-shorthand */
+import * as Vue from "vue";
+import Component from "vue-class-component";
 
-export const editor = {
+@Component({
     template: `
     <div>
         <object-editor v-if="schema.type === 'object'"
@@ -98,4 +97,7 @@ export const editor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
-};
+})
+export class Editor extends Vue {
+
+}

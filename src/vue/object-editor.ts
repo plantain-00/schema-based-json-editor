@@ -1,10 +1,9 @@
+import * as Vue from "vue";
+import Component from "vue-class-component";
 import * as common from "../common";
+import { dragula, hljs } from "../../typings/lib";
 
-/* tslint:disable:only-arrow-functions */
-/* tslint:disable:no-unused-new */
-/* tslint:disable:object-literal-shorthand */
-
-export const objectEditor = {
+@Component({
     template: `
     <div :class="theme.row">
         <h3>
@@ -46,69 +45,68 @@ export const objectEditor = {
     </div >
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
-    data: function (this: This) {
-        const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
-        if (!this.collapsed && value !== undefined) {
+})
+export class ObjectEditor extends Vue {
+    schema: common.ObjectSchema;
+    initialValue?: { [name: string]: common.ValueType };
+    title: string;
+    theme: common.Theme;
+    icon: common.Icon;
+    locale: common.Locale;
+    readonly: boolean;
+    required: boolean;
+    hasDeleteButton: boolean;
+    dragula?: typeof dragula;
+    md?: any;
+    hljs?: typeof hljs;
+    forceHttps?: boolean;
+
+    collapsed = false;
+    value?: { [name: string]: common.ValueType } = {};
+    buttonGroupStyle = common.buttonGroupStyleString;
+    invalidProperties: string[] = [];
+
+    beforeMount() {
+        this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
+        if (!this.collapsed && this.value !== undefined) {
             for (const property in this.schema.properties) {
                 const schema = this.schema.properties[property];
                 const required = this.schema.required && this.schema.required.some((r: any) => r === property);
-                value[property] = common.getDefaultValue(required, schema, value[property]) as { [name: string]: common.ValueType };
+                this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
             }
         }
-        this.$emit("update-value", { value, isValid: true });
-        return {
-            collapsed: false,
-            value,
-            buttonGroupStyle: common.buttonGroupStyleString,
-            invalidProperties: [],
-        };
-    },
-    computed: {
-        isReadOnly(this: This) {
-            return this.readonly || this.schema.readonly;
-        },
-        hasDeleteButtonFunction(this: This) {
-            return this.hasDeleteButton && !this.isReadOnly;
-        },
-        hasOptionalCheckbox(this: This) {
-            return !this.required && (this.value === undefined || !this.isReadOnly);
-        },
-        titleToShow(this: This) {
-            if (this.hasDeleteButton) {
-                return common.getTitle(common.findTitle(this.value), this.title, this.schema.title);
-            }
-            return common.getTitle(this.title, this.schema.title);
-        },
-    },
-    methods: {
-        isRequired(this: This, property: string) {
-            return this.schema.required && this.schema.required.some((r: any) => r === property);
-        },
-        collapseOrExpand(this: This) {
-            this.collapsed = !this.collapsed;
-        },
-        toggleOptional(this: This) {
-            this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as { [name: string]: common.ValueType } | undefined;
-            this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
-        },
-        onChange(this: This, property: string, {value, isValid}: common.ValidityValue<common.ValueType>) {
-            this.value![property] = value;
-            common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
-            this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
-        },
-    },
-};
+        this.$emit("update-value", { value: this.value, isValid: true });
+    }
 
-export type This = {
-    $emit: (event: string, args: common.ValidityValue<{ [name: string]: common.ValueType } | undefined>) => void;
-    value?: { [name: string]: common.ValueType };
-    collapsed: boolean;
-    schema: common.ObjectSchema;
-    initialValue: any;
-    required: boolean;
-    invalidProperties: string[];
-    readonly: boolean;
-    isReadOnly: boolean;
-    hasDeleteButton: boolean;
-    title: string;
-};
+    get isReadOnly() {
+        return this.readonly || this.schema.readonly;
+    }
+    get hasDeleteButtonFunction() {
+        return this.hasDeleteButton && !this.isReadOnly;
+    }
+    get hasOptionalCheckbox() {
+        return !this.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get titleToShow() {
+        if (this.hasDeleteButton) {
+            return common.getTitle(common.findTitle(this.value), this.title, this.schema.title);
+        }
+        return common.getTitle(this.title, this.schema.title);
+    }
+
+    isRequired(property: string) {
+        return this.schema.required && this.schema.required.some((r: any) => r === property);
+    }
+    collapseOrExpand() {
+        this.collapsed = !this.collapsed;
+    }
+    toggleOptional() {
+        this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as { [name: string]: common.ValueType } | undefined;
+        this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
+    }
+    onChange(property: string, {value, isValid}: common.ValidityValue<common.ValueType>) {
+        this.value![property] = value;
+        common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
+        this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
+    }
+}

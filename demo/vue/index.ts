@@ -14,11 +14,9 @@ import * as hljs from "highlight.js";
 /* tslint:disable:object-literal-shorthand */
 
 type This = {
-    schema: common.Schema;
-    value: any;
     color: string;
     valueHtml: string;
-};
+} & Vue;
 
 new Vue({
     el: "#container",

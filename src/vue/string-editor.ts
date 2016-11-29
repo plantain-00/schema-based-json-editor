@@ -1,11 +1,9 @@
+import * as Vue from "vue";
+import Component from "vue-class-component";
 import * as common from "../common";
 import { hljs } from "../../typings/lib";
 
-/* tslint:disable:only-arrow-functions */
-/* tslint:disable:no-unused-new */
-/* tslint:disable:object-literal-shorthand */
-
-export const stringEditor = {
+@Component({
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
         <label v-if="titleToShow" :class="theme.label">
@@ -61,122 +59,110 @@ export const stringEditor = {
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
-    data: function(this: This) {
-        const value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
-        this.$emit("update-value", { value, isValid: !this.errorMessage });
-        return {
-            value,
-            errorMessage: undefined,
-            buttonGroupStyle: common.buttonGroupStyleString,
-            collapsed: false,
-            imagePreviewStyle: common.imagePreviewStyleString,
-            locked: true,
-        };
-    },
-    beforeMount(this: This) {
-        this.validate();
-    },
-    computed: {
-        canPreviewImage(this: This) {
-            return common.isImageUrl(this.value);
-        },
-        canPreviewMarkdown(this: This) {
-            return this.md && this.schema.format === "markdown";
-        },
-        canPreviewCode(this: This) {
-            return this.hljs && this.schema.format === "code";
-        },
-        canPreview(this: This) {
-            return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
-        },
-        useTextArea(this: This) {
-            const isUnlockedCodeOrMarkdown = (this.schema.format === "code" || this.schema.format === "markdown") && (!this.locked);
-            return this.value !== undefined
-                && (this.schema.enum === undefined || this.isReadOnly)
-                && (this.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
-        },
-        useInput(this: This) {
-            return this.value !== undefined
-                && (this.schema.enum === undefined || this.isReadOnly)
-                && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
-        },
-        useSelect(this: This) {
-            return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly;
-        },
-        hasLockButton(this: This) {
-            return this.value !== undefined
-                && (this.schema.enum === undefined || this.isReadOnly)
-                && (this.schema.format === "code" || this.schema.format === "markdown");
-        },
-        getImageUrl(this: This) {
-            return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
-        },
-        getMarkdown(this: This) {
-            return this.md.render(this.value);
-        },
-        getCode(this: This) {
-            return this.hljs!.highlightAuto(this.value!).value;
-        },
-        isReadOnly(this: This) {
-            return this.readonly || this.schema.readonly;
-        },
-        hasOptionalCheckbox(this: This) {
-            return !this.required && (this.value === undefined || !this.isReadOnly);
-        },
-        willPreviewImage(this: This) {
-            return this.value && !this.collapsed && this.canPreviewImage;
-        },
-        willPreviewMarkdown(this: This) {
-            return this.value && !this.collapsed && this.canPreviewMarkdown;
-        },
-        willPreviewCode(this: This) {
-            return this.value && !this.collapsed && this.canPreviewCode;
-        },
-        titleToShow(this: This) {
-            return common.getTitle(this.title, this.schema.title);
-        },
-    },
-    methods: {
-        onChange(this: This, e: { target: { value: string } }) {
-            this.value = e.target.value;
-            this.validate();
-            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
-        },
-        validate(this: This) {
-            this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
-        },
-        toggleOptional(this: This) {
-            this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;
-            this.validate();
-            this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
-        },
-        collapseOrExpand(this: This) {
-            this.collapsed = !this.collapsed;
-        },
-        toggleLocked(this: This) {
-            this.locked = !this.locked;
-        },
-    },
-};
-
-export type This = {
-    $emit: (event: string, args: common.ValidityValue<common.ValueType | undefined>) => void;
-    validate: () => void;
-    value?: string;
-    errorMessage?: string;
+})
+export class StringEditor extends Vue {
     schema: common.StringSchema;
-    initialValue: string;
+    initialValue: string | undefined;
+    title: string;
+    theme: common.Theme;
+    icon: common.Icon;
     locale: common.Locale;
     readonly: boolean;
     required: boolean;
-    collapsed: boolean;
-    md: any;
-    hljs: typeof hljs;
-    forceHttps: boolean;
-    canPreviewImage: boolean;
-    canPreviewMarkdown: boolean;
-    canPreviewCode: boolean;
-    isReadOnly: boolean;
-    locked: boolean;
-    title: string;
-};
+    hasDeleteButton: boolean;
+    md?: any;
+    hljs?: typeof hljs;
+    forceHttps?: boolean;
+
+    value?: string = "";
+    errorMessage?: string = "";
+    buttonGroupStyle = common.buttonGroupStyleString;
+    collapsed = false;
+    imagePreviewStyle = common.imagePreviewStyleString;
+    locked = true;
+
+    beforeMount() {
+        this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
+        this.validate();
+        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }
+
+    get canPreviewImage() {
+        return common.isImageUrl(this.value);
+    }
+    get canPreviewMarkdown() {
+        return this.md && this.schema.format === "markdown";
+    }
+    get canPreviewCode() {
+        return this.hljs && this.schema.format === "code";
+    }
+    get canPreview() {
+        return this.value && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
+    }
+    get useTextArea() {
+        const isUnlockedCodeOrMarkdown = (this.schema.format === "code" || this.schema.format === "markdown") && (!this.locked);
+        return this.value !== undefined
+            && (this.schema.enum === undefined || this.isReadOnly)
+            && (this.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
+    }
+    get useInput() {
+        return this.value !== undefined
+            && (this.schema.enum === undefined || this.isReadOnly)
+            && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
+    }
+    get useSelect() {
+        return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly;
+    }
+    get hasLockButton() {
+        return this.value !== undefined
+            && (this.schema.enum === undefined || this.isReadOnly)
+            && (this.schema.format === "code" || this.schema.format === "markdown");
+    }
+    get getImageUrl() {
+        return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
+    }
+    get getMarkdown() {
+        return this.md.render(this.value);
+    }
+    get getCode() {
+        return this.hljs!.highlightAuto(this.value!).value;
+    }
+    get isReadOnly() {
+        return this.readonly || this.schema.readonly;
+    }
+    get hasOptionalCheckbox() {
+        return !this.required && (this.value === undefined || !this.isReadOnly);
+    }
+    get willPreviewImage() {
+        return this.value && !this.collapsed && this.canPreviewImage;
+    }
+    get willPreviewMarkdown() {
+        return this.value && !this.collapsed && this.canPreviewMarkdown;
+    }
+    get willPreviewCode() {
+        return this.value && !this.collapsed && this.canPreviewCode;
+    }
+    get titleToShow() {
+        return common.getTitle(this.title, this.schema.title);
+    }
+
+    onChange(e: { target: { value: string } }) {
+        this.value = e.target.value;
+        this.validate();
+        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }
+    validate() {
+        this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
+    }
+    toggleOptional() {
+        this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;
+        this.validate();
+        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }
+    collapseOrExpand() {
+        this.collapsed = !this.collapsed;
+    }
+    toggleLocked() {
+        this.locked = !this.locked;
+    }
+}
