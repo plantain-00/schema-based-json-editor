@@ -24,7 +24,7 @@ import { dragula, hljs } from "../../typings/lib";
                 </button>
             </div>
         </h3>
-        <p :class="theme.help">{{schema.description}}</p>
+        <description :theme="theme" :message="schema.description"></description>
         <div v-if="!collapsed && value !== undefined" :class="theme.rowContainer">
             <editor v-for="(propertySchema, property, i) in schema.properties"
                 :key="i"

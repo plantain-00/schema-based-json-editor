@@ -38,8 +38,8 @@ import * as common from "../common";
                 {{e}}
             </option>
         </select>
-        <p :class="theme.help">{{schema.description}}</p>
-        <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
+        <description :theme="theme" :message="schema.description"></description>
+        <description :theme="theme" :message="errorMessage"></description>
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],

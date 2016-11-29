@@ -2,6 +2,7 @@ import * as React from "react";
 import * as common from "../common";
 import { Icon } from "./icon";
 import { Optional } from "./optional";
+import { Description } from "./description";
 
 export class BooleanEditor extends React.Component<common.Props<common.BooleanSchema, boolean>, {}> {
     value?: boolean;
@@ -57,7 +58,7 @@ export class BooleanEditor extends React.Component<common.Props<common.BooleanSc
                     </div>
                 </label>
                 {control}
-                <p className={this.props.theme.help}>{this.props.schema.description}</p>
+                <Description theme={this.props.theme} message={this.props.schema.description} />
             </div>
         );
     }

@@ -27,7 +27,7 @@ import { dragula, hljs } from "../../typings/lib";
                 </button>
             </div>
         </h3>
-        <p :class="theme.help">{{schema.description}}</p>
+        <description :theme="theme" :message="schema.description" :notEmpty="true"></description>
         <div :class="theme.rowContainer">
             <div v-for="(item, i) in getValue" :key="(1 + i) * renderSwitch" :data-index="i" :class="theme.rowContainer">
                 <editor :schema="schema.items"
@@ -48,7 +48,7 @@ import { dragula, hljs } from "../../typings/lib";
                 </editor>
             </div>
         </div>
-        <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
+        <description :theme="theme" :message="errorMessage"></description>
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],

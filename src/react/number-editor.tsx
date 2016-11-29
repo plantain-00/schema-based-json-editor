@@ -2,6 +2,7 @@ import * as React from "react";
 import * as common from "../common";
 import { Icon } from "./icon";
 import {Optional} from "./optional";
+import { Description } from "./description";
 
 export class NumberEditor extends React.Component<common.Props<common.NumberSchema, number>, {}> {
     value?: number;
@@ -32,8 +33,6 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
             </select>
         ) : null;
 
-        const errorDescription = this.errorMessage ? <p className={this.props.theme.help}>{this.errorMessage}</p> : null;
-
         const deleteButton = this.props.onDelete ? (
             <button className={this.props.theme.button} onClick={this.props.onDelete}>
                 <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
@@ -56,8 +55,8 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
                 </label>
                 {input}
                 {select}
-                <p className={this.props.theme.help}>{this.props.schema.description}</p>
-                {errorDescription}
+                <Description theme={this.props.theme} message={this.props.schema.description} />
+                <Description theme={this.props.theme} message={this.errorMessage} />
             </div>
         );
     }

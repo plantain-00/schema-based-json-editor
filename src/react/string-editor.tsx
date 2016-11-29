@@ -2,6 +2,7 @@ import * as React from "react";
 import * as common from "../common";
 import { Icon } from "./icon";
 import { Optional } from "./optional";
+import { Description } from "./description";
 
 export class StringEditor extends React.Component<common.Props<common.StringSchema, string>, {}> {
     value?: string;
@@ -48,8 +49,6 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
             </button>
         ) : null;
 
-        const errorDescription = this.errorMessage ? <p className={this.props.theme.help}>{this.errorMessage}</p> : null;
-
         const deleteButton = this.props.onDelete ? (
             <button className={this.props.theme.button} onClick={this.props.onDelete}>
                 <Icon icon={this.props.icon} text={this.props.icon.delete}></Icon>
@@ -90,8 +89,8 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
                 {imagePreview}
                 {markdownPreview}
                 {codePreview}
-                <p className={this.props.theme.help}>{this.props.schema.description}</p>
-                {errorDescription}
+                <Description theme={this.props.theme} message={this.props.schema.description} />
+                <Description theme={this.props.theme} message={this.errorMessage} />
             </div>
         );
     }

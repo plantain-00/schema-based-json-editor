@@ -25,7 +25,7 @@ import { hljs, dragula } from "../../typings/lib";
                 </button>
             </div>
         </h3>
-        <p [class]="theme.help">{{schema.description}}</p>
+        <description [theme]="theme" [message]="schema.description"></description>
         <div *ngIf="!collapsed && value !== undefined" [class]="theme.rowContainer">
             <editor *ngFor="let property of properties; trackBy: trackByFunction"
                 [schema]="property.value"

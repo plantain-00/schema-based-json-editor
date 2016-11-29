@@ -4,6 +4,7 @@ import * as common from "../common";
 import { Editor } from "./editor";
 import { Icon } from "./icon";
 import { Optional } from "./optional";
+import { Description } from "./description";
 import { dragula } from "../../typings/lib";
 
 export class ArrayEditor extends React.Component<common.Props<common.ArraySchema, common.ValueType[]>, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
@@ -71,8 +72,6 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
             </button>
         ) : null;
 
-        const errorDescription = this.errorMessage ? <p className={this.props.theme.help}>{this.errorMessage}</p> : null;
-
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <h3>
@@ -91,11 +90,11 @@ export class ArrayEditor extends React.Component<common.Props<common.ArraySchema
                         {deleteButton}
                     </div>
                 </h3>
-                <p className={this.props.theme.help}>{this.props.schema.description}</p>
+                <Description theme={this.props.theme} message={this.props.schema.description} notEmpty={true} />
                 <div className={this.props.theme.rowContainer}>
                     {childrenElement}
                 </div>
-                {errorDescription}
+                <Description theme={this.props.theme} message={this.errorMessage} />
             </div>
         );
     }

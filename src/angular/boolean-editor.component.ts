@@ -40,7 +40,7 @@ import * as common from "../common";
                 </label>
             </div>
         </div>
-        <p [class]="theme.help">{{schema.description}}</p>
+        <description [theme]="theme" [message]="schema.description"></description>
     </div>
     `,
 })

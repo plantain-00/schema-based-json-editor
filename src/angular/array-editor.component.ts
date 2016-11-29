@@ -27,7 +27,7 @@ import { hljs, dragula } from "../../typings/lib";
                 </button>
             </div>
         </h3>
-        <p [class]="theme.help">{{schema.description}}</p>
+       <description [theme]="theme" [message]="schema.description" [notEmpty]="true"></description>
         <div #drakContainer [class]="theme.rowContainer">
             <div *ngFor="let item of getValue; let i = index; trackBy:trackByFunction" [attr.data-index]="i" [class]="theme.rowContainer">
                 <editor [schema]="schema.items"
@@ -48,7 +48,7 @@ import { hljs, dragula } from "../../typings/lib";
                 </editor>
             </div>
         </div>
-        <p *ngIf="errorMessage" [class]="theme.help">{{errorMessage}}</p>
+        <description [theme]="theme" [message]="errorMessage"></description>
     </div>
     `,
 })

@@ -3,6 +3,7 @@ import * as common from "../common";
 import { Editor } from "./editor";
 import { Icon } from "./icon";
 import { Optional } from "./optional";
+import { Description } from "./description";
 
 export class ObjectEditor extends React.Component<common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
     collapsed = false;
@@ -67,7 +68,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                         {deleteButton}
                     </div>
                 </h3>
-                <p className={this.props.theme.help}>{this.props.schema.description}</p>
+                <Description theme={this.props.theme} message={this.props.schema.description} />
                 <div className={this.props.theme.rowContainer}>
                     {childrenElement}
                 </div>

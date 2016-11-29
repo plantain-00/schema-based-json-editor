@@ -55,8 +55,8 @@ import { hljs } from "../../typings/lib";
             :src="getImageUrl" />
         <div v-if="willPreviewMarkdown" v-html="getMarkdown"></div>
         <pre v-if="willPreviewCode"><code v-html="getCode"></code></pre>
-        <p :class="theme.help">{{schema.description}}</p>
-        <p v-if="errorMessage" :class="theme.help">{{errorMessage}}</p>
+        <description :theme="theme" :message="schema.description"></description>
+        <description :theme="theme" :message="errorMessage"></description>
     </div>
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],

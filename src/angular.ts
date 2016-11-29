@@ -88,3 +88,6 @@ export { IconComponent };
 
 import { OptionalComponent } from "./angular/optional.component";
 export { OptionalComponent };
+
+import { DescriptionComponent } from "./angular/description.component";
+export { DescriptionComponent };

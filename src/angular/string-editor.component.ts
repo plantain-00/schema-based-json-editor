@@ -59,8 +59,8 @@ import { hljs, dragula } from "../../typings/lib";
         <div *ngIf="willPreviewMarkdown" [innerHTML]="getMarkdown">
         </div>
         <pre *ngIf="willPreviewCode"><code [innerHTML]="getCode"></code></pre>
-        <p [class]="theme.help">{{schema.description}}</p>
-        <p *ngIf="errorMessage" [class]="theme.help">{{errorMessage}}</p>
+        <description [theme]="theme" [message]="schema.description"></description>
+        <description [theme]="theme" [message]="errorMessage"></description>
     </div>
     `,
 })

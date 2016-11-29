@@ -20,7 +20,7 @@ import * as common from "../common";
                 </button>
             </div>
         </label>
-        <p [class]="theme.help">{{schema.description}}</p>
+        <description [theme]="theme" [message]="schema.description"></description>
     </div>
     `,
 })
