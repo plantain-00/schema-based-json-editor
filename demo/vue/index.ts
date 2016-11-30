@@ -15,6 +15,7 @@ import * as hljs from "highlight.js";
 type This = {
     color: string;
     valueHtml: string;
+    schema: typeof schema;
 } & Vue;
 
 new Vue({
@@ -25,15 +26,27 @@ new Vue({
             schema,
             value,
             color: "black",
-            schemaHtml: hljs.highlight("json", JSON.stringify(schema, null, "  ")).value,
             locale: navigator.language,
             dragula,
             markdownit: MarkdownIt,
             hljs,
             valueHtml: "",
+            schemaSchema: {
+                title: "Schema:",
+                type: "string",
+                format: "code",
+            },
         };
     },
+    computed: {
+        formattedSchema(this: This) {
+            return JSON.stringify(this.schema, null, "  ");
+        },
+    },
     methods: {
+        updateSchema(this: This, {value}: common.ValidityValue<common.ValueType>) {
+            this.schema = JSON.parse(value as string);
+        },
         updateValue(this: This, {value, isValid}: common.ValidityValue<common.ValueType>) {
             this.valueHtml = hljs.highlight("json", JSON.stringify(value, null, "  ")).value;
             this.color = isValid ? "black" : "red";

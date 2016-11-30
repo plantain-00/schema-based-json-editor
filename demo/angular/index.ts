@@ -23,9 +23,18 @@ import * as hljs from "highlight.js";
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <div>
-        <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
-            Schema:
-            <pre><code [innerHTML]="schemaHtml"></code></pre>
+        <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
+            <json-editor [schema]="schemaSchema"
+                [initialValue]="formattedSchema"
+                (updateValue)="updateSchema($event)"
+                theme="bootstrap3"
+                icon="fontawesome4"
+                [locale]="locale"
+                [dragula]="dragula"
+                [markdownit]="markdownit"
+                [hljs]="hljs"
+                [forceHttps]="false">
+            </json-editor>
         </div>
         <div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
             GUI:
@@ -50,13 +59,23 @@ import * as hljs from "highlight.js";
 })
 export class MainComponent {
     schema = schema;
-    schemaHtml = hljs.highlight("json", JSON.stringify(schema, null, "  ")).value;
     value: any = {};
     color = "black";
     locale = navigator.language;
     dragula = dragula;
     markdownit = MarkdownIt;
     hljs = hljs;
+    schemaSchema: common.StringSchema = {
+        title: "Schema:",
+        type: "string",
+        format: "code",
+    };
+    get formattedSchema() {
+        return JSON.stringify(this.schema, null, "  ");
+    }
+    updateSchema({value}: common.ValidityValue<common.ValueType>) {
+        this.schema = JSON.parse(value as string);
+    }
     get valueHtml() {
         return hljs.highlight("json", JSON.stringify(this.value, null, "  ")).value;
     }

@@ -22,7 +22,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
             <textarea className={this.props.theme.formControl}
                 onChange={this.onChange}
                 defaultValue={this.value}
-                rows={5}
+                rows={10}
                 readOnly={this.isReadOnly} >
             </textarea>
         ) : null;

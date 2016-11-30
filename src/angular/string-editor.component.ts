@@ -44,7 +44,7 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
             [class]="theme.formControl"
             (change)="onChange($event)"
             (keyup)="onChange($event)"
-            rows="5"
+            rows="10"
             [readOnly]="isReadOnly">{{value}}</textarea>
         <input *ngIf="useInput"
             [class]="theme.formControl"

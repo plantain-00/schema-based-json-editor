@@ -27,9 +27,18 @@
 
 <body>
 	<div id="container">
-		<div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
-			Schema:
-			<pre><code v-html="schemaHtml"></code></pre>
+		<div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
+			<json-editor :schema="schemaSchema"
+			    :initial-value="formattedSchema"
+				@update-value="updateSchema(arguments[0])"
+				theme="bootstrap3"
+				icon="fontawesome4"
+				:locale="locale"
+				:dragula="dragula"
+				:markdownit="markdownit"
+				:hljs="hljs"
+				:force-https="false">
+			</json-editor>
 		</div>
 		<div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
 			GUI:
