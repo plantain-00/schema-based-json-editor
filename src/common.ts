@@ -365,7 +365,7 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
 export const buttonGroupStyle: React.CSSProperties = { marginLeft: "10px" };
 export const buttonGroupStyleString = "margin-left: 10px";
 
-import { hljs as hljsLib, React, dragula } from "../typings/lib";
+import { hljs as hljsLib, React, dragula, MarkdownIt } from "../typings/lib";
 
 export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
@@ -379,7 +379,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     readonly?: boolean;
     required?: boolean;
     dragula?: typeof dragula;
-    md?: any;
+    md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljsLib;
     forceHttps?: boolean;
 }
@@ -573,7 +573,7 @@ export const imagePreviewStyle: React.CSSProperties = {
     maxWidth: "100%",
 };
 
-export function initializeMarkdown(markdownit: any, hljs: typeof hljsLib | undefined, forceHttps: boolean | undefined) {
+export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof hljsLib | undefined, forceHttps: boolean | undefined) {
     if (!markdownit) {
         return undefined;
     }
@@ -598,7 +598,30 @@ export function initializeMarkdown(markdownit: any, hljs: typeof hljsLib | undef
         },
     });
 
-    md.renderer.rules.image = (tokens: any, index: number, options: any, env: any, s: any) => {
+    interface Token {
+        attrGet: (name: string) => string | null;
+        attrIndex: (name: string) => number;
+        attrJoin: (name: string, value: string) => void;
+        attrPush: (attrData: string[]) => void;
+        attrSet: (name: string, value: string) => void;
+        attrs: string[][];
+        block: boolean;
+        children: Token[];
+        content: string;
+        hidden: boolean;
+        info: string;
+        level: number;
+        map: number[];
+        markup: string;
+        meta: any;
+        nesting: number;
+        tag: string;
+        type: string;
+    }
+
+    type TokenRender = (tokens: Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => void;
+
+    md.renderer.rules["image"] = (tokens: Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
         const token = tokens[index];
         const aIndex = token.attrIndex("src");
         if (forceHttps) {
@@ -606,21 +629,21 @@ export function initializeMarkdown(markdownit: any, hljs: typeof hljsLib | undef
         }
         token.attrPush(["style", imagePreviewStyleString]);
 
-        return md.renderer.rules.image(tokens, index, options, env, s);
+        return md.renderer.rules["image"](tokens, index, options, env, self);
     };
 
-    let defaultLinkRender: any;
-    if (md.renderer.rules.link_open) {
-        defaultLinkRender = md.renderer.rules.link_open;
+    let defaultLinkRender: TokenRender;
+    if (md.renderer.rules["link_open"]) {
+        defaultLinkRender = md.renderer.rules["link_open"];
     } else {
-        defaultLinkRender = (tokens: any, index: number, options: any, env: any, s: any) => {
-            return s.renderToken(tokens, index, options);
+        defaultLinkRender = (tokens: Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
+            return self.renderToken(tokens, index, options);
         };
     }
-    md.renderer.rules.link_open = (tokens: any, index: number, options: any, env: any, s: any) => {
+    md.renderer.rules["link_open"] = (tokens: Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
         tokens[index].attrPush(["target", "_blank"]);
         tokens[index].attrPush(["rel", "nofollow"]);
-        return defaultLinkRender(tokens, index, options, env, s);
+        return defaultLinkRender(tokens, index, options, env, self);
     };
     return md;
 }

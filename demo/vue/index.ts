@@ -4,9 +4,8 @@ import { schema } from "../schema";
 import "../../dist/vue";
 import * as common from "../../dist/common";
 
-declare const require: any;
 import * as dragula from "dragula";
-const markdownit = require("markdown-it");
+import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
 
 /* tslint:disable:only-arrow-functions */
@@ -29,7 +28,7 @@ new Vue({
             schemaHtml: hljs.highlight("json", JSON.stringify(schema, null, "  ")).value,
             locale: navigator.language,
             dragula,
-            markdownit,
+            markdownit: MarkdownIt,
             hljs,
             valueHtml: "",
         };

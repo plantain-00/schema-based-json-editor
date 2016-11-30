@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
-import { hljs, dragula } from "../../typings/lib";
+import { hljs, dragula, MarkdownIt } from "../../typings/lib";
 
 @Component({
     selector: "object-editor",
@@ -77,7 +77,7 @@ export class ObjectEditorComponent {
     @Input()
     dragula?: typeof dragula;
     @Input()
-    md?: any;
+    md?: MarkdownIt.MarkdownIt;
     @Input()
     hljs?: typeof hljs;
     @Input()

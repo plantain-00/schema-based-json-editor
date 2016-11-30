@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import * as common from "../common";
-import { hljs, dragula } from "../../typings/lib";
+import { hljs, dragula, MarkdownIt } from "../../typings/lib";
 
 @Component({
     selector: "array-editor",
@@ -86,7 +86,7 @@ export class ArrayEditorComponent {
     @Input()
     dragula?: typeof dragula;
     @Input()
-    md?: any;
+    md?: MarkdownIt.MarkdownIt;
     @Input()
     hljs?: typeof hljs;
     @Input()

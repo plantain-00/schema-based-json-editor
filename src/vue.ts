@@ -2,7 +2,7 @@ import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "./common";
 
-import { hljs } from "../typings/lib";
+import { hljs, MarkdownIt } from "../typings/lib";
 
 import { ArrayEditor } from "./vue/array-editor";
 import { BooleanEditor } from "./vue/boolean-editor";
@@ -50,7 +50,7 @@ class JSONEditor extends Vue {
     theme: string;
     locale: string;
     icon: string;
-    markdownit: any;
+    markdownit: typeof MarkdownIt;
     hljs: typeof hljs;
     forceHttps: boolean;
 

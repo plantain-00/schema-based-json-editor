@@ -1,7 +1,7 @@
 import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
-import { hljs } from "../../typings/lib";
+import { hljs, MarkdownIt } from "../../typings/lib";
 
 @Component({
     template: `
@@ -80,7 +80,7 @@ export class StringEditor extends Vue {
     readonly: boolean;
     required: boolean;
     hasDeleteButton: boolean;
-    md?: any;
+    md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljs;
     forceHttps?: boolean;
 
@@ -132,7 +132,7 @@ export class StringEditor extends Vue {
         return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
     }
     get getMarkdown() {
-        return this.md.render(this.value);
+        return this.md!.render(this.value!);
     }
     get getCode() {
         return this.hljs!.highlightAuto(this.value!).value;

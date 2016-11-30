@@ -1,7 +1,7 @@
 import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
-import { dragula, hljs } from "../../typings/lib";
+import { dragula, hljs, MarkdownIt } from "../../typings/lib";
 
 @Component({
     template: `
@@ -64,7 +64,7 @@ export class ObjectEditor extends Vue {
     required: boolean;
     hasDeleteButton: boolean;
     dragula?: typeof dragula;
-    md?: any;
+    md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljs;
     forceHttps?: boolean;
 

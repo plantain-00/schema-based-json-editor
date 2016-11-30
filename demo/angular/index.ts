@@ -14,9 +14,8 @@ import { schema } from "../schema";
 
 import * as common from "../../dist/common";
 
-declare const require: any;
 import * as dragula from "dragula";
-const markdownit = require("markdown-it");
+import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
 
 @Component({
@@ -56,7 +55,7 @@ export class MainComponent {
     color = "black";
     locale = navigator.language;
     dragula = dragula;
-    markdownit = markdownit;
+    markdownit = MarkdownIt;
     hljs = hljs;
     get valueHtml() {
         return hljs.highlight("json", JSON.stringify(this.value, null, "  ")).value;

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import * as common from "./common";
 import { Editor } from "./react/editor";
-import { hljs, dragula } from "../typings/lib";
+import { hljs, dragula, MarkdownIt } from "../typings/lib";
 
 export type Props = {
     schema: common.Schema;
@@ -25,7 +25,7 @@ export class JSONEditor extends React.Component<Props, {}> {
     theme: common.Theme;
     locale: common.Locale;
     icon: common.Icon;
-    md: any;
+    md?: MarkdownIt.MarkdownIt;
     updateValue = common.debounce((value: any, isValid: boolean) => {
         this.props.updateValue(value, isValid);
     }, 100);

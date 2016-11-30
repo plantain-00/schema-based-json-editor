@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "./common";
-import { hljs, dragula } from "../typings/lib";
+import { hljs, dragula, MarkdownIt } from "../typings/lib";
 
 @Component({
     selector: "json-editor",
@@ -47,7 +47,7 @@ export class JSONEditorComponent {
     themeObject: common.Theme;
     localeObject: common.Locale;
     iconObject: common.Icon;
-    md: any;
+    md?: MarkdownIt.MarkdownIt;
 
     updateValueFunction = common.debounce((value: common.ValidityValue<common.ValueType | undefined>) => {
         this.updateValue.emit(value);

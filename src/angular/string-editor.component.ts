@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
-import { hljs, dragula } from "../../typings/lib";
+import { hljs, dragula, MarkdownIt } from "../../typings/lib";
 
 @Component({
     selector: "string-editor",
@@ -99,7 +99,7 @@ export class StringEditorComponent {
     @Input()
     dragula?: typeof dragula;
     @Input()
-    md?: any;
+    md?: MarkdownIt.MarkdownIt;
     @Input()
     hljs?: typeof hljs;
     @Input()
@@ -150,7 +150,7 @@ export class StringEditorComponent {
         return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
     }
     get getMarkdown() {
-        return this.md.render(this.value);
+        return this.md!.render(this.value!);
     }
     get getCode() {
         return this.hljs!.highlightAuto(this.value!).value;

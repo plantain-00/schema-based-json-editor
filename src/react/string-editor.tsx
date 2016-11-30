@@ -129,7 +129,7 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
         return this.props.forceHttps ? common.replaceProtocal(this.value!) : this.value;
     }
     get getMarkdown() {
-        return this.props.md.render(this.value);
+        return this.props.md!.render(this.value!);
     }
     get getCode() {
         return this.props.hljs!.highlightAuto(this.value!).value;

@@ -2,9 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { JSONEditor } from "../../dist/react";
 import { schema } from "../schema";
-declare const require: any;
 import * as dragula from "dragula";
-const markdownit = require("markdown-it");
+import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
 
 class Main extends React.Component<{}, {}> {
@@ -34,7 +33,7 @@ class Main extends React.Component<{}, {}> {
                         icon="fontawesome4"
                         locale={this.locale}
                         dragula={dragula}
-                        markdownit={markdownit}
+                        markdownit={MarkdownIt}
                         hljs={hljs}
                         forceHttps={false} />
                 </div>
