@@ -10,7 +10,7 @@ enableProdMode();
 
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 
-import { schema } from "../schema";
+import { schema, schemaSchema } from "../schema";
 
 import * as common from "../../dist/common";
 
@@ -37,7 +37,6 @@ import * as hljs from "highlight.js";
             </json-editor>
         </div>
         <div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
-            GUI:
             <json-editor [schema]="schema"
                 [initialValue]="value"
                 (updateValue)="updateValue($event)"
@@ -65,16 +64,16 @@ export class MainComponent {
     dragula = dragula;
     markdownit = MarkdownIt;
     hljs = hljs;
-    schemaSchema: common.StringSchema = {
-        title: "Schema:",
-        type: "string",
-        format: "code",
-    };
+    schemaSchema = schemaSchema;
     get formattedSchema() {
         return JSON.stringify(this.schema, null, "  ");
     }
     updateSchema({value}: common.ValidityValue<common.ValueType>) {
-        this.schema = JSON.parse(value as string);
+        try {
+            this.schema = JSON.parse(value as string);
+        } catch (error) {
+            console.log(error);
+        }
     }
     get valueHtml() {
         return hljs.highlight("json", JSON.stringify(this.value, null, "  ")).value;

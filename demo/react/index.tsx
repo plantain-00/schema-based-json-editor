@@ -1,8 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { JSONEditor } from "../../dist/react";
-import * as common from "../../dist/common";
-import { schema } from "../schema";
+import { schema, schemaSchema } from "../schema";
 import * as dragula from "dragula";
 import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
@@ -12,17 +11,17 @@ class Main extends React.Component<{}, {}> {
     value: any = {};
     isValid = false;
     locale = navigator.language;
-    schemaSchema: common.StringSchema = {
-        title: "Schema:",
-        type: "string",
-        format: "code",
-    };
+    schemaSchema = schemaSchema;
     get formattedSchema() {
         return JSON.stringify(this.schema, null, "  ");
     }
     updateSchema = (value: any, isValid: boolean) => {
-        this.schema = JSON.parse(value);
-        this.setState({ schema: this.schema });
+        try {
+            this.schema = JSON.parse(value);
+            this.setState({ schema: this.schema });
+        } catch (error) {
+            console.log(error);
+        }
     }
     updateValue = (value: any, isValid: boolean) => {
         this.value = value;
@@ -46,7 +45,6 @@ class Main extends React.Component<{}, {}> {
                         forceHttps={false} />
                 </div>
                 <div style={{ width: "500px", margin: "10px", float: "left", overflowY: "scroll", height: "600px" }} className="bootstrap3-row-container">
-                    GUI:
                     <JSONEditor schema={this.schema}
                         initialValue={this.value}
                         updateValue={this.updateValue}

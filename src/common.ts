@@ -598,30 +598,7 @@ export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof h
         },
     });
 
-    interface Token {
-        attrGet: (name: string) => string | null;
-        attrIndex: (name: string) => number;
-        attrJoin: (name: string, value: string) => void;
-        attrPush: (attrData: string[]) => void;
-        attrSet: (name: string, value: string) => void;
-        attrs: string[][];
-        block: boolean;
-        children: Token[];
-        content: string;
-        hidden: boolean;
-        info: string;
-        level: number;
-        map: number[];
-        markup: string;
-        meta: any;
-        nesting: number;
-        tag: string;
-        type: string;
-    }
-
-    type TokenRender = (tokens: Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => void;
-
-    md.renderer.rules["image"] = (tokens: Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
+    md.renderer.rules["image"] = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
         const token = tokens[index];
         const aIndex = token.attrIndex("src");
         if (forceHttps) {
@@ -632,15 +609,15 @@ export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof h
         return md.renderer.rules["image"](tokens, index, options, env, self);
     };
 
-    let defaultLinkRender: TokenRender;
+    let defaultLinkRender: MarkdownIt.TokenRender;
     if (md.renderer.rules["link_open"]) {
         defaultLinkRender = md.renderer.rules["link_open"];
     } else {
-        defaultLinkRender = (tokens: Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
+        defaultLinkRender = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
             return self.renderToken(tokens, index, options);
         };
     }
-    md.renderer.rules["link_open"] = (tokens: Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
+    md.renderer.rules["link_open"] = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
         tokens[index].attrPush(["target", "_blank"]);
         tokens[index].attrPush(["rel", "nofollow"]);
         return defaultLinkRender(tokens, index, options, env, self);

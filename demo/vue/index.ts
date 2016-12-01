@@ -1,5 +1,5 @@
 import * as Vue from "vue";
-import { schema } from "../schema";
+import { schema, schemaSchema } from "../schema";
 
 import "../../dist/vue";
 import * as common from "../../dist/common";
@@ -31,11 +31,7 @@ new Vue({
             markdownit: MarkdownIt,
             hljs,
             valueHtml: "",
-            schemaSchema: {
-                title: "Schema:",
-                type: "string",
-                format: "code",
-            },
+            schemaSchema,
         };
     },
     computed: {
@@ -45,7 +41,11 @@ new Vue({
     },
     methods: {
         updateSchema(this: This, {value}: common.ValidityValue<common.ValueType>) {
-            this.schema = JSON.parse(value as string);
+            try {
+                this.schema = JSON.parse(value as string);
+            } catch (error) {
+                console.log(error);
+            }
         },
         updateValue(this: This, {value, isValid}: common.ValidityValue<common.ValueType>) {
             this.valueHtml = hljs.highlight("json", JSON.stringify(value, null, "  ")).value;

@@ -2,7 +2,7 @@ import * as common from "../dist/common";
 
 export const schema: common.Schema = {
     type: "object",
-    title: "A Title example",
+    title: "GUI:",
     description: "a description example",
     properties: {
         stringExample: {
@@ -168,4 +168,10 @@ export const schema: common.Schema = {
         "performanceExample",
         "itemTitleExample",
     ],
+};
+
+export const schemaSchema: common.StringSchema = {
+    title: "Schema:",
+    type: "string",
+    format: "code",
 };
