@@ -51,7 +51,7 @@ describe("getErrorMessageOfArray", () => {
         expect(common.getErrorMessageOfArray(undefined, { type: "array", items: { type: "string" } }, common.defaultLocale)).toEqual("");
     });
     it("should show minItems error", () => {
-        expect(common.getErrorMessageOfArray(["abc"], { type: "array", items: { type: "string" }, minItems: 2 }, common.defaultLocale)).toEqual("The length of the array must be >= 2");
+        expect(common.getErrorMessageOfArray(["abc"], { type: "array", items: { type: "string" }, minItems: 2 }, common.defaultLocale)).toEqual("The length of the array must be >= 2.");
         expect(common.getErrorMessageOfArray(["abc"], { type: "array", items: { type: "string" }, minItems: 1 }, common.defaultLocale)).toEqual("");
     });
     it("should show uniqueItems error", () => {
@@ -73,6 +73,9 @@ describe("getErrorMessageOfNumber", () => {
         expect(common.getErrorMessageOfNumber(123, { type: "number", maximum: 122 }, common.defaultLocale)).toEqual("Value must be <= 122.");
         expect(common.getErrorMessageOfNumber(123, { type: "number", maximum: 123, exclusiveMaximum: true }, common.defaultLocale)).toEqual("Value must be < 123.");
         expect(common.getErrorMessageOfNumber(123, { type: "number", maximum: 124 }, common.defaultLocale)).toEqual("");
+    });
+    it("should show multipleOf error", () => {
+        expect(common.getErrorMessageOfNumber(123, { type: "number", multipleOf: 2 }, common.defaultLocale)).toEqual("Value must be multiple value of 2.");
     });
 });
 

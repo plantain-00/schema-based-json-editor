@@ -98,7 +98,7 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 + common schema fields: title, description, default, readonly
 + object schema fields: properties, required
 + array schema fields: items, minItems, uniqueItems
-+ number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum
++ number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf
 + string schema fields: format, enum, minLength, maxLength, pattern
 + image preview, code highlight, markdown preview
 

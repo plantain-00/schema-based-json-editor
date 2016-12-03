@@ -4,6 +4,7 @@ import * as toNumber from "lodash/toNumber";
 import * as toInteger from "lodash/toInteger";
 import * as debounce from "lodash/debounce";
 import * as isObject from "lodash/isObject";
+import * as isInteger from "lodash/isInteger";
 
 export { toNumber, toInteger, debounce };
 
@@ -35,6 +36,7 @@ export type NumberSchema = CommonSchema & {
     maximum?: number;
     exclusiveMaximum?: boolean;
     enum?: number[];
+    multipleOf?: number;
 };
 
 export type StringSchema = CommonSchema & {
@@ -126,6 +128,7 @@ export type Locale = {
         smallerThan: string;
         minItems: string;
         uniqueItems: string;
+        multipleOf: string;
     },
     info: {
         notExists: string;
@@ -151,8 +154,9 @@ export const defaultLocale: Locale = {
         maximum: "Value must be <= {0}.",
         largerThan: "Value must be > {0}.",
         smallerThan: "Value must be < {0}.",
-        minItems: "The length of the array must be >= {0}",
+        minItems: "The length of the array must be >= {0}.",
         uniqueItems: "The item in {0} and {1} must not be same.",
+        multipleOf: "Value must be multiple value of {0}.",
     },
     info: {
         notExists: "not exists",
@@ -181,6 +185,7 @@ export const locales: { [name: string]: Locale } = {
             smallerThan: "要求 < {0}。",
             minItems: "数组的长度要求 >= {0}。",
             uniqueItems: "{0} 和 {1} 的项不应该相同。",
+            multipleOf: "要求是 {0} 的整数倍.",
         },
         info: {
             notExists: "不存在",
@@ -481,6 +486,11 @@ export function getErrorMessageOfNumber(value: number | undefined, schema: Numbe
                 if (value > schema.maximum) {
                     return locale.error.maximum.replace("{0}", String(schema.maximum));
                 }
+            }
+        }
+        if (schema.multipleOf && schema.multipleOf > 0) {
+            if (!isInteger(value / schema.multipleOf)) {
+                return locale.error.multipleOf.replace("{0}", String(schema.multipleOf));
             }
         }
     }

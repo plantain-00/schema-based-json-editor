@@ -148,6 +148,11 @@ export const schema: common.Schema = {
                 },
             ],
         },
+        multipleOfExample: {
+            type: "number",
+            default: 4,
+            multipleOf: 2,
+        },
     },
     required: [
         "stringExample",
@@ -167,6 +172,7 @@ export const schema: common.Schema = {
         "codeExample",
         "performanceExample",
         "itemTitleExample",
+        "multipleOfExample",
     ],
 };
 
