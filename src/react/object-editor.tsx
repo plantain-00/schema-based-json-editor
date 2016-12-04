@@ -9,9 +9,11 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     collapsed = false;
     value?: { [name: string]: common.ValueType };
     invalidProperties: string[] = [];
+    errorMessage: string;
     constructor(props: common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
+        this.validate();
         if (!this.collapsed && this.value !== undefined) {
             for (const property in this.props.schema.properties) {
                 const schema = this.props.schema.properties[property];
@@ -46,7 +48,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         }
 
         return (
-            <div className={this.props.theme.row}>
+            <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <h3>
                     {this.titleToShow}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
@@ -72,6 +74,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
                 <div className={this.props.theme.rowContainer}>
                     {childrenElement}
                 </div>
+                <Description theme={this.props.theme} message={this.errorMessage} />
             </div >
         );
     }
@@ -81,17 +84,22 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     }
     toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType } | undefined;
+        this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, this.invalidProperties.length === 0);
     }
     onChange = (property: string, value: common.ValueType, isValid: boolean) => {
         this.value![property] = value;
+        this.validate();
         this.setState({ value: this.value });
         common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
-        this.props.updateValue(this.value, this.invalidProperties.length === 0);
+        this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0);
     }
     isRequired(property: string) {
         return this.props.schema.required && this.props.schema.required.some(r => r === property);
+    }
+    validate() {
+        this.errorMessage = common.getErrorMessageOfObject(this.value, this.props.schema, this.props.locale);
     }
     get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;

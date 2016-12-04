@@ -5,7 +5,7 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
 
 @Component({
     template: `
-    <div :class="theme.row">
+    <div :class="errorMessage ? theme.errorRow : theme.row">
         <h3>
             {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
@@ -49,6 +49,7 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
                 :forceHttps="forceHttps">
             </editor>
         </div>
+        <description :theme="theme" :message="errorMessage"></description>
     </div >
     `,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
@@ -72,9 +73,11 @@ export class ObjectEditor extends Vue {
     value?: { [name: string]: common.ValueType } = {};
     buttonGroupStyle = common.buttonGroupStyleString;
     invalidProperties: string[] = [];
+    errorMessage?: string = "";
 
     beforeMount() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
+        this.validate();
         if (!this.collapsed && this.value !== undefined) {
             for (const property in this.schema.properties) {
                 const schema = this.schema.properties[property];
@@ -106,11 +109,16 @@ export class ObjectEditor extends Vue {
     }
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as { [name: string]: common.ValueType } | undefined;
+        this.validate();
         this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
     }
     onChange(property: string, {value, isValid}: common.ValidityValue<common.ValueType>) {
         this.value![property] = value;
+        this.validate();
         common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
         this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
+    }
+    validate() {
+        this.errorMessage = common.getErrorMessageOfObject(this.value, this.schema, this.locale);
     }
 }

@@ -64,6 +64,7 @@ export class NumberEditor extends Vue {
 
     beforeMount() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
+        this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
     }
 

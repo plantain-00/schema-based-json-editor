@@ -87,6 +87,7 @@ export class ArrayEditor extends Vue {
 
     beforeMount() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
+        this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
     }
 
