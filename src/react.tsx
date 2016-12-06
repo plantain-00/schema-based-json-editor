@@ -18,23 +18,20 @@ export type Props = {
     forceHttps?: boolean;
 };
 
-import { Cancelable } from "lodash";
-export type Cancelable = Cancelable;
-
 export class JSONEditor extends React.Component<Props, {}> {
     theme: common.Theme;
     locale: common.Locale;
     icon: common.Icon;
     md?: MarkdownIt.MarkdownIt;
-    updateValue = common.debounce((value: any, isValid: boolean) => {
-        this.props.updateValue(value, isValid);
-    }, 100);
     constructor(props: Props) {
         super(props);
         this.theme = common.getTheme(this.props.theme);
         this.locale = common.getLocale(this.props.locale);
         this.icon = common.getIcon(this.props.icon, this.locale);
         this.md = common.initializeMarkdown(this.props.markdownit, this.props.hljs, this.props.forceHttps);
+    }
+    updateValue = (value: any, isValid: boolean) => {
+        this.props.updateValue(value, isValid);
     }
     render() {
         return <Editor schema={this.props.schema}

@@ -3,6 +3,9 @@ import Component from "vue-class-component";
 import * as common from "../common";
 import { hljs, MarkdownIt } from "../../typings/lib";
 
+import { Cancelable } from "lodash";
+export type Cancelable = Cancelable;
+
 @Component({
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">
@@ -91,6 +94,15 @@ export class StringEditor extends Vue {
     imagePreviewStyle = common.imagePreviewStyleString;
     locked = true;
 
+    onChangeFunction = common.debounce((value: string) => {
+        this.value = value;
+        this.validate();
+        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }, 500);
+    onChange(e: { target: { value: string } }) {
+        this.onChangeFunction(e.target.value);
+    }
+
     beforeMount() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         this.validate();
@@ -156,11 +168,6 @@ export class StringEditor extends Vue {
         return common.getTitle(this.title, this.schema.title);
     }
 
-    onChange(e: { target: { value: string } }) {
-        this.value = e.target.value;
-        this.validate();
-        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
-    }
     validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
     }

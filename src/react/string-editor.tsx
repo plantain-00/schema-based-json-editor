@@ -4,15 +4,28 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 
+import { Cancelable } from "lodash";
+export type Cancelable = Cancelable;
+
 export class StringEditor extends React.Component<common.Props<common.StringSchema, string>, {}> {
     value?: string;
     errorMessage: string;
     collapsed = false;
     locked = true;
+    onChangeFunction = common.debounce((value: string) => {
+        this.value = value;
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value, !this.errorMessage);
+    }, 500);
     constructor(props: common.Props<common.ArraySchema, string>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string;
         this.validate();
+    }
+    onChange = (e: React.FormEvent<{ value: string }>) => {
+        this.value = e.currentTarget.value;
+        this.onChangeFunction(e.currentTarget.value);
     }
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);
@@ -145,12 +158,6 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
     }
     get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);
-    }
-    onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = e.currentTarget.value;
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);

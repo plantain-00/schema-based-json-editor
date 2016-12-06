@@ -12,7 +12,7 @@ import { hljs, dragula, MarkdownIt } from "../typings/lib";
         [icon]="iconObject"
         [readonly]="readonly"
         [required]="true"
-        (updateValue)="updateValueFunction($event)"
+        (updateValue)="updateValue.emit($event)"
         [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
@@ -49,9 +49,6 @@ export class JSONEditorComponent {
     iconObject: common.Icon;
     md?: MarkdownIt.MarkdownIt;
 
-    updateValueFunction = common.debounce((value: common.ValidityValue<common.ValueType | undefined>) => {
-        this.updateValue.emit(value);
-    }, 100);
     ngOnInit() {
         this.themeObject = common.getTheme(this.theme);
         this.localeObject = common.getLocale(this.locale);
@@ -59,8 +56,6 @@ export class JSONEditorComponent {
         this.md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps);
     }
 }
-import { Cancelable } from "lodash";
-export type Cancelable = Cancelable;
 
 import { BooleanEditorComponent } from "./angular/boolean-editor.component";
 export { BooleanEditorComponent };

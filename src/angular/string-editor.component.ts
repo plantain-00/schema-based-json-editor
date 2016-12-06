@@ -2,6 +2,9 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
 
+import { Cancelable } from "lodash";
+export type Cancelable = Cancelable;
+
 @Component({
     selector: "string-editor",
     styles: [
@@ -110,6 +113,14 @@ export class StringEditorComponent {
     buttonGroupStyle = common.buttonGroupStyleString;
     collapsed = false;
     locked = true;
+    onChangeFunction = common.debounce((value: string) => {
+        this.value = value;
+        this.validate();
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
+    }, 500);
+    onChange(e: { target: { value: string } }) {
+        this.onChangeFunction(e.target.value);
+    }
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;
         this.validate();
@@ -172,11 +183,6 @@ export class StringEditorComponent {
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
-    }
-    onChange(e: { target: { value: string } }) {
-        this.value = e.target.value;
-        this.validate();
-        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);

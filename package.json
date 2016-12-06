@@ -1,6 +1,6 @@
 {
   "name": "schema-based-json-editor",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "A reactjs, angular2 and vuejs component of schema based json editor.",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,10 @@
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {
+    "@types/dragula": "^2.1.29",
+    "@types/highlight.js": "^9.1.8",
+    "@types/lodash": "^4.14.41",
+    "@types/markdown-it": "0.0.1",
     "lodash": "^4.17.2",
     "tslib": "^1.2.0"
   },
@@ -41,11 +45,7 @@
     "@angular/platform-browser-dynamic": "^2.2.4",
     "@angular/router": "^3.2.4",
     "@angular/upgrade": "^2.2.4",
-    "@types/dragula": "^2.1.29",
-    "@types/highlight.js": "^9.1.8",
     "@types/jasmine": "^2.5.38",
-    "@types/lodash": "^4.14.41",
-    "@types/markdown-it": "0.0.1",
     "@types/react": "^0.14.52",
     "@types/react-dom": "^0.14.19",
     "bootstrap": "^3.3.7",

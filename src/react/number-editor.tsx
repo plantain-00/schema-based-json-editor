@@ -1,16 +1,28 @@
 import * as React from "react";
 import * as common from "../common";
 import { Icon } from "./icon";
-import {Optional} from "./optional";
+import { Optional } from "./optional";
 import { Description } from "./description";
+
+import { Cancelable } from "lodash";
+export type Cancelable = Cancelable;
 
 export class NumberEditor extends React.Component<common.Props<common.NumberSchema, number>, {}> {
     value?: number;
     errorMessage: string;
+    onChangeFunction = common.debounce((value: string) => {
+        this.value = this.props.schema.type === "integer" ? common.toInteger(value) : common.toNumber(value);
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value, !this.errorMessage);
+    }, 500);
     constructor(props: common.Props<common.ArraySchema, number>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as number;
         this.validate();
+    }
+    onChange = (e: React.FormEvent<{ value: string }>) => {
+        this.onChangeFunction(e.currentTarget.value);
     }
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);
@@ -57,12 +69,6 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
                 <Description theme={this.props.theme} message={this.errorMessage} />
             </div>
         );
-    }
-    onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfNumber(this.value, this.props.schema, this.props.locale);

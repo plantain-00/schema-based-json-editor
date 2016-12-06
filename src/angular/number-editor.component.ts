@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
 
+import { Cancelable } from "lodash";
+export type Cancelable = Cancelable;
+
 @Component({
     selector: "number-editor",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -73,6 +76,14 @@ export class NumberEditorComponent {
     value?: number;
     errorMessage: string;
     buttonGroupStyle = common.buttonGroupStyleString;
+    onChangeFunction = common.debounce((value: string) => {
+        this.value = this.schema.type === "integer" ? common.toInteger(value) : common.toNumber(value);
+        this.validate();
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
+    }, 500);
+    onChange(e: { target: { value: string } }) {
+        this.onChangeFunction(e.target.value);
+    }
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
@@ -91,11 +102,6 @@ export class NumberEditorComponent {
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
-    }
-    onChange(e: { target: { value: string } }) {
-        this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
-        this.validate();
-        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     trackByFunction(index: number, value: number) {
         return index;

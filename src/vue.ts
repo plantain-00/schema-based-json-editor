@@ -36,7 +36,7 @@ Vue.component("description", Description);
             :icon="iconObject"
             :readonly="readonly"
             :required="true"
-            @update-value="updateValueFunction(arguments[0])"
+            @update-value="updateValue(arguments[0])"
             :dragula="dragula"
             :md="md"
             :hljs="hljs"
@@ -59,14 +59,14 @@ class JSONEditor extends Vue {
     iconObject: common.Icon;
     md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps);
 
-    updateValueFunction = common.debounce((validityValue: common.ValidityValue<common.ValueType>) => {
-        this.$emit("update-value", validityValue);
-    }, 100);
-
     constructor() {
         super();
         this.localeObject = common.getLocale(this.locale);
         this.iconObject = common.getIcon(this.icon, this.localeObject);
+    }
+
+    updateValue(value: common.ValueType) {
+        this.$emit("update-value", value);
     }
 }
 
