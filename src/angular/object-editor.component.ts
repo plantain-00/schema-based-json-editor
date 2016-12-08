@@ -139,7 +139,7 @@ export class ObjectEditorComponent {
     }
     get titleToShow() {
         if (this.hasDeleteButton) {
-            return common.getTitle(common.findTitle(this.value), this.title, this.schema.title);
+            return common.getTitle(common.findTitle(this.value, this.properties), this.title, this.schema.title);
         }
         return common.getTitle(this.title, this.schema.title);
     }

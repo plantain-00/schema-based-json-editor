@@ -664,10 +664,10 @@ export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof h
     return md;
 }
 
-export function findTitle(value: { [name: string]: ValueType } | undefined) {
+export function findTitle(value: { [name: string]: ValueType } | undefined, properties: { name: string; value: Schema }[]) {
     if (value) {
-        for (const key in value) {
-            const title = value[key];
+        for (const {name: property} of properties) {
+            const title = value[property];
             if (typeof title === "string" && title.length > 0) {
                 if (title.length > 23) {
                     return title.substring(0, 20) + "...";

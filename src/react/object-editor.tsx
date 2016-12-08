@@ -127,7 +127,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     }
     get titleToShow() {
         if (this.props.onDelete) {
-            return common.getTitle(common.findTitle(this.value), this.props.title, this.props.schema.title);
+            return common.getTitle(common.findTitle(this.value, this.properties), this.props.title, this.props.schema.title);
         }
         return common.getTitle(this.props.title, this.props.schema.title);
     }
