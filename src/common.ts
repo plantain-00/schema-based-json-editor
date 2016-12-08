@@ -14,6 +14,7 @@ export type CommonSchema = {
     description?: string;
     default?: ValueType;
     readonly?: boolean;
+    propertyOrder?: number;
 };
 
 export type ObjectSchema = CommonSchema & {
@@ -688,4 +689,17 @@ export function getTitle(...titles: any[]) {
         return String(title);
     }
     return "";
+}
+
+export function compare(a: { name: string; value: Schema }, b: { name: string; value: Schema }) {
+    if (typeof a.value.propertyOrder === "number") {
+        if (typeof b.value.propertyOrder === "number") {
+            return a.value.propertyOrder - b.value.propertyOrder;
+        }
+        return -1;
+    }
+    if (typeof b.value.propertyOrder === "number") {
+        return 1;
+    }
+    return 0;
 }

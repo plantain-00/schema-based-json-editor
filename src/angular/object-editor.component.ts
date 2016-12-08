@@ -86,7 +86,7 @@ export class ObjectEditorComponent {
 
     collapsed = false;
     value?: { [name: string]: common.ValueType };
-    properties: { name: string; value: common.ValueType }[] = [];
+    properties: { name: string; value: common.Schema }[] = [];
     buttonGroupStyle = common.buttonGroupStyleString;
     invalidProperties: string[] = [];
     errorMessage: string;
@@ -104,6 +104,7 @@ export class ObjectEditorComponent {
                     value: schema,
                 });
             }
+            this.properties = this.properties.sort(common.compare);
         }
         this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     }

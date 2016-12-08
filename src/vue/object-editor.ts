@@ -32,16 +32,16 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
         </h3>
         <description :theme="theme" :message="schema.description"></description>
         <div v-if="!collapsed && value !== undefined" :class="theme.rowContainer">
-            <editor v-for="(propertySchema, property, i) in schema.properties"
+            <editor v-for="(property, i) in properties"
                 :key="i"
-                :schema="propertySchema"
-                :title="propertySchema.title || property"
-                :initial-value="value[property]"
-                @update-value="onChange(property, arguments[0])"
+                :schema="property.value"
+                :title="property.value.title || property.name"
+                :initial-value="value[property.name]"
+                @update-value="onChange(property.name, arguments[0])"
                 :theme="theme"
                 :icon="icon"
                 :locale="locale"
-                :required="isRequired(property)"
+                :required="isRequired(property.name)"
                 :readonly="isReadOnly"
                 :dragula="dragula"
                 :md="md"
@@ -74,6 +74,7 @@ export class ObjectEditor extends Vue {
     buttonGroupStyle = common.buttonGroupStyleString;
     invalidProperties: string[] = [];
     errorMessage?: string = "";
+    properties: { name: string; value: common.Schema }[] = [];
 
     beforeMount() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
@@ -83,7 +84,12 @@ export class ObjectEditor extends Vue {
                 const schema = this.schema.properties[property];
                 const required = this.schema.required && this.schema.required.some((r: any) => r === property);
                 this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
+                this.properties.push({
+                    name: property,
+                    value: schema,
+                });
             }
+            this.properties = this.properties.sort(common.compare);
         }
         this.$emit("update-value", { value: this.value, isValid: true });
     }

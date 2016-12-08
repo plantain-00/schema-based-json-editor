@@ -162,6 +162,23 @@ export const schema: common.Schema = {
             maxProperties: 1,
             minProperties: 0,
         },
+        propertyOrderExample: {
+            type: "object",
+            properties: {
+                propertyExample1: {
+                    type: "string",
+                    propertyOrder: 3,
+                },
+                propertyExample2: {
+                    type: "number",
+                    propertyOrder: 1,
+                },
+                propertyExample3: {
+                    type: "number",
+                    propertyOrder: 2,
+                },
+            },
+        },
     },
     required: [
         "stringExample",
@@ -182,6 +199,7 @@ export const schema: common.Schema = {
         "performanceExample",
         "itemTitleExample",
         "optionalObjectExample",
+        "propertyOrderExample",
     ],
 };
 
