@@ -28,21 +28,19 @@ Vue.component("description", Description);
 
 @Component({
     template: `
-    <div>
-        <editor :schema="schema"
-            :initial-value="initialValue"
-            :theme="themeObject"
-            :locale="localeObject"
-            :icon="iconObject"
-            :readonly="readonly"
-            :required="true"
-            @update-value="updateValue(arguments[0])"
-            :dragula="dragula"
-            :md="md"
-            :hljs="hljs"
-            :forceHttps="forceHttps">
-        </editor>
-    </div>
+    <editor :schema="schema"
+        :initial-value="initialValue"
+        :theme="themeObject"
+        :locale="localeObject"
+        :icon="iconObject"
+        :readonly="readonly"
+        :required="true"
+        @update-value="updateValue(arguments[0])"
+        :dragula="dragula"
+        :md="md"
+        :hljs="hljs"
+        :forceHttps="forceHttps">
+    </editor>
     `,
     props: ["schema", "initialValue", "theme", "icon", "locale", "readonly", "dragula", "markdownit", "hljs", "forceHttps"],
 })
