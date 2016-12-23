@@ -5,8 +5,11 @@ import { Optional } from "./optional";
 import { Description } from "./description";
 
 export type Props = common.Props<common.NullSchema, null>;
+export type State = Partial<{
+    value?: null;
+}>;
 
-export class NullEditor extends React.Component<Props, {}> {
+export class NullEditor extends React.Component<Props, State> {
     value?: null;
     constructor(props: Props) {
         super(props);
@@ -15,7 +18,7 @@ export class NullEditor extends React.Component<Props, {}> {
     componentDidMount() {
         this.props.updateValue(this.value, true);
     }
-    shouldComponentUpdate(nextProps: Props, nextState: Props) {
+    shouldComponentUpdate(nextProps: Props, nextState: State) {
         return this.props.initialValue !== nextProps.initialValue;
     }
     render() {

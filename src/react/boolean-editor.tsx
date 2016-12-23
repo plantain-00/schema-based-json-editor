@@ -5,8 +5,11 @@ import { Optional } from "./optional";
 import { Description } from "./description";
 
 export type Props = common.Props<common.BooleanSchema, boolean>;
+export type State = Partial<{
+    value?: boolean;
+}>;
 
-export class BooleanEditor extends React.Component<Props, {}> {
+export class BooleanEditor extends React.Component<Props, State> {
     value?: boolean;
     constructor(props: Props) {
         super(props);
@@ -15,7 +18,7 @@ export class BooleanEditor extends React.Component<Props, {}> {
     componentDidMount() {
         this.props.updateValue(this.value, true);
     }
-    shouldComponentUpdate(nextProps: Props, nextState: Props) {
+    shouldComponentUpdate(nextProps: Props, nextState: State) {
         return this.props.initialValue !== nextProps.initialValue;
     }
     render() {

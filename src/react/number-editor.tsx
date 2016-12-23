@@ -8,8 +8,12 @@ import { Cancelable } from "lodash";
 export type Cancelable = Cancelable;
 
 export type Props = common.Props<common.NumberSchema, number>;
+export type State = Partial<{
+    value?: number;
+    errorMessage: string;
+}>;
 
-export class NumberEditor extends React.Component<Props, {}> {
+export class NumberEditor extends React.Component<Props, State> {
     value?: number;
     errorMessage: string;
     constructor(props: Props) {
@@ -26,7 +30,7 @@ export class NumberEditor extends React.Component<Props, {}> {
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);
     }
-    shouldComponentUpdate(nextProps: Props, nextState: Props) {
+    shouldComponentUpdate(nextProps: Props, nextState: State) {
         return this.props.initialValue !== nextProps.initialValue;
     }
     render() {

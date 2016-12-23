@@ -8,8 +8,16 @@ import { Description } from "./description";
 import { dragula } from "../../typings/lib";
 
 export type Props = common.Props<common.ArraySchema, common.ValueType[]>;
+export type State = Partial<{
+    renderSwitch: number;
+    collapsed?: boolean;
+    value?: common.ValueType[];
+    drak?: dragula.Drake;
+    errorMessage: string;
+    invalidIndexes: number[];
+}>;
 
-export class ArrayEditor extends React.Component<Props, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
+export class ArrayEditor extends React.Component<Props, State> {
     renderSwitch = 1;
     collapsed = this.props.schema.collapsed;
     value?: common.ValueType[];

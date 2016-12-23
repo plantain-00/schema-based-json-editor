@@ -8,12 +8,20 @@ import { Cancelable } from "lodash";
 export type Cancelable = Cancelable;
 
 export type Props = common.Props<common.StringSchema, string>;
+export type State = Partial<{
+    value: string;
+    errorMessage: string;
+    collapsed: boolean;
+    locked: boolean;
+    willRender: boolean;
+}>;
 
-export class StringEditor extends React.Component<Props, {}> {
+export class StringEditor extends React.Component<Props, State> {
     value?: string;
     errorMessage: string;
     collapsed = false;
     locked = true;
+    willRender = false;
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string;
@@ -28,7 +36,11 @@ export class StringEditor extends React.Component<Props, {}> {
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);
     }
-    shouldComponentUpdate(nextProps: Props, nextState: Props) {
+    shouldComponentUpdate(nextProps: Props, nextState: State) {
+        if (this.willRender) {
+            this.willRender = false;
+            return true;
+        }
         return this.props.initialValue !== nextProps.initialValue;
     }
     render() {
@@ -170,10 +182,12 @@ export class StringEditor extends React.Component<Props, {}> {
         this.props.updateValue(this.value, !this.errorMessage);
     }
     collapseOrExpand = () => {
+        this.willRender = true;
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
     toggleLocked = () => {
+        this.willRender = true;
         this.locked = !this.locked;
         this.setState({ locked: this.locked });
     }

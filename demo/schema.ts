@@ -209,7 +209,7 @@ export const schema: common.Schema = {
         "itemTitleExample",
         "optionalObjectExample",
         "propertyOrderExample",
-        "collapsedObjectExample"
+        "collapsedObjectExample",
     ],
 };
 

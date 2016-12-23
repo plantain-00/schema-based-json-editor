@@ -6,8 +6,15 @@ import { Optional } from "./optional";
 import { Description } from "./description";
 
 export type Props = common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>;
+export type State = Partial<{
+    collapsed?: boolean;
+    value?: { [name: string]: common.ValueType };
+    invalidProperties: string[];
+    errorMessage: string;
+    properties: { name: string; value: common.Schema }[];
+}>;
 
-export class ObjectEditor extends React.Component<Props, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
+export class ObjectEditor extends React.Component<Props, State> {
     collapsed = this.props.schema.collapsed;
     value?: { [name: string]: common.ValueType };
     invalidProperties: string[] = [];
