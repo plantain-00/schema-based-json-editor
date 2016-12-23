@@ -4,14 +4,19 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 
-export class BooleanEditor extends React.Component<common.Props<common.BooleanSchema, boolean>, {}> {
+export type Props = common.Props<common.BooleanSchema, boolean>;
+
+export class BooleanEditor extends React.Component<Props, {}> {
     value?: boolean;
-    constructor(props: common.Props<common.ArraySchema, boolean>) {
+    constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as boolean;
     }
     componentDidMount() {
         this.props.updateValue(this.value, true);
+    }
+    shouldComponentUpdate(nextProps: Props, nextState: Props) {
+        return this.props.initialValue !== nextProps.initialValue;
     }
     render() {
         const control = this.value !== undefined ? (

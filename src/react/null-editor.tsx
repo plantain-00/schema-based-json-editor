@@ -1,17 +1,22 @@
 import * as React from "react";
 import * as common from "../common";
 import { Icon } from "./icon";
-import {Optional} from "./optional";
+import { Optional } from "./optional";
 import { Description } from "./description";
 
-export class NullEditor extends React.Component<common.Props<common.NullSchema, null>, {}> {
+export type Props = common.Props<common.NullSchema, null>;
+
+export class NullEditor extends React.Component<Props, {}> {
     value?: null;
-    constructor(props: common.Props<common.ArraySchema, null>) {
+    constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as null;
     }
     componentDidMount() {
         this.props.updateValue(this.value, true);
+    }
+    shouldComponentUpdate(nextProps: Props, nextState: Props) {
+        return this.props.initialValue !== nextProps.initialValue;
     }
     render() {
         return (

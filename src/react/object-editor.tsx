@@ -5,13 +5,15 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 
-export class ObjectEditor extends React.Component<common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
+export type Props = common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>;
+
+export class ObjectEditor extends React.Component<Props, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
     collapsed = this.props.schema.collapsed;
     value?: { [name: string]: common.ValueType };
     invalidProperties: string[] = [];
     errorMessage: string;
     properties: { name: string; value: common.Schema }[] = [];
-    constructor(props: common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>) {
+    constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
         this.validate();

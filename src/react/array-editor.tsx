@@ -7,14 +7,16 @@ import { Optional } from "./optional";
 import { Description } from "./description";
 import { dragula } from "../../typings/lib";
 
-export class ArrayEditor extends React.Component<common.Props<common.ArraySchema, common.ValueType[]>, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
+export type Props = common.Props<common.ArraySchema, common.ValueType[]>;
+
+export class ArrayEditor extends React.Component<Props, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
     renderSwitch = 1;
     collapsed = this.props.schema.collapsed;
     value?: common.ValueType[];
     drak?: dragula.Drake;
     errorMessage: string;
     invalidIndexes: number[] = [];
-    constructor(props: common.Props<common.ArraySchema, common.ValueType[]>) {
+    constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[];
         this.validate();

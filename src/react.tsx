@@ -34,7 +34,6 @@ export class JSONEditor extends React.Component<Props, {}> {
         this.props.updateValue(value, isValid);
     }
     render() {
-        console.debug("whole editor rendered");
         return <Editor schema={this.props.schema}
             initialValue={this.props.initialValue}
             updateValue={this.updateValue}

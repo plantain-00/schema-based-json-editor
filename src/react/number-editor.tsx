@@ -7,10 +7,12 @@ import { Description } from "./description";
 import { Cancelable } from "lodash";
 export type Cancelable = Cancelable;
 
-export class NumberEditor extends React.Component<common.Props<common.NumberSchema, number>, {}> {
+export type Props = common.Props<common.NumberSchema, number>;
+
+export class NumberEditor extends React.Component<Props, {}> {
     value?: number;
     errorMessage: string;
-    constructor(props: common.Props<common.ArraySchema, number>) {
+    constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as number;
         this.validate();
@@ -23,6 +25,9 @@ export class NumberEditor extends React.Component<common.Props<common.NumberSche
     }
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);
+    }
+    shouldComponentUpdate(nextProps: Props, nextState: Props) {
+        return this.props.initialValue !== nextProps.initialValue;
     }
     render() {
         const input = this.useInput ? (

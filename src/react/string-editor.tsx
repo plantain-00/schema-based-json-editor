@@ -7,12 +7,14 @@ import { Description } from "./description";
 import { Cancelable } from "lodash";
 export type Cancelable = Cancelable;
 
-export class StringEditor extends React.Component<common.Props<common.StringSchema, string>, {}> {
+export type Props = common.Props<common.StringSchema, string>;
+
+export class StringEditor extends React.Component<Props, {}> {
     value?: string;
     errorMessage: string;
     collapsed = false;
     locked = true;
-    constructor(props: common.Props<common.ArraySchema, string>) {
+    constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string;
         this.validate();
@@ -25,6 +27,9 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
     }
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);
+    }
+    shouldComponentUpdate(nextProps: Props, nextState: Props) {
+        return this.props.initialValue !== nextProps.initialValue;
     }
     render() {
         const textarea = this.useTextArea ? (
