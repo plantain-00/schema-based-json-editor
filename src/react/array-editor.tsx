@@ -9,7 +9,7 @@ import { dragula } from "../../typings/lib";
 
 export class ArrayEditor extends React.Component<common.Props<common.ArraySchema, common.ValueType[]>, { value?: common.ValueType[]; collapsed?: boolean; renderSwitch?: number }> {
     renderSwitch = 1;
-    collapsed = false;
+    collapsed = this.props.schema.collapsed;
     value?: common.ValueType[];
     drak?: dragula.Drake;
     errorMessage: string;

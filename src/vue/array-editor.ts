@@ -78,7 +78,7 @@ export class ArrayEditor extends Vue {
     forceHttps?: boolean;
 
     renderSwitch = 1;
-    collapsed = false;
+    collapsed?: boolean = false;
     value?: common.ValueType[] = [];
     drak?: dragula.Drake | null = null;
     errorMessage?: string = "";
@@ -86,6 +86,7 @@ export class ArrayEditor extends Vue {
     invalidIndexes = [];
 
     beforeMount() {
+        this.collapsed = this.schema.collapsed;
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });

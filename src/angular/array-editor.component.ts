@@ -96,7 +96,7 @@ export class ArrayEditorComponent {
     drakContainer: ElementRef;
 
     renderSwitch = 1;
-    collapsed = false;
+    collapsed?: boolean = false;
     value?: common.ValueType[];
     drak?: dragula.Drake;
     errorMessage: string;
@@ -109,6 +109,7 @@ export class ArrayEditorComponent {
         return [];
     }
     ngOnInit() {
+        this.collapsed = this.schema.collapsed;
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[];
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     }

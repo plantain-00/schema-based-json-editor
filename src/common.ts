@@ -23,6 +23,7 @@ export type ObjectSchema = CommonSchema & {
     required?: string[];
     maxProperties?: number;
     minProperties?: number;
+    collapsed?: boolean;
 };
 
 export type ArraySchema = CommonSchema & {
@@ -30,6 +31,7 @@ export type ArraySchema = CommonSchema & {
     items: Schema;
     minItems?: number;
     uniqueItems?: boolean;
+    collapsed?: boolean;
 };
 
 export type NumberSchema = CommonSchema & {

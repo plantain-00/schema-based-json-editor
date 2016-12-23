@@ -6,7 +6,7 @@ import { Optional } from "./optional";
 import { Description } from "./description";
 
 export class ObjectEditor extends React.Component<common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>, { collapsed?: boolean; value?: { [name: string]: common.ValueType } }> {
-    collapsed = false;
+    collapsed = this.props.schema.collapsed;
     value?: { [name: string]: common.ValueType };
     invalidProperties: string[] = [];
     errorMessage: string;
@@ -15,7 +15,7 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
         this.validate();
-        if (!this.collapsed && this.value !== undefined) {
+        if (this.value !== undefined) {
             for (const property in this.props.schema.properties) {
                 const schema = this.props.schema.properties[property];
                 const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
@@ -34,19 +34,6 @@ export class ObjectEditor extends React.Component<common.Props<common.ObjectSche
     render() {
         const childrenElement: JSX.Element[] = [];
         if (!this.collapsed && this.value !== undefined) {
-            Object.keys(this.props.schema.properties).sort((a, b) => {
-                if (this.props.schema.properties[a].propertyOrder === undefined
-                    && this.props.schema.properties[b].propertyOrder === undefined) {
-                    return 0;
-                }
-                if (this.props.schema.properties[a].propertyOrder === undefined) {
-                    return -this.props.schema.properties[b].propertyOrder!;
-                }
-                if (this.props.schema.properties[b].propertyOrder === undefined) {
-                    return this.props.schema.properties[a].propertyOrder!;
-                }
-                return this.props.schema.properties[a].propertyOrder! - this.props.schema.properties[b].propertyOrder;
-            });
             for (const {name: property, value: schema} of this.properties) {
                 childrenElement.push(<Editor key={property}
                     schema={schema}

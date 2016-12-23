@@ -84,16 +84,17 @@ export class ObjectEditorComponent {
     @Input()
     forceHttps?: boolean;
 
-    collapsed = false;
+    collapsed?: boolean = false;
     value?: { [name: string]: common.ValueType };
     properties: { name: string; value: common.Schema }[] = [];
     buttonGroupStyle = common.buttonGroupStyleString;
     invalidProperties: string[] = [];
     errorMessage: string;
     ngOnInit() {
+        this.collapsed = this.schema.collapsed;
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
         this.validate();
-        if (!this.collapsed && this.value !== undefined) {
+        if (this.value !== undefined) {
             for (const property in this.schema.properties) {
                 const schema = this.schema.properties[property];
                 const required = this.schema.required && this.schema.required.some(r => r === property);

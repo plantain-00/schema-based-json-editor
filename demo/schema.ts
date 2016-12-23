@@ -179,6 +179,15 @@ export const schema: common.Schema = {
                 },
             },
         },
+        collapsedObjectExample: {
+            type: "object",
+            properties: {
+                propertyExample1: {
+                    type: "string",
+                },
+            },
+            collapsed: true,
+        },
     },
     required: [
         "stringExample",
@@ -200,6 +209,7 @@ export const schema: common.Schema = {
         "itemTitleExample",
         "optionalObjectExample",
         "propertyOrderExample",
+        "collapsedObjectExample"
     ],
 };
 

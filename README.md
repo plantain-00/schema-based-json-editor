@@ -96,9 +96,9 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 + angular2 component
 + vuejs component
 + common schema fields: title, description, default, readonly, propertyOrder
-+ object schema fields: properties, required, maxProperties, minProperties
++ object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems
-+ number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf
++ number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, collapsed
 + string schema fields: format, enum, minLength, maxLength, pattern
 + image preview, code highlight, markdown preview
 
