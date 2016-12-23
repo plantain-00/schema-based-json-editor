@@ -32,15 +32,15 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         </h3>
         <description [theme]="theme" [message]="schema.description"></description>
         <div *ngIf="!collapsed && value !== undefined" [class]="theme.rowContainer">
-            <editor *ngFor="let property of properties; trackBy: trackByFunction"
-                [schema]="property.value"
-                [title]="property.value.title || property.name"
-                [initialValue]="value[property.name]"
-                (updateValue)="onChange(property.name, $event)"
+            <editor *ngFor="let p of properties; trackBy: trackByFunction"
+                [schema]="p.schema"
+                [title]="p.schema.title || p.property"
+                [initialValue]="value[p.property]"
+                (updateValue)="onChange(p.property, $event)"
                 [theme]="theme"
                 [icon]="icon"
                 [locale]="locale"
-                [required]="isRequired(property.name)"
+                [required]="isRequired(p.property)"
                 [readonly]="isReadOnly"
                 [dragula]="dragula"
                 [md]="md"
@@ -86,7 +86,7 @@ export class ObjectEditorComponent {
 
     collapsed?: boolean = false;
     value?: { [name: string]: common.ValueType };
-    properties: { name: string; value: common.Schema }[] = [];
+    properties: { property: string; schema: common.Schema }[] = [];
     buttonGroupStyle = common.buttonGroupStyleString;
     invalidProperties: string[] = [];
     errorMessage: string;
@@ -101,8 +101,8 @@ export class ObjectEditorComponent {
                 this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
 
                 this.properties.push({
-                    name: property,
-                    value: schema,
+                    property,
+                    schema,
                 });
             }
             this.properties = this.properties.sort(common.compare);

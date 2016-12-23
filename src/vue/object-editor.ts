@@ -32,16 +32,16 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
         </h3>
         <description :theme="theme" :message="schema.description"></description>
         <div v-if="!collapsed && value !== undefined" :class="theme.rowContainer">
-            <editor v-for="(property, i) in properties"
+            <editor v-for="(p, i) in properties"
                 :key="i"
-                :schema="property.value"
-                :title="property.value.title || property.name"
-                :initial-value="value[property.name]"
-                @update-value="onChange(property.name, arguments[0])"
+                :schema="p.schema"
+                :title="p.schema.title || p.property"
+                :initial-value="value[p.property]"
+                @update-value="onChange(p.property, arguments[0])"
                 :theme="theme"
                 :icon="icon"
                 :locale="locale"
-                :required="isRequired(property.name)"
+                :required="isRequired(p.property)"
                 :readonly="isReadOnly"
                 :dragula="dragula"
                 :md="md"
@@ -74,7 +74,7 @@ export class ObjectEditor extends Vue {
     buttonGroupStyle = common.buttonGroupStyleString;
     invalidProperties: string[] = [];
     errorMessage?: string = "";
-    properties: { name: string; value: common.Schema }[] = [];
+    properties: { property: string; schema: common.Schema }[] = [];
 
     beforeMount() {
         this.collapsed = this.schema.collapsed;
@@ -86,8 +86,8 @@ export class ObjectEditor extends Vue {
                 const required = this.schema.required && this.schema.required.some((r: any) => r === property);
                 this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
                 this.properties.push({
-                    name: property,
-                    value: schema,
+                    property,
+                    schema,
                 });
             }
             this.properties = this.properties.sort(common.compare);

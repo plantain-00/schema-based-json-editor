@@ -19,7 +19,7 @@ export class ObjectEditor extends React.Component<Props, State> {
     value?: { [name: string]: common.ValueType };
     invalidProperties: string[] = [];
     errorMessage: string;
-    properties: { name: string; value: common.Schema }[] = [];
+    properties: { property: string; schema: common.Schema }[] = [];
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
@@ -30,8 +30,8 @@ export class ObjectEditor extends React.Component<Props, State> {
                 const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
                 this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
                 this.properties.push({
-                    name: property,
-                    value: schema,
+                    property,
+                    schema,
                 });
             }
             this.properties = this.properties.sort(common.compare);
@@ -41,25 +41,22 @@ export class ObjectEditor extends React.Component<Props, State> {
         this.props.updateValue(this.value, this.invalidProperties.length === 0);
     }
     render() {
-        const childrenElement: JSX.Element[] = [];
-        if (!this.collapsed && this.value !== undefined) {
-            for (const {name: property, value: schema} of this.properties) {
-                childrenElement.push(<Editor key={property}
-                    schema={schema}
-                    title={schema.title || property}
-                    initialValue={this.value[property]}
-                    updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(property, value, isValid)}
-                    theme={this.props.theme}
-                    icon={this.props.icon}
-                    locale={this.props.locale}
-                    required={this.isRequired(property)}
-                    readonly={this.isReadOnly}
-                    dragula={this.props.dragula}
-                    md={this.props.md}
-                    hljs={this.props.hljs}
-                    forceHttps={this.props.forceHttps} />);
-            }
-        }
+        const childrenElement: JSX.Element[] = (!this.collapsed && this.value !== undefined)
+            ? this.properties.map(({ property, schema }) => <Editor key={property}
+                schema={schema}
+                title={schema.title || property}
+                initialValue={this.value![property]}
+                updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(property, value, isValid)}
+                theme={this.props.theme}
+                icon={this.props.icon}
+                locale={this.props.locale}
+                required={this.isRequired(property)}
+                readonly={this.isReadOnly}
+                dragula={this.props.dragula}
+                md={this.props.md}
+                hljs={this.props.hljs}
+                forceHttps={this.props.forceHttps} />)
+            : [];
 
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
