@@ -2,11 +2,10 @@ import "tslib";
 
 import * as toNumber from "lodash/toNumber";
 import * as toInteger from "lodash/toInteger";
-import * as debounce from "lodash/debounce";
 import * as isObject from "lodash/isObject";
 import * as isInteger from "lodash/isInteger";
 
-export { toNumber, toInteger, debounce };
+export { toNumber, toInteger };
 
 export type CommonSchema = {
     $schema?: string;

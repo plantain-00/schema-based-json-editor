@@ -94,13 +94,10 @@ export class StringEditor extends Vue {
     imagePreviewStyle = common.imagePreviewStyleString;
     locked = true;
 
-    onChangeFunction = common.debounce((value: string) => {
-        this.value = value;
+    onChange(e: { target: { value: string } }) {
+        this.value = e.target.value;
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
-    }, 500);
-    onChange(e: { target: { value: string } }) {
-        this.onChangeFunction(e.target.value);
     }
 
     beforeMount() {

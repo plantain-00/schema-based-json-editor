@@ -113,13 +113,10 @@ export class StringEditorComponent {
     buttonGroupStyle = common.buttonGroupStyleString;
     collapsed = false;
     locked = true;
-    onChangeFunction = common.debounce((value: string) => {
-        this.value = value;
+    onChange(e: { target: { value: string } }) {
+        this.value = e.target.value;
         this.validate();
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
-    }, 500);
-    onChange(e: { target: { value: string } }) {
-        this.onChangeFunction(e.target.value);
     }
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string;

@@ -65,13 +65,10 @@ export class NumberEditor extends Vue {
     errorMessage?: string = "";
     buttonGroupStyle = common.buttonGroupStyleString;
 
-    onChangeFunction = common.debounce((value: string) => {
-        this.value = this.schema.type === "integer" ? common.toInteger(value) : common.toNumber(value);
+    onChange(e: { target: { value: string } }) {
+        this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
-    }, 500);
-    onChange(e: { target: { value: string } }) {
-        this.onChangeFunction(e.target.value);
     }
 
     beforeMount() {

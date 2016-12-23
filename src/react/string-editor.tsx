@@ -12,12 +12,6 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
     errorMessage: string;
     collapsed = false;
     locked = true;
-    onChangeFunction = common.debounce((value: string) => {
-        this.value = value;
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
-    }, 500);
     constructor(props: common.Props<common.ArraySchema, string>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string;
@@ -25,7 +19,9 @@ export class StringEditor extends React.Component<common.Props<common.StringSche
     }
     onChange = (e: React.FormEvent<{ value: string }>) => {
         this.value = e.currentTarget.value;
-        this.onChangeFunction(e.currentTarget.value);
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value, !this.errorMessage);
     }
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);

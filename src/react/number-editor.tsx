@@ -10,19 +10,16 @@ export type Cancelable = Cancelable;
 export class NumberEditor extends React.Component<common.Props<common.NumberSchema, number>, {}> {
     value?: number;
     errorMessage: string;
-    onChangeFunction = common.debounce((value: string) => {
-        this.value = this.props.schema.type === "integer" ? common.toInteger(value) : common.toNumber(value);
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
-    }, 500);
     constructor(props: common.Props<common.ArraySchema, number>) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as number;
         this.validate();
     }
     onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.onChangeFunction(e.currentTarget.value);
+        this.value = this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value, !this.errorMessage);
     }
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);

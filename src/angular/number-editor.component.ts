@@ -76,13 +76,10 @@ export class NumberEditorComponent {
     value?: number;
     errorMessage: string;
     buttonGroupStyle = common.buttonGroupStyleString;
-    onChangeFunction = common.debounce((value: string) => {
-        this.value = this.schema.type === "integer" ? common.toInteger(value) : common.toNumber(value);
+    onChange(e: { target: { value: string } }) {
+        this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
         this.validate();
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
-    }, 500);
-    onChange(e: { target: { value: string } }) {
-        this.onChangeFunction(e.target.value);
     }
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number;
