@@ -32,8 +32,14 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
         </h3>
         <description :theme="theme" :message="schema.description"></description>
         <div v-if="!collapsed && value !== undefined" :class="theme.rowContainer">
-            <editor v-for="(p, i) in properties"
-                :key="i"
+            <div :class="theme.row">
+                <input :class="theme.formControl"
+                    @change="onFilterChange($event)"
+                    @keyup="onFilterChange($event)"
+                    :value="filter" />
+            </div>
+            <editor v-for="(p, i) in filteredProperties"
+                :key="p.property"
                 :schema="p.schema"
                 :title="p.schema.title || p.property"
                 :initial-value="value[p.property]"
@@ -75,6 +81,7 @@ export class ObjectEditor extends Vue {
     invalidProperties: string[] = [];
     errorMessage?: string = "";
     properties: { property: string; schema: common.Schema }[] = [];
+    filter = "";
 
     beforeMount() {
         this.collapsed = this.schema.collapsed;
@@ -95,6 +102,9 @@ export class ObjectEditor extends Vue {
         this.$emit("update-value", { value: this.value, isValid: true });
     }
 
+    get filteredProperties() {
+        return this.properties.filter(p => common.filter(p, this.filter));
+    }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
@@ -124,6 +134,9 @@ export class ObjectEditor extends Vue {
         this.validate();
         common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
         this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
+    }
+    onFilterChange(e: { target: { value: string } }) {
+        this.filter = e.target.value;
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfObject(this.value, this.schema, this.locale);

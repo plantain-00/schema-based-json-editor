@@ -32,7 +32,13 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         </h3>
         <description [theme]="theme" [message]="schema.description"></description>
         <div *ngIf="!collapsed && value !== undefined" [class]="theme.rowContainer">
-            <editor *ngFor="let p of properties; trackBy: trackByFunction"
+            <div [class]="theme.row">
+                <input [class]="theme.formControl"
+                    (change)="onFilterChange($event)"
+                    (keyup)="onFilterChange($event)"
+                    [value]="filter" />
+            </div>
+            <editor *ngFor="let p of filteredProperties; trackBy: trackByFunction"
                 [schema]="p.schema"
                 [title]="p.schema.title || p.property"
                 [initialValue]="value[p.property]"
@@ -90,6 +96,7 @@ export class ObjectEditorComponent {
     buttonGroupStyle = common.buttonGroupStyleString;
     invalidProperties: string[] = [];
     errorMessage: string;
+    filter = "";
     ngOnInit() {
         this.collapsed = this.schema.collapsed;
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
@@ -112,8 +119,8 @@ export class ObjectEditorComponent {
     isRequired(property: string) {
         return this.schema.required && this.schema.required.some(r => r === property);
     }
-    trackByFunction(index: number, value: { [name: string]: common.ValueType }) {
-        return index;
+    trackByFunction(index: number, p: { property: string; schema: common.Schema }) {
+        return p.property;
     }
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
@@ -129,8 +136,14 @@ export class ObjectEditorComponent {
         common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
         this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     }
+    onFilterChange(e: { target: { value: string } }) {
+        this.filter = e.target.value;
+    }
     validate() {
         this.errorMessage = common.getErrorMessageOfObject(this.value, this.schema, this.locale);
+    }
+    get filteredProperties() {
+        return this.properties.filter(p => common.filter(p, this.filter));
     }
     get hasDeleteButtonFunction() {
         return this.hasDeleteButton && !this.isReadOnly;

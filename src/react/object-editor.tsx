@@ -11,7 +11,8 @@ export type State = Partial<{
     value?: { [name: string]: common.ValueType };
     invalidProperties: string[];
     errorMessage: string;
-    properties: { name: string; value: common.Schema }[];
+    properties: { property: string; schema: common.Schema }[];
+    filter: string;
 }>;
 
 export class ObjectEditor extends React.Component<Props, State> {
@@ -20,6 +21,7 @@ export class ObjectEditor extends React.Component<Props, State> {
     invalidProperties: string[] = [];
     errorMessage: string;
     properties: { property: string; schema: common.Schema }[] = [];
+    filter: string = "";
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
@@ -42,21 +44,27 @@ export class ObjectEditor extends React.Component<Props, State> {
     }
     render() {
         const childrenElement: JSX.Element[] = (!this.collapsed && this.value !== undefined)
-            ? this.properties.map(({ property, schema }) => <Editor key={property}
-                schema={schema}
-                title={schema.title || property}
-                initialValue={this.value![property]}
-                updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(property, value, isValid)}
-                theme={this.props.theme}
-                icon={this.props.icon}
-                locale={this.props.locale}
-                required={this.isRequired(property)}
-                readonly={this.isReadOnly}
-                dragula={this.props.dragula}
-                md={this.props.md}
-                hljs={this.props.hljs}
-                forceHttps={this.props.forceHttps} />)
+            ? this.properties.filter(p => common.filter(p, this.filter))
+                .map(({ property, schema }) => <Editor key={property}
+                    schema={schema}
+                    title={schema.title || property}
+                    initialValue={this.value![property]}
+                    updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(property, value, isValid)}
+                    theme={this.props.theme}
+                    icon={this.props.icon}
+                    locale={this.props.locale}
+                    required={this.isRequired(property)}
+                    readonly={this.isReadOnly}
+                    dragula={this.props.dragula}
+                    md={this.props.md}
+                    hljs={this.props.hljs}
+                    forceHttps={this.props.forceHttps} />)
             : [];
+        const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.properties.length > 3)
+            ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
+                onChange={this.onFilterChange}
+                defaultValue={this.filter} /></div>
+            : null;
 
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
@@ -83,6 +91,7 @@ export class ObjectEditor extends React.Component<Props, State> {
                 </h3>
                 <Description theme={this.props.theme} message={this.props.schema.description} />
                 <div className={this.props.theme.rowContainer}>
+                    {filterElement}
                     {childrenElement}
                 </div>
                 <Description theme={this.props.theme} message={this.errorMessage} />
@@ -98,6 +107,10 @@ export class ObjectEditor extends React.Component<Props, State> {
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, this.invalidProperties.length === 0);
+    }
+    onFilterChange = (e: React.FormEvent<{ value: string }>) => {
+        this.filter = e.currentTarget.value;
+        this.setState({ filter: this.filter });
     }
     onChange = (property: string, value: common.ValueType, isValid: boolean) => {
         this.value![property] = value;

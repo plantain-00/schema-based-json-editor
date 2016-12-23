@@ -704,3 +704,10 @@ export function compare(a: { property: string; schema: Schema }, b: { property: 
     }
     return 0;
 }
+
+export function filter({property, schema}: { property: string; schema: Schema }, filterValue: string): boolean {
+    return filterValue === ""
+        || property.indexOf(filterValue) !== -1
+        || (!!schema.title && schema.title.indexOf(filterValue) !== -1)
+        || (!!schema.description && schema.description.indexOf(filterValue) !== -1);
+}
