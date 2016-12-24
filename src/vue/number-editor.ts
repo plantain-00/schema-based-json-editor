@@ -11,9 +11,15 @@ export type Cancelable = Cancelable;
         <label :class="theme.label">
             {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+                <icon v-if="!isReadOnly"
+                    @click="toggleLocked()"
+                    :text="locked ? icon.unlock : icon.lock"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
                 <optional :required="required"
                     :value="value"
-                    :isReadOnly="isReadOnly"
+                    :isReadOnly="isReadOnly || isLocked"
                     :theme="theme"
                     :locale="locale"
                     @toggleOptional="toggleOptional()">
@@ -32,7 +38,8 @@ export type Cancelable = Cancelable;
             @change="onChange($event)"
             @keyup="onChange($event)"
             :value="value"
-            :readOnly="isReadOnly" />
+            :readOnly="isReadOnly || isLocked"
+            :disabled="isReadOnly || isLocked" />
         <select v-if="useSelect"
             :class="theme.formControl"
             type="number"
@@ -48,7 +55,7 @@ export type Cancelable = Cancelable;
         <description :theme="theme" :message="errorMessage"></description>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "parentIsLocked"],
 })
 export class NumberEditor extends Vue {
     schema: common.NumberSchema;
@@ -60,10 +67,12 @@ export class NumberEditor extends Vue {
     readonly: boolean;
     required: boolean;
     hasDeleteButton: boolean;
+    parentIsLocked?: boolean;
 
     value?: number = 0;
     errorMessage?: string = "";
     buttonGroupStyle = common.buttonGroupStyleString;
+    locked = true;
 
     onChange(e: { target: { value: string } }) {
         this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
@@ -78,16 +87,19 @@ export class NumberEditor extends Vue {
     }
 
     get useInput() {
-        return this.value !== undefined && (this.schema.enum === undefined || this.isReadOnly);
+        return this.value !== undefined && (this.schema.enum === undefined || this.isReadOnly || this.isLocked);
     }
     get useSelect() {
-        return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
+        return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly && !this.isLocked);
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
+    get isLocked() {
+        return this.parentIsLocked !== false && this.locked;
+    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly;
+        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
@@ -100,5 +112,8 @@ export class NumberEditor extends Vue {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }
+    toggleLocked() {
+        this.locked = !this.locked;
     }
 }

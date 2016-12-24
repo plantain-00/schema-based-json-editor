@@ -9,9 +9,15 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
         <h3>
             {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyleString">
+                <icon v-if="!isReadOnly"
+                    @click="toggleLocked()"
+                    :text="locked ? icon.unlock : icon.lock"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
                 <optional :required="required"
                     :value="value"
-                    :isReadOnly="isReadOnly"
+                    :isReadOnly="isReadOnly || isLocked"
                     :theme="theme"
                     :locale="locale"
                     @toggleOptional="toggleOptional()">
@@ -59,14 +65,15 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
                     :dragula="dragula"
                     :md="md"
                     :hljs="hljs"
-                    :forceHttps="forceHttps">
+                    :force-https="forceHttps"
+                    :parent-is-locked="isLocked">
                 </editor>
             </div>
         </div>
         <description :theme="theme" :message="errorMessage"></description>
     </div>
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps", "parentIsLocked"],
 })
 export class ArrayEditor extends Vue {
     schema: common.ArraySchema;
@@ -82,6 +89,7 @@ export class ArrayEditor extends Vue {
     md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljs;
     forceHttps?: boolean;
+    parentIsLocked?: boolean;
 
     renderSwitch = 1;
     collapsed?: boolean = false;
@@ -91,6 +99,7 @@ export class ArrayEditor extends Vue {
     buttonGroupStyleString = common.buttonGroupStyleString;
     invalidIndexes = [];
     filter = "";
+    locked = true;
 
     beforeMount() {
         this.collapsed = this.schema.collapsed;
@@ -112,11 +121,14 @@ export class ArrayEditor extends Vue {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
+    get isLocked() {
+        return this.parentIsLocked !== false && this.locked;
+    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly;
+        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
     }
     get hasAddButton() {
-        return !this.isReadOnly && this.value !== undefined;
+        return !this.isReadOnly && this.value !== undefined && !this.isLocked;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
@@ -153,6 +165,9 @@ export class ArrayEditor extends Vue {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as common.ValueType[] | undefined;
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
+    }
+    toggleLocked() {
+        this.locked = !this.locked;
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);

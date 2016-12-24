@@ -9,9 +9,15 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
         <h3>
             {{titleToShow}}
             <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+                <icon v-if="!isReadOnly"
+                    @click="toggleLocked()"
+                    :text="locked ? icon.unlock : icon.lock"
+                    :theme="theme"
+                    :icon="icon">
+                </icon>
                 <optional :required="required"
                     :value="value"
-                    :isReadOnly="isReadOnly"
+                    :isReadOnly="isReadOnly || isLocked"
                     :theme="theme"
                     :locale="locale"
                     @toggleOptional="toggleOptional()">
@@ -52,13 +58,14 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
                 :dragula="dragula"
                 :md="md"
                 :hljs="hljs"
-                :forceHttps="forceHttps">
+                :force-https="forceHttps"
+                :parent-is-locked="isLocked">
             </editor>
         </div>
         <description :theme="theme" :message="errorMessage"></description>
     </div >
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps", "parentIsLocked"],
 })
 export class ObjectEditor extends Vue {
     schema: common.ObjectSchema;
@@ -74,6 +81,7 @@ export class ObjectEditor extends Vue {
     md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljs;
     forceHttps?: boolean;
+    parentIsLocked?: boolean;
 
     collapsed?: boolean = false;
     value?: { [name: string]: common.ValueType } = {};
@@ -82,6 +90,7 @@ export class ObjectEditor extends Vue {
     errorMessage?: string = "";
     properties: { property: string; schema: common.Schema }[] = [];
     filter = "";
+    locked = true;
 
     beforeMount() {
         this.collapsed = this.schema.collapsed;
@@ -108,8 +117,11 @@ export class ObjectEditor extends Vue {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
+    get isLocked() {
+        return this.parentIsLocked !== false && this.locked;
+    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly;
+        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
     }
     get titleToShow() {
         if (this.hasDeleteButton) {
@@ -131,6 +143,9 @@ export class ObjectEditor extends Vue {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as { [name: string]: common.ValueType } | undefined;
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
+    }
+    toggleLocked() {
+        this.locked = !this.locked;
     }
     onChange(property: string, {value, isValid}: common.ValidityValue<common.ValueType>) {
         this.value![property] = value;

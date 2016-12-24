@@ -8,9 +8,15 @@ import * as common from "../common";
         <label [class]="theme.label">
             {{titleToShow}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
+                <icon *ngIf="!isReadOnly"
+                    (onClick)="toggleLocked()"
+                    [text]="locked ? icon.unlock : icon.lock"
+                    [theme]="theme"
+                    [icon]="icon">
+                </icon>
                 <optional [required]="required"
                     [value]="value"
-                    [isReadOnly]="isReadOnly"
+                    [isReadOnly]="isReadOnly || isLocked"
                     [theme]="theme"
                     [locale]="locale"
                     (toggleOptional)="toggleOptional()">
@@ -29,7 +35,7 @@ import * as common from "../common";
                     <input type="radio"
                         (change)="onChange($event)"
                         [checked]="value"
-                        [disabled]="isReadOnly" />
+                        [disabled]="isReadOnly || isLocked" />
                     {{locale.info.true}}
                 </label>
             </div>
@@ -38,7 +44,7 @@ import * as common from "../common";
                     <input type="radio"
                         (change)="onChange($event)"
                         [checked]="!value"
-                        [disabled]="isReadOnly" />
+                        [disabled]="isReadOnly || isLocked" />
                     {{locale.info.false}}
                 </label>
             </div>
@@ -70,9 +76,12 @@ export class BooleanEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
+    @Input()
+    parentIsLocked?: boolean;
 
     value?: boolean;
     buttonGroupStyle = common.buttonGroupStyleString;
+    locked = true;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
         this.updateValue.emit({ value: this.value, isValid: true });
@@ -88,10 +97,16 @@ export class BooleanEditorComponent {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
+    get isLocked() {
+        return this.parentIsLocked !== false && this.locked;
+    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly;
+        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
+    }
+    toggleLocked = () => {
+        this.locked = !this.locked;
     }
 }

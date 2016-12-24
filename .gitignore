@@ -45,3 +45,4 @@ demo/fonts
 demo/css/
 spec/**/*.js
 dist/
+demo/**/index.html

@@ -397,6 +397,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljsLib;
     forceHttps?: boolean;
+    parentIsLocked?: boolean;
 }
 
 export function isSame(value1: ValueType, value2: ValueType) {

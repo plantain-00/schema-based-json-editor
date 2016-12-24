@@ -9,9 +9,15 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         <h3>
             {{titleToShow}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyleString">
+                <icon *ngIf="!isReadOnly"
+                    (onClick)="toggleLocked()"
+                    [text]="locked ? icon.unlock : icon.lock"
+                    [theme]="theme"
+                    [icon]="icon">
+                </icon>
                 <optional [required]="required"
                     [value]="value"
-                    [isReadOnly]="isReadOnly"
+                    [isReadOnly]="isReadOnly || isLocked"
                     [theme]="theme"
                     [locale]="locale"
                     (toggleOptional)="toggleOptional()">
@@ -58,7 +64,8 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
                     [dragula]="dragula"
                     [md]="md"
                     [hljs]="hljs"
-                    [forceHttps]="forceHttps">
+                    [forceHttps]="forceHttps"
+                    [parentIsLocked]="isLocked">
                 </editor>
             </div>
         </div>
@@ -97,6 +104,8 @@ export class ArrayEditorComponent {
     hljs?: typeof hljs;
     @Input()
     forceHttps?: boolean;
+    @Input()
+    parentIsLocked?: boolean;
 
     @ViewChild("drakContainer")
     drakContainer: ElementRef;
@@ -109,6 +118,7 @@ export class ArrayEditorComponent {
     buttonGroupStyleString = common.buttonGroupStyleString;
     invalidIndexes: number[] = [];
     filter = "";
+    locked = true;
     get getValue() {
         if (this.value !== undefined && !this.collapsed) {
             return this.value;
@@ -130,11 +140,14 @@ export class ArrayEditorComponent {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
+    get isLocked() {
+        return this.parentIsLocked !== false && this.locked;
+    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly;
+        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
     }
     get hasAddButton() {
-        return !this.isReadOnly && this.value !== undefined;
+        return !this.isReadOnly && this.value !== undefined && !this.isLocked;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
@@ -189,5 +202,8 @@ export class ArrayEditorComponent {
     }
     onFilterChange(e: { target: { value: string } }) {
         this.filter = e.target.value;
+    }
+    toggleLocked = () => {
+        this.locked = !this.locked;
     }
 }

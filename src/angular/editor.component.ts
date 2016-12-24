@@ -20,7 +20,8 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
-        [forceHttps]="forceHttps">
+        [forceHttps]="forceHttps"
+        [parentIsLocked]="parentIsLocked">
     </object-editor>
     <array-editor *ngIf="schema.type === 'array'"
         [schema]="schema"
@@ -37,7 +38,8 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
-        [forceHttps]="forceHttps">
+        [forceHttps]="forceHttps"
+        [parentIsLocked]="parentIsLocked">
     </array-editor>
     <number-editor *ngIf="schema.type === 'number' || schema.type === 'integer'"
         [schema]="schema"
@@ -50,7 +52,8 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton">
+        [hasDeleteButton]="hasDeleteButton"
+        [parentIsLocked]="parentIsLocked">
     </number-editor>
     <boolean-editor *ngIf="schema.type === 'boolean'"
         [schema]="schema"
@@ -63,7 +66,8 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         [required]="required"
         (updateValue)="updateValue.emit($event)"
         (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton">
+        [hasDeleteButton]="hasDeleteButton"
+        [parentIsLocked]="parentIsLocked">
     </boolean-editor>
     <null-editor *ngIf="schema.type === 'null'"
         [schema]="schema"
@@ -93,7 +97,8 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         [dragula]="dragula"
         [md]="md"
         [hljs]="hljs"
-        [forceHttps]="forceHttps">
+        [forceHttps]="forceHttps"
+        [parentIsLocked]="parentIsLocked">
     </string-editor>
     `,
 })
@@ -128,4 +133,6 @@ export class EditorComponent {
     hljs?: typeof hljs;
     @Input()
     forceHttps?: boolean;
+    @Input()
+    parentIsLocked?: boolean;
 }

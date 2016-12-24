@@ -16,6 +16,7 @@ export type State = Partial<{
     errorMessage: string;
     invalidIndexes: number[];
     filter: string;
+    locked: boolean;
 }>;
 
 export class ArrayEditor extends React.Component<Props, State> {
@@ -26,6 +27,7 @@ export class ArrayEditor extends React.Component<Props, State> {
     errorMessage: string;
     invalidIndexes: number[] = [];
     filter: string = "";
+    locked = true;
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[];
@@ -45,7 +47,6 @@ export class ArrayEditor extends React.Component<Props, State> {
                 }
             });
         }
-
     }
     componentWillUnmount() {
         if (this.drak) {
@@ -70,7 +71,8 @@ export class ArrayEditor extends React.Component<Props, State> {
                         dragula={this.props.dragula}
                         md={this.props.md}
                         hljs={this.props.hljs}
-                        forceHttps={this.props.forceHttps} />
+                        forceHttps={this.props.forceHttps}
+                        parentIsLocked={this.isLocked} />
                 </div>
             ));
         const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
@@ -84,9 +86,14 @@ export class ArrayEditor extends React.Component<Props, State> {
                 <h3>
                     {this.titleToShow}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+                        <Icon valid={!this.isReadOnly}
+                            onClick={this.toggleLocked}
+                            text={this.locked ? this.props.icon.unlock : this.props.icon.lock}
+                            theme={this.props.theme}
+                            icon={this.props.icon} />
                         <Optional required={this.props.required}
                             value={this.value}
-                            isReadOnly={this.isReadOnly}
+                            isReadOnly={this.isReadOnly || this.isLocked}
                             theme={this.props.theme}
                             locale={this.props.locale}
                             toggleOptional={this.toggleOptional} />
@@ -126,6 +133,10 @@ export class ArrayEditor extends React.Component<Props, State> {
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
+    toggleLocked = () => {
+        this.locked = !this.locked;
+        this.setState({ locked: this.locked });
+    }
     validate() {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.props.schema, this.props.locale);
     }
@@ -155,11 +166,14 @@ export class ArrayEditor extends React.Component<Props, State> {
     get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
     }
+    get isLocked() {
+        return this.props.parentIsLocked !== false && this.locked;
+    }
     get hasDeleteButtonFunction() {
-        return this.props.onDelete && !this.isReadOnly;
+        return this.props.onDelete && !this.isReadOnly && !this.isLocked;
     }
     get hasAddButton() {
-        return !this.isReadOnly && this.value !== undefined;
+        return !this.isReadOnly && this.value !== undefined && !this.isLocked;
     }
     get getValue() {
         if (this.value !== undefined && !this.collapsed) {

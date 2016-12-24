@@ -16,9 +16,15 @@ export type Cancelable = Cancelable;
         <label [class]="theme.label">
             {{titleToShow}}
             <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
+                <icon *ngIf="!isReadOnly"
+                    (onClick)="toggleLocked()"
+                    [text]="locked ? icon.unlock : icon.lock"
+                    [theme]="theme"
+                    [icon]="icon">
+                </icon>
                 <optional [required]="required"
                     [value]="value"
-                    [isReadOnly]="isReadOnly"
+                    [isReadOnly]="isReadOnly || isLocked"
                     [theme]="theme"
                     [locale]="locale"
                     (toggleOptional)="toggleOptional()">
@@ -35,12 +41,6 @@ export type Cancelable = Cancelable;
                     [theme]="theme"
                     [icon]="icon">
                 </icon>
-                <icon *ngIf="hasLockButton"
-                    (onClick)="toggleLocked()"
-                    [text]="locked ? icon.unlock : icon.lock"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
             </div>
         </label>
         <textarea *ngIf="useTextArea"
@@ -48,14 +48,16 @@ export type Cancelable = Cancelable;
             (change)="onChange($event)"
             (keyup)="onChange($event)"
             rows="10"
-            [readOnly]="isReadOnly">{{value}}</textarea>
+            [readOnly]="isReadOnly || isLocked"
+            [disabled]="isReadOnly || isLocked">{{value}}</textarea>
         <input *ngIf="useInput"
             [class]="theme.formControl"
             [type]="schema.format"
             (change)="onChange($event)"
             (keyup)="onChange($event)"
             [defaultValue]="value"
-            [readOnly]="isReadOnly" />
+            [readOnly]="isReadOnly || isLocked"
+            [disabled]="isReadOnly || isLocked" />
         <select *ngIf="useSelect"
             [class]="theme.formControl"
             (change)="onChange($event)">
@@ -107,6 +109,8 @@ export class StringEditorComponent {
     hljs?: typeof hljs;
     @Input()
     forceHttps?: boolean;
+    @Input()
+    parentIsLocked?: boolean;
 
     value?: string;
     errorMessage: string;
@@ -126,21 +130,16 @@ export class StringEditorComponent {
     get useTextArea() {
         const isUnlockedCodeOrMarkdown = (this.schema.format === "code" || this.schema.format === "markdown") && (!this.locked);
         return this.value !== undefined
-            && (this.schema.enum === undefined || this.isReadOnly)
+            && (this.schema.enum === undefined || this.isReadOnly || this.isLocked)
             && (this.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
     }
     get useInput() {
         return this.value !== undefined
-            && (this.schema.enum === undefined || this.isReadOnly)
+            && (this.schema.enum === undefined || this.isReadOnly || this.isLocked)
             && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
     }
     get useSelect() {
-        return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly;
-    }
-    get hasLockButton() {
-        return this.value !== undefined
-            && (this.schema.enum === undefined || this.isReadOnly)
-            && (this.schema.format === "code" || this.schema.format === "markdown");
+        return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly && !this.isLocked;
     }
     get canPreviewImage() {
         return common.isImageUrl(this.value);
@@ -166,8 +165,11 @@ export class StringEditorComponent {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
+    get isLocked() {
+        return this.parentIsLocked !== false && this.locked;
+    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly;
+        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
     }
     get willPreviewImage() {
         return this.value && !this.collapsed && this.canPreviewImage;

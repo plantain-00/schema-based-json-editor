@@ -18,7 +18,8 @@ import Component from "vue-class-component";
         :dragula="dragula"
         :md="md"
         :hljs="hljs"
-        :forceHttps="forceHttps">
+        :forceHttps="forceHttps"
+        :parent-is-locked="parentIsLocked">
     </object-editor>
     <array-editor v-else-if="schema.type === 'array'"
         :schema="schema"
@@ -35,7 +36,8 @@ import Component from "vue-class-component";
         :dragula="dragula"
         :md="md"
         :hljs="hljs"
-        :forceHttps="forceHttps">
+        :forceHttps="forceHttps"
+        :parent-is-locked="parentIsLocked">
     </array-editor>
     <number-editor v-else-if="schema.type === 'number' || schema.type === 'integer'"
         :schema="schema"
@@ -48,7 +50,8 @@ import Component from "vue-class-component";
         :required="required"
         @update-value="$emit('update-value', arguments[0])"
         @delete="$emit('delete')"
-        :has-delete-button="hasDeleteButton">
+        :has-delete-button="hasDeleteButton"
+        :parent-is-locked="parentIsLocked">
     </number-editor>
     <boolean-editor v-else-if="schema.type === 'boolean'"
         :schema="schema"
@@ -61,7 +64,8 @@ import Component from "vue-class-component";
         :required="required"
         @update-value="$emit('update-value', arguments[0])"
         @delete="$emit('delete')"
-        :has-delete-button="hasDeleteButton">
+        :has-delete-button="hasDeleteButton"
+        :parent-is-locked="parentIsLocked">
     </boolean-editor>
     <null-editor v-else-if="schema.type === 'null'"
         :schema="schema"
@@ -91,10 +95,11 @@ import Component from "vue-class-component";
         :dragula="dragula"
         :md="md"
         :hljs="hljs"
-        :forceHttps="forceHttps">
+        :forceHttps="forceHttps"
+        :parent-is-locked="parentIsLocked">
     </string-editor>
     `,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps", "parentIsLocked"],
 })
 export class Editor extends Vue {
 

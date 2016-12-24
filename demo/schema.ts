@@ -117,7 +117,7 @@ export const schema: common.Schema = {
         markdownExample: {
             type: "string",
             format: "markdown",
-            default: "### title\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
+            default: "###### markdown title and code example\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```",
         },
         codeExample: {
             type: "string",
