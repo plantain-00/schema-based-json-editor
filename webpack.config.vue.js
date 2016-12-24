@@ -3,13 +3,13 @@ const path = require("path");
 
 module.exports = {
     entry: {
-        react: "./demo/react/index",
-        angular: "./demo/angular/index",
-        vue: "./demo/vue/index"
+        vue: "./demo/vue/index",
+        "vue.vendor": "./demo/vue/vendor",
+        "vue.editor": "./demo/vue/editor"
     },
     output: {
         path: path.join(__dirname, "demo"),
-        filename: "[name].bundle.js"
+        filename: "[name].js"
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -26,7 +26,10 @@ module.exports = {
         //     output: {
         //         comments: false,
         //     },
-        // })
+        // }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ["vue", "vue.editor", "vue.vendor"]
+        }),
     ],
     resolve: {
         alias: {

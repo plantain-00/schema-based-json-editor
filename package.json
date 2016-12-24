@@ -4,13 +4,13 @@
   "description": "A reactjs, angular2 and vuejs component of schema based json editor.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run tsc && tsc -p demo && webpack && npm run rev",
+    "build": "npm run tsc && tsc -p demo && webpack --config webpack.config.react.js && webpack --config webpack.config.angular.js && webpack --config webpack.config.vue.js && npm run rev",
     "tsc": "tsc -p src",
     "lint": "tslint \"src/**/*.tsx\" \"demo/**/*.tsx\" \"src/**/*.ts\" \"demo/**/*.ts\" \"spec/**/*.ts\"",
     "static": "mkdir ./demo/css && cp -r ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cp -r ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/fonts/. ./demo/fonts && mkdir ./demo/css/highlight.js && cp -r ./node_modules/highlight.js/styles/default.css ./demo/css/highlight.js/",
     "test": "tsc -p spec && jasmine",
     "rev": "npm run clean-rev && rev-static",
-    "clean-rev": "rm -f demo/react.bundle-*.js demo/vue.bundle-*.js demo/angular.bundle-*.js"
+    "clean-rev": "rm -f demo/react*-*.js demo/vue*-*.js demo/angular*-*.js"
   },
   "repository": {
     "type": "git",
