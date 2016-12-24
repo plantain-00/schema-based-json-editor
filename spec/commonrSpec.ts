@@ -160,23 +160,23 @@ describe("replaceProtocal", () => {
 describe("findTitle", () => {
     it("should be true", () => {
         expect(common.findTitle(undefined, [
-            { name: "a", value: { type: "string" } },
+            { property: "a", schema: { type: "string" } },
         ])).toEqual(undefined);
         expect(common.findTitle({ a: "b" }, [
-            { name: "a", value: { type: "string" } },
+            { property: "a", schema: { type: "string" } },
         ])).toEqual("b");
         expect(common.findTitle({ a: 1 }, [
-            { name: "a", value: { type: "number" } },
+            { property: "a", schema: { type: "number" } },
         ])).toEqual(undefined);
         expect(common.findTitle({ a: "", b: "c" }, [
-            { name: "a", value: { type: "string" } },
-            { name: "b", value: { type: "string" } },
+            { property: "a", schema: { type: "string" } },
+            { property: "b", schema: { type: "string" } },
         ])).toEqual("c");
         expect(common.findTitle({ a: "bbbbbcccccdddddeeeeeffff" }, [
-            { name: "a", value: { type: "string" } },
+            { property: "a", schema: { type: "string" } },
         ])).toEqual("bbbbbcccccdddddeeeee...");
         expect(common.findTitle({ a: "bbbbbcccccdddddeeeeefff" }, [
-            { name: "a", value: { type: "string" } },
+            { property: "a", schema: { type: "string" } },
         ])).toEqual("bbbbbcccccdddddeeeeefff");
     });
 });
@@ -191,9 +191,9 @@ describe("getTitle", () => {
 
 describe("compare", () => {
     it("should be true", () => {
-        expect(common.compare({ name: "a", value: { type: "string", propertyOrder: 1 } }, { name: "a", value: { type: "string", propertyOrder: 3 } })).toEqual(-2);
-        expect(common.compare({ name: "a", value: { type: "string" } }, { name: "a", value: { type: "string", propertyOrder: 3 } })).toEqual(1);
-        expect(common.compare({ name: "a", value: { type: "string", propertyOrder: 1 } }, { name: "a", value: { type: "string" } })).toEqual(-1);
-        expect(common.compare({ name: "a", value: { type: "string" } }, { name: "a", value: { type: "string" } })).toEqual(0);
+        expect(common.compare({ property: "a", schema: { type: "string", propertyOrder: 1 } }, { property: "a", schema: { type: "string", propertyOrder: 3 } })).toEqual(-2);
+        expect(common.compare({ property: "a", schema: { type: "string" } }, { property: "a", schema: { type: "string", propertyOrder: 3 } })).toEqual(1);
+        expect(common.compare({ property: "a", schema: { type: "string", propertyOrder: 1 } }, { property: "a", schema: { type: "string" } })).toEqual(-1);
+        expect(common.compare({ property: "a", schema: { type: "string" } }, { property: "a", schema: { type: "string" } })).toEqual(0);
     });
 });
