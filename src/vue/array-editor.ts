@@ -38,17 +38,23 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
         </h3>
         <description :theme="theme" :message="schema.description" :notEmpty="true"></description>
         <div :class="theme.rowContainer">
-            <div v-for="(item, i) in getValue" :key="(1 + i) * renderSwitch" :data-index="i" :class="theme.rowContainer">
+            <div v-if="showFilter" :class="theme.row">
+                <input :class="theme.formControl"
+                    @change="onFilterChange($event)"
+                    @keyup="onFilterChange($event)"
+                    :value="filter" />
+            </div>
+            <div v-for="item in filteredValues" :key="(1 + item.i) * renderSwitch" :data-index="item.i" :class="theme.rowContainer">
                 <editor :schema="schema.items"
-                    :title="i"
-                    :initial-value="value[i]"
-                    @update-value="onChange(i, arguments[0])"
+                    :title="item.i"
+                    :initial-value="value[item.i]"
+                    @update-value="onChange(item.i, arguments[0])"
                     :theme="theme"
                     :icon="icon"
                     :locale="locale"
                     :required="true"
                     :readonly="isReadOnly"
-                    @delete="onDeleteFunction(i)"
+                    @delete="onDeleteFunction(item.i)"
                     :has-delete-button="true"
                     :dragula="dragula"
                     :md="md"
@@ -84,6 +90,7 @@ export class ArrayEditor extends Vue {
     errorMessage?: string = "";
     buttonGroupStyleString = common.buttonGroupStyleString;
     invalidIndexes = [];
+    filter = "";
 
     beforeMount() {
         this.collapsed = this.schema.collapsed;
@@ -92,6 +99,10 @@ export class ArrayEditor extends Vue {
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
     }
 
+    get filteredValues() {
+        return this.getValue.map((p, i) => { return { p, i }; })
+            .filter(({p, i}) => common.filterArray(p, i, this.schema.items, this.filter));
+    }
     get getValue() {
         if (this.value !== undefined && !this.collapsed) {
             return this.value;
@@ -109,6 +120,9 @@ export class ArrayEditor extends Vue {
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
+    }
+    get showFilter() {
+        return this.getValue.length >= common.minItemCountIfNeedFilter;
     }
 
     beforeDestroy() {
@@ -159,5 +173,7 @@ export class ArrayEditor extends Vue {
         common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     }
-
+    onFilterChange(e: { target: { value: string } }) {
+        this.filter = e.target.value;
+    }
 }

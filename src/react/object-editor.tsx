@@ -44,7 +44,7 @@ export class ObjectEditor extends React.Component<Props, State> {
     }
     render() {
         const childrenElement: JSX.Element[] = (!this.collapsed && this.value !== undefined)
-            ? this.properties.filter(p => common.filter(p, this.filter))
+            ? this.properties.filter(p => common.filterObject(p, this.filter))
                 .map(({ property, schema }) => <Editor key={property}
                     schema={schema}
                     title={schema.title || property}
@@ -60,7 +60,7 @@ export class ObjectEditor extends React.Component<Props, State> {
                     hljs={this.props.hljs}
                     forceHttps={this.props.forceHttps} />)
             : [];
-        const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.properties.length > 3)
+        const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
             ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
                 onChange={this.onFilterChange}
                 defaultValue={this.filter} /></div>
@@ -136,5 +136,8 @@ export class ObjectEditor extends React.Component<Props, State> {
             return common.getTitle(common.findTitle(this.value, this.properties), this.props.title, this.props.schema.title);
         }
         return common.getTitle(this.props.title, this.props.schema.title);
+    }
+    get showFilter() {
+        return this.properties.length >= common.minItemCountIfNeedFilter;
     }
 }

@@ -137,6 +137,7 @@ export const schema: common.Schema = {
                     },
                 },
                 required: ["propertyExample1", "propertyExample2"],
+                collapsed: true,
             },
             default: [
                 {
@@ -146,6 +147,22 @@ export const schema: common.Schema = {
                 {
                     propertyExample1: "bar",
                     propertyExample2: 2,
+                },
+                {
+                    propertyExample1: "baz",
+                    propertyExample2: 3,
+                },
+                {
+                    propertyExample1: "abc",
+                    propertyExample2: 4,
+                },
+                {
+                    propertyExample1: "def",
+                    propertyExample2: 5,
+                },
+                {
+                    propertyExample1: "ghi",
+                    propertyExample2: 6,
                 },
             ],
         },

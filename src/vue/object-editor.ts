@@ -32,7 +32,7 @@ import { dragula, hljs, MarkdownIt } from "../../typings/lib";
         </h3>
         <description :theme="theme" :message="schema.description"></description>
         <div v-if="!collapsed && value !== undefined" :class="theme.rowContainer">
-            <div :class="theme.row">
+            <div v-if="showFilter" :class="theme.row">
                 <input :class="theme.formControl"
                     @change="onFilterChange($event)"
                     @keyup="onFilterChange($event)"
@@ -103,7 +103,7 @@ export class ObjectEditor extends Vue {
     }
 
     get filteredProperties() {
-        return this.properties.filter(p => common.filter(p, this.filter));
+        return this.properties.filter(p => common.filterObject(p, this.filter));
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
@@ -116,6 +116,9 @@ export class ObjectEditor extends Vue {
             return common.getTitle(common.findTitle(this.value, this.properties), this.title, this.schema.title);
         }
         return common.getTitle(this.title, this.schema.title);
+    }
+    get showFilter() {
+        return this.properties.length >= common.minItemCountIfNeedFilter;
     }
 
     isRequired(property: string) {

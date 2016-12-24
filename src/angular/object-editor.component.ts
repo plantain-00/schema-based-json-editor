@@ -32,7 +32,7 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         </h3>
         <description [theme]="theme" [message]="schema.description"></description>
         <div *ngIf="!collapsed && value !== undefined" [class]="theme.rowContainer">
-            <div [class]="theme.row">
+            <div *ngIf="showFilter" [class]="theme.row">
                 <input [class]="theme.formControl"
                     (change)="onFilterChange($event)"
                     (keyup)="onFilterChange($event)"
@@ -143,7 +143,7 @@ export class ObjectEditorComponent {
         this.errorMessage = common.getErrorMessageOfObject(this.value, this.schema, this.locale);
     }
     get filteredProperties() {
-        return this.properties.filter(p => common.filter(p, this.filter));
+        return this.properties.filter(p => common.filterObject(p, this.filter));
     }
     get hasDeleteButtonFunction() {
         return this.hasDeleteButton && !this.isReadOnly;
@@ -156,5 +156,8 @@ export class ObjectEditorComponent {
             return common.getTitle(common.findTitle(this.value, this.properties), this.title, this.schema.title);
         }
         return common.getTitle(this.title, this.schema.title);
+    }
+    get showFilter() {
+        return this.properties.length >= common.minItemCountIfNeedFilter;
     }
 }

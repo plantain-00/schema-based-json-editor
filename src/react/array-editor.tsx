@@ -15,6 +15,7 @@ export type State = Partial<{
     drak?: dragula.Drake;
     errorMessage: string;
     invalidIndexes: number[];
+    filter: string;
 }>;
 
 export class ArrayEditor extends React.Component<Props, State> {
@@ -24,6 +25,7 @@ export class ArrayEditor extends React.Component<Props, State> {
     drak?: dragula.Drake;
     errorMessage: string;
     invalidIndexes: number[] = [];
+    filter: string = "";
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[];
@@ -51,24 +53,31 @@ export class ArrayEditor extends React.Component<Props, State> {
         }
     }
     render() {
-        const childrenElement: JSX.Element[] = this.getValue.map((e, i) => (
-            <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
-                <Editor schema={this.props.schema.items}
-                    title={String(i)}
-                    initialValue={this.getValue[i]}
-                    updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(i, value, isValid)}
-                    theme={this.props.theme}
-                    icon={this.props.icon}
-                    locale={this.props.locale}
-                    required={true}
-                    readonly={this.isReadOnly}
-                    onDelete={() => this.onDeleteFunction(i)}
-                    dragula={this.props.dragula}
-                    md={this.props.md}
-                    hljs={this.props.hljs}
-                    forceHttps={this.props.forceHttps} />
-            </div>
-        ));
+        const childrenElement: JSX.Element[] = this.getValue.map((p, i) => { return { p, i }; })
+            .filter(({p, i}) => common.filterArray(p, i, this.props.schema.items, this.filter))
+            .map(({p, i}) => (
+                <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
+                    <Editor schema={this.props.schema.items}
+                        title={String(i)}
+                        initialValue={this.getValue[i]}
+                        updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(i, value, isValid)}
+                        theme={this.props.theme}
+                        icon={this.props.icon}
+                        locale={this.props.locale}
+                        required={true}
+                        readonly={this.isReadOnly}
+                        onDelete={() => this.onDeleteFunction(i)}
+                        dragula={this.props.dragula}
+                        md={this.props.md}
+                        hljs={this.props.hljs}
+                        forceHttps={this.props.forceHttps} />
+                </div>
+            ));
+        const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
+            ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
+                onChange={this.onFilterChange}
+                defaultValue={this.filter} /></div>
+            : null;
 
         return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
@@ -100,6 +109,7 @@ export class ArrayEditor extends React.Component<Props, State> {
                 </h3>
                 <Description theme={this.props.theme} message={this.props.schema.description} notEmpty={true} />
                 <div className={this.props.theme.rowContainer}>
+                    {filterElement}
                     {childrenElement}
                 </div>
                 <Description theme={this.props.theme} message={this.errorMessage} />
@@ -131,6 +141,10 @@ export class ArrayEditor extends React.Component<Props, State> {
         common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
+    onFilterChange = (e: React.FormEvent<{ value: string }>) => {
+        this.filter = e.currentTarget.value;
+        this.setState({ filter: this.filter });
+    }
     onDeleteFunction = (i: number) => {
         this.value!.splice(i, 1);
         this.renderSwitch = -this.renderSwitch;
@@ -155,5 +169,8 @@ export class ArrayEditor extends React.Component<Props, State> {
     }
     get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);
+    }
+    get showFilter() {
+        return this.getValue.length >= common.minItemCountIfNeedFilter;
     }
 }

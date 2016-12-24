@@ -682,6 +682,23 @@ export function findTitle(value: { [name: string]: ValueType } | undefined, prop
     return undefined;
 }
 
+function findTitleFromSchema(value: { [name: string]: ValueType } | undefined, schema: ObjectSchema) {
+    if (value) {
+        for (const property in schema.properties) {
+            const title = value[property];
+            if (typeof title === "string" && title.length > 0) {
+                if (title.length > 23) {
+                    return title.substring(0, 20) + "...";
+                }
+                return title;
+            } else {
+                continue;
+            }
+        }
+    }
+    return undefined;
+}
+
 export function getTitle(...titles: any[]) {
     for (const title of titles) {
         if (title === undefined || title === null) {
@@ -705,9 +722,26 @@ export function compare(a: { property: string; schema: Schema }, b: { property: 
     return 0;
 }
 
-export function filter({property, schema}: { property: string; schema: Schema }, filterValue: string): boolean {
+export function filterObject({property, schema}: { property: string; schema: Schema }, filterValue: string): boolean {
     return filterValue === ""
         || property.indexOf(filterValue) !== -1
         || (!!schema.title && schema.title.indexOf(filterValue) !== -1)
         || (!!schema.description && schema.description.indexOf(filterValue) !== -1);
 }
+
+export function filterArray(value: ValueType, index: number, schema: Schema, filterValue: string): boolean {
+    const result = filterValue === ""
+        || String(index).indexOf(filterValue) !== -1
+        || (schema.type === "string" && (value as string).indexOf(filterValue) !== -1)
+        || ((schema.type === "number" || schema.type === "integer") && String(value as number).indexOf(filterValue) !== -1);
+    if (result) {
+        return true;
+    }
+    if (schema.type === "object") {
+        const title = getTitle(findTitleFromSchema(value as { [name: string]: ValueType }, schema as ObjectSchema), schema.title);
+        return title.indexOf(filterValue) !== -1;
+    }
+    return false;
+}
+
+export const minItemCountIfNeedFilter = 6;
