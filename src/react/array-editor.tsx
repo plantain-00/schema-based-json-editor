@@ -54,7 +54,7 @@ export class ArrayEditor extends React.Component<Props, State> {
         }
     }
     render() {
-        const childrenElement: JSX.Element[] = this.getValue.map((p, i) => { return { p, i }; })
+        const childrenElement: JSX.Element[] = this.getValue.map((p, i) => ({ p, i }))
             .filter(({p, i}) => common.filterArray(p, i, this.props.schema.items, this.filter))
             .map(({p, i}) => (
                 <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>

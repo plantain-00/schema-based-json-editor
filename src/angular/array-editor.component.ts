@@ -126,7 +126,7 @@ export class ArrayEditorComponent {
         return [];
     }
     get filteredValues() {
-        return this.getValue.map((p, i) => { return { p, i }; })
+        return this.getValue.map((p, i) => ({ p, i }))
             .filter(({p, i}) => common.filterArray(p, i, this.schema.items, this.filter));
     }
     get showFilter() {
