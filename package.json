@@ -1,6 +1,6 @@
 {
   "name": "schema-based-json-editor",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "description": "A reactjs, angular2 and vuejs component of schema based json editor.",
   "main": "index.js",
   "scripts": {
@@ -34,11 +34,11 @@
     "@types/highlight.js": "9.1.9",
     "@types/lodash": "4.14.52",
     "@types/markdown-it": "0.0.2",
-    "lodash.isinteger": "4.0.4",
-    "lodash.isobject": "3.0.2",
-    "lodash.tointeger": "4.0.4",
-    "lodash.tonumber": "4.0.3",
-    "tslib": "1.5.0"
+    "lodash.isinteger": "4",
+    "lodash.isobject": "3",
+    "lodash.tointeger": "4",
+    "lodash.tonumber": "4",
+    "tslib": "1"
   },
   "devDependencies": {
     "@angular/common": "2.4.5",
