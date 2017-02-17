@@ -1,7 +1,10 @@
 import "core-js/es6";
 import "core-js/es7/reflect";
 import "zone.js/dist/zone";
-import "tslib";
+import { __extends, __decorate, __assign } from "tslib";
+(global as any).__extends = __extends;
+(global as any).__decorate = __decorate;
+(global as any).__assign = __assign;
 import "dragula";
 import "markdown-it";
 import "highlight.js";
