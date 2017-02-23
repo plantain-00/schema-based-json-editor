@@ -58,6 +58,8 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 
 #### vuejs component demo
 
+`npm i vue vue-class-component`
+
 ```js
 import "schema-based-json-editor/dist/vue";
 ```
