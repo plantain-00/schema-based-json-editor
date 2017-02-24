@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "./common";
+import "./lib";
 import { hljs, dragula, MarkdownIt } from "../typings/lib";
 
 @Component({

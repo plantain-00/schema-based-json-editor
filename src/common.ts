@@ -1,8 +1,3 @@
-import { __extends, __decorate, __assign } from "tslib";
-(window as any).__extends = __extends;
-(window as any).__decorate = __decorate;
-(window as any).__assign = __assign;
-
 export const toNumber = require("lodash.tonumber");
 export const toInteger = require("lodash.tointeger");
 const isObject = require("lodash.isobject");
