@@ -436,9 +436,9 @@ export function isSame(value1: ValueType, value2: ValueType) {
 }
 
 export function switchItem(value: any[], el: HTMLElement, sibling: HTMLElement | null) {
-    const fromIndex = +el.dataset["index"];
+    const fromIndex = +el.dataset["index"]!;
     if (sibling) {
-        const toIndex = +sibling.dataset["index"];
+        const toIndex = +sibling.dataset["index"]!;
         value.splice(toIndex, 0, value[fromIndex]);
         if (fromIndex > toIndex) {
             value.splice(fromIndex + 1, 1);
