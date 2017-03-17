@@ -58,19 +58,6 @@ export type NullSchema = CommonSchema & {
 
 export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema;
 
-export type Theme = {
-    rowContainer: string;
-    row: string;
-    formControl: string;
-    button: string;
-    help: string;
-    errorRow: string;
-    label: string;
-    optionalCheckbox: string;
-    buttonGroup: string;
-    radiobox: string;
-};
-
 export const themes: { [name: string]: Theme } = {
     "bootstrap3": {
         rowContainer: "well bootstrap3-row-container",
@@ -86,7 +73,7 @@ export const themes: { [name: string]: Theme } = {
     },
 };
 
-const defaultTheme: Theme = {
+export const defaultTheme = {
     rowContainer: "",
     row: "",
     formControl: "",
@@ -99,6 +86,8 @@ const defaultTheme: Theme = {
     radiobox: "",
 };
 
+export type Theme = typeof defaultTheme;
+
 export function getTheme(name: string | undefined | Theme): Theme {
     if (name === undefined) {
         return defaultTheme;
@@ -109,37 +98,7 @@ export function getTheme(name: string | undefined | Theme): Theme {
     return name;
 }
 
-export type Locale = {
-    button: {
-        collapse: string;
-        expand: string;
-        add: string;
-        delete: string;
-        lock: string;
-        unlock: string;
-    },
-    error: {
-        minLength: string;
-        maxLength: string;
-        pattern: string;
-        minimum: string;
-        maximum: string;
-        largerThan: string;
-        smallerThan: string;
-        minItems: string;
-        uniqueItems: string;
-        multipleOf: string;
-        minProperties: string;
-        maxProperties: string;
-    },
-    info: {
-        notExists: string;
-        true: string;
-        false: string;
-    },
-};
-
-export const defaultLocale: Locale = {
+export const defaultLocale = {
     button: {
         collapse: "Collapse",
         expand: "Expand",
@@ -168,6 +127,8 @@ export const defaultLocale: Locale = {
         false: "false",
     },
 };
+
+export type Locale = typeof defaultLocale;
 
 export const locales: { [name: string]: Locale } = {
     "zh-cn": {
@@ -211,26 +172,20 @@ export function getLocale(name: string | undefined | Locale): Locale {
     return name;
 };
 
-export type Icon = {
-    isText: boolean;
-    collapse: string;
-    expand: string;
-    add: string;
-    delete: string;
-    lock: string;
-    unlock: string;
+export const bootstrap3Icon = {
+    isText: false,
+    collapse: "glyphicon glyphicon-chevron-down",
+    expand: "glyphicon glyphicon-chevron-right",
+    add: "glyphicon glyphicon-plus",
+    delete: "glyphicon glyphicon-remove",
+    lock: "glyphicon glyphicon-lock",
+    unlock: "glyphicon glyphicon-edit",
 };
 
+export type Icon = typeof bootstrap3Icon;
+
 const icons: { [name: string]: Icon } = {
-    "bootstrap3": {
-        isText: false,
-        collapse: "glyphicon glyphicon-chevron-down",
-        expand: "glyphicon glyphicon-chevron-right",
-        add: "glyphicon glyphicon-plus",
-        delete: "glyphicon glyphicon-remove",
-        lock: "glyphicon glyphicon-lock",
-        unlock: "glyphicon glyphicon-edit",
-    },
+    "bootstrap3": bootstrap3Icon,
     "fontawesome4": {
         isText: false,
         collapse: "fa fa-caret-square-o-down",
@@ -664,7 +619,7 @@ export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof h
 
 export function findTitle(value: { [name: string]: ValueType } | undefined, properties: { property: string; schema: Schema }[]) {
     if (value) {
-        for (const {property} of properties) {
+        for (const { property } of properties) {
             const title = value[property];
             if (typeof title === "string" && title.length > 0) {
                 if (title.length > 23) {
@@ -719,7 +674,7 @@ export function compare(a: { property: string; schema: Schema }, b: { property: 
     return 0;
 }
 
-export function filterObject({property, schema}: { property: string; schema: Schema }, filterValue: string): boolean {
+export function filterObject({ property, schema }: { property: string; schema: Schema }, filterValue: string): boolean {
     return filterValue === ""
         || property.indexOf(filterValue) !== -1
         || (!!schema.title && schema.title.indexOf(filterValue) !== -1)
