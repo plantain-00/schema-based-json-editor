@@ -29,7 +29,7 @@ the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/rea
 
 the source code of the demo: https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/react
 
-#### angular2 component demo
+#### angular component demo
 
 ```js
 import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent } from "schema-based-json-editor/dist/angular";
@@ -95,7 +95,7 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 #### features
 
 + reactjs component
-+ angular2 component
++ angular component
 + vuejs component
 + common schema fields: title, description, default, readonly, propertyOrder
 + object schema fields: properties, required, maxProperties, minProperties, collapsed

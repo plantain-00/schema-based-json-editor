@@ -1,7 +1,7 @@
 {
   "name": "schema-based-json-editor",
   "version": "3.7.2",
-  "description": "A reactjs, angular2 and vuejs component of schema based json editor.",
+  "description": "A reactjs, angular and vuejs component of schema based json editor.",
   "main": "index.js",
   "scripts": {
     "build": "npm run tsc && tsc -p demo && webpack --config webpack.config.react.js && webpack --config webpack.config.angular.js && webpack --config webpack.config.vue.js && npm run rev",
@@ -21,7 +21,7 @@
     "schema",
     "vue",
     "react",
-    "angular2"
+    "angular"
   ],
   "author": "York Yao",
   "license": "MIT",

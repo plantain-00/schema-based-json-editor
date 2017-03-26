@@ -24,7 +24,7 @@ import "schema-based-json-editor/dist/vue";
 (value: any, isValid: boolean) => void
 ```
 
-#### 2. angular2: updateValue
+#### 2. angular: updateValue
 
 ```ts
 // before
