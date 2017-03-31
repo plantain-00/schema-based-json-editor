@@ -9,7 +9,7 @@ import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
 
 /* tslint:disable:only-arrow-functions */
-/* tslint:disable:no-unused-new */
+/* tslint:disable:no-unused-expression */
 /* tslint:disable:object-literal-shorthand */
 
 type This = {

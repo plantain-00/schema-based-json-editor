@@ -170,7 +170,7 @@ export function getLocale(name: string | undefined | Locale): Locale {
         return locales[name.toLowerCase()] || defaultLocale;
     }
     return name;
-};
+}
 
 export const bootstrap3Icon = {
     isText: false,
