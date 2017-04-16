@@ -2,9 +2,6 @@ import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
 
-import { Cancelable } from "lodash";
-export type Cancelable = Cancelable;
-
 @Component({
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">

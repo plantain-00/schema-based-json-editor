@@ -3,9 +3,6 @@ import Component from "vue-class-component";
 import * as common from "../common";
 import { hljs, MarkdownIt } from "../../typings/lib";
 
-import { Cancelable } from "lodash";
-export type Cancelable = Cancelable;
-
 @Component({
     template: `
     <div :class="errorMessage ? theme.errorRow : theme.row">

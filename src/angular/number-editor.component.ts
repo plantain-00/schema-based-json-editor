@@ -1,9 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
 
-import { Cancelable } from "lodash";
-export type Cancelable = Cancelable;
-
 @Component({
     selector: "number-editor",
     changeDetection: ChangeDetectionStrategy.OnPush,

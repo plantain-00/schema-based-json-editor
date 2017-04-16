@@ -2,9 +2,6 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
 
-import { Cancelable } from "lodash";
-export type Cancelable = Cancelable;
-
 @Component({
     selector: "string-editor",
     styles: [

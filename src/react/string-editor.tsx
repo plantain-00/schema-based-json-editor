@@ -4,9 +4,6 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 
-import { Cancelable } from "lodash";
-export type Cancelable = Cancelable;
-
 export type Props = common.Props<common.StringSchema, string>;
 export type State = Partial<{
     value: string;
