@@ -97,6 +97,7 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 + reactjs component
 + angular component
 + vuejs component
++ commonjs module
 + common schema fields: title, description, default, readonly, propertyOrder
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems
