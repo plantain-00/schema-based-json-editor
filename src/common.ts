@@ -328,10 +328,10 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
     }
 }
 
-export const buttonGroupStyle: React.CSSProperties = { marginLeft: "10px" };
+export const buttonGroupStyle = { marginLeft: "10px" };
 export const buttonGroupStyleString = "margin-left: 10px";
 
-import { hljs as hljsLib, React, dragula, MarkdownIt } from "../typings/lib";
+import { hljs as hljsLib, dragula, MarkdownIt } from "../typings/lib";
 
 export interface Props<TSchema extends CommonSchema, TValue> {
     schema: TSchema;
@@ -558,7 +558,7 @@ export function replaceProtocal(src: string) {
 }
 
 export const imagePreviewStyleString = "display: block; height: auto; margin: 6px 0; max-width: 100%;";
-export const imagePreviewStyle: React.CSSProperties = {
+export const imagePreviewStyle = {
     display: "block",
     height: "auto",
     margin: "6px 0",
