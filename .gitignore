@@ -46,3 +46,5 @@ demo/css/
 spec/**/*.js
 dist/
 demo/**/index.html
+!*.config.*.js
+!*.config.js
