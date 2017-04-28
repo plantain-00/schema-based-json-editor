@@ -8,7 +8,7 @@ module.exports = {
         "vue.editor": "./demo/vue/editor"
     },
     output: {
-        path: path.join(__dirname, "demo"),
+        path: __dirname,
         filename: "[name].js"
     },
     plugins: [

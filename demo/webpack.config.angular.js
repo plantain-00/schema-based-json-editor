@@ -8,7 +8,7 @@ module.exports = {
         "angular.editor": "./demo/angular/editor"
     },
     output: {
-        path: path.join(__dirname, "demo"),
+        path: __dirname,
         filename: "[name].js"
     },
     plugins: [

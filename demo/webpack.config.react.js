@@ -8,7 +8,7 @@ module.exports = {
         "react.editor": "./demo/react/editor"
     },
     output: {
-        path: path.join(__dirname, "demo"),
+        path: __dirname,
         filename: "[name].js"
     },
     plugins: [
