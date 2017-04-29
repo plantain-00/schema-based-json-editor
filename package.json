@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run tsc && tsc -p demo && webpack --config demo/webpack.config.react.js && webpack --config demo/webpack.config.angular.js && webpack --config demo/webpack.config.vue.js && npm run rev",
-    "tsc": "tsc -p src",
+    "tsc": "npm run clean && tsc -p src",
     "lint": "tslint \"src/**/*.tsx\" \"demo/**/*.tsx\" \"src/**/*.ts\" \"demo/**/*.ts\" \"spec/**/*.ts\"",
     "static": "mkdirp ./demo/css && cpy ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cp -r ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/fonts/. ./demo/fonts && mkdir ./demo/css/highlight.js && cp -r ./node_modules/highlight.js/styles/default.css ./demo/css/highlight.js/",
     "test": "tsc -p spec && jasmine",
     "rev": "npm run clean-rev && rev-static --config demo/rev-static.config.js",
-    "clean-rev": "rimraf demo/react*-*.js demo/vue*-*.js demo/angular*-*.js"
+    "clean-rev": "rimraf demo/react*-*.js demo/vue*-*.js demo/angular*-*.js",
+    "clean": "rimraf dist"
   },
   "repository": {
     "type": "git",
@@ -68,7 +69,7 @@
     "rimraf": "2.6.1",
     "rxjs": "5.2.0",
     "tslint": "5.0.0",
-    "typescript": "2.2.2",
+    "typescript": "2.3.2",
     "vue": "2.2.6",
     "vue-class-component": "5.0.1",
     "webpack": "2.3.2",
