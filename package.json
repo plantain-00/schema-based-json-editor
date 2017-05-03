@@ -7,7 +7,7 @@
     "build": "npm run tsc && tsc -p demo && webpack --config demo/webpack.config.react.js && webpack --config demo/webpack.config.angular.js && webpack --config demo/webpack.config.vue.js && npm run rev",
     "tsc": "npm run clean && tsc -p src",
     "lint": "tslint \"src/**/*.tsx\" \"demo/**/*.tsx\" \"src/**/*.ts\" \"demo/**/*.ts\" \"spec/**/*.ts\"",
-    "static": "mkdirp ./demo/css && cpy ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cp -r ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cp -r ./node_modules/font-awesome/fonts/. ./demo/fonts && mkdir ./demo/css/highlight.js && cp -r ./node_modules/highlight.js/styles/default.css ./demo/css/highlight.js/",
+    "static": "mkdirp ./demo/css && cpy ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cpy ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cpy ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cpy ./node_modules/font-awesome/fonts/. ./demo/fonts && mkdirp ./demo/css/highlight.js && cpy ./node_modules/highlight.js/styles/default.css ./demo/css/highlight.js/",
     "test": "tsc -p spec && jasmine",
     "rev": "npm run clean-rev && rev-static --config demo/rev-static.config.js",
     "clean-rev": "rimraf demo/react*-*.js demo/vue*-*.js demo/angular*-*.js",
