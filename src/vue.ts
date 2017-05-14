@@ -27,22 +27,10 @@ Vue.component("stringEditor", StringEditor);
 Vue.component("optional", Optional);
 Vue.component("description", Description);
 
+import { srcVueTemplateHtml } from "./vue-variables";
+
 @Component({
-    template: `
-    <editor :schema="schema"
-        :initial-value="initialValue"
-        :theme="themeObject"
-        :locale="localeObject"
-        :icon="iconObject"
-        :readonly="readonly"
-        :required="true"
-        @update-value="updateValue(arguments[0])"
-        :dragula="dragula"
-        :md="md"
-        :hljs="hljs"
-        :forceHttps="forceHttps">
-    </editor>
-    `,
+    template: srcVueTemplateHtml,
     props: ["schema", "initialValue", "theme", "icon", "locale", "readonly", "dragula", "markdownit", "hljs", "forceHttps"],
 })
 class JSONEditor extends Vue {

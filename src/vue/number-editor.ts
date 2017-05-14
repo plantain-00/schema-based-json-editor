@@ -1,57 +1,10 @@
 import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
+import { srcVueNumberEditorTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: `
-    <div :class="errorMessage ? theme.errorRow : theme.row">
-        <label :class="theme.label">
-            {{titleToShow}}
-            <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <icon v-if="!isReadOnly"
-                    @click="toggleLocked()"
-                    :text="locked ? icon.unlock : icon.lock"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-                <optional :required="required"
-                    :value="value"
-                    :isReadOnly="isReadOnly || isLocked"
-                    :theme="theme"
-                    :locale="locale"
-                    @toggleOptional="toggleOptional()">
-                </optional>
-                <icon v-if="hasDeleteButtonFunction"
-                    @click="$emit('delete')"
-                    :text="icon.delete"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-            </div>
-        </label>
-        <input v-if="useInput"
-            :class="theme.formControl"
-            type="number"
-            @change="onChange($event)"
-            @keyup="onChange($event)"
-            :value="value"
-            :readOnly="isReadOnly || isLocked"
-            :disabled="isReadOnly || isLocked" />
-        <select v-if="useSelect"
-            :class="theme.formControl"
-            type="number"
-            @change="onChange($event)">
-            <option v-for="(e, i) in schema.enum"
-                :key="i"
-                :value="e"
-                :selected="value === e">
-                {{e}}
-            </option>
-        </select>
-        <description :theme="theme" :message="schema.description"></description>
-        <description :theme="theme" :message="errorMessage"></description>
-    </div>
-    `,
+    template: srcVueNumberEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "parentIsLocked"],
 })
 export class NumberEditor extends Vue {

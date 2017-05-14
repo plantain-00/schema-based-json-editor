@@ -1,0 +1,4 @@
+<button :class="theme.button" @click="$emit('click')">
+    <span v-if="icon.isText">{{text}}</span>
+    <i v-else :class="text"></i>
+</button>

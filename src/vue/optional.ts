@@ -1,16 +1,10 @@
 import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
+import { srcVueOptionalTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: `
-    <div v-if="hasOptionalCheckbox" :class="theme.optionalCheckbox">
-        <label>
-            <input type="checkbox" @change="$emit('toggleOptional')" :checked="value === undefined" :disabled="isReadOnly" />
-            {{locale.info.notExists}}
-        </label>
-    </div>
-    `,
+    template: srcVueOptionalTemplateHtml,
     props: ["required", "value", "isReadOnly", "theme", "locale"],
 })
 export class Optional extends Vue {

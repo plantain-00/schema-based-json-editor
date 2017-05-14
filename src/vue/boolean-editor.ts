@@ -1,57 +1,10 @@
 import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
+import { srcVueBooleanEditorTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: `
-    <div :class="theme.row">
-        <label :class="theme.label">
-            {{titleToShow}}
-            <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <icon v-if="!isReadOnly"
-                    @click="toggleLocked()"
-                    :text="locked ? icon.unlock : icon.lock"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-                <optional :required="required"
-                    :value="value"
-                    :isReadOnly="isReadOnly || isLocked"
-                    :theme="theme"
-                    :locale="locale"
-                    @toggleOptional="toggleOptional()">
-                </optional>
-                <icon v-if="hasDeleteButtonFunction"
-                    @click="$emit('delete')"
-                    :text="icon.delete"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-            </div>
-        </label>
-        <div v-if="value !== undefined">
-            <div :class="theme.radiobox">
-                <label>
-                    <input type="radio"
-                        @change="onChange($event)"
-                        :checked="value"
-                        :disabled="isReadOnly || isLocked" />
-                    {{locale.info.true}}
-                </label>
-            </div>
-            <div :class="theme.radiobox">
-                <label>
-                    <input type="radio"
-                        @change="onChange($event)"
-                        :checked="!value"
-                        :disabled="isReadOnly || isLocked" />
-                    {{locale.info.false}}
-                </label>
-            </div>
-        </div>
-        <description :theme="theme" :message="schema.description"></description>
-    </div>
-    `,
+    template: srcVueBooleanEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "parentIsLocked"],
 })
 export class BooleanEditor extends Vue {

@@ -2,74 +2,10 @@ import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
 import { hljs, MarkdownIt } from "../../typings/lib";
+import { srcVueStringEditorTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: `
-    <div :class="errorMessage ? theme.errorRow : theme.row">
-        <label :class="theme.label">
-            {{titleToShow}}
-            <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <icon v-if="!isReadOnly"
-                    @click="toggleLocked()"
-                    :text="locked ? icon.unlock : icon.lock"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-                <optional :required="required"
-                    :value="value"
-                    :isReadOnly="isReadOnly || isLocked"
-                    :theme="theme"
-                    :locale="locale"
-                    @toggleOptional="toggleOptional()">
-                </optional>
-                <icon v-if="hasDeleteButtonFunction"
-                    @click="$emit('delete')"
-                    :text="icon.delete"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-                <icon v-if="canPreview"
-                    @click="collapseOrExpand()"
-                    :text="collapsed ? icon.expand : icon.collapse"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-            </div>
-        </label>
-        <textarea v-if="useTextArea"
-            :class="theme.formControl"
-            @change="onChange($event)"
-            @keyup="onChange($event)"
-            rows="10"
-            :readOnly="isReadOnly || isLocked"
-            :disabled="isReadOnly || isLocked">{{value}}</textarea>
-        <input v-if="useInput"
-            :class="theme.formControl"
-            :type="schema.format"
-            @change="onChange($event)"
-            @keyup="onChange($event)"
-            :value="value"
-            :readOnly="isReadOnly || isLocked"
-            :disabled="isReadOnly || isLocked" />
-        <select v-if="useSelect"
-            :class="theme.formControl"
-            @change="onChange($event)">
-            <option v-for="(e, i) in schema.enum"
-                :key="i"
-                :value="e"
-                :selected="value === e">
-                {{e}}
-            </option>
-        </select>
-        <img v-if="willPreviewImage"
-            :style="imagePreviewStyle"
-            :src="getImageUrl" />
-        <div v-if="willPreviewMarkdown" v-html="getMarkdown"></div>
-        <pre v-if="willPreviewCode"><code v-html="getCode"></code></pre>
-        <description :theme="theme" :message="schema.description"></description>
-        <description :theme="theme" :message="errorMessage"></description>
-    </div>
-    `,
+    template: srcVueStringEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps", "parentIsLocked"],
 })
 export class StringEditor extends Vue {

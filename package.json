@@ -4,14 +4,15 @@
   "description": "A reactjs, angular and vuejs component of schema based json editor.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run tsc && tsc -p demo && webpack --config demo/webpack.config.react.js && webpack --config demo/webpack.config.angular.js && webpack --config demo/webpack.config.vue.js && npm run rev",
+    "build": "npm run file2variable && npm run tsc && tsc -p demo && webpack --config demo/webpack.config.react.js && webpack --config demo/webpack.config.angular.js && webpack --config demo/webpack.config.vue.js && npm run rev",
     "tsc": "npm run clean && tsc -p src",
     "lint": "tslint \"src/**/*.tsx\" \"demo/**/*.tsx\" \"src/**/*.ts\" \"demo/**/*.ts\" \"spec/**/*.ts\"",
-    "static": "mkdirp ./demo/css && cpy ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cpy ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cpy ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cpy ./node_modules/font-awesome/fonts/. ./demo/fonts && mkdirp ./demo/css/highlight.js && cpy ./node_modules/highlight.js/styles/default.css ./demo/css/highlight.js/",
+    "static": "cpy ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cpy ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cpy ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cpy ./node_modules/font-awesome/fonts/*.* ./demo/fonts && cpy ./node_modules/highlight.js/styles/default.css ./demo/css/highlight.js/",
     "test": "tsc -p spec && jasmine",
     "rev": "npm run clean-rev && rev-static --config demo/rev-static.config.js",
     "clean-rev": "rimraf demo/react*-*.js demo/vue*-*.js demo/angular*-*.js",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "file2variable": "file2variable-cli src/vue/*.template.html src/vue.template.html -o src/vue-variables.ts --html-minify"
   },
   "repository": {
     "type": "git",
@@ -58,11 +59,11 @@
     "core-js": "2.4.1",
     "cpy-cli": "1.0.1",
     "dragula": "3.7.2",
+    "file2variable-cli": "1.1.0",
     "font-awesome": "4.7.0",
     "highlight.js": "9.11.0",
     "jasmine": "2.6.0",
     "markdown-it": "8.3.1",
-    "mkdirp": "0.5.1",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "rev-static": "2.1.2",

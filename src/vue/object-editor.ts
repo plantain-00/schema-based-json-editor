@@ -2,69 +2,10 @@ import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
 import { dragula, hljs, MarkdownIt } from "../../typings/lib";
+import { srcVueObjectEditorTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: `
-    <div :class="errorMessage ? theme.errorRow : theme.row">
-        <h3>
-            {{titleToShow}}
-            <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <icon v-if="!isReadOnly"
-                    @click="toggleLocked()"
-                    :text="locked ? icon.unlock : icon.lock"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-                <optional :required="required"
-                    :value="value"
-                    :isReadOnly="isReadOnly || isLocked"
-                    :theme="theme"
-                    :locale="locale"
-                    @toggleOptional="toggleOptional()">
-                </optional>
-                <icon v-if="true"
-                    @click="collapseOrExpand()"
-                    :text="collapsed ? icon.expand : icon.collapse"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-                <icon v-if="hasDeleteButtonFunction"
-                    @click="$emit('delete')"
-                    :text="icon.delete"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-            </div>
-        </h3>
-        <description :theme="theme" :message="schema.description"></description>
-        <div v-if="!collapsed && value !== undefined" :class="theme.rowContainer">
-            <div v-if="showFilter" :class="theme.row">
-                <input :class="theme.formControl"
-                    @change="onFilterChange($event)"
-                    @keyup="onFilterChange($event)"
-                    :value="filter" />
-            </div>
-            <editor v-for="(p, i) in filteredProperties"
-                :key="p.property"
-                :schema="p.schema"
-                :title="p.schema.title || p.property"
-                :initial-value="value[p.property]"
-                @update-value="onChange(p.property, arguments[0])"
-                :theme="theme"
-                :icon="icon"
-                :locale="locale"
-                :required="isRequired(p.property)"
-                :readonly="isReadOnly"
-                :dragula="dragula"
-                :md="md"
-                :hljs="hljs"
-                :force-https="forceHttps"
-                :parent-is-locked="isLocked">
-            </editor>
-        </div>
-        <description :theme="theme" :message="errorMessage"></description>
-    </div >
-    `,
+    template: srcVueObjectEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps", "parentIsLocked"],
 })
 export class ObjectEditor extends Vue {

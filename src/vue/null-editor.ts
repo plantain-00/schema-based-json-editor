@@ -1,31 +1,10 @@
 import * as Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
+import { srcVueNullEditorTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: `
-    <div :class="theme.row">
-        <label :class="theme.label">
-            {{titleToShow}}
-            <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-                <optional :required="required"
-                    :value="value"
-                    :isReadOnly="isReadOnly"
-                    :theme="theme"
-                    :locale="locale"
-                    @toggleOptional="toggleOptional()">
-                </optional>
-                <icon v-if="hasDeleteButtonFunction"
-                    @click="$emit('delete')"
-                    :text="icon.delete"
-                    :theme="theme"
-                    :icon="icon">
-                </icon>
-            </div>
-        </label>
-        <description :theme="theme" :message="schema.description"></description>
-    </div>
-    `,
+    template: srcVueNullEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
 })
 export class NullEditor extends Vue {
