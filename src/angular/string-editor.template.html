@@ -56,6 +56,7 @@
     <img *ngIf="willPreviewImage"
         class="schema-based-json-editor-image-preview"
         [src]="getImageUrl" />
+    <markdown-tip *ngIf="useTextArea && willPreviewMarkdown" [locale]="locale.name"></markdown-tip>
     <div *ngIf="willPreviewMarkdown" [innerHTML]="getMarkdown">
     </div>
     <pre *ngIf="willPreviewCode"><code [innerHTML]="getCode"></code></pre>

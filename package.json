@@ -1,13 +1,13 @@
 {
   "name": "schema-based-json-editor",
-  "version": "3.7.4",
+  "version": "3.8.0",
   "description": "A reactjs, angular and vuejs component of schema based json editor.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run file2variable && npm run tsc && tsc -p demo && webpack --config demo/webpack.config.react.js && webpack --config demo/webpack.config.angular.js && webpack --config demo/webpack.config.vue.js && npm run rev",
+    "build": "npm run static && npm run file2variable && npm run tsc && tsc -p demo && webpack --config demo/webpack.config.react.js && webpack --config demo/webpack.config.angular.js && webpack --config demo/webpack.config.vue.js && npm run rev",
     "tsc": "npm run clean && tsc -p src",
     "lint": "tslint \"src/**/*.tsx\" \"demo/**/*.tsx\" \"src/**/*.ts\" \"demo/**/*.ts\" \"spec/**/*.ts\"",
-    "static": "cpy ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cpy ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cpy ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cpy ./node_modules/font-awesome/fonts/*.* ./demo/fonts && cpy ./node_modules/highlight.js/styles/default.css ./demo/css/highlight.js/",
+    "static": "cpy ./node_modules/bootstrap/dist/css/bootstrap.min.css ./demo/css/ && cpy ./node_modules/font-awesome/css/font-awesome.min.css ./demo/css/ && cpy ./node_modules/dragula/dist/dragula.min.css ./demo/css/ && cpy ./node_modules/font-awesome/fonts/*.* ./demo/fonts && cpy ./node_modules/highlight.js/styles/default.css ./demo/css/highlight.js/ && cpy ./node_modules/markdown-tip/dist/markdown-tip.css ./demo/css/",
     "test": "tsc -p spec && jasmine",
     "rev": "npm run clean-rev && rev-static --config demo/rev-static.config.js",
     "clean-rev": "rimraf demo/react*-*.js demo/vue*-*.js demo/angular*-*.js",
@@ -39,6 +39,7 @@
     "lodash.isobject": "3",
     "lodash.tointeger": "4",
     "lodash.tonumber": "4",
+    "markdown-tip": "2.0.0",
     "tslib": "1"
   },
   "devDependencies": {

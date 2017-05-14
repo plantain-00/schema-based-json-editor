@@ -126,6 +126,7 @@ export const defaultLocale = {
         true: "true",
         false: "false",
     },
+    name: "en",
 };
 
 export type Locale = typeof defaultLocale;
@@ -159,6 +160,7 @@ export const locales: { [name: string]: Locale } = {
             true: "是",
             false: "否",
         },
+        name: "zh-cn",
     },
 };
 

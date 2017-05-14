@@ -3,6 +3,7 @@ import Component from "vue-class-component";
 import * as common from "../common";
 import { hljs, MarkdownIt } from "../../typings/lib";
 import { srcVueStringEditorTemplateHtml } from "../vue-variables";
+import "markdown-tip/dist/vue";
 
 @Component({
     template: srcVueStringEditorTemplateHtml,

@@ -3,6 +3,7 @@ import * as common from "../common";
 import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
+import { MarkdownTip } from "markdown-tip/dist/react";
 
 export type Props = common.Props<common.StringSchema, string>;
 export type State = Partial<{
@@ -70,6 +71,7 @@ export class StringEditor extends React.Component<Props, State> {
 
         const imagePreview = this.willPreviewImage ? <img style={common.imagePreviewStyle} src={this.getImageUrl} /> : null;
 
+        const markdownTip = this.useTextArea && this.willPreviewMarkdown ? <MarkdownTip locale={this.props.locale.name}></MarkdownTip> : null;
         const markdownPreview = this.willPreviewMarkdown ? <div dangerouslySetInnerHTML={{ __html: this.getMarkdown }}></div> : null;
 
         const codePreview = this.willPreviewCode ? <pre><code dangerouslySetInnerHTML={{ __html: this.getCode }}></code></pre> : null;
@@ -106,6 +108,7 @@ export class StringEditor extends React.Component<Props, State> {
                 {input}
                 {select}
                 {imagePreview}
+                {markdownTip}
                 {markdownPreview}
                 {codePreview}
                 <Description theme={this.props.theme} message={this.props.schema.description} />

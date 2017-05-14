@@ -68,7 +68,7 @@ export class MainComponent {
     get formattedSchema() {
         return JSON.stringify(this.schema, null, "  ");
     }
-    updateSchema({value}: common.ValidityValue<common.ValueType>) {
+    updateSchema({ value }: common.ValidityValue<common.ValueType>) {
         try {
             this.schema = JSON.parse(value as string);
         } catch (error) {
@@ -78,7 +78,7 @@ export class MainComponent {
     get valueHtml() {
         return hljs.highlight("json", JSON.stringify(this.value, null, "  ")).value;
     }
-    updateValue({value, isValid}: common.ValidityValue<common.ValueType>) {
+    updateValue({ value, isValid }: common.ValidityValue<common.ValueType>) {
         this.value = value;
         this.color = isValid ? "black" : "red";
     }
@@ -88,10 +88,11 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent } from "../../dist/angular";
+import { MarkdownTipComponent } from "markdown-tip/dist/angular";
 
 @NgModule({
     imports: [BrowserModule, FormsModule],
-    declarations: [MainComponent, JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent],
+    declarations: [MainComponent, JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent, MarkdownTipComponent],
     bootstrap: [MainComponent],
 })
 class MainModule { }
