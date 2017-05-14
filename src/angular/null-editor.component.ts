@@ -1,31 +1,10 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
+import { srcAngularNullEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "null-editor",
-    template: `
-    <div [class]="theme.row">
-        <label [class]="theme.label">
-            {{titleToShow}}
-            <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <optional [required]="required"
-                    [value]="value"
-                    [isReadOnly]="isReadOnly"
-                    [theme]="theme"
-                    [locale]="locale"
-                    (toggleOptional)="toggleOptional()">
-                </optional>
-                <icon *ngIf="hasDeleteButtonFunction"
-                    (onClick)="onDelete.emit()"
-                    [text]="icon.delete"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-            </div>
-        </label>
-        <description [theme]="theme" [message]="schema.description"></description>
-    </div>
-    `,
+    template: srcAngularNullEditorTemplateHtml,
 })
 export class NullEditorComponent {
     @Input()

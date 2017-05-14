@@ -3,9 +3,7 @@ import * as common from "../common";
 
 @Component({
     selector: "description",
-    template: `
-    <p *ngIf="notEmpty || message" [class]="theme.help">{{message}}</p>
-    `,
+    template: `<p *ngIf="notEmpty || message" [class]="theme.help">{{message}}</p>`,
 })
 export class DescriptionComponent {
     @Input()

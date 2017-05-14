@@ -1,106 +1,11 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
+import { srcAngularEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "editor",
-    template: `
-    <object-editor *ngIf="schema.type === 'object'"
-        [schema]="schema"
-        [initialValue]="initialValue"
-        [title]="title"
-        [theme]="theme"
-        [locale]="locale"
-        [icon]="icon"
-        [readonly]="readonly"
-        [required]="required"
-        (updateValue)="updateValue.emit($event)"
-        (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton"
-        [dragula]="dragula"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps"
-        [parentIsLocked]="parentIsLocked">
-    </object-editor>
-    <array-editor *ngIf="schema.type === 'array'"
-        [schema]="schema"
-        [initialValue]="initialValue"
-        [title]="title"
-        [theme]="theme"
-        [locale]="locale"
-        [icon]="icon"
-        [readonly]="readonly"
-        [required]="required"
-        (updateValue)="updateValue.emit($event)"
-        (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton"
-        [dragula]="dragula"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps"
-        [parentIsLocked]="parentIsLocked">
-    </array-editor>
-    <number-editor *ngIf="schema.type === 'number' || schema.type === 'integer'"
-        [schema]="schema"
-        [initialValue]="initialValue"
-        [title]="title"
-        [theme]="theme"
-        [locale]="locale"
-        [icon]="icon"
-        [readonly]="readonly"
-        [required]="required"
-        (updateValue)="updateValue.emit($event)"
-        (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton"
-        [parentIsLocked]="parentIsLocked">
-    </number-editor>
-    <boolean-editor *ngIf="schema.type === 'boolean'"
-        [schema]="schema"
-        [initialValue]="initialValue"
-        [title]="title"
-        [theme]="theme"
-        [locale]="locale"
-        [icon]="icon"
-        [readonly]="readonly"
-        [required]="required"
-        (updateValue)="updateValue.emit($event)"
-        (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton"
-        [parentIsLocked]="parentIsLocked">
-    </boolean-editor>
-    <null-editor *ngIf="schema.type === 'null'"
-        [schema]="schema"
-        [initialValue]="initialValue"
-        [title]="title"
-        [theme]="theme"
-        [locale]="locale"
-        [icon]="icon"
-        [readonly]="readonly"
-        [required]="required"
-        (updateValue)="updateValue.emit($event)"
-        (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton">
-    </null-editor>
-    <string-editor *ngIf="schema.type === 'string'"
-        [schema]="schema"
-        [initialValue]="initialValue"
-        [title]="title"
-        [theme]="theme"
-        [locale]="locale"
-        [icon]="icon"
-        [readonly]="readonly"
-        [required]="required"
-        (updateValue)="updateValue.emit($event)"
-        (onDelete)="onDelete.emit()"
-        [hasDeleteButton]="hasDeleteButton"
-        [dragula]="dragula"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps"
-        [parentIsLocked]="parentIsLocked">
-    </string-editor>
-    `,
+    template: srcAngularEditorTemplateHtml,
 })
 export class EditorComponent {
     @Input()

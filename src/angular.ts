@@ -2,24 +2,11 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "./common";
 import "./lib";
 import { hljs, dragula, MarkdownIt } from "../typings/lib";
+import { srcAngularTemplateHtml } from "./angular-variables";
 
 @Component({
     selector: "json-editor",
-    template: `
-    <editor [schema]="schema"
-        [initialValue]="initialValue"
-        [theme]="themeObject"
-        [locale]="localeObject"
-        [icon]="iconObject"
-        [readonly]="readonly"
-        [required]="true"
-        (updateValue)="updateValue.emit($event)"
-        [dragula]="dragula"
-        [md]="md"
-        [hljs]="hljs"
-        [forceHttps]="forceHttps">
-    </editor>
-    `,
+    template: srcAngularTemplateHtml,
 })
 export class JSONEditorComponent {
     @Input()

@@ -1,57 +1,10 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
+import { srcAngularBooleanEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "boolean-editor",
-    template: `
-    <div [class]="theme.row">
-        <label [class]="theme.label">
-            {{titleToShow}}
-            <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <icon *ngIf="!isReadOnly"
-                    (onClick)="toggleLocked()"
-                    [text]="locked ? icon.unlock : icon.lock"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-                <optional [required]="required"
-                    [value]="value"
-                    [isReadOnly]="isReadOnly || isLocked"
-                    [theme]="theme"
-                    [locale]="locale"
-                    (toggleOptional)="toggleOptional()">
-                </optional>
-                <icon *ngIf="hasDeleteButtonFunction"
-                    (onClick)="onDelete.emit()"
-                    [text]="icon.delete"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-            </div>
-        </label>
-        <div *ngIf="value !== undefined">
-            <div [class]="theme.radiobox">
-                <label>
-                    <input type="radio"
-                        (change)="onChange($event)"
-                        [checked]="value"
-                        [disabled]="isReadOnly || isLocked" />
-                    {{locale.info.true}}
-                </label>
-            </div>
-            <div [class]="theme.radiobox">
-                <label>
-                    <input type="radio"
-                        (change)="onChange($event)"
-                        [checked]="!value"
-                        [disabled]="isReadOnly || isLocked" />
-                    {{locale.info.false}}
-                </label>
-            </div>
-        </div>
-        <description [theme]="theme" [message]="schema.description"></description>
-    </div>
-    `,
+    template: srcAngularBooleanEditorTemplateHtml,
 })
 export class BooleanEditorComponent {
     @Input()

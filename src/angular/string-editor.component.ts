@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
+import { srcAngularStringEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "string-editor",
@@ -8,72 +9,7 @@ import { hljs, dragula, MarkdownIt } from "../../typings/lib";
         `.schema-based-json-editor-image-preview {${common.imagePreviewStyleString}}`,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
-    <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <label [class]="theme.label">
-            {{titleToShow}}
-            <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <icon *ngIf="!isReadOnly"
-                    (onClick)="toggleLocked()"
-                    [text]="locked ? icon.unlock : icon.lock"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-                <optional [required]="required"
-                    [value]="value"
-                    [isReadOnly]="isReadOnly || isLocked"
-                    [theme]="theme"
-                    [locale]="locale"
-                    (toggleOptional)="toggleOptional()">
-                </optional>
-                <icon *ngIf="hasDeleteButtonFunction"
-                    (onClick)="onDelete.emit()"
-                    [text]="icon.delete"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-                <icon *ngIf="canPreview"
-                    (onClick)="collapseOrExpand()"
-                    [text]="collapsed ? icon.expand : icon.collapse"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-            </div>
-        </label>
-        <textarea *ngIf="useTextArea"
-            [class]="theme.formControl"
-            (change)="onChange($event)"
-            (keyup)="onChange($event)"
-            rows="10"
-            [readOnly]="isReadOnly || isLocked"
-            [disabled]="isReadOnly || isLocked">{{value}}</textarea>
-        <input *ngIf="useInput"
-            [class]="theme.formControl"
-            [type]="schema.format"
-            (change)="onChange($event)"
-            (keyup)="onChange($event)"
-            [defaultValue]="value"
-            [readOnly]="isReadOnly || isLocked"
-            [disabled]="isReadOnly || isLocked" />
-        <select *ngIf="useSelect"
-            [class]="theme.formControl"
-            (change)="onChange($event)">
-            <option *ngFor="let e of schema.enum; let i = index; trackBy:trackByFunction"
-                [value]="e"
-                [selected]="value === e">
-                {{e}}
-            </option>
-        </select>
-        <img *ngIf="willPreviewImage"
-            class="schema-based-json-editor-image-preview"
-            [src]="getImageUrl" />
-        <div *ngIf="willPreviewMarkdown" [innerHTML]="getMarkdown">
-        </div>
-        <pre *ngIf="willPreviewCode"><code [innerHTML]="getCode"></code></pre>
-        <description [theme]="theme" [message]="schema.description"></description>
-        <description [theme]="theme" [message]="errorMessage"></description>
-    </div>
-    `,
+    template: srcAngularStringEditorTemplateHtml,
 })
 export class StringEditorComponent {
     @Input()

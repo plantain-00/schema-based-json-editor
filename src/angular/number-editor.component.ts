@@ -1,57 +1,11 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
+import { srcAngularNumberEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "number-editor",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
-    <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <label [class]="theme.label">
-            {{titleToShow}}
-            <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <icon *ngIf="!isReadOnly"
-                    (onClick)="toggleLocked()"
-                    [text]="locked ? icon.unlock : icon.lock"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-                <optional [required]="required"
-                    [value]="value"
-                    [isReadOnly]="isReadOnly || isLocked"
-                    [theme]="theme"
-                    [locale]="locale"
-                    (toggleOptional)="toggleOptional()">
-                </optional>
-                <icon *ngIf="hasDeleteButtonFunction"
-                    (onClick)="onDelete.emit()"
-                    [text]="icon.delete"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-            </div>
-        </label>
-        <input *ngIf="useInput"
-            [class]="theme.formControl"
-            type="number"
-            (change)="onChange($event)"
-            (keyup)="onChange($event)"
-            [defaultValue]="value"
-            [readOnly]="isReadOnly || isLocked"
-            [disabled]="isReadOnly || isLocked" />
-        <select *ngIf="useSelect"
-            [class]="theme.formControl"
-            type="number"
-            (change)="onChange">
-            <option *ngFor="let e of schema.enum; let i = index; trackBy:trackByFunction"
-                [value]="e"
-                [selected]="value === e">
-                {{e}}
-            </option>
-        </select>
-        <description [theme]="theme" [message]="schema.description"></description>
-        <description [theme]="theme" [message]="errorMessage"></description>
-    </div>
-    `,
+    template: srcAngularNumberEditorTemplateHtml,
 })
 export class NumberEditorComponent {
     @Input()

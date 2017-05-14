@@ -1,69 +1,12 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
+import { srcAngularObjectEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "object-editor",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
-    <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <h3>
-            {{titleToShow}}
-            <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-                <icon *ngIf="!isReadOnly"
-                    (onClick)="toggleLocked()"
-                    [text]="locked ? icon.unlock : icon.lock"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-                <optional [required]="required"
-                    [value]="value"
-                    [isReadOnly]="isReadOnly || isLocked"
-                    [theme]="theme"
-                    [locale]="locale"
-                    (toggleOptional)="toggleOptional()">
-                </optional>
-                <icon (onClick)="collapseOrExpand()"
-                    [text]="collapsed ? icon.expand : icon.collapse"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-                <icon *ngIf="hasDeleteButtonFunction"
-                    (onClick)="onDelete.emit()"
-                    [text]="icon.delete"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-            </div>
-        </h3>
-        <description [theme]="theme" [message]="schema.description"></description>
-        <div *ngIf="!collapsed && value !== undefined" [class]="theme.rowContainer">
-            <div *ngIf="showFilter" [class]="theme.row">
-                <input [class]="theme.formControl"
-                    (change)="onFilterChange($event)"
-                    (keyup)="onFilterChange($event)"
-                    [value]="filter" />
-            </div>
-            <editor *ngFor="let p of filteredProperties; trackBy: trackByFunction"
-                [schema]="p.schema"
-                [title]="p.schema.title || p.property"
-                [initialValue]="value[p.property]"
-                (updateValue)="onChange(p.property, $event)"
-                [theme]="theme"
-                [icon]="icon"
-                [locale]="locale"
-                [required]="isRequired(p.property)"
-                [readonly]="isReadOnly"
-                [dragula]="dragula"
-                [md]="md"
-                [hljs]="hljs"
-                [forceHttps]="forceHttps"
-                [parentIsLocked]="isLocked">
-            </editor>
-        </div>
-        <description [theme]="theme" [message]="errorMessage"></description>
-    </div >
-    `,
+    template: srcAngularObjectEditorTemplateHtml,
 })
 export class ObjectEditorComponent {
     @Input()

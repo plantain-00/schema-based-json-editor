@@ -1,77 +1,11 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
+import { srcAngularArrayEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "array-editor",
-    template: `
-    <div [class]="errorMessage ? theme.errorRow : theme.row">
-        <h3>
-            {{titleToShow}}
-            <div [class]="theme.buttonGroup" [style]="buttonGroupStyleString">
-                <icon *ngIf="!isReadOnly"
-                    (onClick)="toggleLocked()"
-                    [text]="locked ? icon.unlock : icon.lock"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-                <optional [required]="required"
-                    [value]="value"
-                    [isReadOnly]="isReadOnly || isLocked"
-                    [theme]="theme"
-                    [locale]="locale"
-                    (toggleOptional)="toggleOptional()">
-                </optional>
-                <icon (onClick)="collapseOrExpand()"
-                    [text]="collapsed ? icon.expand : icon.collapse"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-                <icon *ngIf="hasAddButton"
-                    (onClick)="addItem()"
-                    [text]="icon.add"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-                <icon *ngIf="hasDeleteButtonFunction"
-                    (onClick)="onDelete.emit()"
-                    [text]="icon.delete"
-                    [theme]="theme"
-                    [icon]="icon">
-                </icon>
-            </div>
-        </h3>
-       <description [theme]="theme" [message]="schema.description" [notEmpty]="true"></description>
-        <div #drakContainer [class]="theme.rowContainer">
-            <div *ngIf="showFilter" [class]="theme.row">
-                <input [class]="theme.formControl"
-                    (change)="onFilterChange($event)"
-                    (keyup)="onFilterChange($event)"
-                    [value]="filter" />
-            </div>
-            <div *ngFor="let item of filteredValues; trackBy:trackByFunction" [attr.data-index]="item.i" [class]="theme.rowContainer">
-                <editor [schema]="schema.items"
-                    [title]="item.i"
-                    [initialValue]="value[item.i]"
-                    (updateValue)="onChange(item.i, $event)"
-                    [theme]="theme"
-                    [icon]="icon"
-                    [locale]="locale"
-                    [required]="true"
-                    [readonly]="isReadOnly"
-                    (onDelete)="onDeleteFunction(item.i)"
-                    [hasDeleteButton]="true"
-                    [dragula]="dragula"
-                    [md]="md"
-                    [hljs]="hljs"
-                    [forceHttps]="forceHttps"
-                    [parentIsLocked]="isLocked">
-                </editor>
-            </div>
-        </div>
-        <description [theme]="theme" [message]="errorMessage"></description>
-    </div>
-    `,
+    template: srcAngularArrayEditorTemplateHtml,
 })
 export class ArrayEditorComponent {
     @Input()
@@ -127,7 +61,7 @@ export class ArrayEditorComponent {
     }
     get filteredValues() {
         return this.getValue.map((p, i) => ({ p, i }))
-            .filter(({p, i}) => common.filterArray(p, i, this.schema.items, this.filter));
+            .filter(({ p, i }) => common.filterArray(p, i, this.schema.items, this.filter));
     }
     get showFilter() {
         return this.getValue.length >= common.minItemCountIfNeedFilter;
@@ -185,7 +119,7 @@ export class ArrayEditorComponent {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
     }
     addItem() {
-        this.value!.push(common.getDefaultValue(true, this.schema.items, undefined) !);
+        this.value!.push(common.getDefaultValue(true, this.schema.items, undefined)!);
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     }
     onDeleteFunction(i: number) {
@@ -194,7 +128,7 @@ export class ArrayEditorComponent {
         this.validate();
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     }
-    onChange(i: number, {value, isValid}: common.ValidityValue<common.ValueType>) {
+    onChange(i: number, { value, isValid }: common.ValidityValue<common.ValueType>) {
         this.value![i] = value;
         this.validate();
         common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);

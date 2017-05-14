@@ -1,17 +1,11 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
+import { srcAngularOptionalTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "optional",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `
-    <div *ngIf="hasOptionalCheckbox" [class]="theme.optionalCheckbox">
-        <label>
-            <input type="checkbox" (change)="toggleOptional.emit()" [checked]="value === undefined" [disabled]="isReadOnly" />
-            {{locale.info.notExists}}
-        </label>
-    </div>
-    `,
+    template: srcAngularOptionalTemplateHtml,
 })
 export class OptionalComponent {
     @Input()

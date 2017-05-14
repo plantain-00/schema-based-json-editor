@@ -12,7 +12,7 @@
     "rev": "npm run clean-rev && rev-static --config demo/rev-static.config.js",
     "clean-rev": "rimraf demo/react*-*.js demo/vue*-*.js demo/angular*-*.js",
     "clean": "rimraf dist",
-    "file2variable": "file2variable-cli src/vue/*.template.html src/vue.template.html -o src/vue-variables.ts --html-minify"
+    "file2variable": "file2variable-cli src/vue/*.template.html src/vue.template.html -o src/vue-variables.ts --html-minify && file2variable-cli src/angular/*.template.html src/angular.template.html -o src/angular-variables.ts --html-minify"
   },
   "repository": {
     "type": "git",
