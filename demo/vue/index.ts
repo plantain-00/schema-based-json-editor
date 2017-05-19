@@ -1,4 +1,5 @@
 import * as Vue from "vue";
+import Component from "vue-class-component";
 import { schema, schemaSchema } from "../schema";
 
 import "../../dist/vue";
@@ -8,48 +9,68 @@ import * as dragula from "dragula";
 import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
 
-/* tslint:disable:only-arrow-functions */
+@Component({
+    template: `
+    <div>
+        <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
+			<json-editor :schema="schemaSchema"
+			    :initial-value="formattedSchema"
+				@update-value="updateSchema(arguments[0])"
+				theme="bootstrap3"
+				icon="fontawesome4"
+				:locale="locale"
+				:dragula="dragula"
+				:markdownit="markdownit"
+				:hljs="hljs"
+				:force-https="false">
+			</json-editor>
+		</div>
+		<div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
+			<json-editor :schema="schema"
+			    :initial-value="value"
+				@update-value="updateValue(arguments[0])"
+				theme="bootstrap3"
+				icon="fontawesome4"
+				:locale="locale"
+				:dragula="dragula"
+				:markdownit="markdownit"
+				:hljs="hljs"
+				:force-https="false">
+			</json-editor>
+		</div>
+		<div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
+            Value:
+			<pre :style="{borderColor: color}"><code v-html="valueHtml"></code></pre>
+		</div>
+    </div>
+    `,
+})
+class App extends Vue {
+    schema = schema;
+    value = {};
+    color = "black";
+    locale = navigator.language;
+    dragula = dragula;
+    markdownit = MarkdownIt;
+    hljs = hljs;
+    valueHtml = "";
+    schemaSchema = schemaSchema;
+    get formattedSchema() {
+        return JSON.stringify(this.schema, null, "  ");
+    }
+    updateSchema({ value }: common.ValidityValue<common.ValueType>) {
+        try {
+            this.schema = JSON.parse(value as string);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    updateValue({ value, isValid }: common.ValidityValue<common.ValueType>) {
+        this.valueHtml = hljs.highlight("json", JSON.stringify(value, null, "  ")).value;
+        this.color = isValid ? "black" : "red";
+    }
+}
+
 /* tslint:disable:no-unused-expression */
-/* tslint:disable:object-literal-shorthand */
-
-type This = {
-    color: string;
-    valueHtml: string;
-    schema: typeof schema;
-} & Vue;
-
-new Vue({
-    el: "#container",
-    data() {
-        const value = {};
-        return {
-            schema,
-            value,
-            color: "black",
-            locale: navigator.language,
-            dragula,
-            markdownit: MarkdownIt,
-            hljs,
-            valueHtml: "",
-            schemaSchema,
-        };
-    },
-    computed: {
-        formattedSchema(this: This) {
-            return JSON.stringify(this.schema, null, "  ");
-        },
-    },
-    methods: {
-        updateSchema(this: This, {value}: common.ValidityValue<common.ValueType>) {
-            try {
-                this.schema = JSON.parse(value as string);
-            } catch (error) {
-                console.log(error);
-            }
-        },
-        updateValue(this: This, {value, isValid}: common.ValidityValue<common.ValueType>) {
-            this.valueHtml = hljs.highlight("json", JSON.stringify(value, null, "  ")).value;
-            this.color = isValid ? "black" : "red";
-        },
-    },
-});
+new App({ el: "#container" });
+/* tslint:enable:no-unused-expression */
