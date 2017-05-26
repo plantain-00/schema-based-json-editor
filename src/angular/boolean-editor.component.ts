@@ -29,12 +29,9 @@ export class BooleanEditorComponent {
     required?: boolean;
     @Input()
     hasDeleteButton: boolean;
-    @Input()
-    parentIsLocked?: boolean;
 
     value?: boolean;
     buttonGroupStyle = common.buttonGroupStyleString;
-    locked = true;
     ngOnInit() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
         this.updateValue.emit({ value: this.value, isValid: true });
@@ -50,16 +47,10 @@ export class BooleanEditorComponent {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
-    get isLocked() {
-        return this.parentIsLocked !== false && this.locked;
-    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
-    }
-    toggleLocked = () => {
-        this.locked = !this.locked;
     }
 }

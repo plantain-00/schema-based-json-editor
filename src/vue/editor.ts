@@ -4,7 +4,7 @@ import { srcVueEditorTemplateHtml } from "../vue-variables";
 
 @Component({
     template: srcVueEditorTemplateHtml,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps", "parentIsLocked"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
 })
 export class Editor extends Vue {
 

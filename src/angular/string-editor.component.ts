@@ -42,14 +42,11 @@ export class StringEditorComponent {
     hljs?: typeof hljs;
     @Input()
     forceHttps?: boolean;
-    @Input()
-    parentIsLocked?: boolean;
 
     value?: string;
     errorMessage: string;
     buttonGroupStyle = common.buttonGroupStyleString;
     collapsed = false;
-    locked = true;
     onChange(e: { target: { value: string } }) {
         this.value = e.target.value;
         this.validate();
@@ -61,18 +58,19 @@ export class StringEditorComponent {
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
     get useTextArea() {
-        const isUnlockedCodeOrMarkdown = (this.schema.format === "code" || this.schema.format === "markdown") && (!this.locked);
         return this.value !== undefined
-            && (this.schema.enum === undefined || this.isReadOnly || this.isLocked)
-            && (this.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
+            && !this.collapsed
+            && (this.schema.enum === undefined || this.isReadOnly)
+            && (this.schema.format === "textarea" || this.schema.format === "code" || this.schema.format === "markdown");
     }
     get useInput() {
         return this.value !== undefined
-            && (this.schema.enum === undefined || this.isReadOnly || this.isLocked)
+            && !this.collapsed
+            && (this.schema.enum === undefined || this.isReadOnly)
             && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
     }
     get useSelect() {
-        return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly && !this.isLocked;
+        return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly;
     }
     get canPreviewImage() {
         return common.isImageUrl(this.value);
@@ -98,11 +96,8 @@ export class StringEditorComponent {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
-    get isLocked() {
-        return this.parentIsLocked !== false && this.locked;
-    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get willPreviewImage() {
         return this.value && !this.collapsed && this.canPreviewImage;
@@ -129,8 +124,5 @@ export class StringEditorComponent {
     }
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
-    }
-    toggleLocked = () => {
-        this.locked = !this.locked;
     }
 }

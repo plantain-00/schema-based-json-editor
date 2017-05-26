@@ -39,8 +39,6 @@ export class ObjectEditorComponent {
     hljs?: typeof hljs;
     @Input()
     forceHttps?: boolean;
-    @Input()
-    parentIsLocked?: boolean;
 
     collapsed?: boolean = false;
     value?: { [name: string]: common.ValueType };
@@ -49,7 +47,6 @@ export class ObjectEditorComponent {
     invalidProperties: string[] = [];
     errorMessage: string;
     filter = "";
-    locked = true;
     ngOnInit() {
         this.collapsed = this.schema.collapsed;
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
@@ -83,9 +80,6 @@ export class ObjectEditorComponent {
         this.validate();
         this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 });
     }
-    toggleLocked = () => {
-        this.locked = !this.locked;
-    }
     onChange(property: string, {value, isValid}: common.ValidityValue<{ [name: string]: common.ValueType }>) {
         this.value![property] = value;
         this.validate();
@@ -102,13 +96,10 @@ export class ObjectEditorComponent {
         return this.properties.filter(p => common.filterObject(p, this.filter));
     }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
-    }
-    get isLocked() {
-        return this.parentIsLocked !== false && this.locked;
     }
     get titleToShow() {
         if (this.hasDeleteButton) {

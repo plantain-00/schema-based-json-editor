@@ -7,7 +7,7 @@ import "markdown-tip/dist/vue";
 
 @Component({
     template: srcVueStringEditorTemplateHtml,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps", "parentIsLocked"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
 })
 export class StringEditor extends Vue {
     schema: common.StringSchema;
@@ -22,14 +22,12 @@ export class StringEditor extends Vue {
     md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljs;
     forceHttps?: boolean;
-    parentIsLocked?: boolean;
 
     value?: string = "";
     errorMessage?: string = "";
     buttonGroupStyle = common.buttonGroupStyleString;
     collapsed = false;
     imagePreviewStyle = common.imagePreviewStyleString;
-    locked = true;
 
     onChange(e: { target: { value: string } }) {
         this.value = e.target.value;
@@ -56,18 +54,19 @@ export class StringEditor extends Vue {
         return (!!this.value) && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
     }
     get useTextArea() {
-        const isUnlockedCodeOrMarkdown = (this.schema.format === "code" || this.schema.format === "markdown") && (!this.locked);
         return this.value !== undefined
-            && (this.schema.enum === undefined || this.isReadOnly || this.isLocked)
-            && (this.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
+            && !this.collapsed
+            && (this.schema.enum === undefined || this.isReadOnly)
+            && (this.schema.format === "textarea" || this.schema.format === "code" || this.schema.format === "markdown");
     }
     get useInput() {
         return this.value !== undefined
-            && (this.schema.enum === undefined || this.isReadOnly || this.isLocked)
+            && !this.collapsed
+            && (this.schema.enum === undefined || this.isReadOnly)
             && (this.schema.format !== "textarea" && this.schema.format !== "code" && this.schema.format !== "markdown");
     }
     get useSelect() {
-        return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly && !this.isLocked;
+        return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly;
     }
     get getImageUrl() {
         return this.forceHttps ? common.replaceProtocal(this.value!) : this.value;
@@ -81,11 +80,8 @@ export class StringEditor extends Vue {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
-    get isLocked() {
-        return this.parentIsLocked !== false && this.locked;
-    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get willPreviewImage() {
         return this.value && !this.collapsed && this.canPreviewImage;
@@ -110,8 +106,5 @@ export class StringEditor extends Vue {
     }
     collapseOrExpand() {
         this.collapsed = !this.collapsed;
-    }
-    toggleLocked() {
-        this.locked = !this.locked;
     }
 }

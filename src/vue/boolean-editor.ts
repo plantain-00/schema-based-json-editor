@@ -5,7 +5,7 @@ import { srcVueBooleanEditorTemplateHtml } from "../vue-variables";
 
 @Component({
     template: srcVueBooleanEditorTemplateHtml,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "parentIsLocked"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
 })
 export class BooleanEditor extends Vue {
     schema: common.ArraySchema;
@@ -17,11 +17,9 @@ export class BooleanEditor extends Vue {
     readonly: boolean;
     required: boolean;
     hasDeleteButton: boolean;
-    parentIsLocked?: boolean;
 
     value?: boolean = false;
     buttonGroupStyle = common.buttonGroupStyleString;
-    locked = true;
 
     beforeMount() {
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean;
@@ -31,11 +29,8 @@ export class BooleanEditor extends Vue {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
-    get isLocked() {
-        return this.parentIsLocked !== false && this.locked;
-    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
@@ -48,8 +43,5 @@ export class BooleanEditor extends Vue {
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as boolean | undefined;
         this.$emit("update-value", { value: this.value, isValid: true });
-    }
-    toggleLocked() {
-        this.locked = !this.locked;
     }
 }

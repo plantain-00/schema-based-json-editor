@@ -10,7 +10,6 @@ export type State = Partial<{
     value: string;
     errorMessage: string;
     collapsed: boolean;
-    locked: boolean;
     willRender: boolean;
 }>;
 
@@ -18,7 +17,6 @@ export class StringEditor extends React.Component<Props, State> {
     value?: string;
     errorMessage: string;
     collapsed = false;
-    locked = true;
     willRender = false;
     constructor(props: Props) {
         super(props);
@@ -39,7 +37,7 @@ export class StringEditor extends React.Component<Props, State> {
             this.willRender = false;
             return true;
         }
-        return this.props.initialValue !== nextProps.initialValue || this.props.parentIsLocked !== nextProps.parentIsLocked;
+        return this.props.initialValue !== nextProps.initialValue;
     }
     render() {
         const textarea = this.useTextArea ? (
@@ -47,8 +45,8 @@ export class StringEditor extends React.Component<Props, State> {
                 onChange={this.onChange}
                 defaultValue={this.value}
                 rows={10}
-                readOnly={this.isReadOnly || this.isLocked}
-                disabled={this.isReadOnly || this.isLocked} >
+                readOnly={this.isReadOnly}
+                disabled={this.isReadOnly} >
             </textarea>
         ) : null;
 
@@ -57,8 +55,8 @@ export class StringEditor extends React.Component<Props, State> {
                 type={this.props.schema.format}
                 onChange={this.onChange}
                 defaultValue={this.value}
-                readOnly={this.isReadOnly || this.isLocked}
-                disabled={this.isReadOnly || this.isLocked} />
+                readOnly={this.isReadOnly}
+                disabled={this.isReadOnly} />
         ) : null;
 
         const select = this.useSelect ? (
@@ -81,14 +79,9 @@ export class StringEditor extends React.Component<Props, State> {
                 <label className={this.props.theme.label}>
                     {this.titleToShow}
                     <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                        <Icon valid={!this.isReadOnly}
-                            onClick={this.toggleLocked}
-                            text={this.locked ? this.props.icon.unlock : this.props.icon.lock}
-                            theme={this.props.theme}
-                            icon={this.props.icon} />
                         <Optional required={this.props.required}
                             value={this.value}
-                            isReadOnly={this.isReadOnly || this.isLocked}
+                            isReadOnly={this.isReadOnly}
                             theme={this.props.theme}
                             locale={this.props.locale}
                             toggleOptional={this.toggleOptional} />
@@ -119,25 +112,23 @@ export class StringEditor extends React.Component<Props, State> {
     get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
     }
-    get isLocked() {
-        return this.props.parentIsLocked !== false && this.locked;
-    }
     get hasDeleteButtonFunction() {
-        return this.props.onDelete && !this.isReadOnly && !this.isLocked;
+        return this.props.onDelete && !this.isReadOnly;
     }
     get useTextArea() {
-        const isUnlockedCodeOrMarkdown = (this.props.schema.format === "code" || this.props.schema.format === "markdown") && (!this.locked);
         return this.value !== undefined
-            && (this.props.schema.enum === undefined || this.isReadOnly || this.isLocked)
-            && (this.props.schema.format === "textarea" || isUnlockedCodeOrMarkdown);
+            && !this.collapsed
+            && (this.props.schema.enum === undefined || this.isReadOnly)
+            && (this.props.schema.format === "textarea" || this.props.schema.format === "code" || this.props.schema.format === "markdown");
     }
     get useInput() {
         return this.value !== undefined
-            && (this.props.schema.enum === undefined || this.isReadOnly || this.isLocked)
+            && !this.collapsed
+            && (this.props.schema.enum === undefined || this.isReadOnly)
             && (this.props.schema.format !== "textarea" && this.props.schema.format !== "code" && this.props.schema.format !== "markdown");
     }
     get useSelect() {
-        return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly && !this.isLocked;
+        return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly;
     }
     get canPreviewImage() {
         return common.isImageUrl(this.value);
@@ -185,10 +176,5 @@ export class StringEditor extends React.Component<Props, State> {
         this.willRender = true;
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
-    }
-    toggleLocked = () => {
-        this.willRender = true;
-        this.locked = !this.locked;
-        this.setState({ locked: this.locked });
     }
 }

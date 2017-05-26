@@ -38,6 +38,4 @@ export class EditorComponent {
     hljs?: typeof hljs;
     @Input()
     forceHttps?: boolean;
-    @Input()
-    parentIsLocked?: boolean;
 }

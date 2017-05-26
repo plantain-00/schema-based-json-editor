@@ -2,15 +2,9 @@
     <h3>
         {{titleToShow}}
         <div [class]="theme.buttonGroup" [style]="buttonGroupStyleString">
-            <icon *ngIf="!isReadOnly"
-                (onClick)="toggleLocked()"
-                [text]="locked ? icon.unlock : icon.lock"
-                [theme]="theme"
-                [icon]="icon">
-            </icon>
             <optional [required]="required"
                 [value]="value"
-                [isReadOnly]="isReadOnly || isLocked"
+                [isReadOnly]="isReadOnly"
                 [theme]="theme"
                 [locale]="locale"
                 (toggleOptional)="toggleOptional()">
@@ -57,8 +51,7 @@
                 [dragula]="dragula"
                 [md]="md"
                 [hljs]="hljs"
-                [forceHttps]="forceHttps"
-                [parentIsLocked]="isLocked">
+                [forceHttps]="forceHttps">
             </editor>
         </div>
     </div>

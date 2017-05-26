@@ -104,8 +104,6 @@ export const defaultLocale = {
         expand: "Expand",
         add: "Add",
         delete: "Delete",
-        lock: "lock",
-        unlock: "unlock",
     },
     error: {
         minLength: "Value must be at least {0} characters long.",
@@ -138,8 +136,6 @@ export const locales: { [name: string]: Locale } = {
             expand: "显示",
             add: "增加",
             delete: "删除",
-            lock: "锁定",
-            unlock: "解锁",
         },
         error: {
             minLength: "要求至少 {0} 字符。",
@@ -180,8 +176,6 @@ export const bootstrap3Icon = {
     expand: "glyphicon glyphicon-chevron-right",
     add: "glyphicon glyphicon-plus",
     delete: "glyphicon glyphicon-remove",
-    lock: "glyphicon glyphicon-lock",
-    unlock: "glyphicon glyphicon-edit",
 };
 
 export type Icon = typeof bootstrap3Icon;
@@ -194,8 +188,6 @@ const icons: { [name: string]: Icon } = {
         expand: "fa fa-caret-square-o-right",
         add: "fa fa-plus",
         delete: "fa fa-times",
-        lock: "fa fa-lock",
-        unlock: "fa fa-unlock",
     },
 };
 
@@ -207,8 +199,6 @@ export function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
             expand: locale.button.expand,
             add: locale.button.add,
             delete: locale.button.delete,
-            lock: locale.button.lock,
-            unlock: locale.button.unlock,
         };
     }
     if (typeof name === "string") {
@@ -218,8 +208,6 @@ export function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
             expand: locale.button.expand,
             add: locale.button.add,
             delete: locale.button.delete,
-            lock: locale.button.lock,
-            unlock: locale.button.unlock,
         };
     }
     return name;
@@ -350,7 +338,6 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljsLib;
     forceHttps?: boolean;
-    parentIsLocked?: boolean;
 }
 
 export function isSame(value1: ValueType, value2: ValueType) {

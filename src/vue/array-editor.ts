@@ -6,7 +6,7 @@ import { srcVueArrayEditorTemplateHtml } from "../vue-variables";
 
 @Component({
     template: srcVueArrayEditorTemplateHtml,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps", "parentIsLocked"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
 })
 export class ArrayEditor extends Vue {
     schema: common.ArraySchema;
@@ -22,7 +22,6 @@ export class ArrayEditor extends Vue {
     md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljs;
     forceHttps?: boolean;
-    parentIsLocked?: boolean;
 
     renderSwitch = 1;
     collapsed?: boolean = false;
@@ -32,7 +31,6 @@ export class ArrayEditor extends Vue {
     buttonGroupStyleString = common.buttonGroupStyleString;
     invalidIndexes = [];
     filter = "";
-    locked = true;
 
     beforeMount() {
         this.collapsed = this.schema.collapsed;
@@ -54,14 +52,11 @@ export class ArrayEditor extends Vue {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
-    get isLocked() {
-        return this.parentIsLocked !== false && this.locked;
-    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get hasAddButton() {
-        return !this.isReadOnly && this.value !== undefined && !this.isLocked;
+        return !this.isReadOnly && this.value !== undefined;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
@@ -98,9 +93,6 @@ export class ArrayEditor extends Vue {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as common.ValueType[] | undefined;
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
-    }
-    toggleLocked() {
-        this.locked = !this.locked;
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);

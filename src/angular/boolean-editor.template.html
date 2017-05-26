@@ -2,15 +2,9 @@
     <label [class]="theme.label">
         {{titleToShow}}
         <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
-            <icon *ngIf="!isReadOnly"
-                (onClick)="toggleLocked()"
-                [text]="locked ? icon.unlock : icon.lock"
-                [theme]="theme"
-                [icon]="icon">
-            </icon>
             <optional [required]="required"
                 [value]="value"
-                [isReadOnly]="isReadOnly || isLocked"
+                [isReadOnly]="isReadOnly"
                 [theme]="theme"
                 [locale]="locale"
                 (toggleOptional)="toggleOptional()">
@@ -29,7 +23,7 @@
                 <input type="radio"
                     (change)="onChange($event)"
                     [checked]="value"
-                    [disabled]="isReadOnly || isLocked" />
+                    [disabled]="isReadOnly" />
                 {{locale.info.true}}
             </label>
         </div>
@@ -38,7 +32,7 @@
                 <input type="radio"
                     (change)="onChange($event)"
                     [checked]="!value"
-                    [disabled]="isReadOnly || isLocked" />
+                    [disabled]="isReadOnly" />
                 {{locale.info.false}}
             </label>
         </div>

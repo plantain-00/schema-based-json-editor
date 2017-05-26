@@ -2,15 +2,9 @@
     <h3>
         {{titleToShow}}
         <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-            <icon v-if="!isReadOnly"
-                @click="toggleLocked()"
-                :text="locked ? icon.unlock : icon.lock"
-                :theme="theme"
-                :icon="icon">
-            </icon>
             <optional :required="required"
                 :value="value"
-                :isReadOnly="isReadOnly || isLocked"
+                :isReadOnly="isReadOnly"
                 :theme="theme"
                 :locale="locale"
                 @toggleOptional="toggleOptional()">
@@ -51,8 +45,7 @@
             :dragula="dragula"
             :md="md"
             :hljs="hljs"
-            :force-https="forceHttps"
-            :parent-is-locked="isLocked">
+            :force-https="forceHttps">
         </editor>
     </div>
     <description :theme="theme" :message="errorMessage"></description>

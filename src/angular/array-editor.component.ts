@@ -38,8 +38,6 @@ export class ArrayEditorComponent {
     hljs?: typeof hljs;
     @Input()
     forceHttps?: boolean;
-    @Input()
-    parentIsLocked?: boolean;
 
     @ViewChild("drakContainer")
     drakContainer: ElementRef;
@@ -52,7 +50,6 @@ export class ArrayEditorComponent {
     buttonGroupStyleString = common.buttonGroupStyleString;
     invalidIndexes: number[] = [];
     filter = "";
-    locked = true;
     get getValue() {
         if (this.value !== undefined && !this.collapsed) {
             return this.value;
@@ -74,14 +71,11 @@ export class ArrayEditorComponent {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
-    get isLocked() {
-        return this.parentIsLocked !== false && this.locked;
-    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get hasAddButton() {
-        return !this.isReadOnly && this.value !== undefined && !this.isLocked;
+        return !this.isReadOnly && this.value !== undefined;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
@@ -136,8 +130,5 @@ export class ArrayEditorComponent {
     }
     onFilterChange(e: { target: { value: string } }) {
         this.filter = e.target.value;
-    }
-    toggleLocked = () => {
-        this.locked = !this.locked;
     }
 }

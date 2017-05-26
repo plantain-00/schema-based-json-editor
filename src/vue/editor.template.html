@@ -13,8 +13,7 @@
     :dragula="dragula"
     :md="md"
     :hljs="hljs"
-    :forceHttps="forceHttps"
-    :parent-is-locked="parentIsLocked">
+    :forceHttps="forceHttps">
 </object-editor>
 <array-editor v-else-if="schema.type === 'array'"
     :schema="schema"
@@ -31,8 +30,7 @@
     :dragula="dragula"
     :md="md"
     :hljs="hljs"
-    :forceHttps="forceHttps"
-    :parent-is-locked="parentIsLocked">
+    :forceHttps="forceHttps">
 </array-editor>
 <number-editor v-else-if="schema.type === 'number' || schema.type === 'integer'"
     :schema="schema"
@@ -45,8 +43,7 @@
     :required="required"
     @update-value="$emit('update-value', arguments[0])"
     @delete="$emit('delete')"
-    :has-delete-button="hasDeleteButton"
-    :parent-is-locked="parentIsLocked">
+    :has-delete-button="hasDeleteButton">
 </number-editor>
 <boolean-editor v-else-if="schema.type === 'boolean'"
     :schema="schema"
@@ -59,8 +56,7 @@
     :required="required"
     @update-value="$emit('update-value', arguments[0])"
     @delete="$emit('delete')"
-    :has-delete-button="hasDeleteButton"
-    :parent-is-locked="parentIsLocked">
+    :has-delete-button="hasDeleteButton">
 </boolean-editor>
 <null-editor v-else-if="schema.type === 'null'"
     :schema="schema"
@@ -90,6 +86,5 @@
     :dragula="dragula"
     :md="md"
     :hljs="hljs"
-    :forceHttps="forceHttps"
-    :parent-is-locked="parentIsLocked">
+    :forceHttps="forceHttps">
 </string-editor>

@@ -6,7 +6,7 @@ import { srcVueObjectEditorTemplateHtml } from "../vue-variables";
 
 @Component({
     template: srcVueObjectEditorTemplateHtml,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps", "parentIsLocked"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
 })
 export class ObjectEditor extends Vue {
     schema: common.ObjectSchema;
@@ -22,7 +22,6 @@ export class ObjectEditor extends Vue {
     md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljs;
     forceHttps?: boolean;
-    parentIsLocked?: boolean;
 
     collapsed?: boolean = false;
     value?: { [name: string]: common.ValueType } = {};
@@ -31,7 +30,6 @@ export class ObjectEditor extends Vue {
     errorMessage?: string = "";
     properties: { property: string; schema: common.Schema }[] = [];
     filter = "";
-    locked = true;
 
     beforeMount() {
         this.collapsed = this.schema.collapsed;
@@ -58,11 +56,8 @@ export class ObjectEditor extends Vue {
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
-    get isLocked() {
-        return this.parentIsLocked !== false && this.locked;
-    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get titleToShow() {
         if (this.hasDeleteButton) {
@@ -84,9 +79,6 @@ export class ObjectEditor extends Vue {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as { [name: string]: common.ValueType } | undefined;
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
-    }
-    toggleLocked() {
-        this.locked = !this.locked;
     }
     onChange(property: string, {value, isValid}: common.ValidityValue<common.ValueType>) {
         this.value![property] = value;

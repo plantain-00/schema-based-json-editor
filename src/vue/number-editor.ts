@@ -5,7 +5,7 @@ import { srcVueNumberEditorTemplateHtml } from "../vue-variables";
 
 @Component({
     template: srcVueNumberEditorTemplateHtml,
-    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "parentIsLocked"],
+    props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
 })
 export class NumberEditor extends Vue {
     schema: common.NumberSchema;
@@ -17,12 +17,10 @@ export class NumberEditor extends Vue {
     readonly: boolean;
     required: boolean;
     hasDeleteButton: boolean;
-    parentIsLocked?: boolean;
 
     value?: number = 0;
     errorMessage?: string = "";
     buttonGroupStyle = common.buttonGroupStyleString;
-    locked = true;
 
     onChange(e: { target: { value: string } }) {
         this.value = this.schema.type === "integer" ? common.toInteger(e.target.value) : common.toNumber(e.target.value);
@@ -37,19 +35,16 @@ export class NumberEditor extends Vue {
     }
 
     get useInput() {
-        return this.value !== undefined && (this.schema.enum === undefined || this.isReadOnly || this.isLocked);
+        return this.value !== undefined && (this.schema.enum === undefined || this.isReadOnly);
     }
     get useSelect() {
-        return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly && !this.isLocked);
+        return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly);
     }
     get isReadOnly() {
         return this.readonly || this.schema.readonly;
     }
-    get isLocked() {
-        return this.parentIsLocked !== false && this.locked;
-    }
     get hasDeleteButtonFunction() {
-        return this.hasDeleteButton && !this.isReadOnly && !this.isLocked;
+        return this.hasDeleteButton && !this.isReadOnly;
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
@@ -62,8 +57,5 @@ export class NumberEditor extends Vue {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
-    }
-    toggleLocked() {
-        this.locked = !this.locked;
     }
 }

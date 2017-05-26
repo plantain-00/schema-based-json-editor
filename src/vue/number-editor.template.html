@@ -2,15 +2,9 @@
     <label :class="theme.label">
         {{titleToShow}}
         <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-            <icon v-if="!isReadOnly"
-                @click="toggleLocked()"
-                :text="locked ? icon.unlock : icon.lock"
-                :theme="theme"
-                :icon="icon">
-            </icon>
             <optional :required="required"
                 :value="value"
-                :isReadOnly="isReadOnly || isLocked"
+                :isReadOnly="isReadOnly"
                 :theme="theme"
                 :locale="locale"
                 @toggleOptional="toggleOptional()">
@@ -29,8 +23,8 @@
         @change="onChange($event)"
         @keyup="onChange($event)"
         :value="value"
-        :readOnly="isReadOnly || isLocked"
-        :disabled="isReadOnly || isLocked" />
+        :readOnly="isReadOnly"
+        :disabled="isReadOnly" />
     <select v-if="useSelect"
         :class="theme.formControl"
         type="number"
