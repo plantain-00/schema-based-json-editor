@@ -59,7 +59,7 @@ export type NullSchema = CommonSchema & {
 export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema;
 
 export const themes: { [name: string]: Theme } = {
-    "bootstrap3": {
+    bootstrap3: {
         rowContainer: "well bootstrap3-row-container",
         row: "row",
         formControl: "form-control",
@@ -181,8 +181,8 @@ export const bootstrap3Icon = {
 export type Icon = typeof bootstrap3Icon;
 
 const icons: { [name: string]: Icon } = {
-    "bootstrap3": bootstrap3Icon,
-    "fontawesome4": {
+    bootstrap3: bootstrap3Icon,
+    fontawesome4: {
         isText: false,
         collapse: "fa fa-caret-square-o-down",
         expand: "fa fa-caret-square-o-right",
