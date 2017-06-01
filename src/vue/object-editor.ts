@@ -37,13 +37,15 @@ export class ObjectEditor extends Vue {
         this.validate();
         if (this.value !== undefined) {
             for (const property in this.schema.properties) {
-                const schema = this.schema.properties[property];
-                const required = this.schema.required && this.schema.required.some((r: any) => r === property);
-                this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
-                this.properties.push({
-                    property,
-                    schema,
-                });
+                if (this.schema.properties.hasOwnProperty(property)) {
+                    const schema = this.schema.properties[property];
+                    const required = this.schema.required && this.schema.required.some((r: any) => r === property);
+                    this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
+                    this.properties.push({
+                        property,
+                        schema,
+                    });
+                }
             }
             this.properties = this.properties.sort(common.compare);
         }
@@ -80,7 +82,7 @@ export class ObjectEditor extends Vue {
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: this.invalidProperties.length === 0 });
     }
-    onChange(property: string, {value, isValid}: common.ValidityValue<common.ValueType>) {
+    onChange(property: string, { value, isValid }: common.ValidityValue<common.ValueType>) {
         this.value![property] = value;
         this.validate();
         common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);

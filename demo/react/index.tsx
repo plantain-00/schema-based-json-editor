@@ -20,6 +20,7 @@ class Main extends React.Component<{}, {}> {
             this.schema = JSON.parse(value);
             this.setState({ schema: this.schema });
         } catch (error) {
+            // tslint:disable-next-line:no-console
             console.log(error);
         }
     }

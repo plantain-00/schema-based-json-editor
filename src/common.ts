@@ -1,7 +1,9 @@
+// tslint:disable:no-var-requires
 export const toNumber = require("lodash.tonumber");
 export const toInteger = require("lodash.tointeger");
 const isObject = require("lodash.isobject");
 const isInteger = require("lodash.isinteger");
+// tslint:enable:no-var-requires
 
 export type CommonSchema = {
     $schema?: string;
@@ -323,7 +325,7 @@ export const buttonGroupStyleString = "margin-left: 10px";
 
 import { hljs as hljsLib, dragula, MarkdownIt } from "../typings/lib";
 
-export interface Props<TSchema extends CommonSchema, TValue> {
+export type Props<TSchema extends CommonSchema, TValue> = {
     schema: TSchema;
     initialValue: TValue;
     title?: string;
@@ -338,7 +340,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
     md?: MarkdownIt.MarkdownIt;
     hljs?: typeof hljsLib;
     forceHttps?: boolean;
-}
+};
 
 export function isSame(value1: ValueType, value2: ValueType) {
     if (typeof value1 === "string"
@@ -380,9 +382,9 @@ export function isSame(value1: ValueType, value2: ValueType) {
 }
 
 export function switchItem(value: any[], el: HTMLElement, sibling: HTMLElement | null) {
-    const fromIndex = +el.dataset["index"]!;
+    const fromIndex = +el.dataset.index!;
     if (sibling) {
-        const toIndex = +sibling.dataset["index"]!;
+        const toIndex = +sibling.dataset.index!;
         value.splice(toIndex, 0, value[fromIndex]);
         if (fromIndex > toIndex) {
             value.splice(fromIndex + 1, 1);
@@ -554,6 +556,11 @@ export const imagePreviewStyle = {
     maxWidth: "100%",
 };
 
+function print(message: string) {
+    // tslint:disable-next-line:no-console
+    console.log(message);
+}
+
 export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof hljsLib | undefined, forceHttps: boolean | undefined) {
     if (!markdownit) {
         return undefined;
@@ -566,20 +573,20 @@ export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof h
                     try {
                         return hljs.highlight(lang, str).value;
                     } catch (error) {
-                        console.log(error);
+                        print(error);
                     }
                 }
                 try {
                     return hljs.highlightAuto(str).value;
                 } catch (error) {
-                    console.log(error);
+                    print(error);
                 }
             }
             return "";
         },
     });
 
-    md.renderer.rules["image"] = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
+    md.renderer.rules.image = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
         const token = tokens[index];
         const aIndex = token.attrIndex("src");
         if (forceHttps) {
@@ -587,18 +594,18 @@ export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof h
         }
         token.attrPush(["style", imagePreviewStyleString]);
 
-        return md.renderer.rules["image"](tokens, index, options, env, self);
+        return md.renderer.rules.image(tokens, index, options, env, self);
     };
 
     let defaultLinkRender: MarkdownIt.TokenRender;
-    if (md.renderer.rules["link_open"]) {
-        defaultLinkRender = md.renderer.rules["link_open"];
+    if (md.renderer.rules.link_open) {
+        defaultLinkRender = md.renderer.rules.link_open;
     } else {
         defaultLinkRender = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
             return self.renderToken(tokens, index, options);
         };
     }
-    md.renderer.rules["link_open"] = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
+    md.renderer.rules.link_open = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
         tokens[index].attrPush(["target", "_blank"]);
         tokens[index].attrPush(["rel", "nofollow"]);
         return defaultLinkRender(tokens, index, options, env, self);
@@ -626,14 +633,16 @@ export function findTitle(value: { [name: string]: ValueType } | undefined, prop
 function findTitleFromSchema(value: { [name: string]: ValueType } | undefined, schema: ObjectSchema) {
     if (value) {
         for (const property in schema.properties) {
-            const title = value[property];
-            if (typeof title === "string" && title.length > 0) {
-                if (title.length > 23) {
-                    return title.substring(0, 20) + "...";
+            if (schema.properties.hasOwnProperty(property)) {
+                const title = value[property];
+                if (typeof title === "string" && title.length > 0) {
+                    if (title.length > 23) {
+                        return title.substring(0, 20) + "...";
+                    }
+                    return title;
+                } else {
+                    continue;
                 }
-                return title;
-            } else {
-                continue;
             }
         }
     }

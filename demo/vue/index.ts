@@ -62,6 +62,7 @@ class App extends Vue {
         try {
             this.schema = JSON.parse(value as string);
         } catch (error) {
+            // tslint:disable-next-line:no-console
             console.log(error);
         }
     }
@@ -71,6 +72,5 @@ class App extends Vue {
     }
 }
 
-/* tslint:disable:no-unused-expression */
+// tslint:disable-next-line:no-unused-expression
 new App({ el: "#container" });
-/* tslint:enable:no-unused-expression */

@@ -28,13 +28,15 @@ export class ObjectEditor extends React.Component<Props, State> {
         this.validate();
         if (this.value !== undefined) {
             for (const property in this.props.schema.properties) {
-                const schema = this.props.schema.properties[property];
-                const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
-                this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
-                this.properties.push({
-                    property,
-                    schema,
-                });
+                if (this.props.schema.properties.hasOwnProperty(property)) {
+                    const schema = this.props.schema.properties[property];
+                    const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
+                    this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
+                    this.properties.push({
+                        property,
+                        schema,
+                    });
+                }
             }
             this.properties = this.properties.sort(common.compare);
         }
