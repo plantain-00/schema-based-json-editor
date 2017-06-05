@@ -6,6 +6,19 @@
 
 # schema-based-json-editor
 
+#### features
+
++ reactjs component
++ angular component
++ vuejs component
++ commonjs module
++ common schema fields: title, description, default, readonly, propertyOrder
++ object schema fields: properties, required, maxProperties, minProperties, collapsed
++ array schema fields: items, minItems, uniqueItems
++ number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, collapsed
++ string schema fields: format, enum, minLength, maxLength, pattern
++ image preview, code highlight, markdown preview
+
 #### install
 
 `npm i schema-based-json-editor`
@@ -26,8 +39,6 @@ import { JSONEditor } from "schema-based-json-editor/dist/react";
 ```
 
 the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/react/index.html
-
-the source code of the demo: https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/react
 
 #### angular component demo
 
@@ -54,8 +65,6 @@ class MainModule { }
 
 the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/angular/index.html
 
-the source code of the demo: https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/angular
-
 #### vuejs component demo
 
 `npm i vue vue-class-component`
@@ -76,8 +85,6 @@ import "schema-based-json-editor/dist/vue";
 
 the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/vue/index.html
 
-the source code of the demo: https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/vue
-
 #### properties of the component
 
 + schema: the json schema object
@@ -91,19 +98,6 @@ the source code of the demo: https://github.com/plantain-00/schema-based-json-ed
 + markdownit: optional, the `markdown-it` library object if you want to preview markdown
 + hljs: optional, the `highlight.js` library object if you want to highlight code
 + forceHttps: optional, a boolean value, if true, the preview url of images will be `https://` rather than `http://`
-
-#### features
-
-+ reactjs component
-+ angular component
-+ vuejs component
-+ commonjs module
-+ common schema fields: title, description, default, readonly, propertyOrder
-+ object schema fields: properties, required, maxProperties, minProperties, collapsed
-+ array schema fields: items, minItems, uniqueItems
-+ number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, collapsed
-+ string schema fields: format, enum, minLength, maxLength, pattern
-+ image preview, code highlight, markdown preview
 
 #### change logs
 

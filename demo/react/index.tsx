@@ -33,6 +33,7 @@ class Main extends React.Component<{}, {}> {
         const valueHtml = hljs.highlight("json", JSON.stringify(this.value, null, "  ")).value;
         return (
             <div>
+                <a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/react/index.tsx" target="_blank">the source code of the demo</a>
                 <div style={{ float: "left", margin: "10px", width: "400px", overflowY: "scroll", height: "600px" }} className="bootstrap3-row-container">
                     <JSONEditor schema={this.schemaSchema}
                         initialValue={this.formattedSchema}

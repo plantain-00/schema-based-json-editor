@@ -12,6 +12,7 @@ import * as hljs from "highlight.js";
 @Component({
     template: `
     <div>
+        <a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/vue/index.ts" target="_blank">the source code of the demo</a>
         <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
 			<json-editor :schema="schemaSchema"
 			    :initial-value="formattedSchema"
