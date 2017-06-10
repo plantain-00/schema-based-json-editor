@@ -7,7 +7,7 @@
     :icon="icon"
     :readonly="readonly"
     :required="required"
-    @update-value="$emit('update-value', arguments[0])"
+    @update-value="$emit('update-value', $event)"
     @delete="$emit('delete')"
     :has-delete-button="hasDeleteButton"
     :dragula="dragula"
@@ -24,7 +24,7 @@
     :icon="icon"
     :readonly="readonly"
     :required="required"
-    @update-value="$emit('update-value', arguments[0])"
+    @update-value="$emit('update-value', $event)"
     @delete="$emit('delete')"
     :has-delete-button="hasDeleteButton"
     :dragula="dragula"
@@ -41,7 +41,7 @@
     :icon="icon"
     :readonly="readonly"
     :required="required"
-    @update-value="$emit('update-value', arguments[0])"
+    @update-value="$emit('update-value', $event)"
     @delete="$emit('delete')"
     :has-delete-button="hasDeleteButton">
 </number-editor>
@@ -54,7 +54,7 @@
     :icon="icon"
     :readonly="readonly"
     :required="required"
-    @update-value="$emit('update-value', arguments[0])"
+    @update-value="$emit('update-value', $event)"
     @delete="$emit('delete')"
     :has-delete-button="hasDeleteButton">
 </boolean-editor>
@@ -67,7 +67,7 @@
     :icon="icon"
     :readonly="readonly"
     :required="required"
-    @update-value="$emit('update-value', arguments[0])"
+    @update-value="$emit('update-value', $event)"
     @delete="$emit('delete')"
     :has-delete-button="hasDeleteButton">
 </null-editor>
@@ -80,7 +80,7 @@
     :icon="icon"
     :readonly="readonly"
     :required="required"
-    @update-value="$emit('update-value', arguments[0])"
+    @update-value="$emit('update-value', $event)"
     @delete="$emit('delete')"
     :has-delete-button="hasDeleteButton"
     :dragula="dragula"

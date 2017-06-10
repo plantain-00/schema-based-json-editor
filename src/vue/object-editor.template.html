@@ -36,7 +36,7 @@
             :schema="p.schema"
             :title="p.schema.title || p.property"
             :initial-value="value[p.property]"
-            @update-value="onChange(p.property, arguments[0])"
+            @update-value="onChange(p.property, $event)"
             :theme="theme"
             :icon="icon"
             :locale="locale"

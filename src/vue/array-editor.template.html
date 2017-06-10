@@ -41,7 +41,7 @@
             <editor :schema="schema.items"
                 :title="item.i"
                 :initial-value="value[item.i]"
-                @update-value="onChange(item.i, arguments[0])"
+                @update-value="onChange(item.i, $event)"
                 :theme="theme"
                 :icon="icon"
                 :locale="locale"

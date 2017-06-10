@@ -40,7 +40,7 @@
         :disabled="isReadOnly" />
     <select2 v-if="useSelect" :data="options"
         :value="value"
-        @update="updateSelection(arguments[0])">
+        @update="updateSelection($event)">
     </select2>
     <img v-if="willPreviewImage"
         :style="imagePreviewStyle"
