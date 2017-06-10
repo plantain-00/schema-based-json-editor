@@ -92,10 +92,11 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent } from "../../dist/angular";
 import { MarkdownTipComponent } from "markdown-tip/dist/angular";
+import { Select2Component } from "select2-component/dist/angular";
 
 @NgModule({
     imports: [BrowserModule, FormsModule],
-    declarations: [MainComponent, JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent, MarkdownTipComponent],
+    declarations: [MainComponent, JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent, MarkdownTipComponent, Select2Component],
     bootstrap: [MainComponent],
 })
 class MainModule { }

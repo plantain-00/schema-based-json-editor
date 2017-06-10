@@ -58,6 +58,18 @@ export class NumberEditorComponent {
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
     }
+    get options() {
+        return this.schema.enum!.map(e => ({
+            value: e,
+            label: e,
+        }));
+    }
+
+    updateSelection(value: number) {
+        this.value = value;
+        this.validate();
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
+    }
     trackByFunction(index: number, value: number) {
         return index;
     }

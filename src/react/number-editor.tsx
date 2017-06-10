@@ -3,6 +3,7 @@ import * as common from "../common";
 import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
+import { Select2 } from "select2-component/dist/react";
 
 export type Props = common.Props<common.NumberSchema, number>;
 export type State = Partial<{
@@ -47,12 +48,10 @@ export class NumberEditor extends React.Component<Props, State> {
         ) : null;
 
         const select = this.useSelect ? (
-            <select className={this.props.theme.formControl}
-                type="number"
-                onChange={this.onChange}
-                defaultValue={String(this.value)} >
-                {this.props.schema.enum!.map((e, i) => <option key={i} value={e} >{e}</option>)}
-            </select>
+            <Select2 data={this.options}
+                value={this.value}
+                update={(e: number) => this.updateSelection(e)}>
+            </Select2>
         ) : null;
 
         return (
@@ -103,5 +102,18 @@ export class NumberEditor extends React.Component<Props, State> {
     }
     get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);
+    }
+    get options() {
+        return this.props.schema.enum!.map(e => ({
+            value: e,
+            label: e.toString(),
+        }));
+    }
+
+    updateSelection(value: number) {
+        this.value = value;
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value, !this.errorMessage);
     }
 }

@@ -38,16 +38,10 @@
         :value="value"
         :readOnly="isReadOnly"
         :disabled="isReadOnly" />
-    <select v-if="useSelect"
-        :class="theme.formControl"
-        @change="onChange($event)">
-        <option v-for="(e, i) in schema.enum"
-            :key="i"
-            :value="e"
-            :selected="value === e">
-            {{e}}
-        </option>
-    </select>
+    <select2 v-if="useSelect" :data="options"
+        :value="value"
+        @update="updateSelection(arguments[0])">
+    </select2>
     <img v-if="willPreviewImage"
         :style="imagePreviewStyle"
         :src="getImageUrl" />

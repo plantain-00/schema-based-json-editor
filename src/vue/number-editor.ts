@@ -50,6 +50,19 @@ export class NumberEditor extends Vue {
         return common.getTitle(this.title, this.schema.title);
     }
 
+    get options() {
+        return this.schema.enum!.map(e => ({
+            value: e,
+            label: e,
+        }));
+    }
+
+    updateSelection(value: number) {
+        this.value = value;
+        this.validate();
+        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }
+
     validate() {
         this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
     }

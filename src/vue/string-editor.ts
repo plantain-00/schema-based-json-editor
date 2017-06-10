@@ -4,6 +4,7 @@ import * as common from "../common";
 import { hljs, MarkdownIt } from "../../typings/lib";
 import { srcVueStringEditorTemplateHtml } from "../vue-variables";
 import "markdown-tip/dist/vue";
+import "select2-component/dist/vue";
 
 @Component({
     template: srcVueStringEditorTemplateHtml,
@@ -94,6 +95,18 @@ export class StringEditor extends Vue {
     }
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
+    }
+    get options() {
+        return this.schema.enum!.map(e => ({
+            value: e,
+            label: e,
+        }));
+    }
+
+    updateSelection(value: string) {
+        this.value = value;
+        this.validate();
+        this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
     }
 
     validate() {

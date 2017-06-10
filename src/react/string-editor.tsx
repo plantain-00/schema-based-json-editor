@@ -4,6 +4,7 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 import { MarkdownTip } from "markdown-tip/dist/react";
+import { Select2 } from "select2-component/dist/react";
 
 export type Props = common.Props<common.StringSchema, string>;
 export type State = Partial<{
@@ -60,11 +61,10 @@ export class StringEditor extends React.Component<Props, State> {
         ) : null;
 
         const select = this.useSelect ? (
-            <select className={this.props.theme.formControl}
-                onChange={this.onChange}
-                defaultValue={this.value}>
-                {this.props.schema.enum!.map((e, i) => <option key={i} value={e} >{e}</option>)}
-            </select>
+            <Select2 data={this.options}
+                value={this.value}
+                update={(e: string) => this.updateSelection(e)}>
+            </Select2>
         ) : null;
 
         const imagePreview = this.willPreviewImage ? <img style={common.imagePreviewStyle} src={this.getImageUrl} /> : null;
@@ -162,6 +162,19 @@ export class StringEditor extends React.Component<Props, State> {
     }
     get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);
+    }
+    get options() {
+        return this.props.schema.enum!.map(e => ({
+            value: e,
+            label: e,
+        }));
+    }
+
+    updateSelection(value: string) {
+        this.value = value;
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value, !this.errorMessage);
     }
     validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);

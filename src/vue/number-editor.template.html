@@ -25,17 +25,10 @@
         :value="value"
         :readOnly="isReadOnly"
         :disabled="isReadOnly" />
-    <select v-if="useSelect"
-        :class="theme.formControl"
-        type="number"
-        @change="onChange($event)">
-        <option v-for="(e, i) in schema.enum"
-            :key="i"
-            :value="e"
-            :selected="value === e">
-            {{e}}
-        </option>
-    </select>
+    <select2 v-if="useSelect" :data="options"
+        :value="value"
+        @update="updateSelection(arguments[0])">
+    </select2>
     <description :theme="theme" :message="schema.description"></description>
     <description :theme="theme" :message="errorMessage"></description>
 </div>
