@@ -76,7 +76,7 @@ import "schema-based-json-editor/dist/vue";
 ```jsx
 <json-editor :schema="schema"
     :initial-value="value"
-    @update-value="updateValue(arguments[0])"
+    @update-value="updateValue($event)"
     theme="bootstrap3"
     icon="fontawesome4"
     locale="zh-cn">

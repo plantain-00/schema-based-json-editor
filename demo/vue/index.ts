@@ -17,7 +17,7 @@ import * as hljs from "highlight.js";
         <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
 			<json-editor :schema="schemaSchema"
 			    :initial-value="formattedSchema"
-				@update-value="updateSchema(arguments[0])"
+				@update-value="updateSchema($event)"
 				theme="bootstrap3"
 				icon="fontawesome4"
 				:locale="locale"
@@ -30,7 +30,7 @@ import * as hljs from "highlight.js";
 		<div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
 			<json-editor :schema="schema"
 			    :initial-value="value"
-				@update-value="updateValue(arguments[0])"
+				@update-value="updateValue($event)"
 				theme="bootstrap3"
 				icon="fontawesome4"
 				:locale="locale"
