@@ -36,15 +36,12 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-!webpack.config.js
-*.js.map
-demo/**/*.js
+# Source
 .vscode
-vendor.bundle.css
-demo/fonts
-demo/css/
-spec/**/*.js
-dist/
-demo/**/index.html
-!*.config.*.js
+dist
+demo/**/*.js
+demo/**/*.css
 !*.config.js
+!demo/*-*.js
+!demo/*-*.css
+spec/**/*.js
