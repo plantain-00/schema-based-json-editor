@@ -40,7 +40,7 @@ jspm_packages
 .vscode
 dist
 demo/**/*.js
-demo/**/*.css
+#demo/**/*.css
 !*.config.js
 !demo/*-*.js
 !demo/*-*.css
