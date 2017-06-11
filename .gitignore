@@ -45,3 +45,4 @@ demo/**/*.js
 !demo/*-*.js
 !demo/*-*.css
 spec/**/*.js
+!demo/css/highlight.js/
