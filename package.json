@@ -35,7 +35,6 @@
     "@types/dragula": "*",
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
-    "@types/node": "*",
     "lodash.isinteger": "4",
     "lodash.isobject": "3",
     "lodash.tointeger": "4",

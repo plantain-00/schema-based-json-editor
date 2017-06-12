@@ -1,9 +1,9 @@
-// tslint:disable:no-var-requires
-export const toNumber = require("lodash.tonumber");
-export const toInteger = require("lodash.tointeger");
-const isObject = require("lodash.isobject");
-const isInteger = require("lodash.isinteger");
-// tslint:enable:no-var-requires
+// tslint:disable-next-line:no-reference
+/// <reference path="./lib.d.ts" />
+export import toNumber = require("lodash.tonumber");
+export import toInteger = require("lodash.tointeger");
+import isObject = require("lodash.isobject");
+import isInteger = require("lodash.isinteger");
 
 export type CommonSchema = {
     $schema?: string;
