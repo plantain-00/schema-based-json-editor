@@ -8,9 +8,9 @@ declare module "lodash.tointeger" {
 }
 declare module "lodash.isobject" {
     function isObject(obj: any): boolean;
-    export =isObject;
+    export = isObject;
 }
 declare module "lodash.isinteger" {
     function isInteger(value: number): boolean;
-    export =isInteger;
+    export = isInteger;
 }
