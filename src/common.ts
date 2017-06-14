@@ -1,9 +1,9 @@
 // tslint:disable-next-line:no-reference
 /// <reference path="./lib.d.ts" />
-import toNumber from "lodash.tonumber";
-import toInteger from "lodash.tointeger";
-import isObject from "lodash.isobject";
-import isInteger from "lodash.isinteger";
+import toNumber = require("lodash.tonumber");
+import toInteger = require("lodash.tointeger");
+import isObject = require("lodash.isobject");
+import isInteger = require("lodash.isinteger");
 export { toNumber, toInteger };
 
 export type CommonSchema = {
