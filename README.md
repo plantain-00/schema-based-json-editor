@@ -11,7 +11,6 @@
 + reactjs component
 + angular component
 + vuejs component
-+ commonjs module
 + common schema fields: title, description, default, readonly, propertyOrder
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems
