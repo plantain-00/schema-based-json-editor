@@ -18,14 +18,11 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
-  firefox: latest
-  apt:
-    sources:
       - google-chrome
     packages:
+      - g++-4.8
       - google-chrome-stable
+  firefox: latest
 branches:
   except:
     - gh-pages
