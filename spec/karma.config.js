@@ -21,15 +21,7 @@ module.exports = function (karma) {
     }
   }
 
-  if (process.env.TRAVIS) {
-    config.browsers.push('chrome_travis_ci')
-    config.customLaunchers = {
-      chrome_travis_ci: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    }
-  } else {
+  if (!process.env.TRAVIS) {
     config.browsers.push('Chrome')
   }
 
