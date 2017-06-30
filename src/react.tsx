@@ -1,7 +1,5 @@
 import * as React from "react";
-
 import * as common from "./common";
-import "./lib";
 import { Editor } from "./react/editor";
 import { hljs, dragula, MarkdownIt } from "../typings/lib";
 

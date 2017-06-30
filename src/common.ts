@@ -6,6 +6,11 @@ import * as isObject from "lodash.isobject";
 import * as isInteger from "lodash.isinteger";
 export { toNumber, toInteger };
 
+import { __extends, __decorate, __assign } from "tslib";
+(window as any).__extends = __extends;
+(window as any).__decorate = __decorate;
+(window as any).__assign = __assign;
+
 export type CommonSchema = {
     $schema?: string;
     title?: string;
