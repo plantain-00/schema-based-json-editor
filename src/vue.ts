@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "./common";
+export * from "./common";
 
 import { hljs, MarkdownIt } from "../typings/lib";
 

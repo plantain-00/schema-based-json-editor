@@ -3,7 +3,7 @@ import Component from "vue-class-component";
 import { schema, schemaSchema } from "../schema";
 
 import "../../dist/vue";
-import * as common from "../../dist/common";
+import { ValidityValue, ValueType } from "../../dist/vue";
 
 import * as dragula from "dragula";
 import * as MarkdownIt from "markdown-it";
@@ -60,7 +60,7 @@ class App extends Vue {
     get formattedSchema() {
         return JSON.stringify(this.schema, null, "  ");
     }
-    updateSchema({ value }: common.ValidityValue<common.ValueType>) {
+    updateSchema({ value }: ValidityValue<ValueType>) {
         try {
             this.schema = JSON.parse(value as string);
         } catch (error) {
@@ -68,7 +68,7 @@ class App extends Vue {
             console.log(error);
         }
     }
-    updateValue({ value, isValid }: common.ValidityValue<common.ValueType>) {
+    updateValue({ value, isValid }: ValidityValue<ValueType>) {
         this.valueHtml = hljs.highlight("json", JSON.stringify(value, null, "  ")).value;
         this.color = isValid ? "black" : "red";
     }
