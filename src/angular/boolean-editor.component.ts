@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { srcAngularBooleanEditorTemplateHtml } from "../angular-variables";
+import { angularBooleanEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "boolean-editor",
-    template: srcAngularBooleanEditorTemplateHtml,
+    template: angularBooleanEditorTemplateHtml,
 })
 export class BooleanEditorComponent {
     @Input()

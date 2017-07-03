@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { srcAngularNullEditorTemplateHtml } from "../angular-variables";
+import { angularNullEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "null-editor",
-    template: srcAngularNullEditorTemplateHtml,
+    template: angularNullEditorTemplateHtml,
 })
 export class NullEditorComponent {
     @Input()

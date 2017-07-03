@@ -2,10 +2,10 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
 import { dragula, hljs, MarkdownIt } from "../../typings/lib";
-import { srcVueObjectEditorTemplateHtml } from "../vue-variables";
+import { vueObjectEditorTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: srcVueObjectEditorTemplateHtml,
+    template: vueObjectEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
 })
 export class ObjectEditor extends Vue {

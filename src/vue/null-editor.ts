@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
-import { srcVueNullEditorTemplateHtml } from "../vue-variables";
+import { vueNullEditorTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: srcVueNullEditorTemplateHtml,
+    template: vueNullEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
 })
 export class NullEditor extends Vue {

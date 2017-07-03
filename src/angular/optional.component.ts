@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
-import { srcAngularOptionalTemplateHtml } from "../angular-variables";
+import { angularOptionalTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "optional",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: srcAngularOptionalTemplateHtml,
+    template: angularOptionalTemplateHtml,
 })
 export class OptionalComponent {
     @Input()

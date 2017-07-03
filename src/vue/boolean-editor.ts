@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
-import { srcVueBooleanEditorTemplateHtml } from "../vue-variables";
+import { vueBooleanEditorTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: srcVueBooleanEditorTemplateHtml,
+    template: vueBooleanEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
 })
 export class BooleanEditor extends Vue {

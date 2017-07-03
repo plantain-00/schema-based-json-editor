@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
-import { srcAngularArrayEditorTemplateHtml } from "../angular-variables";
+import { angularArrayEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "array-editor",
-    template: srcAngularArrayEditorTemplateHtml,
+    template: angularArrayEditorTemplateHtml,
 })
 export class ArrayEditorComponent {
     @Input()

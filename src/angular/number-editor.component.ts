@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
-import { srcAngularNumberEditorTemplateHtml } from "../angular-variables";
+import { angularNumberEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "number-editor",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: srcAngularNumberEditorTemplateHtml,
+    template: angularNumberEditorTemplateHtml,
 })
 export class NumberEditorComponent {
     @Input()

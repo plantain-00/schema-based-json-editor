@@ -2,12 +2,12 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
 import { hljs, MarkdownIt } from "../../typings/lib";
-import { srcVueStringEditorTemplateHtml } from "../vue-variables";
+import { vueStringEditorTemplateHtml } from "../vue-variables";
 import "markdown-tip/dist/vue";
 import "select2-component/dist/vue";
 
 @Component({
-    template: srcVueStringEditorTemplateHtml,
+    template: vueStringEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
 })
 export class StringEditor extends Vue {

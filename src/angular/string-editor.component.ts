@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
-import { srcAngularStringEditorTemplateHtml } from "../angular-variables";
+import { angularStringEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "string-editor",
@@ -9,7 +9,7 @@ import { srcAngularStringEditorTemplateHtml } from "../angular-variables";
         `.schema-based-json-editor-image-preview {${common.imagePreviewStyleString}}`,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: srcAngularStringEditorTemplateHtml,
+    template: angularStringEditorTemplateHtml,
 })
 export class StringEditorComponent {
     @Input()

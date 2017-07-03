@@ -2,10 +2,10 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
 import { dragula, hljs, MarkdownIt } from "../../typings/lib";
-import { srcVueArrayEditorTemplateHtml } from "../vue-variables";
+import { vueArrayEditorTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: srcVueArrayEditorTemplateHtml,
+    template: vueArrayEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
 })
 export class ArrayEditor extends Vue {

@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "./common";
 import { hljs, dragula, MarkdownIt } from "../typings/lib";
-import { srcAngularTemplateHtml } from "./angular-variables";
+import { angularTemplateHtml } from "./angular-variables";
 
 @Component({
     selector: "json-editor",
-    template: srcAngularTemplateHtml,
+    template: angularTemplateHtml,
 })
 export class JSONEditorComponent {
     @Input()

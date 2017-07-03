@@ -1,11 +1,11 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
-import { srcAngularEditorTemplateHtml } from "../angular-variables";
+import { angularEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "editor",
-    template: srcAngularEditorTemplateHtml,
+    template: angularEditorTemplateHtml,
 })
 export class EditorComponent {
     @Input()

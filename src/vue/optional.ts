@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
-import { srcVueOptionalTemplateHtml } from "../vue-variables";
+import { vueOptionalTemplateHtml } from "../vue-variables";
 
 @Component({
-    template: srcVueOptionalTemplateHtml,
+    template: vueOptionalTemplateHtml,
     props: ["required", "value", "isReadOnly", "theme", "locale"],
 })
 export class Optional extends Vue {

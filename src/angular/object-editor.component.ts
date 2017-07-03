@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
 import { hljs, dragula, MarkdownIt } from "../../typings/lib";
-import { srcAngularObjectEditorTemplateHtml } from "../angular-variables";
+import { angularObjectEditorTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "object-editor",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: srcAngularObjectEditorTemplateHtml,
+    template: angularObjectEditorTemplateHtml,
 })
 export class ObjectEditorComponent {
     @Input()

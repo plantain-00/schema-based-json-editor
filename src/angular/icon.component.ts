@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { srcAngularIconTemplateHtml } from "../angular-variables";
+import { angularIconTemplateHtml } from "../angular-variables";
 
 @Component({
     selector: "icon",
-    template: srcAngularIconTemplateHtml,
+    template: angularIconTemplateHtml,
 })
 export class IconComponent {
     @Input()
