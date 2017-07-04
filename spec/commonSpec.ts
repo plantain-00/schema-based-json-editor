@@ -139,16 +139,6 @@ describe("isImageUrl", () => {
     });
 });
 
-describe("getLocale", () => {
-    it("should be true", () => {
-        expect(common.getLocale(undefined)).toEqual(common.defaultLocale);
-        expect(common.getLocale("en")).toEqual(common.defaultLocale);
-        expect(common.getLocale("zh-cn")).toEqual(common.locales["zh-cn"]);
-        expect(common.getLocale("zh-CN")).toEqual(common.locales["zh-cn"]);
-        expect(common.getLocale(common.defaultLocale)).toEqual(common.defaultLocale);
-    });
-});
-
 describe("replaceProtocal", () => {
     it("should be true", () => {
         expect(common.replaceProtocal("http://example/a.png")).toEqual("https://example/a.png");
