@@ -45,7 +45,7 @@
     <img v-if="willPreviewImage"
         :style="imagePreviewStyle"
         :src="getImageUrl" />
-    <markdown-tip v-if="useTextArea && willPreviewMarkdown" :locale="locale.name"></markdown-tip>
+    <markdown-tip v-if="useTextArea && willPreviewMarkdown" :locale="locale.markdownTipLocale"></markdown-tip>
     <div v-if="willPreviewMarkdown" v-html="getMarkdown"></div>
     <pre v-if="willPreviewCode"><code v-html="getCode"></code></pre>
     <description :theme="theme" :message="schema.description"></description>

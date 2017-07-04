@@ -10,7 +10,7 @@ export type Props = {
     updateValue: (value: common.ValueType | undefined, isValid: boolean) => void;
     theme?: string;
     icon?: string;
-    locale?: string;
+    locale?: common.Locale | null;
     readonly?: boolean;
     dragula?: typeof dragula;
     markdownit?: any;

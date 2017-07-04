@@ -69,7 +69,7 @@ export class StringEditor extends React.Component<Props, State> {
 
         const imagePreview = this.willPreviewImage ? <img style={common.imagePreviewStyle} src={this.getImageUrl} /> : null;
 
-        const markdownTip = this.useTextArea && this.willPreviewMarkdown ? <MarkdownTip locale={this.props.locale.name}></MarkdownTip> : null;
+        const markdownTip = this.useTextArea && this.willPreviewMarkdown ? <MarkdownTip locale={this.props.locale.markdownTipLocale}></MarkdownTip> : null;
         const markdownPreview = this.willPreviewMarkdown ? <div dangerouslySetInnerHTML={{ __html: this.getMarkdown }}></div> : null;
 
         const codePreview = this.willPreviewCode ? <pre><code dangerouslySetInnerHTML={{ __html: this.getCode }}></code></pre> : null;

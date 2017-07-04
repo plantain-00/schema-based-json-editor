@@ -17,6 +17,7 @@
 + number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, collapsed
 + string schema fields: format, enum, minLength, maxLength, pattern
 + image preview, code highlight, markdown preview
++ multi-language
 
 #### install
 
@@ -33,8 +34,8 @@ import { JSONEditor } from "schema-based-json-editor/dist/react";
     initialValue={initialValue}
     updateValue={this.updateValue}
     theme="bootstrap3"
-    icon="fontawesome4"
-    locale="zh-cn" />
+    icon="fontawesome4">
+</JSONEditor>
 ```
 
 the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/react/index.html
@@ -57,8 +58,7 @@ class MainModule { }
     [initialValue]="value"
     (updateValue)="updateValue($event)"
     theme="bootstrap3"
-    icon="fontawesome4"
-    locale="zh-cn">
+    icon="fontawesome4">
 </json-editor>
 ```
 
@@ -77,26 +77,27 @@ import "schema-based-json-editor/dist/vue";
     :initial-value="value"
     @update-value="updateValue($event)"
     theme="bootstrap3"
-    icon="fontawesome4"
-    locale="zh-cn">
+    icon="fontawesome4">
 </json-editor>
 ```
 
 the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/vue/index.html
 
-#### properties of the component
+#### properties and events of the component
 
-+ schema: the json schema object
-+ initialValue: the initial json
-+ updateValue: the function that is invoked when the json is edited in the editor
-+ theme: optional, support "bootstrap3" for now
-+ icon: optional, support "bootstrap3" and "fontawesome4" for now
-+ locale: optional, support "zh-cn" for now
-+ readonly: optional, a boolean value
-+ dragula: optional, the `dragula` library object if you want to reorder array by drag and drop
-+ markdownit: optional, the `markdown-it` library object if you want to preview markdown
-+ hljs: optional, the `highlight.js` library object if you want to highlight code
-+ forceHttps: optional, a boolean value, if true, the preview url of images will be `https://` rather than `http://`
+name | type | description
+--- | --- | ---
+schema | Schema | the json schema object
+initialValue | ValueType | the initial json
+updateValue | (value: ValueType or undefined, isValid: boolean) => void | the function that is invoked when the json is edited in the editor
+theme | string? | support "bootstrap3" for now
+icon | string? | support "bootstrap3" and "fontawesome4" for now
+locale | Locale? | locale object
+readonly | boolean? | readonly
+dragula | object? | the `dragula` library object if you want to reorder array by drag and drop
+markdownit | object? | the `markdown-it` library object if you want to preview markdown
+hljs | object? | the `highlight.js` library object if you want to highlight code
+forceHttps | boolean? | if true, the preview url of images will be `https://` rather than `http://`
 
 #### change logs
 

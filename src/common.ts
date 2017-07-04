@@ -4,6 +4,7 @@ import * as toNumber from "lodash.tonumber";
 import * as toInteger from "lodash.tointeger";
 import * as isObject from "lodash.isobject";
 import * as isInteger from "lodash.isinteger";
+import { defaultLocale as defaultMarkDownTipLocale } from "markdown-tip/dist/common";
 export { toNumber, toInteger };
 
 import { __extends, __decorate, __assign } from "tslib";
@@ -132,50 +133,15 @@ export const defaultLocale = {
         true: "true",
         false: "false",
     },
-    name: "en",
+    markdownTipLocale: defaultMarkDownTipLocale,
 };
 
 export type Locale = typeof defaultLocale;
 
-export const locales: { [name: string]: Locale } = {
-    "zh-cn": {
-        button: {
-            collapse: "折叠",
-            expand: "显示",
-            add: "增加",
-            delete: "删除",
-        },
-        error: {
-            minLength: "要求至少 {0} 字符。",
-            maxLength: "要求至多 {0} 字符。",
-            pattern: "要求匹配模式 {0}。",
-            minimum: "要求 >= {0}。",
-            maximum: "要求 <= {0}。",
-            largerThan: "要求 > {0}。",
-            smallerThan: "要求 < {0}。",
-            minItems: "数组的长度要求 >= {0}。",
-            uniqueItems: "{0} 和 {1} 的项不应该相同。",
-            multipleOf: "要求是 {0} 的整数倍。",
-            minProperties: "要求属性个数 >= {0}。",
-            maxProperties: "要求属性个数 <= {0}。",
-        },
-        info: {
-            notExists: "不存在",
-            true: "是",
-            false: "否",
-        },
-        name: "zh-cn",
-    },
-};
+export const locales: { [name: string]: Locale } = {};
 
-export function getLocale(name: string | undefined | Locale): Locale {
-    if (name === undefined) {
-        return defaultLocale;
-    }
-    if (typeof name === "string") {
-        return locales[name.toLowerCase()] || defaultLocale;
-    }
-    return name;
+export function getLocale(locale: undefined | null | Locale): Locale {
+    return locale || defaultLocale;
 }
 
 export const bootstrap3Icon = {

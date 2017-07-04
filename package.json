@@ -1,6 +1,6 @@
 {
   "name": "schema-based-json-editor",
-  "version": "3.9.0",
+  "version": "4.0.0",
   "description": "A reactjs, angular and vuejs component of schema based json editor.",
   "main": "index.js",
   "scripts": {
@@ -41,8 +41,8 @@
     "lodash.isobject": "3",
     "lodash.tointeger": "4",
     "lodash.tonumber": "4",
-    "markdown-tip": "2",
-    "select2-component": "^2.5",
+    "markdown-tip": "3",
+    "select2-component": "2",
     "tslib": "1"
   },
   "devDependencies": {

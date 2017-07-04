@@ -3,11 +3,13 @@ import Component from "vue-class-component";
 import { schema, schemaSchema } from "../schema";
 
 import "../../dist/vue";
-import { ValidityValue, ValueType } from "../../dist/vue";
+import { ValidityValue, ValueType, Locale } from "../../dist/vue";
 
 import * as dragula from "dragula";
 import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
+
+let locale: Locale | null = null;
 
 @Component({
     template: `
@@ -15,7 +17,7 @@ import * as hljs from "highlight.js";
         <a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/vue/index.ts" target="_blank">the source code of the demo</a>
         <br/>
         <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
-			<json-editor :schema="schemaSchema"
+            <json-editor :schema="schemaSchema"
 			    :initial-value="formattedSchema"
 				@update-value="updateSchema($event)"
 				theme="bootstrap3"
@@ -48,10 +50,10 @@ import * as hljs from "highlight.js";
     `,
 })
 class App extends Vue {
+    locale = locale;
     schema = schema;
     value = {};
     color = "black";
-    locale = navigator.language;
     dragula = dragula;
     markdownit = MarkdownIt;
     hljs = hljs;
@@ -74,5 +76,18 @@ class App extends Vue {
     }
 }
 
-// tslint:disable-next-line:no-unused-expression
-new App({ el: "#container" });
+function start() {
+    // tslint:disable-next-line:no-unused-expression
+    new App({ el: "#container" });
+}
+
+if (navigator.language === "zh-CN") {
+    import ("../../dist/locales/" + navigator.language + ".js").then(module => {
+        locale = module.locale;
+        start();
+    }, error => {
+        start();
+    });
+} else {
+    start();
+}

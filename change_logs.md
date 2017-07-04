@@ -1,3 +1,13 @@
+### v 4.x
+
+```bash
+// v4
+locale is an object that can be imported dynamicly
+
+// v3
+locale is a string
+```
+
 ### v 3.x
 
 ```ts

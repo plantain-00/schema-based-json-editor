@@ -20,7 +20,7 @@ export class JSONEditorComponent {
     @Input()
     icon?: string;
     @Input()
-    locale?: string;
+    locale?: common.Locale;
     @Input()
     readonly?: boolean;
     @Input()

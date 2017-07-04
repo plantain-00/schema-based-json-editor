@@ -35,7 +35,7 @@ import { vueTemplateHtml } from "./vue-variables";
 })
 class JSONEditor extends Vue {
     theme: string;
-    locale: string;
+    locale: common.Locale;
     icon: string;
     markdownit: typeof MarkdownIt;
     hljs: typeof hljs;

@@ -16,6 +16,8 @@ import * as dragula from "dragula";
 import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
 
+let locale: Locale | null = null;
+
 @Component({
     selector: "app",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -57,10 +59,10 @@ import * as hljs from "highlight.js";
     `,
 })
 export class MainComponent {
+    locale = locale;
     schema = schema;
     value: any = {};
     color = "black";
-    locale = navigator.language;
     dragula = dragula;
     markdownit = MarkdownIt;
     hljs = hljs;
@@ -89,7 +91,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent, ValidityValue, ValueType } from "../../dist/angular";
-import { MarkdownTipComponent } from "markdown-tip/dist/angular";
+import { MarkdownTipComponent, Locale } from "markdown-tip/dist/angular";
 import { Select2Component } from "select2-component/dist/angular";
 
 @NgModule({
@@ -99,4 +101,17 @@ import { Select2Component } from "select2-component/dist/angular";
 })
 class MainModule { }
 
-platformBrowserDynamic().bootstrapModule(MainModule);
+function start() {
+    platformBrowserDynamic().bootstrapModule(MainModule);
+}
+
+if (navigator.language === "zh-CN") {
+    import ("../../dist/locales/" + navigator.language + ".js").then(module => {
+        locale = module.locale;
+        start();
+    }, error => {
+        start();
+    });
+} else {
+    start();
+}
