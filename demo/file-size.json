@@ -1,0 +1,11 @@
+{
+  "angularEditorBundleJs": "43.7 kB",
+  "angularIndexBundleJs": "6.51 kB",
+  "angularVendorBundleJs": "1.44 MB",
+  "reactEditorBundleJs": "57.4 kB",
+  "reactIndexBundleJs": "5.61 kB",
+  "reactVendorBundleJs": "807 kB",
+  "vueEditorBundleJs": "57.4 kB",
+  "vueIndexBundleJs": "5.81 kB",
+  "vueVendorBundleJs": "761 kB"
+}

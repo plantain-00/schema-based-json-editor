@@ -75,7 +75,7 @@
     "markdown-it": "8.3.1",
     "react": "15.6.1",
     "react-dom": "15.6.1",
-    "rev-static": "2.6.0",
+    "rev-static": "2.7.1",
     "rimraf": "2.6.1",
     "rxjs": "5.4.1",
     "standard": "10.0.2",
