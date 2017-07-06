@@ -37,7 +37,7 @@ module.exports = [
     },
     output: {
       path: path.resolve(__dirname, 'vue'),
-      filename: '[name].bundle.js'
+      filename: '[name].bundle-[hash].js'
     },
     plugins,
     resolve
@@ -50,7 +50,7 @@ module.exports = [
     },
     output: {
       path: path.resolve(__dirname, 'react'),
-      filename: '[name].bundle.js'
+      filename: '[name].bundle-[hash].js'
     },
     plugins,
     resolve
@@ -63,7 +63,7 @@ module.exports = [
     },
     output: {
       path: path.resolve(__dirname, 'angular'),
-      filename: '[name].bundle.js'
+      filename: '[name].bundle-[hash].js'
     },
     plugins,
     resolve
