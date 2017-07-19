@@ -4,7 +4,7 @@ import * as toNumber from "lodash.tonumber";
 import * as toInteger from "lodash.tointeger";
 import * as isObject from "lodash.isobject";
 import * as isInteger from "lodash.isinteger";
-import { defaultLocale as defaultMarkDownTipLocale } from "markdown-tip/dist/common";
+import { defaultLocale as defaultMarkDownTipLocale } from "markdown-tip/common";
 export { toNumber, toInteger };
 
 import { __extends, __decorate, __assign } from "tslib";

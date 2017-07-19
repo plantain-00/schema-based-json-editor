@@ -1,5 +1,5 @@
 import { Locale } from "../common";
-import { locale as markdownTipLocale } from "markdown-tip/dist/locales/zh-CN";
+import { locale as markdownTipLocale } from "markdown-tip/locales/zh-CN";
 
 export const locale: Locale = {
     button: {

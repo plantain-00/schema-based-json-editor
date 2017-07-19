@@ -1,3 +1,16 @@
+### v 5.x
+
+```ts
+// v5
+import { JSONEditor } from "schema-based-json-editor/react";
+import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent } from "schema-based-json-editor/angular";
+import "schema-based-json-editor/vue";
+
+// v4
+import { JSONEditor } from "schema-based-json-editor/dist/react";
+import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent } from "schema-based-json-editor/dist/angular";
+import "schema-based-json-editor/dist/vue";
+
 ### v 4.x
 
 ```bash

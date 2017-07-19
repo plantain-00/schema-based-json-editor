@@ -91,8 +91,8 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent, ValidityValue, ValueType } from "../../dist/angular";
-import { MarkdownTipComponent, Locale } from "markdown-tip/dist/angular";
-import { Select2Component } from "select2-component/dist/angular";
+import { MarkdownTipComponent, Locale } from "markdown-tip/angular";
+import { Select2Component } from "select2-component/angular";
 
 @NgModule({
     imports: [BrowserModule, FormsModule],

@@ -26,7 +26,7 @@
 #### reactjs component demo
 
 ```js
-import { JSONEditor } from "schema-based-json-editor/dist/react";
+import { JSONEditor } from "schema-based-json-editor/react";
 ```
 
 ```jsx
@@ -43,7 +43,7 @@ the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/rea
 #### angular component demo
 
 ```js
-import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent } from "schema-based-json-editor/dist/angular";
+import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent } from "schema-based-json-editor/angular";
 
 @NgModule({
     imports: [BrowserModule, FormsModule],
@@ -69,7 +69,7 @@ the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/ang
 `npm i vue vue-class-component`
 
 ```js
-import "schema-based-json-editor/dist/vue";
+import "schema-based-json-editor/vue";
 ```
 
 ```jsx

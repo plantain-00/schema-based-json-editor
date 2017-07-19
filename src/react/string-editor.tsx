@@ -3,8 +3,8 @@ import * as common from "../common";
 import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
-import { MarkdownTip } from "markdown-tip/dist/react";
-import { Select2 } from "select2-component/dist/react";
+import { MarkdownTip } from "markdown-tip/react";
+import { Select2 } from "select2-component/react";
 
 export type Props = common.Props<common.StringSchema, string>;
 export type State = Partial<{

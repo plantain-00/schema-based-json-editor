@@ -8,5 +8,5 @@ import "@angular/platform-browser";
 import "@angular/platform-browser-dynamic";
 import "@angular/core";
 import "@angular/forms";
-import "markdown-tip/dist/angular";
-import "select2-component/dist/angular";
+import "markdown-tip/angular";
+import "select2-component/angular";
