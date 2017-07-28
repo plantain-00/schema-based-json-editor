@@ -5,7 +5,7 @@ import { Editor } from "./editor";
 import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
-import { dragula } from "../../typings/lib";
+import { dragula } from "../libs";
 
 export type Props = common.Props<common.ArraySchema, common.ValueType[]>;
 export type State = Partial<{

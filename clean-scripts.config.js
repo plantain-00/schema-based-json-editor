@@ -13,6 +13,8 @@ module.exports = {
     `file2variable-cli src/angular/*.template.html src/angular.template.html -o src/angular-variables.ts --html-minify --base src`,
     `rimraf dist`,
     `tsc -p src`,
+    `cpy src/lib.d.ts dist`,
+    `cpy src/libs.d.ts dist`,
     `tsc -p demo`,
     `webpack --config demo/webpack.config.js`,
     `rev-static --config demo/rev-static.config.js`

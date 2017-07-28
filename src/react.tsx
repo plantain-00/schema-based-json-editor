@@ -2,7 +2,7 @@ import * as React from "react";
 import * as common from "./common";
 export * from "./common";
 import { Editor } from "./react/editor";
-import { hljs, dragula, MarkdownIt } from "../typings/lib";
+import { hljs, dragula, MarkdownIt } from "./libs";
 
 export type Props = {
     schema: common.Schema;

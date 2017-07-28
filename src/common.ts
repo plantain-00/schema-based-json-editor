@@ -295,7 +295,7 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
 export const buttonGroupStyle = { marginLeft: "10px" };
 export const buttonGroupStyleString = "margin-left: 10px";
 
-import { hljs as hljsLib, dragula, MarkdownIt } from "../typings/lib";
+import { hljs as hljsLib, dragula, MarkdownIt } from "./libs";
 
 export type Props<TSchema extends CommonSchema, TValue> = {
     schema: TSchema;

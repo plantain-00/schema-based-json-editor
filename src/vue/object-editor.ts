@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
-import { dragula, hljs, MarkdownIt } from "../../typings/lib";
+import { dragula, hljs, MarkdownIt } from "../libs";
 import { vueObjectEditorTemplateHtml } from "../vue-variables";
 
 @Component({

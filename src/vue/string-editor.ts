@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
-import { hljs, MarkdownIt } from "../../typings/lib";
+import { hljs, MarkdownIt } from "../libs";
 import { vueStringEditorTemplateHtml } from "../vue-variables";
 import "markdown-tip/vue";
 import "select2-component/vue";

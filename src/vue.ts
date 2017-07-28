@@ -3,7 +3,7 @@ import Component from "vue-class-component";
 import * as common from "./common";
 export * from "./common";
 
-import { hljs, MarkdownIt } from "../typings/lib";
+import { hljs, MarkdownIt } from "./libs";
 
 import { ArrayEditor } from "./vue/array-editor";
 import { BooleanEditor } from "./vue/boolean-editor";
