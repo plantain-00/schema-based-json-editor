@@ -9,12 +9,11 @@ const plugins = [
   }),
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    },
     output: {
       comments: false
-    }
+    },
+    exclude: [
+    ]
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: ['index', 'editor', 'vendor']

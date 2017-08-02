@@ -16,7 +16,7 @@ module.exports = {
     `cpy src/lib.d.ts dist`,
     `cpy src/libs.d.ts dist`,
     `tsc -p demo`,
-    `webpack --config demo/webpack.config.js`,
+    `webpack --display-modules --config demo/webpack.config.js`,
     `rev-static --config demo/rev-static.config.js`
   ],
   lint: [
