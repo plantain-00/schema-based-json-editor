@@ -14,6 +14,7 @@
         "importHelpers": true,
         "jsx": "react",
         "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "emitDecoratorMetadata": true
     }
 }
