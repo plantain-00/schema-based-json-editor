@@ -1,8 +1,10 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import * as common from "./common";
 export * from "./common";
-import { hljs, dragula, MarkdownIt } from "./libs";
+import { Dragula, MarkdownIt } from "./libs";
 import { angularTemplateHtml } from "./angular-variables";
+import { MarkdownTipModule } from "markdown-tip/angular";
 
 @Component({
     selector: "json-editor",
@@ -24,7 +26,7 @@ export class JSONEditorComponent {
     @Input()
     readonly?: boolean;
     @Input()
-    dragula?: typeof dragula;
+    dragula?: Dragula;
     @Input()
     markdownit?: any;
     @Input()
@@ -35,7 +37,7 @@ export class JSONEditorComponent {
     themeObject: common.Theme;
     localeObject: common.Locale;
     iconObject: common.Icon;
-    md?: MarkdownIt.MarkdownIt;
+    md?: MarkdownIt;
 
     ngOnInit() {
         this.themeObject = common.getTheme(this.theme);
@@ -44,6 +46,40 @@ export class JSONEditorComponent {
         this.md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps);
     }
 }
+
+@NgModule({
+    declarations: [
+        JSONEditorComponent,
+        BooleanEditorComponent,
+        ArrayEditorComponent,
+        EditorComponent,
+        NullEditorComponent,
+        NumberEditorComponent,
+        ObjectEditorComponent,
+        StringEditorComponent,
+        IconComponent,
+        OptionalComponent,
+        DescriptionComponent,
+    ],
+    imports: [
+        CommonModule,
+        MarkdownTipModule,
+    ],
+    exports: [
+        JSONEditorComponent,
+        BooleanEditorComponent,
+        ArrayEditorComponent,
+        EditorComponent,
+        NullEditorComponent,
+        NumberEditorComponent,
+        ObjectEditorComponent,
+        StringEditorComponent,
+        IconComponent,
+        OptionalComponent,
+        DescriptionComponent,
+    ],
+})
+export class JSONEditorModule { }
 
 import { BooleanEditorComponent } from "./angular/boolean-editor.component";
 export { BooleanEditorComponent };

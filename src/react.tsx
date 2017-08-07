@@ -2,7 +2,7 @@ import * as React from "react";
 import * as common from "./common";
 export * from "./common";
 import { Editor } from "./react/editor";
-import { hljs, dragula, MarkdownIt } from "./libs";
+import { Dragula, MarkdownIt } from "./libs";
 
 export type Props = {
     schema: common.Schema;
@@ -12,7 +12,7 @@ export type Props = {
     icon?: string;
     locale?: common.Locale | null;
     readonly?: boolean;
-    dragula?: typeof dragula;
+    dragula?: Dragula;
     markdownit?: any;
     hljs?: typeof hljs;
     forceHttps?: boolean;
@@ -22,7 +22,7 @@ export class JSONEditor extends React.Component<Props, {}> {
     theme: common.Theme;
     locale: common.Locale;
     icon: common.Icon;
-    md?: MarkdownIt.MarkdownIt;
+    md?: MarkdownIt;
     constructor(props: Props) {
         super(props);
         this.theme = common.getTheme(this.props.theme);

@@ -45,3 +45,4 @@ dist
 !**/*-*.js
 !**/*-*.css
 !demo/css/highlight.js/
+src/compiled

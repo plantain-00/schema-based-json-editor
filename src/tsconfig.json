@@ -17,5 +17,12 @@
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "emitDecoratorMetadata": true
-    }
+    },
+    "angularCompilerOptions": {
+        "strictMetadataEmit": true,
+        "genDir": "compiled"
+    },
+    "exclude": [
+        "./compiled/"
+    ]
 }

@@ -5,7 +5,6 @@ import { Editor } from "./editor";
 import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
-import { dragula } from "../libs";
 
 export type Props = common.Props<common.ArraySchema, common.ValueType[]>;
 export type State = Partial<{
@@ -36,7 +35,7 @@ export class ArrayEditor extends React.Component<Props, State> {
         if (this.props.dragula) {
             const container = ReactDOM.findDOMNode(this).childNodes[2] as HTMLElement;
             this.drak = this.props.dragula([container]);
-            this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+            this.drak!.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
                 if (this.value) {
                     common.switchItem(this.value, el, sibling);
                     this.renderSwitch = -this.renderSwitch;

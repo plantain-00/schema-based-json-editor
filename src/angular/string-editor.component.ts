@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from "@angular/core";
 import * as common from "../common";
-import { hljs, dragula, MarkdownIt } from "../libs";
+import { Dragula, MarkdownIt } from "../libs";
 import { angularStringEditorTemplateHtml } from "../angular-variables";
 
 @Component({
@@ -35,9 +35,9 @@ export class StringEditorComponent {
     @Input()
     hasDeleteButton: boolean;
     @Input()
-    dragula?: typeof dragula;
+    dragula?: Dragula;
     @Input()
-    md?: MarkdownIt.MarkdownIt;
+    md?: MarkdownIt;
     @Input()
     hljs?: typeof hljs;
     @Input()
@@ -111,18 +111,7 @@ export class StringEditorComponent {
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
     }
-    get options() {
-        return this.schema.enum!.map(e => ({
-            value: e,
-            label: e,
-        }));
-    }
 
-    updateSelection(value: string) {
-        this.value = value;
-        this.validate();
-        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
-    }
     validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
     }

@@ -25,10 +25,16 @@
         [defaultValue]="value"
         [readOnly]="isReadOnly"
         [disabled]="isReadOnly" />
-    <select2 *ngIf="useSelect" [data]="options"
-        [value]="value"
-        (update)="updateSelection($event)">
-    </select2>
+    <select *ngIf="useSelect"
+        [class]="theme.formControl"
+        type="number"
+        (change)="onChange">
+        <option *ngFor="let e of schema.enum; let i = index; trackBy:trackByFunction"
+            [value]="e"
+            [selected]="value === e">
+            {{e}}
+        </option>
+    </select>
     <description [theme]="theme" [message]="schema.description"></description>
     <description [theme]="theme" [message]="errorMessage"></description>
 </div>

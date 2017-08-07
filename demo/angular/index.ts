@@ -90,13 +90,11 @@ export class MainComponent {
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
-import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent, ValidityValue, ValueType } from "../../dist/angular";
-import { MarkdownTipComponent, Locale } from "markdown-tip/angular";
-import { Select2Component } from "select2-component/angular";
+import { JSONEditorModule, ValidityValue, ValueType, Locale } from "../../dist/angular";
 
 @NgModule({
-    imports: [BrowserModule, FormsModule],
-    declarations: [MainComponent, JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent, MarkdownTipComponent, Select2Component],
+    imports: [BrowserModule, FormsModule, JSONEditorModule],
+    declarations: [MainComponent],
     bootstrap: [MainComponent],
 })
 class MainModule { }

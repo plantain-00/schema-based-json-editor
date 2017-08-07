@@ -3,7 +3,7 @@ import Component from "vue-class-component";
 import * as common from "./common";
 export * from "./common";
 
-import { hljs, MarkdownIt } from "./libs";
+import { MarkdownIt } from "./libs";
 
 import { ArrayEditor } from "./vue/array-editor";
 import { BooleanEditor } from "./vue/boolean-editor";
@@ -37,7 +37,7 @@ class JSONEditor extends Vue {
     theme: string;
     locale: common.Locale;
     icon: string;
-    markdownit: typeof MarkdownIt;
+    markdownit: MarkdownIt;
     hljs: typeof hljs;
     forceHttps: boolean;
 

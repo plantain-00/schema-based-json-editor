@@ -1,5 +1,8 @@
-import * as hljs from "highlight.js";
 import * as dragula from "dragula";
-import * as MarkdownIt from "markdown-it";
+import { MarkdownIt, Token, TokenRender, Renderer } from "markdown-it";
+import * as hljs from "hljs";
 
-export { hljs, dragula, MarkdownIt };
+export type Dragula = typeof dragula;
+export { MarkdownIt, Token, TokenRender, Renderer };
+export type HLJS = typeof hljs;
+export type MarkdownItType = typeof MarkdownIt;

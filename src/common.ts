@@ -293,7 +293,7 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
 export const buttonGroupStyle = { marginLeft: "10px" };
 export const buttonGroupStyleString = "margin-left: 10px";
 
-import { hljs as hljsLib, dragula, MarkdownIt } from "./libs";
+import { HLJS, Dragula, MarkdownIt, Token, TokenRender, Renderer, MarkdownItType } from "./libs";
 
 export type Props<TSchema extends CommonSchema, TValue> = {
     schema: TSchema;
@@ -306,9 +306,9 @@ export type Props<TSchema extends CommonSchema, TValue> = {
     onDelete?: () => void;
     readonly?: boolean;
     required?: boolean;
-    dragula?: typeof dragula;
-    md?: MarkdownIt.MarkdownIt;
-    hljs?: typeof hljsLib;
+    dragula?: Dragula;
+    md?: MarkdownIt;
+    hljs?: HLJS;
     forceHttps?: boolean;
 };
 
@@ -531,7 +531,7 @@ function print(message: string) {
     console.log(message);
 }
 
-export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof hljsLib | undefined, forceHttps: boolean | undefined) {
+export function initializeMarkdown(markdownit: MarkdownItType, hljs: HLJS | undefined, forceHttps: boolean | undefined) {
     if (!markdownit) {
         return undefined;
     }
@@ -556,7 +556,7 @@ export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof h
         },
     });
 
-    md.renderer.rules.image = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
+    md.renderer.rules.image = (tokens: Token[], index: number, options: any, env: any, self: Renderer) => {
         const token = tokens[index];
         const aIndex = token.attrIndex("src");
         if (forceHttps) {
@@ -567,15 +567,15 @@ export function initializeMarkdown(markdownit: typeof MarkdownIt, hljs: typeof h
         return md.renderer.rules.image(tokens, index, options, env, self);
     };
 
-    let defaultLinkRender: MarkdownIt.TokenRender;
+    let defaultLinkRender: TokenRender;
     if (md.renderer.rules.link_open) {
         defaultLinkRender = md.renderer.rules.link_open;
     } else {
-        defaultLinkRender = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
+        defaultLinkRender = (tokens: Token[], index: number, options: any, env: any, self: Renderer) => {
             return self.renderToken(tokens, index, options);
         };
     }
-    md.renderer.rules.link_open = (tokens: MarkdownIt.Token[], index: number, options: any, env: any, self: MarkdownIt.Renderer) => {
+    md.renderer.rules.link_open = (tokens: Token[], index: number, options: any, env: any, self: Renderer) => {
         tokens[index].attrPush(["target", "_blank"]);
         tokens[index].attrPush(["rel", "nofollow"]);
         return defaultLinkRender(tokens, index, options, env, self);

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { hljs, dragula, MarkdownIt } from "../libs";
+import { Dragula, MarkdownIt } from "../libs";
 import { angularEditorTemplateHtml } from "../angular-variables";
 
 @Component({
@@ -31,9 +31,9 @@ export class EditorComponent {
     @Input()
     hasDeleteButton: boolean;
     @Input()
-    dragula?: typeof dragula;
+    dragula?: Dragula;
     @Input()
-    md?: MarkdownIt.MarkdownIt;
+    md?: MarkdownIt;
     @Input()
     hljs?: typeof hljs;
     @Input()
