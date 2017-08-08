@@ -40,6 +40,9 @@ module.exports = {
     'tsc -p spec',
     'karma start spec/karma.config.js'
   ],
-  fix: `standard --fix "**/*.config.js"`,
+  fix: {
+    ts: `tslint --fix "src/**/*.tsx" "demo/**/*.tsx" "src/**/*.ts" "demo/**/*.ts" "spec/**/*.ts"`,
+    js: `standard --fix "**/*.config.js"`
+  },
   release: `clean-release`
 }
