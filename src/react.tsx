@@ -4,6 +4,9 @@ export * from "./common";
 import { Editor } from "./react/editor";
 import { Dragula, MarkdownIt } from "./libs";
 
+/**
+ * @public
+ */
 export type Props = {
     schema: common.Schema;
     initialValue: common.ValueType;
@@ -18,6 +21,9 @@ export type Props = {
     forceHttps?: boolean;
 };
 
+/**
+ * @public
+ */
 export class JSONEditor extends React.Component<Props, {}> {
     theme: common.Theme;
     locale: common.Locale;

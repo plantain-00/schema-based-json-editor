@@ -6,6 +6,9 @@ import { Dragula, MarkdownIt } from "./libs";
 import { angularTemplateHtml } from "./angular-variables";
 import { MarkdownTipModule } from "markdown-tip/angular";
 
+/**
+ * @public
+ */
 @Component({
     selector: "json-editor",
     template: angularTemplateHtml,
@@ -47,6 +50,9 @@ export class JSONEditorComponent {
     }
 }
 
+/**
+ * @public
+ */
 @NgModule({
     declarations: [
         JSONEditorComponent,

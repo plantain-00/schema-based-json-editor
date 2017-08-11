@@ -5,13 +5,22 @@ import { Optional } from "./optional";
 import { Description } from "./description";
 import { Select2 } from "select2-component/react";
 
+/**
+ * @public
+ */
 export type Props = common.Props<common.NumberSchema, number>;
+/**
+ * @public
+ */
 export type State = Partial<{
     value?: number;
     errorMessage: string;
     willRender: boolean;
 }>;
 
+/**
+ * @public
+ */
 export class NumberEditor extends React.Component<Props, State> {
     value?: number;
     errorMessage: string;

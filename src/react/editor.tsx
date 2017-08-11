@@ -7,6 +7,9 @@ import { BooleanEditor } from "./boolean-editor";
 import { NullEditor } from "./null-editor";
 import { StringEditor } from "./string-editor";
 
+/**
+ * @public
+ */
 export class Editor extends React.Component<common.Props<common.Schema, common.ValueType>, {}> {
     render() {
         switch (this.props.schema.type) {

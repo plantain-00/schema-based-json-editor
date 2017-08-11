@@ -5,7 +5,13 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 
+/**
+ * @public
+ */
 export type Props = common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>;
+/**
+ * @public
+ */
 export type State = Partial<{
     collapsed?: boolean;
     value?: { [name: string]: common.ValueType };
@@ -15,6 +21,9 @@ export type State = Partial<{
     filter: string;
 }>;
 
+/**
+ * @public
+ */
 export class ObjectEditor extends React.Component<Props, State> {
     collapsed = this.props.schema.collapsed;
     value?: { [name: string]: common.ValueType };

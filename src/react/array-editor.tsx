@@ -6,7 +6,13 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 
+/**
+ * @public
+ */
 export type Props = common.Props<common.ArraySchema, common.ValueType[]>;
+/**
+ * @public
+ */
 export type State = Partial<{
     renderSwitch: number;
     collapsed?: boolean;
@@ -17,6 +23,9 @@ export type State = Partial<{
     filter: string;
 }>;
 
+/**
+ * @public
+ */
 export class ArrayEditor extends React.Component<Props, State> {
     renderSwitch = 1;
     collapsed = this.props.schema.collapsed;

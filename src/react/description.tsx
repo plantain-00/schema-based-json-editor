@@ -1,6 +1,9 @@
 import * as React from "react";
 import * as common from "../common";
 
+/**
+ * @public
+ */
 export class Description extends React.Component<{
     theme: common.Theme;
     message: string | undefined;

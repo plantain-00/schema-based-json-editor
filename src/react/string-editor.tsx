@@ -6,7 +6,13 @@ import { Description } from "./description";
 import { MarkdownTip } from "markdown-tip/react";
 import { Select2 } from "select2-component/react";
 
+/**
+ * @public
+ */
 export type Props = common.Props<common.StringSchema, string>;
+/**
+ * @public
+ */
 export type State = Partial<{
     value: string;
     errorMessage: string;
@@ -14,6 +20,9 @@ export type State = Partial<{
     willRender: boolean;
 }>;
 
+/**
+ * @public
+ */
 export class StringEditor extends React.Component<Props, State> {
     value?: string;
     errorMessage: string;

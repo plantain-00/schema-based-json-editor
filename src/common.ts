@@ -10,6 +10,9 @@ import { __extends, __decorate, __assign } from "tslib";
 (window as any).__decorate = __decorate;
 (window as any).__assign = __assign;
 
+/**
+ * @public
+ */
 export type CommonSchema = {
     $schema?: string;
     title?: string;
@@ -65,6 +68,9 @@ export type NullSchema = CommonSchema & {
 
 export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema;
 
+/**
+ * @public
+ */
 export const themes: { [name: string]: Theme } = {
     bootstrap3: {
         rowContainer: "well bootstrap3-row-container",
@@ -80,6 +86,9 @@ export const themes: { [name: string]: Theme } = {
     },
 };
 
+/**
+ * @public
+ */
 export const defaultTheme = {
     rowContainer: "",
     row: "",
@@ -105,6 +114,9 @@ export function getTheme(name: string | undefined | Theme): Theme {
     return name;
 }
 
+/**
+ * @public
+ */
 export const defaultLocale = {
     button: {
         collapse: "Collapse",
@@ -136,12 +148,18 @@ export const defaultLocale = {
 
 export type Locale = typeof defaultLocale;
 
+/**
+ * @public
+ */
 export const locales: { [name: string]: Locale } = {};
 
 export function getLocale(locale: undefined | null | Locale): Locale {
     return locale || defaultLocale;
 }
 
+/**
+ * @public
+ */
 export const bootstrap3Icon = {
     isText: false,
     collapse: "glyphicon glyphicon-chevron-down",
@@ -312,7 +330,7 @@ export type Props<TSchema extends CommonSchema, TValue> = {
     forceHttps?: boolean;
 };
 
-export function isSame(value1: ValueType, value2: ValueType) {
+function isSame(value1: ValueType, value2: ValueType) {
     if (typeof value1 === "string"
         || typeof value1 === "number"
         || typeof value1 === "boolean"

@@ -4,11 +4,20 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 
+/**
+ * @public
+ */
 export type Props = common.Props<common.NullSchema, null>;
+/**
+ * @public
+ */
 export type State = Partial<{
     value?: null;
 }>;
 
+/**
+ * @public
+ */
 export class NullEditor extends React.Component<Props, State> {
     value?: null;
     constructor(props: Props) {

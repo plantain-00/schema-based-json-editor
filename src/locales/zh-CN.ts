@@ -1,6 +1,9 @@
 import { Locale } from "../common";
 import { locale as markdownTipLocale } from "markdown-tip/locales/zh-CN";
 
+/**
+ * @public
+ */
 export const locale: Locale = {
     button: {
         collapse: "折叠",

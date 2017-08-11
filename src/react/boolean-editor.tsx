@@ -4,12 +4,21 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 
+/**
+ * @public
+ */
 export type Props = common.Props<common.BooleanSchema, boolean>;
+/**
+ * @public
+ */
 export type State = Partial<{
     value?: boolean;
     willRender: boolean;
 }>;
 
+/**
+ * @public
+ */
 export class BooleanEditor extends React.Component<Props, State> {
     value?: boolean;
     willRender = false;
