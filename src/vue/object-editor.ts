@@ -39,7 +39,7 @@ export class ObjectEditor extends Vue {
             for (const property in this.schema.properties) {
                 if (this.schema.properties.hasOwnProperty(property)) {
                     const schema = this.schema.properties[property];
-                    const required = this.schema.required && this.schema.required.some((r: any) => r === property);
+                    const required = this.schema.required && this.schema.required.some(r => r === property);
                     this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
                     this.properties.push({
                         property,
@@ -72,7 +72,7 @@ export class ObjectEditor extends Vue {
     }
 
     isRequired(property: string) {
-        return this.schema.required && this.schema.required.some((r: any) => r === property);
+        return this.schema.required && this.schema.required.some(r => r === property);
     }
     collapseOrExpand() {
         this.collapsed = !this.collapsed;

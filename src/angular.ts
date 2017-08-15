@@ -31,7 +31,7 @@ export class JSONEditorComponent {
     @Input()
     dragula?: Dragula;
     @Input()
-    markdownit?: any;
+    markdownit?: MarkdownIt;
     @Input()
     hljs?: typeof hljs;
     @Input()

@@ -6,9 +6,9 @@ import { defaultLocale as defaultMarkDownTipLocale } from "markdown-tip/common";
 export { toNumber, toInteger };
 
 import { __extends, __decorate, __assign } from "tslib";
-(window as any).__extends = __extends;
-(window as any).__decorate = __decorate;
-(window as any).__assign = __assign;
+window.__extends = __extends;
+window.__decorate = __decorate;
+window.__assign = __assign;
 
 /**
  * @public
@@ -362,7 +362,7 @@ function isSame(value1: ValueType, value2: ValueType) {
         return false;
     }
     for (const key in value1) {
-        if (!isSame((value1 as { [name: string]: ValueType })[key], (value2 as { [name: string]: ValueType })[key])) {
+        if (value1.hasOwnProperty(key) && !isSame((value1 as { [name: string]: ValueType })[key], (value2 as { [name: string]: ValueType })[key])) {
             return false;
         }
     }
@@ -460,7 +460,7 @@ export function getErrorMessageOfObject(value: { [name: string]: ValueType } | u
     if (value !== undefined) {
         let length = 0;
         for (const key in value) {
-            if (value[key] !== undefined) {
+            if (value.hasOwnProperty(key) && value[key] !== undefined) {
                 length++;
             }
         }
@@ -544,7 +544,7 @@ export const imagePreviewStyle = {
     maxWidth: "100%",
 };
 
-function print(message: string) {
+function printInConsole(message: string) {
     // tslint:disable-next-line:no-console
     console.log(message);
 }
@@ -556,21 +556,20 @@ export function initializeMarkdown(markdownit: MarkdownItType, hljs: HLJS | unde
     const md = markdownit({
         linkify: true,
         highlight: (str: string, lang: string) => {
-            if (hljs) {
-                if (lang && hljs.getLanguage(lang)) {
-                    try {
-                        return hljs.highlight(lang, str).value;
-                    } catch (error) {
-                        print(error);
-                    }
-                }
+            if (lang && hljs.getLanguage(lang)) {
                 try {
-                    return hljs.highlightAuto(str).value;
+                    return `<pre><code class="hljs ${lang}">${hljs.highlight(lang, str).value}</code></pre>`;
                 } catch (error) {
-                    print(error);
+                    printInConsole(error);
+                }
+            } else {
+                try {
+                    return `<pre><code class="hljs">${hljs.highlightAuto(str).value}</code></pre>`;
+                } catch (error) {
+                    printInConsole(error);
                 }
             }
-            return "";
+            return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`;
         },
     });
 
