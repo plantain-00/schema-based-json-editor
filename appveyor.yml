@@ -4,6 +4,7 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
+  - git checkout package-lock.json
 
 test_script:
   - node --version
