@@ -330,7 +330,10 @@ export type Props<TSchema extends CommonSchema, TValue> = {
     forceHttps?: boolean;
 };
 
-function isSame(value1: ValueType, value2: ValueType) {
+/**
+ * @public
+ */
+export function isSame(value1: ValueType, value2: ValueType) {
     if (typeof value1 === "string"
         || typeof value1 === "number"
         || typeof value1 === "boolean"
