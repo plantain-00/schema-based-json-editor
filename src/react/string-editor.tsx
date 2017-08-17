@@ -24,20 +24,14 @@ export type State = Partial<{
  * @public
  */
 export class StringEditor extends React.Component<Props, State> {
-    value?: string;
-    errorMessage: string;
-    collapsed = false;
-    willRender = false;
+    private value?: string;
+    private errorMessage: string;
+    private collapsed = false;
+    private willRender = false;
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string;
         this.validate();
-    }
-    onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = e.currentTarget.value;
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
     }
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);
@@ -118,83 +112,89 @@ export class StringEditor extends React.Component<Props, State> {
             </div>
         );
     }
-    get isReadOnly() {
+    private onChange = (e: React.FormEvent<{ value: string }>) => {
+        this.value = e.currentTarget.value;
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value, !this.errorMessage);
+    }
+    private get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
     }
-    get hasDeleteButtonFunction() {
+    private get hasDeleteButtonFunction() {
         return this.props.onDelete && !this.isReadOnly;
     }
-    get useTextArea() {
+    private get useTextArea() {
         return this.value !== undefined
             && !this.collapsed
             && (this.props.schema.enum === undefined || this.isReadOnly)
             && (this.props.schema.format === "textarea" || this.props.schema.format === "code" || this.props.schema.format === "markdown");
     }
-    get useInput() {
+    private get useInput() {
         return this.value !== undefined
             && !this.collapsed
             && (this.props.schema.enum === undefined || this.isReadOnly)
             && (this.props.schema.format !== "textarea" && this.props.schema.format !== "code" && this.props.schema.format !== "markdown");
     }
-    get useSelect() {
+    private get useSelect() {
         return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly;
     }
-    get canPreviewImage() {
+    private get canPreviewImage() {
         return common.isImageUrl(this.value);
     }
-    get canPreviewMarkdown() {
+    private get canPreviewMarkdown() {
         return this.props.md && this.props.schema.format === "markdown";
     }
-    get canPreviewCode() {
+    private get canPreviewCode() {
         return this.props.hljs && this.props.schema.format === "code";
     }
-    get canPreview() {
+    private get canPreview() {
         return (!!this.value) && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode);
     }
-    get getImageUrl() {
+    private get getImageUrl() {
         return this.props.forceHttps ? common.replaceProtocal(this.value!) : this.value;
     }
-    get getMarkdown() {
+    private get getMarkdown() {
         return this.props.md!.render(this.value!);
     }
-    get getCode() {
+    private get getCode() {
         return this.props.hljs!.highlightAuto(this.value!).value;
     }
-    get willPreviewImage() {
+    private get willPreviewImage() {
         return this.value && !this.collapsed && this.canPreviewImage;
     }
-    get willPreviewMarkdown() {
+    private get willPreviewMarkdown() {
         return this.value && !this.collapsed && this.canPreviewMarkdown;
     }
-    get willPreviewCode() {
+    private get willPreviewCode() {
         return this.value && !this.collapsed && this.canPreviewCode;
     }
-    get titleToShow() {
+    private get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);
     }
-    get options() {
+    private get options() {
         return this.props.schema.enum!.map(e => ({
             value: e,
             label: e,
         }));
     }
 
-    updateSelection(value: string) {
+    private updateSelection(value: string) {
         this.value = value;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage);
     }
-    validate() {
+    private validate() {
         this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale);
     }
-    toggleOptional = () => {
+    private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as string | undefined;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage);
     }
-    collapseOrExpand = () => {
+    private collapseOrExpand = () => {
         this.willRender = true;
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });

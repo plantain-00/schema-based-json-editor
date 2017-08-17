@@ -27,13 +27,13 @@ export type State = Partial<{
  * @public
  */
 export class ArrayEditor extends React.Component<Props, State> {
-    renderSwitch = 1;
-    collapsed = this.props.schema.collapsed;
-    value?: common.ValueType[];
-    drak?: dragula.Drake;
-    errorMessage: string;
-    invalidIndexes: number[] = [];
-    filter: string = "";
+    private renderSwitch = 1;
+    private collapsed = this.props.schema.collapsed;
+    private value?: common.ValueType[];
+    private drak?: dragula.Drake;
+    private errorMessage: string;
+    private invalidIndexes: number[] = [];
+    private filter: string = "";
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[];
@@ -123,61 +123,61 @@ export class ArrayEditor extends React.Component<Props, State> {
             </div>
         );
     }
-    collapseOrExpand = () => {
+    private collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
-    toggleOptional = () => {
+    private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as common.ValueType[] | undefined;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
-    validate() {
+    private validate() {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.props.schema, this.props.locale);
     }
-    addItem = () => {
+    private addItem = () => {
         this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined) !);
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
-    onChange = (i: number, value: common.ValueType, isValid: boolean) => {
+    private onChange = (i: number, value: common.ValueType, isValid: boolean) => {
         this.value![i] = value;
         this.setState({ value: this.value });
         this.validate();
         common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
-    onFilterChange = (e: React.FormEvent<{ value: string }>) => {
+    private onFilterChange = (e: React.FormEvent<{ value: string }>) => {
         this.filter = e.currentTarget.value;
         this.setState({ filter: this.filter });
     }
-    onDeleteFunction = (i: number) => {
+    private onDeleteFunction = (i: number) => {
         this.value!.splice(i, 1);
         this.renderSwitch = -this.renderSwitch;
         this.setState({ value: this.value, renderSwitch: this.renderSwitch });
         this.validate();
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
-    get isReadOnly() {
+    private get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
     }
-    get hasDeleteButtonFunction() {
+    private get hasDeleteButtonFunction() {
         return this.props.onDelete && !this.isReadOnly;
     }
-    get hasAddButton() {
+    private get hasAddButton() {
         return !this.isReadOnly && this.value !== undefined;
     }
-    get getValue() {
+    private get getValue() {
         if (this.value !== undefined && !this.collapsed) {
             return this.value;
         }
         return [];
     }
-    get titleToShow() {
+    private get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);
     }
-    get showFilter() {
+    private get showFilter() {
         return this.getValue.length >= common.minItemCountIfNeedFilter;
     }
 }

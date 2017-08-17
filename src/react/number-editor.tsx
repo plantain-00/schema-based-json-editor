@@ -22,19 +22,13 @@ export type State = Partial<{
  * @public
  */
 export class NumberEditor extends React.Component<Props, State> {
-    value?: number;
-    errorMessage: string;
-    willRender = false;
+    private value?: number;
+    private errorMessage: string;
+    private willRender = false;
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as number;
         this.validate();
-    }
-    onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
     }
     componentDidMount() {
         this.props.updateValue(this.value, !this.errorMessage);
@@ -88,38 +82,44 @@ export class NumberEditor extends React.Component<Props, State> {
             </div>
         );
     }
-    validate() {
+    private onChange = (e: React.FormEvent<{ value: string }>) => {
+        this.value = this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
+        this.validate();
+        this.setState({ value: this.value });
+        this.props.updateValue(this.value, !this.errorMessage);
+    }
+    private validate() {
         this.errorMessage = common.getErrorMessageOfNumber(this.value, this.props.schema, this.props.locale);
     }
-    toggleOptional = () => {
+    private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as number | undefined;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage);
     }
-    get useInput() {
+    private get useInput() {
         return this.value !== undefined && (this.props.schema.enum === undefined || this.isReadOnly);
     }
-    get useSelect() {
+    private get useSelect() {
         return this.value !== undefined && (this.props.schema.enum !== undefined && !this.isReadOnly);
     }
-    get isReadOnly() {
+    private get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
     }
-    get hasDeleteButtonFunction() {
+    private get hasDeleteButtonFunction() {
         return this.props.onDelete && !this.isReadOnly;
     }
-    get titleToShow() {
+    private get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);
     }
-    get options() {
+    private get options() {
         return this.props.schema.enum!.map(e => ({
             value: e,
             label: e.toString(),
         }));
     }
 
-    updateSelection(value: number) {
+    private updateSelection(value: number) {
         this.value = value;
         this.validate();
         this.setState({ value: this.value });

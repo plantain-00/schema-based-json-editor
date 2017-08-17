@@ -19,7 +19,7 @@ export type State = Partial<{
  * @public
  */
 export class NullEditor extends React.Component<Props, State> {
-    value?: null;
+    private value?: null;
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as null;
@@ -53,18 +53,18 @@ export class NullEditor extends React.Component<Props, State> {
             </div>
         );
     }
-    toggleOptional = () => {
+    private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as null | undefined;
         this.setState({ value: this.value });
         this.props.updateValue(this.value, true);
     }
-    get isReadOnly() {
+    private get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
     }
-    get hasDeleteButtonFunction() {
+    private get hasDeleteButtonFunction() {
         return this.props.onDelete && !this.isReadOnly;
     }
-    get titleToShow() {
+    private get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);
     }
 }

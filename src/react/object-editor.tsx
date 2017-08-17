@@ -25,12 +25,12 @@ export type State = Partial<{
  * @public
  */
 export class ObjectEditor extends React.Component<Props, State> {
-    collapsed = this.props.schema.collapsed;
-    value?: { [name: string]: common.ValueType };
-    invalidProperties: string[] = [];
-    errorMessage: string;
-    properties: { property: string; schema: common.Schema }[] = [];
-    filter: string = "";
+    private collapsed = this.props.schema.collapsed;
+    private value?: { [name: string]: common.ValueType };
+    private invalidProperties: string[] = [];
+    private errorMessage: string;
+    private properties: { property: string; schema: common.Schema }[] = [];
+    private filter: string = "";
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
@@ -109,46 +109,46 @@ export class ObjectEditor extends React.Component<Props, State> {
             </div >
         );
     }
-    collapseOrExpand = () => {
+    private collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
         this.setState({ collapsed: this.collapsed });
     }
-    toggleOptional = () => {
+    private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType } | undefined;
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, this.invalidProperties.length === 0);
     }
-    onFilterChange = (e: React.FormEvent<{ value: string }>) => {
+    private onFilterChange = (e: React.FormEvent<{ value: string }>) => {
         this.filter = e.currentTarget.value;
         this.setState({ filter: this.filter });
     }
-    onChange = (property: string, value: common.ValueType, isValid: boolean) => {
+    private onChange = (property: string, value: common.ValueType, isValid: boolean) => {
         this.value![property] = value;
         this.validate();
         this.setState({ value: this.value });
         common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
         this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0);
     }
-    isRequired(property: string) {
+    private isRequired(property: string) {
         return this.props.schema.required && this.props.schema.required.some(r => r === property);
     }
-    validate() {
+    private validate() {
         this.errorMessage = common.getErrorMessageOfObject(this.value, this.props.schema, this.props.locale);
     }
-    get isReadOnly() {
+    private get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
     }
-    get hasDeleteButtonFunction() {
+    private get hasDeleteButtonFunction() {
         return this.props.onDelete && !this.isReadOnly;
     }
-    get titleToShow() {
+    private get titleToShow() {
         if (this.props.onDelete) {
             return common.getTitle(common.findTitle(this.value, this.properties), this.props.title, this.props.schema.title);
         }
         return common.getTitle(this.props.title, this.props.schema.title);
     }
-    get showFilter() {
+    private get showFilter() {
         return this.properties.length >= common.minItemCountIfNeedFilter;
     }
 }

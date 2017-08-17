@@ -77,7 +77,6 @@ class App extends Vue {
 }
 
 function start() {
-    // tslint:disable-next-line:no-unused-expression
     new App({ el: "#container" });
 }
 

@@ -9,27 +9,13 @@ import * as hljs from "highlight.js";
 let locale: Locale | null = null;
 
 class Main extends React.Component<{}, {}> {
-    locale = locale;
-    schema = schema;
-    value: any = {};
-    isValid = false;
-    schemaSchema = schemaSchema;
-    get formattedSchema() {
+    private locale = locale;
+    private schema = schema;
+    private value: any = {};
+    private isValid = false;
+    private schemaSchema = schemaSchema;
+    private get formattedSchema() {
         return JSON.stringify(this.schema, null, "  ");
-    }
-    updateSchema = (value: any, isValid: boolean) => {
-        try {
-            this.schema = JSON.parse(value);
-            this.setState({ schema: this.schema });
-        } catch (error) {
-            // tslint:disable-next-line:no-console
-            console.log(error);
-        }
-    }
-    updateValue = (value: any, isValid: boolean) => {
-        this.value = value;
-        this.isValid = isValid;
-        this.setState({ value: this.value });
     }
     render() {
         const valueHtml = hljs.highlight("json", JSON.stringify(this.value, null, "  ")).value;
@@ -67,6 +53,20 @@ class Main extends React.Component<{}, {}> {
                 </div>
             </div>
         );
+    }
+    private updateSchema = (value: any, isValid: boolean) => {
+        try {
+            this.schema = JSON.parse(value);
+            this.setState({ schema: this.schema });
+        } catch (error) {
+            // tslint:disable-next-line:no-console
+            console.log(error);
+        }
+    }
+    private updateValue = (value: any, isValid: boolean) => {
+        this.value = value;
+        this.isValid = isValid;
+        this.setState({ value: this.value });
     }
 }
 

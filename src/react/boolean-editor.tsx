@@ -20,8 +20,8 @@ export type State = Partial<{
  * @public
  */
 export class BooleanEditor extends React.Component<Props, State> {
-    value?: boolean;
-    willRender = false;
+    private value?: boolean;
+    private willRender = false;
     constructor(props: Props) {
         super(props);
         this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as boolean;
@@ -83,23 +83,23 @@ export class BooleanEditor extends React.Component<Props, State> {
             </div>
         );
     }
-    onChange = (e: React.FormEvent<{ checked: boolean }>) => {
+    private onChange = (e: React.FormEvent<{ checked: boolean }>) => {
         this.value = !this.value;
         this.setState({ value: this.value });
         this.props.updateValue(this.value, true);
     }
-    toggleOptional = () => {
+    private toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as boolean | undefined;
         this.setState({ value: this.value });
         this.props.updateValue(this.value, true);
     }
-    get isReadOnly() {
+    private get isReadOnly() {
         return this.props.readonly || this.props.schema.readonly;
     }
-    get hasDeleteButtonFunction() {
+    private get hasDeleteButtonFunction() {
         return this.props.onDelete && !this.isReadOnly;
     }
-    get titleToShow() {
+    private get titleToShow() {
         return common.getTitle(this.props.title, this.props.schema.title);
     }
 }

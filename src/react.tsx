@@ -25,19 +25,16 @@ export type Props = {
  * @public
  */
 export class JSONEditor extends React.Component<Props, {}> {
-    theme: common.Theme;
-    locale: common.Locale;
-    icon: common.Icon;
-    md?: MarkdownIt;
+    private theme: common.Theme;
+    private locale: common.Locale;
+    private icon: common.Icon;
+    private md?: MarkdownIt;
     constructor(props: Props) {
         super(props);
         this.theme = common.getTheme(this.props.theme);
         this.locale = common.getLocale(this.props.locale);
         this.icon = common.getIcon(this.props.icon, this.locale);
         this.md = common.initializeMarkdown(this.props.markdownit, this.props.hljs, this.props.forceHttps);
-    }
-    updateValue = (value: any, isValid: boolean) => {
-        this.props.updateValue(value, isValid);
     }
     render() {
         return <Editor schema={this.props.schema}
@@ -52,5 +49,8 @@ export class JSONEditor extends React.Component<Props, {}> {
             md={this.md}
             hljs={this.props.hljs}
             forceHttps={this.props.forceHttps} />;
+    }
+    private updateValue = (value: any, isValid: boolean) => {
+        this.props.updateValue(value, isValid);
     }
 }
