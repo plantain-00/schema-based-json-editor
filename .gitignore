@@ -43,6 +43,7 @@ dist
 **/*.css
 !*.config.js
 !**/*-*.js
+!**/0.bundle.js
 !**/*-*.css
 !demo/css/highlight.js/
 src/compiled
