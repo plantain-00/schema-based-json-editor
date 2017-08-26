@@ -38,7 +38,7 @@ module.exports = {
       const puppeteer = require('puppeteer')
       const server = createServer()
       server.listen(8000)
-      const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+      const browser = await puppeteer.launch()
       const page = await browser.newPage()
       for (const type of ['vue', 'react', 'angular']) {
         await page.goto(`http://localhost:8000/demo/${type}`)
