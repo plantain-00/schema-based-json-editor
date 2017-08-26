@@ -32,6 +32,20 @@ module.exports = {
         },
         `rev-static --config demo/rev-static.config.js`
       ]
+    },
+    async () => {
+      const { createServer } = require('http-server')
+      const puppeteer = require('puppeteer')
+      const server = createServer()
+      server.listen(8000)
+      const browser = await puppeteer.launch()
+      const page = await browser.newPage()
+      for (const type of ['vue', 'react', 'angular']) {
+        await page.goto(`http://localhost:8000/demo/${type}`)
+        await page.screenshot({ path: `demo/${type}/screenshot.png`, fullPage: true })
+      }
+      server.close()
+      browser.close()
     }
   ],
   lint: {
@@ -42,6 +56,9 @@ module.exports = {
   test: [
     'tsc -p spec',
     process.env.APPVEYOR ? 'echo "skip karma test"' : 'karma start spec/karma.config.js',
+    'git checkout demo/vue/screenshot.png',
+    'git checkout demo/react/screenshot.png',
+    'git checkout demo/angular/screenshot.png',
     () => new Promise((resolve, reject) => {
       childProcess.exec('git status -s', (error, stdout, stderr) => {
         if (error) {
