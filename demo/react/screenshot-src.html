@@ -1,0 +1,572 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/dragula.min.css">
+<link rel="stylesheet" href="../css/highlight.js/default.css">
+<link rel="stylesheet" href="../css/markdown-tip.css">
+<link rel="stylesheet" href="../css/gh-fork-ribbon.css">
+<link rel="stylesheet" href="../css/select2.min.css">
+<style>
+* {
+font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif;
+-webkit-font-smoothing: antialiased;
+}
+input,
+textarea {
+font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.bootstrap3-row-container {
+padding: 9px 25px;
+}
+</style>
+</head><body>
+<a class="github-fork-ribbon right-bottom" href="https://github.com/plantain-00/schema-based-json-editor" title="Fork me on GitHub" target="_blank" rel="noopener">Fork me on GitHub</a>
+<div id="container"><div data-reactroot=""><a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/react/index.tsx" target="_blank">the source code of the demo</a><br><div class="bootstrap3-row-container" style="float: left; margin: 10px; width: 400px; overflow-y: scroll; height: 600px;"><div class="row"><label class="control-label"><!-- react-text: 7 -->Schema:<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 9 --><!-- react-empty: 10 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label><textarea class="form-control" rows="10">{
+  "type": "object",
+  "title": "GUI:",
+  "description": "a description example",
+  "properties": {
+    "stringExample": {
+      "type": "string",
+      "title": "A string example",
+      "description": "a string description example",
+      "default": "a default string example",
+      "minLength": 20,
+      "maxLength": 25
+    },
+    "booleanExample": {
+      "type": "boolean",
+      "title": "A boolean example",
+      "description": "a boolean description example",
+      "default": true
+    },
+    "numberExample": {
+      "type": "number",
+      "title": "A number example",
+      "description": "a number description example",
+      "default": 123.4,
+      "minimum": 10,
+      "exclusiveMinimum": true,
+      "maximum": 1000,
+      "exclusiveMaximum": true
+    },
+    "integerExample": {
+      "type": "integer",
+      "title": "A integer example",
+      "description": "a integer description example",
+      "default": 124,
+      "multipleOf": 2
+    },
+    "nullExample": {
+      "type": "null",
+      "title": "A null example",
+      "description": "a null description example",
+      "default": null
+    },
+    "objectExample": {
+      "type": "object",
+      "title": "A object example",
+      "description": "a object description example",
+      "properties": {
+        "propertyExample1": {
+          "type": "string"
+        },
+        "propertyExample2": {
+          "type": "number"
+        }
+      },
+      "default": {},
+      "required": [
+        "propertyExample1",
+        "propertyExample2"
+      ]
+    },
+    "arrayExample": {
+      "type": "array",
+      "title": "A array example",
+      "description": "a array description example",
+      "items": {
+        "type": "string",
+        "maxLength": 15
+      },
+      "default": [
+        "default item 1",
+        "default item 2"
+      ],
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "readOnlyExample": {
+      "type": "string",
+      "readonly": true,
+      "default": "abc"
+    },
+    "readOnlyAndOptionalExample": {
+      "type": "string",
+      "readonly": true,
+      "default": "abc"
+    },
+    "enumExample": {
+      "type": "string",
+      "enum": [
+        "enum 1",
+        "enum 2"
+      ]
+    },
+    "optionalExample": {
+      "type": "string"
+    },
+    "optionalAndDefaultExample": {
+      "type": "string",
+      "default": "abc"
+    },
+    "booleanOptionalExample": {
+      "type": "boolean"
+    },
+    "colorExample": {
+      "type": "string",
+      "format": "color",
+      "default": "#000000"
+    },
+    "textareaExample": {
+      "type": "string",
+      "format": "textarea"
+    },
+    "patternExample": {
+      "type": "string",
+      "pattern": "^[A-z]{3}$",
+      "default": "abc"
+    },
+    "imagePreviewExample": {
+      "type": "string",
+      "default": "http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg"
+    },
+    "markdownExample": {
+      "type": "string",
+      "format": "markdown",
+      "default": "###### markdown title and code example\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```"
+    },
+    "codeExample": {
+      "type": "string",
+      "format": "code",
+      "default": "function foo(bar) {\n    console.log(bar);\n}\n"
+    },
+    "itemTitleExample": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "propertyExample1": {
+            "type": "string"
+          },
+          "propertyExample2": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "propertyExample1",
+          "propertyExample2"
+        ],
+        "collapsed": true
+      },
+      "default": [
+        {
+          "propertyExample1": "foo",
+          "propertyExample2": 1
+        },
+        {
+          "propertyExample1": "bar",
+          "propertyExample2": 2
+        },
+        {
+          "propertyExample1": "baz",
+          "propertyExample2": 3
+        },
+        {
+          "propertyExample1": "abc",
+          "propertyExample2": 4
+        },
+        {
+          "propertyExample1": "def",
+          "propertyExample2": 5
+        },
+        {
+          "propertyExample1": "ghi",
+          "propertyExample2": 6
+        }
+      ]
+    },
+    "optionalObjectExample": {
+      "type": "object",
+      "properties": {
+        "propertyExample1": {
+          "type": "string"
+        },
+        "propertyExample2": {
+          "type": "number"
+        }
+      },
+      "maxProperties": 1,
+      "minProperties": 0
+    },
+    "propertyOrderExample": {
+      "type": "object",
+      "properties": {
+        "propertyExample1": {
+          "type": "string",
+          "propertyOrder": 3
+        },
+        "propertyExample2": {
+          "type": "number",
+          "propertyOrder": 1
+        },
+        "propertyExample3": {
+          "type": "number",
+          "propertyOrder": 2
+        }
+      }
+    },
+    "collapsedObjectExample": {
+      "type": "object",
+      "properties": {
+        "propertyExample1": {
+          "type": "string"
+        }
+      },
+      "collapsed": true
+    }
+  },
+  "required": [
+    "stringExample",
+    "booleanExample",
+    "numberExample",
+    "integerExample",
+    "nullExample",
+    "objectExample",
+    "arrayExample",
+    "readOnlyExample",
+    "enumExample",
+    "colorExample",
+    "textareaExample",
+    "patternExample",
+    "imagePreviewExample",
+    "markdownExample",
+    "codeExample",
+    "performanceExample",
+    "itemTitleExample",
+    "optionalObjectExample",
+    "propertyOrderExample",
+    "collapsedObjectExample"
+  ]
+}</textarea><pre><code>{
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"GUI:"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a description example"</span>,
+  <span class="hljs-attr">"properties"</span>: {
+    <span class="hljs-attr">"stringExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"A string example"</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a string description example"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-string">"a default string example"</span>,
+      <span class="hljs-attr">"minLength"</span>: <span class="hljs-number">20</span>,
+      <span class="hljs-attr">"maxLength"</span>: <span class="hljs-number">25</span>
+    },
+    <span class="hljs-attr">"booleanExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"boolean"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"A boolean example"</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a boolean description example"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-literal">true</span>
+    },
+    <span class="hljs-attr">"numberExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"number"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"A number example"</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a number description example"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-number">123.4</span>,
+      <span class="hljs-attr">"minimum"</span>: <span class="hljs-number">10</span>,
+      <span class="hljs-attr">"exclusiveMinimum"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"maximum"</span>: <span class="hljs-number">1000</span>,
+      <span class="hljs-attr">"exclusiveMaximum"</span>: <span class="hljs-literal">true</span>
+    },
+    <span class="hljs-attr">"integerExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"integer"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"A integer example"</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a integer description example"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-number">124</span>,
+      <span class="hljs-attr">"multipleOf"</span>: <span class="hljs-number">2</span>
+    },
+    <span class="hljs-attr">"nullExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"null"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"A null example"</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a null description example"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-literal">null</span>
+    },
+    <span class="hljs-attr">"objectExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"A object example"</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a object description example"</span>,
+      <span class="hljs-attr">"properties"</span>: {
+        <span class="hljs-attr">"propertyExample1"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>
+        },
+        <span class="hljs-attr">"propertyExample2"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"number"</span>
+        }
+      },
+      <span class="hljs-attr">"default"</span>: {},
+      <span class="hljs-attr">"required"</span>: [
+        <span class="hljs-string">"propertyExample1"</span>,
+        <span class="hljs-string">"propertyExample2"</span>
+      ]
+    },
+    <span class="hljs-attr">"arrayExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"array"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"A array example"</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a array description example"</span>,
+      <span class="hljs-attr">"items"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+        <span class="hljs-attr">"maxLength"</span>: <span class="hljs-number">15</span>
+      },
+      <span class="hljs-attr">"default"</span>: [
+        <span class="hljs-string">"default item 1"</span>,
+        <span class="hljs-string">"default item 2"</span>
+      ],
+      <span class="hljs-attr">"minItems"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"uniqueItems"</span>: <span class="hljs-literal">true</span>
+    },
+    <span class="hljs-attr">"readOnlyExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"readonly"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-string">"abc"</span>
+    },
+    <span class="hljs-attr">"readOnlyAndOptionalExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"readonly"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-string">"abc"</span>
+    },
+    <span class="hljs-attr">"enumExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"enum"</span>: [
+        <span class="hljs-string">"enum 1"</span>,
+        <span class="hljs-string">"enum 2"</span>
+      ]
+    },
+    <span class="hljs-attr">"optionalExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>
+    },
+    <span class="hljs-attr">"optionalAndDefaultExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-string">"abc"</span>
+    },
+    <span class="hljs-attr">"booleanOptionalExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"boolean"</span>
+    },
+    <span class="hljs-attr">"colorExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"format"</span>: <span class="hljs-string">"color"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-string">"#000000"</span>
+    },
+    <span class="hljs-attr">"textareaExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"format"</span>: <span class="hljs-string">"textarea"</span>
+    },
+    <span class="hljs-attr">"patternExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"pattern"</span>: <span class="hljs-string">"^[A-z]{3}$"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-string">"abc"</span>
+    },
+    <span class="hljs-attr">"imagePreviewExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-string">"http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg"</span>
+    },
+    <span class="hljs-attr">"markdownExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"format"</span>: <span class="hljs-string">"markdown"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-string">"###### markdown title and code example\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```"</span>
+    },
+    <span class="hljs-attr">"codeExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+      <span class="hljs-attr">"format"</span>: <span class="hljs-string">"code"</span>,
+      <span class="hljs-attr">"default"</span>: <span class="hljs-string">"function foo(bar) {\n    console.log(bar);\n}\n"</span>
+    },
+    <span class="hljs-attr">"itemTitleExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"array"</span>,
+      <span class="hljs-attr">"items"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+        <span class="hljs-attr">"properties"</span>: {
+          <span class="hljs-attr">"propertyExample1"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>
+          },
+          <span class="hljs-attr">"propertyExample2"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"number"</span>
+          }
+        },
+        <span class="hljs-attr">"required"</span>: [
+          <span class="hljs-string">"propertyExample1"</span>,
+          <span class="hljs-string">"propertyExample2"</span>
+        ],
+        <span class="hljs-attr">"collapsed"</span>: <span class="hljs-literal">true</span>
+      },
+      <span class="hljs-attr">"default"</span>: [
+        {
+          <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"foo"</span>,
+          <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">1</span>
+        },
+        {
+          <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"bar"</span>,
+          <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">2</span>
+        },
+        {
+          <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"baz"</span>,
+          <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">3</span>
+        },
+        {
+          <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"abc"</span>,
+          <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">4</span>
+        },
+        {
+          <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"def"</span>,
+          <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">5</span>
+        },
+        {
+          <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"ghi"</span>,
+          <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">6</span>
+        }
+      ]
+    },
+    <span class="hljs-attr">"optionalObjectExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+      <span class="hljs-attr">"properties"</span>: {
+        <span class="hljs-attr">"propertyExample1"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>
+        },
+        <span class="hljs-attr">"propertyExample2"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"number"</span>
+        }
+      },
+      <span class="hljs-attr">"maxProperties"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"minProperties"</span>: <span class="hljs-number">0</span>
+    },
+    <span class="hljs-attr">"propertyOrderExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+      <span class="hljs-attr">"properties"</span>: {
+        <span class="hljs-attr">"propertyExample1"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+          <span class="hljs-attr">"propertyOrder"</span>: <span class="hljs-number">3</span>
+        },
+        <span class="hljs-attr">"propertyExample2"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"number"</span>,
+          <span class="hljs-attr">"propertyOrder"</span>: <span class="hljs-number">1</span>
+        },
+        <span class="hljs-attr">"propertyExample3"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"number"</span>,
+          <span class="hljs-attr">"propertyOrder"</span>: <span class="hljs-number">2</span>
+        }
+      }
+    },
+    <span class="hljs-attr">"collapsedObjectExample"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+      <span class="hljs-attr">"properties"</span>: {
+        <span class="hljs-attr">"propertyExample1"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>
+        }
+      },
+      <span class="hljs-attr">"collapsed"</span>: <span class="hljs-literal">true</span>
+    }
+  },
+  <span class="hljs-attr">"required"</span>: [
+    <span class="hljs-string">"stringExample"</span>,
+    <span class="hljs-string">"booleanExample"</span>,
+    <span class="hljs-string">"numberExample"</span>,
+    <span class="hljs-string">"integerExample"</span>,
+    <span class="hljs-string">"nullExample"</span>,
+    <span class="hljs-string">"objectExample"</span>,
+    <span class="hljs-string">"arrayExample"</span>,
+    <span class="hljs-string">"readOnlyExample"</span>,
+    <span class="hljs-string">"enumExample"</span>,
+    <span class="hljs-string">"colorExample"</span>,
+    <span class="hljs-string">"textareaExample"</span>,
+    <span class="hljs-string">"patternExample"</span>,
+    <span class="hljs-string">"imagePreviewExample"</span>,
+    <span class="hljs-string">"markdownExample"</span>,
+    <span class="hljs-string">"codeExample"</span>,
+    <span class="hljs-string">"performanceExample"</span>,
+    <span class="hljs-string">"itemTitleExample"</span>,
+    <span class="hljs-string">"optionalObjectExample"</span>,
+    <span class="hljs-string">"propertyOrderExample"</span>,
+    <span class="hljs-string">"collapsedObjectExample"</span>
+  ]
+}</code></pre><!-- react-empty: 16 --><!-- react-empty: 17 --></div></div><div class="bootstrap3-row-container" style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px;"><div class="row"><h3><!-- react-text: 21 -->GUI:<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 23 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><!-- react-empty: 26 --></div></h3><p class="help-block">a description example</p><div class="well bootstrap3-row-container"><div class="row"><input class="form-control" value=""></div><div class="row"><label class="control-label"><!-- react-text: 33 -->optionalAndDefaultExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 38 -->not exists<!-- /react-text --></label></div><!-- react-empty: 39 --><!-- react-empty: 40 --></div></label><!-- react-empty: 41 --><!-- react-empty: 42 --></div><div class="row"><label class="control-label"><!-- react-text: 45 -->A string example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 47 --><!-- react-empty: 48 --><!-- react-empty: 49 --></div></label><input class="form-control" value="a default string example"><p class="help-block">a string description example</p><!-- react-empty: 52 --></div><div class="row"><label class="control-label"><!-- react-text: 55 -->A number example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 57 --><!-- react-empty: 58 --></div></label><input type="number" class="form-control" value="123.4"><p class="help-block">a number description example</p><!-- react-empty: 61 --></div><div class="row"><label class="control-label"><!-- react-text: 64 -->A integer example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 66 --><!-- react-empty: 67 --></div></label><input type="number" class="form-control" value="124"><p class="help-block">a integer description example</p><!-- react-empty: 70 --></div><div class="row"><label class="control-label"><!-- react-text: 73 -->A null example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 75 --><!-- react-empty: 76 --></div></label><p class="help-block">a null description example</p></div><div class="row"><h3><!-- react-text: 80 -->A object example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 82 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><!-- react-empty: 85 --></div></h3><p class="help-block">a object description example</p><div class="well bootstrap3-row-container"><div class="row"><label class="control-label"><!-- react-text: 90 -->propertyExample1<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 92 --><!-- react-empty: 93 --><!-- react-empty: 94 --></div></label><input class="form-control" value=""><!-- react-empty: 96 --><!-- react-empty: 97 --></div><div class="row"><label class="control-label"><!-- react-text: 100 -->propertyExample2<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 102 --><!-- react-empty: 103 --></div></label><input type="number" class="form-control" value="0"><!-- react-empty: 105 --><!-- react-empty: 106 --></div></div><!-- react-empty: 107 --></div><div class="row"><h3><!-- react-text: 110 -->A array example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 112 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><button class="btn btn-default"><i class="fa fa-plus"></i></button><!-- react-empty: 117 --></div></h3><p class="help-block">a array description example</p><div class="well bootstrap3-row-container"><div data-index="0" class="well bootstrap3-row-container"><div class="row"><label class="control-label"><!-- react-text: 123 -->0<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 125 --><button class="btn btn-default"><i class="fa fa-times"></i></button><!-- react-empty: 128 --></div></label><input class="form-control" value="default item 1"><!-- react-empty: 130 --><!-- react-empty: 131 --></div></div><div data-index="1" class="well bootstrap3-row-container"><div class="row"><label class="control-label"><!-- react-text: 135 -->1<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 137 --><button class="btn btn-default"><i class="fa fa-times"></i></button><!-- react-empty: 140 --></div></label><input class="form-control" value="default item 2"><!-- react-empty: 142 --><!-- react-empty: 143 --></div></div></div><!-- react-empty: 144 --></div><div class="row"><label class="control-label"><!-- react-text: 147 -->readOnlyExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 149 --><!-- react-empty: 150 --><!-- react-empty: 151 --></div></label><input class="form-control" readonly="" disabled="" value="abc"><!-- react-empty: 153 --><!-- react-empty: 154 --></div><div class="row"><label class="control-label"><!-- react-text: 157 -->readOnlyAndOptionalExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" disabled="" value="on"><!-- react-text: 162 -->not exists<!-- /react-text --></label></div><!-- react-empty: 163 --><!-- react-empty: 164 --></div></label><!-- react-empty: 165 --><!-- react-empty: 166 --></div><div class="row"><label class="control-label"><!-- react-text: 169 -->enumExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 171 --><!-- react-empty: 172 --><!-- react-empty: 173 --></div></label><div class="select2 select2-container select2-container--default   select2-container--below select2-container--focus"><div class="selection"><div class="select2-selection select2-selection--single" role="combobox"><span class="select2-selection__rendered" title="enum 1">enum 1</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></div></div><div class="select2-container select2-container--default select2-container-dropdown"><div class="select2-dropdown select2-dropdown--below"><div class="select2-search select2-search--dropdown select2-search--hide"><input type="search" value="" class="select2-search__field" role="textbox" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></div><div class="select2-results"><ul class="select2-results__options" role="tree" tabindex="-1"><li class="select2-results__option select2-results__option--highlighted" role="treeitem" aria-selected="true" aria-disabled="false">enum 1</li><li class="select2-results__option" role="treeitem" aria-selected="false" aria-disabled="false">enum 2</li></ul></div></div></div></div><!-- react-empty: 188 --><!-- react-empty: 189 --></div><div class="row"><label class="control-label"><!-- react-text: 192 -->optionalExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 197 -->not exists<!-- /react-text --></label></div><!-- react-empty: 198 --><!-- react-empty: 199 --></div></label><!-- react-empty: 200 --><!-- react-empty: 201 --></div><div class="row"><label class="control-label"><!-- react-text: 204 -->A boolean example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 206 --><!-- react-empty: 207 --></div></label><div><div class="radio-inline"><label><input type="radio" value="on"><!-- react-text: 212 -->true<!-- /react-text --></label></div><div class="radio-inline"><label><input type="radio" value="on"><!-- react-text: 216 -->false<!-- /react-text --></label></div></div><p class="help-block">a boolean description example</p></div><div class="row"><label class="control-label"><!-- react-text: 220 -->booleanOptionalExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 225 -->not exists<!-- /react-text --></label></div><!-- react-empty: 226 --></div></label><!-- react-empty: 227 --></div><div class="row"><label class="control-label"><!-- react-text: 230 -->colorExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 232 --><!-- react-empty: 233 --><!-- react-empty: 234 --></div></label><input type="color" class="form-control" value="#000000"><!-- react-empty: 236 --><!-- react-empty: 237 --></div><div class="row"><label class="control-label"><!-- react-text: 240 -->textareaExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 242 --><!-- react-empty: 243 --><!-- react-empty: 244 --></div></label><textarea class="form-control" rows="10"></textarea><!-- react-empty: 246 --><!-- react-empty: 247 --></div><div class="row"><label class="control-label"><!-- react-text: 250 -->patternExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 252 --><!-- react-empty: 253 --><!-- react-empty: 254 --></div></label><input class="form-control" value="abc"><!-- react-empty: 256 --><!-- react-empty: 257 --></div><div class="row"><label class="control-label"><!-- react-text: 260 -->imagePreviewExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 262 --><!-- react-empty: 263 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label><input class="form-control" value="http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg"><img src="http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg" style="display: block; height: auto; margin: 6px 0px; max-width: 100%;"><!-- react-empty: 268 --><!-- react-empty: 269 --></div><div class="row"><label class="control-label"><!-- react-text: 272 -->markdownExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 274 --><!-- react-empty: 275 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label><textarea class="form-control" rows="10">###### markdown title and code example
+
+```js
+function foo(bar) {
+    console.log(bar);
+}
+```</textarea><div class="markdown-tip"><div class="markdown-tip-item"><span class="markdown-tip-item-text">Heading</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Horizontal Rules</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Bold</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Italic</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Strikethrough</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Blockquote</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Unordered List</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Ordered List</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Inline Code</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Indented Code</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Block Code</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Table</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Link</span></div><div class="markdown-tip-item"><span class="markdown-tip-item-text">Image</span></div></div><div><h6>markdown title and code example</h6>
+<pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">bar</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(bar);
+}
+</code></pre>
+</div><!-- react-empty: 309 --><!-- react-empty: 310 --></div><div class="row"><label class="control-label"><!-- react-text: 313 -->codeExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 315 --><!-- react-empty: 316 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label><textarea class="form-control" rows="10">function foo(bar) {
+    console.log(bar);
+}
+</textarea><pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">bar</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(bar);
+}
+</code></pre><!-- react-empty: 322 --><!-- react-empty: 323 --></div><div class="row"><h3><!-- react-text: 326 -->itemTitleExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 328 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><button class="btn btn-default"><i class="fa fa-plus"></i></button><!-- react-empty: 333 --></div></h3><p class="help-block"></p><div class="well bootstrap3-row-container"><div class="row"><input class="form-control" value=""></div><div data-index="0" class="well bootstrap3-row-container"><div class="row"><h3><!-- react-text: 341 -->foo<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 343 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div></h3><!-- react-empty: 348 --><div class="well bootstrap3-row-container"></div><!-- react-empty: 350 --></div></div><div data-index="1" class="well bootstrap3-row-container"><div class="row"><h3><!-- react-text: 354 -->bar<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 356 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div></h3><!-- react-empty: 361 --><div class="well bootstrap3-row-container"></div><!-- react-empty: 363 --></div></div><div data-index="2" class="well bootstrap3-row-container"><div class="row"><h3><!-- react-text: 367 -->baz<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 369 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div></h3><!-- react-empty: 374 --><div class="well bootstrap3-row-container"></div><!-- react-empty: 376 --></div></div><div data-index="3" class="well bootstrap3-row-container"><div class="row"><h3><!-- react-text: 380 -->abc<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 382 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div></h3><!-- react-empty: 387 --><div class="well bootstrap3-row-container"></div><!-- react-empty: 389 --></div></div><div data-index="4" class="well bootstrap3-row-container"><div class="row"><h3><!-- react-text: 393 -->def<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 395 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div></h3><!-- react-empty: 400 --><div class="well bootstrap3-row-container"></div><!-- react-empty: 402 --></div></div><div data-index="5" class="well bootstrap3-row-container"><div class="row"><h3><!-- react-text: 406 -->ghi<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 408 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div></h3><!-- react-empty: 413 --><div class="well bootstrap3-row-container"></div><!-- react-empty: 415 --></div></div></div><!-- react-empty: 416 --></div><div class="row"><h3><!-- react-text: 419 -->optionalObjectExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 421 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><!-- react-empty: 424 --></div></h3><!-- react-empty: 425 --><div class="well bootstrap3-row-container"><div class="row"><label class="control-label"><!-- react-text: 429 -->propertyExample1<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 434 -->not exists<!-- /react-text --></label></div><!-- react-empty: 435 --><!-- react-empty: 436 --></div></label><!-- react-empty: 437 --><!-- react-empty: 438 --></div><div class="row"><label class="control-label"><!-- react-text: 441 -->propertyExample2<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 446 -->not exists<!-- /react-text --></label></div><!-- react-empty: 447 --></div></label><!-- react-empty: 448 --><!-- react-empty: 449 --></div></div><!-- react-empty: 450 --></div><div class="row"><h3><!-- react-text: 453 -->propertyOrderExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 455 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><!-- react-empty: 458 --></div></h3><!-- react-empty: 459 --><div class="well bootstrap3-row-container"><div class="row"><label class="control-label"><!-- react-text: 463 -->propertyExample2<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 468 -->not exists<!-- /react-text --></label></div><!-- react-empty: 469 --></div></label><!-- react-empty: 470 --><!-- react-empty: 471 --></div><div class="row"><label class="control-label"><!-- react-text: 474 -->propertyExample3<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 479 -->not exists<!-- /react-text --></label></div><!-- react-empty: 480 --></div></label><!-- react-empty: 481 --><!-- react-empty: 482 --></div><div class="row"><label class="control-label"><!-- react-text: 485 -->propertyExample1<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 490 -->not exists<!-- /react-text --></label></div><!-- react-empty: 491 --><!-- react-empty: 492 --></div></label><!-- react-empty: 493 --><!-- react-empty: 494 --></div></div><!-- react-empty: 495 --></div><div class="row"><h3><!-- react-text: 498 -->collapsedObjectExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 500 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><!-- react-empty: 503 --></div></h3><!-- react-empty: 504 --><div class="well bootstrap3-row-container"></div><!-- react-empty: 506 --></div></div><!-- react-empty: 507 --></div></div><div style="float: left; margin: 10px; width: 400px; overflow-y: scroll; height: 600px;"><!-- react-text: 509 -->Value:<!-- /react-text --><pre style="border-color: black;"><code>{
+  <span class="hljs-attr">"stringExample"</span>: <span class="hljs-string">"a default string example"</span>,
+  <span class="hljs-attr">"booleanExample"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"numberExample"</span>: <span class="hljs-number">123.4</span>,
+  <span class="hljs-attr">"integerExample"</span>: <span class="hljs-number">124</span>,
+  <span class="hljs-attr">"nullExample"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"objectExample"</span>: {
+    <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">""</span>,
+    <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">0</span>
+  },
+  <span class="hljs-attr">"arrayExample"</span>: [
+    <span class="hljs-string">"default item 1"</span>,
+    <span class="hljs-string">"default item 2"</span>
+  ],
+  <span class="hljs-attr">"readOnlyExample"</span>: <span class="hljs-string">"abc"</span>,
+  <span class="hljs-attr">"enumExample"</span>: <span class="hljs-string">"enum 1"</span>,
+  <span class="hljs-attr">"colorExample"</span>: <span class="hljs-string">"#000000"</span>,
+  <span class="hljs-attr">"textareaExample"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"patternExample"</span>: <span class="hljs-string">"abc"</span>,
+  <span class="hljs-attr">"imagePreviewExample"</span>: <span class="hljs-string">"http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg"</span>,
+  <span class="hljs-attr">"markdownExample"</span>: <span class="hljs-string">"###### markdown title and code example\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```"</span>,
+  <span class="hljs-attr">"codeExample"</span>: <span class="hljs-string">"function foo(bar) {\n    console.log(bar);\n}\n"</span>,
+  <span class="hljs-attr">"itemTitleExample"</span>: [
+    {
+      <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"foo"</span>,
+      <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">1</span>
+    },
+    {
+      <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"bar"</span>,
+      <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">2</span>
+    },
+    {
+      <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"baz"</span>,
+      <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">3</span>
+    },
+    {
+      <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"abc"</span>,
+      <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">4</span>
+    },
+    {
+      <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"def"</span>,
+      <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">5</span>
+    },
+    {
+      <span class="hljs-attr">"propertyExample1"</span>: <span class="hljs-string">"ghi"</span>,
+      <span class="hljs-attr">"propertyExample2"</span>: <span class="hljs-number">6</span>
+    }
+  ],
+  <span class="hljs-attr">"optionalObjectExample"</span>: {},
+  <span class="hljs-attr">"propertyOrderExample"</span>: {},
+  <span class="hljs-attr">"collapsedObjectExample"</span>: {}
+}</code></pre></div></div></div>
+<script src="./vendor.bundle-30ec3460696db0727e1606c5dcb1868b.js" crossorigin="anonymous" integrity="sha256-Hsj3Oec1Ai/Y3EsZA88+3F12BDby/J4lJ0BhCxAfvyM="></script>
+<script src="./editor.bundle-4bc8b595bea7afd297cfd4e57b344f86.js" crossorigin="anonymous" integrity="sha256-edG1bGGgHjMaDU2euMgeCHrLD7k9SNtmOXezCoDpH94="></script>
+<script src="./index.bundle-e7682ce23cb86d124e1af4d908fd478f.js" crossorigin="anonymous" integrity="sha256-x2IJhT4VMxucUzHsI827NK3TWJFyAqEfab/KpJQUDgE="></script>
+</body></html>
