@@ -1,5 +1,5 @@
 {
-  "angularEditorBundleJs": "39.2 kB 6.84 kB",
+  "angularEditorBundleJs": "39.2 kB 6.82 kB",
   "angularIndexBundleJs": "6.69 kB 2.09 kB",
   "angularVendorBundleJs": "1.61 MB 460 kB",
   "reactEditorBundleJs": "52.4 kB 11.7 kB",
@@ -8,7 +8,7 @@
   "vueEditorBundleJs": "52.4 kB 11.8 kB",
   "vueIndexBundleJs": "6.18 kB 2 kB",
   "vueVendorBundleJs": "764 kB 269 kB",
-  "demoAngularIndexHtml": "1.44 kB 788 B",
+  "demoAngularIndexHtml": "1.44 kB 787 B",
   "demoReactIndexHtml": "1.51 kB 799 B",
-  "demoVueIndexHtml": "1.51 kB 801 B"
+  "demoVueIndexHtml": "1.51 kB 805 B"
 }

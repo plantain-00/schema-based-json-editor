@@ -62,12 +62,12 @@ export class NumberEditorComponent {
     trackByFunction(index: number, value: number) {
         return index;
     }
-    validate() {
-        this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
-    }
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
         this.validate();
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
+    }
+    private validate() {
+        this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
     }
 }

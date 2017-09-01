@@ -42,11 +42,11 @@ export class ObjectEditorComponent {
 
     collapsed?: boolean = false;
     value?: { [name: string]: common.ValueType };
-    properties: { property: string; schema: common.Schema }[] = [];
     buttonGroupStyle = common.buttonGroupStyleString;
-    invalidProperties: string[] = [];
     errorMessage: string;
     filter = "";
+    private properties: { property: string; schema: common.Schema }[] = [];
+    private invalidProperties: string[] = [];
     ngOnInit() {
         this.collapsed = this.schema.collapsed;
         this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType };
@@ -91,7 +91,7 @@ export class ObjectEditorComponent {
     onFilterChange(e: { target: { value: string } }) {
         this.filter = e.target.value;
     }
-    validate() {
+    private validate() {
         this.errorMessage = common.getErrorMessageOfObject(this.value, this.schema, this.locale);
     }
     get filteredProperties() {

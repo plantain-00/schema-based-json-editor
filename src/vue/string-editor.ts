@@ -42,13 +42,13 @@ export class StringEditor extends Vue {
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
     }
 
-    get canPreviewImage() {
+    private get canPreviewImage() {
         return common.isImageUrl(this.value);
     }
-    get canPreviewMarkdown() {
+    private get canPreviewMarkdown() {
         return this.md && this.schema.format === "markdown";
     }
-    get canPreviewCode() {
+    private get canPreviewCode() {
         return this.hljs && this.schema.format === "code";
     }
     get canPreview() {
@@ -109,9 +109,6 @@ export class StringEditor extends Vue {
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
     }
 
-    validate() {
-        this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
-    }
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;
         this.validate();
@@ -119,5 +116,8 @@ export class StringEditor extends Vue {
     }
     collapseOrExpand() {
         this.collapsed = !this.collapsed;
+    }
+    private validate() {
+        this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
     }
 }

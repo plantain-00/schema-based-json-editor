@@ -26,11 +26,11 @@ export class ArrayEditor extends Vue {
     renderSwitch = 1;
     collapsed?: boolean = false;
     value?: common.ValueType[] = [];
-    drak?: dragula.Drake | null = null;
     errorMessage?: string = "";
     buttonGroupStyleString = common.buttonGroupStyleString;
-    invalidIndexes = [];
     filter = "";
+    private invalidIndexes = [];
+    private drak?: dragula.Drake | null = null;
 
     beforeMount() {
         this.collapsed = this.schema.collapsed;
@@ -43,7 +43,7 @@ export class ArrayEditor extends Vue {
         return this.getValue.map((p, i) => ({ p, i }))
             .filter(({ p, i }) => common.filterArray(p, i, this.schema.items, this.filter));
     }
-    get getValue() {
+    private get getValue() {
         if (this.value !== undefined && !this.collapsed) {
             return this.value;
         }
@@ -94,9 +94,6 @@ export class ArrayEditor extends Vue {
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     }
-    validate() {
-        this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
-    }
     addItem() {
         this.value!.push(common.getDefaultValue(true, this.schema.items, undefined)!);
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
@@ -115,5 +112,8 @@ export class ArrayEditor extends Vue {
     }
     onFilterChange(e: { target: { value: string } }) {
         this.filter = e.target.value;
+    }
+    private validate() {
+        this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
     }
 }

@@ -26,10 +26,10 @@ export class ObjectEditor extends Vue {
     collapsed?: boolean = false;
     value?: { [name: string]: common.ValueType } = {};
     buttonGroupStyle = common.buttonGroupStyleString;
-    invalidProperties: string[] = [];
     errorMessage?: string = "";
-    properties: { property: string; schema: common.Schema }[] = [];
     filter = "";
+    private invalidProperties: string[] = [];
+    private properties: { property: string; schema: common.Schema }[] = [];
 
     beforeMount() {
         this.collapsed = this.schema.collapsed;
@@ -91,7 +91,7 @@ export class ObjectEditor extends Vue {
     onFilterChange(e: { target: { value: string } }) {
         this.filter = e.target.value;
     }
-    validate() {
+    private validate() {
         this.errorMessage = common.getErrorMessageOfObject(this.value, this.schema, this.locale);
     }
 }

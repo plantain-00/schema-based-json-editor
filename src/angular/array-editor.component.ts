@@ -39,18 +39,20 @@ export class ArrayEditorComponent {
     @Input()
     forceHttps?: boolean;
 
-    @ViewChild("drakContainer")
-    drakContainer: ElementRef;
-
-    renderSwitch = 1;
     collapsed?: boolean = false;
     value?: common.ValueType[];
-    drak?: dragula.Drake;
     errorMessage: string;
     buttonGroupStyleString = common.buttonGroupStyleString;
-    invalidIndexes: number[] = [];
     filter = "";
-    get getValue() {
+
+    @ViewChild("drakContainer")
+    private drakContainer: ElementRef;
+
+    private renderSwitch = 1;
+    private drak?: dragula.Drake;
+    private invalidIndexes: number[] = [];
+
+    private get getValue() {
         if (this.value !== undefined && !this.collapsed) {
             return this.value;
         }
@@ -109,9 +111,6 @@ export class ArrayEditorComponent {
         this.validate();
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
     }
-    validate() {
-        this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
-    }
     addItem() {
         this.value!.push(common.getDefaultValue(true, this.schema.items, undefined)!);
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 });
@@ -130,5 +129,8 @@ export class ArrayEditorComponent {
     }
     onFilterChange(e: { target: { value: string } }) {
         this.filter = e.target.value;
+    }
+    private validate() {
+        this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale);
     }
 }

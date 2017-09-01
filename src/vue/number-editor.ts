@@ -63,12 +63,12 @@ export class NumberEditor extends Vue {
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
     }
 
-    validate() {
-        this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
-    }
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
         this.validate();
         this.$emit("update-value", { value: this.value, isValid: !this.errorMessage });
+    }
+    private validate() {
+        this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale);
     }
 }

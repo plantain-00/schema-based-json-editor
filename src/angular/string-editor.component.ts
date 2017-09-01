@@ -72,13 +72,13 @@ export class StringEditorComponent {
     get useSelect() {
         return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly;
     }
-    get canPreviewImage() {
+    private get canPreviewImage() {
         return common.isImageUrl(this.value);
     }
-    get canPreviewMarkdown() {
+    private get canPreviewMarkdown() {
         return this.md && this.schema.format === "markdown";
     }
-    get canPreviewCode() {
+    private get canPreviewCode() {
         return this.hljs && this.schema.format === "code";
     }
     get canPreview() {
@@ -112,9 +112,6 @@ export class StringEditorComponent {
         return common.getTitle(this.title, this.schema.title);
     }
 
-    validate() {
-        this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
-    }
     toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;
         this.validate();
@@ -125,5 +122,8 @@ export class StringEditorComponent {
     }
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
+    }
+    private validate() {
+        this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale);
     }
 }
