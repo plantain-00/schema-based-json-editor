@@ -1,5 +1,10 @@
 const webpackConfig = require('./webpack.config.js')
 
+const ChromiumRevision = require('puppeteer/package.json').puppeteer.chromium_revision
+const Downloader = require('puppeteer/utils/ChromiumDownloader')
+const revisionInfo = Downloader.revisionInfo(Downloader.currentPlatform(), ChromiumRevision)
+process.env.CHROME_BIN = revisionInfo.executablePath
+
 module.exports = function (karma) {
   const config = {
     basePath: '',
@@ -12,7 +17,7 @@ module.exports = function (karma) {
     colors: true,
     logLevel: karma.LOG_INFO,
     autoWatch: true,
-    browsers: ['Firefox'],
+    browsers: ['ChromeHeadless'],
     singleRun: true,
     concurrency: Infinity,
     webpack: webpackConfig,
@@ -21,8 +26,8 @@ module.exports = function (karma) {
     }
   }
 
-  if (!process.env.TRAVIS) {
-    config.browsers.push('Chrome')
+  if (!process.env.APPVEYOR) {
+    config.browsers.push('Firefox')
   }
 
   karma.set(config)

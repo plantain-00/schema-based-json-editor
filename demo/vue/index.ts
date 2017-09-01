@@ -2,6 +2,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { schema, schemaSchema } from "../schema";
 
+// tslint:disable-next-line:no-duplicate-imports
 import "../../dist/vue";
 import { ValidityValue, ValueType, Locale } from "../../dist/vue";
 

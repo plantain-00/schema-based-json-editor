@@ -4,11 +4,8 @@ import "zone.js/dist/zone";
 import "tslib";
 
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-import { enableProdMode } from "@angular/core";
 
 enableProdMode();
-
-import { Component, ChangeDetectionStrategy } from "@angular/core";
 
 import { schema, schemaSchema } from "../schema";
 
@@ -87,7 +84,7 @@ class MainComponent {
     }
 }
 
-import { NgModule } from "@angular/core";
+import { NgModule, Component, ChangeDetectionStrategy, enableProdMode } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { JSONEditorModule, ValidityValue, ValueType, Locale } from "../../dist/angular";
@@ -104,7 +101,7 @@ function start() {
 }
 
 if (navigator.language === "zh-CN") {
-    import ("../../dist/locales/" + navigator.language + ".js").then(module => {
+    import("../../dist/locales/" + navigator.language + ".js").then(module => {
         locale = module.locale;
         start();
     }, error => {
