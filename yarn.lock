@@ -2693,7 +2693,7 @@ markdown-it@8.4.0:
     mdurl "^1.0.1"
     uc.micro "^1.0.3"
 
-markdown-tip@4.1:
+markdown-tip@4:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-4.1.0.tgz#13698708ddf24e778342678430805988b1d9b9e9"
   dependencies:
@@ -3765,7 +3765,7 @@ safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, 
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-select2-component@3.1.6:
+select2-component@3:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-3.1.6.tgz#00ec7e42da27dcd921ace8aee1dc66306afeb9d6"
   dependencies:
