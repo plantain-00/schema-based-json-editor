@@ -2,59 +2,59 @@
 # yarn lockfile v1
 
 
-"@angular/common@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.4.0-RC.0.tgz#ad2d0853a62d2e87bba0bdd6588da6fa5f2dabb8"
+"@angular/common@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.4.1.tgz#d1aea2ccebddd2dfaf7137f55760d45638ada24a"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/compiler-cli@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-4.4.0-RC.0.tgz#d2daf086782a280210055a221f60d162b4fe627a"
+"@angular/compiler-cli@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-4.4.1.tgz#17b3be903efe1ed3bb2b1e29140634b500fdb265"
   dependencies:
     "@angular/tsc-wrapped" "4.3.6"
     minimist "^1.2.0"
     reflect-metadata "^0.1.2"
 
-"@angular/compiler@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.4.0-RC.0.tgz#a22a9eb7d0cfd04c01558b4b6ff144e4f20434ee"
+"@angular/compiler@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.4.1.tgz#ece6a333f8e57e819679f2a4034f807564b9cc40"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/core@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.4.0-RC.0.tgz#6f1b05d58dbe82e2cd329cd3dc0666f36c60c38f"
+"@angular/core@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.4.1.tgz#a3c5b80452448535253d2eab17b60601d83cc012"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/forms@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-4.4.0-RC.0.tgz#2c6d5bdb7d46fe6eb0416e161962b427265c3f7b"
+"@angular/forms@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-4.4.1.tgz#2a3644a3f84b96aad240ac6caa74d52bf3ada24a"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/http@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/http/-/http-4.4.0-RC.0.tgz#6baa945fa3a182a6ce82a151af65fc1489f5e1b1"
+"@angular/http@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/http/-/http-4.4.1.tgz#9265d1802673aa5f73ac125f98fce7af8b5fa72c"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser-dynamic@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.4.0-RC.0.tgz#74fea4a8fbd89633209f2af0ca0a71a7a569d835"
+"@angular/platform-browser-dynamic@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.4.1.tgz#951dd7fdb3f5a0e45bc4bf93a2a7e051def24eaf"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-4.4.0-RC.0.tgz#b7c5b8b6388564c74b0510f8750e2d7492413cee"
+"@angular/platform-browser@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-4.4.1.tgz#ce576401976f71d45a23c9a61ac05cef90a70f00"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/router@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-4.4.0-RC.0.tgz#ef6c075f1664a9fe677fa542334707e670461ee0"
+"@angular/router@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/router/-/router-4.4.1.tgz#d2c933c84a8f5077792e77787561ee1e7a4a1a14"
   dependencies:
     tslib "^1.7.1"
 
@@ -64,9 +64,9 @@
   dependencies:
     tsickle "^0.21.0"
 
-"@angular/upgrade@4.4.0-RC.0":
-  version "4.4.0-RC.0"
-  resolved "https://registry.yarnpkg.com/@angular/upgrade/-/upgrade-4.4.0-RC.0.tgz#fce37c6e57e03442235685b16b03f82fc377b6a5"
+"@angular/upgrade@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@angular/upgrade/-/upgrade-4.4.1.tgz#afeec13ea665257181f51ad5d0e7e765673a6be4"
   dependencies:
     tslib "^1.7.1"
 
@@ -121,9 +121,9 @@
   version "9.1.10"
   resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.1.10.tgz#b621f809cd9573b80992b90cffc5788208e3069c"
 
-"@types/jasmine@2.5.54":
-  version "2.5.54"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.54.tgz#a6b5f2ae2afb6e0307774e8c7c608e037d491c63"
+"@types/jasmine@2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.6.0.tgz#997b41a27752b4850af2683bc4a8d8222c25bd02"
 
 "@types/long@^3.0.31":
   version "3.0.32"
@@ -3728,6 +3728,12 @@ rimraf@2, rimraf@2.6.1, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.6.0, rimraf@^2.6
   dependencies:
     glob "^7.0.5"
 
+rimraf@2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
+  dependencies:
+    glob "^7.0.5"
+
 ripemd160@^2.0.0, ripemd160@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-2.0.1.tgz#0f4584295c53a3628af7e6d79aca21ce57d1c6e7"
@@ -3759,9 +3765,9 @@ safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, 
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-select2-component@3.1:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-3.1.5.tgz#15ce104db0dad9e76a1c2f40b3102da7b12c5f97"
+select2-component@3.1.6:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-3.1.6.tgz#00ec7e42da27dcd921ace8aee1dc66306afeb9d6"
   dependencies:
     "@types/node" "*"
     tslib "1"
@@ -4389,9 +4395,9 @@ vue-class-component@5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-5.0.2.tgz#3dcdc005c58c4e88d8ec2d46e01c74f4d90135c8"
 
-vue@2.4.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.4.2.tgz#a9855261f191c978cc0dc1150531b8d08149b58c"
+vue@2.4.4:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.4.4.tgz#ea9550b96a71465fd2b8b17b61673b3561861789"
 
 watch-then-execute@1.0.1:
   version "1.0.1"
@@ -4427,9 +4433,9 @@ webpack-sources@^1.0.1:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
 
-webpack@3.5.6:
-  version "3.5.6"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.5.6.tgz#a492fb6c1ed7f573816f90e00c8fbb5a20cc5c36"
+webpack@3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.6.0.tgz#a89a929fbee205d35a4fa2cc487be9cbec8898bc"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
