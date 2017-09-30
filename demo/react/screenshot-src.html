@@ -31,30 +31,247 @@
 <body>
     <a class="github-fork-ribbon right-bottom" href="https://github.com/plantain-00/schema-based-json-editor" title="Fork me on GitHub" target="_blank" rel="noopener">Fork me on GitHub</a>
     <div id="container">
-        <div data-reactroot=""><a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/react/index.tsx" target="_blank">the source code of the demo</a><br>
+        <div><a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/demo/react/index.tsx" target="_blank">the source code of the demo</a><br>
             <div class="bootstrap3-row-container" style="float: left; margin: 10px; width: 400px; overflow-y: scroll; height: 600px;">
-                <div class="row"><label class="control-label"><!-- react-text: 7 -->Schema:<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 9 --><!-- react-empty: 10 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label>
-                    <textarea
-                        class="form-control" rows="10">{ "type": "object", "title": "GUI:", "description": "a description example", "properties": { "stringExample": { "type": "string", "title": "A string example", "description": "a string description example", "default": "a default string
-                        example", "minLength": 20, "maxLength": 25 }, "booleanExample": { "type": "boolean", "title": "A boolean example", "description": "a boolean description example", "default": true }, "numberExample": { "type": "number", "title":
-                        "A number example", "description": "a number description example", "default": 123.4, "minimum": 10, "exclusiveMinimum": true, "maximum": 1000, "exclusiveMaximum": true }, "integerExample": { "type": "integer", "title": "A integer
-                        example", "description": "a integer description example", "default": 124, "multipleOf": 2 }, "nullExample": { "type": "null", "title": "A null example", "description": "a null description example", "default": null }, "objectExample":
-                        { "type": "object", "title": "A object example", "description": "a object description example", "properties": { "propertyExample1": { "type": "string" }, "propertyExample2": { "type": "number" } }, "default": {}, "required": [
-                        "propertyExample1", "propertyExample2" ] }, "arrayExample": { "type": "array", "title": "A array example", "description": "a array description example", "items": { "type": "string", "maxLength": 15 }, "default": [ "default item
-                        1", "default item 2" ], "minItems": 1, "uniqueItems": true }, "readOnlyExample": { "type": "string", "readonly": true, "default": "abc" }, "readOnlyAndOptionalExample": { "type": "string", "readonly": true, "default": "abc" },
-                        "enumExample": { "type": "string", "enum": [ "enum 1", "enum 2" ] }, "optionalExample": { "type": "string" }, "optionalAndDefaultExample": { "type": "string", "default": "abc" }, "booleanOptionalExample": { "type": "boolean" },
-                        "colorExample": { "type": "string", "format": "color", "default": "#000000" }, "textareaExample": { "type": "string", "format": "textarea" }, "patternExample": { "type": "string", "pattern": "^[A-z]{3}$", "default": "abc" }, "imagePreviewExample":
-                        { "type": "string", "default": "http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg" }, "markdownExample": { "type": "string", "format": "markdown", "default": "###### markdown title and code example\n\n```js\nfunction
-                        foo(bar) {\n console.log(bar);\n}\n```" }, "codeExample": { "type": "string", "format": "code", "default": "function foo(bar) {\n console.log(bar);\n}\n" }, "itemTitleExample": { "type": "array", "items": { "type": "object", "properties":
-                        { "propertyExample1": { "type": "string" }, "propertyExample2": { "type": "number" } }, "required": [ "propertyExample1", "propertyExample2" ], "collapsed": true }, "default": [ { "propertyExample1": "foo", "propertyExample2":
-                        1 }, { "propertyExample1": "bar", "propertyExample2": 2 }, { "propertyExample1": "baz", "propertyExample2": 3 }, { "propertyExample1": "abc", "propertyExample2": 4 }, { "propertyExample1": "def", "propertyExample2": 5 }, { "propertyExample1":
-                        "ghi", "propertyExample2": 6 } ] }, "optionalObjectExample": { "type": "object", "properties": { "propertyExample1": { "type": "string" }, "propertyExample2": { "type": "number" } }, "maxProperties": 1, "minProperties": 0 }, "propertyOrderExample":
-                        { "type": "object", "properties": { "propertyExample1": { "type": "string", "propertyOrder": 3 }, "propertyExample2": { "type": "number", "propertyOrder": 1 }, "propertyExample3": { "type": "number", "propertyOrder": 2 } } }, "collapsedObjectExample":
-                        { "type": "object", "properties": { "propertyExample1": { "type": "string" } }, "collapsed": true } }, "required": [ "stringExample", "booleanExample", "numberExample", "integerExample", "nullExample", "objectExample", "arrayExample",
-                        "readOnlyExample", "enumExample", "colorExample", "textareaExample", "patternExample", "imagePreviewExample", "markdownExample", "codeExample", "performanceExample", "itemTitleExample", "optionalObjectExample", "propertyOrderExample",
-                        "collapsedObjectExample" ] }
-                        </textarea>
-                        <pre><code>{
+                <div class="row"><label class="control-label">Schema:<div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label><textarea class="form-control" rows="10">{
+  "type": "object",
+  "title": "GUI:",
+  "description": "a description example",
+  "properties": {
+    "stringExample": {
+      "type": "string",
+      "title": "A string example",
+      "description": "a string description example",
+      "default": "a default string example",
+      "minLength": 20,
+      "maxLength": 25
+    },
+    "booleanExample": {
+      "type": "boolean",
+      "title": "A boolean example",
+      "description": "a boolean description example",
+      "default": true
+    },
+    "numberExample": {
+      "type": "number",
+      "title": "A number example",
+      "description": "a number description example",
+      "default": 123.4,
+      "minimum": 10,
+      "exclusiveMinimum": true,
+      "maximum": 1000,
+      "exclusiveMaximum": true
+    },
+    "integerExample": {
+      "type": "integer",
+      "title": "A integer example",
+      "description": "a integer description example",
+      "default": 124,
+      "multipleOf": 2
+    },
+    "nullExample": {
+      "type": "null",
+      "title": "A null example",
+      "description": "a null description example",
+      "default": null
+    },
+    "objectExample": {
+      "type": "object",
+      "title": "A object example",
+      "description": "a object description example",
+      "properties": {
+        "propertyExample1": {
+          "type": "string"
+        },
+        "propertyExample2": {
+          "type": "number"
+        }
+      },
+      "default": {},
+      "required": [
+        "propertyExample1",
+        "propertyExample2"
+      ]
+    },
+    "arrayExample": {
+      "type": "array",
+      "title": "A array example",
+      "description": "a array description example",
+      "items": {
+        "type": "string",
+        "maxLength": 15
+      },
+      "default": [
+        "default item 1",
+        "default item 2"
+      ],
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "readOnlyExample": {
+      "type": "string",
+      "readonly": true,
+      "default": "abc"
+    },
+    "readOnlyAndOptionalExample": {
+      "type": "string",
+      "readonly": true,
+      "default": "abc"
+    },
+    "enumExample": {
+      "type": "string",
+      "enum": [
+        "enum 1",
+        "enum 2"
+      ]
+    },
+    "optionalExample": {
+      "type": "string"
+    },
+    "optionalAndDefaultExample": {
+      "type": "string",
+      "default": "abc"
+    },
+    "booleanOptionalExample": {
+      "type": "boolean"
+    },
+    "colorExample": {
+      "type": "string",
+      "format": "color",
+      "default": "#000000"
+    },
+    "textareaExample": {
+      "type": "string",
+      "format": "textarea"
+    },
+    "patternExample": {
+      "type": "string",
+      "pattern": "^[A-z]{3}$",
+      "default": "abc"
+    },
+    "imagePreviewExample": {
+      "type": "string",
+      "default": "http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg"
+    },
+    "markdownExample": {
+      "type": "string",
+      "format": "markdown",
+      "default": "###### markdown title and code example\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```"
+    },
+    "codeExample": {
+      "type": "string",
+      "format": "code",
+      "default": "function foo(bar) {\n    console.log(bar);\n}\n"
+    },
+    "itemTitleExample": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "propertyExample1": {
+            "type": "string"
+          },
+          "propertyExample2": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "propertyExample1",
+          "propertyExample2"
+        ],
+        "collapsed": true
+      },
+      "default": [
+        {
+          "propertyExample1": "foo",
+          "propertyExample2": 1
+        },
+        {
+          "propertyExample1": "bar",
+          "propertyExample2": 2
+        },
+        {
+          "propertyExample1": "baz",
+          "propertyExample2": 3
+        },
+        {
+          "propertyExample1": "abc",
+          "propertyExample2": 4
+        },
+        {
+          "propertyExample1": "def",
+          "propertyExample2": 5
+        },
+        {
+          "propertyExample1": "ghi",
+          "propertyExample2": 6
+        }
+      ]
+    },
+    "optionalObjectExample": {
+      "type": "object",
+      "properties": {
+        "propertyExample1": {
+          "type": "string"
+        },
+        "propertyExample2": {
+          "type": "number"
+        }
+      },
+      "maxProperties": 1,
+      "minProperties": 0
+    },
+    "propertyOrderExample": {
+      "type": "object",
+      "properties": {
+        "propertyExample1": {
+          "type": "string",
+          "propertyOrder": 3
+        },
+        "propertyExample2": {
+          "type": "number",
+          "propertyOrder": 1
+        },
+        "propertyExample3": {
+          "type": "number",
+          "propertyOrder": 2
+        }
+      }
+    },
+    "collapsedObjectExample": {
+      "type": "object",
+      "properties": {
+        "propertyExample1": {
+          "type": "string"
+        }
+      },
+      "collapsed": true
+    }
+  },
+  "required": [
+    "stringExample",
+    "booleanExample",
+    "numberExample",
+    "integerExample",
+    "nullExample",
+    "objectExample",
+    "arrayExample",
+    "readOnlyExample",
+    "enumExample",
+    "colorExample",
+    "textareaExample",
+    "patternExample",
+    "imagePreviewExample",
+    "markdownExample",
+    "codeExample",
+    "performanceExample",
+    "itemTitleExample",
+    "optionalObjectExample",
+    "propertyOrderExample",
+    "collapsedObjectExample"
+  ]
+}</textarea>
+                    <pre><code>{
   <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
   <span class="hljs-attr">"title"</span>: <span class="hljs-string">"GUI:"</span>,
   <span class="hljs-attr">"description"</span>: <span class="hljs-string">"a description example"</span>,
@@ -292,118 +509,62 @@
     <span class="hljs-string">"collapsedObjectExample"</span>
   ]
 }</code></pre>
-                        <!-- react-empty: 16 -->
-                        <!-- react-empty: 17 -->
                 </div>
             </div>
             <div class="bootstrap3-row-container" style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px;">
                 <div class="row">
-                    <h3>
-                        <!-- react-text: 21 -->GUI:
-                        <!-- /react-text -->
-                        <div class="btn-group" style="margin-left: 10px;">
-                            <!-- react-empty: 23 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button>
-                            <!-- react-empty: 26 -->
-                        </div>
+                    <h3>GUI:
+                        <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div>
                     </h3>
                     <p class="help-block">a description example</p>
                     <div class="well bootstrap3-row-container">
                         <div class="row"><input class="form-control" value=""></div>
-                        <div class="row"><label class="control-label"><!-- react-text: 33 -->optionalAndDefaultExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 38 -->not exists<!-- /react-text --></label></div>
-                        <!-- react-empty: 39 -->
-                        <!-- react-empty: 40 -->
+                        <div class="row"><label class="control-label">optionalAndDefaultExample<div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on">not exists</label></div>
                     </div>
                     </label>
-                    <!-- react-empty: 41 -->
-                    <!-- react-empty: 42 -->
                 </div>
-                <div class="row"><label class="control-label"><!-- react-text: 45 -->A string example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 47 --><!-- react-empty: 48 --><!-- react-empty: 49 --></div></label><input class="form-control"
-                        value="a default string example">
+                <div class="row"><label class="control-label">A string example<div class="btn-group" style="margin-left: 10px;"></div></label><input class="form-control" value="a default string example">
                     <p class="help-block">a string description example</p>
-                    <!-- react-empty: 52 -->
                 </div>
-                <div class="row"><label class="control-label"><!-- react-text: 55 -->A number example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 57 --><!-- react-empty: 58 --></div></label><input type="number" class="form-control"
-                        value="123.4">
+                <div class="row"><label class="control-label">A number example<div class="btn-group" style="margin-left: 10px;"></div></label><input type="number" class="form-control" value="123.4">
                     <p class="help-block">a number description example</p>
-                    <!-- react-empty: 61 -->
                 </div>
-                <div class="row"><label class="control-label"><!-- react-text: 64 -->A integer example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 66 --><!-- react-empty: 67 --></div></label><input type="number" class="form-control"
-                        value="124">
+                <div class="row"><label class="control-label">A integer example<div class="btn-group" style="margin-left: 10px;"></div></label><input type="number" class="form-control" value="124">
                     <p class="help-block">a integer description example</p>
-                    <!-- react-empty: 70 -->
                 </div>
-                <div class="row"><label class="control-label"><!-- react-text: 73 -->A null example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 75 --><!-- react-empty: 76 --></div></label>
+                <div class="row"><label class="control-label">A null example<div class="btn-group" style="margin-left: 10px;"></div></label>
                     <p class="help-block">a null description example</p>
                 </div>
                 <div class="row">
-                    <h3>
-                        <!-- react-text: 80 -->A object example
-                        <!-- /react-text -->
-                        <div class="btn-group" style="margin-left: 10px;">
-                            <!-- react-empty: 82 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button>
-                            <!-- react-empty: 85 -->
-                        </div>
+                    <h3>A object example
+                        <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div>
                     </h3>
                     <p class="help-block">a object description example</p>
                     <div class="well bootstrap3-row-container">
-                        <div class="row"><label class="control-label"><!-- react-text: 90 -->propertyExample1<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 92 --><!-- react-empty: 93 --><!-- react-empty: 94 --></div></label>
-                            <input
-                                class="form-control" value="">
-                                <!-- react-empty: 96 -->
-                                <!-- react-empty: 97 -->
-                        </div>
-                        <div class="row"><label class="control-label"><!-- react-text: 100 -->propertyExample2<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 102 --><!-- react-empty: 103 --></div></label><input type="number" class="form-control"
-                                value="0">
-                            <!-- react-empty: 105 -->
-                            <!-- react-empty: 106 -->
-                        </div>
+                        <div class="row"><label class="control-label">propertyExample1<div class="btn-group" style="margin-left: 10px;"></div></label><input class="form-control" value=""></div>
+                        <div class="row"><label class="control-label">propertyExample2<div class="btn-group" style="margin-left: 10px;"></div></label><input type="number" class="form-control" value="0"></div>
                     </div>
-                    <!-- react-empty: 107 -->
                 </div>
                 <div class="row">
-                    <h3>
-                        <!-- react-text: 110 -->A array example
-                        <!-- /react-text -->
-                        <div class="btn-group" style="margin-left: 10px;">
-                            <!-- react-empty: 112 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><button class="btn btn-default"><i class="fa fa-plus"></i></button>
-                            <!-- react-empty: 117 -->
-                        </div>
+                    <h3>A array example
+                        <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><button class="btn btn-default"><i class="fa fa-plus"></i></button></div>
                     </h3>
                     <p class="help-block">a array description example</p>
                     <div class="well bootstrap3-row-container">
                         <div data-index="0" class="well bootstrap3-row-container">
-                            <div class="row"><label class="control-label"><!-- react-text: 123 -->0<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 125 --><button class="btn btn-default"><i class="fa fa-times"></i></button><!-- react-empty: 128 --></div></label>
-                                <input
-                                    class="form-control" value="default item 1">
-                                    <!-- react-empty: 130 -->
-                                    <!-- react-empty: 131 -->
-                            </div>
+                            <div class="row"><label class="control-label">0<div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-times"></i></button></div></label><input class="form-control" value="default item 1"></div>
                         </div>
                         <div data-index="1" class="well bootstrap3-row-container">
-                            <div class="row"><label class="control-label"><!-- react-text: 135 -->1<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 137 --><button class="btn btn-default"><i class="fa fa-times"></i></button><!-- react-empty: 140 --></div></label>
-                                <input
-                                    class="form-control" value="default item 2">
-                                    <!-- react-empty: 142 -->
-                                    <!-- react-empty: 143 -->
-                            </div>
+                            <div class="row"><label class="control-label">1<div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-times"></i></button></div></label><input class="form-control" value="default item 2"></div>
                         </div>
                     </div>
-                    <!-- react-empty: 144 -->
                 </div>
-                <div class="row"><label class="control-label"><!-- react-text: 147 -->readOnlyExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 149 --><!-- react-empty: 150 --><!-- react-empty: 151 --></div></label><input class="form-control"
-                        readonly="" disabled="" value="abc">
-                    <!-- react-empty: 153 -->
-                    <!-- react-empty: 154 -->
-                </div>
-                <div class="row"><label class="control-label"><!-- react-text: 157 -->readOnlyAndOptionalExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" disabled="" value="on"><!-- react-text: 162 -->not exists<!-- /react-text --></label></div>
-                <!-- react-empty: 163 -->
-                <!-- react-empty: 164 -->
+                <div class="row"><label class="control-label">readOnlyExample<div class="btn-group" style="margin-left: 10px;"></div></label><input class="form-control" readonly="" disabled="" value="abc"></div>
+                <div class="row"><label class="control-label">readOnlyAndOptionalExample<div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" disabled="" value="on">not exists</label></div>
             </div>
             </label>
-            <!-- react-empty: 165 -->
-            <!-- react-empty: 166 -->
         </div>
-        <div class="row"><label class="control-label"><!-- react-text: 169 -->enumExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 171 --><!-- react-empty: 172 --><!-- react-empty: 173 --></div></label>
+        <div class="row"><label class="control-label">enumExample<div class="btn-group" style="margin-left: 10px;"></div></label>
             <div class="select2 select2-container select2-container--default   select2-container--below select2-container--focus">
                 <div class="selection">
                     <div class="select2-selection select2-selection--single" role="combobox"><span class="select2-selection__rendered" title="enum 1">enum 1</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></div>
@@ -420,270 +581,169 @@
                     </div>
                 </div>
             </div>
-            <!-- react-empty: 188 -->
-            <!-- react-empty: 189 -->
         </div>
-        <div class="row"><label class="control-label"><!-- react-text: 192 -->optionalExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 197 -->not exists<!-- /react-text --></label></div>
-        <!-- react-empty: 198 -->
-        <!-- react-empty: 199 -->
+        <div class="row"><label class="control-label">optionalExample<div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on">not exists</label></div>
     </div>
     </label>
-    <!-- react-empty: 200 -->
-    <!-- react-empty: 201 -->
     </div>
-    <div class="row"><label class="control-label"><!-- react-text: 204 -->A boolean example<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 206 --><!-- react-empty: 207 --></div></label>
+    <div class="row"><label class="control-label">A boolean example<div class="btn-group" style="margin-left: 10px;"></div></label>
         <div>
-            <div class="radio-inline"><label><input type="radio" value="on"><!-- react-text: 212 -->true<!-- /react-text --></label></div>
-            <div class="radio-inline"><label><input type="radio" value="on"><!-- react-text: 216 -->false<!-- /react-text --></label></div>
+            <div class="radio-inline"><label><input type="radio" value="on">true</label></div>
+            <div class="radio-inline"><label><input type="radio" value="on">false</label></div>
         </div>
         <p class="help-block">a boolean description example</p>
     </div>
-    <div class="row"><label class="control-label"><!-- react-text: 220 -->booleanOptionalExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 225 -->not exists<!-- /react-text --></label></div>
-    <!-- react-empty: 226 -->
+    <div class="row"><label class="control-label">booleanOptionalExample<div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on">not exists</label></div>
     </div>
     </label>
-    <!-- react-empty: 227 -->
     </div>
-    <div class="row"><label class="control-label"><!-- react-text: 230 -->colorExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 232 --><!-- react-empty: 233 --><!-- react-empty: 234 --></div></label><input type="color" class="form-control"
-            value="#000000">
-        <!-- react-empty: 236 -->
-        <!-- react-empty: 237 -->
-    </div>
-    <div class="row"><label class="control-label"><!-- react-text: 240 -->textareaExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 242 --><!-- react-empty: 243 --><!-- react-empty: 244 --></div></label><textarea class="form-control"
-            rows="10"></textarea>
-        <!-- react-empty: 246 -->
-        <!-- react-empty: 247 -->
-    </div>
-    <div class="row"><label class="control-label"><!-- react-text: 250 -->patternExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 252 --><!-- react-empty: 253 --><!-- react-empty: 254 --></div></label><input class="form-control"
-            value="abc">
-        <!-- react-empty: 256 -->
-        <!-- react-empty: 257 -->
-    </div>
-    <div class="row"><label class="control-label"><!-- react-text: 260 -->imagePreviewExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 262 --><!-- react-empty: 263 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label>
-        <input
-            class="form-control" value="http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg"><img src="http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg" style="display: block; height: auto; margin: 6px 0px; max-width: 100%;">
-            <!-- react-empty: 268 -->
-            <!-- react-empty: 269 -->
-    </div>
-    <div class="row"><label class="control-label"><!-- react-text: 272 -->markdownExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 274 --><!-- react-empty: 275 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label>
-        <textarea
-            class="form-control" rows="10">###### markdown title and code example ```js function foo(bar) { console.log(bar); } ```
-            </textarea>
-            <div class="markdown-tip">
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Heading</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Horizontal Rules</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Bold</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Italic</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Strikethrough</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Blockquote</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Unordered List</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Ordered List</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Inline Code</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Indented Code</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Block Code</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Table</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Link</span></div>
-                <div class="markdown-tip-item"><span class="markdown-tip-item-text">Image</span></div>
-            </div>
-            <div>
-                <h6>markdown title and code example</h6>
-                <pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">bar</span>) </span>{
+    <div class="row"><label class="control-label">colorExample<div class="btn-group" style="margin-left: 10px;"></div></label><input type="color" class="form-control" value="#000000"></div>
+    <div class="row"><label class="control-label">textareaExample<div class="btn-group" style="margin-left: 10px;"></div></label><textarea class="form-control" rows="10"></textarea></div>
+    <div class="row"><label class="control-label">patternExample<div class="btn-group" style="margin-left: 10px;"></div></label><input class="form-control" value="abc"></div>
+    <div class="row"><label class="control-label">imagePreviewExample<div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label><input class="form-control" value="http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg">
+        <img
+            src="http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg" style="display: block; height: auto; margin: 6px 0px; max-width: 100%;"></div>
+    <div class="row"><label class="control-label">markdownExample<div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label><textarea class="form-control" rows="10">###### markdown title and code example
+
+```js
+function foo(bar) {
+    console.log(bar);
+}
+```</textarea>
+        <div class="markdown-tip">
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Heading</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Horizontal Rules</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Bold</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Italic</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Strikethrough</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Blockquote</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Unordered List</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Ordered List</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Inline Code</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Indented Code</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Block Code</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Table</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Link</span></div>
+            <div class="markdown-tip-item"><span class="markdown-tip-item-text">Image</span></div>
+        </div>
+        <div>
+            <h6>markdown title and code example</h6>
+            <pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">bar</span>) </span>{
     <span class="hljs-built_in">console</span>.log(bar);
 }
 </code></pre>
-            </div>
-            <!-- react-empty: 309 -->
-            <!-- react-empty: 310 -->
+        </div>
     </div>
-    <div class="row"><label class="control-label"><!-- react-text: 313 -->codeExample<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><!-- react-empty: 315 --><!-- react-empty: 316 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label>
-        <textarea
-            class="form-control" rows="10">function foo(bar) { console.log(bar); }
-            </textarea>
-            <pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">bar</span>) </span>{
+    <div class="row"><label class="control-label">codeExample<div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div></label><textarea class="form-control" rows="10">function foo(bar) {
+    console.log(bar);
+}
+</textarea>
+        <pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">bar</span>) </span>{
     <span class="hljs-built_in">console</span>.log(bar);
 }
 </code></pre>
-            <!-- react-empty: 322 -->
-            <!-- react-empty: 323 -->
     </div>
     <div class="row">
-        <h3>
-            <!-- react-text: 326 -->itemTitleExample
-            <!-- /react-text -->
-            <div class="btn-group" style="margin-left: 10px;">
-                <!-- react-empty: 328 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><button class="btn btn-default"><i class="fa fa-plus"></i></button>
-                <!-- react-empty: 333 -->
-            </div>
+        <h3>itemTitleExample
+            <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button><button class="btn btn-default"><i class="fa fa-plus"></i></button></div>
         </h3>
         <p class="help-block"></p>
         <div class="well bootstrap3-row-container">
             <div class="row"><input class="form-control" value=""></div>
             <div data-index="0" class="well bootstrap3-row-container">
                 <div class="row">
-                    <h3>
-                        <!-- react-text: 341 -->foo
-                        <!-- /react-text -->
-                        <div class="btn-group" style="margin-left: 10px;">
-                            <!-- react-empty: 343 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
+                    <h3>foo
+                        <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
                     </h3>
-                    <!-- react-empty: 348 -->
                     <div class="well bootstrap3-row-container"></div>
-                    <!-- react-empty: 350 -->
                 </div>
             </div>
             <div data-index="1" class="well bootstrap3-row-container">
                 <div class="row">
-                    <h3>
-                        <!-- react-text: 354 -->bar
-                        <!-- /react-text -->
-                        <div class="btn-group" style="margin-left: 10px;">
-                            <!-- react-empty: 356 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
+                    <h3>bar
+                        <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
                     </h3>
-                    <!-- react-empty: 361 -->
                     <div class="well bootstrap3-row-container"></div>
-                    <!-- react-empty: 363 -->
                 </div>
             </div>
             <div data-index="2" class="well bootstrap3-row-container">
                 <div class="row">
-                    <h3>
-                        <!-- react-text: 367 -->baz
-                        <!-- /react-text -->
-                        <div class="btn-group" style="margin-left: 10px;">
-                            <!-- react-empty: 369 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
+                    <h3>baz
+                        <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
                     </h3>
-                    <!-- react-empty: 374 -->
                     <div class="well bootstrap3-row-container"></div>
-                    <!-- react-empty: 376 -->
                 </div>
             </div>
             <div data-index="3" class="well bootstrap3-row-container">
                 <div class="row">
-                    <h3>
-                        <!-- react-text: 380 -->abc
-                        <!-- /react-text -->
-                        <div class="btn-group" style="margin-left: 10px;">
-                            <!-- react-empty: 382 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
+                    <h3>abc
+                        <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
                     </h3>
-                    <!-- react-empty: 387 -->
                     <div class="well bootstrap3-row-container"></div>
-                    <!-- react-empty: 389 -->
                 </div>
             </div>
             <div data-index="4" class="well bootstrap3-row-container">
                 <div class="row">
-                    <h3>
-                        <!-- react-text: 393 -->def
-                        <!-- /react-text -->
-                        <div class="btn-group" style="margin-left: 10px;">
-                            <!-- react-empty: 395 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
+                    <h3>def
+                        <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
                     </h3>
-                    <!-- react-empty: 400 -->
                     <div class="well bootstrap3-row-container"></div>
-                    <!-- react-empty: 402 -->
                 </div>
             </div>
             <div data-index="5" class="well bootstrap3-row-container">
                 <div class="row">
-                    <h3>
-                        <!-- react-text: 406 -->ghi
-                        <!-- /react-text -->
-                        <div class="btn-group" style="margin-left: 10px;">
-                            <!-- react-empty: 408 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
+                    <h3>ghi
+                        <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button><button class="btn btn-default"><i class="fa fa-times"></i></button></div>
                     </h3>
-                    <!-- react-empty: 413 -->
                     <div class="well bootstrap3-row-container"></div>
-                    <!-- react-empty: 415 -->
                 </div>
             </div>
         </div>
-        <!-- react-empty: 416 -->
     </div>
     <div class="row">
-        <h3>
-            <!-- react-text: 419 -->optionalObjectExample
-            <!-- /react-text -->
-            <div class="btn-group" style="margin-left: 10px;">
-                <!-- react-empty: 421 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button>
-                <!-- react-empty: 424 -->
-            </div>
+        <h3>optionalObjectExample
+            <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div>
         </h3>
-        <!-- react-empty: 425 -->
         <div class="well bootstrap3-row-container">
-            <div class="row"><label class="control-label"><!-- react-text: 429 -->propertyExample1<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 434 -->not exists<!-- /react-text --></label></div>
-            <!-- react-empty: 435 -->
-            <!-- react-empty: 436 -->
+            <div class="row"><label class="control-label">propertyExample1<div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on">not exists</label></div>
         </div>
         </label>
-        <!-- react-empty: 437 -->
-        <!-- react-empty: 438 -->
     </div>
-    <div class="row"><label class="control-label"><!-- react-text: 441 -->propertyExample2<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 446 -->not exists<!-- /react-text --></label></div>
-    <!-- react-empty: 447 -->
+    <div class="row"><label class="control-label">propertyExample2<div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on">not exists</label></div>
     </div>
     </label>
-    <!-- react-empty: 448 -->
-    <!-- react-empty: 449 -->
     </div>
     </div>
-    <!-- react-empty: 450 -->
     </div>
     <div class="row">
-        <h3>
-            <!-- react-text: 453 -->propertyOrderExample
-            <!-- /react-text -->
-            <div class="btn-group" style="margin-left: 10px;">
-                <!-- react-empty: 455 --><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button>
-                <!-- react-empty: 458 -->
-            </div>
+        <h3>propertyOrderExample
+            <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-down"></i></button></div>
         </h3>
-        <!-- react-empty: 459 -->
         <div class="well bootstrap3-row-container">
-            <div class="row"><label class="control-label"><!-- react-text: 463 -->propertyExample2<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 468 -->not exists<!-- /react-text --></label></div>
-            <!-- react-empty: 469 -->
+            <div class="row"><label class="control-label">propertyExample2<div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on">not exists</label></div>
         </div>
         </label>
-        <!-- react-empty: 470 -->
-        <!-- react-empty: 471 -->
     </div>
-    <div class="row"><label class="control-label"><!-- react-text: 474 -->propertyExample3<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 479 -->not exists<!-- /react-text --></label></div>
-    <!-- react-empty: 480 -->
+    <div class="row"><label class="control-label">propertyExample3<div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on">not exists</label></div>
     </div>
     </label>
-    <!-- react-empty: 481 -->
-    <!-- react-empty: 482 -->
     </div>
-    <div class="row"><label class="control-label"><!-- react-text: 485 -->propertyExample1<!-- /react-text --><div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on"><!-- react-text: 490 -->not exists<!-- /react-text --></label></div>
-    <!-- react-empty: 491 -->
-    <!-- react-empty: 492 -->
+    <div class="row"><label class="control-label">propertyExample1<div class="btn-group" style="margin-left: 10px;"><div class="checkbox pull-left"><label><input type="checkbox" value="on">not exists</label></div>
     </div>
     </label>
-    <!-- react-empty: 493 -->
-    <!-- react-empty: 494 -->
     </div>
     </div>
-    <!-- react-empty: 495 -->
     </div>
     <div class="row">
-        <h3>
-            <!-- react-text: 498 -->collapsedObjectExample
-            <!-- /react-text -->
-            <div class="btn-group" style="margin-left: 10px;">
-                <!-- react-empty: 500 --><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button>
-                <!-- react-empty: 503 -->
-            </div>
+        <h3>collapsedObjectExample
+            <div class="btn-group" style="margin-left: 10px;"><button class="btn btn-default"><i class="fa fa-caret-square-o-right"></i></button></div>
         </h3>
-        <!-- react-empty: 504 -->
         <div class="well bootstrap3-row-container"></div>
-        <!-- react-empty: 506 -->
     </div>
     </div>
-    <!-- react-empty: 507 -->
     </div>
     </div>
-    <div style="float: left; margin: 10px; width: 400px; overflow-y: scroll; height: 600px;">
-        <!-- react-text: 509 -->Value:
-        <!-- /react-text -->
+    <div style="float: left; margin: 10px; width: 400px; overflow-y: scroll; height: 600px;">Value:
         <pre style="border-color: black;"><code>{
   <span class="hljs-attr">"stringExample"</span>: <span class="hljs-string">"a default string example"</span>,
   <span class="hljs-attr">"booleanExample"</span>: <span class="hljs-literal">true</span>,
@@ -739,9 +799,9 @@
     </div>
     </div>
     </div>
-    <script src="./vendor.bundle-609fd9c298948eb9b082386c2bdb8190.js" crossorigin="anonymous" integrity="sha256-LiOx+BBsZUGT5tlxXBGX747erv+oTQz4eZ6hqR/QLhQ="></script>
-    <script src="./editor.bundle-73b3d8012fc143534ccceea82009fce8.js" crossorigin="anonymous" integrity="sha256-rBTajH/BzKaBzQZu5uganI5XuNu0sJs1aYDuijI6mSI="></script>
-    <script src="./index.bundle-f1e9e0b4fd3747a5e86cf34c4088777e.js" crossorigin="anonymous" integrity="sha256-rlUGcDV9qG5qmhyMaxK36glOFrqkmG+wtgDpYfF38V8="></script>
+    <script src="./vendor.bundle-97724a4f2c8f0d52b333b09e5f758109.js" crossorigin="anonymous" integrity="sha256-+uIv76L4ebDUYnd1sHCPKHU20lue/aCMJsZR5PY3vsg="></script>
+    <script src="./editor.bundle-ef1f6ef6193013d5ebb2ff8e3ffb5262.js" crossorigin="anonymous" integrity="sha256-PehMFmwn7PirN4xC9TZv4VIRPAZj9CoErjJR1aZaRbA="></script>
+    <script src="./index.bundle-3044dd1c18c6ad053b0fcd37f91be4f9.js" crossorigin="anonymous" integrity="sha256-vrZVnI0HV+YGTdtlvu5uoymIX3tt3cohiAElq+u8tdM="></script>
 </body>
 
 </html>
