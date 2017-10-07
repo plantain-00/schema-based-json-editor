@@ -71,7 +71,7 @@ class Main extends React.Component<{}, {}> {
 }
 
 function start() {
-    ReactDOM.render(<Main />, document.getElementById("container"));
+    ReactDOM.render(<Main /> as any, document.getElementById("container"));
 }
 
 if (navigator.language === "zh-CN") {
