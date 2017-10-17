@@ -76,7 +76,7 @@
     "markdown-it": "8.4.0",
     "mkdirp": "0.5.1",
     "no-unused-export": "1.2.7",
-    "puppeteer": "0.11.0",
+    "puppeteer": "0.12.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "rev-static": "3.4.1",
