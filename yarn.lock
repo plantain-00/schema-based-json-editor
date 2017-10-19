@@ -145,9 +145,9 @@
   version "7.0.43"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.43.tgz#a187e08495a075f200ca946079c914e1a5fe962c"
 
-"@types/puppeteer@0.10.2":
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-0.10.2.tgz#b285c17e7ce5a006f7506e4dc75aabb20d06704d"
+"@types/puppeteer@0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-0.12.0.tgz#ba48be19d08abf7774192304a5cae5ce8e519481"
   dependencies:
     "@types/node" "*"
 

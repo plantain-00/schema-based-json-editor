@@ -53,7 +53,7 @@
     "@angular/router": "4.4.4",
     "@angular/upgrade": "4.4.4",
     "@types/jasmine": "2.6.0",
-    "@types/puppeteer": "0.10.2",
+    "@types/puppeteer": "0.12.0",
     "@types/react": "16.0.10",
     "@types/react-dom": "16.0.1",
     "bootstrap": "3.3.7",
