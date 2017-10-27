@@ -559,17 +559,19 @@ export function initializeMarkdown(markdownit: MarkdownItType, hljs: HLJS | unde
     const md = markdownit({
         linkify: true,
         highlight: (str: string, lang: string) => {
-            if (lang && hljs.getLanguage(lang)) {
-                try {
-                    return `<pre><code class="hljs ${lang}">${hljs.highlight(lang, str).value}</code></pre>`;
-                } catch (error) {
-                    printInConsole(error);
-                }
-            } else {
-                try {
-                    return `<pre><code class="hljs">${hljs.highlightAuto(str).value}</code></pre>`;
-                } catch (error) {
-                    printInConsole(error);
+            if (hljs) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return `<pre><code class="hljs ${lang}">${hljs.highlight(lang, str).value}</code></pre>`;
+                    } catch (error) {
+                        printInConsole(error);
+                    }
+                } else {
+                    try {
+                        return `<pre><code class="hljs">${hljs.highlightAuto(str).value}</code></pre>`;
+                    } catch (error) {
+                        printInConsole(error);
+                    }
                 }
             }
             return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`;
