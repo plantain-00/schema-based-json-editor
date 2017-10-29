@@ -2,7 +2,7 @@ import * as React from "react";
 import * as common from "./common";
 export * from "./common";
 import { Editor } from "./react/editor";
-import { Dragula, MarkdownIt } from "./libs";
+import { Dragula, MarkdownItType, MarkdownIt } from "./libs";
 
 /**
  * @public
@@ -16,7 +16,7 @@ export type Props = {
     locale?: common.Locale | null;
     readonly?: boolean;
     dragula?: Dragula;
-    markdownit?: any;
+    markdownit?: MarkdownItType;
     hljs?: typeof hljs;
     forceHttps?: boolean;
 };

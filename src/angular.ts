@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, NgModule } from "@angular/core"
 import { CommonModule } from "@angular/common";
 import * as common from "./common";
 export * from "./common";
-import { Dragula, MarkdownIt } from "./libs";
+import { Dragula, MarkdownItType, MarkdownIt } from "./libs";
 import { angularTemplateHtml } from "./angular-variables";
 import { MarkdownTipModule } from "markdown-tip/angular";
 
@@ -31,7 +31,7 @@ export class JSONEditorComponent {
     @Input()
     dragula?: Dragula;
     @Input()
-    markdownit?: MarkdownIt;
+    markdownit?: MarkdownItType;
     @Input()
     hljs?: typeof hljs;
     @Input()

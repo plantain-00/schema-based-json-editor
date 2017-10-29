@@ -552,7 +552,7 @@ function printInConsole(message: string) {
     console.log(message);
 }
 
-export function initializeMarkdown(markdownit: MarkdownItType, hljs: HLJS | undefined, forceHttps: boolean | undefined) {
+export function initializeMarkdown(markdownit: MarkdownItType | undefined, hljs: HLJS | undefined, forceHttps: boolean | undefined) {
     if (!markdownit) {
         return undefined;
     }
