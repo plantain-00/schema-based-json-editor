@@ -87,7 +87,6 @@
     "typescript": "2.5.3",
     "vue": "2.5.2",
     "vue-class-component": "6.0.0",
-    "watch-then-execute": "1.0.2",
     "webpack": "3.8.1",
     "zone.js": "0.8.18"
   }

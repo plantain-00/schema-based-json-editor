@@ -3,6 +3,13 @@ const { Service, execAsync } = require('clean-scripts')
 const tsFiles = `"src/**/*.ts" "src/**/*.tsx" "spec/**/*.ts" "demo/**/*.ts" "demo/**/*.tsx" "screenshots/**/*.ts"`
 const jsFiles = `"*.config.js" "demo/*.config.js" "spec/**/*.config.js"`
 
+const vueTemplateCommand = `file2variable-cli src/vue/*.template.html src/vue.template.html -o src/vue-variables.ts --html-minify --base src`
+const angularTemplateCommand = `file2variable-cli src/angular/*.template.html src/angular.template.html -o src/angular-variables.ts --html-minify --base src`
+const ngcSrcCommand = `ngc -p src`
+const tscDemoCommand = `tsc -p demo`
+const webpackCommand = `webpack --display-modules --config demo/webpack.config.js`
+const revStaticCommand = `rev-static --config demo/rev-static.config.js`
+
 module.exports = {
   build: [
     `rimraf dist`,
@@ -24,16 +31,16 @@ module.exports = {
         {
           js: [
             {
-              vue: `file2variable-cli src/vue/*.template.html src/vue.template.html -o src/vue-variables.ts --html-minify --base src`,
-              angular: `file2variable-cli src/angular/*.template.html src/angular.template.html -o src/angular-variables.ts --html-minify --base src`
+              vue: vueTemplateCommand,
+              angular: angularTemplateCommand
             },
-            `ngc -p src`,
-            `tsc -p demo`,
-            `webpack --display-modules --config demo/webpack.config.js`
+            ngcSrcCommand,
+            tscDemoCommand,
+            webpackCommand
           ],
           clean: `rimraf demo/**/*.bundle-*.js`
         },
-        `rev-static --config demo/rev-static.config.js`
+        revStaticCommand
       ]
     }
   ],
@@ -59,12 +66,12 @@ module.exports = {
   },
   release: `clean-release`,
   watch: {
-    vue: `file2variable-cli src/vue/*.template.html src/vue.template.html -o src/vue-variables.ts --html-minify --base src --watch`,
-    angular: `file2variable-cli src/angular/*.template.html src/angular.template.html -o src/angular-variables.ts --html-minify --base src --watch`,
-    tsc: `tsc -p src --watch`,
-    demo: `tsc -p demo --watch`,
-    webpack: `webpack --display-modules --config demo/webpack.config.js --watch`,
-    rev: `rev-static --config demo/rev-static.config.js --watch`
+    vue: `${vueTemplateCommand} --watch`,
+    angular: `${angularTemplateCommand} --watch`,
+    tsc: `${ngcSrcCommand} --watch`,
+    demo: `${tscDemoCommand} --watch`,
+    webpack: `${webpackCommand} --watch`,
+    rev: `${revStaticCommand} --watch`
   },
   screenshot: [
     new Service(`http-server -p 8000`),

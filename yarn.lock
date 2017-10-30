@@ -2537,10 +2537,6 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
-lodash.debounce@4.0.8:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
-
 lodash.isinteger@4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
@@ -4291,14 +4287,6 @@ vue-class-component@6.0.0:
 vue@2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.2.tgz#fd367a87bae7535e47f9dc5c9ec3b496e5feb5a4"
-
-watch-then-execute@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/watch-then-execute/-/watch-then-execute-1.0.2.tgz#5586cfc72d15534a6b6e17aad86df36da8fe248b"
-  dependencies:
-    chokidar "1.7.0"
-    lodash.debounce "4.0.8"
-    minimist "1.2.0"
 
 watchpack@^1.4.0:
   version "1.4.0"
