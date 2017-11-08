@@ -46,6 +46,9 @@ the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/rea
 ```js
 import { JSONEditorModule } from "schema-based-json-editor/angular";
 
+// for angular AOT:
+// import { JSONEditorModule } from "schema-based-json-editor/aot/angular";
+
 @NgModule({
     imports: [BrowserModule, FormsModule, JSONEditorModule],
     declarations: [MainComponent],

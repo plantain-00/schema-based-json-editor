@@ -61,13 +61,13 @@ export class ArrayEditor extends React.Component<Props, State> {
     }
     render() {
         const childrenElement: JSX.Element[] = this.getValue.map((p, i) => ({ p, i }))
-            .filter(({p, i}) => common.filterArray(p, i, this.props.schema.items, this.filter))
-            .map(({p, i}) => (
+            .filter(({ p, i }) => common.filterArray(p, i, this.props.schema.items, this.filter))
+            .map(({ p, i }) => (
                 <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
                     <Editor schema={this.props.schema.items}
                         title={String(i)}
                         initialValue={this.getValue[i]}
-                        updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(i, value, isValid)}
+                        updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(i, value, isValid)}
                         theme={this.props.theme}
                         icon={this.props.icon}
                         locale={this.props.locale}
@@ -137,16 +137,18 @@ export class ArrayEditor extends React.Component<Props, State> {
         this.errorMessage = common.getErrorMessageOfArray(this.value, this.props.schema, this.props.locale);
     }
     private addItem = () => {
-        this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined) !);
+        this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined)!);
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
-    private onChange = (i: number, value: common.ValueType, isValid: boolean) => {
-        this.value![i] = value;
-        this.setState({ value: this.value });
-        this.validate();
-        common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
-        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
+    private onChange = (i: number, value: common.ValueType | undefined, isValid: boolean) => {
+        if (value !== undefined) {
+            this.value![i] = value;
+            this.setState({ value: this.value });
+            this.validate();
+            common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
+            this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
+        }
     }
     private onFilterChange = (e: React.FormEvent<{ value: string }>) => {
         this.filter = e.currentTarget.value;

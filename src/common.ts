@@ -6,9 +6,9 @@ import { defaultLocale as defaultMarkDownTipLocale } from "markdown-tip/common";
 export { toNumber, toInteger };
 
 import { __extends, __decorate, __assign } from "tslib";
-window.__extends = __extends;
-window.__decorate = __decorate;
-window.__assign = __assign;
+(window as any).__extends = __extends;
+(window as any).__decorate = __decorate;
+(window as any).__assign = __assign;
 
 /**
  * @public

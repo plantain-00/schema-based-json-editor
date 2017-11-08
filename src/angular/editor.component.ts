@@ -9,7 +9,7 @@ import { angularEditorTemplateHtml } from "../angular-variables";
 })
 export class EditorComponent {
     @Input()
-    schema: common.ArraySchema;
+    schema: common.Schema;
     @Input()
     initialValue: common.ValueType[];
     @Input()

@@ -60,7 +60,7 @@ export class ObjectEditor extends React.Component<Props, State> {
                     schema={schema}
                     title={schema.title || property}
                     initialValue={this.value![property]}
-                    updateValue={(value: common.ValueType, isValid: boolean) => this.onChange(property, value, isValid)}
+                    updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(property, value, isValid)}
                     theme={this.props.theme}
                     icon={this.props.icon}
                     locale={this.props.locale}
@@ -123,12 +123,14 @@ export class ObjectEditor extends React.Component<Props, State> {
         this.filter = e.currentTarget.value;
         this.setState({ filter: this.filter });
     }
-    private onChange = (property: string, value: common.ValueType, isValid: boolean) => {
-        this.value![property] = value;
-        this.validate();
-        this.setState({ value: this.value });
-        common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
-        this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0);
+    private onChange = (property: string, value: common.ValueType | undefined, isValid: boolean) => {
+        if (value !== undefined) {
+            this.value![property] = value;
+            this.validate();
+            this.setState({ value: this.value });
+            common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
+            this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0);
+        }
     }
     private isRequired(property: string) {
         return this.props.schema.required && this.props.schema.required.some(r => r === property);

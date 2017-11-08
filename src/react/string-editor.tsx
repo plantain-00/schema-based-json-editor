@@ -4,7 +4,7 @@ import { Icon } from "./icon";
 import { Optional } from "./optional";
 import { Description } from "./description";
 import { MarkdownTip } from "markdown-tip/react";
-import { Select2 } from "select2-component/react";
+import { Select2, Select2UpdateValue } from "select2-component/react";
 
 /**
  * @public
@@ -66,7 +66,7 @@ export class StringEditor extends React.Component<Props, State> {
         const select = this.useSelect ? (
             <Select2 data={this.options}
                 value={this.value}
-                update={(e: string) => this.updateSelection(e)}>
+                update={(e: Select2UpdateValue) => this.updateSelection(e)}>
             </Select2>
         ) : null;
 
@@ -179,8 +179,8 @@ export class StringEditor extends React.Component<Props, State> {
         }));
     }
 
-    private updateSelection(value: string) {
-        this.value = value;
+    private updateSelection(value: Select2UpdateValue) {
+        this.value = value.toString();
         this.validate();
         this.setState({ value: this.value });
         this.props.updateValue(this.value, !this.errorMessage);

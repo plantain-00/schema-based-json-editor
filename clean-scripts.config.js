@@ -5,7 +5,10 @@ const jsFiles = `"*.config.js" "demo/*.config.js" "spec/**/*.config.js"`
 
 const vueTemplateCommand = `file2variable-cli src/vue/*.template.html src/vue.template.html -o src/vue-variables.ts --html-minify --base src`
 const angularTemplateCommand = `file2variable-cli src/angular/*.template.html src/angular.template.html -o src/angular-variables.ts --html-minify --base src`
-const ngcSrcCommand = `ngc -p src`
+const ngcSrcCommand = [
+  `tsc -p src`,
+  `ngc -p src/tsconfig.aot.json`
+]
 const tscDemoCommand = `tsc -p demo`
 const webpackCommand = `webpack --display-modules --config demo/webpack.config.js`
 const revStaticCommand = `rev-static --config demo/rev-static.config.js`

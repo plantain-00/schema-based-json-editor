@@ -1,3 +1,13 @@
+### v 6.x
+
+```ts
+// v5 angular AOT:
+import { JSONEditorModule } from "schema-based-json-editor/angular";
+
+// v6 angular AOT:
+import { JSONEditorModule } from "schema-based-json-editor/aot/angular";
+```
+
 ### v 5.x
 
 ```ts
@@ -10,6 +20,7 @@ import "schema-based-json-editor/vue";
 import { JSONEditor } from "schema-based-json-editor/dist/react";
 import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, EditorComponent, NullEditorComponent, NumberEditorComponent, ObjectEditorComponent, StringEditorComponent, IconComponent, OptionalComponent, DescriptionComponent } from "schema-based-json-editor/dist/angular";
 import "schema-based-json-editor/dist/vue";
+```
 
 ### v 4.x
 

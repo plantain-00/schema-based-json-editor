@@ -19,10 +19,6 @@
         "emitDecoratorMetadata": true,
         "newLine": "LF"
     },
-    "angularCompilerOptions": {
-        "strictMetadataEmit": true,
-        "genDir": "compiled"
-    },
     "exclude": [
         "./compiled/"
     ]
