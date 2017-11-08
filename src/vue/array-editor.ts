@@ -72,7 +72,7 @@ export class ArrayEditor extends Vue {
     }
     mounted() {
         if (this.dragula) {
-            const container = this.$el.childNodes[4] as HTMLElement;
+            const container = this.$el.childNodes[2] as HTMLElement;
             if (container) {
                 this.drak = this.dragula([container]);
                 this.drak.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
