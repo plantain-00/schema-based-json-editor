@@ -2,6 +2,7 @@
   "angularEditorBundleJs": "45.1 kB 6.98 kB",
   "angularIndexBundleJs": "6.69 kB 2.1 kB",
   "angularVendorBundleJs": "1.66 MB 475 kB",
+  "aotIndexBundleJs": "1.07 MB 323 kB",
   "reactEditorBundleJs": "52.5 kB 11.7 kB",
   "reactIndexBundleJs": "5.97 kB 1.97 kB",
   "reactVendorBundleJs": "778 kB 268 kB",
@@ -9,6 +10,7 @@
   "vueIndexBundleJs": "6.18 kB 2 kB",
   "vueVendorBundleJs": "769 kB 271 kB",
   "demoAngularIndexHtml": "1.44 kB 785 B",
+  "demoAotIndexHtml": "1.11 kB 632 B",
   "demoReactIndexHtml": "1.51 kB 797 B",
   "demoVueIndexHtml": "1.51 kB 800 B"
 }

@@ -46,4 +46,7 @@ dist
 !**/0.bundle.js
 !**/*-*.css
 !demo/css/highlight.js/
-src/compiled
+demo/**/*.metadata.json
+demo/**/*.ngsummary.json
+demo/aot/*.d.ts
+demo/*.d.ts

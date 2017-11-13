@@ -5,8 +5,7 @@
         "rootDir": "."
     },
     "angularCompilerOptions": {
-        "strictMetadataEmit": true,
-        "genDir": "compiled"
+        "strictMetadataEmit": true
     },
     "include": [
         "angular-variables.ts",

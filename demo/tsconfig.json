@@ -24,5 +24,10 @@
         "allowSyntheticDefaultImports": true,
         "emitDecoratorMetadata": true,
         "newLine": "LF"
-    }
+    },
+    "include": [
+        "angular/*",
+        "vue/*",
+        "react/*"
+    ]
 }

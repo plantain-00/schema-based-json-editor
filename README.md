@@ -68,6 +68,8 @@ class MainModule { }
 
 the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/angular/index.html
 
+the AOT online demo: https://plantain-00.github.io/schema-based-json-editor/demo/aot/index.html
+
 #### vuejs component demo
 
 `npm i vue vue-class-component`

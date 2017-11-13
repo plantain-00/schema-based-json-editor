@@ -2,6 +2,7 @@ const { Service, execAsync } = require('clean-scripts')
 
 const tsFiles = `"src/**/*.ts" "src/**/*.tsx" "spec/**/*.ts" "demo/**/*.ts" "demo/**/*.tsx" "screenshots/**/*.ts"`
 const jsFiles = `"*.config.js" "demo/*.config.js" "spec/**/*.config.js"`
+const excludeTsFiles = `"demo/**/*.d.ts"`
 
 const vueTemplateCommand = `file2variable-cli src/vue/*.template.html src/vue.template.html -o src/vue-variables.ts --html-minify --base src`
 const angularTemplateCommand = `file2variable-cli src/angular/*.template.html src/angular.template.html -o src/angular-variables.ts --html-minify --base src`
@@ -9,7 +10,10 @@ const ngcSrcCommand = [
   `tsc -p src`,
   `ngc -p src/tsconfig.aot.json`
 ]
-const tscDemoCommand = `tsc -p demo`
+const tscDemoCommand = [
+  `tsc -p demo`,
+  `ngc -p demo/tsconfig.aot.json`
+]
 const webpackCommand = `webpack --display-modules --config demo/webpack.config.js`
 const revStaticCommand = `rev-static --config demo/rev-static.config.js`
 
@@ -48,9 +52,9 @@ module.exports = {
     }
   ],
   lint: {
-    ts: `tslint ${tsFiles}`,
+    ts: `tslint ${tsFiles} --exclude ${excludeTsFiles}`,
     js: `standard ${jsFiles}`,
-    export: `no-unused-export ${tsFiles} --exclude "src/compiled/**/*"`
+    export: `no-unused-export ${tsFiles} --exclude ${excludeTsFiles}`
   },
   test: [
     'tsc -p spec',
@@ -64,7 +68,7 @@ module.exports = {
     }
   ],
   fix: {
-    ts: `tslint --fix ${tsFiles}`,
+    ts: `tslint --fix ${tsFiles} --exclude ${excludeTsFiles}`,
     js: `standard --fix ${jsFiles}`
   },
   release: `clean-release`,
