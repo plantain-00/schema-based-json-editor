@@ -3675,8 +3675,8 @@ safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, 
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
 select2-component@4:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-4.0.1.tgz#78aad9314734446377723e444d69b1c0cac01035"
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-4.0.2.tgz#9e36f69ed3ce6f082332732118e85343d0bac7c2"
   dependencies:
     "@types/node" "*"
     tslib "1"
