@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import * as common from "../common";
-import { Dragula, MarkdownIt } from "../libs";
+import { Dragula, MarkdownIt, HLJS } from "../libs";
 import { angularEditorTemplateHtml } from "../angular-variables";
 
 @Component({
@@ -35,7 +35,7 @@ export class EditorComponent {
     @Input()
     md?: MarkdownIt;
     @Input()
-    hljs?: typeof hljs;
+    hljs?: HLJS;
     @Input()
     forceHttps?: boolean;
 }

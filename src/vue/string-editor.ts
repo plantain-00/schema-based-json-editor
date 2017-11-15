@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
-import { MarkdownIt } from "../libs";
+import { MarkdownIt, HLJS } from "../libs";
 import { vueStringEditorTemplateHtml } from "../vue-variables";
 import "markdown-tip/vue";
 import "select2-component/vue";
@@ -21,7 +21,7 @@ export class StringEditor extends Vue {
     required: boolean;
     hasDeleteButton: boolean;
     md?: MarkdownIt;
-    hljs?: typeof hljs;
+    hljs?: HLJS;
     forceHttps?: boolean;
 
     value?: string = "";

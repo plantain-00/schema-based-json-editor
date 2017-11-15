@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
 import * as common from "../common";
-import { Dragula, MarkdownIt } from "../libs";
+import { Dragula, MarkdownIt, HLJS } from "../libs";
 import { angularArrayEditorTemplateHtml } from "../angular-variables";
 
 @Component({
@@ -35,7 +35,7 @@ export class ArrayEditorComponent {
     @Input()
     md?: MarkdownIt;
     @Input()
-    hljs?: typeof hljs;
+    hljs?: HLJS;
     @Input()
     forceHttps?: boolean;
 

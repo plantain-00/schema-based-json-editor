@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "../common";
-import { Dragula, MarkdownIt } from "../libs";
+import { Dragula, MarkdownIt, HLJS } from "../libs";
 import { vueArrayEditorTemplateHtml } from "../vue-variables";
 
 @Component({
@@ -20,7 +20,7 @@ export class ArrayEditor extends Vue {
     hasDeleteButton: boolean;
     dragula?: Dragula;
     md?: MarkdownIt;
-    hljs?: typeof hljs;
+    hljs?: HLJS;
     forceHttps?: boolean;
 
     renderSwitch = 1;
