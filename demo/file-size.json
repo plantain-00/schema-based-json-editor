@@ -8,9 +8,9 @@
   "reactVendorBundleJs": "762 kB 263 kB",
   "vueEditorBundleJs": "52.6 kB 11.9 kB",
   "vueIndexBundleJs": "6.18 kB 2 kB",
-  "vueVendorBundleJs": "769 kB 271 kB",
-  "demoAngularIndexHtml": "1.44 kB 785 B",
-  "demoAotIndexHtml": "1.11 kB 635 B",
+  "vueVendorBundleJs": "770 kB 271 kB",
+  "demoAngularIndexHtml": "1.44 kB 787 B",
+  "demoAotIndexHtml": "1.11 kB 632 B",
   "demoReactIndexHtml": "1.51 kB 799 B",
-  "demoVueIndexHtml": "1.51 kB 798 B"
+  "demoVueIndexHtml": "1.51 kB 801 B"
 }
