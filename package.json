@@ -52,6 +52,8 @@
     "@angular/platform-browser-dynamic": "5.0.2",
     "@angular/router": "5.0.2",
     "@angular/upgrade": "5.0.2",
+    "@commitlint/cli": "5.0.1",
+    "@commitlint/config-angular": "5.0.1",
     "@types/jasmine": "2.8.2",
     "@types/puppeteer": "0.13.0",
     "@types/react": "16.0.25",
