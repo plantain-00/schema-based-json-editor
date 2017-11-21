@@ -10,7 +10,7 @@ import * as puppeteer from "puppeteer";
         await page.waitFor(100);
         await page.screenshot({ path: `screenshots/${type}-initial.png` });
 
-        const prefix = type === "angular" ? "editor" : ".row";
+        const prefix = (type === "angular" || type === "aot") ? "editor" : ".row";
 
         await (page.type as any)(`${prefix}:nth-child(100n+1) input`, "num");
         await page.waitFor(100);
@@ -57,7 +57,7 @@ import * as puppeteer from "puppeteer";
         await page.waitFor(100);
         await page.screenshot({ path: `screenshots/${type}-array.png` });
 
-        if (type === "angular") {
+        if (type === "angular" || type === "aot") {
             await (page as any).select(`${prefix}:nth-child(100n+11) select`, "enum 2");
             await page.waitFor(100);
             await page.screenshot({ path: `screenshots/${type}-enum.png` });

@@ -142,13 +142,11 @@ export class ArrayEditor extends React.Component<Props, State> {
         this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
     private onChange = (i: number, value: common.ValueType | undefined, isValid: boolean) => {
-        if (value !== undefined) {
-            this.value![i] = value;
-            this.setState({ value: this.value });
-            this.validate();
-            common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
-            this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-        }
+        this.value![i] = value;
+        this.setState({ value: this.value });
+        this.validate();
+        common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
+        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
     }
     private onFilterChange = (e: React.FormEvent<{ value: string }>) => {
         this.filter = e.currentTarget.value;

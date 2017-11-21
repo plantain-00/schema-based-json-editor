@@ -205,6 +205,11 @@ export const schema: common.Schema = {
             },
             collapsed: true,
         },
+        emptyEnumExample: {
+            type: "string",
+            enum: [
+            ],
+        },
     },
     required: [
         "stringExample",
@@ -227,6 +232,7 @@ export const schema: common.Schema = {
         "optionalObjectExample",
         "propertyOrderExample",
         "collapsedObjectExample",
+        "emptyEnumExample",
     ],
 };
 

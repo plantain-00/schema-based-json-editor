@@ -124,13 +124,11 @@ export class ObjectEditor extends React.Component<Props, State> {
         this.setState({ filter: this.filter });
     }
     private onChange = (property: string, value: common.ValueType | undefined, isValid: boolean) => {
-        if (value !== undefined) {
-            this.value![property] = value;
-            this.validate();
-            this.setState({ value: this.value });
-            common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
-            this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0);
-        }
+        this.value![property] = value;
+        this.validate();
+        this.setState({ value: this.value });
+        common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
+        this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0);
     }
     private isRequired(property: string) {
         return this.props.schema.required && this.props.schema.required.some(r => r === property);

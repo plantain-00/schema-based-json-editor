@@ -2789,8 +2789,8 @@ markdown-it@8.4.0:
     uc.micro "^1.0.3"
 
 markdown-tip@5:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-5.0.2.tgz#463728380c0355c45bafcb226362d1cbf80cc75d"
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-5.0.4.tgz#e7d79bf7d379812f39013271637c484d4bc11465"
   dependencies:
     tslib "1"
 
@@ -3879,8 +3879,8 @@ safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, 
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
 select2-component@4:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-4.0.2.tgz#9e36f69ed3ce6f082332732118e85343d0bac7c2"
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-4.0.4.tgz#e568372273d2c21530e81f5624adf629848cee26"
   dependencies:
     "@types/node" "*"
     tslib "1"

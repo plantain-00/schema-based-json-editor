@@ -203,7 +203,7 @@ export function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
     return name;
 }
 
-export type ValueType = { [name: string]: any } | any[] | number | boolean | string | null;
+export type ValueType = { [name: string]: any } | any[] | number | boolean | string | null | undefined;
 
 export function getDefaultValue(required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {
     if (initialValue !== undefined) {
