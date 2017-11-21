@@ -23,7 +23,7 @@ const plugins = [
 const resolve = {
   alias: {
     'markdown-it': 'markdown-it/dist/markdown-it.min.js',
-    'vue$': 'vue/dist/vue.js'
+    'vue$': 'vue/dist/vue.min.js'
   }
 }
 
