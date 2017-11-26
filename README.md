@@ -20,14 +20,12 @@
 + image preview, code highlight, markdown preview
 + multi-language
 
-#### install
+#### reactjs component
 
-`npm i schema-based-json-editor`
-
-#### reactjs component demo
+`npm i react-schema-based-json-editor`
 
 ```js
-import { JSONEditor } from "schema-based-json-editor/react";
+import { JSONEditor } from "react-schema-based-json-editor";
 ```
 
 ```jsx
@@ -39,15 +37,14 @@ import { JSONEditor } from "schema-based-json-editor/react";
 </JSONEditor>
 ```
 
-the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/react/index.html
+the online demo: https://plantain-00.github.io/schema-based-json-editor/packages/react/demo
 
-#### angular component demo
+#### angular component
+
+`npm i angular-schema-based-json-editor`
 
 ```js
-import { JSONEditorModule } from "schema-based-json-editor/angular";
-
-// for angular AOT:
-// import { JSONEditorModule } from "schema-based-json-editor/aot/angular";
+import { JSONEditorModule } from "angular-schema-based-json-editor";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, JSONEditorModule],
@@ -66,16 +63,16 @@ class MainModule { }
 </json-editor>
 ```
 
-the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/angular/index.html
+the online demo: https://plantain-00.github.io/schema-based-json-editor/packages/angular/demo/jit
 
-the AOT online demo: https://plantain-00.github.io/schema-based-json-editor/demo/aot/index.html
+the AOT online demo: https://plantain-00.github.io/schema-based-json-editor/packages/angular/demo/aot
 
-#### vuejs component demo
+#### vuejs component
 
-`npm i vue vue-class-component`
+`npm i vue-schema-based-json-editor`
 
 ```js
-import "schema-based-json-editor/vue";
+import "vue-schema-based-json-editor";
 ```
 
 ```jsx
@@ -87,7 +84,7 @@ import "schema-based-json-editor/vue";
 </json-editor>
 ```
 
-the online demo: https://plantain-00.github.io/schema-based-json-editor/demo/vue/index.html
+the online demo: https://plantain-00.github.io/schema-based-json-editor/packages/vue/demo
 
 #### properties and events of the component
 

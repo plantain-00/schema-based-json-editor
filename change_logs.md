@@ -1,3 +1,27 @@
+### v 7.x
+
+```bash
+# v6
+npm i schema-based-json-editor
+
+# v7
+npm i vue-schema-based-json-editor
+npm i react-schema-based-json-editor
+npm i angular-schema-based-json-editor
+```
+
+```ts
+// v6
+import "schema-based-json-editor/vue";
+import { Select2 } from "schema-based-json-editor/react";
+import { JSONEditor } from "schema-based-json-editor/angular";
+
+// v7
+import "vue-schema-based-json-editor";
+import { JSONEditor } from "react-schema-based-json-editor";
+import { JSONEditorModule } from "angular-schema-based-json-editor";
+```
+
 ### v 6.x
 
 ```ts

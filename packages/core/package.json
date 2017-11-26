@@ -1,0 +1,38 @@
+{
+  "name": "schema-based-json-editor",
+  "version": "7.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "description": "A reactjs, angular and vuejs component of schema based json editor.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plantain-00/schema-based-json-editor.git"
+  },
+  "keywords": [
+    "json",
+    "schema"
+  ],
+  "author": "York Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
+  },
+  "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
+  "dependencies": {
+    "lodash.isinteger": "4",
+    "lodash.isobject": "3",
+    "lodash.tointeger": "4",
+    "lodash.tonumber": "4",
+    "markdown-tip": "6",
+    "select2-component": "5",
+    "tslib": "1"
+  },
+  "devDependencies": {
+    "bootstrap": "3.3.7",
+    "dragula": "3.7.2",
+    "font-awesome": "4.7.0",
+    "github-fork-ribbon-css": "0.2.1",
+    "highlight.js": "9.12.0",
+    "markdown-it": "8.4.0"
+  }
+}

@@ -39,14 +39,11 @@ jspm_packages
 # Source
 .vscode
 dist
-**/*.js
-**/*.css
+**/demo/**/*.metadata.json
+**/demo/**/*.ngsummary.json
+**/demo/**/*.d.ts
+*.js
+*.css
 !*.config.js
 !**/*-*.js
-!**/0.bundle.js
 !**/*-*.css
-!demo/css/highlight.js/
-demo/**/*.metadata.json
-demo/**/*.ngsummary.json
-demo/aot/*.d.ts
-demo/*.d.ts

@@ -1,0 +1,13 @@
+{
+  "lerna": "2.5.1",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "7.0.0",
+  "npmClient": "yarn",
+  "command": {
+    "publish": {
+      "message": "feat: publish %s"
+    }
+  }
+}

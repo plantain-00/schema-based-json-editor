@@ -1,0 +1,48 @@
+{
+  "name": "angular-schema-based-json-editor",
+  "version": "7.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "description": "A angular component of schema based json editor.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plantain-00/schema-based-json-editor.git"
+  },
+  "keywords": [
+    "json",
+    "schema",
+    "angular"
+  ],
+  "author": "York Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
+  },
+  "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
+  "dependencies": {
+    "@angular/common": "5",
+    "@angular/compiler": "5",
+    "@angular/compiler-cli": "5",
+    "@angular/core": "5",
+    "@angular/forms": "5",
+    "@angular/http": "5",
+    "@angular/platform-browser": "5",
+    "@angular/platform-browser-dynamic": "5",
+    "@angular/router": "5",
+    "@angular/upgrade": "5",
+    "@types/dragula": "*",
+    "@types/highlight.js": "*",
+    "@types/markdown-it": "*",
+    "core-js": "2",
+    "markdown-tip-angular": "6",
+    "rxjs": "5",
+    "schema-based-json-editor": "^7.0.0",
+    "select2-angular-component": "5",
+    "zone.js": "0.8"
+  },
+  "devDependencies": {
+    "dragula": "3.7.2",
+    "highlight.js": "9.12.0",
+    "markdown-it": "8.4.0"
+  }
+}

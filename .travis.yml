@@ -10,6 +10,7 @@ before_install:
 install:
   - yarn install --pure-lockfile
 script:
+  - npm run bootstrap
   - npm run build
   - npm run lint
   - npm run test
