@@ -111,6 +111,18 @@ export class StringEditorComponent {
     get titleToShow() {
         return common.getTitle(this.title, this.schema.title);
     }
+    get options() {
+        return this.schema.enum!.map(e => ({
+            value: e,
+            label: e,
+        }));
+    }
+
+    updateSelection(value: string) {
+        this.value = value;
+        this.validate();
+        this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
+    }
 
     toggleOptional = () => {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined;

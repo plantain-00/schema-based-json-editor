@@ -38,15 +38,11 @@
         [defaultValue]="value"
         [readOnly]="isReadOnly"
         [disabled]="isReadOnly" />
-    <select *ngIf="useSelect"
-        [class]="theme.formControl"
-        (change)="onChange($event)">
-        <option *ngFor="let e of schema.enum; let i = index; trackBy:trackByFunction"
-            [value]="e"
-            [selected]="value === e">
-            {{e}}
-        </option>
-    </select>
+    <select2 *ngIf="useSelect"
+        [data]="options"
+        [value]="value"
+        (update)="updateSelection($event)">
+    </select2>
     <img *ngIf="willPreviewImage"
         class="schema-based-json-editor-image-preview"
         [src]="getImageUrl" />

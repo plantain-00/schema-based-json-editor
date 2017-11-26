@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { MarkdownTipModule } from "markdown-tip-angular";
+import { Select2Module } from "select2-angular-component";
 
 /**
  * @public
@@ -24,6 +25,7 @@ import { MarkdownTipModule } from "markdown-tip-angular";
     imports: [
         CommonModule,
         MarkdownTipModule,
+        Select2Module,
     ],
     exports: [
         JSONEditorComponent,
