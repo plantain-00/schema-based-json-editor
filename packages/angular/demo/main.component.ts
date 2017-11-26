@@ -1,17 +1,11 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
 
-import { ValidityValue, ValueType, Locale } from "../dist/";
+import { ValidityValue, ValueType } from "../dist/";
 import { schema, schemaSchema } from "schema-based-json-editor/demo/";
 
 import * as dragula from "dragula";
 import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
-
-let locale: Locale | null = null;
-
-export function setLocale(newLocale: Locale) {
-    locale = newLocale;
-}
 
 @Component({
     selector: "app",
@@ -54,7 +48,7 @@ export function setLocale(newLocale: Locale) {
     `,
 })
 export class MainComponent {
-    locale = locale;
+    locale = null;
     schema = schema;
     value: any = {};
     color = "black";

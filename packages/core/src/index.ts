@@ -22,6 +22,9 @@ export type CommonSchema = {
     propertyOrder?: number;
 };
 
+/**
+ * @public
+ */
 export type ObjectSchema = CommonSchema & {
     type: "object";
     properties: { [name: string]: Schema };
@@ -31,6 +34,9 @@ export type ObjectSchema = CommonSchema & {
     collapsed?: boolean;
 };
 
+/**
+ * @public
+ */
 export type ArraySchema = CommonSchema & {
     type: "array";
     items: Schema;
@@ -39,6 +45,9 @@ export type ArraySchema = CommonSchema & {
     collapsed?: boolean;
 };
 
+/**
+ * @public
+ */
 export type NumberSchema = CommonSchema & {
     type: "number" | "integer";
     minimum?: number;
@@ -49,6 +58,9 @@ export type NumberSchema = CommonSchema & {
     multipleOf?: number;
 };
 
+/**
+ * @public
+ */
 export type StringSchema = CommonSchema & {
     type: "string";
     format?: "textarea" | "color" | "date" | "datetime" | "datetime-local" | "time" | "month" | "email" | "uri" | "url" | "week" | "hostname" | "ipv4" | "ipv6" | "code" | "markdown";
@@ -58,14 +70,23 @@ export type StringSchema = CommonSchema & {
     pattern?: string;
 };
 
+/**
+ * @public
+ */
 export type BooleanSchema = CommonSchema & {
     type: "boolean";
 };
 
+/**
+ * @public
+ */
 export type NullSchema = CommonSchema & {
     type: "null";
 };
 
+/**
+ * @public
+ */
 export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema;
 
 /**
@@ -102,8 +123,14 @@ export const defaultTheme = {
     radiobox: "",
 };
 
+/**
+ * @public
+ */
 export type Theme = typeof defaultTheme;
 
+/**
+ * @public
+ */
 export function getTheme(name: string | undefined | Theme): Theme {
     if (name === undefined) {
         return defaultTheme;
@@ -153,6 +180,9 @@ export type Locale = typeof defaultLocale;
  */
 export const locales: { [name: string]: Locale } = {};
 
+/**
+ * @public
+ */
 export function getLocale(locale: undefined | null | Locale): Locale {
     return locale || defaultLocale;
 }
@@ -168,6 +198,9 @@ export const bootstrap3Icon = {
     delete: "glyphicon glyphicon-remove",
 };
 
+/**
+ * @public
+ */
 export type Icon = typeof bootstrap3Icon;
 
 const icons: { [name: string]: Icon } = {
@@ -181,6 +214,9 @@ const icons: { [name: string]: Icon } = {
     },
 };
 
+/**
+ * @public
+ */
 export function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
     if (name === undefined) {
         return {
@@ -203,8 +239,14 @@ export function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
     return name;
 }
 
+/**
+ * @public
+ */
 export type ValueType = { [name: string]: any } | any[] | number | boolean | string | null | undefined;
 
+/**
+ * @public
+ */
 export function getDefaultValue(required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {
     if (initialValue !== undefined) {
         switch (schema.type) {
@@ -308,11 +350,20 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
     }
 }
 
+/**
+ * @public
+ */
 export const buttonGroupStyle = { marginLeft: "10px" };
+/**
+ * @public
+ */
 export const buttonGroupStyleString = "margin-left: 10px";
 
 import { HLJS, Dragula, MarkdownIt, Token, TokenRender, Renderer, MarkdownItType } from "./libs";
 
+/**
+ * @public
+ */
 export type Props<TSchema extends CommonSchema, TValue> = {
     schema: TSchema;
     initialValue: TValue;
@@ -372,6 +423,9 @@ export function isSame(value1: ValueType, value2: ValueType) {
     return true;
 }
 
+/**
+ * @public
+ */
 export function switchItem(value: any[], el: HTMLElement, sibling: HTMLElement | null) {
     const fromIndex = +el.dataset.index!;
     if (sibling) {
@@ -388,6 +442,9 @@ export function switchItem(value: any[], el: HTMLElement, sibling: HTMLElement |
     }
 }
 
+/**
+ * @public
+ */
 export function getErrorMessageOfArray(value: any[] | undefined, schema: ArraySchema, locale: Locale) {
     if (value !== undefined) {
         if (schema.minItems !== undefined) {
@@ -408,6 +465,9 @@ export function getErrorMessageOfArray(value: any[] | undefined, schema: ArraySc
     return "";
 }
 
+/**
+ * @public
+ */
 export function getErrorMessageOfNumber(value: number | undefined, schema: NumberSchema, locale: Locale) {
     if (value !== undefined) {
         if (schema.minimum !== undefined) {
@@ -441,6 +501,9 @@ export function getErrorMessageOfNumber(value: number | undefined, schema: Numbe
     return "";
 }
 
+/**
+ * @public
+ */
 export function getErrorMessageOfString(value: string | undefined, schema: StringSchema, locale: Locale) {
     if (value !== undefined) {
         if (schema.minLength !== undefined
@@ -459,6 +522,9 @@ export function getErrorMessageOfString(value: string | undefined, schema: Strin
     return "";
 }
 
+/**
+ * @public
+ */
 export function getErrorMessageOfObject(value: { [name: string]: ValueType } | undefined, schema: ObjectSchema, locale: Locale) {
     if (value !== undefined) {
         let length = 0;
@@ -479,6 +545,9 @@ export function getErrorMessageOfObject(value: { [name: string]: ValueType } | u
     return "";
 }
 
+/**
+ * @public
+ */
 export function toggleOptional(value: ValueType | undefined, schema: Schema, initialValue: any) {
     if (value === undefined) {
         return getDefaultValue(true, schema, initialValue);
@@ -487,11 +556,17 @@ export function toggleOptional(value: ValueType | undefined, schema: Schema, ini
     }
 }
 
+/**
+ * @public
+ */
 export type ValidityValue<T> = {
     value: T;
     isValid: boolean;
 };
 
+/**
+ * @public
+ */
 export function recordInvalidPropertiesOfObject(invalidProperties: string[], isValid: boolean, property: string) {
     const index = invalidProperties.indexOf(property);
     if (isValid) {
@@ -505,6 +580,9 @@ export function recordInvalidPropertiesOfObject(invalidProperties: string[], isV
     }
 }
 
+/**
+ * @public
+ */
 export function recordInvalidIndexesOfArray(invalidIndexes: number[], isValid: boolean, i: number) {
     const index = invalidIndexes.indexOf(i);
     if (isValid) {
@@ -520,6 +598,9 @@ export function recordInvalidIndexesOfArray(invalidIndexes: number[], isValid: b
 
 const imageExtensions = [".png", ".jpg", ".bmp", ".gif"];
 
+/**
+ * @public
+ */
 export function isImageUrl(value?: string) {
     if (!value || value.length <= "https://".length) {
         return false;
@@ -532,6 +613,9 @@ export function isImageUrl(value?: string) {
     return imageExtensions.indexOf(extensionName) !== -1;
 }
 
+/**
+ * @public
+ */
 export function replaceProtocal(src: string) {
     if (src.indexOf("http://") === 0 && src.indexOf("http://localhost") !== 0) {
         return "https://" + src.substring("http://".length);
@@ -539,7 +623,13 @@ export function replaceProtocal(src: string) {
     return src;
 }
 
+/**
+ * @public
+ */
 export const imagePreviewStyleString = "display: block; height: auto; margin: 6px 0; max-width: 100%;";
+/**
+ * @public
+ */
 export const imagePreviewStyle = {
     display: "block",
     height: "auto",
@@ -552,6 +642,9 @@ function printInConsole(message: string) {
     console.log(message);
 }
 
+/**
+ * @public
+ */
 export function initializeMarkdown(markdownit: MarkdownItType | undefined, hljs: HLJS | undefined, forceHttps: boolean | undefined) {
     if (!markdownit) {
         return undefined;
@@ -605,6 +698,9 @@ export function initializeMarkdown(markdownit: MarkdownItType | undefined, hljs:
     return md;
 }
 
+/**
+ * @public
+ */
 export function findTitle(value: { [name: string]: ValueType } | undefined, properties: { property: string; schema: Schema }[]) {
     if (value) {
         for (const { property } of properties) {
@@ -641,6 +737,9 @@ function findTitleFromSchema(value: { [name: string]: ValueType } | undefined, s
     return undefined;
 }
 
+/**
+ * @public
+ */
 export function getTitle(...titles: any[]) {
     for (const title of titles) {
         if (title === undefined || title === null) {
@@ -651,6 +750,9 @@ export function getTitle(...titles: any[]) {
     return "";
 }
 
+/**
+ * @public
+ */
 export function compare(a: { property: string; schema: Schema }, b: { property: string; schema: Schema }) {
     if (typeof a.schema.propertyOrder === "number") {
         if (typeof b.schema.propertyOrder === "number") {
@@ -664,6 +766,9 @@ export function compare(a: { property: string; schema: Schema }, b: { property: 
     return 0;
 }
 
+/**
+ * @public
+ */
 export function filterObject({ property, schema }: { property: string; schema: Schema }, filterValue: string): boolean {
     return filterValue === ""
         || property.indexOf(filterValue) !== -1
@@ -671,6 +776,9 @@ export function filterObject({ property, schema }: { property: string; schema: S
         || (!!schema.description && schema.description.indexOf(filterValue) !== -1);
 }
 
+/**
+ * @public
+ */
 export function filterArray(value: ValueType, index: number, schema: Schema, filterValue: string): boolean {
     const result = filterValue === ""
         || String(index).indexOf(filterValue) !== -1
@@ -686,4 +794,7 @@ export function filterArray(value: ValueType, index: number, schema: Schema, fil
     return false;
 }
 
+/**
+ * @public
+ */
 export const minItemCountIfNeedFilter = 6;

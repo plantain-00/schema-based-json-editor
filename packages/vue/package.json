@@ -1,6 +1,6 @@
 {
   "name": "vue-schema-based-json-editor",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A vuejs component of schema based json editor.",
@@ -24,7 +24,7 @@
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
     "markdown-tip-vue": "6",
-    "schema-based-json-editor": "^7.0.0",
+    "schema-based-json-editor": "^7.0.1",
     "select2-vue-component": "5",
     "vue": "2",
     "vue-class-component": "6"

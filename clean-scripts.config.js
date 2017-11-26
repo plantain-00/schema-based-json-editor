@@ -31,7 +31,7 @@ module.exports = {
         `cpy ./packages/core/node_modules/font-awesome/css/font-awesome.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/dragula/dist/dragula.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/font-awesome/fonts/*.* ./packages/core/demo/fonts`,
-        `cpy ./packages/core/node_modules/highlight.js/styles/default.css ./packages/core/demo/css/highlight.js/`,
+        `cpy ./packages/core/node_modules/highlight.js/styles/default.css ./packages/core/demo/css/highlightjs/`,
         `cpy ./packages/core/node_modules/markdown-tip/dist/markdown-tip.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/github-fork-ribbon-css/gh-fork-ribbon.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/select2-component/dist/select2.min.css ./packages/core/demo/css/`,
@@ -49,7 +49,7 @@ module.exports = {
             tscDemoCommand,
             webpackCommand
           ],
-          clean: `rimraf "packages/@(core|vue|react|angular)/demo/**/*.@(index.bundle-*.js|*.bundle-*.css)"`
+          clean: `rimraf "packages/@(core|vue|react|angular)/demo/**/@(*.bundle-*.js|*.bundle-*.css)"`
         },
         revStaticCommand
       ]

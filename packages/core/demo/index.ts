@@ -1,5 +1,8 @@
 import * as common from "../dist/";
 
+/**
+ * @public
+ */
 export const schema: common.Schema = {
     type: "object",
     title: "GUI:",
@@ -236,6 +239,9 @@ export const schema: common.Schema = {
     ],
 };
 
+/**
+ * @public
+ */
 export const schemaSchema: common.StringSchema = {
     title: "Schema:",
     type: "string",

@@ -1,4 +1,4 @@
-import "../packages/core/dist";
+import * as common from "../packages/core/dist";
 
 describe("getDefaultValue", () => {
     it("should work", () => {
