@@ -71,9 +71,6 @@ export class NumberEditorComponent {
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
 
-    trackByFunction(index: number, value: number) {
-        return index;
-    }
     toggleOptional() {
         this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined;
         this.validate();

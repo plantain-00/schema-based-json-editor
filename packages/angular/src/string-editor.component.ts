@@ -129,9 +129,6 @@ export class StringEditorComponent {
         this.validate();
         this.updateValue.emit({ value: this.value, isValid: !this.errorMessage });
     }
-    trackByFunction(index: number, value: { [name: string]: common.ValueType }) {
-        return index;
-    }
     collapseOrExpand = () => {
         this.collapsed = !this.collapsed;
     }
