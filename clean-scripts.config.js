@@ -23,8 +23,6 @@ const revStaticCommand = `rev-static`
 
 module.exports = {
   build: [
-    `rimraf dist`,
-    `mkdirp dist`,
     {
       copy: [
         `cpy ./packages/core/node_modules/bootstrap/dist/css/bootstrap.min.css ./packages/core/demo/css/`,
