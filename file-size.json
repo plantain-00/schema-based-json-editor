@@ -11,8 +11,8 @@
   "vueDemoEditorBundleJs": "54.8 kB 12.6 kB",
   "vueDemoIndexBundleJs": "6.24 kB 2.01 kB",
   "vueDemoVendorBundleJs": "751 kB 264 kB",
-  "packagesAngularDemoAotIndexHtml": "1.27 kB 653 B",
-  "packagesAngularDemoJitIndexHtml": "1.6 kB 806 B",
-  "packagesReactDemoIndexHtml": "1.6 kB 807 B",
-  "packagesVueDemoIndexHtml": "1.6 kB 810 B"
+  "packagesAngularDemoAotIndexHtml": "1.31 kB 665 B",
+  "packagesAngularDemoJitIndexHtml": "1.64 kB 822 B",
+  "packagesReactDemoIndexHtml": "1.64 kB 827 B",
+  "packagesVueDemoIndexHtml": "1.64 kB 828 B"
 }
