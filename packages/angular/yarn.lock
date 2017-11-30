@@ -35,33 +35,15 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/http@5":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@angular/http/-/http-5.0.3.tgz#a3b9a4247c4b77456e49549655d4c1d1859e075d"
-  dependencies:
-    tslib "^1.7.1"
-
-"@angular/platform-browser-dynamic@5":
+"@angular/platform-browser-dynamic@5", "@angular/platform-browser-dynamic@5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.0.3.tgz#be6dcf03a04fa51c6a0484b40e5f1a7d7e54cc87"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser@5":
+"@angular/platform-browser@5", "@angular/platform-browser@5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-5.0.3.tgz#4ac872404a2a8162dd28a5b164238b76bf5e1261"
-  dependencies:
-    tslib "^1.7.1"
-
-"@angular/router@5":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-5.0.3.tgz#616cc6a7ae33575b54e613b70af5c7f291c8cd1e"
-  dependencies:
-    tslib "^1.7.1"
-
-"@angular/upgrade@5":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@angular/upgrade/-/upgrade-5.0.3.tgz#1a1c26818d2721d4c12e40c34bbf55126f394ddb"
   dependencies:
     tslib "^1.7.1"
 
@@ -70,8 +52,8 @@
   resolved "https://registry.yarnpkg.com/@types/dragula/-/dragula-2.1.32.tgz#78c1f730ca9b50e3185b238673d74df14d725154"
 
 "@types/highlight.js@*":
-  version "9.12.1"
-  resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.12.1.tgz#990f5dc63774852beab55e6173e5851d35da52f2"
+  version "9.12.2"
+  resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.12.2.tgz#6ee7cd395effe5ec80b515d3ff1699068cd0cd1d"
 
 "@types/markdown-it@*":
   version "0.0.4"
@@ -255,7 +237,7 @@ contra@1.9.4:
     atoa "1.0.0"
     ticky "1.0.1"
 
-core-js@2:
+core-js@2, core-js@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
 
@@ -643,22 +625,6 @@ linkify-it@^2.0.0:
   dependencies:
     uc.micro "^1.0.1"
 
-lodash.isinteger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
-
-lodash.isobject@3:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
-
-lodash.tointeger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.tointeger/-/lodash.tointeger-4.0.4.tgz#65e655acaa724e26d3fef57effc46970e1cd17e6"
-
-lodash.tonumber@4:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
-
 markdown-it@8.4.0:
   version "8.4.0"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.0.tgz#e2400881bf171f7018ed1bd9da441dac8af6306d"
@@ -686,7 +652,7 @@ markdown-tip-angular@6:
     tslib "1"
     zone.js "0.8"
 
-markdown-tip@6, markdown-tip@^6.0.0:
+markdown-tip@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.0.0.tgz#917ea625a40d7d255b8db57eeb275acb5ec6633f"
 
@@ -953,7 +919,7 @@ rimraf@2, rimraf@^2.5.1, rimraf@^2.6.1:
   dependencies:
     glob "^7.0.5"
 
-rxjs@5:
+rxjs@5, rxjs@5.5.2:
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.2.tgz#28d403f0071121967f18ad665563255d54236ac3"
   dependencies:
@@ -962,18 +928,6 @@ rxjs@5:
 safe-buffer@^5.0.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
-
-schema-based-json-editor@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/schema-based-json-editor/-/schema-based-json-editor-7.0.1.tgz#0cc8d49e8791c912e6ff58d6ecec0814dcb3199a"
-  dependencies:
-    lodash.isinteger "4"
-    lodash.isobject "3"
-    lodash.tointeger "4"
-    lodash.tonumber "4"
-    markdown-tip "6"
-    select2-component "5"
-    tslib "1"
 
 select2-angular-component@5:
   version "5.0.0"
@@ -993,7 +947,7 @@ select2-angular-component@5:
     tslib "1"
     zone.js "0.8"
 
-select2-component@5, select2-component@^5.0.0:
+select2-component@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.0.0.tgz#0e4f43a34a7db3b36207b111128956e6d1a6746e"
 
@@ -1076,8 +1030,8 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
 symbol-observable@^1.0.1:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.1.0.tgz#5c68fd8d54115d9dfb72a84720549222e8db9b32"
 
 tar-pack@^3.4.0:
   version "3.4.1"
@@ -1167,6 +1121,6 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-zone.js@0.8:
+zone.js@0.8, zone.js@0.8.18:
   version "0.8.18"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.18.tgz#8cecb3977fcd1b3090562ff4570e2847e752b48d"
