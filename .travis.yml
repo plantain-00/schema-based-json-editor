@@ -8,7 +8,7 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
   - git fetch --unshallow || true
 install:
-  - yarn install --pure-lockfile
+  - yarn install --frozen-lockfile
 script:
   - npm run bootstrap
   - npm run build

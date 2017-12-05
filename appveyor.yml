@@ -3,7 +3,7 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - yarn install --pure-lockfile
+  - yarn install --frozen-lockfile
 
 test_script:
   - node --version

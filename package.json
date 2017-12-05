@@ -3,7 +3,7 @@
   "private": true,
   "description": "A reactjs, angular and vuejs component of schema based json editor.",
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap -- --frozen-lockfile",
     "build": "clean-scripts build",
     "lint": "clean-scripts lint",
     "test": "clean-scripts test",
