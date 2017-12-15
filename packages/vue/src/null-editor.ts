@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "schema-based-json-editor";
-import { nullEditorTemplateHtml } from "./variables";
+import { nullEditorTemplateHtml } from "./null-variables";
 
 @Component({
-    template: nullEditorTemplateHtml,
+    render: nullEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
 })
 export class NullEditor extends Vue {

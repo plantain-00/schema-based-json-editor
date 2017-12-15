@@ -7,16 +7,16 @@
   resolved "https://registry.yarnpkg.com/@types/dragula/-/dragula-2.1.32.tgz#78c1f730ca9b50e3185b238673d74df14d725154"
 
 "@types/highlight.js@*":
-  version "9.12.1"
-  resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.12.1.tgz#990f5dc63774852beab55e6173e5851d35da52f2"
+  version "9.12.2"
+  resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.12.2.tgz#6ee7cd395effe5ec80b515d3ff1699068cd0cd1d"
 
 "@types/markdown-it@*":
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "8.0.53"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.53.tgz#396b35af826fa66aad472c8cb7b8d5e277f4e6d8"
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.1.tgz#4ec3020bcdfe2abffeef9ba3fbf26fca097514b5"
 
 argparse@^1.0.7:
   version "1.0.9"
@@ -66,22 +66,6 @@ linkify-it@^2.0.0:
   dependencies:
     uc.micro "^1.0.1"
 
-lodash.isinteger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
-
-lodash.isobject@3:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
-
-lodash.tointeger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.tointeger/-/lodash.tointeger-4.0.4.tgz#65e655acaa724e26d3fef57effc46970e1cd17e6"
-
-lodash.tonumber@4:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
-
 markdown-it@8.4.0:
   version "8.4.0"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.0.tgz#e2400881bf171f7018ed1bd9da441dac8af6306d"
@@ -93,45 +77,36 @@ markdown-it@8.4.0:
     uc.micro "^1.0.3"
 
 markdown-tip-vue@6:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.0.0.tgz#d600e14f55fff209512d4c941e77cbc7a63e37d9"
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.1.0.tgz#64103d29646d60a947ad19e0652313fb11474f56"
   dependencies:
-    markdown-tip "^6.0.0"
-    tslib "1"
+    markdown-tip "^6.0.1"
     vue "2"
     vue-class-component "6"
 
-markdown-tip@6, markdown-tip@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.0.0.tgz#917ea625a40d7d255b8db57eeb275acb5ec6633f"
+markdown-tip@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.0.1.tgz#30fbb591bfac8d6801c92f30c5a142a4c0cbe51a"
+  dependencies:
+    tslib "1"
 
 mdurl@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
 
-schema-based-json-editor@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/schema-based-json-editor/-/schema-based-json-editor-7.0.1.tgz#0cc8d49e8791c912e6ff58d6ecec0814dcb3199a"
-  dependencies:
-    lodash.isinteger "4"
-    lodash.isobject "3"
-    lodash.tointeger "4"
-    lodash.tonumber "4"
-    markdown-tip "6"
-    select2-component "5"
-    tslib "1"
-
-select2-component@5, select2-component@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.0.0.tgz#0e4f43a34a7db3b36207b111128956e6d1a6746e"
-
-select2-vue-component@5:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.0.0.tgz#07bbb6009a1a8ab8a2472ff9b8971a117868137e"
+select2-component@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.0.2.tgz#9485270230262b27936f39b66d094458b818edfe"
   dependencies:
     "@types/node" "*"
-    select2-component "^5.0.0"
     tslib "1"
+
+select2-vue-component@5:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.1.0.tgz#b9daf9a113553ece6de662342b44f7c82d56e100"
+  dependencies:
+    "@types/node" "*"
+    select2-component "^5.0.2"
     vue "2"
     vue-class-component "6"
 
@@ -144,17 +119,21 @@ ticky@1.0.1:
   resolved "https://registry.yarnpkg.com/ticky/-/ticky-1.0.1.tgz#b7cfa71e768f1c9000c497b9151b30947c50e46d"
 
 tslib@1:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.0.tgz#dc604ebad64bcbf696d613da6c954aa0e7ea1eb6"
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.1.tgz#6946af2d1d651a7b1863b531d6e5afa41aa44eac"
+
+typescript@2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
 
 uc.micro@^1.0.1, uc.micro@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.3.tgz#7ed50d5e0f9a9fb0a573379259f2a77458d50192"
 
 vue-class-component@6:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.1.0.tgz#41a51a7991f2c0d51ff73f08436de0c2bfd934d6"
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.1.1.tgz#2e095036648b428a4f1e9ec8a8bbe7833a6d1879"
 
 vue@2:
-  version "2.5.8"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.8.tgz#f855c1c27255184a82225f4bef225473e8faf15b"
+  version "2.5.11"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.11.tgz#80ca2657aa81f03545cd8dd5a2f55454641e6405"

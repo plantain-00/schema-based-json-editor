@@ -27,13 +27,13 @@ Vue.component("stringEditor", StringEditor);
 Vue.component("optional", Optional);
 Vue.component("description", Description);
 
-import { indexTemplateHtml } from "./variables";
+import { indexTemplateHtml } from "./index-variables";
 
 @Component({
-    template: indexTemplateHtml,
+    render: indexTemplateHtml,
     props: ["schema", "initialValue", "theme", "icon", "locale", "readonly", "dragula", "markdownit", "hljs", "forceHttps"],
 })
-class JSONEditor extends Vue {
+export class JSONEditor extends Vue {
     theme: string;
     locale: common.Locale;
     icon: string;

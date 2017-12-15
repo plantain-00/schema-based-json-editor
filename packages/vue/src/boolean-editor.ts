@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "schema-based-json-editor";
-import { booleanEditorTemplateHtml } from "./variables";
+import { booleanEditorTemplateHtml } from "./boolean-variables";
 
 @Component({
-    template: booleanEditorTemplateHtml,
+    render: booleanEditorTemplateHtml,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
 })
 export class BooleanEditor extends Vue {

@@ -1,8 +1,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
+import { descriptionTemplateHtml } from "./description-variables";
+
 @Component({
-    template: `<p v-if="notEmpty || message" :class="theme.help">{{message}}</p>`,
+    render: descriptionTemplateHtml,
     props: ["theme", "message", "notEmpty"],
 })
 export class Description extends Vue {

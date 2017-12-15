@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Component from "vue-class-component";
-import { iconTemplateHtml } from "./variables";
+import { iconTemplateHtml } from "./icon-variables";
 
 @Component({
-    template: iconTemplateHtml,
+    render: iconTemplateHtml,
     props: ["icon", "text", "theme"],
 })
 export class Icon extends Vue {

@@ -51,8 +51,7 @@ module.exports = [
       path: path.resolve(__dirname, 'packages/react/demo'),
       filename: '[name].bundle.js'
     },
-    plugins,
-    resolve
+    plugins
   },
   {
     entry: {
@@ -64,8 +63,7 @@ module.exports = [
       path: path.resolve(__dirname, 'packages/angular/demo/jit'),
       filename: '[name].bundle.js'
     },
-    plugins,
-    resolve
+    plugins
   },
   {
     entry: {
@@ -89,7 +87,6 @@ module.exports = [
         exclude: [
         ]
       })
-    ],
-    resolve
+    ]
   }
 ]
