@@ -1,10 +1,11 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "schema-based-json-editor";
-import { numberEditorTemplateHtml } from "./number-variables";
+import { numberEditorTemplateHtml, numberEditorTemplateHtmlStatic } from "./variables";
 
 @Component({
     render: numberEditorTemplateHtml,
+    staticRenderFns: numberEditorTemplateHtmlStatic,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton"],
 })
 export class NumberEditor extends Vue {

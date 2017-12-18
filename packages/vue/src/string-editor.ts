@@ -2,12 +2,13 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import * as common from "schema-based-json-editor";
 import { MarkdownIt, HLJS } from "schema-based-json-editor/dist/libs";
-import { stringEditorTemplateHtml } from "./string-variables";
+import { stringEditorTemplateHtml, stringEditorTemplateHtmlStatic } from "./variables";
 import "markdown-tip-vue";
 import "select2-vue-component";
 
 @Component({
     render: stringEditorTemplateHtml,
+    staticRenderFns: stringEditorTemplateHtmlStatic,
     props: ["schema", "initialValue", "title", "theme", "icon", "locale", "readonly", "required", "hasDeleteButton", "dragula", "md", "hljs", "forceHttps"],
 })
 export class StringEditor extends Vue {

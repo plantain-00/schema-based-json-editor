@@ -4,17 +4,7 @@ const tsFiles = `"packages/@(core|vue|react|angular)/@(src|demo)/**/*.@(ts|tsx)"
 const jsFiles = `"*.config.js" "spec/**/*.config.js"`
 const excludeTsFiles = `"packages/@(core|vue|react|angular)/@(src|demo)/**/*.d.ts"`
 
-const vueArrayTemplateCommand = `file2variable-cli packages/vue/src/array-editor.template.html -o packages/vue/src/array-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "ArrayEditor" --vue-type-path "./array-editor"`
-const vueBooleanTemplateCommand = `file2variable-cli packages/vue/src/boolean-editor.template.html -o packages/vue/src/boolean-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "BooleanEditor" --vue-type-path "./boolean-editor"`
-const vueDescriptionTemplateCommand = `file2variable-cli packages/vue/src/description.template.html -o packages/vue/src/description-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "Description" --vue-type-path "./description"`
-const vueEditorTemplateCommand = `file2variable-cli packages/vue/src/editor.template.html -o packages/vue/src/editor-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "Editor" --vue-type-path "./editor"`
-const vueIconTemplateCommand = `file2variable-cli packages/vue/src/icon.template.html -o packages/vue/src/icon-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "Icon" --vue-type-path "./icon"`
-const vueIndexTemplateCommand = `file2variable-cli packages/vue/src/index.template.html -o packages/vue/src/index-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "JSONEditor" --vue-type-path "./index"`
-const vueNullTemplateCommand = `file2variable-cli packages/vue/src/null-editor.template.html -o packages/vue/src/null-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "NullEditor" --vue-type-path "./null-editor"`
-const vueNumberTemplateCommand = `file2variable-cli packages/vue/src/number-editor.template.html -o packages/vue/src/number-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "NumberEditor" --vue-type-path "./number-editor"`
-const vueObjectTemplateCommand = `file2variable-cli packages/vue/src/object-editor.template.html -o packages/vue/src/object-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "ObjectEditor" --vue-type-path "./object-editor"`
-const vueOptionalTemplateCommand = `file2variable-cli packages/vue/src/optional.template.html -o packages/vue/src/optional-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "Optional" --vue-type-path "./optional"`
-const vueStringTemplateCommand = `file2variable-cli packages/vue/src/string-editor.template.html -o packages/vue/src/string-variables.ts --html-minify --base packages/vue/src/  --vue --vue-type-name "StringEditor" --vue-type-path "./string-editor"`
+const vueTemplateCommand = `file2variable-cli --config packages/vue/src/file2variable.config.js`
 
 const angularTemplateCommand = `file2variable-cli packages/angular/src/*.template.html -o packages/angular/src/variables.ts --html-minify --base packages/angular/src`
 const ngcSrcCommand = [
@@ -51,19 +41,7 @@ module.exports = {
         {
           js: [
             {
-              vue: [
-                vueArrayTemplateCommand,
-                vueBooleanTemplateCommand,
-                vueDescriptionTemplateCommand,
-                vueEditorTemplateCommand,
-                vueIconTemplateCommand,
-                vueIndexTemplateCommand,
-                vueNullTemplateCommand,
-                vueNumberTemplateCommand,
-                vueObjectTemplateCommand,
-                vueOptionalTemplateCommand,
-                vueStringTemplateCommand
-              ],
+              vue: vueTemplateCommand,
               angular: angularTemplateCommand
             },
             ngcSrcCommand,
@@ -92,19 +70,7 @@ module.exports = {
     js: `standard --fix ${jsFiles}`
   },
   watch: {
-    vue: {
-      vueArrayTemplateCommand: `${vueArrayTemplateCommand} --watch`,
-      vueBooleanTemplateCommand: `${vueBooleanTemplateCommand} --watch`,
-      vueDescriptionTemplateCommand: `${vueDescriptionTemplateCommand} --watch`,
-      vueEditorTemplateCommand: `${vueEditorTemplateCommand} --watch`,
-      vueIconTemplateCommand: `${vueIconTemplateCommand} --watch`,
-      vueIndexTemplateCommand: `${vueIndexTemplateCommand} --watch`,
-      vueNullTemplateCommand: `${vueNullTemplateCommand} --watch`,
-      vueNumberTemplateCommand: `${vueNumberTemplateCommand} --watch`,
-      vueObjectTemplateCommand: `${vueObjectTemplateCommand} --watch`,
-      vueOptionalTemplateCommand: `${vueOptionalTemplateCommand} --watch`,
-      vueStringTemplateCommand: `${vueStringTemplateCommand} --watch`
-    },
+    vue: `${vueTemplateCommand} --watch`,
     angular: `${angularTemplateCommand} --watch`,
     tsc: `${ngcSrcCommand} --watch`,
     demo: `${tscDemoCommand} --watch`,

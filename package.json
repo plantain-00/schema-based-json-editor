@@ -39,7 +39,7 @@
     "@types/puppeteer": "0.13.7",
     "clean-scripts": "1.7.0",
     "cpy-cli": "1.0.1",
-    "file2variable-cli": "1.7.2",
+    "file2variable-cli": "1.8.0",
     "http-server": "0.10.0",
     "jasmine": "2.8.0",
     "karma": "1.7.1",

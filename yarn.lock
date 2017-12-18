@@ -1847,9 +1847,9 @@ file-entry-cache@^2.0.0:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
-file2variable-cli@1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/file2variable-cli/-/file2variable-cli-1.7.2.tgz#58802e6442c64d7660fc2a3d2a2e0e6d6ab487f2"
+file2variable-cli@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/file2variable-cli/-/file2variable-cli-1.8.0.tgz#bb1cf2b8cc323a5d5c2531ca85e6f4078feb741c"
   dependencies:
     camelcase "4.1.0"
     chokidar "1.7.0"
