@@ -1,6 +1,6 @@
 {
   "name": "angular-schema-based-json-editor",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A angular component of schema based json editor.",
@@ -19,6 +19,9 @@
     "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@angular/common": "5",
     "@angular/core": "5",
@@ -27,7 +30,7 @@
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
     "markdown-tip-angular": "6",
-    "schema-based-json-editor": "^7.1.0",
+    "schema-based-json-editor": "^7.1.1",
     "select2-angular-component": "5"
   },
   "devDependencies": {
@@ -39,5 +42,16 @@
     "markdown-it": "8.4.0",
     "rxjs": "5.5.6",
     "zone.js": "0.8.18"
+  },
+  "peerDependencies": {
+    "@angular/common": "5",
+    "@angular/core": "5",
+    "@angular/forms": "5",
+    "@types/dragula": "*",
+    "@types/highlight.js": "*",
+    "@types/markdown-it": "*",
+    "markdown-tip-angular": "6",
+    "schema-based-json-editor": "^7.1.1",
+    "select2-angular-component": "5"
   }
 }

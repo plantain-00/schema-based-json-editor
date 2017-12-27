@@ -1,6 +1,6 @@
 {
   "name": "schema-based-json-editor",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs, angular and vuejs component of schema based json editor.",
@@ -18,6 +18,9 @@
     "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "lodash.isinteger": "4",
     "lodash.isobject": "3",
@@ -34,5 +37,14 @@
     "github-fork-ribbon-css": "0.2.1",
     "highlight.js": "9.12.0",
     "markdown-it": "8.4.0"
+  },
+  "peerDependencies": {
+    "lodash.isinteger": "4",
+    "lodash.isobject": "3",
+    "lodash.tointeger": "4",
+    "lodash.tonumber": "4",
+    "markdown-tip": "6",
+    "select2-component": "5",
+    "tslib": "1"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "react-schema-based-json-editor",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs component of schema based json editor.",
@@ -19,6 +19,9 @@
     "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@types/dragula": "*",
     "@types/highlight.js": "*",
@@ -26,7 +29,7 @@
     "markdown-tip-react": "6",
     "react": "16",
     "react-dom": "16",
-    "schema-based-json-editor": "^7.1.0",
+    "schema-based-json-editor": "^7.1.1",
     "select2-react-component": "5"
   },
   "devDependencies": {
@@ -35,5 +38,15 @@
     "dragula": "3.7.2",
     "highlight.js": "9.12.0",
     "markdown-it": "8.4.0"
+  },
+  "peerDependencies": {
+    "@types/dragula": "*",
+    "@types/highlight.js": "*",
+    "@types/markdown-it": "*",
+    "markdown-tip-react": "6",
+    "react": "16",
+    "react-dom": "16",
+    "schema-based-json-editor": "^7.1.1",
+    "select2-react-component": "5"
   }
 }
