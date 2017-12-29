@@ -1,4 +1,6 @@
-### v 7.x
+# change logs
+
+## v 7.x
 
 ```bash
 # v6
@@ -22,7 +24,7 @@ import { JSONEditor } from "react-schema-based-json-editor";
 import { JSONEditorModule } from "angular-schema-based-json-editor";
 ```
 
-### v 6.x
+## v 6.x
 
 ```ts
 // v5 angular AOT:
@@ -32,7 +34,7 @@ import { JSONEditorModule } from "schema-based-json-editor/angular";
 import { JSONEditorModule } from "schema-based-json-editor/aot/angular";
 ```
 
-### v 5.x
+## v 5.x
 
 ```ts
 // v5
@@ -46,7 +48,7 @@ import { JSONEditorComponent, BooleanEditorComponent, ArrayEditorComponent, Edit
 import "schema-based-json-editor/dist/vue";
 ```
 
-### v 4.x
+## v 4.x
 
 ```bash
 // v4
@@ -56,7 +58,7 @@ locale is an object that can be imported dynamicly
 locale is a string
 ```
 
-### v 3.x
+## v 3.x
 
 ```ts
 // before
@@ -70,9 +72,9 @@ import "schema-based-json-editor/dist/angular";
 import "schema-based-json-editor/dist/vue";
 ```
 
-### v 2.x
+## v 2.x
 
-#### 1. reactjs: updateValue
+### 1. reactjs: updateValue
 
 ```ts
 // before
@@ -82,7 +84,7 @@ import "schema-based-json-editor/dist/vue";
 (value: any, isValid: boolean) => void
 ```
 
-#### 2. angular: updateValue
+### 2. angular: updateValue
 
 ```ts
 // before
@@ -92,7 +94,7 @@ import "schema-based-json-editor/dist/vue";
 (value: { value: any, isValid: boolean }) => void
 ```
 
-#### 3. vuejs: update-value
+### 3. vuejs: update-value
 
 ```ts
 // before

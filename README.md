@@ -1,3 +1,5 @@
+# schema-based-json-editor
+
 [![Dependency Status](https://david-dm.org/plantain-00/schema-based-json-editor.svg)](https://david-dm.org/plantain-00/schema-based-json-editor)
 [![devDependency Status](https://david-dm.org/plantain-00/schema-based-json-editor/dev-status.svg)](https://david-dm.org/plantain-00/schema-based-json-editor#info=devDependencies)
 [![Build Status: Linux](https://travis-ci.org/plantain-00/schema-based-json-editor.svg?branch=master)](https://travis-ci.org/plantain-00/schema-based-json-editor)
@@ -5,9 +7,7 @@
 [![npm version](https://badge.fury.io/js/schema-based-json-editor.svg)](https://badge.fury.io/js/schema-based-json-editor)
 [![Downloads](https://img.shields.io/npm/dm/schema-based-json-editor.svg)](https://www.npmjs.com/package/schema-based-json-editor)
 
-# schema-based-json-editor
-
-#### features
+## features
 
 + reactjs component
 + angular component
@@ -20,7 +20,7 @@
 + image preview, code highlight, markdown preview
 + multi-language
 
-#### reactjs component
+## reactjs component
 
 `npm i react-schema-based-json-editor`
 
@@ -37,9 +37,9 @@ import { JSONEditor } from "react-schema-based-json-editor";
 </JSONEditor>
 ```
 
-the online demo: https://plantain-00.github.io/schema-based-json-editor/packages/react/demo
+the online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/react/demo>
 
-#### angular component
+## angular component
 
 `npm i angular-schema-based-json-editor`
 
@@ -63,11 +63,11 @@ class MainModule { }
 </json-editor>
 ```
 
-the online demo: https://plantain-00.github.io/schema-based-json-editor/packages/angular/demo/jit
+the online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/angular/demo/jit>
 
-the AOT online demo: https://plantain-00.github.io/schema-based-json-editor/packages/angular/demo/aot
+the AOT online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/angular/demo/aot>
 
-#### vuejs component
+## vuejs component
 
 `npm i vue-schema-based-json-editor`
 
@@ -84,9 +84,9 @@ import "vue-schema-based-json-editor";
 </json-editor>
 ```
 
-the online demo: https://plantain-00.github.io/schema-based-json-editor/packages/vue/demo
+the online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/vue/demo>
 
-#### properties and events of the component
+## properties and events of the component
 
 name | type | description
 --- | --- | ---
@@ -102,6 +102,6 @@ markdownit | object? | the `markdown-it` library object if you want to preview m
 hljs | object? | the `highlight.js` library object if you want to highlight code
 forceHttps | boolean? | if true, the preview url of images will be `https://` rather than `http://`
 
-#### change logs
+## change logs
 
-https://github.com/plantain-00/schema-based-json-editor/tree/master/change_logs.md
+<https://github.com/plantain-00/schema-based-json-editor/tree/master/change_logs.md>
