@@ -41,7 +41,7 @@
     "highlight.js": "9.12.0",
     "markdown-it": "8.4.0",
     "rxjs": "5.5.6",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.19"
   },
   "peerDependencies": {
     "@angular/common": "5",

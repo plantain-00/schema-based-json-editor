@@ -139,16 +139,16 @@ markdown-it@8.4.0:
     uc.micro "^1.0.3"
 
 markdown-tip-react@6:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.0.1.tgz#e57f27abeae252bb450a602e614dfae5d94f9353"
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.1.1.tgz#0573d2012ae03ba2caa25441c3c01eec00f08cbb"
   dependencies:
-    markdown-tip "^6.0.1"
+    markdown-tip "^6.1.1"
     react "16"
     react-dom "16"
 
-markdown-tip@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.0.1.tgz#30fbb591bfac8d6801c92f30c5a142a4c0cbe51a"
+markdown-tip@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.1.1.tgz#bd2089398999733161584ad061d5d2159f2b0985"
   dependencies:
     tslib "1"
 
@@ -199,21 +199,21 @@ react@16:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-select2-component@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.0.2.tgz#9485270230262b27936f39b66d094458b818edfe"
+select2-component@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.1.1.tgz#4c07db706c5e4fd2cd8842e8294625a8311a05fc"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-react-component@5:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.0.2.tgz#8c733b43fe6a82b687536b6f2ff54bf4c2b19a7b"
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.1.1.tgz#cb2da4d7d2c1d409778f00c79ff7d30f92b34c0b"
   dependencies:
     "@types/node" "*"
     react "16"
     react-dom "16"
-    select2-component "^5.0.2"
+    select2-component "^5.1.1"
 
 setimmediate@^1.0.5:
   version "1.0.5"

@@ -111,17 +111,17 @@ markdown-it@8.4.0:
     uc.micro "^1.0.3"
 
 markdown-tip-angular@6:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip-angular/-/markdown-tip-angular-6.1.0.tgz#a1f3698fa231af9732b6bb49dc267c3045ffa90b"
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/markdown-tip-angular/-/markdown-tip-angular-6.1.1.tgz#126277fa7308c43f6ecc5abfb45c3433bcf7a6e4"
   dependencies:
     "@angular/common" "5"
     "@angular/core" "5"
     "@angular/forms" "5"
-    markdown-tip "^6.0.1"
+    markdown-tip "^6.1.1"
 
-markdown-tip@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.0.1.tgz#30fbb591bfac8d6801c92f30c5a142a4c0cbe51a"
+markdown-tip@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.1.1.tgz#bd2089398999733161584ad061d5d2159f2b0985"
   dependencies:
     tslib "1"
 
@@ -136,17 +136,17 @@ rxjs@5.5.6:
     symbol-observable "1.0.1"
 
 select2-angular-component@5:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/select2-angular-component/-/select2-angular-component-5.1.0.tgz#53c0a72fa270b6cdda830c9a219bdaabc72575d9"
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/select2-angular-component/-/select2-angular-component-5.1.1.tgz#ede5903d9bbd7975b7b194ff7de1344a00c3119e"
   dependencies:
     "@angular/common" "5"
     "@angular/core" "5"
     "@angular/forms" "5"
-    select2-component "^5.0.2"
+    select2-component "^5.1.1"
 
-select2-component@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.0.2.tgz#9485270230262b27936f39b66d094458b818edfe"
+select2-component@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.1.1.tgz#4c07db706c5e4fd2cd8842e8294625a8311a05fc"
   dependencies:
     "@types/node" "*"
     tslib "1"
@@ -171,6 +171,6 @@ uc.micro@^1.0.1, uc.micro@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.3.tgz#7ed50d5e0f9a9fb0a573379259f2a77458d50192"
 
-zone.js@0.8.18:
-  version "0.8.18"
-  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.18.tgz#8cecb3977fcd1b3090562ff4570e2847e752b48d"
+zone.js@0.8.19:
+  version "0.8.19"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.19.tgz#a4b522cd9e8b7b616a638c297d720d4c7f292f71"
