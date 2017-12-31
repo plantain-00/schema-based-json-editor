@@ -23,9 +23,6 @@ export type State = Partial<{
     filter: string;
 }>;
 
-/**
- * @public
- */
 export class ArrayEditor extends React.Component<Props, State> {
     private renderSwitch = 1;
     private collapsed = this.props.schema.collapsed;

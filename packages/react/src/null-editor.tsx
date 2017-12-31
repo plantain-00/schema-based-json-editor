@@ -15,9 +15,6 @@ export type State = Partial<{
     value?: null;
 }>;
 
-/**
- * @public
- */
 export class NullEditor extends React.Component<Props, State> {
     private value?: null;
     constructor(props: Props) {

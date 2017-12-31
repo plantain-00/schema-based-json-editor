@@ -1,9 +1,6 @@
 import * as React from "react";
 import * as common from "schema-based-json-editor";
 
-/**
- * @public
- */
 export class Description extends React.Component<{
     theme: common.Theme;
     message: string | undefined;

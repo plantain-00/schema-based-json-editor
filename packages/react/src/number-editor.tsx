@@ -18,9 +18,6 @@ export type State = Partial<{
     willRender: boolean;
 }>;
 
-/**
- * @public
- */
 export class NumberEditor extends React.Component<Props, State> {
     private value?: number;
     private errorMessage: string;

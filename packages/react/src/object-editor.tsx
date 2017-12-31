@@ -21,9 +21,6 @@ export type State = Partial<{
     filter: string;
 }>;
 
-/**
- * @public
- */
 export class ObjectEditor extends React.Component<Props, State> {
     private collapsed = this.props.schema.collapsed;
     private value?: { [name: string]: common.ValueType };

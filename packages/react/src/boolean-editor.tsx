@@ -16,9 +16,6 @@ export type State = Partial<{
     willRender: boolean;
 }>;
 
-/**
- * @public
- */
 export class BooleanEditor extends React.Component<Props, State> {
     private value?: boolean;
     private willRender = false;

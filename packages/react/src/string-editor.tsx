@@ -20,9 +20,6 @@ export type State = Partial<{
     willRender: boolean;
 }>;
 
-/**
- * @public
- */
 export class StringEditor extends React.Component<Props, State> {
     private value?: string;
     private errorMessage: string;
