@@ -212,6 +212,13 @@ const icons: { [name: string]: Icon } = {
         add: "fa fa-plus",
         delete: "fa fa-times",
     },
+    fontawesome5: {
+        isText: false,
+        collapse: "fas fa-caret-square-down",
+        expand: "fas fa-caret-square-right",
+        add: "fas fa-plus",
+        delete: "fas fa-times",
+    },
 };
 
 /**

@@ -94,7 +94,7 @@ schema | Schema | the json schema object
 initialValue | ValueType | the initial json
 updateValue | (value: ValueType or undefined, isValid: boolean) => void | the function that is invoked when the json is edited in the editor
 theme | string? | support "bootstrap3" for now
-icon | string? | support "bootstrap3" and "fontawesome4" for now
+icon | string? | support "bootstrap3" "fontawesome4" and "fontawesome5" for now
 locale | Locale? | locale object
 readonly | boolean? | readonly
 dragula | object? | the `dragula` library object if you want to reorder array by drag and drop
