@@ -36,15 +36,18 @@ export class JSONEditorComponent {
     @Input()
     forceHttps?: boolean;
 
-    themeObject: common.Theme;
-    localeObject: common.Locale;
-    iconObject: common.Icon;
+    get themeObject() {
+        return common.getTheme(this.theme);
+    }
+    get localeObject() {
+        return common.getLocale(this.locale);
+    }
+    get iconObject() {
+        return common.getIcon(this.icon, this.localeObject);
+    }
     md?: MarkdownIt;
 
     ngOnInit() {
-        this.themeObject = common.getTheme(this.theme);
-        this.localeObject = common.getLocale(this.locale);
-        this.iconObject = common.getIcon(this.icon, this.localeObject);
         this.md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps);
     }
 }

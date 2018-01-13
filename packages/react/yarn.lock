@@ -15,8 +15,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "8.5.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.7.tgz#9c498c35af354dcfbca3790fb2e81129e93cf0e2"
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.3.0.tgz#3a129cda7c4e5df2409702626892cb4b96546dd5"
 
 "@types/react-dom@16.0.3":
   version "16.0.3"
@@ -181,7 +181,7 @@ prop-types@^15.6.0:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-react-dom@16:
+"react-dom@15 || 16", react-dom@16:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
   dependencies:
@@ -190,7 +190,7 @@ react-dom@16:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react@16:
+"react@15 || 16", react@16:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:
@@ -199,21 +199,21 @@ react@16:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-select2-component@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.1.1.tgz#4c07db706c5e4fd2cd8842e8294625a8311a05fc"
+select2-component@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.1.2.tgz#154acec43dd547f4caf73c99ff6cb31970662ec7"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-react-component@5:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.1.1.tgz#cb2da4d7d2c1d409778f00c79ff7d30f92b34c0b"
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.1.2.tgz#dae67ebad569f5f9d57d8cf6659a0b41e814f1ca"
   dependencies:
     "@types/node" "*"
-    react "16"
-    react-dom "16"
-    select2-component "^5.1.1"
+    react "15 || 16"
+    react-dom "15 || 16"
+    select2-component "^5.1.2"
 
 setimmediate@^1.0.5:
   version "1.0.5"

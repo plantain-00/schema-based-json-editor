@@ -56,6 +56,13 @@ export class MainComponent {
     markdownit = MarkdownIt as any;
     hljs = hljs;
     schemaSchema = schemaSchema;
+    ngOnInit() {
+        if (navigator.language === "zh-CN") {
+            import("../../core/dist/locales/" + navigator.language + ".js").then(module => {
+                this.locale = module.locale;
+            });
+        }
+    }
     get formattedSchema() {
         return JSON.stringify(this.schema, null, "  ");
     }

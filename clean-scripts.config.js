@@ -9,7 +9,7 @@ const vueTemplateCommand = `file2variable-cli --config packages/vue/src/file2var
 const angularTemplateCommand = `file2variable-cli packages/angular/src/*.template.html -o packages/angular/src/variables.ts --html-minify --base packages/angular/src`
 const ngcSrcCommand = [
   `ngc -p packages/core/src`,
-  `cd ./packages/vue/ && npm run tsc`,
+  `tsc -p packages/vue/src`,
   `tsc -p packages/react/src`,
   `ngc -p packages/angular/src`
 ]

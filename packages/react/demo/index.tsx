@@ -1,21 +1,27 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { JSONEditor, Locale } from "../dist/";
+import { JSONEditor } from "../dist/";
 import { schema, schemaSchema } from "schema-based-json-editor/demo/";
 import * as dragula from "dragula";
 import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
 
-let locale: Locale | null = null;
-
 class Main extends React.Component<{}, {}> {
-    private locale = locale;
+    private locale = null;
     private schema = schema;
     private value: any = {};
     private isValid = false;
     private schemaSchema = schemaSchema;
     private get formattedSchema() {
         return JSON.stringify(this.schema, null, "  ");
+    }
+    componentWillMount() {
+        if (navigator.language === "zh-CN") {
+            import("../../core/dist/locales/" + navigator.language + ".js").then(module => {
+                this.locale = module.locale;
+                this.setState({ locale: this.locale });
+            });
+        }
     }
     render() {
         const valueHtml = hljs.highlight("json", JSON.stringify(this.value, null, "  ")).value;
@@ -70,17 +76,4 @@ class Main extends React.Component<{}, {}> {
     }
 }
 
-function start() {
-    ReactDOM.render(<Main />, document.getElementById("container"));
-}
-
-if (navigator.language === "zh-CN") {
-    import("../../core/dist/locales/" + navigator.language + ".js").then(module => {
-        locale = module.locale;
-        start();
-    }, error => {
-        start();
-    });
-} else {
-    start();
-}
+ReactDOM.render(<Main />, document.getElementById("container"));

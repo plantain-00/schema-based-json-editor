@@ -1,6 +1,6 @@
 {
   "name": "vue-schema-based-json-editor",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A vuejs component of schema based json editor.",
@@ -18,9 +18,6 @@
   "bugs": {
     "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
   },
-  "scripts": {
-    "tsc": "tsc -p src"
-  },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "files": [
     "dist"
@@ -30,7 +27,7 @@
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
     "markdown-tip-vue": "6",
-    "schema-based-json-editor": "^7.2.0",
+    "schema-based-json-editor": "^7.2.1",
     "select2-vue-component": "5",
     "vue": "2",
     "vue-class-component": "6"
@@ -38,15 +35,14 @@
   "devDependencies": {
     "dragula": "3.7.2",
     "highlight.js": "9.12.0",
-    "markdown-it": "8.4.0",
-    "typescript": "2.6.2"
+    "markdown-it": "8.4.0"
   },
   "peerDependencies": {
     "@types/dragula": "*",
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
     "markdown-tip-vue": "6",
-    "schema-based-json-editor": "^7.2.0",
+    "schema-based-json-editor": "^7.2.1",
     "select2-vue-component": "5",
     "vue": "2",
     "vue-class-component": "6"

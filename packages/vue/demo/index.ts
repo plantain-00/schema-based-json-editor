@@ -4,13 +4,11 @@ import { schema, schemaSchema } from "schema-based-json-editor/demo/";
 
 // tslint:disable:no-duplicate-imports
 import "../dist/";
-import { ValidityValue, ValueType, Locale } from "../dist/";
+import { ValidityValue, ValueType } from "../dist/";
 
 import * as dragula from "dragula";
 import * as MarkdownIt from "markdown-it";
 import * as hljs from "highlight.js";
-
-let locale: Locale | null = null;
 
 @Component({
     template: `
@@ -51,7 +49,7 @@ let locale: Locale | null = null;
     `,
 })
 class App extends Vue {
-    locale = locale;
+    locale = null;
     schema = schema;
     value = {};
     color = "black";
@@ -62,6 +60,13 @@ class App extends Vue {
     schemaSchema = schemaSchema;
     get formattedSchema() {
         return JSON.stringify(this.schema, null, "  ");
+    }
+    beforeCreate() {
+        if (navigator.language === "zh-CN") {
+            import("../../core/dist/locales/" + navigator.language + ".js").then(module => {
+                this.locale = module.locale;
+            });
+        }
     }
     updateSchema({ value }: ValidityValue<ValueType>) {
         try {
@@ -77,17 +82,4 @@ class App extends Vue {
     }
 }
 
-function start() {
-    new App({ el: "#container" });
-}
-
-if (navigator.language === "zh-CN") {
-    import("../../core/dist/locales/" + navigator.language + ".js").then(module => {
-        locale = module.locale;
-        start();
-    }, error => {
-        start();
-    });
-} else {
-    start();
-}
+new App({ el: "#container" });

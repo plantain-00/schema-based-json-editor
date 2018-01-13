@@ -25,25 +25,22 @@ export type Props = {
  * @public
  */
 export class JSONEditor extends React.Component<Props, {}> {
-    private theme: common.Theme;
-    private locale: common.Locale;
-    private icon: common.Icon;
     private md?: MarkdownIt;
     constructor(props: Props) {
         super(props);
-        this.theme = common.getTheme(this.props.theme);
-        this.locale = common.getLocale(this.props.locale);
-        this.icon = common.getIcon(this.props.icon, this.locale);
         this.md = common.initializeMarkdown(this.props.markdownit, this.props.hljs, this.props.forceHttps);
     }
     render() {
+        const theme = common.getTheme(this.props.theme);
+        const locale = common.getLocale(this.props.locale);
+        const icon = common.getIcon(this.props.icon, locale);
         return <Editor schema={this.props.schema}
             initialValue={this.props.initialValue}
             updateValue={this.updateValue}
             readonly={this.props.readonly}
-            theme={this.theme}
-            locale={this.locale}
-            icon={this.icon}
+            theme={theme}
+            locale={locale}
+            icon={icon}
             required={true}
             dragula={this.props.dragula}
             md={this.md}
