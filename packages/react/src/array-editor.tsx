@@ -1,63 +1,63 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import * as common from "schema-based-json-editor";
-import { Editor } from "./editor";
-import { Icon } from "./icon";
-import { Optional } from "./optional";
-import { Description } from "./description";
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import * as common from 'schema-based-json-editor'
+import { Editor } from './editor'
+import { Icon } from './icon'
+import { Optional } from './optional'
+import { Description } from './description'
 
 /**
  * @public
  */
-export type Props = common.Props<common.ArraySchema, common.ValueType[]>;
+export type Props = common.Props<common.ArraySchema, common.ValueType[]>
 /**
  * @public
  */
 export type State = Partial<{
-    renderSwitch: number;
-    collapsed?: boolean;
-    value?: common.ValueType[];
-    drak?: dragula.Drake;
-    errorMessage: string;
-    invalidIndexes: number[];
-    filter: string;
-}>;
+  renderSwitch: number;
+  collapsed?: boolean;
+  value?: common.ValueType[];
+  drak?: dragula.Drake;
+  errorMessage: string;
+  invalidIndexes: number[];
+  filter: string;
+}>
 
 export class ArrayEditor extends React.Component<Props, State> {
-    private renderSwitch = 1;
-    private collapsed = this.props.schema.collapsed;
-    private value?: common.ValueType[];
-    private drak?: dragula.Drake;
-    private errorMessage: string;
-    private invalidIndexes: number[] = [];
-    private filter: string = "";
-    constructor(props: Props) {
-        super(props);
-        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[];
-        this.validate();
-    }
-    componentDidMount() {
-        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-        if (this.props.dragula) {
-            const container = ReactDOM.findDOMNode(this as any).childNodes[2] as HTMLElement;
-            this.drak = this.props.dragula([container]);
-            this.drak!.on("drop", (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
-                if (this.value) {
-                    common.switchItem(this.value, el, sibling);
-                    this.renderSwitch = -this.renderSwitch;
-                    this.setState({ value: this.value, renderSwitch: this.renderSwitch });
-                    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-                }
-            });
+  private renderSwitch = 1
+  private collapsed = this.props.schema.collapsed
+  private value?: common.ValueType[]
+  private drak?: dragula.Drake
+  private errorMessage: string
+  private invalidIndexes: number[] = []
+  private filter: string = ''
+  constructor (props: Props) {
+    super(props)
+    this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[]
+    this.validate()
+  }
+  componentDidMount () {
+    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
+    if (this.props.dragula) {
+      const container = ReactDOM.findDOMNode(this as any).childNodes[2] as HTMLElement
+      this.drak = this.props.dragula([container])
+      this.drak!.on('drop', (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+        if (this.value) {
+          common.switchItem(this.value, el, sibling)
+          this.renderSwitch = -this.renderSwitch
+          this.setState({ value: this.value, renderSwitch: this.renderSwitch })
+          this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
         }
+      })
     }
-    componentWillUnmount() {
-        if (this.drak) {
-            this.drak.destroy();
-        }
+  }
+  componentWillUnmount () {
+    if (this.drak) {
+      this.drak.destroy()
     }
-    render() {
-        const childrenElement: JSX.Element[] = this.getValue.map((p, i) => ({ p, i }))
+  }
+  render () {
+    const childrenElement: JSX.Element[] = this.getValue.map((p, i) => ({ p, i }))
             .filter(({ p, i }) => common.filterArray(p, i, this.props.schema.items, this.filter))
             .map(({ p, i }) => (
                 <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
@@ -76,14 +76,14 @@ export class ArrayEditor extends React.Component<Props, State> {
                         hljs={this.props.hljs}
                         forceHttps={this.props.forceHttps} />
                 </div>
-            ));
-        const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
+            ))
+    const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
             ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
                 onChange={this.onFilterChange}
                 defaultValue={this.filter} /></div>
-            : null;
+            : null
 
-        return (
+    return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <h3>
                     {this.titleToShow}
@@ -118,63 +118,63 @@ export class ArrayEditor extends React.Component<Props, State> {
                 </div>
                 <Description theme={this.props.theme} message={this.errorMessage} />
             </div>
-        );
+    )
+  }
+  private collapseOrExpand = () => {
+    this.collapsed = !this.collapsed
+    this.setState({ collapsed: this.collapsed })
+  }
+  private toggleOptional = () => {
+    this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as common.ValueType[] | undefined
+    this.validate()
+    this.setState({ value: this.value })
+    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
+  }
+  private validate () {
+    this.errorMessage = common.getErrorMessageOfArray(this.value, this.props.schema, this.props.locale)
+  }
+  private addItem = () => {
+    this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined)!)
+    this.setState({ value: this.value })
+    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
+  }
+  private onChange = (i: number, value: common.ValueType | undefined, isValid: boolean) => {
+    this.value![i] = value
+    this.setState({ value: this.value })
+    this.validate()
+    common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i)
+    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
+  }
+  private onFilterChange = (e: React.FormEvent<{ value: string }>) => {
+    this.filter = e.currentTarget.value
+    this.setState({ filter: this.filter })
+  }
+  private onDeleteFunction = (i: number) => {
+    this.value!.splice(i, 1)
+    this.renderSwitch = -this.renderSwitch
+    this.setState({ value: this.value, renderSwitch: this.renderSwitch })
+    this.validate()
+    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
+  }
+  private get isReadOnly () {
+    return this.props.readonly || this.props.schema.readonly
+  }
+  private get hasDeleteButtonFunction () {
+    return this.props.onDelete && !this.isReadOnly
+  }
+  private get hasAddButton () {
+    return !this.isReadOnly && this.value !== undefined
+  }
+  private get getValue () {
+    if (this.value !== undefined && !this.collapsed) {
+      return this.value
     }
-    private collapseOrExpand = () => {
-        this.collapsed = !this.collapsed;
-        this.setState({ collapsed: this.collapsed });
-    }
-    private toggleOptional = () => {
-        this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as common.ValueType[] | undefined;
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-    }
-    private validate() {
-        this.errorMessage = common.getErrorMessageOfArray(this.value, this.props.schema, this.props.locale);
-    }
-    private addItem = () => {
-        this.value!.push(common.getDefaultValue(true, this.props.schema.items, undefined)!);
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-    }
-    private onChange = (i: number, value: common.ValueType | undefined, isValid: boolean) => {
-        this.value![i] = value;
-        this.setState({ value: this.value });
-        this.validate();
-        common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i);
-        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-    }
-    private onFilterChange = (e: React.FormEvent<{ value: string }>) => {
-        this.filter = e.currentTarget.value;
-        this.setState({ filter: this.filter });
-    }
-    private onDeleteFunction = (i: number) => {
-        this.value!.splice(i, 1);
-        this.renderSwitch = -this.renderSwitch;
-        this.setState({ value: this.value, renderSwitch: this.renderSwitch });
-        this.validate();
-        this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0);
-    }
-    private get isReadOnly() {
-        return this.props.readonly || this.props.schema.readonly;
-    }
-    private get hasDeleteButtonFunction() {
-        return this.props.onDelete && !this.isReadOnly;
-    }
-    private get hasAddButton() {
-        return !this.isReadOnly && this.value !== undefined;
-    }
-    private get getValue() {
-        if (this.value !== undefined && !this.collapsed) {
-            return this.value;
-        }
-        return [];
-    }
-    private get titleToShow() {
-        return common.getTitle(this.props.title, this.props.schema.title);
-    }
-    private get showFilter() {
-        return this.getValue.length >= common.minItemCountIfNeedFilter;
-    }
+    return []
+  }
+  private get titleToShow () {
+    return common.getTitle(this.props.title, this.props.schema.title)
+  }
+  private get showFilter () {
+    return this.getValue.length >= common.minItemCountIfNeedFilter
+  }
 }

@@ -1,60 +1,60 @@
-import * as React from "react";
-import * as common from "schema-based-json-editor";
-import { Icon } from "./icon";
-import { Optional } from "./optional";
-import { Description } from "./description";
-import { Select2, Select2UpdateValue } from "select2-react-component";
+import * as React from 'react'
+import * as common from 'schema-based-json-editor'
+import { Icon } from './icon'
+import { Optional } from './optional'
+import { Description } from './description'
+import { Select2, Select2UpdateValue } from 'select2-react-component'
 
 /**
  * @public
  */
-export type Props = common.Props<common.NumberSchema, number>;
+export type Props = common.Props<common.NumberSchema, number>
 /**
  * @public
  */
 export type State = Partial<{
-    value?: number;
-    errorMessage: string;
-    willRender: boolean;
-}>;
+  value?: number;
+  errorMessage: string;
+  willRender: boolean;
+}>
 
 export class NumberEditor extends React.Component<Props, State> {
-    private value?: number;
-    private errorMessage: string;
-    private willRender = false;
-    constructor(props: Props) {
-        super(props);
-        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as number;
-        this.validate();
+  private value?: number
+  private errorMessage: string
+  private willRender = false
+  constructor (props: Props) {
+    super(props)
+    this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as number
+    this.validate()
+  }
+  componentDidMount () {
+    this.props.updateValue(this.value, !this.errorMessage)
+  }
+  shouldComponentUpdate (nextProps: Props, nextState: State) {
+    if (this.willRender) {
+      this.willRender = false
+      return true
     }
-    componentDidMount() {
-        this.props.updateValue(this.value, !this.errorMessage);
-    }
-    shouldComponentUpdate(nextProps: Props, nextState: State) {
-        if (this.willRender) {
-            this.willRender = false;
-            return true;
-        }
-        return this.props.initialValue !== nextProps.initialValue;
-    }
-    render() {
-        const input = this.useInput ? (
+    return this.props.initialValue !== nextProps.initialValue
+  }
+  render () {
+    const input = this.useInput ? (
             <input className={this.props.theme.formControl}
-                type="number"
+                type='number'
                 onChange={this.onChange}
                 defaultValue={String(this.value)}
                 readOnly={this.isReadOnly}
                 disabled={this.isReadOnly} />
-        ) : null;
+        ) : null
 
-        const select = this.useSelect ? (
+    const select = this.useSelect ? (
             <Select2 data={this.options}
                 value={this.value}
                 update={(e: Select2UpdateValue) => this.updateSelection(e)}>
             </Select2>
-        ) : null;
+        ) : null
 
-        return (
+    return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <label className={this.props.theme.label}>
                     {this.titleToShow}
@@ -77,50 +77,50 @@ export class NumberEditor extends React.Component<Props, State> {
                 <Description theme={this.props.theme} message={this.props.schema.description} />
                 <Description theme={this.props.theme} message={this.errorMessage} />
             </div>
-        );
-    }
-    private onChange = (e: React.FormEvent<{ value: string }>) => {
-        this.value = this.props.schema.type === "integer" ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value);
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
-    }
-    private validate() {
-        this.errorMessage = common.getErrorMessageOfNumber(this.value, this.props.schema, this.props.locale);
-    }
-    private toggleOptional = () => {
-        this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as number | undefined;
-        this.validate();
-        this.willRender = true;
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
-    }
-    private get useInput() {
-        return this.value !== undefined && (this.props.schema.enum === undefined || this.isReadOnly);
-    }
-    private get useSelect() {
-        return this.value !== undefined && (this.props.schema.enum !== undefined && !this.isReadOnly);
-    }
-    private get isReadOnly() {
-        return this.props.readonly || this.props.schema.readonly;
-    }
-    private get hasDeleteButtonFunction() {
-        return this.props.onDelete && !this.isReadOnly;
-    }
-    private get titleToShow() {
-        return common.getTitle(this.props.title, this.props.schema.title);
-    }
-    private get options() {
-        return this.props.schema.enum!.map(e => ({
-            value: e,
-            label: e.toString(),
-        }));
-    }
+    )
+  }
+  private onChange = (e: React.FormEvent<{ value: string }>) => {
+    this.value = this.props.schema.type === 'integer' ? common.toInteger(e.currentTarget.value) : common.toNumber(e.currentTarget.value)
+    this.validate()
+    this.setState({ value: this.value })
+    this.props.updateValue(this.value, !this.errorMessage)
+  }
+  private validate () {
+    this.errorMessage = common.getErrorMessageOfNumber(this.value, this.props.schema, this.props.locale)
+  }
+  private toggleOptional = () => {
+    this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as number | undefined
+    this.validate()
+    this.willRender = true
+    this.setState({ value: this.value })
+    this.props.updateValue(this.value, !this.errorMessage)
+  }
+  private get useInput () {
+    return this.value !== undefined && (this.props.schema.enum === undefined || this.isReadOnly)
+  }
+  private get useSelect () {
+    return this.value !== undefined && (this.props.schema.enum !== undefined && !this.isReadOnly)
+  }
+  private get isReadOnly () {
+    return this.props.readonly || this.props.schema.readonly
+  }
+  private get hasDeleteButtonFunction () {
+    return this.props.onDelete && !this.isReadOnly
+  }
+  private get titleToShow () {
+    return common.getTitle(this.props.title, this.props.schema.title)
+  }
+  private get options () {
+    return this.props.schema.enum!.map(e => ({
+      value: e,
+      label: e.toString()
+    }))
+  }
 
-    private updateSelection(value: Select2UpdateValue) {
-        this.value = +value;
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, !this.errorMessage);
-    }
+  private updateSelection (value: Select2UpdateValue) {
+    this.value = +value
+    this.validate()
+    this.setState({ value: this.value })
+    this.props.updateValue(this.value, !this.errorMessage)
+  }
 }

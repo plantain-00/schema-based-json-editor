@@ -1,57 +1,57 @@
-import * as React from "react";
-import * as common from "schema-based-json-editor";
-import { Editor } from "./editor";
-import { Icon } from "./icon";
-import { Optional } from "./optional";
-import { Description } from "./description";
+import * as React from 'react'
+import * as common from 'schema-based-json-editor'
+import { Editor } from './editor'
+import { Icon } from './icon'
+import { Optional } from './optional'
+import { Description } from './description'
 
 /**
  * @public
  */
-export type Props = common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>;
+export type Props = common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>
 /**
  * @public
  */
 export type State = Partial<{
-    collapsed?: boolean;
-    value?: { [name: string]: common.ValueType };
-    invalidProperties: string[];
-    errorMessage: string;
-    properties: { property: string; schema: common.Schema }[];
-    filter: string;
-}>;
+  collapsed?: boolean;
+  value?: { [name: string]: common.ValueType };
+  invalidProperties: string[];
+  errorMessage: string;
+  properties: { property: string; schema: common.Schema }[];
+  filter: string;
+}>
 
 export class ObjectEditor extends React.Component<Props, State> {
-    private collapsed = this.props.schema.collapsed;
-    private value?: { [name: string]: common.ValueType };
-    private invalidProperties: string[] = [];
-    private errorMessage: string;
-    private properties: { property: string; schema: common.Schema }[] = [];
-    private filter: string = "";
-    constructor(props: Props) {
-        super(props);
-        this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType };
-        this.validate();
-        if (this.value !== undefined) {
-            for (const property in this.props.schema.properties) {
-                if (this.props.schema.properties.hasOwnProperty(property)) {
-                    const schema = this.props.schema.properties[property];
-                    const required = this.props.schema.required && this.props.schema.required.some(r => r === property);
-                    this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType };
-                    this.properties.push({
-                        property,
-                        schema,
-                    });
-                }
-            }
-            this.properties = this.properties.sort(common.compare);
+  private collapsed = this.props.schema.collapsed
+  private value?: { [name: string]: common.ValueType }
+  private invalidProperties: string[] = []
+  private errorMessage: string
+  private properties: { property: string; schema: common.Schema }[] = []
+  private filter: string = ''
+  constructor (props: Props) {
+    super(props)
+    this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType }
+    this.validate()
+    if (this.value !== undefined) {
+      for (const property in this.props.schema.properties) {
+        if (this.props.schema.properties.hasOwnProperty(property)) {
+          const schema = this.props.schema.properties[property]
+          const required = this.props.schema.required && this.props.schema.required.some(r => r === property)
+          this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType }
+          this.properties.push({
+            property,
+            schema
+          })
         }
+      }
+      this.properties = this.properties.sort(common.compare)
     }
-    componentDidMount() {
-        this.props.updateValue(this.value, this.invalidProperties.length === 0);
-    }
-    render() {
-        const childrenElement: JSX.Element[] = (!this.collapsed && this.value !== undefined)
+  }
+  componentDidMount () {
+    this.props.updateValue(this.value, this.invalidProperties.length === 0)
+  }
+  render () {
+    const childrenElement: JSX.Element[] = (!this.collapsed && this.value !== undefined)
             ? this.properties.filter(p => common.filterObject(p, this.filter))
                 .map(({ property, schema }) => <Editor key={property}
                     schema={schema}
@@ -67,14 +67,14 @@ export class ObjectEditor extends React.Component<Props, State> {
                     md={this.props.md}
                     hljs={this.props.hljs}
                     forceHttps={this.props.forceHttps} />)
-            : [];
-        const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
+            : []
+    const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
             ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
                 onChange={this.onFilterChange}
                 defaultValue={this.filter} /></div>
-            : null;
+            : null
 
-        return (
+    return (
             <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
                 <h3>
                     {this.titleToShow}
@@ -104,48 +104,48 @@ export class ObjectEditor extends React.Component<Props, State> {
                 </div>
                 <Description theme={this.props.theme} message={this.errorMessage} />
             </div >
-        );
+    )
+  }
+  private collapseOrExpand = () => {
+    this.collapsed = !this.collapsed
+    this.setState({ collapsed: this.collapsed })
+  }
+  private toggleOptional = () => {
+    this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType } | undefined
+    this.validate()
+    this.setState({ value: this.value })
+    this.props.updateValue(this.value, this.invalidProperties.length === 0)
+  }
+  private onFilterChange = (e: React.FormEvent<{ value: string }>) => {
+    this.filter = e.currentTarget.value
+    this.setState({ filter: this.filter })
+  }
+  private onChange = (property: string, value: common.ValueType | undefined, isValid: boolean) => {
+    this.value![property] = value
+    this.validate()
+    this.setState({ value: this.value })
+    common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property)
+    this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0)
+  }
+  private isRequired (property: string) {
+    return this.props.schema.required && this.props.schema.required.some(r => r === property)
+  }
+  private validate () {
+    this.errorMessage = common.getErrorMessageOfObject(this.value, this.props.schema, this.props.locale)
+  }
+  private get isReadOnly () {
+    return this.props.readonly || this.props.schema.readonly
+  }
+  private get hasDeleteButtonFunction () {
+    return this.props.onDelete && !this.isReadOnly
+  }
+  private get titleToShow () {
+    if (this.props.onDelete) {
+      return common.getTitle(common.findTitle(this.value, this.properties), this.props.title, this.props.schema.title)
     }
-    private collapseOrExpand = () => {
-        this.collapsed = !this.collapsed;
-        this.setState({ collapsed: this.collapsed });
-    }
-    private toggleOptional = () => {
-        this.value = common.toggleOptional(this.value, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType } | undefined;
-        this.validate();
-        this.setState({ value: this.value });
-        this.props.updateValue(this.value, this.invalidProperties.length === 0);
-    }
-    private onFilterChange = (e: React.FormEvent<{ value: string }>) => {
-        this.filter = e.currentTarget.value;
-        this.setState({ filter: this.filter });
-    }
-    private onChange = (property: string, value: common.ValueType | undefined, isValid: boolean) => {
-        this.value![property] = value;
-        this.validate();
-        this.setState({ value: this.value });
-        common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property);
-        this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0);
-    }
-    private isRequired(property: string) {
-        return this.props.schema.required && this.props.schema.required.some(r => r === property);
-    }
-    private validate() {
-        this.errorMessage = common.getErrorMessageOfObject(this.value, this.props.schema, this.props.locale);
-    }
-    private get isReadOnly() {
-        return this.props.readonly || this.props.schema.readonly;
-    }
-    private get hasDeleteButtonFunction() {
-        return this.props.onDelete && !this.isReadOnly;
-    }
-    private get titleToShow() {
-        if (this.props.onDelete) {
-            return common.getTitle(common.findTitle(this.value, this.properties), this.props.title, this.props.schema.title);
-        }
-        return common.getTitle(this.props.title, this.props.schema.title);
-    }
-    private get showFilter() {
-        return this.properties.length >= common.minItemCountIfNeedFilter;
-    }
+    return common.getTitle(this.props.title, this.props.schema.title)
+  }
+  private get showFilter () {
+    return this.properties.length >= common.minItemCountIfNeedFilter
+  }
 }

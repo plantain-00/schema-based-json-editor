@@ -1,15 +1,15 @@
-import { Component, Input } from "@angular/core";
-import * as common from "schema-based-json-editor";
+import { Component, Input } from '@angular/core'
+import * as common from 'schema-based-json-editor'
 
 @Component({
-    selector: "description",
-    template: `<p *ngIf="notEmpty || message" [class]="theme.help">{{message}}</p>`,
+  selector: 'description',
+  template: `<p *ngIf="notEmpty || message" [class]="theme.help">{{message}}</p>`
 })
 export class DescriptionComponent {
-    @Input()
-    theme: common.Theme;
-    @Input()
-    message: string | undefined;
-    @Input()
-    notEmpty?: boolean;
+  @Input()
+    theme: common.Theme
+  @Input()
+    message: string | undefined
+  @Input()
+    notEmpty?: boolean
 }

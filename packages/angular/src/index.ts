@@ -1,77 +1,77 @@
 
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { MarkdownTipModule } from "markdown-tip-angular";
-import { Select2Module } from "select2-angular-component";
+import { MarkdownTipModule } from 'markdown-tip-angular'
+import { Select2Module } from 'select2-angular-component'
 
 /**
  * @public
  */
 @NgModule({
-    declarations: [
-        JSONEditorComponent,
-        BooleanEditorComponent,
-        ArrayEditorComponent,
-        EditorComponent,
-        NullEditorComponent,
-        NumberEditorComponent,
-        ObjectEditorComponent,
-        StringEditorComponent,
-        IconComponent,
-        OptionalComponent,
-        DescriptionComponent,
-    ],
-    imports: [
-        CommonModule,
-        MarkdownTipModule,
-        Select2Module,
-    ],
-    exports: [
-        JSONEditorComponent,
-        BooleanEditorComponent,
-        ArrayEditorComponent,
-        EditorComponent,
-        NullEditorComponent,
-        NumberEditorComponent,
-        ObjectEditorComponent,
-        StringEditorComponent,
-        IconComponent,
-        OptionalComponent,
-        DescriptionComponent,
-    ],
+  declarations: [
+    JSONEditorComponent,
+    BooleanEditorComponent,
+    ArrayEditorComponent,
+    EditorComponent,
+    NullEditorComponent,
+    NumberEditorComponent,
+    ObjectEditorComponent,
+    StringEditorComponent,
+    IconComponent,
+    OptionalComponent,
+    DescriptionComponent
+  ],
+  imports: [
+    CommonModule,
+    MarkdownTipModule,
+    Select2Module
+  ],
+  exports: [
+    JSONEditorComponent,
+    BooleanEditorComponent,
+    ArrayEditorComponent,
+    EditorComponent,
+    NullEditorComponent,
+    NumberEditorComponent,
+    ObjectEditorComponent,
+    StringEditorComponent,
+    IconComponent,
+    OptionalComponent,
+    DescriptionComponent
+  ]
 })
 export class JSONEditorModule { }
 
-import { JSONEditorComponent } from "./index.component";
-export * from "./index.component";
+import { JSONEditorComponent } from './index.component'
+export * from './index.component'
 
-import { BooleanEditorComponent } from "./boolean-editor.component";
-export { BooleanEditorComponent };
+import { BooleanEditorComponent } from './boolean-editor.component'
+export { BooleanEditorComponent }
 
-import { ArrayEditorComponent } from "./array-editor.component";
-export { ArrayEditorComponent };
+import { ArrayEditorComponent } from './array-editor.component'
+export { ArrayEditorComponent }
 
-import { EditorComponent } from "./editor.component";
-export { EditorComponent };
+import { EditorComponent } from './editor.component'
+export { EditorComponent }
 
-import { NullEditorComponent } from "./null-editor.component";
-export { NullEditorComponent };
+import { NullEditorComponent } from './null-editor.component'
+export { NullEditorComponent }
 
-import { NumberEditorComponent } from "./number-editor.component";
-export { NumberEditorComponent };
+import { NumberEditorComponent } from './number-editor.component'
+export { NumberEditorComponent }
 
-import { ObjectEditorComponent } from "./object-editor.component";
-export { ObjectEditorComponent };
+import { ObjectEditorComponent } from './object-editor.component'
+export { ObjectEditorComponent }
 
-import { StringEditorComponent } from "./string-editor.component";
-export { StringEditorComponent };
+import { StringEditorComponent } from './string-editor.component'
+export { StringEditorComponent }
 
-import { IconComponent } from "./icon.component";
-export { IconComponent };
+import { IconComponent } from './icon.component'
+export { IconComponent }
 
-import { OptionalComponent } from "./optional.component";
-export { OptionalComponent };
+import { OptionalComponent } from './optional.component'
+export { OptionalComponent }
 
-import { DescriptionComponent } from "./description.component";
-export { DescriptionComponent };
+import { DescriptionComponent } from './description.component'
+export { DescriptionComponent }
