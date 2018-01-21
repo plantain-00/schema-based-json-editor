@@ -31,7 +31,7 @@
     "tslib": "1"
   },
   "devDependencies": {
-    "bootstrap": "3.3.7",
+    "bootstrap": "4.0.0",
     "dragula": "3.7.2",
     "font-awesome": "4.7.0",
     "github-fork-ribbon-css": "0.2.1",

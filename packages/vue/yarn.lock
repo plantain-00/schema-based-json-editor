@@ -77,8 +77,8 @@ markdown-it@8.4.0:
     uc.micro "^1.0.3"
 
 markdown-tip-vue@6:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.1.1.tgz#b3d4e368f1008ab39863b43ec634b6d03439bbe9"
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.1.2.tgz#b0cc4d8e151fb640e983bff485b5e112599a54c4"
   dependencies:
     markdown-tip "^6.1.1"
     vue "2"
@@ -119,8 +119,8 @@ ticky@1.0.1:
   resolved "https://registry.yarnpkg.com/ticky/-/ticky-1.0.1.tgz#b7cfa71e768f1c9000c497b9151b30947c50e46d"
 
 tslib@1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.1.tgz#6946af2d1d651a7b1863b531d6e5afa41aa44eac"
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
 uc.micro@^1.0.1, uc.micro@^1.0.3:
   version "1.0.3"

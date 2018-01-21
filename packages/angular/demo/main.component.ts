@@ -70,7 +70,6 @@ export class MainComponent {
     try {
       this.schema = JSON.parse(value as string)
     } catch (error) {
-            // tslint:disable-next-line:no-console
       console.log(error)
     }
   }

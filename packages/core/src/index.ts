@@ -645,7 +645,6 @@ export const imagePreviewStyle = {
 }
 
 function printInConsole (message: string) {
-    // tslint:disable-next-line:no-console
   console.log(message)
 }
 

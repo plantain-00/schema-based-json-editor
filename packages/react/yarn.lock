@@ -139,8 +139,8 @@ markdown-it@8.4.0:
     uc.micro "^1.0.3"
 
 markdown-tip-react@6:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.1.1.tgz#0573d2012ae03ba2caa25441c3c01eec00f08cbb"
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.1.2.tgz#bd057c4840225a6a3984acbcc1aa59abecf1f990"
   dependencies:
     markdown-tip "^6.1.1"
     react "16"
@@ -228,8 +228,8 @@ ticky@1.0.1:
   resolved "https://registry.yarnpkg.com/ticky/-/ticky-1.0.1.tgz#b7cfa71e768f1c9000c497b9151b30947c50e46d"
 
 tslib@1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.1.tgz#6946af2d1d651a7b1863b531d6e5afa41aa44eac"
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
 ua-parser-js@^0.7.9:
   version "0.7.17"
