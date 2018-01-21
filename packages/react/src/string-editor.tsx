@@ -42,30 +42,30 @@ export class StringEditor extends React.Component<Props, State> {
   }
   render () {
     const textarea = this.useTextArea ? (
-            <textarea className={this.props.theme.formControl}
-                onChange={this.onChange}
-                defaultValue={this.value}
-                rows={10}
-                readOnly={this.isReadOnly}
-                disabled={this.isReadOnly} >
-            </textarea>
-        ) : null
+      <textarea className={this.props.theme.formControl}
+        onChange={this.onChange}
+        defaultValue={this.value}
+        rows={10}
+        readOnly={this.isReadOnly}
+        disabled={this.isReadOnly} >
+      </textarea>
+    ) : null
 
     const input = this.useInput ? (
-            <input className={this.props.theme.formControl}
-                type={this.props.schema.format}
-                onChange={this.onChange}
-                defaultValue={this.value}
-                readOnly={this.isReadOnly}
-                disabled={this.isReadOnly} />
-        ) : null
+      <input className={this.props.theme.formControl}
+        type={this.props.schema.format}
+        onChange={this.onChange}
+        defaultValue={this.value}
+        readOnly={this.isReadOnly}
+        disabled={this.isReadOnly} />
+    ) : null
 
     const select = this.useSelect ? (
-            <Select2 data={this.options}
-                value={this.value}
-                update={(e: Select2UpdateValue) => this.updateSelection(e)}>
-            </Select2>
-        ) : null
+      <Select2 data={this.options}
+        value={this.value}
+        update={(e: Select2UpdateValue) => this.updateSelection(e)}>
+      </Select2>
+    ) : null
 
     const imagePreview = this.willPreviewImage ? <img style={common.imagePreviewStyle} src={this.getImageUrl} /> : null
 
@@ -75,38 +75,38 @@ export class StringEditor extends React.Component<Props, State> {
     const codePreview = this.willPreviewCode ? <pre><code dangerouslySetInnerHTML={{ __html: this.getCode }}></code></pre> : null
 
     return (
-            <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
-                <label className={this.props.theme.label}>
-                    {this.titleToShow}
-                    <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                        <Optional required={this.props.required}
-                            value={this.value}
-                            isReadOnly={this.isReadOnly}
-                            theme={this.props.theme}
-                            locale={this.props.locale}
-                            toggleOptional={this.toggleOptional} />
-                        <Icon valid={this.hasDeleteButtonFunction}
-                            onClick={this.props.onDelete!}
-                            text={this.props.icon.delete}
-                            theme={this.props.theme}
-                            icon={this.props.icon} />
-                        <Icon valid={this.canPreview}
-                            onClick={this.collapseOrExpand}
-                            text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
-                            theme={this.props.theme}
-                            icon={this.props.icon} />
-                    </div>
-                </label>
-                {textarea}
-                {input}
-                {select}
-                {imagePreview}
-                {markdownTip}
-                {markdownPreview}
-                {codePreview}
-                <Description theme={this.props.theme} message={this.props.schema.description} />
-                <Description theme={this.props.theme} message={this.errorMessage} />
-            </div>
+      <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
+        <label className={this.props.theme.label}>
+          {this.titleToShow}
+          <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+            <Optional required={this.props.required}
+              value={this.value}
+              isReadOnly={this.isReadOnly}
+              theme={this.props.theme}
+              locale={this.props.locale}
+              toggleOptional={this.toggleOptional} />
+            <Icon valid={this.hasDeleteButtonFunction}
+              onClick={this.props.onDelete!}
+              text={this.props.icon.delete}
+              theme={this.props.theme}
+              icon={this.props.icon} />
+            <Icon valid={this.canPreview}
+              onClick={this.collapseOrExpand}
+              text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
+              theme={this.props.theme}
+              icon={this.props.icon} />
+          </div>
+        </label>
+        {textarea}
+        {input}
+        {select}
+        {imagePreview}
+        {markdownTip}
+        {markdownPreview}
+        {codePreview}
+        <Description theme={this.props.theme} message={this.props.schema.description} />
+        <Description theme={this.props.theme} message={this.errorMessage} />
+      </div>
     )
   }
   private onChange = (e: React.FormEvent<{ value: string }>) => {
@@ -123,15 +123,15 @@ export class StringEditor extends React.Component<Props, State> {
   }
   private get useTextArea () {
     return this.value !== undefined
-            && !this.collapsed
-            && (this.props.schema.enum === undefined || this.isReadOnly)
-            && (this.props.schema.format === 'textarea' || this.props.schema.format === 'code' || this.props.schema.format === 'markdown')
+      && !this.collapsed
+      && (this.props.schema.enum === undefined || this.isReadOnly)
+      && (this.props.schema.format === 'textarea' || this.props.schema.format === 'code' || this.props.schema.format === 'markdown')
   }
   private get useInput () {
     return this.value !== undefined
-            && !this.collapsed
-            && (this.props.schema.enum === undefined || this.isReadOnly)
-            && (this.props.schema.format !== 'textarea' && this.props.schema.format !== 'code' && this.props.schema.format !== 'markdown')
+      && !this.collapsed
+      && (this.props.schema.enum === undefined || this.isReadOnly)
+      && (this.props.schema.format !== 'textarea' && this.props.schema.format !== 'code' && this.props.schema.format !== 'markdown')
   }
   private get useSelect () {
     return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly

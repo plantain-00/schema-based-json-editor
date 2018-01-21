@@ -52,58 +52,58 @@ export class ObjectEditor extends React.Component<Props, State> {
   }
   render () {
     const childrenElement: JSX.Element[] = (!this.collapsed && this.value !== undefined)
-            ? this.properties.filter(p => common.filterObject(p, this.filter))
-                .map(({ property, schema }) => <Editor key={property}
-                    schema={schema}
-                    title={schema.title || property}
-                    initialValue={this.value![property]}
-                    updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(property, value, isValid)}
-                    theme={this.props.theme}
-                    icon={this.props.icon}
-                    locale={this.props.locale}
-                    required={this.isRequired(property)}
-                    readonly={this.isReadOnly}
-                    dragula={this.props.dragula}
-                    md={this.props.md}
-                    hljs={this.props.hljs}
-                    forceHttps={this.props.forceHttps} />)
-            : []
+      ? this.properties.filter(p => common.filterObject(p, this.filter))
+        .map(({ property, schema }) => <Editor key={property}
+          schema={schema}
+          title={schema.title || property}
+          initialValue={this.value![property]}
+          updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(property, value, isValid)}
+          theme={this.props.theme}
+          icon={this.props.icon}
+          locale={this.props.locale}
+          required={this.isRequired(property)}
+          readonly={this.isReadOnly}
+          dragula={this.props.dragula}
+          md={this.props.md}
+          hljs={this.props.hljs}
+          forceHttps={this.props.forceHttps} />)
+      : []
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
-            ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
-                onChange={this.onFilterChange}
-                defaultValue={this.filter} /></div>
-            : null
+      ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
+        onChange={this.onFilterChange}
+        defaultValue={this.filter} /></div>
+      : null
 
     return (
-            <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
-                <h3>
-                    {this.titleToShow}
-                    <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                        <Optional required={this.props.required}
-                            value={this.value}
-                            isReadOnly={this.isReadOnly}
-                            theme={this.props.theme}
-                            locale={this.props.locale}
-                            toggleOptional={this.toggleOptional} />
-                        <Icon valid={true}
-                            onClick={this.collapseOrExpand}
-                            text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
-                            theme={this.props.theme}
-                            icon={this.props.icon} />
-                        <Icon valid={this.hasDeleteButtonFunction}
-                            onClick={this.props.onDelete!}
-                            text={this.props.icon.delete}
-                            theme={this.props.theme}
-                            icon={this.props.icon} />
-                    </div>
-                </h3>
-                <Description theme={this.props.theme} message={this.props.schema.description} />
-                <div className={this.props.theme.rowContainer}>
-                    {filterElement}
-                    {childrenElement}
-                </div>
-                <Description theme={this.props.theme} message={this.errorMessage} />
-            </div >
+      <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
+        <h3>
+          {this.titleToShow}
+          <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+            <Optional required={this.props.required}
+              value={this.value}
+              isReadOnly={this.isReadOnly}
+              theme={this.props.theme}
+              locale={this.props.locale}
+              toggleOptional={this.toggleOptional} />
+            <Icon valid={true}
+              onClick={this.collapseOrExpand}
+              text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
+              theme={this.props.theme}
+              icon={this.props.icon} />
+            <Icon valid={this.hasDeleteButtonFunction}
+              onClick={this.props.onDelete!}
+              text={this.props.icon.delete}
+              theme={this.props.theme}
+              icon={this.props.icon} />
+          </div>
+        </h3>
+        <Description theme={this.props.theme} message={this.props.schema.description} />
+        <div className={this.props.theme.rowContainer}>
+          {filterElement}
+          {childrenElement}
+        </div>
+        <Description theme={this.props.theme} message={this.errorMessage} />
+      </div >
     )
   }
   private collapseOrExpand = () => {

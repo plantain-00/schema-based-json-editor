@@ -26,38 +26,38 @@ class Main extends React.Component<{}, {}> {
   render () {
     const valueHtml = hljs.highlight('json', JSON.stringify(this.value, null, '  ')).value
     return (
-            <div>
-                <a href='https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/react/demo' target='_blank'>the source code of the demo</a>
-                <br/>
-                <div style={{ float: 'left', margin: '10px', width: '400px', overflowY: 'scroll', height: '600px' }} className='bootstrap3-row-container'>
-                    <JSONEditor schema={this.schemaSchema}
-                        initialValue={this.formattedSchema}
-                        updateValue={this.updateSchema}
-                        theme='bootstrap3'
-                        icon='fontawesome4'
-                        locale={this.locale}
-                        dragula={dragula}
-                        markdownit={MarkdownIt}
-                        hljs={hljs}
-                        forceHttps={false} />
-                </div>
-                <div style={{ width: '500px', margin: '10px', float: 'left', overflowY: 'scroll', height: '600px' }} className='bootstrap3-row-container'>
-                    <JSONEditor schema={this.schema}
-                        initialValue={this.value}
-                        updateValue={this.updateValue}
-                        theme='bootstrap3'
-                        icon='fontawesome4'
-                        locale={this.locale}
-                        dragula={dragula}
-                        markdownit={MarkdownIt}
-                        hljs={hljs}
-                        forceHttps={false} />
-                </div>
-                <div style={{ float: 'left', margin: '10px', width: '400px', overflowY: 'scroll', height: '600px' }}>
-                    Value:
-                    <pre style={{ borderColor: this.isValid ? 'black' : 'red' }}><code dangerouslySetInnerHTML={{ __html: valueHtml }}></code></pre>
-                </div>
-            </div>
+      <div>
+        <a href='https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/react/demo' target='_blank'>the source code of the demo</a>
+        <br />
+        <div style={{ float: 'left', margin: '10px', width: '400px', overflowY: 'scroll', height: '600px' }} className='bootstrap3-row-container'>
+          <JSONEditor schema={this.schemaSchema}
+            initialValue={this.formattedSchema}
+            updateValue={this.updateSchema}
+            theme='bootstrap3'
+            icon='fontawesome4'
+            locale={this.locale}
+            dragula={dragula}
+            markdownit={MarkdownIt}
+            hljs={hljs}
+            forceHttps={false} />
+        </div>
+        <div style={{ width: '500px', margin: '10px', float: 'left', overflowY: 'scroll', height: '600px' }} className='bootstrap3-row-container'>
+          <JSONEditor schema={this.schema}
+            initialValue={this.value}
+            updateValue={this.updateValue}
+            theme='bootstrap3'
+            icon='fontawesome4'
+            locale={this.locale}
+            dragula={dragula}
+            markdownit={MarkdownIt}
+            hljs={hljs}
+            forceHttps={false} />
+        </div>
+        <div style={{ float: 'left', margin: '10px', width: '400px', overflowY: 'scroll', height: '600px' }}>
+          Value:
+          <pre style={{ borderColor: this.isValid ? 'black' : 'red' }}><code dangerouslySetInnerHTML={{ __html: valueHtml }}></code></pre>
+        </div>
+      </div>
     )
   }
   private updateSchema = (value: any, isValid: boolean) => {

@@ -39,44 +39,44 @@ export class NumberEditor extends React.Component<Props, State> {
   }
   render () {
     const input = this.useInput ? (
-            <input className={this.props.theme.formControl}
-                type='number'
-                onChange={this.onChange}
-                defaultValue={String(this.value)}
-                readOnly={this.isReadOnly}
-                disabled={this.isReadOnly} />
-        ) : null
+      <input className={this.props.theme.formControl}
+        type='number'
+        onChange={this.onChange}
+        defaultValue={String(this.value)}
+        readOnly={this.isReadOnly}
+        disabled={this.isReadOnly} />
+    ) : null
 
     const select = this.useSelect ? (
-            <Select2 data={this.options}
-                value={this.value}
-                update={(e: Select2UpdateValue) => this.updateSelection(e)}>
-            </Select2>
-        ) : null
+      <Select2 data={this.options}
+        value={this.value}
+        update={(e: Select2UpdateValue) => this.updateSelection(e)}>
+      </Select2>
+    ) : null
 
     return (
-            <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
-                <label className={this.props.theme.label}>
-                    {this.titleToShow}
-                    <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                        <Optional required={this.props.required}
-                            value={this.value}
-                            isReadOnly={this.isReadOnly}
-                            theme={this.props.theme}
-                            locale={this.props.locale}
-                            toggleOptional={this.toggleOptional} />
-                        <Icon valid={this.hasDeleteButtonFunction}
-                            onClick={this.props.onDelete!}
-                            text={this.props.icon.delete}
-                            theme={this.props.theme}
-                            icon={this.props.icon} />
-                    </div>
-                </label>
-                {input}
-                {select}
-                <Description theme={this.props.theme} message={this.props.schema.description} />
-                <Description theme={this.props.theme} message={this.errorMessage} />
-            </div>
+      <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
+        <label className={this.props.theme.label}>
+          {this.titleToShow}
+          <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+            <Optional required={this.props.required}
+              value={this.value}
+              isReadOnly={this.isReadOnly}
+              theme={this.props.theme}
+              locale={this.props.locale}
+              toggleOptional={this.toggleOptional} />
+            <Icon valid={this.hasDeleteButtonFunction}
+              onClick={this.props.onDelete!}
+              text={this.props.icon.delete}
+              theme={this.props.theme}
+              icon={this.props.icon} />
+          </div>
+        </label>
+        {input}
+        {select}
+        <Description theme={this.props.theme} message={this.props.schema.description} />
+        <Description theme={this.props.theme} message={this.errorMessage} />
+      </div>
     )
   }
   private onChange = (e: React.FormEvent<{ value: string }>) => {

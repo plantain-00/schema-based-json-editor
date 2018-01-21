@@ -12,15 +12,15 @@ export class Optional extends React.Component<{
   render () {
     if (!this.props.required && (this.props.value === undefined || !this.props.isReadOnly)) {
       return (
-                <div className={this.props.theme.optionalCheckbox}>
-                    <label>
-                        <input type='checkbox'
-                            onChange={this.props.toggleOptional}
-                            checked={this.props.value === undefined}
-                            disabled={this.props.isReadOnly} />
-                        {this.props.locale.info.notExists}
-                    </label>
-                </div>
+        <div className={this.props.theme.optionalCheckbox}>
+          <label>
+            <input type='checkbox'
+              onChange={this.props.toggleOptional}
+              checked={this.props.value === undefined}
+              disabled={this.props.isReadOnly} />
+            {this.props.locale.info.notExists}
+          </label>
+        </div>
       )
     }
     return null

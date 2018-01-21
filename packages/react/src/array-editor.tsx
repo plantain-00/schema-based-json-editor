@@ -58,66 +58,66 @@ export class ArrayEditor extends React.Component<Props, State> {
   }
   render () {
     const childrenElement: JSX.Element[] = this.getValue.map((p, i) => ({ p, i }))
-            .filter(({ p, i }) => common.filterArray(p, i, this.props.schema.items, this.filter))
-            .map(({ p, i }) => (
-                <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
-                    <Editor schema={this.props.schema.items}
-                        title={String(i)}
-                        initialValue={this.getValue[i]}
-                        updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(i, value, isValid)}
-                        theme={this.props.theme}
-                        icon={this.props.icon}
-                        locale={this.props.locale}
-                        required={true}
-                        readonly={this.isReadOnly}
-                        onDelete={() => this.onDeleteFunction(i)}
-                        dragula={this.props.dragula}
-                        md={this.props.md}
-                        hljs={this.props.hljs}
-                        forceHttps={this.props.forceHttps} />
-                </div>
-            ))
+      .filter(({ p, i }) => common.filterArray(p, i, this.props.schema.items, this.filter))
+      .map(({ p, i }) => (
+        <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
+          <Editor schema={this.props.schema.items}
+            title={String(i)}
+            initialValue={this.getValue[i]}
+            updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(i, value, isValid)}
+            theme={this.props.theme}
+            icon={this.props.icon}
+            locale={this.props.locale}
+            required={true}
+            readonly={this.isReadOnly}
+            onDelete={() => this.onDeleteFunction(i)}
+            dragula={this.props.dragula}
+            md={this.props.md}
+            hljs={this.props.hljs}
+            forceHttps={this.props.forceHttps} />
+        </div>
+      ))
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
-            ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
-                onChange={this.onFilterChange}
-                defaultValue={this.filter} /></div>
-            : null
+      ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
+        onChange={this.onFilterChange}
+        defaultValue={this.filter} /></div>
+      : null
 
     return (
-            <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
-                <h3>
-                    {this.titleToShow}
-                    <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
-                        <Optional required={this.props.required}
-                            value={this.value}
-                            isReadOnly={this.isReadOnly}
-                            theme={this.props.theme}
-                            locale={this.props.locale}
-                            toggleOptional={this.toggleOptional} />
-                        <Icon valid={true}
-                            onClick={this.collapseOrExpand}
-                            text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
-                            theme={this.props.theme}
-                            icon={this.props.icon} />
-                        <Icon valid={this.hasAddButton}
-                            onClick={this.addItem}
-                            text={this.props.icon.add}
-                            theme={this.props.theme}
-                            icon={this.props.icon} />
-                        <Icon valid={this.hasDeleteButtonFunction}
-                            onClick={this.props.onDelete!}
-                            text={this.props.icon.delete}
-                            theme={this.props.theme}
-                            icon={this.props.icon} />
-                    </div>
-                </h3>
-                <Description theme={this.props.theme} message={this.props.schema.description} notEmpty={true} />
-                <div className={this.props.theme.rowContainer}>
-                    {filterElement}
-                    {childrenElement}
-                </div>
-                <Description theme={this.props.theme} message={this.errorMessage} />
-            </div>
+      <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
+        <h3>
+          {this.titleToShow}
+          <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
+            <Optional required={this.props.required}
+              value={this.value}
+              isReadOnly={this.isReadOnly}
+              theme={this.props.theme}
+              locale={this.props.locale}
+              toggleOptional={this.toggleOptional} />
+            <Icon valid={true}
+              onClick={this.collapseOrExpand}
+              text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
+              theme={this.props.theme}
+              icon={this.props.icon} />
+            <Icon valid={this.hasAddButton}
+              onClick={this.addItem}
+              text={this.props.icon.add}
+              theme={this.props.theme}
+              icon={this.props.icon} />
+            <Icon valid={this.hasDeleteButtonFunction}
+              onClick={this.props.onDelete!}
+              text={this.props.icon.delete}
+              theme={this.props.theme}
+              icon={this.props.icon} />
+          </div>
+        </h3>
+        <Description theme={this.props.theme} message={this.props.schema.description} notEmpty={true} />
+        <div className={this.props.theme.rowContainer}>
+          {filterElement}
+          {childrenElement}
+        </div>
+        <Description theme={this.props.theme} message={this.errorMessage} />
+      </div>
     )
   }
   private collapseOrExpand = () => {

@@ -15,15 +15,15 @@ export class Icon extends React.Component<{
     if (this.props.valid) {
       if (this.props.icon.isText) {
         return (
-                    <button className={this.props.theme.button} onClick={this.props.onClick}>
-                        {this.props.text}
-                    </button>
+          <button className={this.props.theme.button} onClick={this.props.onClick}>
+            {this.props.text}
+          </button>
         )
       } else {
         return (
-                    <button className={this.props.theme.button} onClick={this.props.onClick}>
-                        <i className={this.props.text}></i>
-                    </button>
+          <button className={this.props.theme.button} onClick={this.props.onClick}>
+            <i className={this.props.text}></i>
+          </button>
         )
       }
     }
