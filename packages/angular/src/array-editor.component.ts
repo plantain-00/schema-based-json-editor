@@ -9,19 +9,19 @@ import { arrayEditorTemplateHtml } from './variables'
 })
 export class ArrayEditorComponent {
   @Input()
-    schema: common.ArraySchema
+    schema!: common.ArraySchema
   @Input()
-    initialValue: common.ValueType[]
+    initialValue!: common.ValueType[]
   @Input()
     title?: string
   @Output()
     updateValue = new EventEmitter<common.ValidityValue<common.ValueType[] | undefined>>()
   @Input()
-    theme: common.Theme
+    theme!: common.Theme
   @Input()
-    icon: common.Icon
+    icon!: common.Icon
   @Input()
-    locale: common.Locale
+    locale!: common.Locale
   @Output()
     onDelete = new EventEmitter()
   @Input()
@@ -29,7 +29,7 @@ export class ArrayEditorComponent {
   @Input()
     required?: boolean
   @Input()
-    hasDeleteButton: boolean
+    hasDeleteButton!: boolean
   @Input()
     dragula?: Dragula
   @Input()
@@ -41,12 +41,12 @@ export class ArrayEditorComponent {
 
   collapsed?: boolean = false
   value?: common.ValueType[]
-  errorMessage: string
+  errorMessage!: string
   buttonGroupStyleString = common.buttonGroupStyleString
   filter = ''
 
   @ViewChild('drakContainer')
-    private drakContainer: ElementRef
+    private drakContainer!: ElementRef
 
   private renderSwitch = 1
   private drak?: dragula.Drake

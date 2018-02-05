@@ -28,7 +28,7 @@ export class ArrayEditor extends React.Component<Props, State> {
   private collapsed = this.props.schema.collapsed
   private value?: common.ValueType[]
   private drak?: dragula.Drake
-  private errorMessage: string
+  private errorMessage!: string
   private invalidIndexes: number[] = []
   private filter: string = ''
   constructor (props: Props) {

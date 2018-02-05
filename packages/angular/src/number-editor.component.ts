@@ -9,19 +9,19 @@ import { numberEditorTemplateHtml } from './variables'
 })
 export class NumberEditorComponent {
   @Input()
-    schema: common.NumberSchema
+    schema!: common.NumberSchema
   @Input()
-    initialValue: number
+    initialValue!: number
   @Input()
     title?: string
   @Output()
     updateValue = new EventEmitter<common.ValidityValue<number | undefined>>()
   @Input()
-    theme: common.Theme
+    theme!: common.Theme
   @Input()
-    icon: common.Icon
+    icon!: common.Icon
   @Input()
-    locale: common.Locale
+    locale!: common.Locale
   @Output()
     onDelete = new EventEmitter()
   @Input()
@@ -29,10 +29,10 @@ export class NumberEditorComponent {
   @Input()
     required?: boolean
   @Input()
-    hasDeleteButton: boolean
+    hasDeleteButton!: boolean
 
   value?: number
-  errorMessage: string
+  errorMessage!: string
   buttonGroupStyle = common.buttonGroupStyleString
   onChange (e: { target: { value: string } }) {
     this.value = this.schema.type === 'integer' ? common.toInteger(e.target.value) : common.toNumber(e.target.value)

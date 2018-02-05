@@ -8,19 +8,19 @@ import { booleanEditorTemplateHtml } from './variables'
 })
 export class BooleanEditorComponent {
   @Input()
-    schema: common.BooleanSchema
+    schema!: common.BooleanSchema
   @Input()
-    initialValue: boolean
+    initialValue!: boolean
   @Input()
     title?: string
   @Output()
     updateValue = new EventEmitter<common.ValidityValue<boolean | undefined>>()
   @Input()
-    theme: common.Theme
+    theme!: common.Theme
   @Input()
-    icon: common.Icon
+    icon!: common.Icon
   @Input()
-    locale: common.Locale
+    locale!: common.Locale
   @Output()
     onDelete = new EventEmitter()
   @Input()
@@ -28,7 +28,7 @@ export class BooleanEditorComponent {
   @Input()
     required?: boolean
   @Input()
-    hasDeleteButton: boolean
+    hasDeleteButton!: boolean
 
   value?: boolean
   buttonGroupStyle = common.buttonGroupStyleString

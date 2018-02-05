@@ -9,15 +9,15 @@ import { numberEditorTemplateHtml, numberEditorTemplateHtmlStatic } from './vari
   props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton']
 })
 export class NumberEditor extends Vue {
-  schema: common.NumberSchema
+  schema!: common.NumberSchema
   initialValue?: number
-  title: string
-  theme: common.Theme
-  icon: common.Icon
-  locale: common.Locale
-  readonly: boolean
-  required: boolean
-  hasDeleteButton: boolean
+  title!: string
+  theme!: common.Theme
+  icon!: common.Icon
+  locale!: common.Locale
+  readonly!: boolean
+  required!: boolean
+  hasDeleteButton!: boolean
 
   value?: number = 0
   errorMessage?: string = ''

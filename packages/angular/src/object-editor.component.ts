@@ -10,19 +10,19 @@ import { objectEditorTemplateHtml } from './variables'
 })
 export class ObjectEditorComponent {
   @Input()
-    schema: common.ObjectSchema
+    schema!: common.ObjectSchema
   @Input()
-    initialValue: { [name: string]: common.ValueType }
+    initialValue!: { [name: string]: common.ValueType }
   @Input()
     title?: string
   @Output()
     updateValue = new EventEmitter<common.ValidityValue<{ [name: string]: common.ValueType } | undefined>>()
   @Input()
-    theme: common.Theme
+    theme!: common.Theme
   @Input()
-    icon: common.Icon
+    icon!: common.Icon
   @Input()
-    locale: common.Locale
+    locale!: common.Locale
   @Output()
     onDelete = new EventEmitter()
   @Input()
@@ -30,7 +30,7 @@ export class ObjectEditorComponent {
   @Input()
     required?: boolean
   @Input()
-    hasDeleteButton: boolean
+    hasDeleteButton!: boolean
   @Input()
     dragula?: Dragula
   @Input()
@@ -43,7 +43,7 @@ export class ObjectEditorComponent {
   collapsed?: boolean = false
   value?: { [name: string]: common.ValueType }
   buttonGroupStyle = common.buttonGroupStyleString
-  errorMessage: string
+  errorMessage!: string
   filter = ''
   private properties: { property: string; schema: common.Schema }[] = []
   private invalidProperties: string[] = []

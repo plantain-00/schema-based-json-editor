@@ -12,8 +12,8 @@ export class Optional extends Vue {
   required: boolean | undefined
   value: common.ValueType | undefined
   isReadOnly: boolean | undefined
-  theme: common.Theme
-  locale: common.Locale
+  theme!: common.Theme
+  locale!: common.Locale
 
   get hasOptionalCheckbox () {
     return !this.required && (this.value === undefined || !this.isReadOnly)

@@ -20,7 +20,7 @@ export type State = Partial<{
 
 export class NumberEditor extends React.Component<Props, State> {
   private value?: number
-  private errorMessage: string
+  private errorMessage!: string
   private willRender = false
   constructor (props: Props) {
     super(props)

@@ -22,7 +22,7 @@ export type State = Partial<{
 
 export class StringEditor extends React.Component<Props, State> {
   private value?: string
-  private errorMessage: string
+  private errorMessage!: string
   private collapsed = false
   private willRender = false
   constructor (props: Props) {

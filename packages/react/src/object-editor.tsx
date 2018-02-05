@@ -25,7 +25,7 @@ export class ObjectEditor extends React.Component<Props, State> {
   private collapsed = this.props.schema.collapsed
   private value?: { [name: string]: common.ValueType }
   private invalidProperties: string[] = []
-  private errorMessage: string
+  private errorMessage!: string
   private properties: { property: string; schema: common.Schema }[] = []
   private filter: string = ''
   constructor (props: Props) {

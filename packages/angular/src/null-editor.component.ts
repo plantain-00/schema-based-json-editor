@@ -8,19 +8,19 @@ import { nullEditorTemplateHtml } from './variables'
 })
 export class NullEditorComponent {
   @Input()
-    schema: common.NullSchema
+    schema!: common.NullSchema
   @Input()
-    initialValue: null
+    initialValue!: null
   @Input()
     title?: string
   @Output()
     updateValue = new EventEmitter<common.ValidityValue<null | undefined>>()
   @Input()
-    theme: common.Theme
+    theme!: common.Theme
   @Input()
-    icon: common.Icon
+    icon!: common.Icon
   @Input()
-    locale: common.Locale
+    locale!: common.Locale
   @Output()
     onDelete = new EventEmitter()
   @Input()
@@ -28,7 +28,7 @@ export class NullEditorComponent {
   @Input()
     required?: boolean
   @Input()
-    hasDeleteButton: boolean
+    hasDeleteButton!: boolean
 
   value?: null
   buttonGroupStyle = common.buttonGroupStyleString

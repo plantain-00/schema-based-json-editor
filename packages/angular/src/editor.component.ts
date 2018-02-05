@@ -9,19 +9,19 @@ import { editorTemplateHtml } from './variables'
 })
 export class EditorComponent {
   @Input()
-    schema: common.Schema
+    schema!: common.Schema
   @Input()
-    initialValue: common.ValueType[]
+    initialValue!: common.ValueType[]
   @Input()
     title?: string
   @Output()
     updateValue = new EventEmitter<common.ValidityValue<common.ValueType>>()
   @Input()
-    theme: common.Theme
+    theme!: common.Theme
   @Input()
-    icon: common.Icon
+    icon!: common.Icon
   @Input()
-    locale: common.Locale
+    locale!: common.Locale
   @Output()
     onDelete = new EventEmitter()
   @Input()
@@ -29,7 +29,7 @@ export class EditorComponent {
   @Input()
     required?: boolean
   @Input()
-    hasDeleteButton: boolean
+    hasDeleteButton!: boolean
   @Input()
     dragula?: Dragula
   @Input()

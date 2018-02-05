@@ -35,12 +35,12 @@ import { indexTemplateHtml, indexTemplateHtmlStatic } from './variables'
   props: ['schema', 'initialValue', 'theme', 'icon', 'locale', 'readonly', 'dragula', 'markdownit', 'hljs', 'forceHttps']
 })
 export class JSONEditor extends Vue {
-  theme: string
-  locale: common.Locale
-  icon: string
-  markdownit: MarkdownItType
-  hljs: HLJS
-  forceHttps: boolean
+  theme!: string
+  locale!: common.Locale
+  icon!: string
+  markdownit!: MarkdownItType
+  hljs!: HLJS
+  forceHttps!: boolean
 
   themeObject = common.getTheme(this.theme)
   get localeObject () {

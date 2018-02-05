@@ -7,7 +7,7 @@ import * as common from 'schema-based-json-editor'
 })
 export class DescriptionComponent {
   @Input()
-    theme: common.Theme
+    theme!: common.Theme
   @Input()
     message: string | undefined
   @Input()

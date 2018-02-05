@@ -10,15 +10,15 @@ import { objectEditorTemplateHtml, objectEditorTemplateHtmlStatic } from './vari
   props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps']
 })
 export class ObjectEditor extends Vue {
-  schema: common.ObjectSchema
+  schema!: common.ObjectSchema
   initialValue?: { [name: string]: common.ValueType }
-  title: string
-  theme: common.Theme
-  icon: common.Icon
-  locale: common.Locale
-  readonly: boolean
-  required: boolean
-  hasDeleteButton: boolean
+  title!: string
+  theme!: common.Theme
+  icon!: common.Icon
+  locale!: common.Locale
+  readonly!: boolean
+  required!: boolean
+  hasDeleteButton!: boolean
   dragula?: Dragula
   md?: MarkdownIt
   hljs?: HLJS

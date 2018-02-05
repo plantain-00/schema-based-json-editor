@@ -15,9 +15,9 @@ export class OptionalComponent {
   @Input()
     isReadOnly: boolean | undefined
   @Input()
-    theme: common.Theme
+    theme!: common.Theme
   @Input()
-    locale: common.Locale
+    locale!: common.Locale
   @Output()
     toggleOptional = new EventEmitter()
 

@@ -9,15 +9,15 @@ import { nullEditorTemplateHtml, nullEditorTemplateHtmlStatic } from './variable
   props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton']
 })
 export class NullEditor extends Vue {
-  schema: common.ArraySchema
+  schema!: common.ArraySchema
   initialValue?: null
-  title: string
-  theme: common.Theme
-  icon: common.Icon
-  locale: common.Locale
-  readonly: boolean
-  required: boolean
-  hasDeleteButton: boolean
+  title!: string
+  theme!: common.Theme
+  icon!: common.Icon
+  locale!: common.Locale
+  readonly!: boolean
+  required!: boolean
+  hasDeleteButton!: boolean
 
   value?: null = null
   buttonGroupStyle = common.buttonGroupStyleString

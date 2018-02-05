@@ -14,9 +14,9 @@ import { indexTemplateHtml } from './variables'
 })
 export class JSONEditorComponent {
   @Input()
-    schema: common.Schema
+    schema!: common.Schema
   @Input()
-    initialValue: common.ValueType
+    initialValue!: common.ValueType
   @Output()
     updateValue = new EventEmitter<common.ValidityValue<common.ValueType | undefined>>()
   @Input()

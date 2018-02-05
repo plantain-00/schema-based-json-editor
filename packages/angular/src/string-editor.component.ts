@@ -13,19 +13,19 @@ import { stringEditorTemplateHtml } from './variables'
 })
 export class StringEditorComponent {
   @Input()
-    schema: common.StringSchema
+    schema!: common.StringSchema
   @Input()
-    initialValue: string
+    initialValue!: string
   @Input()
     title?: string
   @Output()
     updateValue = new EventEmitter<common.ValidityValue<string | undefined>>()
   @Input()
-    theme: common.Theme
+    theme!: common.Theme
   @Input()
-    icon: common.Icon
+    icon!: common.Icon
   @Input()
-    locale: common.Locale
+    locale!: common.Locale
   @Output()
     onDelete = new EventEmitter()
   @Input()
@@ -33,7 +33,7 @@ export class StringEditorComponent {
   @Input()
     required?: boolean
   @Input()
-    hasDeleteButton: boolean
+    hasDeleteButton!: boolean
   @Input()
     dragula?: Dragula
   @Input()
@@ -44,7 +44,7 @@ export class StringEditorComponent {
     forceHttps?: boolean
 
   value?: string
-  errorMessage: string
+  errorMessage!: string
   buttonGroupStyle = common.buttonGroupStyleString
   collapsed = false
   onChange (e: { target: { value: string } }) {
