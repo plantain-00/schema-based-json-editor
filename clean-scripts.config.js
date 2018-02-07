@@ -34,7 +34,6 @@ module.exports = {
         `cpy ./packages/core/node_modules/markdown-tip/dist/markdown-tip.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/github-fork-ribbon-css/gh-fork-ribbon.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/select2-component/dist/select2.min.css ./packages/core/demo/css/`,
-        `cpy ./packages/core/src/lib.d.ts ./packages/core/dist`,
         `cpy ./packages/core/src/libs.d.ts ./packages/core/dist`
       ],
       version: [

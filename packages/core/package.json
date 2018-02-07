@@ -1,6 +1,6 @@
 {
   "name": "schema-based-json-editor",
-  "version": "7.2.3",
+  "version": "7.2.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs, angular and vuejs component of schema based json editor.",
@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "files": [
-    "dist"
+    "dist",
+    "src/lib.d.ts",
+    "src/lib.ngsummary.json"
   ],
   "dependencies": {
     "lodash.isinteger": "4",
