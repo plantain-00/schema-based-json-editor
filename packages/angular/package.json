@@ -1,6 +1,6 @@
 {
   "name": "angular-schema-based-json-editor",
-  "version": "7.2.1",
+  "version": "7.2.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A angular component of schema based json editor.",
@@ -30,7 +30,7 @@
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
     "markdown-tip-angular": "6",
-    "schema-based-json-editor": "^7.2.1",
+    "schema-based-json-editor": "^7.2.2",
     "select2-angular-component": "5"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
     "markdown-tip-angular": "6",
-    "schema-based-json-editor": "^7.2.1",
+    "schema-based-json-editor": "^7.2.2",
     "select2-angular-component": "5"
   }
 }
