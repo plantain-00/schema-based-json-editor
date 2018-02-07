@@ -1,3 +1,4 @@
+/// <reference path="./lib.d.ts" />
 import toNumber from 'lodash.tonumber'
 import toInteger from 'lodash.tointeger'
 import isObject from 'lodash.isobject'

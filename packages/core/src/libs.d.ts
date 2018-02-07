@@ -1,4 +1,4 @@
-import dragula from "dragula";
+import dragula = require("dragula");
 // tslint:disable:no-duplicate-imports
 import { MarkdownIt, Token, TokenRender, Renderer } from "markdown-it";
 import * as markdownit from "markdown-it";
