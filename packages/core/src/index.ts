@@ -1,7 +1,7 @@
-import * as toNumber from 'lodash.tonumber'
-import * as toInteger from 'lodash.tointeger'
-import * as isObject from 'lodash.isobject'
-import * as isInteger from 'lodash.isinteger'
+import toNumber from 'lodash.tonumber'
+import toInteger from 'lodash.tointeger'
+import isObject from 'lodash.isobject'
+import isInteger from 'lodash.isinteger'
 import { defaultLocale as defaultMarkDownTipLocale } from 'markdown-tip'
 export { toNumber, toInteger }
 

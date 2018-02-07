@@ -86,7 +86,7 @@ export class ArrayEditorComponent {
     if (this.drakContainer && this.dragula) {
       const container = this.drakContainer.nativeElement as HTMLElement
       this.drak = this.dragula([container])
-      this.drak.on('drop', (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+      this.drak!.on('drop', (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
         if (this.value) {
           common.switchItem(this.value, el, sibling)
           this.renderSwitch = -this.renderSwitch
