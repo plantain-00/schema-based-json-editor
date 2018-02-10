@@ -30,9 +30,9 @@
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {},
   "devDependencies": {
-    "@angular/compiler": "5.2.3",
-    "@angular/compiler-cli": "5.2.3",
-    "@angular/core": "5.2.3",
+    "@angular/compiler": "5.2.4",
+    "@angular/compiler-cli": "5.2.4",
+    "@angular/core": "5.2.4",
     "@commitlint/cli": "6.1.0",
     "@commitlint/config-conventional": "6.1.0",
     "@types/jasmine": "2.8.6",
@@ -41,14 +41,14 @@
     "cpy-cli": "1.0.1",
     "file2variable-cli": "1.8.3",
     "http-server": "0.11.1",
-    "jasmine": "2.9.0",
+    "jasmine": "3.0.0",
     "karma": "2.0.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-firefox-launcher": "1.1.0",
     "karma-jasmine": "1.1.1",
     "karma-webpack": "2.0.9",
     "lerna": "2.8.0",
-    "markdownlint-cli": "0.7.0",
+    "markdownlint-cli": "0.7.1",
     "no-unused-export": "1.5.0",
     "puppeteer": "1.0.0",
     "rev-static": "3.4.1",
@@ -57,6 +57,6 @@
     "tslint": "5.9.1",
     "tslint-config-standard": "7.0.0",
     "typescript": "2.7.1",
-    "webpack": "3.10.0"
+    "webpack": "3.11.0"
   }
 }

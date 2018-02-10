@@ -3,32 +3,32 @@
 
 
 "@angular/common@5":
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-5.2.3.tgz#f2a5c12ec44b73a248d8dcb2d37ac2749f091cf7"
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-5.2.4.tgz#a0ee6ef65f731196d3037bce515f7bbec90740d2"
   dependencies:
     tslib "^1.7.1"
 
 "@angular/core@5":
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.2.3.tgz#157dcb437d085b325513689e0e4ae70182f3f708"
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.2.4.tgz#44a59bcea87b3aac9ce8ff2ff674fe9cb60e2041"
   dependencies:
     tslib "^1.7.1"
 
 "@angular/forms@5":
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-5.2.3.tgz#4992419191a3800516085209be331fc0d63bd099"
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-5.2.4.tgz#a731087e147ca61f5051cbe22597a24d937c4852"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser-dynamic@5.2.3":
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.2.3.tgz#87d5172da2c102c3cf48da29d39e9b4b9414b419"
+"@angular/platform-browser-dynamic@5.2.4":
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.2.4.tgz#708457c9aafb1b812187c95d10365685521314d4"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser@5.2.3":
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-5.2.3.tgz#953df896839879e2b8ca89a364d66e3ac1dcd167"
+"@angular/platform-browser@5.2.4":
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-5.2.4.tgz#dcb2dc6083774dcf2e17c9e9d0653d87057bf732"
   dependencies:
     tslib "^1.7.1"
 
@@ -45,8 +45,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "9.4.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.0.tgz#b85a0bcf1e1cc84eb4901b7e96966aedc6f078d1"
+  version "9.4.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.5.tgz#d2a90c634208173d1b1a0a6ba9f1df3de62edcf5"
 
 argparse@^1.0.7:
   version "1.0.9"
