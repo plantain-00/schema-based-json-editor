@@ -212,6 +212,10 @@ export const schema: common.Schema = {
       type: 'string',
       enum: [
       ]
+    },
+    uploadFileExample: {
+      type: 'string',
+      format: 'base64'
     }
   },
   required: [
@@ -235,7 +239,8 @@ export const schema: common.Schema = {
     'optionalObjectExample',
     'propertyOrderExample',
     'collapsedObjectExample',
-    'emptyEnumExample'
+    'emptyEnumExample',
+    'uploadFileExample'
   ]
 }
 

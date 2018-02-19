@@ -90,6 +90,20 @@ entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
+file-uploader-angular-component@7:
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/file-uploader-angular-component/-/file-uploader-angular-component-7.1.4.tgz#ed01e6bca229c04423f0fe5c222d7ef89de49014"
+  dependencies:
+    "@angular/common" "5"
+    "@angular/core" "5"
+    file-uploader-component "^7.1.4"
+
+file-uploader-component@^7.1.4:
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.1.4.tgz#bb65ffa7f325d15cf162a95aa137e98d971fbab7"
+  dependencies:
+    tslib "1"
+
 highlight.js@9.12.0:
   version "9.12.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"

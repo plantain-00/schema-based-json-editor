@@ -5,6 +5,7 @@ import { Optional } from './optional'
 import { Description } from './description'
 import { MarkdownTip } from 'markdown-tip-react'
 import { Select2, Select2UpdateValue } from 'select2-react-component'
+import { FileUploader } from 'file-uploader-react-component'
 
 /**
  * @public
@@ -41,6 +42,12 @@ export class StringEditor extends React.Component<Props, State> {
     return this.props.initialValue !== nextProps.initialValue
   }
   render () {
+    const fileUploader = this.canUpload ? (
+      <FileUploader locale={this.props.locale.fileUploaderLocale}
+      fileGot={(e) => this.fileGot(e)}>
+      </FileUploader>
+    ) : null
+
     const textarea = this.useTextArea ? (
       <textarea className={this.props.theme.formControl}
         onChange={this.onChange}
@@ -97,6 +104,7 @@ export class StringEditor extends React.Component<Props, State> {
               icon={this.props.icon} />
           </div>
         </label>
+        {fileUploader}
         {textarea}
         {input}
         {select}
@@ -137,7 +145,7 @@ export class StringEditor extends React.Component<Props, State> {
     return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly
   }
   private get canPreviewImage () {
-    return common.isImageUrl(this.value)
+    return common.isImageUrl(this.value) || common.isBase64Image(this.value)
   }
   private get canPreviewMarkdown () {
     return this.props.md && this.props.schema.format === 'markdown'
@@ -175,6 +183,9 @@ export class StringEditor extends React.Component<Props, State> {
       label: e
     }))
   }
+  private get canUpload () {
+    return this.props.schema.format === 'base64'
+  }
 
   private updateSelection (value: Select2UpdateValue) {
     this.value = value.toString()
@@ -182,6 +193,20 @@ export class StringEditor extends React.Component<Props, State> {
     this.setState({ value: this.value })
     this.props.updateValue(this.value, !this.errorMessage)
   }
+  private fileGot (file: File | Blob) {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+      this.value = reader.result
+      this.validate()
+      this.setState({ value: this.value })
+      this.props.updateValue(this.value, !this.errorMessage)
+    }
+    reader.onerror = (error) => {
+      console.log(error)
+    }
+  }
+
   private validate () {
     this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale)
   }

@@ -1,5 +1,6 @@
 import { Locale } from '../'
 import { locale as markdownTipLocale } from 'markdown-tip/dist/locales/zh-CN'
+import { locale as fileUploaderLocale } from 'file-uploader-component/dist/locales/zh-CN'
 
 /**
  * @public
@@ -30,5 +31,6 @@ export const locale: Locale = {
     true: '是',
     false: '否'
   },
-  markdownTipLocale
+  markdownTipLocale,
+  fileUploaderLocale
 }

@@ -23,6 +23,10 @@
             </icon>
         </div>
     </label>
+    <file-uploader v-if="canUpload"
+        :locale="locale.fileUploaderLocale"
+        @file-got="fileGot($event)">
+    </file-uploader>
     <textarea v-if="useTextArea"
         :class="theme.formControl"
         @change="onChange($event)"

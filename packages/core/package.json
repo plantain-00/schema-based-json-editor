@@ -24,6 +24,7 @@
     "src/lib.ngsummary.json"
   ],
   "dependencies": {
+    "file-uploader-component": "7",
     "lodash.isinteger": "4",
     "lodash.isobject": "3",
     "lodash.tointeger": "4",

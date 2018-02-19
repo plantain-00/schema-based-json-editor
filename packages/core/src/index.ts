@@ -4,6 +4,7 @@ import toInteger from 'lodash.tointeger'
 import isObject from 'lodash.isobject'
 import isInteger from 'lodash.isinteger'
 import { defaultLocale as defaultMarkDownTipLocale } from 'markdown-tip'
+import { defaultLocale as defaultFileUploaderLocale } from 'file-uploader-component'
 export { toNumber, toInteger }
 
 import { __extends, __decorate, __assign } from 'tslib'
@@ -64,7 +65,7 @@ export type NumberSchema = CommonSchema & {
  */
 export type StringSchema = CommonSchema & {
   type: 'string';
-  format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown';
+  format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64';
   enum?: string[];
   minLength?: number;
   maxLength?: number;
@@ -171,7 +172,8 @@ export const defaultLocale = {
     true: 'true',
     false: 'false'
   },
-  markdownTipLocale: defaultMarkDownTipLocale
+  markdownTipLocale: defaultMarkDownTipLocale,
+  fileUploaderLocale: defaultFileUploaderLocale
 }
 
 export type Locale = typeof defaultLocale
@@ -619,6 +621,17 @@ export function isImageUrl (value?: string) {
   }
   const extensionName = value.substr(value.length - 4, 4)
   return imageExtensions.indexOf(extensionName) !== -1
+}
+
+/**
+ * @public
+ */
+export function isBase64Image (value?: string) {
+  if (!value) {
+    return false
+  }
+  return value.indexOf(`data:image/`) === 0
+    && value.indexOf(`;base64,`) !== -1
 }
 
 /**

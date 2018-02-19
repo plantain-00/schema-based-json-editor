@@ -26,6 +26,7 @@
     "@types/dragula": "*",
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
+    "file-uploader-vue-component": "7",
     "markdown-tip-vue": "6",
     "schema-based-json-editor": "^7.2.4",
     "select2-vue-component": "5",

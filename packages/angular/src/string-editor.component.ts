@@ -73,7 +73,7 @@ export class StringEditorComponent {
     return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly
   }
   private get canPreviewImage () {
-    return common.isImageUrl(this.value)
+    return common.isImageUrl(this.value) || common.isBase64Image(this.value)
   }
   private get canPreviewMarkdown () {
     return this.md && this.schema.format === 'markdown'
@@ -117,6 +117,9 @@ export class StringEditorComponent {
       label: e
     }))
   }
+  get canUpload () {
+    return this.schema.format === 'base64'
+  }
 
   updateSelection (value: string) {
     this.value = value
@@ -132,6 +135,19 @@ export class StringEditorComponent {
   collapseOrExpand = () => {
     this.collapsed = !this.collapsed
   }
+  fileGot (file: File | Blob) {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+      this.value = reader.result
+      this.validate()
+      this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
+    }
+    reader.onerror = (error) => {
+      console.log(error)
+    }
+  }
+
   private validate () {
     this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale)
   }

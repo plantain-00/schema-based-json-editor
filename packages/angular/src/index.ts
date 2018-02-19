@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common'
 
 import { MarkdownTipModule } from 'markdown-tip-angular'
 import { Select2Module } from 'select2-angular-component'
+import { FileUploaderModule } from 'file-uploader-angular-component'
 
 /**
  * @public
@@ -25,7 +26,8 @@ import { Select2Module } from 'select2-angular-component'
   imports: [
     CommonModule,
     MarkdownTipModule,
-    Select2Module
+    Select2Module,
+    FileUploaderModule
   ],
   exports: [
     JSONEditorComponent,

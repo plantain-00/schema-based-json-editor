@@ -26,6 +26,7 @@
     "@types/dragula": "*",
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
+    "file-uploader-react-component": "7",
     "markdown-tip-react": "6",
     "react": "16",
     "react-dom": "16",

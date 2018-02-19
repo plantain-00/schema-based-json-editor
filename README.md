@@ -15,8 +15,8 @@
 + common schema fields: title, description, default, readonly, propertyOrder
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems
-+ number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, collapsed
-+ string schema fields: format, enum, minLength, maxLength, pattern
++ number and integer shema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf
++ string schema fields: format('textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64'), enum, minLength, maxLength, pattern
 + image preview, code highlight, markdown preview
 + multi-language
 

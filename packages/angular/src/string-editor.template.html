@@ -23,6 +23,10 @@
             </icon>
         </div>
     </label>
+    <file-uploader *ngIf="canUpload"
+        [locale]="locale.fileUploaderLocale"
+        (fileGot)="fileGot($event)">
+    </file-uploader>
     <textarea *ngIf="useTextArea"
         [class]="theme.formControl"
         (change)="onChange($event)"

@@ -5,6 +5,7 @@ import { MarkdownIt, HLJS } from 'schema-based-json-editor/dist/libs'
 import { stringEditorTemplateHtml, stringEditorTemplateHtmlStatic } from './variables'
 import 'markdown-tip-vue'
 import 'select2-vue-component'
+import 'file-uploader-vue-component'
 
 @Component({
   render: stringEditorTemplateHtml,
@@ -44,7 +45,7 @@ export class StringEditor extends Vue {
   }
 
   private get canPreviewImage () {
-    return common.isImageUrl(this.value)
+    return common.isImageUrl(this.value) || common.isBase64Image(this.value)
   }
   private get canPreviewMarkdown () {
     return this.md && this.schema.format === 'markdown'
@@ -103,6 +104,9 @@ export class StringEditor extends Vue {
       label: e
     }))
   }
+  get canUpload () {
+    return this.schema.format === 'base64'
+  }
 
   updateSelection (value: string) {
     this.value = value
@@ -117,6 +121,18 @@ export class StringEditor extends Vue {
   }
   collapseOrExpand () {
     this.collapsed = !this.collapsed
+  }
+  fileGot (file: File | Blob) {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => {
+      this.value = reader.result
+      this.validate()
+      this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
+    }
+    reader.onerror = (error) => {
+      console.log(error)
+    }
   }
   private validate () {
     this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale)

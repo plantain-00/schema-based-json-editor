@@ -29,6 +29,7 @@
     "@types/dragula": "*",
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
+    "file-uploader-angular-component": "7",
     "markdown-tip-angular": "6",
     "schema-based-json-editor": "^7.2.4",
     "select2-angular-component": "5"
