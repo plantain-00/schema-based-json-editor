@@ -32,7 +32,8 @@
                 :value="filter" />
         </div>
         <editor v-for="(p, i) in filteredProperties"
-            :key="p.property"
+            v-if="isRequired(p.property) !== false"
+            :key="p.property + isRequired(p.property)"
             :schema="p.schema"
             :title="p.schema.title || p.property"
             :initial-value="value[p.property]"

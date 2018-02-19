@@ -22,6 +22,7 @@ export type CommonSchema = {
   default?: ValueType;
   readonly?: boolean;
   propertyOrder?: number;
+  requiredWhen?: [string, '===' | 'in', any];
 }
 
 /**
@@ -818,3 +819,39 @@ export function filterArray (value: ValueType, index: number, schema: Schema, fi
  * @public
  */
 export const minItemCountIfNeedFilter = 6
+
+/**
+ * @public
+ */
+export function isRequired (
+  required: string[] | undefined,
+  value: { [name: string]: ValueType } | undefined,
+  schema: ObjectSchema,
+  property: string) {
+  /**
+   * return true: required
+   * return undefined: optional
+   * return false: hidden
+   */
+  if (required && required.some(r => r === property)) {
+    return true
+  }
+  if (!value) {
+    return undefined
+  }
+  const requiredWhen = schema.properties[property].requiredWhen
+  if (!requiredWhen) {
+    return undefined
+  }
+  const [left, operator, right] = requiredWhen
+  if (!schema.properties[left]) {
+    return undefined
+  }
+  if (operator === '===') {
+    return value[left] === right
+  }
+  if (operator === 'in') {
+    return Array.isArray(right) && right.indexOf(value[left]) !== -1
+  }
+  return undefined
+}

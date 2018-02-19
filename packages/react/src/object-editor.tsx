@@ -52,8 +52,8 @@ export class ObjectEditor extends React.Component<Props, State> {
   }
   render () {
     const childrenElement: JSX.Element[] = (!this.collapsed && this.value !== undefined)
-      ? this.properties.filter(p => common.filterObject(p, this.filter))
-        .map(({ property, schema }) => <Editor key={property}
+      ? this.properties.filter(p => common.filterObject(p, this.filter) && this.isRequired(p.property) !== false)
+        .map(({ property, schema }) => <Editor key={property + this.isRequired(property)}
           schema={schema}
           title={schema.title || property}
           initialValue={this.value![property]}
@@ -122,13 +122,18 @@ export class ObjectEditor extends React.Component<Props, State> {
   }
   private onChange = (property: string, value: common.ValueType | undefined, isValid: boolean) => {
     this.value![property] = value
+    for (const p in this.props.schema.properties) {
+      if (this.isRequired(p) === false) {
+        this.value![p] = undefined
+      }
+    }
     this.validate()
     this.setState({ value: this.value })
     common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property)
     this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0)
   }
   private isRequired (property: string) {
-    return this.props.schema.required && this.props.schema.required.some(r => r === property)
+    return common.isRequired(this.props.schema.required, this.value, this.props.schema, property)
   }
   private validate () {
     this.errorMessage = common.getErrorMessageOfObject(this.value, this.props.schema, this.props.locale)

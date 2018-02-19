@@ -216,6 +216,33 @@ export const schema: common.Schema = {
     uploadFileExample: {
       type: 'string',
       format: 'base64'
+    },
+    requiredWhenExample: {
+      type: 'object',
+      properties: {
+        kind: {
+          type: 'number'
+        },
+        propertyExample1: {
+          type: 'number',
+          requiredWhen: ['kind', '===', 0]
+        },
+        propertyExample2: {
+          type: 'string',
+          requiredWhen: ['kind', '===', 1]
+        },
+        propertyExample3: {
+          type: 'number',
+          requiredWhen: ['kind', 'in', [0, 1]]
+        },
+        propertyExample4: {
+          type: 'string'
+        },
+        propertyExample5: {
+          type: 'string'
+        }
+      },
+      required: ['kind', 'propertyExample4']
     }
   },
   required: [
@@ -240,7 +267,8 @@ export const schema: common.Schema = {
     'propertyOrderExample',
     'collapsedObjectExample',
     'emptyEnumExample',
-    'uploadFileExample'
+    'uploadFileExample',
+    'requiredWhenExample'
   ]
 }
 

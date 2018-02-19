@@ -69,10 +69,10 @@ export class ObjectEditorComponent {
     this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 })
   }
   isRequired (property: string) {
-    return this.schema.required && this.schema.required.some(r => r === property)
+    return common.isRequired(this.schema.required, this.value, this.schema, property)
   }
-  trackByFunction (index: number, p: { property: string; schema: common.Schema }) {
-    return p.property
+  trackByFunction = (index: number, p: { property: string; schema: common.Schema }) => {
+    return p.property + this.isRequired(p.property)
   }
   collapseOrExpand = () => {
     this.collapsed = !this.collapsed
@@ -84,6 +84,11 @@ export class ObjectEditorComponent {
   }
   onChange (property: string, { value, isValid }: common.ValidityValue<{ [name: string]: common.ValueType }>) {
     this.value![property] = value
+    for (const p in this.schema.properties) {
+      if (this.isRequired(p) === false) {
+        this.value![p] = undefined
+      }
+    }
     this.validate()
     common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property)
     this.updateValue.emit({ value: this.value, isValid: this.invalidProperties.length === 0 })
@@ -95,7 +100,7 @@ export class ObjectEditorComponent {
     this.errorMessage = common.getErrorMessageOfObject(this.value, this.schema, this.locale)
   }
   get filteredProperties () {
-    return this.properties.filter(p => common.filterObject(p, this.filter))
+    return this.properties.filter(p => common.filterObject(p, this.filter) && this.isRequired(p.property) !== false)
   }
   get hasDeleteButtonFunction () {
     return this.hasDeleteButton && !this.isReadOnly

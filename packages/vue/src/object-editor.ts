@@ -31,6 +31,7 @@ export class ObjectEditor extends Vue {
   filter = ''
   private invalidProperties: string[] = []
   private properties: { property: string; schema: common.Schema }[] = []
+  private watchedProperties: string[] = []
 
   beforeMount () {
     this.collapsed = this.schema.collapsed
@@ -49,6 +50,12 @@ export class ObjectEditor extends Vue {
         }
       }
       this.properties = this.properties.sort(common.compare)
+    }
+    for (const property in this.schema.properties) {
+      const schema = this.schema.properties[property]
+      if (schema.requiredWhen) {
+        this.watchedProperties.push(schema.requiredWhen[0])
+      }
     }
     this.$emit('update-value', { value: this.value, isValid: true })
   }
@@ -73,7 +80,7 @@ export class ObjectEditor extends Vue {
   }
 
   isRequired (property: string) {
-    return this.schema.required && this.schema.required.some(r => r === property)
+    return common.isRequired(this.schema.required, this.value, this.schema, property)
   }
   collapseOrExpand () {
     this.collapsed = !this.collapsed
@@ -85,7 +92,15 @@ export class ObjectEditor extends Vue {
   }
   onChange (property: string, { value, isValid }: common.ValidityValue<common.ValueType>) {
     this.value![property] = value
+    for (const p in this.schema.properties) {
+      if (this.isRequired(p) === false) {
+        this.value![p] = undefined
+      }
+    }
     this.validate()
+    if (this.watchedProperties.some(p => p === property)) {
+      this.$forceUpdate()
+    }
     common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property)
     this.$emit('update-value', { value: this.value, isValid: this.invalidProperties.length === 0 })
   }
