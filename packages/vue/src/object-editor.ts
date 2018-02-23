@@ -53,7 +53,7 @@ export class ObjectEditor extends Vue {
     }
     for (const property in this.schema.properties) {
       const schema = this.schema.properties[property]
-      if (schema.requiredWhen) {
+      if (schema && schema.requiredWhen) {
         this.watchedProperties.push(schema.requiredWhen[0])
       }
     }

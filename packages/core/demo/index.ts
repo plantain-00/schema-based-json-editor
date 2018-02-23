@@ -221,19 +221,24 @@ export const schema: common.Schema = {
       type: 'object',
       properties: {
         kind: {
-          type: 'number'
+          type: 'string',
+          enum: [
+            'enum 1',
+            'enum 2',
+            'enum 3'
+          ]
         },
         propertyExample1: {
           type: 'number',
-          requiredWhen: ['kind', '===', 0]
+          requiredWhen: ['kind', '===', 'enum 1']
         },
         propertyExample2: {
           type: 'string',
-          requiredWhen: ['kind', '===', 1]
+          requiredWhen: ['kind', '===', 'enum 2']
         },
         propertyExample3: {
           type: 'number',
-          requiredWhen: ['kind', 'in', [0, 1]]
+          requiredWhen: ['kind', 'in', ['enum 1', 'enum 2']]
         },
         propertyExample4: {
           type: 'string'
@@ -278,5 +283,5 @@ export const schema: common.Schema = {
 export const schemaSchema: common.StringSchema = {
   title: 'Schema:',
   type: 'string',
-  format: 'code'
+  format: 'textarea'
 }

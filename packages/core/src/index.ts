@@ -839,6 +839,9 @@ export function isRequired (
   if (!value) {
     return undefined
   }
+  if (!schema.properties[property]) {
+    return undefined
+  }
   const requiredWhen = schema.properties[property].requiredWhen
   if (!requiredWhen) {
     return undefined
