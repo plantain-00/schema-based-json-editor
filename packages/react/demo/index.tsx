@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { JSONEditor } from '../dist/'
-import { schema, schemaSchema } from 'schema-based-json-editor/demo/'
+import { schema, schemaSchema, initialValue, initialValueSchema } from 'schema-based-json-editor/demo/'
 import * as dragula from 'dragula'
 import * as MarkdownIt from 'markdown-it'
 import * as hljs from 'highlight.js'
@@ -9,12 +9,12 @@ import * as hljs from 'highlight.js'
 class Main extends React.Component<{}, {}> {
   private locale = null
   private schema = schema
-  private value: any = {}
+  private value = initialValue
   private isValid = false
   private schemaSchema = schemaSchema
-  private get formattedSchema () {
-    return JSON.stringify(this.schema, null, '  ')
-  }
+  private initialValueSchema = initialValueSchema
+  private editingSchema = JSON.stringify(schema, null, '  ')
+  private editingInitialValue = JSON.stringify(initialValue, null, '  ')
   componentWillMount () {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
@@ -26,12 +26,12 @@ class Main extends React.Component<{}, {}> {
   render () {
     const valueHtml = hljs.highlight('json', JSON.stringify(this.value, null, '  ')).value
     return (
-      <div>
+      <div style={{ position: 'relative' }}>
         <a href='https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/react/demo' target='_blank'>the source code of the demo</a>
         <br />
-        <div style={{ float: 'left', margin: '10px', width: '400px', overflowY: 'scroll', height: '600px' }} className='bootstrap3-row-container'>
+        <div style={{ margin: '10px', width: '400px', overflowY: 'scroll', position: 'absolute' }} className='bootstrap3-row-container'>
           <JSONEditor schema={this.schemaSchema}
-            initialValue={this.formattedSchema}
+            initialValue={this.editingSchema}
             updateValue={this.updateSchema}
             theme='bootstrap3'
             icon='fontawesome4'
@@ -41,7 +41,19 @@ class Main extends React.Component<{}, {}> {
             hljs={hljs}
             forceHttps={false} />
         </div>
-        <div style={{ width: '500px', margin: '10px', float: 'left', overflowY: 'scroll', height: '600px' }} className='bootstrap3-row-container'>
+        <div style={{ margin: '10px', width: '400px', overflowY: 'scroll', position: 'absolute', top: '300px' }} className='bootstrap3-row-container'>
+          <JSONEditor schema={this.initialValueSchema}
+            initialValue={this.editingInitialValue}
+            updateValue={this.updateInitialValue}
+            theme='bootstrap3'
+            icon='fontawesome4'
+            locale={this.locale}
+            dragula={dragula}
+            markdownit={MarkdownIt}
+            hljs={hljs}
+            forceHttps={false} />
+        </div>
+        <div style={{ width: '500px', margin: '10px', overflowY: 'scroll', height: '600px', position: 'absolute', left: '450px' }} className='bootstrap3-row-container'>
           <JSONEditor schema={this.schema}
             initialValue={this.value}
             updateValue={this.updateValue}
@@ -53,7 +65,7 @@ class Main extends React.Component<{}, {}> {
             hljs={hljs}
             forceHttps={false} />
         </div>
-        <div style={{ float: 'left', margin: '10px', width: '400px', overflowY: 'scroll', height: '600px' }}>
+        <div style={{ margin: '10px', width: '400px', overflowY: 'scroll', height: '600px', position: 'absolute', right: '10px' }}>
           Value:
           <pre style={{ borderColor: this.isValid ? 'black' : 'red' }}><code dangerouslySetInnerHTML={{ __html: valueHtml }}></code></pre>
         </div>
@@ -62,8 +74,18 @@ class Main extends React.Component<{}, {}> {
   }
   private updateSchema = (value: any, isValid: boolean) => {
     try {
-      this.schema = JSON.parse(value)
-      this.setState({ schema: this.schema })
+      this.editingSchema = value as string
+      localStorage.setItem('json-editor:schema', this.editingSchema)
+      this.setState({ editingSchema: this.editingSchema })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  private updateInitialValue = (value: any, isValid: boolean) => {
+    try {
+      this.editingInitialValue = value as string
+      localStorage.setItem('json-editor:initial-value', this.editingInitialValue)
+      this.setState({ editingInitialValue: this.editingInitialValue })
     } catch (error) {
       console.log(error)
     }

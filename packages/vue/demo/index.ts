@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { schema, schemaSchema } from 'schema-based-json-editor/demo/'
+import { schema, schemaSchema, initialValue, initialValueSchema } from 'schema-based-json-editor/demo/'
 
 // tslint:disable:no-duplicate-imports
 import '../dist/'
@@ -12,12 +12,12 @@ import * as hljs from 'highlight.js'
 
 @Component({
   template: `
-    <div>
+    <div style="position: relative">
       <a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/vue/demo" target="_blank">the source code of the demo</a>
       <br/>
-      <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
+      <div style="width: 400px; margin: 10px; overflow-y: scroll; position: absolute;" class="bootstrap3-row-container">
         <json-editor :schema="schemaSchema"
-          :initial-value="formattedSchema"
+          :initial-value="editingSchema"
           @update-value="updateSchema($event)"
           theme="bootstrap3"
           icon="fontawesome4"
@@ -28,7 +28,20 @@ import * as hljs from 'highlight.js'
           :force-https="false">
         </json-editor>
       </div>
-      <div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
+      <div style="width: 400px; margin: 10px; overflow-y: scroll; position: absolute; top: 300px;" class="bootstrap3-row-container">
+        <json-editor :schema="initialValueSchema"
+          :initial-value="editingInitialValue"
+          @update-value="updateInitialValue($event)"
+          theme="bootstrap3"
+          icon="fontawesome4"
+          :locale="locale"
+          :dragula="dragula"
+          :markdownit="markdownit"
+          :hljs="hljs"
+          :force-https="false">
+        </json-editor>
+      </div>
+      <div style="width: 500px; margin: 10px; overflow-y: scroll; height: 600px; position: absolute; left: 450px;" class="bootstrap3-row-container">
         <json-editor :schema="schema"
           :initial-value="value"
           @update-value="updateValue($event)"
@@ -41,7 +54,7 @@ import * as hljs from 'highlight.js'
           :force-https="false">
         </json-editor>
       </div>
-      <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
+      <div style="width: 400px; margin: 10px; overflow-y: scroll; height: 600px; position: absolute; right: 10px;">
         Value:
         <pre :style="{borderColor: color}"><code v-html="valueHtml"></code></pre>
       </div>
@@ -51,16 +64,16 @@ import * as hljs from 'highlight.js'
 class App extends Vue {
   locale = null
   schema = schema
-  value = {}
+  value = initialValue
   color = 'black'
   dragula = dragula
   markdownit = MarkdownIt
   hljs = hljs
   valueHtml = ''
   schemaSchema = schemaSchema
-  get formattedSchema () {
-    return JSON.stringify(this.schema, null, '  ')
-  }
+  initialValueSchema = initialValueSchema
+  editingSchema = JSON.stringify(schema, null, '  ')
+  editingInitialValue = JSON.stringify(initialValue, null, '  ')
   beforeCreate () {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
@@ -70,7 +83,16 @@ class App extends Vue {
   }
   updateSchema ({ value }: ValidityValue<ValueType>) {
     try {
-      this.schema = JSON.parse(value as string)
+      this.editingSchema = value as string
+      localStorage.setItem('json-editor:schema', this.editingSchema)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  updateInitialValue ({ value }: ValidityValue<ValueType>) {
+    try {
+      this.editingInitialValue = value as string
+      localStorage.setItem('json-editor:initial-value', this.editingInitialValue)
     } catch (error) {
       console.log(error)
     }

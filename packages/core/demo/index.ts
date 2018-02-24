@@ -3,7 +3,7 @@ import * as common from '../dist/'
 /**
  * @public
  */
-export const schema: common.Schema = {
+export let schema: common.Schema = {
   type: 'object',
   title: 'GUI:',
   description: 'a description example',
@@ -277,11 +277,43 @@ export const schema: common.Schema = {
   ]
 }
 
+const schemaString = localStorage.getItem('json-editor:schema')
+if (schemaString) {
+  try {
+    schema = JSON.parse(schemaString)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+/**
+ * @public
+ */
+export let initialValue = {}
+
+const initialValueString = localStorage.getItem('json-editor:initial-value')
+if (initialValueString) {
+  try {
+    initialValue = JSON.parse(initialValueString)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 /**
  * @public
  */
 export const schemaSchema: common.StringSchema = {
-  title: 'Schema:',
+  title: 'Schema(refresh the page to make it work when you change it):',
+  type: 'string',
+  format: 'textarea'
+}
+
+/**
+ * @public
+ */
+export const initialValueSchema: common.StringSchema = {
+  title: 'Initial Value(refresh the page to make it work when you change it):',
   type: 'string',
   format: 'textarea'
 }

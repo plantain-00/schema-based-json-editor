@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core'
 
 import { ValidityValue, ValueType } from '../dist/'
-import { schema, schemaSchema } from 'schema-based-json-editor/demo/'
+import { schema, schemaSchema, initialValue, initialValueSchema } from 'schema-based-json-editor/demo/'
 
 import * as dragula from 'dragula'
 import * as MarkdownIt from 'markdown-it'
@@ -11,12 +11,12 @@ import * as hljs from 'highlight.js'
   selector: 'app',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div>
+    <div style="position: relative">
       <a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/angular/demo" target="_blank">the source code of the demo</a>
       <br/>
-      <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
+      <div style="width: 400px; margin: 10px; overflow-y: scroll; position: absolute;" class="bootstrap3-row-container">
         <json-editor [schema]="schemaSchema"
-          [initialValue]="formattedSchema"
+          [initialValue]="editingSchema"
           (updateValue)="updateSchema($event)"
           theme="bootstrap3"
           icon="fontawesome4"
@@ -27,7 +27,20 @@ import * as hljs from 'highlight.js'
           [forceHttps]="false">
         </json-editor>
       </div>
-      <div style="width: 500px; margin: 10px; float: left; overflow-y: scroll; height: 600px" class="bootstrap3-row-container">
+      <div style="width: 400px; margin: 10px; overflow-y: scroll; position: absolute; top: 300px;" class="bootstrap3-row-container">
+        <json-editor [schema]="initialValueSchema"
+          [initialValue]="editingInitialValue"
+          (updateValue)="updateInitialValue($event)"
+          theme="bootstrap3"
+          icon="fontawesome4"
+          [locale]="locale"
+          [dragula]="dragula"
+          [markdownit]="markdownit"
+          [hljs]="hljs"
+          [forceHttps]="false">
+        </json-editor>
+      </div>
+      <div style="width: 500px; margin: 10px; overflow-y: scroll; height: 600px; position: absolute; left: 450px;" class="bootstrap3-row-container">
         <json-editor [schema]="schema"
           [initialValue]="value"
           (updateValue)="updateValue($event)"
@@ -40,7 +53,7 @@ import * as hljs from 'highlight.js'
           [forceHttps]="false">
         </json-editor>
       </div>
-      <div style="width: 400px; margin: 10px; float: left; overflow-y: scroll; height: 600px">
+      <div style="width: 400px; margin: 10px; overflow-y: scroll; height: 600px; position: absolute; right: 10px;">
         Value:
         <pre [style.borderColor]="color"><code [innerHTML]="valueHtml"></code></pre>
       </div>
@@ -50,12 +63,15 @@ import * as hljs from 'highlight.js'
 export class MainComponent {
   locale = null
   schema = schema
-  value: any = {}
+  value: any = initialValue
   color = 'black'
   dragula = dragula
   markdownit = MarkdownIt as any
   hljs = hljs
   schemaSchema = schemaSchema
+  initialValueSchema = initialValueSchema
+  editingSchema = JSON.stringify(schema, null, '  ')
+  editingInitialValue = JSON.stringify(initialValue, null, '  ')
   ngOnInit () {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
@@ -63,12 +79,18 @@ export class MainComponent {
       })
     }
   }
-  get formattedSchema () {
-    return JSON.stringify(this.schema, null, '  ')
-  }
   updateSchema ({ value }: ValidityValue<ValueType>) {
     try {
-      this.schema = JSON.parse(value as string)
+      this.editingSchema = value as string
+      localStorage.setItem('json-editor:schema', this.editingSchema)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  updateInitialValue ({ value }: ValidityValue<ValueType>) {
+    try {
+      this.editingInitialValue = value as string
+      localStorage.setItem('json-editor:initial-value', this.editingInitialValue)
     } catch (error) {
       console.log(error)
     }
