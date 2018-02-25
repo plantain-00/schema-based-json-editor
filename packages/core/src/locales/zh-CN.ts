@@ -29,7 +29,8 @@ export const locale: Locale = {
   info: {
     notExists: '不存在',
     true: '是',
-    false: '否'
+    false: '否',
+    search: '搜索'
   },
   markdownTipLocale,
   fileUploaderLocale

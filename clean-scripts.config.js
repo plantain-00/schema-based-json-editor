@@ -5,20 +5,18 @@ const jsFiles = `"*.config.js" "spec/**/*.config.js"`
 const excludeTsFiles = `"packages/@(core|vue|react|angular)/@(src|demo)/**/*.d.ts"`
 
 const vueTemplateCommand = `file2variable-cli --config packages/vue/src/file2variable.config.js`
-
 const angularTemplateCommand = `file2variable-cli packages/angular/src/*.template.html -o packages/angular/src/variables.ts --html-minify --base packages/angular/src`
-const ngcSrcCommand = [
-  `ngc -p packages/core/src`,
-  `tsc -p packages/vue/src`,
-  `tsc -p packages/react/src`,
-  `ngc -p packages/angular/src`
-]
-const tscDemoCommand = [
-  `ngc -p packages/core/demo`,
-  `tsc -p packages/vue/demo`,
-  `tsc -p packages/react/demo`,
-  `ngc -p packages/angular/demo`
-]
+
+const tscCoreSrcCommand = `ngc -p packages/core/src`
+const tscVueSrcCommand = `tsc -p packages/vue/src`
+const tscReactSrcCommand = `tsc -p packages/react/src`
+const tscAngularSrcCommand = `ngc -p packages/angular/src`
+
+const tscCoreDemoCommand = `ngc -p packages/core/demo`
+const tscVueDemoCommand = `tsc -p packages/vue/demo`
+const tscReactDemoCommand = `tsc -p packages/react/demo`
+const tscAngularDemoCommand = `ngc -p packages/angular/demo`
+
 const webpackCommand = `webpack`
 const revStaticCommand = `rev-static`
 
@@ -41,11 +39,21 @@ module.exports = {
         {
           js: [
             {
-              vue: vueTemplateCommand,
-              angular: angularTemplateCommand
+              vueTemplateCommand,
+              angularTemplateCommand
             },
-            ngcSrcCommand,
-            tscDemoCommand,
+            tscCoreSrcCommand,
+            {
+              tscVueSrcCommand,
+              tscReactSrcCommand,
+              tscAngularSrcCommand
+            },
+            tscCoreDemoCommand,
+            {
+              tscVueDemoCommand,
+              tscReactDemoCommand,
+              tscAngularDemoCommand
+            },
             webpackCommand
           ],
           clean: `rimraf "packages/@(core|vue|react|angular)/demo/**/@(*.bundle-*.js|*.bundle-*.css)"`
@@ -71,12 +79,18 @@ module.exports = {
     js: `standard --fix ${jsFiles}`
   },
   watch: {
-    vue: `${vueTemplateCommand} --watch`,
-    angular: `${angularTemplateCommand} --watch`,
-    tsc: `${ngcSrcCommand} --watch`,
-    demo: `${tscDemoCommand} --watch`,
-    webpack: `${webpackCommand} --watch`,
-    rev: `${revStaticCommand} --watch`
+    vueTemplateCommand: `${vueTemplateCommand} --watch`,
+    angularTemplateCommand: `${angularTemplateCommand} --watch`,
+    tscCoreSrcCommand: `${tscCoreSrcCommand} --watch`,
+    tscVueSrcCommand: `${tscVueSrcCommand} --watch`,
+    tscReactSrcCommand: `${tscReactSrcCommand} --watch`,
+    tscAngularSrcCommand: `${tscAngularSrcCommand} --watch`,
+    tscCoreDemoCommand: `${tscCoreDemoCommand} --watch`,
+    tscVueDemoCommand: `${tscVueDemoCommand} --watch`,
+    tscReactDemoCommand: `${tscReactDemoCommand} --watch`,
+    tscAngularDemoCommand: `${tscAngularDemoCommand} --watch`,
+    webpackCommand: `${webpackCommand} --watch`,
+    revStaticCommand: `${revStaticCommand} --watch`
   },
   screenshot: [
     new Service(`http-server -p 8000`),

@@ -29,6 +29,7 @@
             <input :class="theme.formControl"
                 @change="onFilterChange($event)"
                 @keyup="onFilterChange($event)"
+                :placeholder="locale.info.search"
                 :value="filter" />
         </div>
         <editor v-for="(p, i) in filteredProperties"

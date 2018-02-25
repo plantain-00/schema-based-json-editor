@@ -15,7 +15,7 @@ import * as hljs from 'highlight.js'
     <div style="position: relative">
       <a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/vue/demo" target="_blank">the source code of the demo</a>
       <br/>
-      <div style="width: 400px; margin: 10px; overflow-y: scroll; position: absolute;" class="bootstrap3-row-container">
+      <div style="width: 30%; margin: 10px; overflow-y: scroll; position: absolute;" class="bootstrap3-row-container">
         <json-editor :schema="schemaSchema"
           :initial-value="editingSchema"
           @update-value="updateSchema($event)"
@@ -28,7 +28,7 @@ import * as hljs from 'highlight.js'
           :force-https="false">
         </json-editor>
       </div>
-      <div style="width: 400px; margin: 10px; overflow-y: scroll; position: absolute; top: 300px;" class="bootstrap3-row-container">
+      <div style="width: 30%; margin: 10px; overflow-y: scroll; position: absolute; top: 300px;" class="bootstrap3-row-container">
         <json-editor :schema="initialValueSchema"
           :initial-value="editingInitialValue"
           @update-value="updateInitialValue($event)"
@@ -41,7 +41,7 @@ import * as hljs from 'highlight.js'
           :force-https="false">
         </json-editor>
       </div>
-      <div style="width: 500px; margin: 10px; overflow-y: scroll; height: 600px; position: absolute; left: 450px;" class="bootstrap3-row-container">
+      <div style="width: 35%; margin: 10px; overflow-y: scroll; position: absolute; left: 31%;" class="bootstrap3-row-container">
         <json-editor :schema="schema"
           :initial-value="value"
           @update-value="updateValue($event)"
@@ -54,7 +54,7 @@ import * as hljs from 'highlight.js'
           :force-https="false">
         </json-editor>
       </div>
-      <div style="width: 400px; margin: 10px; overflow-y: scroll; height: 600px; position: absolute; right: 10px;">
+      <div style="width: 30%; margin: 10px; overflow-y: scroll; position: absolute; right: 10px;">
         Value:
         <pre :style="{borderColor: color}"><code v-html="valueHtml"></code></pre>
       </div>

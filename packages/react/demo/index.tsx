@@ -29,7 +29,7 @@ class Main extends React.Component<{}, {}> {
       <div style={{ position: 'relative' }}>
         <a href='https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/react/demo' target='_blank'>the source code of the demo</a>
         <br />
-        <div style={{ margin: '10px', width: '400px', overflowY: 'scroll', position: 'absolute' }} className='bootstrap3-row-container'>
+        <div style={{ margin: '10px', width: '30%', overflowY: 'scroll', position: 'absolute' }} className='bootstrap3-row-container'>
           <JSONEditor schema={this.schemaSchema}
             initialValue={this.editingSchema}
             updateValue={this.updateSchema}
@@ -41,7 +41,7 @@ class Main extends React.Component<{}, {}> {
             hljs={hljs}
             forceHttps={false} />
         </div>
-        <div style={{ margin: '10px', width: '400px', overflowY: 'scroll', position: 'absolute', top: '300px' }} className='bootstrap3-row-container'>
+        <div style={{ margin: '10px', width: '30%', overflowY: 'scroll', position: 'absolute', top: '300px' }} className='bootstrap3-row-container'>
           <JSONEditor schema={this.initialValueSchema}
             initialValue={this.editingInitialValue}
             updateValue={this.updateInitialValue}
@@ -53,7 +53,7 @@ class Main extends React.Component<{}, {}> {
             hljs={hljs}
             forceHttps={false} />
         </div>
-        <div style={{ width: '500px', margin: '10px', overflowY: 'scroll', height: '600px', position: 'absolute', left: '450px' }} className='bootstrap3-row-container'>
+        <div style={{ width: '35%', margin: '10px', overflowY: 'scroll', position: 'absolute', left: '31%' }} className='bootstrap3-row-container'>
           <JSONEditor schema={this.schema}
             initialValue={this.value}
             updateValue={this.updateValue}
@@ -65,7 +65,7 @@ class Main extends React.Component<{}, {}> {
             hljs={hljs}
             forceHttps={false} />
         </div>
-        <div style={{ margin: '10px', width: '400px', overflowY: 'scroll', height: '600px', position: 'absolute', right: '10px' }}>
+        <div style={{ margin: '10px', width: '30%', overflowY: 'scroll', position: 'absolute', right: '10px' }}>
           Value:
           <pre style={{ borderColor: this.isValid ? 'black' : 'red' }}><code dangerouslySetInnerHTML={{ __html: valueHtml }}></code></pre>
         </div>

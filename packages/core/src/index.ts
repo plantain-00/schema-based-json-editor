@@ -171,7 +171,8 @@ export const defaultLocale = {
   info: {
     notExists: 'not exists',
     true: 'true',
-    false: 'false'
+    false: 'false',
+    search: 'search'
   },
   markdownTipLocale: defaultMarkDownTipLocale,
   fileUploaderLocale: defaultFileUploaderLocale

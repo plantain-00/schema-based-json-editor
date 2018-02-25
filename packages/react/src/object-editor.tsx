@@ -71,6 +71,7 @@ export class ObjectEditor extends React.Component<Props, State> {
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
       ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
         onChange={this.onFilterChange}
+        placeholder={this.props.locale.info.search}
         defaultValue={this.filter} /></div>
       : null
 

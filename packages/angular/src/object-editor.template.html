@@ -28,6 +28,7 @@
             <input [class]="theme.formControl"
                 (change)="onFilterChange($event)"
                 (keyup)="onFilterChange($event)"
+                [placeholder]="locale.info.search"
                 [value]="filter" />
         </div>
         <editor *ngFor="let p of filteredProperties; trackBy: trackByFunction"
