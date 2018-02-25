@@ -1,6 +1,6 @@
 {
   "name": "react-schema-based-json-editor",
-  "version": "7.4.1",
+  "version": "7.4.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs component of schema based json editor.",
@@ -30,7 +30,7 @@
     "markdown-tip-react": "6",
     "react": "16",
     "react-dom": "16",
-    "schema-based-json-editor": "^7.4.1",
+    "schema-based-json-editor": "^7.4.2",
     "select2-react-component": "5"
   },
   "devDependencies": {
@@ -47,7 +47,7 @@
     "markdown-tip-react": "6",
     "react": "16",
     "react-dom": "16",
-    "schema-based-json-editor": "^7.4.1",
+    "schema-based-json-editor": "^7.4.2",
     "select2-react-component": "5"
   }
 }
