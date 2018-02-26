@@ -17,7 +17,11 @@ const tscVueDemoCommand = `tsc -p packages/vue/demo`
 const tscReactDemoCommand = `tsc -p packages/react/demo`
 const tscAngularDemoCommand = `ngc -p packages/angular/demo`
 
-const webpackCommand = `webpack`
+const webpackVueCommand = `webpack --config packages/vue/demo/webpack.config.js`
+const webpackReactCommand = `webpack --config packages/react/demo/webpack.config.js`
+const webpackAngularJitCommand = `webpack --config packages/angular/demo/jit/webpack.config.js`
+const webpackAngularAotCommand = `webpack --config packages/angular/demo/aot/webpack.config.js`
+
 const revStaticCommand = `rev-static`
 
 module.exports = {
@@ -38,23 +42,30 @@ module.exports = {
       version: [
         {
           js: [
-            {
-              vueTemplateCommand,
-              angularTemplateCommand
-            },
             tscCoreSrcCommand,
-            {
-              tscVueSrcCommand,
-              tscReactSrcCommand,
-              tscAngularSrcCommand
-            },
             tscCoreDemoCommand,
             {
-              tscVueDemoCommand,
-              tscReactDemoCommand,
-              tscAngularDemoCommand
-            },
-            webpackCommand
+              vue: [
+                vueTemplateCommand,
+                tscVueSrcCommand,
+                tscVueDemoCommand,
+                webpackVueCommand
+              ],
+              react: [
+                tscReactSrcCommand,
+                tscReactDemoCommand,
+                webpackReactCommand
+              ],
+              angular: [
+                angularTemplateCommand,
+                tscAngularSrcCommand,
+                tscAngularDemoCommand,
+                {
+                  webpackAngularJitCommand,
+                  webpackAngularAotCommand
+                }
+              ]
+            }
           ],
           clean: `rimraf "packages/@(core|vue|react|angular)/demo/**/@(*.bundle-*.js|*.bundle-*.css)"`
         },
@@ -89,7 +100,10 @@ module.exports = {
     tscVueDemoCommand: `${tscVueDemoCommand} --watch`,
     tscReactDemoCommand: `${tscReactDemoCommand} --watch`,
     tscAngularDemoCommand: `${tscAngularDemoCommand} --watch`,
-    webpackCommand: `${webpackCommand} --watch`,
+    webpackVueCommand: `${webpackVueCommand} --watch`,
+    webpackReactCommand: `${webpackReactCommand} --watch`,
+    webpackAngularJitCommand: `${webpackAngularJitCommand} --watch`,
+    webpackAngularAotCommand: `${webpackAngularAotCommand} --watch`,
     revStaticCommand: `${revStaticCommand} --watch`
   },
   screenshot: [
