@@ -1,33 +1,22 @@
-const webpack = require('webpack')
-
 module.exports = {
   entry: {
-    index: './packages/vue/demo/index',
-    vendor: './packages/vue/demo/vendor',
-    editor: './packages/vue/demo/editor'
+    index: './packages/vue/demo/index'
   },
   output: {
     path: __dirname,
     filename: '[name].bundle.js'
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
       }
-    }),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      output: {
-        comments: false
-      },
-      exclude: [
-      ]
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['index', 'editor', 'vendor']
-    })
-  ],
+    }
+  },
   resolve: {
     alias: {
       'markdown-it': 'markdown-it/dist/markdown-it.min.js',

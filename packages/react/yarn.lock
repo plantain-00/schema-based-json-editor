@@ -25,9 +25,9 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.0.38":
-  version "16.0.38"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.38.tgz#76617433ea10274505f60bb86eddfdd0476ffdc2"
+"@types/react@*", "@types/react@16.0.40":
+  version "16.0.40"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.40.tgz#caabc2296886f40b67f6fc80f0f3464476461df9"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -188,8 +188,8 @@ promise@^7.1.1:
     asap "~2.0.3"
 
 prop-types@^15.6.0:
-  version "15.6.0"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
+  version "15.6.1"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.3.1"
@@ -213,21 +213,21 @@ prop-types@^15.6.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-select2-component@^5.1.2:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.1.2.tgz#154acec43dd547f4caf73c99ff6cb31970662ec7"
+select2-component@^5.1.3:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.1.3.tgz#c0b302e603b0feaec5489cd4690fb8ef3e1ddcb5"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-react-component@5:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.1.2.tgz#dae67ebad569f5f9d57d8cf6659a0b41e814f1ca"
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.1.3.tgz#842ffa916200af1b049a136bcee514ff9eb3e7ab"
   dependencies:
     "@types/node" "*"
     react "15 || 16"
     react-dom "15 || 16"
-    select2-component "^5.1.2"
+    select2-component "^5.1.3"
 
 setimmediate@^1.0.5:
   version "1.0.5"
