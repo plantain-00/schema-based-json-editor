@@ -28,6 +28,14 @@
 import { JSONEditor } from "react-schema-based-json-editor";
 ```
 
+or
+
+```html
+<script src="./node_modules/react/umd/react.production.min.js"></script>
+<script src="./node_modules/react-dom/umd/react-dom.production.min.js"></script>
+<script src="./node_modules/react-schema-based-json-editor/dist/react-schema-based-json-editor.min.js"></script>
+```
+
 ```jsx
 <JSONEditor schema={schema}
     initialValue={initialValue}
@@ -73,6 +81,14 @@ the AOT online demo: <https://plantain-00.github.io/schema-based-json-editor/pac
 
 ```js
 import "vue-schema-based-json-editor";
+```
+
+or
+
+```html
+<script src="./node_modules/vue/dist/vue.min.js"></script>
+<script src="./node_modules/vue-class-component/dist/vue-class-component.min.js"></script>
+<script src="./node_modules/vue-schema-based-json-editor/dist/vue-schema-based-json-editor.min.js"></script>
 ```
 
 ```jsx
