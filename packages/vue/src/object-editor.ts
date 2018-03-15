@@ -76,7 +76,7 @@ export class ObjectEditor extends Vue {
     return common.getTitle(this.title, this.schema.title)
   }
   get showFilter () {
-    return this.properties.length >= common.minItemCountIfNeedFilter
+    return this.properties.filter(p => this.isRequired(p.property) !== false).length >= common.minItemCountIfNeedFilter
   }
 
   isRequired (property: string) {

@@ -152,6 +152,6 @@ export class ObjectEditor extends React.Component<Props, State> {
     return common.getTitle(this.props.title, this.props.schema.title)
   }
   private get showFilter () {
-    return this.properties.length >= common.minItemCountIfNeedFilter
+    return this.properties.filter(p => this.isRequired(p.property) !== false).length >= common.minItemCountIfNeedFilter
   }
 }
