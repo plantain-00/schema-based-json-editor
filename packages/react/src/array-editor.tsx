@@ -39,7 +39,7 @@ export class ArrayEditor extends React.Component<Props, State> {
   componentDidMount () {
     this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
     if (this.props.dragula) {
-      const container = ReactDOM.findDOMNode(this as any).childNodes[2] as HTMLElement
+      const container = common.findContainer(ReactDOM.findDOMNode(this as any).childNodes)
       this.drak = this.props.dragula([container])
       this.drak!.on('drop', (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
         if (this.value) {

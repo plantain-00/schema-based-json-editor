@@ -859,3 +859,16 @@ export function isRequired (
   }
   return undefined
 }
+
+/**
+ * @public
+ */
+export function findContainer (childNodes: NodeList) {
+  for (let i = 0; i < childNodes.length; i++) {
+    const node = childNodes[i]
+    if (node.nodeName === 'DIV') {
+      return node as HTMLElement
+    }
+  }
+  return undefined
+}
