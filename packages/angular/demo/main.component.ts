@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core'
 
 import { ValidityValue, ValueType } from '../dist/'
-import { schema, propertiesSchema, initialValue, theme } from 'schema-based-json-editor/demo/'
+import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, icon } from 'schema-based-json-editor/demo/'
 
 import * as dragula from 'dragula'
 import * as MarkdownIt from 'markdown-it'
@@ -19,7 +19,7 @@ import * as hljs from 'highlight.js'
           [initialValue]="propertiesInitialValue"
           (updateValue)="updatePropertiesValue($event)"
           [theme]="theme"
-          icon="fontawesome4"
+          [icon]="icon"
           [locale]="locale"
           [dragula]="dragula"
           [markdownit]="markdownit"
@@ -31,7 +31,7 @@ import * as hljs from 'highlight.js'
           [initialValue]="initialValue"
           (updateValue)="updateValue($event)"
           [theme]="theme"
-          icon="fontawesome4"
+          [icon]="icon"
           [locale]="locale"
           [dragula]="dragula"
           [markdownit]="markdownit"
@@ -54,12 +54,9 @@ export class MainComponent {
   markdownit = MarkdownIt as any
   hljs = hljs
   propertiesSchema = propertiesSchema
-  propertiesInitialValue = {
-    schema: JSON.stringify(schema, null, '  '),
-    initialValue: JSON.stringify(initialValue, null, '  '),
-    theme
-  }
+  propertiesInitialValue = propertiesInitialValue
   theme = theme
+  icon = icon
   ngOnInit () {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {

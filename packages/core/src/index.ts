@@ -235,6 +235,13 @@ const icons: { [name: string]: Icon } = {
     expand: 'fas fa-caret-square-right',
     add: 'fas fa-plus',
     delete: 'fas fa-times'
+  },
+  antd3: {
+    isText: false,
+    collapse: 'anticon anticon-down',
+    expand: 'anticon anticon-right',
+    add: 'anticon anticon-plus',
+    delete: 'anticon anticon-close'
   }
 }
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { JSONEditor } from '../dist/'
-import { schema, propertiesSchema, initialValue, theme } from 'schema-based-json-editor/demo/'
+import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, icon } from 'schema-based-json-editor/demo/'
 import * as dragula from 'dragula'
 import * as MarkdownIt from 'markdown-it'
 import * as hljs from 'highlight.js'
@@ -12,11 +12,7 @@ class Main extends React.Component<{}, {}> {
   private initialValue = initialValue
   private isValid = false
   private propertiesSchema = propertiesSchema
-  private propertiesInitialValue = {
-    schema: JSON.stringify(schema, null, '  '),
-    initialValue: JSON.stringify(initialValue, null, '  '),
-    theme
-  }
+  private propertiesInitialValue = propertiesInitialValue
   componentWillMount () {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
@@ -36,7 +32,7 @@ class Main extends React.Component<{}, {}> {
             initialValue={this.propertiesInitialValue}
             updateValue={this.updatePropertiesValue}
             theme={theme}
-            icon='fontawesome4'
+            icon={icon}
             locale={this.locale}
             dragula={dragula}
             markdownit={MarkdownIt}
@@ -47,7 +43,7 @@ class Main extends React.Component<{}, {}> {
             initialValue={this.initialValue}
             updateValue={this.updateValue}
             theme={theme}
-            icon='fontawesome4'
+            icon={icon}
             locale={this.locale}
             dragula={dragula}
             markdownit={MarkdownIt}

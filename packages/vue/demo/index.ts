@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { schema, propertiesSchema, initialValue, theme } from 'schema-based-json-editor/demo/'
+import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, icon } from 'schema-based-json-editor/demo/'
 
 // tslint:disable:no-duplicate-imports
 import '../dist/'
@@ -20,7 +20,7 @@ import * as hljs from 'highlight.js'
           :initial-value="propertiesInitialValue"
           @update-value="updatePropertiesValue($event)"
           :theme="theme"
-          icon="fontawesome4"
+          :icon="icon"
           :locale="locale"
           :dragula="dragula"
           :markdownit="markdownit"
@@ -32,7 +32,7 @@ import * as hljs from 'highlight.js'
           :initial-value="initialValue"
           @update-value="updateValue($event)"
           :theme="theme"
-          icon="fontawesome4"
+          :icon="icon"
           :locale="locale"
           :dragula="dragula"
           :markdownit="markdownit"
@@ -56,12 +56,9 @@ class App extends Vue {
   hljs = hljs
   valueHtml = ''
   propertiesSchema = propertiesSchema
-  propertiesInitialValue = {
-    schema: JSON.stringify(schema, null, '  '),
-    initialValue: JSON.stringify(initialValue, null, '  '),
-    theme
-  }
+  propertiesInitialValue = propertiesInitialValue
   theme = theme
+  icon = icon
   beforeCreate () {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {

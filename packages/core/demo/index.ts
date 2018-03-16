@@ -287,6 +287,11 @@ export let initialValue = {}
  */
 export let theme = 'bootstrap3'
 
+/**
+ * @public
+ */
+export let icon = 'fontawesome4'
+
 const propertiesString = localStorage.getItem('json-editor:properties')
 if (propertiesString) {
   try {
@@ -294,6 +299,7 @@ if (propertiesString) {
     schema = JSON.parse(properties.schema)
     initialValue = JSON.parse(properties.initialValue)
     theme = properties.theme
+    icon = properties.icon
   } catch (error) {
     console.log(error)
   }
@@ -322,13 +328,33 @@ export const propertiesSchema: common.ObjectSchema = {
         'antd3',
         '(undefined)'
       ]
+    },
+    icon: {
+      type: 'string',
+      enum: [
+        'bootstrap3',
+        'fontawesome4',
+        'antd3',
+        '(undefined)'
+      ]
     }
   },
   required: [
     'schema',
     'initialValue',
-    'theme'
+    'theme',
+    'icon'
   ]
+}
+
+/**
+ * @public
+ */
+export const propertiesInitialValue = {
+  schema: JSON.stringify(schema, null, '  '),
+  initialValue: JSON.stringify(initialValue, null, '  '),
+  theme,
+  icon
 }
 
 function addCssLink (file: string) {
@@ -339,8 +365,14 @@ function addCssLink (file: string) {
   document.getElementsByTagName('head')[0].appendChild(link)
 }
 
-if (theme === 'bootstrap3') {
+if (theme === 'bootstrap3' || icon === 'bootstrap3') {
   addCssLink('bootstrap.min.css')
-} else if (theme === 'antd3') {
+}
+
+if (theme === 'antd3' || icon === 'antd3') {
   addCssLink('antd.min.css')
+}
+
+if (icon === 'fontawesome4') {
+  addCssLink('font-awesome.min.css')
 }
