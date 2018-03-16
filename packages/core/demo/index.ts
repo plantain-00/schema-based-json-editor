@@ -277,24 +277,23 @@ export let schema: common.Schema = {
   ]
 }
 
-const schemaString = localStorage.getItem('json-editor:schema')
-if (schemaString) {
-  try {
-    schema = JSON.parse(schemaString)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 /**
  * @public
  */
 export let initialValue = {}
 
-const initialValueString = localStorage.getItem('json-editor:initial-value')
-if (initialValueString) {
+/**
+ * @public
+ */
+export let theme = 'bootstrap3'
+
+const propertiesString = localStorage.getItem('json-editor:properties')
+if (propertiesString) {
   try {
-    initialValue = JSON.parse(initialValueString)
+    const properties = JSON.parse(propertiesString)
+    schema = JSON.parse(properties.schema)
+    initialValue = JSON.parse(properties.initialValue)
+    theme = properties.theme
   } catch (error) {
     console.log(error)
   }
@@ -303,17 +302,30 @@ if (initialValueString) {
 /**
  * @public
  */
-export const schemaSchema: common.StringSchema = {
-  title: 'Schema(refresh the page to make it work when you change it):',
-  type: 'string',
-  format: 'textarea'
-}
-
-/**
- * @public
- */
-export const initialValueSchema: common.StringSchema = {
-  title: 'Initial Value(refresh the page to make it work when you change it):',
-  type: 'string',
-  format: 'textarea'
+export const propertiesSchema: common.ObjectSchema = {
+  type: 'object',
+  title: 'properties of the component',
+  description: 'refresh the page to make it work when you change it',
+  properties: {
+    schema: {
+      type: 'string',
+      format: 'textarea'
+    },
+    initialValue: {
+      type: 'string',
+      format: 'textarea'
+    },
+    theme: {
+      type: 'string',
+      enum: [
+        'bootstrap3',
+        '(undefined)'
+      ]
+    }
+  },
+  required: [
+    'schema',
+    'initialValue',
+    'theme'
+  ]
 }
