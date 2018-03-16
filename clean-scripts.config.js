@@ -37,6 +37,7 @@ module.exports = {
         `cpy ./packages/core/node_modules/github-fork-ribbon-css/gh-fork-ribbon.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/select2-component/dist/select2.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/file-uploader-component/dist/file-uploader.min.css ./packages/core/demo/css/`,
+        `cpy ./packages/core/node_modules/antd/dist/antd.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/src/libs.d.ts ./packages/core/dist`
       ],
       version: [

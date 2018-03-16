@@ -319,6 +319,7 @@ export const propertiesSchema: common.ObjectSchema = {
       type: 'string',
       enum: [
         'bootstrap3',
+        'antd3',
         '(undefined)'
       ]
     }
@@ -328,4 +329,18 @@ export const propertiesSchema: common.ObjectSchema = {
     'initialValue',
     'theme'
   ]
+}
+
+function addCssLink (file: string) {
+  const link = document.createElement('link')
+  link.href = '../../core/demo/css/' + file
+  link.type = 'text/css'
+  link.rel = 'stylesheet'
+  document.getElementsByTagName('head')[0].appendChild(link)
+}
+
+if (theme === 'bootstrap3') {
+  addCssLink('bootstrap.min.css')
+} else if (theme === 'antd3') {
+  addCssLink('antd.min.css')
 }

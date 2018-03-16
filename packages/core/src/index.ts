@@ -107,6 +107,18 @@ export const themes: { [name: string]: Theme } = {
     optionalCheckbox: 'checkbox pull-left',
     buttonGroup: 'btn-group',
     radiobox: 'radio-inline'
+  },
+  antd3: {
+    rowContainer: 'ant-form ant-form-horizontal',
+    row: 'ant-row',
+    formControl: 'ant-input',
+    button: 'ant-btn',
+    help: 'ant-form-explain',
+    errorRow: 'ant-row has-error',
+    label: 'ant-form-item-label',
+    optionalCheckbox: 'ant-checkbox',
+    buttonGroup: 'ant-btn-group',
+    radiobox: 'ant-radio'
   }
 }
 
