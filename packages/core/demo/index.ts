@@ -326,6 +326,7 @@ export const propertiesSchema: common.ObjectSchema = {
       enum: [
         'bootstrap3',
         'antd3',
+        'element-ui2',
         '(undefined)'
       ]
     },
@@ -335,6 +336,7 @@ export const propertiesSchema: common.ObjectSchema = {
         'bootstrap3',
         'fontawesome4',
         'antd3',
+        'element-ui2',
         '(undefined)'
       ]
     }
@@ -359,7 +361,7 @@ export const propertiesInitialValue = {
 
 function addCssLink (file: string) {
   const link = document.createElement('link')
-  link.href = '../../core/demo/css/' + file
+  link.href = '/packages/core/demo/css/' + file
   link.type = 'text/css'
   link.rel = 'stylesheet'
   document.getElementsByTagName('head')[0].appendChild(link)
@@ -369,10 +371,14 @@ if (theme === 'bootstrap3' || icon === 'bootstrap3') {
   addCssLink('bootstrap.min.css')
 }
 
+if (icon === 'fontawesome4') {
+  addCssLink('font-awesome.min.css')
+}
+
 if (theme === 'antd3' || icon === 'antd3') {
   addCssLink('antd.min.css')
 }
 
-if (icon === 'fontawesome4') {
-  addCssLink('font-awesome.min.css')
+if (theme === 'element-ui2' || icon === 'element-ui2') {
+  addCssLink('element-ui/index.css')
 }

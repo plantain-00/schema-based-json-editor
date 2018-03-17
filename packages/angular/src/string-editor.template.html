@@ -1,5 +1,5 @@
 <div [class]="errorMessage ? theme.errorRow : theme.row">
-    <label [class]="theme.label">
+    <label [class]="theme.title">
         {{titleToShow}}
         <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
             <optional [required]="required"
@@ -28,14 +28,14 @@
         (fileGot)="fileGot($event)">
     </file-uploader>
     <textarea *ngIf="useTextArea"
-        [class]="theme.formControl"
+        [class]="theme.textarea"
         (change)="onChange($event)"
         (keyup)="onChange($event)"
         rows="10"
         [readOnly]="isReadOnly"
         [disabled]="isReadOnly">{{value}}</textarea>
     <input *ngIf="useInput"
-        [class]="theme.formControl"
+        [class]="theme.input"
         [type]="schema.format"
         (change)="onChange($event)"
         (keyup)="onChange($event)"

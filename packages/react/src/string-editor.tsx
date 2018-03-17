@@ -49,7 +49,7 @@ export class StringEditor extends React.Component<Props, State> {
     ) : null
 
     const textarea = this.useTextArea ? (
-      <textarea className={this.props.theme.formControl}
+      <textarea className={this.props.theme.textarea}
         onChange={this.onChange}
         defaultValue={this.value}
         rows={10}
@@ -59,7 +59,7 @@ export class StringEditor extends React.Component<Props, State> {
     ) : null
 
     const input = this.useInput ? (
-      <input className={this.props.theme.formControl}
+      <input className={this.props.theme.input}
         type={this.props.schema.format}
         onChange={this.onChange}
         defaultValue={this.value}
@@ -83,7 +83,7 @@ export class StringEditor extends React.Component<Props, State> {
 
     return (
       <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
-        <label className={this.props.theme.label}>
+        <label className={this.props.theme.title}>
           {this.titleToShow}
           <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
             <Optional required={this.props.required}

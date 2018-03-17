@@ -29,14 +29,14 @@
         </div>
     </h3>
     <description [theme]="theme" [message]="schema.description" [notEmpty]="true"></description>
-    <div #drakContainer [class]="theme.rowContainer">
+    <div #drakContainer [class]="theme.card">
         <div *ngIf="showFilter" [class]="theme.row">
-            <input [class]="theme.formControl"
+            <input [class]="theme.input"
                 (change)="onFilterChange($event)"
                 (keyup)="onFilterChange($event)"
                 [value]="filter" />
         </div>
-        <div *ngFor="let item of filteredValues; trackBy:trackByFunction" [attr.data-index]="item.i" [class]="theme.rowContainer">
+        <div *ngFor="let item of filteredValues; trackBy:trackByFunction" [attr.data-index]="item.i" [class]="theme.card">
             <editor [schema]="schema.items"
                 [title]="item.i"
                 [initialValue]="value![item.i]"

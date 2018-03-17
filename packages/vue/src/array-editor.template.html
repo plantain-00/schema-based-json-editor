@@ -30,9 +30,9 @@
         </div>
     </h3>
     <description :theme="theme" :message="schema.description" :notEmpty="true"></description>
-    <div :class="theme.rowContainer">
+    <div :class="theme.card">
         <div v-if="showFilter" :class="theme.row">
-            <input :class="theme.formControl"
+            <input :class="theme.input"
                 @change="onFilterChange($event)"
                 @keyup="onFilterChange($event)"
                 :value="filter" />

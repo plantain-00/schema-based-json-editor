@@ -39,7 +39,7 @@ export class NumberEditor extends React.Component<Props, State> {
   }
   render () {
     const input = this.useInput ? (
-      <input className={this.props.theme.formControl}
+      <input className={this.props.theme.input}
         type='number'
         onChange={this.onChange}
         defaultValue={String(this.value)}
@@ -56,7 +56,7 @@ export class NumberEditor extends React.Component<Props, State> {
 
     return (
       <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
-        <label className={this.props.theme.label}>
+        <label className={this.props.theme.title}>
           {this.titleToShow}
           <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
             <Optional required={this.props.required}

@@ -97,28 +97,43 @@ export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | 
  */
 export const themes: { [name: string]: Theme } = {
   bootstrap3: {
-    rowContainer: 'well bootstrap3-row-container',
+    card: 'well',
     row: 'row',
-    formControl: 'form-control',
+    input: 'form-control',
+    textarea: 'form-control',
     button: 'btn btn-default',
-    help: 'help-block',
+    description: 'help-block',
     errorRow: 'row has-error',
-    label: 'control-label',
-    optionalCheckbox: 'checkbox pull-left',
+    title: 'control-label',
+    checkbox: 'checkbox pull-left',
     buttonGroup: 'btn-group',
     radiobox: 'radio-inline'
   },
   antd3: {
-    rowContainer: 'ant-form ant-form-horizontal',
+    card: 'ant-card ant-card-bordered ant-card-body',
     row: 'ant-row',
-    formControl: 'ant-input',
+    input: 'ant-input',
+    textarea: 'ant-input',
     button: 'ant-btn',
-    help: 'ant-form-explain',
+    description: 'ant-form-explain',
     errorRow: 'ant-row has-error',
-    label: 'ant-form-item-label',
-    optionalCheckbox: 'ant-checkbox',
+    title: 'ant-form-item-label',
+    checkbox: 'ant-checkbox',
     buttonGroup: 'ant-btn-group',
     radiobox: 'ant-radio'
+  },
+  'element-ui2': {
+    card: 'el-form el-card box-card el-card__body',
+    row: 'el-form-item',
+    input: 'el-input__inner',
+    textarea: 'el-textarea__inner',
+    button: 'el-button el-button--default el-button--small',
+    description: '',
+    errorRow: 'el-form-item is-error',
+    title: 'el-form-item__label',
+    checkbox: 'el-checkbox',
+    buttonGroup: 'el-button-group',
+    radiobox: 'el-radio'
   }
 }
 
@@ -126,16 +141,23 @@ export const themes: { [name: string]: Theme } = {
  * @public
  */
 export const defaultTheme = {
-  rowContainer: '',
-  row: '',
-  formControl: '',
-  button: '',
-  help: '',
-  errorRow: '',
-  label: '',
-  optionalCheckbox: '',
-  buttonGroup: '',
-  radiobox: ''
+  card: 'schema-based-json-editor--card',
+  row: 'schema-based-json-editor--row',
+  input: 'schema-based-json-editor--input',
+  textarea: 'schema-based-json-editor--textarea',
+  button: 'schema-based-json-editor--button',
+  description: 'schema-based-json-editor--description',
+  errorRow: 'schema-based-json-editor--error-row',
+  title: 'schema-based-json-editor--title',
+  checkbox: 'schema-based-json-editor--checkbox',
+  buttonGroup: 'schema-based-json-editor--button-group',
+  radiobox: 'schema-based-json-editor--radiobox'
+}
+
+for (const themeName in themes) {
+  for (const key in themes[themeName]) {
+    themes[themeName][key as keyof Theme] += ' ' + defaultTheme[key as keyof Theme]
+  }
 }
 
 /**
@@ -242,6 +264,13 @@ const icons: { [name: string]: Icon } = {
     expand: 'anticon anticon-right',
     add: 'anticon anticon-plus',
     delete: 'anticon anticon-close'
+  },
+  'element-ui2': {
+    isText: false,
+    collapse: 'el-icon-arrow-down',
+    expand: 'el-icon-arrow-right',
+    add: 'el-icon-plus',
+    delete: 'el-icon-close'
   }
 }
 

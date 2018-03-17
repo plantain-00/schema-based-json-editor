@@ -8,7 +8,7 @@ export class Description extends React.Component<{
 }, {}> {
   render () {
     if (this.props.notEmpty || this.props.message) {
-      return <p className={this.props.theme.help}>{this.props.message}</p>
+      return <p className={this.props.theme.description}>{this.props.message}</p>
     }
     return null
   }

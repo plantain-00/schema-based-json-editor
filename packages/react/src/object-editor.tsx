@@ -69,7 +69,7 @@ export class ObjectEditor extends React.Component<Props, State> {
           forceHttps={this.props.forceHttps} />)
       : []
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
-      ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
+      ? <div className={this.props.theme.row}><input className={this.props.theme.input}
         onChange={this.onFilterChange}
         placeholder={this.props.locale.info.search}
         defaultValue={this.filter} /></div>
@@ -99,7 +99,7 @@ export class ObjectEditor extends React.Component<Props, State> {
           </div>
         </h3>
         <Description theme={this.props.theme} message={this.props.schema.description} />
-        <div className={this.props.theme.rowContainer}>
+        <div className={this.props.theme.card}>
           {filterElement}
           {childrenElement}
         </div>

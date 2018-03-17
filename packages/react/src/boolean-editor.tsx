@@ -59,7 +59,7 @@ export class BooleanEditor extends React.Component<Props, State> {
 
     return (
       <div className={this.props.theme.row}>
-        <label className={this.props.theme.label}>
+        <label className={this.props.theme.title}>
           {this.titleToShow}
           <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
             <Optional required={this.props.required}

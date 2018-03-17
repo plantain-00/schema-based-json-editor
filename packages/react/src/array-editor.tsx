@@ -60,7 +60,7 @@ export class ArrayEditor extends React.Component<Props, State> {
     const childrenElement: JSX.Element[] = this.getValue.map((p, i) => ({ p, i }))
       .filter(({ p, i }) => common.filterArray(p, i, this.props.schema.items, this.filter))
       .map(({ p, i }) => (
-        <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.rowContainer}>
+        <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.card}>
           <Editor schema={this.props.schema.items}
             title={String(i)}
             initialValue={this.getValue[i]}
@@ -78,7 +78,7 @@ export class ArrayEditor extends React.Component<Props, State> {
         </div>
       ))
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
-      ? <div className={this.props.theme.row}><input className={this.props.theme.formControl}
+      ? <div className={this.props.theme.row}><input className={this.props.theme.input}
         onChange={this.onFilterChange}
         defaultValue={this.filter} /></div>
       : null
@@ -112,7 +112,7 @@ export class ArrayEditor extends React.Component<Props, State> {
           </div>
         </h3>
         <Description theme={this.props.theme} message={this.props.schema.description} notEmpty={true} />
-        <div className={this.props.theme.rowContainer}>
+        <div className={this.props.theme.card}>
           {filterElement}
           {childrenElement}
         </div>

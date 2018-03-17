@@ -29,6 +29,7 @@ module.exports = {
     {
       copy: [
         `cpy ./packages/core/node_modules/bootstrap/dist/css/bootstrap.min.css ./packages/core/demo/css/`,
+        `cpy ./packages/core/node_modules/bootstrap/fonts/*.* ./packages/core/demo/fonts`,
         `cpy ./packages/core/node_modules/font-awesome/css/font-awesome.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/dragula/dist/dragula.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/font-awesome/fonts/*.* ./packages/core/demo/fonts`,
@@ -38,6 +39,8 @@ module.exports = {
         `cpy ./packages/core/node_modules/select2-component/dist/select2.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/file-uploader-component/dist/file-uploader.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/antd/dist/antd.min.css ./packages/core/demo/css/`,
+        `cpy ./packages/core/node_modules/element-ui/lib/theme-chalk/index.css ./packages/core/demo/css/element-ui/`,
+        `cpy ./packages/core/node_modules/element-ui/lib/theme-chalk/fonts/*.* ./packages/core/demo/css/element-ui/fonts/`,
         `cpy ./packages/core/src/libs.d.ts ./packages/core/dist`
       ],
       version: [

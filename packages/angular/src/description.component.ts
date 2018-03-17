@@ -3,7 +3,7 @@ import * as common from 'schema-based-json-editor'
 
 @Component({
   selector: 'description',
-  template: `<p *ngIf="notEmpty || message" [class]="theme.help">{{message}}</p>`
+  template: `<p *ngIf="notEmpty || message" [class]="theme.description">{{message}}</p>`
 })
 export class DescriptionComponent {
   @Input()

@@ -1,5 +1,5 @@
 <div :class="errorMessage ? theme.errorRow : theme.row">
-    <label :class="theme.label">
+    <label :class="theme.title">
         {{titleToShow}}
         <div :class="theme.buttonGroup" :style="buttonGroupStyle">
             <optional :required="required"
@@ -18,7 +18,7 @@
         </div>
     </label>
     <input v-if="useInput"
-        :class="theme.formControl"
+        :class="theme.input"
         type="number"
         @change="onChange($event)"
         @keyup="onChange($event)"
