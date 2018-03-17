@@ -143,7 +143,7 @@ export const themes: { [name: string]: Theme } = {
     button: 'el-button el-button--default el-button--small',
     description: '',
     errorRow: 'el-form-item is-error',
-    title: 'el-form-item__label',
+    title: '',
     checkbox: 'el-checkbox',
     buttonGroup: 'el-button-group',
     radiobox: 'el-radio'
