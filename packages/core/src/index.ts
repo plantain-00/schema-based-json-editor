@@ -281,7 +281,10 @@ export const bootstrap3Icon = {
  */
 export type Icon = typeof bootstrap3Icon
 
-const icons: { [name: string]: Icon } = {
+/**
+ * @public
+ */
+export const icons: { [name: string]: Icon } = {
   bootstrap3: bootstrap3Icon,
   fontawesome4: {
     isText: false,

@@ -118,6 +118,81 @@ markdownit | object? | the `markdown-it` library object if you want to preview m
 hljs | object? | the `highlight.js` library object if you want to highlight code
 forceHttps | boolean? | if true, the preview url of images will be `https://` rather than `http://`
 
+## improve current theme
+
+You can find css classes like `schema-based-json-editor--*`, you can set their styles to improve UI
+
+The full list of the classes are in:
+
+```ts
+export const defaultTheme = {
+  card: 'schema-based-json-editor--card',
+  row: 'schema-based-json-editor--row',
+  input: 'schema-based-json-editor--input',
+  textarea: 'schema-based-json-editor--textarea',
+  button: 'schema-based-json-editor--button',
+  description: 'schema-based-json-editor--description',
+  errorRow: 'schema-based-json-editor--error-row',
+  title: 'schema-based-json-editor--title',
+  checkbox: 'schema-based-json-editor--checkbox',
+  buttonGroup: 'schema-based-json-editor--button-group',
+  radiobox: 'schema-based-json-editor--radiobox'
+}
+```
+
+## support other themes / icons / locales
+
+```ts
+import { themes, icons, locales } from 'schema-based-json-editor'
+
+themes['new-theme-name'] = { ... }
+icons['new-icon-name'] = { ... }
+locales['new-locale-name'] = { ... }
+```
+
+the data structure of new themes / icons / locales are just like default ones:
+
+```ts
+export const bootstrap3Icon = {
+  isText: false,
+  collapse: 'glyphicon glyphicon-chevron-down',
+  expand: 'glyphicon glyphicon-chevron-right',
+  add: 'glyphicon glyphicon-plus',
+  delete: 'glyphicon glyphicon-remove'
+}
+
+export const defaultLocale = {
+  button: {
+    collapse: 'Collapse',
+    expand: 'Expand',
+    add: 'Add',
+    delete: 'Delete'
+  },
+  error: {
+    minLength: 'Value must be at least {0} characters long.',
+    maxLength: 'Value must be at most {0} characters long.',
+    pattern: "Value doesn't match the pattern {0}.",
+    minimum: 'Value must be >= {0}.',
+    maximum: 'Value must be <= {0}.',
+    largerThan: 'Value must be > {0}.',
+    smallerThan: 'Value must be < {0}.',
+    minItems: 'The length of the array must be >= {0}.',
+    uniqueItems: 'The item in {0} and {1} must not be same.',
+    multipleOf: 'Value must be multiple value of {0}.',
+    minProperties: 'Properties count must be >= {0}.',
+    maxProperties: 'Properties count must be <= {0}.'
+  },
+  info: {
+    notExists: 'not exists',
+    true: 'true',
+    false: 'false',
+    search: 'search'
+  },
+  markdownTipLocale: defaultMarkDownTipLocale,
+  fileUploaderLocale: defaultFileUploaderLocale
+}
+```
+
 ## change logs
 
 <https://github.com/plantain-00/schema-based-json-editor/tree/master/change_logs.md>
