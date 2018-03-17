@@ -3,32 +3,32 @@
 
 
 "@angular/common@5":
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-5.2.8.tgz#25c81609305e4cee6734d90c8ff1132ab35f81bf"
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-5.2.9.tgz#beb25d4434498abae56bd8dc2c01ade3f6c45e81"
   dependencies:
     tslib "^1.7.1"
 
 "@angular/core@5":
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.2.8.tgz#d2e7657f2c5ce7f050e8f438dcc420c9bebca10a"
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.2.9.tgz#3daf13ef9aa754b9954ed21da3eb322e8b20f667"
   dependencies:
     tslib "^1.7.1"
 
 "@angular/forms@5":
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-5.2.8.tgz#eda3c0ee2cb085581bb9bf8ac3c7b463b082b643"
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-5.2.9.tgz#12c45b3a02c398b354f09cc740d914cd904c0c9c"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser-dynamic@5.2.8":
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.2.8.tgz#f2a620694ad771bf466d2bd752ca3a657ea7d46c"
+"@angular/platform-browser-dynamic@5.2.9":
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.2.9.tgz#86075b7bb694861f722ceda29aae186b045c6b7d"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/platform-browser@5.2.8":
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-5.2.8.tgz#253264887429ad71057882bcbc5cfda1fa4bbc06"
+"@angular/platform-browser@5.2.9":
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-5.2.9.tgz#9ee76327b1b3affad68ffa839058661b7704bc2c"
   dependencies:
     tslib "^1.7.1"
 
@@ -46,7 +46,7 @@
 
 "@types/node@*":
   version "9.4.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
+  resolved "http://registry.npmjs.org/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -91,16 +91,16 @@ entities@~1.1.1:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
 file-uploader-angular-component@7:
-  version "7.1.4"
-  resolved "https://registry.yarnpkg.com/file-uploader-angular-component/-/file-uploader-angular-component-7.1.4.tgz#ed01e6bca229c04423f0fe5c222d7ef89de49014"
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-angular-component/-/file-uploader-angular-component-7.2.0.tgz#6f2fea1898b7c4fe1896e29ab56a29403ceced70"
   dependencies:
     "@angular/common" "5"
     "@angular/core" "5"
-    file-uploader-component "^7.1.4"
+    file-uploader-component "^7.2.0"
 
-file-uploader-component@^7.1.4:
-  version "7.1.4"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.1.4.tgz#bb65ffa7f325d15cf162a95aa137e98d971fbab7"
+file-uploader-component@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.2.0.tgz#1de506808aba0079207c0ff26ace848f428c3144"
   dependencies:
     tslib "1"
 
@@ -125,17 +125,17 @@ markdown-it@8.4.1:
     uc.micro "^1.0.5"
 
 markdown-tip-angular@6:
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/markdown-tip-angular/-/markdown-tip-angular-6.1.2.tgz#8ae36621bc1069d4f67807ae04e76f0848889b30"
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-angular/-/markdown-tip-angular-6.2.0.tgz#4c68beccee45a7769255b8be20925fef2af5d53b"
   dependencies:
     "@angular/common" "5"
     "@angular/core" "5"
     "@angular/forms" "5"
-    markdown-tip "^6.1.1"
+    markdown-tip "^6.2.0"
 
-markdown-tip@^6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.1.1.tgz#bd2089398999733161584ad061d5d2159f2b0985"
+markdown-tip@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.2.0.tgz#716ed6e74f4f3516a21f9f93211c94fdadea6b34"
   dependencies:
     tslib "1"
 
@@ -143,24 +143,24 @@ mdurl@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
 
-rxjs@5.5.6:
-  version "5.5.6"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.6.tgz#e31fb96d6fd2ff1fd84bcea8ae9c02d007179c02"
+rxjs@5.5.7:
+  version "5.5.7"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.7.tgz#afb3d1642b069b2fbf203903d6501d1acb4cda27"
   dependencies:
     symbol-observable "1.0.1"
 
 select2-angular-component@5:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/select2-angular-component/-/select2-angular-component-5.1.3.tgz#d8037687bf80e75c1ed773829600758e1aabab3d"
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/select2-angular-component/-/select2-angular-component-5.2.0.tgz#2e247585d9de4cfc188aa483a3b8116a11caa273"
   dependencies:
     "@angular/common" "5"
     "@angular/core" "5"
     "@angular/forms" "5"
-    select2-component "^5.1.3"
+    select2-component "^5.2.0"
 
-select2-component@^5.1.3:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.1.3.tgz#c0b302e603b0feaec5489cd4690fb8ef3e1ddcb5"
+select2-component@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.0.tgz#80b913982289366ab9f994d15e3415056edfe5fa"
   dependencies:
     "@types/node" "*"
     tslib "1"

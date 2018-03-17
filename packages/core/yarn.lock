@@ -4,7 +4,7 @@
 
 "@types/node@*":
   version "9.4.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
+  resolved "http://registry.npmjs.org/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
 
 add-dom-event-listener@1.x:
   version "1.0.2"
@@ -220,8 +220,8 @@ fbjs@^0.8.15, fbjs@^0.8.16, fbjs@^0.8.9:
     ua-parser-js "^0.7.9"
 
 file-uploader-component@7:
-  version "7.1.4"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.1.4.tgz#bb65ffa7f325d15cf162a95aa137e98d971fbab7"
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.2.0.tgz#1de506808aba0079207c0ff26ace848f428c3144"
   dependencies:
     tslib "1"
 
@@ -349,8 +349,8 @@ markdown-it@8.4.1:
     uc.micro "^1.0.5"
 
 markdown-tip@6:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.1.1.tgz#bd2089398999733161584ad061d5d2159f2b0985"
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.2.0.tgz#716ed6e74f4f3516a21f9f93211c94fdadea6b34"
   dependencies:
     tslib "1"
 
@@ -746,8 +746,8 @@ rmc-feedback@^1.0.0:
     classnames "^2.2.5"
 
 select2-component@5:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.1.3.tgz#c0b302e603b0feaec5489cd4690fb8ef3e1ddcb5"
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.0.tgz#80b913982289366ab9f994d15e3415056edfe5fa"
   dependencies:
     "@types/node" "*"
     tslib "1"
