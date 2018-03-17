@@ -109,6 +109,19 @@ export const themes: { [name: string]: Theme } = {
     buttonGroup: 'btn-group',
     radiobox: 'radio-inline'
   },
+  bootstrap4: {
+    card: 'card card-body',
+    row: 'row',
+    input: 'form-control',
+    textarea: 'form-control',
+    button: 'btn btn-default',
+    description: 'form-text',
+    errorRow: 'row is-invalid',
+    title: 'col-form-label',
+    checkbox: 'form-check-input pull-left',
+    buttonGroup: 'btn-group',
+    radiobox: 'form-check-inline form-check-input'
+  },
   antd3: {
     card: 'ant-card ant-card-bordered ant-card-body',
     row: 'ant-row',
