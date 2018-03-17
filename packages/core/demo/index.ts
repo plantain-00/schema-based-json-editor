@@ -327,6 +327,8 @@ export const propertiesSchema: common.ObjectSchema = {
         'bootstrap3',
         'antd3',
         'element-ui2',
+        'iview2',
+        'blueprint1',
         '(undefined)'
       ]
     },
@@ -337,6 +339,7 @@ export const propertiesSchema: common.ObjectSchema = {
         'fontawesome4',
         'antd3',
         'element-ui2',
+        'iview2',
         '(undefined)'
       ]
     }
@@ -385,5 +388,13 @@ export function addAllCssLinks (cssRootPath: string) {
 
   if (theme === 'element-ui2' || icon === 'element-ui2') {
     addCssLink(cssRootPath, 'element-ui/index.css')
+  }
+
+  if (theme === 'iview2' || icon === 'iview2') {
+    addCssLink(cssRootPath, 'iview.css')
+  }
+
+  if (theme === 'blueprint1') {
+    addCssLink(cssRootPath, 'blueprint.css')
   }
 }

@@ -147,6 +147,32 @@ export const themes: { [name: string]: Theme } = {
     checkbox: 'el-checkbox',
     buttonGroup: 'el-button-group',
     radiobox: 'el-radio'
+  },
+  iview2: {
+    card: 'ivu-card ivu-card-body',
+    row: 'ivu-row',
+    input: 'ivu-input',
+    textarea: 'ivu-input',
+    button: 'ivu-btn',
+    description: '',
+    errorRow: 'ivu-row ivu-form-item-error',
+    title: 'ivu-form-item-label',
+    checkbox: 'ivu-checkbox',
+    buttonGroup: 'ivu-btn-group ivu-btn-group-small',
+    radiobox: 'ivu-radio'
+  },
+  blueprint1: {
+    card: 'pt-card',
+    row: '',
+    input: 'pt-input pt-fill',
+    textarea: 'pt-input pt-fill',
+    button: 'pt-button',
+    description: 'pt-text-muted',
+    errorRow: '',
+    title: 'pt-label',
+    checkbox: 'pt-checkbox',
+    buttonGroup: 'pt-button-group',
+    radiobox: 'pt-radio'
   }
 }
 
@@ -284,6 +310,13 @@ const icons: { [name: string]: Icon } = {
     expand: 'el-icon-arrow-right',
     add: 'el-icon-plus',
     delete: 'el-icon-close'
+  },
+  iview2: {
+    isText: false,
+    collapse: 'ivu-icon ivu-icon-ios-arrow-down',
+    expand: 'ivu-icon ivu-icon-ios-arrow-right',
+    add: 'ivu-icon ivu-icon-ios-plus-empty',
+    delete: 'ivu-icon ivu-icon-ios-close-empty'
   }
 }
 

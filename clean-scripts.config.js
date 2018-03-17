@@ -41,6 +41,9 @@ module.exports = {
         `cpy ./packages/core/node_modules/antd/dist/antd.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/element-ui/lib/theme-chalk/index.css ./packages/core/demo/css/element-ui/`,
         `cpy ./packages/core/node_modules/element-ui/lib/theme-chalk/fonts/*.* ./packages/core/demo/css/element-ui/fonts/`,
+        `cpy ./packages/core/node_modules/iview/dist/styles/iview.css ./packages/core/demo/css/`,
+        `cpy ./packages/core/node_modules/iview/dist/styles/fonts/*.* ./packages/core/demo/css/fonts/`,
+        `cpy ./packages/core/node_modules/@blueprintjs/core/dist/blueprint.css ./packages/core/demo/css/`,
         `cpy ./packages/core/src/libs.d.ts ./packages/core/dist`
       ],
       version: [
