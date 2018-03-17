@@ -359,7 +359,7 @@ export const propertiesInitialValue = {
   icon
 }
 
-function addCssLink (cssRootPath:string, file: string) {
+function addCssLink (cssRootPath: string, file: string) {
   const link = document.createElement('link')
   link.href = cssRootPath + file
   link.type = 'text/css'
@@ -374,15 +374,15 @@ export function addAllCssLinks (cssRootPath: string) {
   if (theme === 'bootstrap3' || icon === 'bootstrap3') {
     addCssLink(cssRootPath, 'bootstrap.min.css')
   }
-  
+
   if (icon === 'fontawesome4') {
     addCssLink(cssRootPath, 'font-awesome.min.css')
   }
-  
+
   if (theme === 'antd3' || icon === 'antd3') {
     addCssLink(cssRootPath, 'antd.min.css')
   }
-  
+
   if (theme === 'element-ui2' || icon === 'element-ui2') {
     addCssLink(cssRootPath, 'element-ui/index.css')
   }
