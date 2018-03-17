@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, icon } from 'schema-based-json-editor/demo/'
+import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, icon, addAllCssLinks } from 'schema-based-json-editor/demo/'
 
 // tslint:disable:no-duplicate-imports
 import '../dist/'
@@ -9,6 +9,8 @@ import { ValidityValue, ValueType } from '../dist/'
 import * as dragula from 'dragula'
 import * as MarkdownIt from 'markdown-it'
 import * as hljs from 'highlight.js'
+
+addAllCssLinks('../../core/demo/css/')
 
 @Component({
   template: `

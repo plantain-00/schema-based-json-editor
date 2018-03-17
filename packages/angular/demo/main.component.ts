@@ -1,11 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core'
 
 import { ValidityValue, ValueType } from '../dist/'
-import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, icon } from 'schema-based-json-editor/demo/'
+import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, icon, addAllCssLinks } from 'schema-based-json-editor/demo/'
 
 import * as dragula from 'dragula'
 import * as MarkdownIt from 'markdown-it'
 import * as hljs from 'highlight.js'
+
+addAllCssLinks('../../../core/demo/css/')
 
 @Component({
   selector: 'app',

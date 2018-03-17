@@ -359,26 +359,31 @@ export const propertiesInitialValue = {
   icon
 }
 
-function addCssLink (file: string) {
+function addCssLink (cssRootPath:string, file: string) {
   const link = document.createElement('link')
-  link.href = '/packages/core/demo/css/' + file
+  link.href = cssRootPath + file
   link.type = 'text/css'
   link.rel = 'stylesheet'
   document.getElementsByTagName('head')[0].appendChild(link)
 }
 
-if (theme === 'bootstrap3' || icon === 'bootstrap3') {
-  addCssLink('bootstrap.min.css')
-}
-
-if (icon === 'fontawesome4') {
-  addCssLink('font-awesome.min.css')
-}
-
-if (theme === 'antd3' || icon === 'antd3') {
-  addCssLink('antd.min.css')
-}
-
-if (theme === 'element-ui2' || icon === 'element-ui2') {
-  addCssLink('element-ui/index.css')
+/**
+ * @public
+ */
+export function addAllCssLinks (cssRootPath: string) {
+  if (theme === 'bootstrap3' || icon === 'bootstrap3') {
+    addCssLink(cssRootPath, 'bootstrap.min.css')
+  }
+  
+  if (icon === 'fontawesome4') {
+    addCssLink(cssRootPath, 'font-awesome.min.css')
+  }
+  
+  if (theme === 'antd3' || icon === 'antd3') {
+    addCssLink(cssRootPath, 'antd.min.css')
+  }
+  
+  if (theme === 'element-ui2' || icon === 'element-ui2') {
+    addCssLink(cssRootPath, 'element-ui/index.css')
+  }
 }
