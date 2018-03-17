@@ -29,7 +29,6 @@ module.exports = {
     {
       copy: [
         `cpy ./packages/core/node_modules/bootstrap/dist/css/bootstrap.min.css ./packages/core/demo/css/`,
-        `cpy ./packages/core/node_modules/bootstrap/fonts/*.* ./packages/core/demo/fonts`,
         `cpy ./packages/core/node_modules/font-awesome/css/font-awesome.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/dragula/dist/dragula.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/font-awesome/fonts/*.* ./packages/core/demo/fonts`,

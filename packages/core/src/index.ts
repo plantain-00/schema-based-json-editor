@@ -111,16 +111,16 @@ export const themes: { [name: string]: Theme } = {
   },
   bootstrap4: {
     card: 'card card-body',
-    row: 'row',
+    row: '',
     input: 'form-control',
     textarea: 'form-control',
     button: 'btn btn-default',
     description: 'form-text',
-    errorRow: 'row is-invalid',
+    errorRow: 'is-invalid',
     title: 'col-form-label',
-    checkbox: 'form-check-input pull-left',
+    checkbox: '',
     buttonGroup: 'btn-group',
-    radiobox: 'form-check-inline form-check-input'
+    radiobox: ''
   },
   antd3: {
     card: 'ant-card ant-card-bordered ant-card-body',
