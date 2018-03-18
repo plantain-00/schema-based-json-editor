@@ -128,15 +128,17 @@ The full list of the classes are in:
 export const defaultTheme = {
   card: 'schema-based-json-editor--card',
   row: 'schema-based-json-editor--row',
-  input: 'schema-based-json-editor--input',
-  textarea: 'schema-based-json-editor--textarea',
-  button: 'schema-based-json-editor--button',
-  description: 'schema-based-json-editor--description',
   errorRow: 'schema-based-json-editor--error-row',
-  title: 'schema-based-json-editor--title',
+  input: 'schema-based-json-editor--input',
+  errorInput: 'schema-based-json-editor--error-input',
+  textarea: 'schema-based-json-editor--textarea',
+  errorTextarea: 'schema-based-json-editor--error-textarea',
   checkbox: 'schema-based-json-editor--checkbox',
+  radiobox: 'schema-based-json-editor--radiobox',
+  button: 'schema-based-json-editor--button',
   buttonGroup: 'schema-based-json-editor--button-group',
-  radiobox: 'schema-based-json-editor--radiobox'
+  title: 'schema-based-json-editor--title',
+  description: 'schema-based-json-editor--description'
 }
 ```
 

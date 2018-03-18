@@ -18,7 +18,7 @@
         </div>
     </label>
     <input v-if="useInput"
-        :class="theme.input"
+        :class="errorMessage ? theme.errorInput : theme.input"
         type="number"
         @change="onChange($event)"
         @keyup="onChange($event)"

@@ -28,14 +28,14 @@
         (fileGot)="fileGot($event)">
     </file-uploader>
     <textarea *ngIf="useTextArea"
-        [class]="theme.textarea"
+        [class]="errorMessage ? theme.errorTextarea : theme.textarea"
         (change)="onChange($event)"
         (keyup)="onChange($event)"
         rows="10"
         [readOnly]="isReadOnly"
         [disabled]="isReadOnly">{{value}}</textarea>
     <input *ngIf="useInput"
-        [class]="theme.input"
+        [class]="errorMessage ? theme.errorInput : theme.input"
         [type]="schema.format"
         (change)="onChange($event)"
         (keyup)="onChange($event)"

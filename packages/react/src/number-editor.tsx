@@ -39,7 +39,7 @@ export class NumberEditor extends React.Component<Props, State> {
   }
   render () {
     const input = this.useInput ? (
-      <input className={this.props.theme.input}
+      <input className={this.errorMessage ? this.props.theme.errorInput : this.props.theme.input}
         type='number'
         onChange={this.onChange}
         defaultValue={String(this.value)}
