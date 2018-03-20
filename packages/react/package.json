@@ -2,6 +2,9 @@
   "name": "react-schema-based-json-editor",
   "version": "7.7.3",
   "main": "dist/index.js",
+  "module": "dist/index.js",
+  "unpkg": "dist/react-schema-based-json-editor.min.js",
+  "jsdelivr": "dist/react-schema-based-json-editor.min.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs component of schema based json editor.",
   "repository": {
