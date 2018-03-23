@@ -1,12 +1,22 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import * as common from 'schema-based-json-editor'
+import { Icon } from './icon'
+import { Optional } from './optional'
+import { Description } from './description'
+import { Editor } from './editor'
 import { Dragula, MarkdownIt, HLJS } from 'schema-based-json-editor/dist/libs'
 import { objectEditorTemplateHtml, objectEditorTemplateHtmlStatic } from './variables'
 
 @Component({
   render: objectEditorTemplateHtml,
   staticRenderFns: objectEditorTemplateHtmlStatic,
+  components: {
+    icon: Icon,
+    optional: Optional,
+    description: Description,
+    editor: Editor
+  },
   props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps']
 })
 export class ObjectEditor extends Vue {

@@ -5,33 +5,30 @@ export * from 'schema-based-json-editor'
 
 import { MarkdownItType, HLJS } from 'schema-based-json-editor/dist/libs'
 
+import { Editor } from './editor'
+
 import { ArrayEditor } from './array-editor'
 import { BooleanEditor } from './boolean-editor'
-import { Editor } from './editor'
-import { Icon } from './icon'
 import { NullEditor } from './null-editor'
 import { NumberEditor } from './number-editor'
 import { ObjectEditor } from './object-editor'
 import { StringEditor } from './string-editor'
-import { Optional } from './optional'
-import { Description } from './description'
 
 Vue.component('array-editor', ArrayEditor)
 Vue.component('boolean-editor', BooleanEditor)
-Vue.component('editor', Editor)
-Vue.component('icon', Icon)
 Vue.component('null-editor', NullEditor)
-Vue.component('numberEditor', NumberEditor)
-Vue.component('objectEditor', ObjectEditor)
-Vue.component('stringEditor', StringEditor)
-Vue.component('optional', Optional)
-Vue.component('description', Description)
+Vue.component('number-editor', NumberEditor)
+Vue.component('object-editor', ObjectEditor)
+Vue.component('string-editor', StringEditor)
 
 import { indexTemplateHtml, indexTemplateHtmlStatic } from './variables'
 
 @Component({
   render: indexTemplateHtml,
   staticRenderFns: indexTemplateHtmlStatic,
+  components: {
+    editor: Editor
+  },
   props: ['schema', 'initialValue', 'theme', 'icon', 'locale', 'readonly', 'dragula', 'markdownit', 'hljs', 'forceHttps']
 })
 export class JSONEditor extends Vue {

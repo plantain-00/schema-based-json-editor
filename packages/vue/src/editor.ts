@@ -5,6 +5,9 @@ import { editorTemplateHtml, editorTemplateHtmlStatic } from './variables'
 @Component({
   render: editorTemplateHtml,
   staticRenderFns: editorTemplateHtmlStatic,
+  components: {
+    editor: Editor
+  },
   props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps']
 })
 export class Editor extends Vue {

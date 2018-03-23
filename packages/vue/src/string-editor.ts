@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import * as common from 'schema-based-json-editor'
+import { Icon } from './icon'
+import { Optional } from './optional'
+import { Description } from './description'
 import { MarkdownIt, HLJS } from 'schema-based-json-editor/dist/libs'
 import { stringEditorTemplateHtml, stringEditorTemplateHtmlStatic } from './variables'
 import 'markdown-tip-vue'
@@ -10,6 +13,11 @@ import 'file-uploader-vue-component'
 @Component({
   render: stringEditorTemplateHtml,
   staticRenderFns: stringEditorTemplateHtmlStatic,
+  components: {
+    icon: Icon,
+    optional: Optional,
+    description: Description
+  },
   props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps']
 })
 export class StringEditor extends Vue {
