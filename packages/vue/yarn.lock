@@ -15,8 +15,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "9.4.7"
-  resolved "http://registry.npmjs.org/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.0.tgz#d3480ee666df9784b1001a1872a2f6ccefb6c2d7"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -63,8 +63,8 @@ file-uploader-component@^7.2.0:
     tslib "1"
 
 file-uploader-vue-component@7:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.2.0.tgz#56e3fb3931e5b39cf36e8881f7df65f9abef7fee"
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.2.1.tgz#1d871a49e558483b0314145d6a3e5f36a8c4e239"
   dependencies:
     file-uploader-component "^7.2.0"
     vue "2"
@@ -91,8 +91,8 @@ markdown-it@8.4.1:
     uc.micro "^1.0.5"
 
 markdown-tip-vue@6:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.2.0.tgz#c88606b47162d4cf56a18733209303da444e1361"
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.2.1.tgz#5c3198871dc47880e2537ef4a787bde0ad2a5869"
   dependencies:
     markdown-tip "^6.2.0"
     vue "2"
@@ -108,19 +108,19 @@ mdurl@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
 
-select2-component@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.0.tgz#80b913982289366ab9f994d15e3415056edfe5fa"
+select2-component@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.1.tgz#81f488608bf6f704e04edf5bf3d350f35b9cc148"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-vue-component@5:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.2.0.tgz#7867e6e35b6f9c4527ba482f6197e6a4d3e632d3"
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.2.1.tgz#dade8d3b1278703ef5b7834df8cc4df8ffcfdd55"
   dependencies:
     "@types/node" "*"
-    select2-component "^5.2.0"
+    select2-component "^5.2.1"
     vue "2"
     vue-class-component "6"
 

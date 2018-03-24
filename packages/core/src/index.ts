@@ -185,6 +185,21 @@ export const themes: { [name: string]: Theme } = {
     radiobox: 'pt-radio',
     title: 'pt-label',
     description: 'pt-text-muted'
+  },
+  blueprint2: {
+    card: 'pt-card',
+    row: '',
+    errorRow: '',
+    input: 'pt-input pt-fill',
+    errorInput: 'pt-input pt-fill',
+    textarea: 'pt-input pt-fill',
+    errorTextarea: 'pt-input pt-fill',
+    button: 'pt-button',
+    buttonGroup: 'pt-button-group',
+    checkbox: 'pt-checkbox',
+    radiobox: 'pt-radio',
+    title: 'pt-label',
+    description: 'pt-text-muted'
   }
 }
 

@@ -328,7 +328,7 @@ export const propertiesSchema: common.ObjectSchema = {
         'antd3',
         'element-ui2',
         'iview2',
-        'blueprint1',
+        'blueprint2',
         '(undefined)'
       ]
     },
@@ -393,7 +393,7 @@ export function addAllCssLinks (cssRootPath: string) {
     addCssLink(cssRootPath, 'iview.css')
   }
 
-  if (theme === 'blueprint1') {
+  if (theme === 'blueprint2') {
     addCssLink(cssRootPath, 'blueprint.css')
   }
 }

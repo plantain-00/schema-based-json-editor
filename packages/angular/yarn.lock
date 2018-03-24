@@ -45,8 +45,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "9.4.7"
-  resolved "http://registry.npmjs.org/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.0.tgz#d3480ee666df9784b1001a1872a2f6ccefb6c2d7"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -91,8 +91,8 @@ entities@~1.1.1:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
 file-uploader-angular-component@7:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-angular-component/-/file-uploader-angular-component-7.2.0.tgz#6f2fea1898b7c4fe1896e29ab56a29403ceced70"
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/file-uploader-angular-component/-/file-uploader-angular-component-7.2.1.tgz#5853f16d62dbe90ee6f280b7cac20455e9b79b67"
   dependencies:
     "@angular/common" "5"
     "@angular/core" "5"
@@ -125,8 +125,8 @@ markdown-it@8.4.1:
     uc.micro "^1.0.5"
 
 markdown-tip-angular@6:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip-angular/-/markdown-tip-angular-6.2.0.tgz#4c68beccee45a7769255b8be20925fef2af5d53b"
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/markdown-tip-angular/-/markdown-tip-angular-6.2.1.tgz#5a0008c6b3117ca5ba0b8f7c962013fc8f7bf323"
   dependencies:
     "@angular/common" "5"
     "@angular/core" "5"
@@ -150,17 +150,17 @@ rxjs@5.5.7:
     symbol-observable "1.0.1"
 
 select2-angular-component@5:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/select2-angular-component/-/select2-angular-component-5.2.0.tgz#2e247585d9de4cfc188aa483a3b8116a11caa273"
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/select2-angular-component/-/select2-angular-component-5.2.1.tgz#e985dbfd102dc247375f44777887d9de623be7c2"
   dependencies:
     "@angular/common" "5"
     "@angular/core" "5"
     "@angular/forms" "5"
-    select2-component "^5.2.0"
+    select2-component "^5.2.1"
 
-select2-component@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.0.tgz#80b913982289366ab9f994d15e3415056edfe5fa"
+select2-component@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.1.tgz#81f488608bf6f704e04edf5bf3d350f35b9cc148"
   dependencies:
     "@types/node" "*"
     tslib "1"
