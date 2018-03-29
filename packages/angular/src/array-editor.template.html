@@ -9,7 +9,8 @@
                 [locale]="locale"
                 (toggleOptional)="toggleOptional()">
             </optional>
-            <icon (onClick)="collapseOrExpand()"
+            <icon *ngIf="!disableCollapse"
+                (onClick)="collapseOrExpand()"
                 [text]="collapsed ? icon.expand : icon.collapse"
                 [theme]="theme"
                 [icon]="icon">
@@ -51,7 +52,8 @@
                 [dragula]="dragula"
                 [md]="md"
                 [hljs]="hljs"
-                [forceHttps]="forceHttps">
+                [forceHttps]="forceHttps"
+                [disableCollapse]="disableCollapse">
             </editor>
         </div>
     </div>

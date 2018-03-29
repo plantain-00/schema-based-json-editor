@@ -517,6 +517,7 @@ export type Props<TSchema extends CommonSchema, TValue> = {
   md?: MarkdownIt;
   hljs?: HLJS;
   forceHttps?: boolean;
+  disableCollapse?: boolean;
 }
 
 /**

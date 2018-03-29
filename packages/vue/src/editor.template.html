@@ -13,7 +13,8 @@
     :dragula="dragula"
     :md="md"
     :hljs="hljs"
-    :forceHttps="forceHttps">
+    :forceHttps="forceHttps"
+    :disableCollapse="disableCollapse">
 </object-editor>
 <array-editor v-else-if="schema.type === 'array'"
     :schema="schema"
@@ -30,7 +31,8 @@
     :dragula="dragula"
     :md="md"
     :hljs="hljs"
-    :forceHttps="forceHttps">
+    :forceHttps="forceHttps"
+    :disableCollapse="disableCollapse">
 </array-editor>
 <number-editor v-else-if="schema.type === 'number' || schema.type === 'integer'"
     :schema="schema"

@@ -117,6 +117,7 @@ dragula | object? | the `dragula` library object if you want to reorder array by
 markdownit | object? | the `markdown-it` library object if you want to preview markdown
 hljs | object? | the `highlight.js` library object if you want to highlight code
 forceHttps | boolean? | if true, the preview url of images will be `https://` rather than `http://`
+disableCollapse | boolean? | if true, the collapse button will be hidden
 
 ## improve current theme
 

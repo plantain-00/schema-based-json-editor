@@ -5,7 +5,6 @@ import { Icon } from './icon'
 import { Optional } from './optional'
 import { Description } from './description'
 import { Editor } from './editor'
-import { Dragula, MarkdownIt, HLJS } from 'schema-based-json-editor/dist/libs'
 import { objectEditorTemplateHtml, objectEditorTemplateHtmlStatic } from './variables'
 
 @Component({
@@ -17,22 +16,17 @@ import { objectEditorTemplateHtml, objectEditorTemplateHtmlStatic } from './vari
     description: Description,
     editor: Editor
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps']
+  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'disableCollapse']
 })
 export class ObjectEditor extends Vue {
   schema!: common.ObjectSchema
   initialValue?: { [name: string]: common.ValueType }
   title!: string
-  theme!: common.Theme
   icon!: common.Icon
   locale!: common.Locale
   readonly!: boolean
   required!: boolean
   hasDeleteButton!: boolean
-  dragula?: Dragula
-  md?: MarkdownIt
-  hljs?: HLJS
-  forceHttps?: boolean
 
   collapsed?: boolean = false
   value?: { [name: string]: common.ValueType } = {}

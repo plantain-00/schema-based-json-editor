@@ -19,6 +19,7 @@ export type Props = {
   markdownit?: MarkdownItType;
   hljs?: HLJS;
   forceHttps?: boolean;
+  disableCollapse?: boolean;
 }
 
 /**
@@ -45,7 +46,8 @@ export class JSONEditor extends React.Component<Props, {}> {
             dragula={this.props.dragula}
             md={this.md}
             hljs={this.props.hljs}
-            forceHttps={this.props.forceHttps} />
+            forceHttps={this.props.forceHttps}
+            disableCollapse={this.props.disableCollapse} />
   }
   private updateValue = (value: any, isValid: boolean) => {
     this.props.updateValue(value, isValid)

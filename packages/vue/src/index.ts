@@ -29,15 +29,15 @@ import { indexTemplateHtml, indexTemplateHtmlStatic } from './variables'
   components: {
     editor: Editor
   },
-  props: ['schema', 'initialValue', 'theme', 'icon', 'locale', 'readonly', 'dragula', 'markdownit', 'hljs', 'forceHttps']
+  props: ['schema', 'initialValue', 'theme', 'icon', 'locale', 'readonly', 'dragula', 'markdownit', 'hljs', 'forceHttps', 'disableCollapse']
 })
 export class JSONEditor extends Vue {
-  theme!: string
+  theme: string | undefined
   locale!: common.Locale
-  icon!: string
-  markdownit!: MarkdownItType
-  hljs!: HLJS
-  forceHttps!: boolean
+  icon: string | undefined
+  markdownit: MarkdownItType | undefined
+  hljs: HLJS | undefined
+  forceHttps: boolean | undefined
 
   themeObject = common.getTheme(this.theme)
   get localeObject () {

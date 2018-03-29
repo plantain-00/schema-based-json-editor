@@ -9,7 +9,7 @@
                 :locale="locale"
                 @toggleOptional="toggleOptional()">
             </optional>
-            <icon v-if="true"
+            <icon v-if="!disableCollapse"
                 @click="collapseOrExpand()"
                 :text="collapsed ? icon.expand : icon.collapse"
                 :theme="theme"
@@ -52,7 +52,8 @@
                 :dragula="dragula"
                 :md="md"
                 :hljs="hljs"
-                :force-https="forceHttps">
+                :force-https="forceHttps"
+                :disable-collapse="disableCollapse">
             </editor>
         </div>
     </div>

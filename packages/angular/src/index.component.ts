@@ -14,27 +14,29 @@ import { indexTemplateHtml } from './variables'
 })
 export class JSONEditorComponent {
   @Input()
-    schema!: common.Schema
+  schema!: common.Schema
   @Input()
-    initialValue!: common.ValueType
+  initialValue!: common.ValueType
   @Output()
-    updateValue = new EventEmitter<common.ValidityValue<common.ValueType | undefined>>()
+  updateValue = new EventEmitter<common.ValidityValue<common.ValueType | undefined>>()
   @Input()
-    theme?: string
+  theme?: string
   @Input()
-    icon?: string
+  icon?: string
   @Input()
-    locale?: common.Locale
+  locale?: common.Locale
   @Input()
-    readonly?: boolean
+  readonly?: boolean
   @Input()
-    dragula?: Dragula
+  dragula?: Dragula
   @Input()
-    markdownit?: MarkdownItType
+  markdownit?: MarkdownItType
   @Input()
-    hljs?: HLJS
+  hljs?: HLJS
   @Input()
-    forceHttps?: boolean
+  forceHttps?: boolean
+  @Input()
+  disableCollapse?: boolean
 
   get themeObject () {
     return common.getTheme(this.theme)

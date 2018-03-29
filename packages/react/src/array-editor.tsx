@@ -74,7 +74,8 @@ export class ArrayEditor extends React.Component<Props, State> {
             dragula={this.props.dragula}
             md={this.props.md}
             hljs={this.props.hljs}
-            forceHttps={this.props.forceHttps} />
+            forceHttps={this.props.forceHttps}
+            disableCollapse={this.props.disableCollapse} />
         </div>
       ))
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
@@ -94,7 +95,7 @@ export class ArrayEditor extends React.Component<Props, State> {
               theme={this.props.theme}
               locale={this.props.locale}
               toggleOptional={this.toggleOptional} />
-            <Icon valid={true}
+            <Icon valid={!this.props.disableCollapse}
               onClick={this.collapseOrExpand}
               text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
               theme={this.props.theme}

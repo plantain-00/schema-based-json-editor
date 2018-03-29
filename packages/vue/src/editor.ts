@@ -8,7 +8,7 @@ import { editorTemplateHtml, editorTemplateHtmlStatic } from './variables'
   components: {
     editor: Editor
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps']
+  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'disableCollapse']
 })
 export class Editor extends Vue {
 

@@ -10,35 +10,37 @@ import { objectEditorTemplateHtml } from './variables'
 })
 export class ObjectEditorComponent {
   @Input()
-    schema!: common.ObjectSchema
+  schema!: common.ObjectSchema
   @Input()
-    initialValue!: { [name: string]: common.ValueType }
+  initialValue!: { [name: string]: common.ValueType }
   @Input()
-    title?: string
+  title?: string
   @Output()
-    updateValue = new EventEmitter<common.ValidityValue<{ [name: string]: common.ValueType } | undefined>>()
+  updateValue = new EventEmitter<common.ValidityValue<{ [name: string]: common.ValueType } | undefined>>()
   @Input()
-    theme!: common.Theme
+  theme!: common.Theme
   @Input()
-    icon!: common.Icon
+  icon!: common.Icon
   @Input()
-    locale!: common.Locale
+  locale!: common.Locale
   @Output()
-    onDelete = new EventEmitter()
+  onDelete = new EventEmitter()
   @Input()
-    readonly?: boolean
+  readonly?: boolean
   @Input()
-    required?: boolean
+  required?: boolean
   @Input()
-    hasDeleteButton!: boolean
+  hasDeleteButton!: boolean
   @Input()
-    dragula?: Dragula
+  dragula?: Dragula
   @Input()
-    md?: MarkdownIt
+  md?: MarkdownIt
   @Input()
-    hljs?: HLJS
+  hljs?: HLJS
   @Input()
-    forceHttps?: boolean
+  forceHttps?: boolean
+  @Input()
+  disableCollapse?: boolean
 
   collapsed?: boolean = false
   value?: { [name: string]: common.ValueType }

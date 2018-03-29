@@ -5,7 +5,7 @@ import { Icon } from './icon'
 import { Editor } from './editor'
 import { Optional } from './optional'
 import { Description } from './description'
-import { Dragula, MarkdownIt, HLJS } from 'schema-based-json-editor/dist/libs'
+import { Dragula } from 'schema-based-json-editor/dist/libs'
 import { arrayEditorTemplateHtml, arrayEditorTemplateHtmlStatic } from './variables'
 
 @Component({
@@ -17,22 +17,18 @@ import { arrayEditorTemplateHtml, arrayEditorTemplateHtmlStatic } from './variab
     description: Description,
     editor: Editor
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps']
+  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'disableCollapse']
 })
 export class ArrayEditor extends Vue {
   schema!: common.ArraySchema
   initialValue?: common.ValueType[]
   title!: string
-  theme!: common.Theme
   icon!: common.Icon
   locale!: common.Locale
   readonly!: boolean
   required!: boolean
   hasDeleteButton!: boolean
   dragula?: Dragula
-  md?: MarkdownIt
-  hljs?: HLJS
-  forceHttps?: boolean
 
   renderSwitch = 1
   collapsed?: boolean = false

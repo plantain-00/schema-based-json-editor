@@ -9,33 +9,35 @@ import { editorTemplateHtml } from './variables'
 })
 export class EditorComponent {
   @Input()
-    schema!: common.Schema
+  schema!: common.Schema
   @Input()
-    initialValue!: common.ValueType[]
+  initialValue!: common.ValueType[]
   @Input()
-    title?: string
+  title?: string
   @Output()
-    updateValue = new EventEmitter<common.ValidityValue<common.ValueType>>()
+  updateValue = new EventEmitter<common.ValidityValue<common.ValueType>>()
   @Input()
-    theme!: common.Theme
+  theme!: common.Theme
   @Input()
-    icon!: common.Icon
+  icon!: common.Icon
   @Input()
-    locale!: common.Locale
+  locale!: common.Locale
   @Output()
-    onDelete = new EventEmitter()
+  onDelete = new EventEmitter()
   @Input()
-    readonly?: boolean
+  readonly?: boolean
   @Input()
-    required?: boolean
+  required?: boolean
   @Input()
-    hasDeleteButton!: boolean
+  hasDeleteButton!: boolean
   @Input()
-    dragula?: Dragula
+  dragula?: Dragula
   @Input()
-    md?: MarkdownIt
+  md?: MarkdownIt
   @Input()
-    hljs?: HLJS
+  hljs?: HLJS
   @Input()
-    forceHttps?: boolean
+  forceHttps?: boolean
+  @Input()
+  disableCollapse?: boolean
 }
