@@ -47,7 +47,7 @@
     "karma-firefox-launcher": "1.1.0",
     "karma-jasmine": "1.1.1",
     "karma-webpack": "3.0.0",
-    "lerna": "2.9.0",
+    "lerna": "2.9.1",
     "markdownlint-cli": "0.8.1",
     "no-unused-export": "1.5.0",
     "puppeteer": "1.2.0",
@@ -60,8 +60,8 @@
     "standard": "11.0.1",
     "tslint": "5.9.1",
     "tslint-config-standard": "7.0.0",
-    "typescript": "2.7.2",
-    "webpack": "4.2.0",
+    "typescript": "2.8.1",
+    "webpack": "4.4.1",
     "webpack-cli": "2.0.13"
   }
 }
