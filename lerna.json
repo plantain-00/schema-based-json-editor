@@ -4,10 +4,5 @@
     "packages/*"
   ],
   "version": "7.9.0",
-  "npmClient": "yarn",
-  "command": {
-    "publish": {
-      "message": "feat: publish %s"
-    }
-  }
+  "npmClient": "yarn"
 }
