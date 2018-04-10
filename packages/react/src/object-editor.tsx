@@ -67,7 +67,8 @@ export class ObjectEditor extends React.Component<Props, State> {
           md={this.props.md}
           hljs={this.props.hljs}
           forceHttps={this.props.forceHttps}
-          disableCollapse={this.props.disableCollapse} />)
+          disableCollapse={this.props.disableCollapse}
+          noSelect2={this.props.noSelect2} />)
       : []
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
       ? <div className={this.props.theme.row}><input className={this.props.theme.input}

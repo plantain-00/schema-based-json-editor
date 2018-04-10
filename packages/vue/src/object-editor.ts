@@ -16,7 +16,7 @@ import { objectEditorTemplateHtml, objectEditorTemplateHtmlStatic } from './vari
     description: Description,
     editor: Editor
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'disableCollapse']
+  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'disableCollapse', 'noSelect2']
 })
 export class ObjectEditor extends Vue {
   schema!: common.ObjectSchema

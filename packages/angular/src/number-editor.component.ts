@@ -9,27 +9,29 @@ import { numberEditorTemplateHtml } from './variables'
 })
 export class NumberEditorComponent {
   @Input()
-    schema!: common.NumberSchema
+  schema!: common.NumberSchema
   @Input()
-    initialValue!: number
+  initialValue!: number
   @Input()
-    title?: string
+  title?: string
   @Output()
-    updateValue = new EventEmitter<common.ValidityValue<number | undefined>>()
+  updateValue = new EventEmitter<common.ValidityValue<number | undefined>>()
   @Input()
-    theme!: common.Theme
+  theme!: common.Theme
   @Input()
-    icon!: common.Icon
+  icon!: common.Icon
   @Input()
-    locale!: common.Locale
+  locale!: common.Locale
   @Output()
-    onDelete = new EventEmitter()
+  onDelete = new EventEmitter()
   @Input()
-    readonly?: boolean
+  readonly?: boolean
   @Input()
-    required?: boolean
+  required?: boolean
   @Input()
-    hasDeleteButton!: boolean
+  hasDeleteButton!: boolean
+  @Input()
+  noSelect2?: boolean
 
   value?: number
   errorMessage!: string
@@ -70,7 +72,9 @@ export class NumberEditorComponent {
     this.validate()
     this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
   }
-
+  trackByFunction = (index: number) => {
+    return index
+  }
   toggleOptional () {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined
     this.validate()

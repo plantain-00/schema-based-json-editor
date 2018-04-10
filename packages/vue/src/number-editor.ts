@@ -14,7 +14,7 @@ import { numberEditorTemplateHtml, numberEditorTemplateHtmlStatic } from './vari
     optional: Optional,
     description: Description
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton']
+  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'noSelect2']
 })
 export class NumberEditor extends Vue {
   schema!: common.NumberSchema
@@ -26,6 +26,7 @@ export class NumberEditor extends Vue {
   readonly!: boolean
   required!: boolean
   hasDeleteButton!: boolean
+  noSelect2!: boolean
 
   value?: number = 0
   errorMessage?: string = ''

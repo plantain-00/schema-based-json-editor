@@ -20,6 +20,7 @@ export type Props = {
   hljs?: HLJS;
   forceHttps?: boolean;
   disableCollapse?: boolean;
+  noSelect2?: boolean;
 }
 
 /**
@@ -36,18 +37,19 @@ export class JSONEditor extends React.Component<Props, {}> {
     const locale = common.getLocale(this.props.locale)
     const icon = common.getIcon(this.props.icon, locale)
     return <Editor schema={this.props.schema}
-            initialValue={this.props.initialValue}
-            updateValue={this.updateValue}
-            readonly={this.props.readonly}
-            theme={theme}
-            locale={locale}
-            icon={icon}
-            required={true}
-            dragula={this.props.dragula}
-            md={this.md}
-            hljs={this.props.hljs}
-            forceHttps={this.props.forceHttps}
-            disableCollapse={this.props.disableCollapse} />
+      initialValue={this.props.initialValue}
+      updateValue={this.updateValue}
+      readonly={this.props.readonly}
+      theme={theme}
+      locale={locale}
+      icon={icon}
+      required={true}
+      dragula={this.props.dragula}
+      md={this.md}
+      hljs={this.props.hljs}
+      forceHttps={this.props.forceHttps}
+      disableCollapse={this.props.disableCollapse}
+      noSelect2={this.props.noSelect2} />
   }
   private updateValue = (value: any, isValid: boolean) => {
     this.props.updateValue(value, isValid)

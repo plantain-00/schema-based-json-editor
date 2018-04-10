@@ -46,6 +46,7 @@
     "markdown-it": "8.4.1"
   },
   "peerDependencies": {
+    "file-uploader-component": "7",
     "lodash.isinteger": "4",
     "lodash.isobject": "3",
     "lodash.tointeger": "4",

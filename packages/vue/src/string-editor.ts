@@ -18,7 +18,7 @@ import 'file-uploader-vue-component'
     optional: Optional,
     description: Description
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps']
+  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'noSelect2']
 })
 export class StringEditor extends Vue {
   schema!: common.StringSchema

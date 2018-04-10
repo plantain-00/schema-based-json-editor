@@ -41,6 +41,8 @@ export class ObjectEditorComponent {
   forceHttps?: boolean
   @Input()
   disableCollapse?: boolean
+  @Input()
+  noSelect2?: boolean
 
   collapsed?: boolean = false
   value?: { [name: string]: common.ValueType }

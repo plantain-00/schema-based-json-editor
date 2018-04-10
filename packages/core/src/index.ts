@@ -109,7 +109,8 @@ export const themes: { [name: string]: Theme } = {
     button: 'btn btn-default',
     buttonGroup: 'btn-group',
     title: 'control-label',
-    description: 'help-block'
+    description: 'help-block',
+    select: 'form-control'
   },
   bootstrap4: {
     card: 'card card-body',
@@ -124,7 +125,8 @@ export const themes: { [name: string]: Theme } = {
     button: 'btn btn-default',
     buttonGroup: 'btn-group',
     title: 'col-form-label',
-    description: 'form-text'
+    description: 'form-text',
+    select: 'form-control'
   },
   antd3: {
     card: 'ant-card ant-card-bordered ant-card-body',
@@ -139,7 +141,8 @@ export const themes: { [name: string]: Theme } = {
     button: 'ant-btn',
     buttonGroup: 'ant-btn-group',
     title: 'ant-form-item-label',
-    description: 'ant-form-explain'
+    description: 'ant-form-explain',
+    select: 'ant-input'
   },
   'element-ui2': {
     card: 'el-form el-card box-card el-card__body',
@@ -154,7 +157,8 @@ export const themes: { [name: string]: Theme } = {
     checkbox: 'el-checkbox',
     radiobox: 'el-radio',
     title: '',
-    description: ''
+    description: '',
+    select: 'el-input__inner'
   },
   iview2: {
     card: 'ivu-card ivu-card-body',
@@ -169,7 +173,8 @@ export const themes: { [name: string]: Theme } = {
     checkbox: 'ivu-checkbox',
     radiobox: 'ivu-radio',
     title: 'ivu-form-item-label',
-    description: ''
+    description: '',
+    select: 'ivu-input'
   },
   blueprint1: {
     card: 'pt-card',
@@ -184,7 +189,8 @@ export const themes: { [name: string]: Theme } = {
     checkbox: 'pt-checkbox',
     radiobox: 'pt-radio',
     title: 'pt-label',
-    description: 'pt-text-muted'
+    description: 'pt-text-muted',
+    select: 'pt-input pt-fill'
   },
   blueprint2: {
     card: 'pt-card',
@@ -199,7 +205,8 @@ export const themes: { [name: string]: Theme } = {
     checkbox: 'pt-checkbox',
     radiobox: 'pt-radio',
     title: 'pt-label',
-    description: 'pt-text-muted'
+    description: 'pt-text-muted',
+    select: 'pt-input pt-fill'
   }
 }
 
@@ -219,7 +226,8 @@ export const defaultTheme = {
   button: 'schema-based-json-editor--button',
   buttonGroup: 'schema-based-json-editor--button-group',
   title: 'schema-based-json-editor--title',
-  description: 'schema-based-json-editor--description'
+  description: 'schema-based-json-editor--description',
+  select: 'schema-based-json-editor--select'
 }
 
 for (const themeName in themes) {
@@ -518,6 +526,7 @@ export type Props<TSchema extends CommonSchema, TValue> = {
   hljs?: HLJS;
   forceHttps?: boolean;
   disableCollapse?: boolean;
+  noSelect2?: boolean;
 }
 
 /**

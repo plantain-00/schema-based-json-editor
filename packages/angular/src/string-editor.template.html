@@ -42,11 +42,17 @@
         [defaultValue]="value"
         [readOnly]="isReadOnly"
         [disabled]="isReadOnly" />
-    <select2 *ngIf="useSelect"
+    <select2 *ngIf="useSelect && !noSelect2"
         [data]="options"
         [value]="value"
         (update)="updateSelection($event)">
     </select2>
+    <select *ngIf="useSelect && noSelect2"
+        [class]="theme.select"
+        [value]="value"
+        (change)="updateSelection($event.target.value)">
+        <option *ngFor="let option of options; trackBy:trackByFunction" [value]="option.value">{{option.label}}</option>
+    </select>
     <img *ngIf="willPreviewImage"
         class="schema-based-json-editor-image-preview"
         [src]="getImageUrl" />

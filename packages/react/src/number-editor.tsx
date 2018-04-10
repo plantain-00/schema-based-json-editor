@@ -47,12 +47,23 @@ export class NumberEditor extends React.Component<Props, State> {
         disabled={this.isReadOnly} />
     ) : null
 
-    const select = this.useSelect ? (
-      <Select2 data={this.options}
-        value={this.value}
-        update={(e: Select2UpdateValue) => this.updateSelection(e)}>
-      </Select2>
-    ) : null
+    let select: JSX.Element | null = null
+    if (this.useSelect) {
+      if (this.props.noSelect2) {
+        select = <select value={this.value}
+          className={this.props.theme.select}
+          onChange={(e) => this.updateSelection(+e.target.value)}>
+          {
+            this.options.map(op => <option key={op.value} value={op.value}>{op.label}</option>)
+          }
+        </select>
+      } else {
+        select = <Select2 data={this.options}
+          value={this.value}
+          update={(e: Select2UpdateValue) => this.updateSelection(e)}>
+        </Select2>
+      }
+    }
 
     return (
       <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>

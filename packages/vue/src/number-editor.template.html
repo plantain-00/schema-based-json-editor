@@ -25,10 +25,16 @@
         :value="value"
         :readOnly="isReadOnly"
         :disabled="isReadOnly" />
-    <select2 v-if="useSelect" :data="options"
+    <select2 v-if="useSelect && !noSelect2" :data="options"
         :value="value"
         @update="updateSelection($event)">
     </select2>
+    <select v-if="useSelect && noSelect2"
+        :class="theme.select"
+        :value="value"
+        @change="updateSelection(+$event.target.value)">
+        <option v-for="option in options" :key="option.value" :value="option.value">{{option.label}}</option>
+    </select>
     <description :theme="theme" :message="schema.description"></description>
     <description :theme="theme" :message="errorMessage"></description>
 </div>

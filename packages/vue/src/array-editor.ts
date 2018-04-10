@@ -17,7 +17,7 @@ import { arrayEditorTemplateHtml, arrayEditorTemplateHtmlStatic } from './variab
     description: Description,
     editor: Editor
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'disableCollapse']
+  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'disableCollapse', 'noSelect2']
 })
 export class ArrayEditor extends Vue {
   schema!: common.ArraySchema

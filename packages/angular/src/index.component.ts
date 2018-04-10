@@ -37,6 +37,8 @@ export class JSONEditorComponent {
   forceHttps?: boolean
   @Input()
   disableCollapse?: boolean
+  @Input()
+  noSelect2?: boolean
 
   get themeObject () {
     return common.getTheme(this.theme)

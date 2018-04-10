@@ -14,7 +14,8 @@
     :md="md"
     :hljs="hljs"
     :forceHttps="forceHttps"
-    :disableCollapse="disableCollapse">
+    :disableCollapse="disableCollapse"
+    :noSelect2="noSelect2">
 </object-editor>
 <array-editor v-else-if="schema.type === 'array'"
     :schema="schema"
@@ -32,7 +33,8 @@
     :md="md"
     :hljs="hljs"
     :forceHttps="forceHttps"
-    :disableCollapse="disableCollapse">
+    :disableCollapse="disableCollapse"
+    :noSelect2="noSelect2">
 </array-editor>
 <number-editor v-else-if="schema.type === 'number' || schema.type === 'integer'"
     :schema="schema"
@@ -45,7 +47,8 @@
     :required="required"
     @update-value="$emit('update-value', $event)"
     @delete="$emit('delete')"
-    :has-delete-button="hasDeleteButton">
+    :has-delete-button="hasDeleteButton"
+    :noSelect2="noSelect2">
 </number-editor>
 <boolean-editor v-else-if="schema.type === 'boolean'"
     :schema="schema"
@@ -88,5 +91,6 @@
     :dragula="dragula"
     :md="md"
     :hljs="hljs"
-    :forceHttps="forceHttps">
+    :forceHttps="forceHttps"
+    :noSelect2="noSelect2">
 </string-editor>

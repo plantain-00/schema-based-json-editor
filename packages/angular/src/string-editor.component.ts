@@ -13,35 +13,37 @@ import { stringEditorTemplateHtml } from './variables'
 })
 export class StringEditorComponent {
   @Input()
-    schema!: common.StringSchema
+  schema!: common.StringSchema
   @Input()
-    initialValue!: string
+  initialValue!: string
   @Input()
-    title?: string
+  title?: string
   @Output()
-    updateValue = new EventEmitter<common.ValidityValue<string | undefined>>()
+  updateValue = new EventEmitter<common.ValidityValue<string | undefined>>()
   @Input()
-    theme!: common.Theme
+  theme!: common.Theme
   @Input()
-    icon!: common.Icon
+  icon!: common.Icon
   @Input()
-    locale!: common.Locale
+  locale!: common.Locale
   @Output()
-    onDelete = new EventEmitter()
+  onDelete = new EventEmitter()
   @Input()
-    readonly?: boolean
+  readonly?: boolean
   @Input()
-    required?: boolean
+  required?: boolean
   @Input()
-    hasDeleteButton!: boolean
+  hasDeleteButton!: boolean
   @Input()
-    dragula?: Dragula
+  dragula?: Dragula
   @Input()
-    md?: MarkdownIt
+  md?: MarkdownIt
   @Input()
-    hljs?: HLJS
+  hljs?: HLJS
   @Input()
-    forceHttps?: boolean
+  forceHttps?: boolean
+  @Input()
+  noSelect2?: boolean
 
   value?: string
   errorMessage!: string
@@ -126,7 +128,9 @@ export class StringEditorComponent {
     this.validate()
     this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
   }
-
+  trackByFunction = (index: number) => {
+    return index
+  }
   toggleOptional = () => {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined
     this.validate()

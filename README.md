@@ -118,6 +118,7 @@ markdownit | object? | the `markdown-it` library object if you want to preview m
 hljs | object? | the `highlight.js` library object if you want to highlight code
 forceHttps | boolean? | if true, the preview url of images will be `https://` rather than `http://`
 disableCollapse | boolean? | if true, the collapse button will be hidden
+noSelect2 | boolean? | if true, use `select` rather than `select2-component`
 
 ## improve current theme
 
@@ -139,7 +140,8 @@ export const defaultTheme = {
   button: 'schema-based-json-editor--button',
   buttonGroup: 'schema-based-json-editor--button-group',
   title: 'schema-based-json-editor--title',
-  description: 'schema-based-json-editor--description'
+  description: 'schema-based-json-editor--description',
+  select: 'schema-based-json-editor--select'
 }
 ```
 

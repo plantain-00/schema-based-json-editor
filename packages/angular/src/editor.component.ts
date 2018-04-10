@@ -40,4 +40,6 @@ export class EditorComponent {
   forceHttps?: boolean
   @Input()
   disableCollapse?: boolean
+  @Input()
+  noSelect2?: boolean
 }

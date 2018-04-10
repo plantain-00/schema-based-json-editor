@@ -29,7 +29,7 @@ import { indexTemplateHtml, indexTemplateHtmlStatic } from './variables'
   components: {
     editor: Editor
   },
-  props: ['schema', 'initialValue', 'theme', 'icon', 'locale', 'readonly', 'dragula', 'markdownit', 'hljs', 'forceHttps', 'disableCollapse']
+  props: ['schema', 'initialValue', 'theme', 'icon', 'locale', 'readonly', 'dragula', 'markdownit', 'hljs', 'forceHttps', 'disableCollapse', 'noSelect2']
 })
 export class JSONEditor extends Vue {
   theme: string | undefined
