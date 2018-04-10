@@ -36,7 +36,7 @@ export class BooleanEditor extends React.Component<Props, State> {
   render () {
     const control = this.value !== undefined ? (
       <div>
-        <div className={this.props.theme.radiobox}>
+        <span className={this.props.theme.radiobox}>
           <label>
             <input type='radio'
               onChange={this.onChange}
@@ -44,8 +44,8 @@ export class BooleanEditor extends React.Component<Props, State> {
               disabled={this.isReadOnly} />
             {this.props.locale.info.true}
           </label>
-        </div>
-        <div className={this.props.theme.radiobox}>
+        </span>
+        <span className={this.props.theme.radiobox}>
           <label>
             <input type='radio'
               onChange={this.onChange}
@@ -53,7 +53,7 @@ export class BooleanEditor extends React.Component<Props, State> {
               disabled={this.isReadOnly} />
             {this.props.locale.info.false}
           </label>
-        </div>
+        </span>
       </div>
     ) : null
 

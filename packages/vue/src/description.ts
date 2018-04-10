@@ -6,7 +6,7 @@ import { descriptionTemplateHtml, descriptionTemplateHtmlStatic } from './variab
 @Component({
   render: descriptionTemplateHtml,
   staticRenderFns: descriptionTemplateHtmlStatic,
-  props: ['theme', 'message', 'notEmpty']
+  props: ['theme', 'message']
 })
 export class Description extends Vue {
 

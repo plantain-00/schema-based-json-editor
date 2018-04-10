@@ -18,7 +18,7 @@
         </div>
     </label>
     <div v-if="value !== undefined">
-        <div :class="theme.radiobox">
+        <span :class="theme.radiobox">
             <label>
                 <input type="radio"
                     @change="onChange($event)"
@@ -26,8 +26,8 @@
                     :disabled="isReadOnly" />
                 {{locale.info.true}}
             </label>
-        </div>
-        <div :class="theme.radiobox">
+        </span>
+        <span :class="theme.radiobox">
             <label>
                 <input type="radio"
                     @change="onChange($event)"
@@ -35,7 +35,7 @@
                     :disabled="isReadOnly" />
                 {{locale.info.false}}
             </label>
-        </div>
+        </span>
     </div>
     <description :theme="theme" :message="schema.description"></description>
 </div>

@@ -113,7 +113,7 @@ export class ArrayEditor extends React.Component<Props, State> {
               icon={this.props.icon} />
           </div>
         </h3>
-        <Description theme={this.props.theme} message={this.props.schema.description} notEmpty={true} />
+        <Description theme={this.props.theme} message={this.props.schema.description} />
         <div className={this.props.theme.card}>
           {filterElement}
           {childrenElement}
