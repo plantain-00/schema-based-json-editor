@@ -60,6 +60,7 @@ export type NumberSchema = CommonSchema & {
   exclusiveMaximum?: boolean;
   enum?: number[];
   multipleOf?: number;
+  enumTitles?: string[];
 }
 
 /**
@@ -72,6 +73,7 @@ export type StringSchema = CommonSchema & {
   minLength?: number;
   maxLength?: number;
   pattern?: string;
+  enumTitles?: string[];
 }
 
 /**
@@ -1016,4 +1018,15 @@ export function findContainer (childNodes: NodeList) {
     }
   }
   return undefined
+}
+
+/**
+ * @public
+ */
+export function getOptions (schema: NumberSchema | StringSchema) {
+  const enumTitles: string[] = schema.enumTitles || []
+  return (schema.enum as (number | string)[]).map((e, i) => ({
+    value: e,
+    label: typeof enumTitles[i] === 'string' ? enumTitles[i] : e
+  }))
 }

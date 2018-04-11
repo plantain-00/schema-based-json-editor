@@ -3,7 +3,7 @@ import * as common from 'schema-based-json-editor'
 import { Icon } from './icon'
 import { Optional } from './optional'
 import { Description } from './description'
-import { Select2, Select2UpdateValue } from 'select2-react-component'
+import { Select2, Select2UpdateValue, Select2Option } from 'select2-react-component'
 
 /**
  * @public
@@ -122,10 +122,7 @@ export class NumberEditor extends React.Component<Props, State> {
     return common.getTitle(this.props.title, this.props.schema.title)
   }
   private get options () {
-    return this.props.schema.enum!.map(e => ({
-      value: e,
-      label: e.toString()
-    }))
+    return common.getOptions(this.props.schema) as Select2Option[]
   }
 
   private updateSelection (value: Select2UpdateValue) {

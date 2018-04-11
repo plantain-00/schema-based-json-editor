@@ -12,11 +12,11 @@
 + reactjs component
 + angular component
 + vuejs component
-+ common schema fields: title, description, default, readonly, propertyOrder, requiredWhen('===', 'in'), optionalWhen('===', 'in')
++ common schema fields: title, description, default, readonly, propertyOrder, requiredWhen, optionalWhen
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems
-+ number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf
-+ string schema fields: format('textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64'), enum, minLength, maxLength, pattern
++ number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, enumTitles
++ string schema fields: format('textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64'), enum, minLength, maxLength, pattern, enumTitles
 + boolean schema fields: format('checkbox')
 + image preview, code highlight, markdown preview
 + multi-language
@@ -198,6 +198,16 @@ export const defaultLocale = {
   fileUploaderLocale: defaultFileUploaderLocale
 }
 ```
+
+## non-standard fields
+
+field | type | description
+--- | --- | ---
+propertyOrder | number? | in a object, the property with smaller `propertyOrder` will be closer to the top
+requiredWhen | [string, '===' or 'in', any]? | in a object, the property is required when the condition is true, eg, `['name', '===', 'foo']` or `['name', 'in', ['foo', 'bar']]`, otherwise the property is hidden
+optionalWhen | [string, '===' or 'in', any]? | in a object, the property is optional when the condition is true, eg, `['name', '===', 'foo']` or `['name', 'in', ['foo', 'bar']]`, otherwise the property is hidden
+collapsed | boolean? | if true, the object or array is collapsed by default
+enumTitles | string[]? | works with `enum` field, are the titles of the enum
 
 ## change logs
 

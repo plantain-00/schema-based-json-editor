@@ -61,10 +61,7 @@ export class NumberEditor extends Vue {
   }
 
   get options () {
-    return this.schema.enum!.map(e => ({
-      value: e,
-      label: e
-    }))
+    return common.getOptions(this.schema)
   }
 
   updateSelection (value: number) {

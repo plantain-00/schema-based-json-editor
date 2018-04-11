@@ -4,7 +4,7 @@ import { Icon } from './icon'
 import { Optional } from './optional'
 import { Description } from './description'
 import { MarkdownTip } from 'markdown-tip-react'
-import { Select2, Select2UpdateValue } from 'select2-react-component'
+import { Select2, Select2UpdateValue, Select2Option } from 'select2-react-component'
 import { FileUploader } from 'file-uploader-react-component'
 
 /**
@@ -189,10 +189,7 @@ export class StringEditor extends React.Component<Props, State> {
     return common.getTitle(this.props.title, this.props.schema.title)
   }
   private get options () {
-    return this.props.schema.enum!.map(e => ({
-      value: e,
-      label: e
-    }))
+    return common.getOptions(this.props.schema) as Select2Option[]
   }
   private get canUpload () {
     return this.props.schema.format === 'base64'

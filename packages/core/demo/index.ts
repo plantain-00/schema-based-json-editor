@@ -252,6 +252,22 @@ export let schema: common.Schema = {
         }
       },
       required: ['kind', 'propertyExample4']
+    },
+    checkboxBooleanExample: {
+      type: 'boolean',
+      default: true,
+      format: 'checkbox'
+    },
+    enumTitlesExample: {
+      type: 'string',
+      enum: [
+        'enum 1',
+        'enum 2'
+      ],
+      enumTitles: [
+        'enum title 1',
+        'enum title 2'
+      ]
     }
   },
   required: [
@@ -277,7 +293,9 @@ export let schema: common.Schema = {
     'collapsedObjectExample',
     'emptyEnumExample',
     'uploadFileExample',
-    'requiredWhenExample'
+    'requiredWhenExample',
+    'checkboxBooleanExample',
+    'enumTitlesExample'
   ]
 }
 

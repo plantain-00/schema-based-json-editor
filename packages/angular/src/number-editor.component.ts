@@ -61,10 +61,7 @@ export class NumberEditorComponent {
     return common.getTitle(this.title, this.schema.title)
   }
   get options () {
-    return this.schema.enum!.map(e => ({
-      value: e,
-      label: e
-    }))
+    return common.getOptions(this.schema)
   }
 
   updateSelection (value: number) {
