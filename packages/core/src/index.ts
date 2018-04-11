@@ -78,6 +78,7 @@ export type StringSchema = CommonSchema & {
  */
 export type BooleanSchema = CommonSchema & {
   type: 'boolean';
+  format?: 'checkbox';
 }
 
 /**

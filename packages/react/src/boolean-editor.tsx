@@ -34,28 +34,47 @@ export class BooleanEditor extends React.Component<Props, State> {
     return this.props.initialValue !== nextProps.initialValue
   }
   render () {
-    const control = this.value !== undefined ? (
-      <div>
-        <span className={this.props.theme.radiobox}>
-          <label>
-            <input type='radio'
-              onChange={this.onChange}
-              checked={this.value}
-              disabled={this.isReadOnly} />
-            {this.props.locale.info.true}
-          </label>
-        </span>
-        <span className={this.props.theme.radiobox}>
-          <label>
-            <input type='radio'
-              onChange={this.onChange}
-              checked={!this.value}
-              disabled={this.isReadOnly} />
-            {this.props.locale.info.false}
-          </label>
-        </span>
-      </div>
-    ) : null
+    let control: JSX.Element | null = null
+    if (this.value !== undefined) {
+      if (this.props.schema.format === 'checkbox') {
+        control = (
+          <div>
+            <span className={this.props.theme.checkbox}>
+              <label>
+                <input type='checkbox'
+                  onChange={this.onChange}
+                  checked={this.value}
+                  disabled={this.isReadOnly} />
+                {this.props.locale.info.true}
+              </label>
+            </span>
+          </div>
+        )
+      } else {
+        control = (
+          <div>
+            <span className={this.props.theme.radiobox}>
+              <label>
+                <input type='radio'
+                  onChange={this.onChange}
+                  checked={this.value}
+                  disabled={this.isReadOnly} />
+                {this.props.locale.info.true}
+              </label>
+            </span>
+            <span className={this.props.theme.radiobox}>
+              <label>
+                <input type='radio'
+                  onChange={this.onChange}
+                  checked={!this.value}
+                  disabled={this.isReadOnly} />
+                {this.props.locale.info.false}
+              </label>
+            </span>
+          </div>
+        )
+      }
+    }
 
     return (
       <div className={this.props.theme.row}>

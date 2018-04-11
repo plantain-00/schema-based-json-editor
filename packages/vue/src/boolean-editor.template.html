@@ -18,7 +18,7 @@
         </div>
     </label>
     <div v-if="value !== undefined">
-        <span :class="theme.radiobox">
+        <span v-if="schema.format !== 'checkbox'" :class="theme.radiobox">
             <label>
                 <input type="radio"
                     @change="onChange($event)"
@@ -27,7 +27,7 @@
                 {{locale.info.true}}
             </label>
         </span>
-        <span :class="theme.radiobox">
+        <span v-if="schema.format !== 'checkbox'" :class="theme.radiobox">
             <label>
                 <input type="radio"
                     @change="onChange($event)"
@@ -36,6 +36,15 @@
                 {{locale.info.false}}
             </label>
         </span>
+        <span v-if="schema.format === 'checkbox'" :class="theme.checkbox">
+          <label>
+              <input type="checkbox"
+                  @change="onChange($event)"
+                  :checked="value"
+                  :disabled="isReadOnly" />
+              {{locale.info.true}}
+          </label>
+      </span>
     </div>
     <description :theme="theme" :message="schema.description"></description>
 </div>

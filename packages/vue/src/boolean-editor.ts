@@ -17,7 +17,7 @@ import { booleanEditorTemplateHtml, booleanEditorTemplateHtmlStatic } from './va
   props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton']
 })
 export class BooleanEditor extends Vue {
-  schema!: common.ArraySchema
+  schema!: common.BooleanSchema
   initialValue?: boolean
   title!: string
   theme!: common.Theme
