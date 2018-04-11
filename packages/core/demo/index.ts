@@ -245,6 +245,10 @@ export let schema: common.Schema = {
         },
         propertyExample5: {
           type: 'string'
+        },
+        propertyExample6: {
+          type: 'string',
+          optionalWhen: ['kind', '===', 'enum 2']
         }
       },
       required: ['kind', 'propertyExample4']

@@ -23,6 +23,7 @@ export type CommonSchema = {
   readonly?: boolean;
   propertyOrder?: number;
   requiredWhen?: [string, '===' | 'in', any];
+  optionalWhen?: [string, '===' | 'in', any];
 }
 
 /**
@@ -974,25 +975,32 @@ export function isRequired (
   if (required && required.some(r => r === property)) {
     return true
   }
-  if (!value) {
-    return undefined
-  }
-  if (!schema.properties[property]) {
-    return undefined
-  }
-  const requiredWhen = schema.properties[property].requiredWhen
-  if (!requiredWhen) {
-    return undefined
-  }
-  const [left, operator, right] = requiredWhen
-  if (!schema.properties[left]) {
-    return undefined
-  }
-  if (operator === '===') {
-    return value[left] === right
-  }
-  if (operator === 'in') {
-    return Array.isArray(right) && right.indexOf(value[left]) !== -1
+  if (value && schema.properties[property]) {
+    const requiredWhen = schema.properties[property].requiredWhen
+    if (requiredWhen) {
+      const [left, operator, right] = requiredWhen
+      if (schema.properties[left]) {
+        if (operator === '===') {
+          return value[left] === right
+        }
+        if (operator === 'in') {
+          return Array.isArray(right) && right.indexOf(value[left]) !== -1
+        }
+      }
+    }
+
+    const optionalWhen = schema.properties[property].optionalWhen
+    if (optionalWhen) {
+      const [left, operator, right] = optionalWhen
+      if (schema.properties[left]) {
+        if (operator === '===') {
+          return value[left] === right ? undefined : false
+        }
+        if (operator === 'in') {
+          return Array.isArray(right) && right.indexOf(value[left]) !== -1 ? undefined : false
+        }
+      }
+    }
   }
   return undefined
 }

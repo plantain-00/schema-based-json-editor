@@ -12,7 +12,7 @@
 + reactjs component
 + angular component
 + vuejs component
-+ common schema fields: title, description, default, readonly, propertyOrder, requiredWhen('===', 'in')
++ common schema fields: title, description, default, readonly, propertyOrder, requiredWhen('===', 'in'), optionalWhen('===', 'in')
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems
 + number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf
