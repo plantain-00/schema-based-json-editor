@@ -96,7 +96,7 @@ export class ArrayEditor extends React.Component<Props, State> {
               theme={this.props.theme}
               locale={this.props.locale}
               toggleOptional={this.toggleOptional} />
-            <Icon valid={!this.props.disableCollapse}
+            <Icon valid={!this.props.disableCollapse && this.value && this.value.length > 0}
               onClick={this.collapseOrExpand}
               text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
               theme={this.props.theme}

@@ -9,7 +9,7 @@
                 :locale="locale"
                 @toggleOptional="toggleOptional()">
             </optional>
-            <icon v-if="!disableCollapse"
+            <icon v-if="!disableCollapse && value.length > 0"
                 @click="collapseOrExpand()"
                 :text="collapsed ? icon.expand : icon.collapse"
                 :theme="theme"

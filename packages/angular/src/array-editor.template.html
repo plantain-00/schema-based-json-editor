@@ -9,7 +9,7 @@
                 [locale]="locale"
                 (toggleOptional)="toggleOptional()">
             </optional>
-            <icon *ngIf="!disableCollapse"
+            <icon *ngIf="!disableCollapse && value && value.length > 0"
                 (onClick)="collapseOrExpand()"
                 [text]="collapsed ? icon.expand : icon.collapse"
                 [theme]="theme"
