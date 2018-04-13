@@ -1,6 +1,6 @@
 {
   "name": "react-schema-based-json-editor",
-  "version": "7.11.0",
+  "version": "7.11.2",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "unpkg": "dist/react-schema-based-json-editor.min.js",
@@ -33,7 +33,7 @@
     "markdown-tip-react": "6",
     "react": "16",
     "react-dom": "16",
-    "schema-based-json-editor": "^7.11.0",
+    "schema-based-json-editor": "^7.11.2",
     "select2-react-component": "5"
   },
   "devDependencies": {
@@ -50,7 +50,7 @@
     "markdown-tip-react": "6",
     "react": "16",
     "react-dom": "16",
-    "schema-based-json-editor": "^7.11.0",
+    "schema-based-json-editor": "^7.11.2",
     "select2-react-component": "5"
   }
 }
