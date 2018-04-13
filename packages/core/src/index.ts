@@ -865,8 +865,24 @@ export function initializeMarkdown (markdownit: MarkdownItType | undefined, hljs
  */
 export function findTitle (value: { [name: string]: ValueType } | undefined, properties: { property: string; schema: Schema }[]) {
   if (value) {
-    for (const { property } of properties) {
+    for (const { property, schema } of properties) {
       const title = value[property]
+      if (schema.type === 'number'
+        || schema.type === 'integer'
+        || schema.type === 'string') {
+        if (schema.enum && schema.enumTitles) {
+          const index = (schema.enum as (string | number)[]).indexOf(title as string | number)
+          if (index !== -1 && index < schema.enumTitles.length) {
+            const enumTitle = schema.enumTitles[index]
+            if (typeof enumTitle === 'string' && enumTitle.length > 0) {
+              if (enumTitle.length > 23) {
+                return enumTitle.substring(0, 20) + '...'
+              }
+              return enumTitle
+            }
+          }
+        }
+      }
       if (typeof title === 'string' && title.length > 0) {
         if (title.length > 23) {
           return title.substring(0, 20) + '...'

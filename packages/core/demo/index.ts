@@ -268,6 +268,31 @@ export let schema: common.Schema = {
         'enum title 1',
         'enum title 2'
       ]
+    },
+    itemTitleEnumTitleExample: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          propertyExample1: {
+            type: 'string',
+            enum: [
+              'foo',
+              'bar'
+            ],
+            enumTitles: [
+              'foo title',
+              'bar title'
+            ]
+          }
+        },
+        required: ['propertyExample1']
+      },
+      default: [
+        {
+          propertyExample1: 'bar'
+        }
+      ]
     }
   },
   required: [
@@ -295,7 +320,8 @@ export let schema: common.Schema = {
     'uploadFileExample',
     'requiredWhenExample',
     'checkboxBooleanExample',
-    'enumTitlesExample'
+    'enumTitlesExample',
+    'itemTitleEnumTitleExample'
   ]
 }
 
