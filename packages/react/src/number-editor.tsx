@@ -52,6 +52,7 @@ export class NumberEditor extends React.Component<Props, State> {
       if (this.props.noSelect2) {
         select = <select value={this.value}
           className={this.props.theme.select}
+          disabled={this.isReadOnly}
           onChange={(e) => this.updateSelection(+e.target.value)}>
           {
             this.options.map(op => <option key={op.value} value={op.value}>{op.label}</option>)
@@ -60,6 +61,7 @@ export class NumberEditor extends React.Component<Props, State> {
       } else {
         select = <Select2 data={this.options}
           value={this.value}
+          disabled={this.isReadOnly}
           update={(e: Select2UpdateValue) => this.updateSelection(e)}>
         </Select2>
       }

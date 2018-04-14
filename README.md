@@ -17,7 +17,7 @@
 + array schema fields: items, minItems, uniqueItems
 + number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, enumTitles
 + string schema fields: format('textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64'), enum, minLength, maxLength, pattern, enumTitles
-+ boolean schema fields: format('checkbox')
++ boolean schema fields: format('checkbox' | 'select' | 'select2')
 + image preview, code highlight, markdown preview
 + multi-language
 

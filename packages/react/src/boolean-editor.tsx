@@ -3,6 +3,7 @@ import * as common from 'schema-based-json-editor'
 import { Icon } from './icon'
 import { Optional } from './optional'
 import { Description } from './description'
+import { Select2, Select2UpdateValue, Select2Option } from 'select2-react-component'
 
 /**
  * @public
@@ -49,6 +50,24 @@ export class BooleanEditor extends React.Component<Props, State> {
               </label>
             </span>
           </div>
+        )
+      } else if (this.props.schema.format === 'select') {
+        control = (
+          <select value={String(this.value)}
+            className={this.props.theme.select}
+            disabled={this.isReadOnly}
+            onChange={(e) => this.onChange()}>
+            <option value='true'>{this.props.locale.info.true}</option>
+            <option value='false'>{this.props.locale.info.false}</option>
+          </select>
+        )
+      } else if (this.props.schema.format === 'select2') {
+        control = (
+          <Select2 data={this.booleanOptions}
+            value={String(this.value)}
+            disabled={this.isReadOnly}
+            update={(e: Select2UpdateValue) => this.onChange()}>
+          </Select2>
         )
       } else {
         control = (
@@ -99,7 +118,7 @@ export class BooleanEditor extends React.Component<Props, State> {
       </div>
     )
   }
-  private onChange = (e: React.FormEvent<{ checked: boolean }>) => {
+  private onChange = () => {
     this.value = !this.value
     this.setState({ value: this.value })
     this.props.updateValue(this.value, true)
@@ -118,5 +137,17 @@ export class BooleanEditor extends React.Component<Props, State> {
   }
   private get titleToShow () {
     return common.getTitle(this.props.title, this.props.schema.title)
+  }
+  private get booleanOptions (): Select2Option[] {
+    return [
+      {
+        value: 'true',
+        label: this.props.locale.info.true
+      },
+      {
+        value: 'false',
+        label: this.props.locale.info.false
+      }
+    ]
   }
 }

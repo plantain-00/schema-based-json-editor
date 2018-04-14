@@ -37,9 +37,7 @@ export class NumberEditorComponent {
   errorMessage!: string
   buttonGroupStyle = common.buttonGroupStyleString
   onChange (e: { target: { value: string } }) {
-    this.value = this.schema.type === 'integer' ? common.toInteger(e.target.value) : common.toNumber(e.target.value)
-    this.validate()
-    this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
+    this.updateSelection(e.target.value)
   }
   ngOnInit () {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number
@@ -64,7 +62,7 @@ export class NumberEditorComponent {
     return common.getOptions(this.schema)
   }
 
-  updateSelection (value: number) {
+  updateSelection (value: any) {
     this.value = this.schema.type === 'integer' ? common.toInteger(value) : common.toNumber(value)
     this.validate()
     this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })

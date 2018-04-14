@@ -44,8 +44,20 @@ export class BooleanEditor extends Vue {
   get titleToShow () {
     return common.getTitle(this.title, this.schema.title)
   }
+  get booleanOptions () {
+    return [
+      {
+        value: true,
+        label: this.locale.info.true
+      },
+      {
+        value: false,
+        label: this.locale.info.false
+      }
+    ]
+  }
 
-  onChange (e: { target: { checked: boolean } }) {
+  onChange () {
     this.value = !this.value
     this.$emit('update-value', { value: this.value, isValid: true })
   }

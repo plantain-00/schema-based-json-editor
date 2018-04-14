@@ -44,11 +44,13 @@
         :disabled="isReadOnly" />
     <select2 v-if="useSelect && !noSelect2" :data="options"
         :value="value"
+        :disabled="isReadOnly"
         @update="updateSelection($event)">
     </select2>
     <select v-if="useSelect && noSelect2"
         :class="theme.select"
         :value="value"
+        :disabled="isReadOnly"
         @change="updateSelection($event.target.value)">
         <option v-for="option in options" :key="option.value" :value="option.value">{{option.label}}</option>
     </select>

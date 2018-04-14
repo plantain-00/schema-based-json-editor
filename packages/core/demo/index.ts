@@ -293,6 +293,16 @@ export let schema: common.Schema = {
           propertyExample1: 'bar'
         }
       ]
+    },
+    selectBooleanExample: {
+      type: 'boolean',
+      default: false,
+      format: 'select'
+    },
+    select2BooleanExample: {
+      type: 'boolean',
+      default: false,
+      format: 'select2'
     }
   },
   required: [
@@ -321,7 +331,9 @@ export let schema: common.Schema = {
     'requiredWhenExample',
     'checkboxBooleanExample',
     'enumTitlesExample',
-    'itemTitleEnumTitleExample'
+    'itemTitleEnumTitleExample',
+    'selectBooleanExample',
+    'select2BooleanExample'
   ]
 }
 

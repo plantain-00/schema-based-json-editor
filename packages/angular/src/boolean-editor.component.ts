@@ -36,7 +36,7 @@ export class BooleanEditorComponent {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean
     this.updateValue.emit({ value: this.value, isValid: true })
   }
-  onChange (e: { target: { checked: boolean } }) {
+  onChange () {
     this.value = !this.value
     this.updateValue.emit({ value: this.value, isValid: true })
   }
