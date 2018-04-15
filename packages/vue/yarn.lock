@@ -15,8 +15,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "9.6.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.2.tgz#e49ac1adb458835e95ca6487bc20f916b37aff23"
+  version "9.6.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.5.tgz#ee700810fdf49ac1c399fc5980b7559b3e5a381d"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -56,17 +56,17 @@ entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-file-uploader-component@7, file-uploader-component@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.2.0.tgz#1de506808aba0079207c0ff26ace848f428c3144"
+file-uploader-component@^7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.2.2.tgz#623125c272cbc08fc0cba74028e8958d346a0b3f"
   dependencies:
     tslib "1"
 
 file-uploader-vue-component@7:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.2.1.tgz#1d871a49e558483b0314145d6a3e5f36a8c4e239"
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.2.2.tgz#5b176ca9b880d9167936188ad1476c0248905540"
   dependencies:
-    file-uploader-component "^7.2.0"
+    file-uploader-component "^7.2.2"
     vue "2"
     vue-class-component "6"
 
@@ -80,22 +80,6 @@ linkify-it@^2.0.0:
   dependencies:
     uc.micro "^1.0.1"
 
-lodash.isinteger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
-
-lodash.isobject@3:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
-
-lodash.tointeger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.tointeger/-/lodash.tointeger-4.0.4.tgz#65e655acaa724e26d3fef57effc46970e1cd17e6"
-
-lodash.tonumber@4:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
-
 markdown-it@8.4.1:
   version "8.4.1"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.1.tgz#206fe59b0e4e1b78a7c73250af9b34a4ad0aaf44"
@@ -107,14 +91,14 @@ markdown-it@8.4.1:
     uc.micro "^1.0.5"
 
 markdown-tip-vue@6:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.2.1.tgz#5c3198871dc47880e2537ef4a787bde0ad2a5869"
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.2.2.tgz#10b9caac1d3860083332e1bb769df8fbd675ceae"
   dependencies:
     markdown-tip "^6.2.0"
     vue "2"
     vue-class-component "6"
 
-markdown-tip@6, markdown-tip@^6.2.0:
+markdown-tip@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.2.0.tgz#716ed6e74f4f3516a21f9f93211c94fdadea6b34"
   dependencies:
@@ -124,32 +108,19 @@ mdurl@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
 
-schema-based-json-editor@^7.9.0:
-  version "7.9.0"
-  resolved "https://registry.yarnpkg.com/schema-based-json-editor/-/schema-based-json-editor-7.9.0.tgz#70dbbf084db52062676dbc3f5beccb35280f88a4"
-  dependencies:
-    file-uploader-component "7"
-    lodash.isinteger "4"
-    lodash.isobject "3"
-    lodash.tointeger "4"
-    lodash.tonumber "4"
-    markdown-tip "6"
-    select2-component "5"
-    tslib "1"
-
-select2-component@5, select2-component@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.1.tgz#81f488608bf6f704e04edf5bf3d350f35b9cc148"
+select2-component@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.2.tgz#300ec2231e5db27382f32f0018c6ae5dc5b32a01"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-vue-component@5:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.2.1.tgz#dade8d3b1278703ef5b7834df8cc4df8ffcfdd55"
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.2.2.tgz#767ca10c7e93e188ec7cb861260c4034093f2afa"
   dependencies:
     "@types/node" "*"
-    select2-component "^5.2.1"
+    select2-component "^5.2.2"
     vue "2"
     vue-class-component "6"
 

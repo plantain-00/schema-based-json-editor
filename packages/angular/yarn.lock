@@ -45,8 +45,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "9.6.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.4.tgz#0ef7b4cfc3499881c81e0ea1ce61a23f6f4f5b42"
+  version "9.6.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.5.tgz#ee700810fdf49ac1c399fc5980b7559b3e5a381d"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -65,9 +65,9 @@ contra@1.9.4:
     atoa "1.0.0"
     ticky "1.0.1"
 
-core-js@2.5.4:
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.4.tgz#f2c8bf181f2a80b92f360121429ce63a2f0aeae0"
+core-js@2.5.5:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.5.tgz#b14dde936c640c0579a6b50cabcc132dd6127e3b"
 
 crossvent@1.5.4:
   version "1.5.4"
@@ -98,7 +98,7 @@ file-uploader-angular-component@7:
     "@angular/core" "4 || 5"
     file-uploader-component "^7.2.2"
 
-file-uploader-component@7, file-uploader-component@^7.2.2:
+file-uploader-component@^7.2.2:
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.2.2.tgz#623125c272cbc08fc0cba74028e8958d346a0b3f"
   dependencies:
@@ -113,22 +113,6 @@ linkify-it@^2.0.0:
   resolved "https://registry.yarnpkg.com/linkify-it/-/linkify-it-2.0.3.tgz#d94a4648f9b1c179d64fa97291268bdb6ce9434f"
   dependencies:
     uc.micro "^1.0.1"
-
-lodash.isinteger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
-
-lodash.isobject@3:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
-
-lodash.tointeger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.tointeger/-/lodash.tointeger-4.0.4.tgz#65e655acaa724e26d3fef57effc46970e1cd17e6"
-
-lodash.tonumber@4:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
 
 markdown-it@8.4.1:
   version "8.4.1"
@@ -149,7 +133,7 @@ markdown-tip-angular@6:
     "@angular/forms" "4 || 5"
     markdown-tip "^6.2.0"
 
-markdown-tip@6, markdown-tip@^6.2.0:
+markdown-tip@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.2.0.tgz#716ed6e74f4f3516a21f9f93211c94fdadea6b34"
   dependencies:
@@ -159,24 +143,11 @@ mdurl@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
 
-rxjs@5.5.8:
-  version "5.5.8"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.8.tgz#b2b0809a57614ad6254c03d7446dea0d83ca3791"
+rxjs@5.5.10:
+  version "5.5.10"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.10.tgz#fde02d7a614f6c8683d0d1957827f492e09db045"
   dependencies:
     symbol-observable "1.0.1"
-
-schema-based-json-editor@^7.11.0:
-  version "7.11.0"
-  resolved "https://registry.yarnpkg.com/schema-based-json-editor/-/schema-based-json-editor-7.11.0.tgz#4b4421fb90f86b87e60237bed5412e148942745a"
-  dependencies:
-    file-uploader-component "7"
-    lodash.isinteger "4"
-    lodash.isobject "3"
-    lodash.tointeger "4"
-    lodash.tonumber "4"
-    markdown-tip "6"
-    select2-component "5"
-    tslib "1"
 
 select2-angular-component@5:
   version "5.2.2"
@@ -187,7 +158,7 @@ select2-angular-component@5:
     "@angular/forms" "4 || 5"
     select2-component "^5.2.2"
 
-select2-component@5, select2-component@^5.2.2:
+select2-component@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.2.tgz#300ec2231e5db27382f32f0018c6ae5dc5b32a01"
   dependencies:
@@ -214,6 +185,6 @@ uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.5.tgz#0c65f15f815aa08b560a61ce8b4db7ffc3f45376"
 
-zone.js@0.8.25:
-  version "0.8.25"
-  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.25.tgz#e20e5e85b881e2e66352612b5f238e8309e5badd"
+zone.js@0.8.26:
+  version "0.8.26"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.26.tgz#7bdd72f7668c5a7ad6b118148b4ea39c59d08d2d"

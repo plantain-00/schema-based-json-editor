@@ -15,21 +15,21 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "9.6.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.2.tgz#e49ac1adb458835e95ca6487bc20f916b37aff23"
+  version "9.6.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.5.tgz#ee700810fdf49ac1c399fc5980b7559b3e5a381d"
 
-"@types/react-dom@16.0.4":
-  version "16.0.4"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.4.tgz#2e8fd45f5443780ed49bf2cdd9809e6091177a7d"
+"@types/react-dom@16.0.5":
+  version "16.0.5"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.5.tgz#a757457662e3819409229e8f86795ff37b371f96"
   dependencies:
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.3.5":
-  version "16.3.5"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.5.tgz#bd3b21285602ea7cadb4b9e0d9711d96fd5692cc"
+"@types/react@*", "@types/react@16.3.10":
+  version "16.3.10"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.10.tgz#2f25eef83f7c7f6c51cea4c02660f727c75d3b33"
   dependencies:
-    csstype "^2.0.0"
+    csstype "^2.2.0"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -62,9 +62,9 @@ crossvent@1.5.4:
   dependencies:
     custom-event "1.0.0"
 
-csstype@^2.0.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.1.1.tgz#37b01a7a9958ef0b88167ff6678deccd732e0ae2"
+csstype@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.2.0.tgz#1656ef97553ac53b77090844a2531c6660ebd902"
 
 custom-event@1.0.0:
   version "1.0.0"
@@ -99,17 +99,17 @@ fbjs@^0.8.16:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
 
-file-uploader-component@7, file-uploader-component@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.2.0.tgz#1de506808aba0079207c0ff26ace848f428c3144"
+file-uploader-component@^7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.2.2.tgz#623125c272cbc08fc0cba74028e8958d346a0b3f"
   dependencies:
     tslib "1"
 
 file-uploader-react-component@7:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.2.1.tgz#715610d8cc88b1a95c7c0a7a5cbb6eadc2fca64a"
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.2.2.tgz#bb037c79840897fcdb911e6534341ac933d6aeef"
   dependencies:
-    file-uploader-component "^7.2.0"
+    file-uploader-component "^7.2.2"
     react "16"
     react-dom "16"
 
@@ -118,8 +118,10 @@ highlight.js@9.12.0:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
 
 iconv-lite@~0.4.13:
-  version "0.4.19"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
+  version "0.4.21"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.21.tgz#c47f8733d02171189ebc4a400f3218d348094798"
+  dependencies:
+    safer-buffer "^2.1.0"
 
 is-stream@^1.0.1:
   version "1.1.0"
@@ -142,22 +144,6 @@ linkify-it@^2.0.0:
   dependencies:
     uc.micro "^1.0.1"
 
-lodash.isinteger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
-
-lodash.isobject@3:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
-
-lodash.tointeger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.tointeger/-/lodash.tointeger-4.0.4.tgz#65e655acaa724e26d3fef57effc46970e1cd17e6"
-
-lodash.tonumber@4:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
-
 loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
@@ -175,14 +161,14 @@ markdown-it@8.4.1:
     uc.micro "^1.0.5"
 
 markdown-tip-react@6:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.2.1.tgz#eb9b3d88a2f6dddc1504166fc037e7f0b130bd00"
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.2.2.tgz#aac5787f1632d39f1d7eb935be55c0ca42f185b1"
   dependencies:
     markdown-tip "^6.2.0"
     react "16"
     react-dom "16"
 
-markdown-tip@6, markdown-tip@^6.2.0:
+markdown-tip@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.2.0.tgz#716ed6e74f4f3516a21f9f93211c94fdadea6b34"
   dependencies:
@@ -235,34 +221,25 @@ prop-types@^15.6.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-schema-based-json-editor@^7.9.0:
-  version "7.9.0"
-  resolved "https://registry.yarnpkg.com/schema-based-json-editor/-/schema-based-json-editor-7.9.0.tgz#70dbbf084db52062676dbc3f5beccb35280f88a4"
-  dependencies:
-    file-uploader-component "7"
-    lodash.isinteger "4"
-    lodash.isobject "3"
-    lodash.tointeger "4"
-    lodash.tonumber "4"
-    markdown-tip "6"
-    select2-component "5"
-    tslib "1"
+safer-buffer@^2.1.0:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
-select2-component@5, select2-component@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.1.tgz#81f488608bf6f704e04edf5bf3d350f35b9cc148"
+select2-component@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.2.tgz#300ec2231e5db27382f32f0018c6ae5dc5b32a01"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-react-component@5:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.2.1.tgz#108383e4749742422bc85251b58028f05eae7eb3"
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.2.2.tgz#e8e6d438284dc49f7e6918791e7b82a4c9b3b2af"
   dependencies:
     "@types/node" "*"
     react "15 || 16"
     react-dom "15 || 16"
-    select2-component "^5.2.1"
+    select2-component "^5.2.2"
 
 setimmediate@^1.0.5:
   version "1.0.5"
