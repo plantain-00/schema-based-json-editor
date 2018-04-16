@@ -1,0 +1,59 @@
+{
+  "name": "angular-schema-based-json-editor",
+  "version": "7.11.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "description": "A angular component of schema based json editor.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plantain-00/schema-based-json-editor.git"
+  },
+  "keywords": [
+    "json",
+    "schema",
+    "angular"
+  ],
+  "author": "York Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
+  },
+  "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@angular/common": "4 || 5",
+    "@angular/core": "4 || 5",
+    "@angular/forms": "4 || 5",
+    "@types/dragula": "*",
+    "@types/highlight.js": "*",
+    "@types/markdown-it": "*",
+    "file-uploader-angular-component": "7",
+    "markdown-tip-angular": "6",
+    "schema-based-json-editor": "^7.11.2",
+    "select2-angular-component": "5"
+  },
+  "devDependencies": {
+    "@angular/platform-browser": "5.2.9",
+    "@angular/platform-browser-dynamic": "5.2.9",
+    "core-js": "2.5.5",
+    "dragula": "3.7.2",
+    "highlight.js": "9.12.0",
+    "markdown-it": "8.4.1",
+    "rxjs": "5.5.10",
+    "zone.js": "0.8.26"
+  },
+  "peerDependencies": {
+    "@angular/common": "4 || 5",
+    "@angular/core": "4 || 5",
+    "@angular/forms": "4 || 5",
+    "@types/dragula": "*",
+    "@types/highlight.js": "*",
+    "@types/markdown-it": "*",
+    "file-uploader-angular-component": "7",
+    "markdown-tip-angular": "6",
+    "schema-based-json-editor": "^7.11.2",
+    "select2-angular-component": "5"
+  }
+}

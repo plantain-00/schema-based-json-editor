@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck" : true
+  },
+  "compilerOptions": {
+    "outDir": "../dist",
+    "rootDir": "."
+  }
+}

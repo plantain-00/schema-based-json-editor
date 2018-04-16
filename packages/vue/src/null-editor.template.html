@@ -1,0 +1,21 @@
+<div :class="theme.row">
+    <label :class="theme.title">
+        {{titleToShow}}
+        <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+            <optional :required="required"
+                :value="value"
+                :isReadOnly="isReadOnly"
+                :theme="theme"
+                :locale="locale"
+                @toggleOptional="toggleOptional()">
+            </optional>
+            <icon v-if="hasDeleteButtonFunction"
+                @click="$emit('delete')"
+                :text="icon.delete"
+                :theme="theme"
+                :icon="icon">
+            </icon>
+        </div>
+    </label>
+    <description :theme="theme" :message="schema.description"></description>
+</div>

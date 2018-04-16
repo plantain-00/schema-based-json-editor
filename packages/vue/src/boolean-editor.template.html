@@ -1,0 +1,64 @@
+<div :class="theme.row">
+  <label :class="theme.title">
+    {{titleToShow}}
+    <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+      <optional :required="required"
+        :value="value"
+        :isReadOnly="isReadOnly"
+        :theme="theme"
+        :locale="locale"
+        @toggleOptional="toggleOptional()">
+      </optional>
+      <icon v-if="hasDeleteButtonFunction"
+        @click="$emit('delete')"
+        :text="icon.delete"
+        :theme="theme"
+        :icon="icon">
+      </icon>
+    </div>
+  </label>
+  <div v-if="value !== undefined">
+    <span v-if="schema.format === 'checkbox'" :class="theme.checkbox">
+      <label>
+        <input type="checkbox"
+          @change="onChange()"
+          :checked="value"
+          :disabled="isReadOnly" />
+        {{locale.info.true}}
+      </label>
+    </span>
+    <select v-else-if="schema.format === 'select'" :class="theme.select"
+      :value="value"
+      :disabled="isReadOnly"
+      @change="onChange()">
+      <option :value="true">{{locale.info.true}}</option>
+      <option :value="false">{{locale.info.false}}</option>
+    </select>
+    <select2 v-else-if="schema.format === 'select2'" :data="booleanOptions"
+      :value="value"
+      :disabled="isReadOnly"
+      @update="onChange()">
+    </select2>
+    <template v-else>
+      <span :class="theme.radiobox">
+        <label>
+          <input type="radio"
+            @change="onChange()"
+            :checked="value"
+            :disabled="isReadOnly" />
+          {{locale.info.true}}
+        </label>
+      </span>
+      <span :class="theme.radiobox">
+        <label>
+          <input type="radio"
+            @change="onChange()"
+            :checked="!value"
+            :disabled="isReadOnly" />
+          {{locale.info.false}}
+        </label>
+      </span>
+    </template>
+  </div>
+  <description :theme="theme" :message="schema.description"></description>
+</div>

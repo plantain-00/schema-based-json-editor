@@ -1,0 +1,58 @@
+{
+  "name": "schema-based-json-editor",
+  "version": "7.11.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "description": "A reactjs, angular and vuejs component of schema based json editor.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plantain-00/schema-based-json-editor.git"
+  },
+  "keywords": [
+    "json",
+    "schema"
+  ],
+  "author": "York Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
+  },
+  "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
+  "files": [
+    "dist",
+    "src/lib.d.ts",
+    "src/lib.ngsummary.json"
+  ],
+  "dependencies": {
+    "file-uploader-component": "7",
+    "lodash.isinteger": "4",
+    "lodash.isobject": "3",
+    "lodash.tointeger": "4",
+    "lodash.tonumber": "4",
+    "markdown-tip": "6",
+    "select2-component": "5",
+    "tslib": "1"
+  },
+  "devDependencies": {
+    "@blueprintjs/core": "2.1.1",
+    "antd": "3.4.1",
+    "bootstrap": "4.1.0",
+    "dragula": "3.7.2",
+    "element-ui": "2.3.4",
+    "font-awesome": "4.7.0",
+    "github-fork-ribbon-css": "0.2.1",
+    "highlight.js": "9.12.0",
+    "iview": "2.13.0",
+    "markdown-it": "8.4.1"
+  },
+  "peerDependencies": {
+    "file-uploader-component": "7",
+    "lodash.isinteger": "4",
+    "lodash.isobject": "3",
+    "lodash.tointeger": "4",
+    "lodash.tonumber": "4",
+    "markdown-tip": "6",
+    "select2-component": "5",
+    "tslib": "1"
+  }
+}

@@ -1,0 +1,6 @@
+<div v-if="hasOptionalCheckbox" :class="theme.checkbox">
+    <label>
+        <input type="checkbox" @change="$emit('toggleOptional')" :checked="value === undefined" :disabled="isReadOnly" />
+        {{locale.info.notExists}}
+    </label>
+</div>

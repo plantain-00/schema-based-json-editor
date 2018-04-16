@@ -1,0 +1,67 @@
+<div [class]="errorMessage ? theme.errorRow : theme.row">
+    <label [class]="theme.title">
+        {{titleToShow}}
+        <div [class]="theme.buttonGroup" [style]="buttonGroupStyle">
+            <optional [required]="required"
+                [value]="value"
+                [isReadOnly]="isReadOnly"
+                [theme]="theme"
+                [locale]="locale"
+                (toggleOptional)="toggleOptional()">
+            </optional>
+            <icon *ngIf="hasDeleteButtonFunction"
+                (onClick)="onDelete.emit()"
+                [text]="icon.delete"
+                [theme]="theme"
+                [icon]="icon">
+            </icon>
+            <icon *ngIf="canPreview"
+                (onClick)="collapseOrExpand()"
+                [text]="collapsed ? icon.expand : icon.collapse"
+                [theme]="theme"
+                [icon]="icon">
+            </icon>
+        </div>
+    </label>
+    <file-uploader *ngIf="canUpload"
+        [locale]="locale.fileUploaderLocale"
+        (fileGot)="fileGot($event)">
+    </file-uploader>
+    <textarea *ngIf="useTextArea"
+        [class]="errorMessage ? theme.errorTextarea : theme.textarea"
+        (change)="onChange($event)"
+        (keyup)="onChange($event)"
+        rows="10"
+        [readOnly]="isReadOnly"
+        [disabled]="isReadOnly">{{value}}</textarea>
+    <input *ngIf="useInput"
+        [class]="errorMessage ? theme.errorInput : theme.input"
+        [type]="schema.format"
+        (change)="onChange($event)"
+        (keyup)="onChange($event)"
+        [defaultValue]="value"
+        [readOnly]="isReadOnly"
+        [disabled]="isReadOnly" />
+    <select2 *ngIf="useSelect && !noSelect2"
+        [data]="options"
+        [value]="value"
+        [disabled]="isReadOnly"
+        (update)="updateSelection($event)">
+    </select2>
+    <select *ngIf="useSelect && noSelect2"
+        [class]="theme.select"
+        [value]="value"
+        [disabled]="isReadOnly"
+        (change)="updateSelection($event.target.value)">
+        <option *ngFor="let option of options; trackBy:trackByFunction" [value]="option.value">{{option.label}}</option>
+    </select>
+    <img *ngIf="willPreviewImage"
+        class="schema-based-json-editor-image-preview"
+        [src]="getImageUrl" />
+    <markdown-tip *ngIf="useTextArea && willPreviewMarkdown" [locale]="locale.markdownTipLocale"></markdown-tip>
+    <div *ngIf="willPreviewMarkdown" [innerHTML]="getMarkdown">
+    </div>
+    <pre *ngIf="willPreviewCode"><code [innerHTML]="getCode"></code></pre>
+    <description [theme]="theme" [message]="schema.description"></description>
+    <description [theme]="theme" [message]="errorMessage"></description>
+</div>

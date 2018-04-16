@@ -1,0 +1,65 @@
+<div :class="errorMessage ? theme.errorRow : theme.row">
+    <label :class="theme.title">
+        {{titleToShow}}
+        <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+            <optional :required="required"
+                :value="value"
+                :isReadOnly="isReadOnly"
+                :theme="theme"
+                :locale="locale"
+                @toggleOptional="toggleOptional()">
+            </optional>
+            <icon v-if="hasDeleteButtonFunction"
+                @click="$emit('delete')"
+                :text="icon.delete"
+                :theme="theme"
+                :icon="icon">
+            </icon>
+            <icon v-if="canPreview"
+                @click="collapseOrExpand()"
+                :text="collapsed ? icon.expand : icon.collapse"
+                :theme="theme"
+                :icon="icon">
+            </icon>
+        </div>
+    </label>
+    <file-uploader v-if="canUpload"
+        :locale="locale.fileUploaderLocale"
+        @file-got="fileGot($event)">
+    </file-uploader>
+    <textarea v-if="useTextArea"
+        :class="errorMessage ? theme.errorTextarea : theme.textarea"
+        @change="onChange($event)"
+        @keyup="onChange($event)"
+        rows="10"
+        :readOnly="isReadOnly"
+        :disabled="isReadOnly">{{value}}</textarea>
+    <input v-if="useInput"
+        :class="errorMessage ? theme.errorInput : theme.input"
+        :type="schema.format"
+        @change="onChange($event)"
+        @keyup="onChange($event)"
+        :value="value"
+        :readOnly="isReadOnly"
+        :disabled="isReadOnly" />
+    <select2 v-if="useSelect && !noSelect2" :data="options"
+        :value="value"
+        :disabled="isReadOnly"
+        @update="updateSelection($event)">
+    </select2>
+    <select v-if="useSelect && noSelect2"
+        :class="theme.select"
+        :value="value"
+        :disabled="isReadOnly"
+        @change="updateSelection($event.target.value)">
+        <option v-for="option in options" :key="option.value" :value="option.value">{{option.label}}</option>
+    </select>
+    <img v-if="willPreviewImage"
+        :style="imagePreviewStyle"
+        :src="getImageUrl" />
+    <markdown-tip v-if="useTextArea && willPreviewMarkdown" :locale="locale.markdownTipLocale"></markdown-tip>
+    <div v-if="willPreviewMarkdown" v-html="getMarkdown"></div>
+    <pre v-if="willPreviewCode"><code v-html="getCode"></code></pre>
+    <description :theme="theme" :message="schema.description"></description>
+    <description :theme="theme" :message="errorMessage"></description>
+</div>
