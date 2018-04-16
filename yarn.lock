@@ -1788,12 +1788,12 @@ clean-css@4.1.x:
   dependencies:
     source-map "0.5.x"
 
-clean-scripts@1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/clean-scripts/-/clean-scripts-1.7.0.tgz#ce7d0bc9aa7a158cceddd84ea3679aa11cf76579"
+clean-scripts@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/clean-scripts/-/clean-scripts-1.8.0.tgz#17504b095baf50dacb2285718e04e0f8267a459d"
   dependencies:
     minimist "1.2.0"
-    pretty-ms "3.0.1"
+    pretty-ms "3.1.0"
 
 cli-cursor@^1.0.2:
   version "1.0.2"
@@ -6359,14 +6359,7 @@ pretty-bytes@4.0.2, pretty-bytes@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-4.0.2.tgz#b2bf82e7350d65c6c33aa95aaa5a4f6327f61cd9"
 
-pretty-ms@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-3.0.1.tgz#7c18b73c228a9b8f6edc2835a12cb8f7ed85f9f4"
-  dependencies:
-    parse-ms "^1.0.0"
-    plur "^2.1.2"
-
-pretty-ms@^3.1.0:
+pretty-ms@3.1.0, pretty-ms@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-3.1.0.tgz#e9cac9c76bf6ee52fe942dd9c6c4213153b12881"
   dependencies:

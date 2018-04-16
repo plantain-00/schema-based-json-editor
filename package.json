@@ -5,6 +5,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap -- --frozen-lockfile",
     "build": "clean-scripts build",
+    "dev": "export NODE_ENV=development && clean-scripts build",
     "lint": "clean-scripts lint",
     "test": "clean-scripts test",
     "fix": "clean-scripts fix",
@@ -37,7 +38,7 @@
     "@commitlint/config-conventional": "6.1.3",
     "@types/jasmine": "2.8.6",
     "@types/puppeteer": "1.2.1",
-    "clean-scripts": "1.7.0",
+    "clean-scripts": "1.8.0",
     "cpy-cli": "1.0.1",
     "file2variable-cli": "1.8.3",
     "http-server": "0.11.1",

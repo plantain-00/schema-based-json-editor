@@ -24,10 +24,12 @@ const webpackAngularAotCommand = `webpack --config packages/angular/demo/aot/web
 
 const revStaticCommand = `rev-static`
 
+const isDev = process.env.NODE_ENV === 'development'
+
 module.exports = {
   build: [
     {
-      copy: [
+      copy: isDev ? undefined : [
         `cpy ./packages/core/node_modules/bootstrap/dist/css/bootstrap.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/font-awesome/css/font-awesome.min.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/dragula/dist/dragula.min.css ./packages/core/demo/css/`,
@@ -54,13 +56,13 @@ module.exports = {
               vue: [
                 vueTemplateCommand,
                 tscVueSrcCommand,
-                `rollup --config packages/vue/src/rollup.config.js`,
+                isDev ? undefined : `rollup --config packages/vue/src/rollup.config.js`,
                 tscVueDemoCommand,
                 webpackVueCommand
               ],
               react: [
                 tscReactSrcCommand,
-                `rollup --config packages/react/src/rollup.config.js`,
+                isDev ? undefined : `rollup --config packages/react/src/rollup.config.js`,
                 tscReactDemoCommand,
                 webpackReactCommand
               ],
@@ -69,7 +71,7 @@ module.exports = {
                 tscAngularSrcCommand,
                 tscAngularDemoCommand,
                 {
-                  webpackAngularJitCommand,
+                  webpackAngularJitCommand: isDev ? undefined : webpackAngularJitCommand,
                   webpackAngularAotCommand
                 }
               ]
