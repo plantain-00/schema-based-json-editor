@@ -1,4 +1,4 @@
-const { Service, checkGitStatus } = require('clean-scripts')
+const { Service } = require('clean-scripts')
 
 const tsFiles = `"packages/@(core|vue|react|angular)/@(src|demo)/**/*.@(ts|tsx)" "spec/**/*.ts" "screenshots/**/*.ts"`
 const jsFiles = `"*.config.js" "spec/**/*.config.js"`
@@ -92,8 +92,7 @@ module.exports = {
   },
   test: [
     'tsc -p spec',
-    'karma start spec/karma.config.js',
-    () => checkGitStatus()
+    'karma start spec/karma.config.js'
   ],
   fix: {
     ts: `tslint --fix ${tsFiles} --exclude ${excludeTsFiles}`,

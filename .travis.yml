@@ -24,3 +24,10 @@ addons:
       - g++-4.8
       - libnss3
   firefox: latest
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
