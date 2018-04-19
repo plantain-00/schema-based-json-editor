@@ -141,11 +141,11 @@ export class BooleanEditor extends React.Component<Props, State> {
   private get booleanOptions (): Select2Option[] {
     return [
       {
-        value: 'true',
+        value: true,
         label: this.props.locale.info.true
       },
       {
-        value: 'false',
+        value: false,
         label: this.props.locale.info.false
       }
     ]
