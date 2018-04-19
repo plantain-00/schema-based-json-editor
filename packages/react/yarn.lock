@@ -25,9 +25,9 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.3.10":
-  version "16.3.10"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.10.tgz#2f25eef83f7c7f6c51cea4c02660f727c75d3b33"
+"@types/react@*", "@types/react@16.3.11":
+  version "16.3.11"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.11.tgz#345a17f1c96420f10b9f0dc696c31091ff9d66ea"
   dependencies:
     csstype "^2.2.0"
 
@@ -63,8 +63,8 @@ crossvent@1.5.4:
     custom-event "1.0.0"
 
 csstype@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.2.0.tgz#1656ef97553ac53b77090844a2531c6660ebd902"
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.3.0.tgz#062e141c78345cf814da0e0b716ad777931b08af"
 
 custom-event@1.0.0:
   version "1.0.0"
@@ -204,8 +204,8 @@ prop-types@^15.6.0:
     object-assign "^4.1.1"
 
 "react-dom@15 || 16", react-dom@16:
-  version "16.3.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.1.tgz#6a3c90a4fb62f915bdbcf6204422d93a7d4ca573"
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.2.tgz#cb90f107e09536d683d84ed5d4888e9640e0e4df"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -213,8 +213,8 @@ prop-types@^15.6.0:
     prop-types "^15.6.0"
 
 "react@15 || 16", react@16:
-  version "16.3.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.3.1.tgz#4a2da433d471251c69b6033ada30e2ed1202cfd8"
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -225,21 +225,21 @@ safer-buffer@^2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
-select2-component@^5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.2.2.tgz#300ec2231e5db27382f32f0018c6ae5dc5b32a01"
+select2-component@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.3.0.tgz#42b655d30aa3abb81ea1e69319301efcfdaf9ff0"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-react-component@5:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.2.2.tgz#e8e6d438284dc49f7e6918791e7b82a4c9b3b2af"
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.3.0.tgz#8280272cfe3cc2de043fb803de1ccb01e1e45113"
   dependencies:
     "@types/node" "*"
     react "15 || 16"
     react-dom "15 || 16"
-    select2-component "^5.2.2"
+    select2-component "^5.3.0"
 
 setimmediate@^1.0.5:
   version "1.0.5"
