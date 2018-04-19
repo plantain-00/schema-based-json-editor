@@ -75,7 +75,7 @@ export class StringEditor extends React.Component<Props, State> {
           disabled={this.isReadOnly}
           onChange={(e) => this.updateSelection(e.target.value)}>
           {
-            this.options.map(op => <option key={op.value} value={op.value}>{op.label}</option>)
+            this.options.map(op => <option key={op.value as (string | number)} value={op.value as (string | number)}>{op.label}</option>)
           }
         </select>
       } else {
