@@ -74,6 +74,15 @@ export class StringEditorComponent {
   get useSelect () {
     return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly
   }
+  get useSelect2Component () {
+    return this.useSelect && !this.noSelect2 && this.schema.format !== 'select' && this.schema.format !== 'radiobox'
+  }
+  get useSelectComponent () {
+    return this.useSelect && (this.schema.format === 'select' || this.noSelect2)
+  }
+  get useRadioBoxComponent () {
+    return this.useSelect && this.schema.format === 'radiobox'
+  }
   private get canPreviewImage () {
     return common.isImageUrl(this.value) || common.isBase64Image(this.value)
   }

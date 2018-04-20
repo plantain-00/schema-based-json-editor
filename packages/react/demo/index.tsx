@@ -29,7 +29,7 @@ class Main extends React.Component<{}, {}> {
       <div style={{ position: 'relative' }}>
         <a href='https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/react/demo' target='_blank'>the source code of the demo</a>
         <br />
-        <div style={{ margin: '10px', width: '30%', position: 'absolute' }} className='bootstrap3-row-container'>
+        <div style={{ margin: '10px', width: '30%', position: 'fixed', height: '100%', overflowY: 'scroll' }} className='bootstrap3-row-container'>
           <JSONEditor schema={this.propertiesSchema}
             initialValue={this.propertiesInitialValue}
             updateValue={this.updatePropertiesValue}
@@ -51,7 +51,7 @@ class Main extends React.Component<{}, {}> {
             markdownit={MarkdownIt}
             hljs={hljs} />
         </div>
-        <div style={{ margin: '10px', width: '30%', position: 'absolute', right: '10px' }}>
+        <div style={{ margin: '10px', width: '30%', position: 'fixed', right: '10px', height: '100%', overflowY: 'scroll' }}>
           Value:
           <pre style={{ borderColor: this.isValid ? 'black' : 'red' }}><code dangerouslySetInnerHTML={{ __html: valueHtml }}></code></pre>
         </div>

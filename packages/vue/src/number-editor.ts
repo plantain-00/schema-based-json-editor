@@ -47,8 +47,17 @@ export class NumberEditor extends Vue {
   get useInput () {
     return this.value !== undefined && (this.schema.enum === undefined || this.isReadOnly)
   }
-  get useSelect () {
+  private get useSelect () {
     return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly)
+  }
+  get useSelect2Component () {
+    return this.useSelect && !this.noSelect2 && this.schema.format !== 'select' && this.schema.format !== 'radiobox'
+  }
+  get useSelectComponent () {
+    return this.useSelect && (this.schema.format === 'select' || this.noSelect2)
+  }
+  get useRadioBoxComponent () {
+    return this.useSelect && this.schema.format === 'radiobox'
   }
   get isReadOnly () {
     return this.readonly || this.schema.readonly

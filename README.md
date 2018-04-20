@@ -15,8 +15,8 @@
 + common schema fields: title, description, default, readonly, propertyOrder, requiredWhen, optionalWhen
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems
-+ number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, enumTitles
-+ string schema fields: format('textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64'), enum, minLength, maxLength, pattern, enumTitles
++ number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, enumTitles, format('select' | 'radiobox')
++ string schema fields: format('textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox'), enum, minLength, maxLength, pattern, enumTitles
 + boolean schema fields: format('checkbox' | 'select' | 'select2')
 + image preview, code highlight, markdown preview
 + multi-language

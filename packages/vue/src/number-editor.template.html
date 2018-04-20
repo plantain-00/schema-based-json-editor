@@ -1,42 +1,53 @@
 <div :class="errorMessage ? theme.errorRow : theme.row">
-    <label :class="theme.title">
-        {{titleToShow}}
-        <div :class="theme.buttonGroup" :style="buttonGroupStyle">
-            <optional :required="required"
-                :value="value"
-                :isReadOnly="isReadOnly"
-                :theme="theme"
-                :locale="locale"
-                @toggleOptional="toggleOptional()">
-            </optional>
-            <icon v-if="hasDeleteButtonFunction"
-                @click="$emit('delete')"
-                :text="icon.delete"
-                :theme="theme"
-                :icon="icon">
-            </icon>
-        </div>
-    </label>
-    <input v-if="useInput"
-        :class="errorMessage ? theme.errorInput : theme.input"
-        type="number"
-        @change="onChange($event)"
-        @keyup="onChange($event)"
+  <label :class="theme.title">
+    {{titleToShow}}
+    <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+      <optional :required="required"
         :value="value"
-        :readOnly="isReadOnly"
-        :disabled="isReadOnly" />
-    <select2 v-if="useSelect && !noSelect2" :data="options"
-        :value="value"
-        :disabled="isReadOnly"
-        @update="updateSelection($event)">
-    </select2>
-    <select v-if="useSelect && noSelect2"
-        :class="theme.select"
-        :value="value"
-        :disabled="isReadOnly"
-        @change="updateSelection(+$event.target.value)">
-        <option v-for="option in options" :key="option.value" :value="option.value">{{option.label}}</option>
-    </select>
-    <description :theme="theme" :message="schema.description"></description>
-    <description :theme="theme" :message="errorMessage"></description>
+        :isReadOnly="isReadOnly"
+        :theme="theme"
+        :locale="locale"
+        @toggleOptional="toggleOptional()">
+      </optional>
+      <icon v-if="hasDeleteButtonFunction"
+        @click="$emit('delete')"
+        :text="icon.delete"
+        :theme="theme"
+        :icon="icon">
+      </icon>
+    </div>
+  </label>
+  <input v-if="useInput"
+    :class="errorMessage ? theme.errorInput : theme.input"
+    type="number"
+    @change="onChange($event)"
+    @keyup="onChange($event)"
+    :value="value"
+    :readOnly="isReadOnly"
+    :disabled="isReadOnly" />
+  <select2 v-if="useSelect2Component" :data="options"
+    :value="value"
+    :disabled="isReadOnly"
+    @update="updateSelection($event)">
+  </select2>
+  <select v-if="useSelectComponent"
+    :class="theme.select"
+    :value="value"
+    :disabled="isReadOnly"
+    @change="updateSelection(+$event.target.value)">
+    <option v-for="option in options" :key="option.value" :value="option.value">{{option.label}}</option>
+  </select>
+  <div v-if="useRadioBoxComponent">
+    <span v-for="option in options" :key="option.value" :class="theme.radiobox">
+      <label>
+        <input type="radio"
+          @change="updateSelection(option.value)"
+          :checked="value === option.value"
+          :disabled="isReadOnly" />
+        {{option.label}}
+      </label>
+    </span>
+  </div>
+  <description :theme="theme" :message="schema.description"></description>
+  <description :theme="theme" :message="errorMessage"></description>
 </div>
