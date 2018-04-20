@@ -64,7 +64,7 @@ export class BooleanEditor extends React.Component<Props, State> {
       } else if (this.props.schema.format === 'select2') {
         control = (
           <Select2 data={this.booleanOptions}
-            value={String(this.value)}
+            value={this.value}
             disabled={this.isReadOnly}
             update={(e: Select2UpdateValue) => this.onChange()}>
           </Select2>

@@ -17,7 +17,7 @@ addAllCssLinks('../../core/demo/css/')
     <div style="position: relative">
       <a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/vue/demo" target="_blank">the source code of the demo</a>
       <br/>
-      <div style="width: 30%; margin: 10px; position: absolute;" class="bootstrap3-row-container">
+      <div style="width: 30%; margin: 10px; position: fixed; height: 100%; overflow-y: scroll" class="bootstrap3-row-container">
         <json-editor :schema="propertiesSchema"
           :initial-value="propertiesInitialValue"
           @update-value="updatePropertiesValue($event)"
@@ -41,7 +41,7 @@ addAllCssLinks('../../core/demo/css/')
           :hljs="hljs">
         </json-editor>
       </div>
-      <div style="width: 30%; margin: 10px; position: absolute; right: 10px;">
+      <div style="width: 30%; margin: 10px; position: fixed; right: 10px; height: 100%; overflow-y: scroll">
         Value:
         <pre :style="{borderColor: color}"><code v-html="valueHtml"></code></pre>
       </div>

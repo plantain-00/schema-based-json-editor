@@ -61,6 +61,7 @@ export type NumberSchema = CommonSchema & {
   enum?: number[];
   multipleOf?: number;
   enumTitles?: string[];
+  format?: 'select' | 'radiobox';
 }
 
 /**
@@ -68,7 +69,7 @@ export type NumberSchema = CommonSchema & {
  */
 export type StringSchema = CommonSchema & {
   type: 'string';
-  format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64';
+  format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox';
   enum?: string[];
   minLength?: number;
   maxLength?: number;

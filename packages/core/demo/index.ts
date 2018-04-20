@@ -303,6 +303,54 @@ export let schema: common.Schema = {
       type: 'boolean',
       default: false,
       format: 'select2'
+    },
+    stringEnumSelectExample: {
+      type: 'string',
+      format: 'select',
+      enum: [
+        'enum 1',
+        'enum 2'
+      ],
+      enumTitles: [
+        'enum title 1',
+        'enum title 2'
+      ]
+    },
+    stringEnumRadioboxExample: {
+      type: 'string',
+      format: 'radiobox',
+      enum: [
+        'enum 1',
+        'enum 2'
+      ],
+      enumTitles: [
+        'enum title 1',
+        'enum title 2'
+      ]
+    },
+    numberEnumSelectExample: {
+      type: 'number',
+      format: 'select',
+      enum: [
+        1,
+        2
+      ],
+      enumTitles: [
+        'one',
+        'two'
+      ]
+    },
+    numberEnumRadioboxExample: {
+      type: 'number',
+      format: 'radiobox',
+      enum: [
+        1,
+        2
+      ],
+      enumTitles: [
+        'one',
+        'two'
+      ]
     }
   },
   required: [
@@ -333,7 +381,11 @@ export let schema: common.Schema = {
     'enumTitlesExample',
     'itemTitleEnumTitleExample',
     'selectBooleanExample',
-    'select2BooleanExample'
+    'select2BooleanExample',
+    'stringEnumSelectExample',
+    'stringEnumRadioboxExample',
+    'numberEnumSelectExample',
+    'numberEnumRadioboxExample'
   ]
 }
 

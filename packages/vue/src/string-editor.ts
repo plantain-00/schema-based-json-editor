@@ -33,6 +33,7 @@ export class StringEditor extends Vue {
   md?: MarkdownIt
   hljs?: HLJS
   forceHttps?: boolean
+  noSelect2?: boolean
 
   value?: string = ''
   errorMessage?: string = ''
@@ -76,8 +77,17 @@ export class StringEditor extends Vue {
             && (this.schema.enum === undefined || this.isReadOnly)
             && (this.schema.format !== 'textarea' && this.schema.format !== 'code' && this.schema.format !== 'markdown')
   }
-  get useSelect () {
+  private get useSelect () {
     return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly
+  }
+  get useSelect2Component () {
+    return this.useSelect && !this.noSelect2 && this.schema.format !== 'select' && this.schema.format !== 'radiobox'
+  }
+  get useSelectComponent () {
+    return this.useSelect && (this.schema.format === 'select' || this.noSelect2)
+  }
+  get useRadioBoxComponent () {
+    return this.useSelect && this.schema.format === 'radiobox'
   }
   get getImageUrl () {
     return this.forceHttps ? common.replaceProtocal(this.value!) : this.value

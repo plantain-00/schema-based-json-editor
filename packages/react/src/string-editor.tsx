@@ -69,21 +69,33 @@ export class StringEditor extends React.Component<Props, State> {
 
     let select: JSX.Element | null = null
     if (this.useSelect) {
-      if (this.props.noSelect2) {
+      if (this.useSelectComponent) {
+        const options = this.options.map(op => <option key={op.value as (string | number)} value={op.value as (string | number)}>{op.label}</option>)
         select = <select value={this.value}
           className={this.props.theme.select}
           disabled={this.isReadOnly}
           onChange={(e) => this.updateSelection(e.target.value)}>
-          {
-            this.options.map(op => <option key={op.value as (string | number)} value={op.value as (string | number)}>{op.label}</option>)
-          }
+          {options}
         </select>
-      } else {
+      } else if (this.useSelect2Component) {
         select = <Select2 data={this.options}
           value={this.value}
           disabled={this.isReadOnly}
           update={(e: Select2UpdateValue) => this.updateSelection(e)}>
         </Select2>
+      } else if (this.useRadioBoxComponent) {
+        const options = this.options.map(option => <span key={option.value as (string | number)} className={this.props.theme.radiobox}>
+          <label>
+            <input type='radio'
+              onChange={() => this.updateSelection(option.value)}
+              checked={this.value === option.value}
+              disabled={this.isReadOnly} />
+            {option.label}
+          </label>
+        </span>)
+        select = <div>
+          {options}
+        </div>
       }
     }
 
@@ -157,6 +169,16 @@ export class StringEditor extends React.Component<Props, State> {
   private get useSelect () {
     return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly
   }
+  private get useSelect2Component () {
+    return this.useSelect && !this.props.noSelect2 && this.props.schema.format !== 'select' && this.props.schema.format !== 'radiobox'
+  }
+  private get useSelectComponent () {
+    return this.useSelect && (this.props.schema.format === 'select' || this.props.noSelect2)
+  }
+  private get useRadioBoxComponent () {
+    return this.useSelect && this.props.schema.format === 'radiobox'
+  }
+
   private get canPreviewImage () {
     return common.isImageUrl(this.value) || common.isBase64Image(this.value)
   }
