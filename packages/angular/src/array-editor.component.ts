@@ -86,6 +86,10 @@ export class ArrayEditorComponent {
   get titleToShow () {
     return common.getTitle(this.title, this.schema.title)
   }
+  get className () {
+    const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
+    return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
+  }
   ngAfterViewInit () {
     if (this.drakContainer && this.dragula) {
       const container = this.drakContainer.nativeElement as HTMLElement

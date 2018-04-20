@@ -96,7 +96,7 @@ export class BooleanEditor extends React.Component<Props, State> {
     }
 
     return (
-      <div className={this.props.theme.row}>
+      <div className={this.className}>
         <label className={this.props.theme.title}>
           {this.titleToShow}
           <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
@@ -149,5 +149,9 @@ export class BooleanEditor extends React.Component<Props, State> {
         label: this.props.locale.info.false
       }
     ]
+  }
+  private get className () {
+    const rowClass = this.props.theme.row
+    return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
   }
 }

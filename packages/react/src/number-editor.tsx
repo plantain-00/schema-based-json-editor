@@ -80,7 +80,7 @@ export class NumberEditor extends React.Component<Props, State> {
     }
 
     return (
-      <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
+      <div className={this.className}>
         <label className={this.props.theme.title}>
           {this.titleToShow}
           <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
@@ -146,6 +146,10 @@ export class NumberEditor extends React.Component<Props, State> {
   }
   private get options () {
     return common.getOptions(this.props.schema) as Select2Option[]
+  }
+  private get className () {
+    const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row
+    return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
   }
 
   private updateSelection (value: Select2UpdateValue) {

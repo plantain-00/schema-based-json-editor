@@ -53,4 +53,8 @@ export class BooleanEditorComponent {
   get titleToShow () {
     return common.getTitle(this.title, this.schema.title)
   }
+  get className () {
+    const rowClass = this.theme.row
+    return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
+  }
 }

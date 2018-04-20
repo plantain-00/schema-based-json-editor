@@ -24,6 +24,7 @@ export type CommonSchema = {
   propertyOrder?: number;
   requiredWhen?: [string, '===' | 'in', any];
   optionalWhen?: [string, '===' | 'in', any];
+  className?: string;
 }
 
 /**

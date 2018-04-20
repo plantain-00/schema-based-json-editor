@@ -24,6 +24,7 @@ export class ObjectEditor extends Vue {
   title!: string
   icon!: common.Icon
   locale!: common.Locale
+  theme!: common.Theme
   readonly!: boolean
   required!: boolean
   hasDeleteButton!: boolean
@@ -81,6 +82,10 @@ export class ObjectEditor extends Vue {
   }
   get showFilter () {
     return this.properties.filter(p => this.isRequired(p.property) !== false).length >= common.minItemCountIfNeedFilter
+  }
+  get className () {
+    const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
+    return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
   }
 
   isRequired (property: string) {

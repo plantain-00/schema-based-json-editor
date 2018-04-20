@@ -86,7 +86,7 @@ export class ArrayEditor extends React.Component<Props, State> {
       : null
 
     return (
-      <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
+      <div className={this.className}>
         <h3>
           {this.titleToShow}
           <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
@@ -178,5 +178,9 @@ export class ArrayEditor extends React.Component<Props, State> {
   }
   private get showFilter () {
     return this.getValue.length >= common.minItemCountIfNeedFilter
+  }
+  private get className () {
+    const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row
+    return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
   }
 }

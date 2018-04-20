@@ -68,9 +68,12 @@ export class NumberEditor extends Vue {
   get titleToShow () {
     return common.getTitle(this.title, this.schema.title)
   }
-
   get options () {
     return common.getOptions(this.schema)
+  }
+  get className () {
+    const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
+    return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
   }
 
   updateSelection (value: number) {
