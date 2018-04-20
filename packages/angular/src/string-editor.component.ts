@@ -128,6 +128,10 @@ export class StringEditorComponent {
   get canUpload () {
     return this.schema.format === 'base64'
   }
+  get className () {
+    const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
+    return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
+  }
 
   updateSelection (value: string) {
     this.value = value

@@ -107,7 +107,7 @@ export class StringEditor extends React.Component<Props, State> {
     const codePreview = this.willPreviewCode ? <pre><code dangerouslySetInnerHTML={{ __html: this.getCode }}></code></pre> : null
 
     return (
-      <div className={this.errorMessage ? this.props.theme.errorRow : this.props.theme.row}>
+      <div className={this.className}>
         <label className={this.props.theme.title}>
           {this.titleToShow}
           <div className={this.props.theme.buttonGroup} style={common.buttonGroupStyle}>
@@ -217,6 +217,10 @@ export class StringEditor extends React.Component<Props, State> {
   }
   private get canUpload () {
     return this.props.schema.format === 'base64'
+  }
+  private get className () {
+    const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row
+    return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
   }
 
   private updateSelection (value: Select2UpdateValue) {

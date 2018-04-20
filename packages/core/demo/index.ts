@@ -14,13 +14,15 @@ export let schema: common.Schema = {
       description: 'a string description example',
       default: 'a default string example',
       minLength: 20,
-      maxLength: 25
+      maxLength: 25,
+      propertyOrder: 1
     },
     booleanExample: {
       type: 'boolean',
       title: 'A boolean example',
       description: 'a boolean description example',
-      default: true
+      default: true,
+      propertyOrder: 2
     },
     numberExample: {
       type: 'number',
@@ -30,20 +32,23 @@ export let schema: common.Schema = {
       minimum: 10,
       exclusiveMinimum: true,
       maximum: 1000,
-      exclusiveMaximum: true
+      exclusiveMaximum: true,
+      propertyOrder: 3
     },
     integerExample: {
       type: 'integer',
       title: 'A integer example',
       description: 'a integer description example',
       default: 124,
-      multipleOf: 2
+      multipleOf: 2,
+      propertyOrder: 4
     },
     nullExample: {
       type: 'null',
       title: 'A null example',
       description: 'a null description example',
-      default: null
+      default: null,
+      propertyOrder: 5
     },
     objectExample: {
       type: 'object',
@@ -58,7 +63,8 @@ export let schema: common.Schema = {
         }
       },
       default: {},
-      required: ['propertyExample1', 'propertyExample2']
+      required: ['propertyExample1', 'propertyExample2'],
+      propertyOrder: 6
     },
     arrayExample: {
       type: 'array',
@@ -70,62 +76,75 @@ export let schema: common.Schema = {
       },
       default: ['default item 1', 'default item 2'],
       minItems: 1,
-      uniqueItems: true
+      uniqueItems: true,
+      propertyOrder: 7
     },
     readOnlyExample: {
       type: 'string',
       readonly: true,
-      default: 'abc'
+      default: 'abc',
+      propertyOrder: 8
     },
     readOnlyAndOptionalExample: {
       type: 'string',
       readonly: true,
-      default: 'abc'
+      default: 'abc',
+      propertyOrder: 9
     },
     enumExample: {
       type: 'string',
       enum: [
         'enum 1',
         'enum 2'
-      ]
+      ],
+      propertyOrder: 10
     },
     optionalExample: {
-      type: 'string'
+      type: 'string',
+      propertyOrder: 11
     },
     optionalAndDefaultExample: {
       type: 'string',
-      default: 'abc'
+      default: 'abc',
+      propertyOrder: 12
     },
     booleanOptionalExample: {
-      type: 'boolean'
+      type: 'boolean',
+      propertyOrder: 13
     },
     colorExample: {
       type: 'string',
       format: 'color',
-      default: '#000000'
+      default: '#000000',
+      propertyOrder: 14
     },
     textareaExample: {
       type: 'string',
-      format: 'textarea'
+      format: 'textarea',
+      propertyOrder: 15
     },
     patternExample: {
       type: 'string',
       pattern: '^[A-z]{3}$',
-      default: 'abc'
+      default: 'abc',
+      propertyOrder: 16
     },
     imagePreviewExample: {
       type: 'string',
-      default: 'http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg'
+      default: 'http://image2.sina.com.cn/bj/art/2004-08-02/U91P52T4D51657F160DT20040802125523.jpg',
+      propertyOrder: 17
     },
     markdownExample: {
       type: 'string',
       format: 'markdown',
-      default: '###### markdown title and code example\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```'
+      default: '###### markdown title and code example\n\n```js\nfunction foo(bar) {\n    console.log(bar);\n}\n```',
+      propertyOrder: 18
     },
     codeExample: {
       type: 'string',
       format: 'code',
-      default: 'function foo(bar) {\n    console.log(bar);\n}\n'
+      default: 'function foo(bar) {\n    console.log(bar);\n}\n',
+      propertyOrder: 19
     },
     itemTitleExample: {
       type: 'array',
@@ -167,7 +186,8 @@ export let schema: common.Schema = {
           propertyExample1: 'ghi',
           propertyExample2: 6
         }
-      ]
+      ],
+      propertyOrder: 20
     },
     optionalObjectExample: {
       type: 'object',
@@ -180,24 +200,8 @@ export let schema: common.Schema = {
         }
       },
       maxProperties: 1,
-      minProperties: 0
-    },
-    propertyOrderExample: {
-      type: 'object',
-      properties: {
-        propertyExample1: {
-          type: 'string',
-          propertyOrder: 3
-        },
-        propertyExample2: {
-          type: 'number',
-          propertyOrder: 1
-        },
-        propertyExample3: {
-          type: 'number',
-          propertyOrder: 2
-        }
-      }
+      minProperties: 0,
+      propertyOrder: 21
     },
     collapsedObjectExample: {
       type: 'object',
@@ -206,16 +210,19 @@ export let schema: common.Schema = {
           type: 'string'
         }
       },
-      collapsed: true
+      collapsed: true,
+      propertyOrder: 22
     },
     emptyEnumExample: {
       type: 'string',
       enum: [
-      ]
+      ],
+      propertyOrder: 23
     },
     uploadFileExample: {
       type: 'string',
-      format: 'base64'
+      format: 'base64',
+      propertyOrder: 24
     },
     requiredWhenExample: {
       type: 'object',
@@ -251,12 +258,14 @@ export let schema: common.Schema = {
           optionalWhen: ['kind', '===', 'enum 2']
         }
       },
-      required: ['kind', 'propertyExample4']
+      required: ['kind', 'propertyExample4'],
+      propertyOrder: 25
     },
     checkboxBooleanExample: {
       type: 'boolean',
       default: true,
-      format: 'checkbox'
+      format: 'checkbox',
+      propertyOrder: 26
     },
     enumTitlesExample: {
       type: 'string',
@@ -267,7 +276,8 @@ export let schema: common.Schema = {
       enumTitles: [
         'enum title 1',
         'enum title 2'
-      ]
+      ],
+      propertyOrder: 27
     },
     itemTitleEnumTitleExample: {
       type: 'array',
@@ -292,17 +302,20 @@ export let schema: common.Schema = {
         {
           propertyExample1: 'bar'
         }
-      ]
+      ],
+      propertyOrder: 28
     },
     selectBooleanExample: {
       type: 'boolean',
       default: false,
-      format: 'select'
+      format: 'select',
+      propertyOrder: 28
     },
     select2BooleanExample: {
       type: 'boolean',
       default: false,
-      format: 'select2'
+      format: 'select2',
+      propertyOrder: 30
     },
     stringEnumSelectExample: {
       type: 'string',
@@ -314,7 +327,8 @@ export let schema: common.Schema = {
       enumTitles: [
         'enum title 1',
         'enum title 2'
-      ]
+      ],
+      propertyOrder: 31
     },
     stringEnumRadioboxExample: {
       type: 'string',
@@ -326,7 +340,8 @@ export let schema: common.Schema = {
       enumTitles: [
         'enum title 1',
         'enum title 2'
-      ]
+      ],
+      propertyOrder: 32
     },
     numberEnumSelectExample: {
       type: 'number',
@@ -338,7 +353,8 @@ export let schema: common.Schema = {
       enumTitles: [
         'one',
         'two'
-      ]
+      ],
+      propertyOrder: 33
     },
     numberEnumRadioboxExample: {
       type: 'number',
@@ -350,7 +366,13 @@ export let schema: common.Schema = {
       enumTitles: [
         'one',
         'two'
-      ]
+      ],
+      propertyOrder: 34
+    },
+    classNameExample: {
+      type: 'string',
+      className: 'custom-class-string',
+      propertyOrder: 35
     }
   },
   required: [
@@ -385,7 +407,8 @@ export let schema: common.Schema = {
     'stringEnumSelectExample',
     'stringEnumRadioboxExample',
     'numberEnumSelectExample',
-    'numberEnumRadioboxExample'
+    'numberEnumRadioboxExample',
+    'classNameExample'
   ]
 }
 

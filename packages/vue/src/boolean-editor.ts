@@ -56,6 +56,10 @@ export class BooleanEditor extends Vue {
       }
     ]
   }
+  get className () {
+    const rowClass = this.theme.row
+    return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
+  }
 
   onChange () {
     this.value = !this.value

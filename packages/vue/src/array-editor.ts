@@ -25,6 +25,7 @@ export class ArrayEditor extends Vue {
   title!: string
   icon!: common.Icon
   locale!: common.Locale
+  theme!: common.Theme
   readonly!: boolean
   required!: boolean
   hasDeleteButton!: boolean
@@ -70,6 +71,10 @@ export class ArrayEditor extends Vue {
   }
   get showFilter () {
     return this.getValue.length >= common.minItemCountIfNeedFilter
+  }
+  get className () {
+    const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
+    return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
   }
 
   beforeDestroy () {

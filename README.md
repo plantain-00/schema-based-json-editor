@@ -12,7 +12,7 @@
 + reactjs component
 + angular component
 + vuejs component
-+ common schema fields: title, description, default, readonly, propertyOrder, requiredWhen, optionalWhen
++ common schema fields: title, description, default, readonly, propertyOrder, requiredWhen, optionalWhen, className
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems
 + number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, enumTitles, format('select' | 'radiobox')
@@ -146,6 +146,8 @@ export const defaultTheme = {
 }
 ```
 
+You can also set `className` in schema to get fine grained style control
+
 ## support other themes / icons / locales
 
 ```ts
@@ -208,6 +210,7 @@ requiredWhen | [string, '===' or 'in', any]? | in a object, the property is requ
 optionalWhen | [string, '===' or 'in', any]? | in a object, the property is optional when the condition is true, eg, `['name', '===', 'foo']` or `['name', 'in', ['foo', 'bar']]`, otherwise the property is hidden
 collapsed | boolean? | if true, the object or array is collapsed by default
 enumTitles | string[]? | works with `enum` field, are the titles of the enum
+className | string? | custom class name
 
 ## change logs
 
