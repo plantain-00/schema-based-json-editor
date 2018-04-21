@@ -45,8 +45,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "9.6.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.5.tgz#ee700810fdf49ac1c399fc5980b7559b3e5a381d"
+  version "9.6.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.6.tgz#439b91f9caf3983cad2eef1e11f6bedcbf9431d2"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -98,7 +98,7 @@ file-uploader-angular-component@7:
     "@angular/core" "4 || 5"
     file-uploader-component "^7.2.2"
 
-file-uploader-component@7, file-uploader-component@^7.2.2:
+file-uploader-component@^7.2.2:
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.2.2.tgz#623125c272cbc08fc0cba74028e8958d346a0b3f"
   dependencies:
@@ -113,22 +113,6 @@ linkify-it@^2.0.0:
   resolved "https://registry.yarnpkg.com/linkify-it/-/linkify-it-2.0.3.tgz#d94a4648f9b1c179d64fa97291268bdb6ce9434f"
   dependencies:
     uc.micro "^1.0.1"
-
-lodash.isinteger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
-
-lodash.isobject@3:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
-
-lodash.tointeger@4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.tointeger/-/lodash.tointeger-4.0.4.tgz#65e655acaa724e26d3fef57effc46970e1cd17e6"
-
-lodash.tonumber@4:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
 
 markdown-it@8.4.1:
   version "8.4.1"
@@ -149,7 +133,7 @@ markdown-tip-angular@6:
     "@angular/forms" "4 || 5"
     markdown-tip "^6.2.0"
 
-markdown-tip@6, markdown-tip@^6.2.0:
+markdown-tip@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.2.0.tgz#716ed6e74f4f3516a21f9f93211c94fdadea6b34"
   dependencies:
@@ -165,19 +149,6 @@ rxjs@5.5.10:
   dependencies:
     symbol-observable "1.0.1"
 
-schema-based-json-editor@^7.11.2:
-  version "7.11.2"
-  resolved "https://registry.yarnpkg.com/schema-based-json-editor/-/schema-based-json-editor-7.11.2.tgz#8344a9c6e46712927c0fd21299354880c0aa3d04"
-  dependencies:
-    file-uploader-component "7"
-    lodash.isinteger "4"
-    lodash.isobject "3"
-    lodash.tointeger "4"
-    lodash.tonumber "4"
-    markdown-tip "6"
-    select2-component "5"
-    tslib "1"
-
 select2-angular-component@5:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/select2-angular-component/-/select2-angular-component-5.3.0.tgz#b4877343a83ccd1aa83cc66a0c46ca99bd43235b"
@@ -187,7 +158,7 @@ select2-angular-component@5:
     "@angular/forms" "4 || 5"
     select2-component "^5.3.0"
 
-select2-component@5, select2-component@^5.3.0:
+select2-component@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.3.0.tgz#42b655d30aa3abb81ea1e69319301efcfdaf9ff0"
   dependencies:

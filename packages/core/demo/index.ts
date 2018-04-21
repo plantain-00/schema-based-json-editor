@@ -13,8 +13,8 @@ export let schema: common.Schema = {
       title: 'A string example',
       description: 'a string description example',
       default: 'a default string example',
-      minLength: 20,
-      maxLength: 25,
+      minLength: 15,
+      maxLength: 20,
       propertyOrder: 1
     },
     booleanExample: {
