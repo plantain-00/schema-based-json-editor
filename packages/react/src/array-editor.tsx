@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as common from 'schema-based-json-editor'
+import { Select2, Select2Option } from 'select2-react-component'
 import { Editor } from './editor'
 import { Icon } from './icon'
 import { Optional } from './optional'
@@ -85,6 +86,45 @@ export class ArrayEditor extends React.Component<Props, State> {
         defaultValue={this.filter} /></div>
       : null
 
+    let element: JSX.Element
+    if (this.props.schema.enum) {
+      let format: JSX.Element | JSX.Element[]
+      if (this.props.schema.format === 'select2' && !this.props.noSelect2) {
+        format = (
+          <Select2 data={this.options}
+            value={this.value as any}
+            disabled={this.isReadOnly}
+            multiple={true}
+            update={($event) => this.onChangeSelect2($event)}>
+          </Select2>
+        )
+      } else {
+        format = this.options.map(option => (
+          <span key={option.value as (string | number)} className={this.props.theme.checkbox}>
+            <label>
+              <input type='checkbox'
+                onChange={() => this.onChangeCheckbox(option.value)}
+                checked={this.isChecked(option.value)}
+                disabled={this.isReadOnly} />
+              {option.label}
+            </label>
+          </span>
+        ))
+      }
+      element = (
+        <div>
+          {format}
+        </div>
+      )
+    } else {
+      element = (
+        <div className={this.props.theme.card}>
+          {filterElement}
+          {childrenElement}
+        </div>
+      )
+    }
+
     return (
       <div className={this.className}>
         <h3>
@@ -96,7 +136,7 @@ export class ArrayEditor extends React.Component<Props, State> {
               theme={this.props.theme}
               locale={this.props.locale}
               toggleOptional={this.toggleOptional} />
-            <Icon valid={!this.props.disableCollapse && this.value && this.value.length > 0}
+            <Icon valid={!this.props.disableCollapse && this.value && this.value.length > 0 && !this.props.schema.enum}
               onClick={this.collapseOrExpand}
               text={this.collapsed ? this.props.icon.expand : this.props.icon.collapse}
               theme={this.props.theme}
@@ -114,10 +154,7 @@ export class ArrayEditor extends React.Component<Props, State> {
           </div>
         </h3>
         <Description theme={this.props.theme} message={this.props.schema.description} />
-        <div className={this.props.theme.card}>
-          {filterElement}
-          {childrenElement}
-        </div>
+        {element}
         <Description theme={this.props.theme} message={this.errorMessage} />
       </div>
     )
@@ -158,6 +195,26 @@ export class ArrayEditor extends React.Component<Props, State> {
     this.validate()
     this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
   }
+  private isChecked = (value: any) => {
+    return this.value && this.value.indexOf(value) !== -1
+  }
+  private onChangeCheckbox = (value: any) => {
+    if (this.value) {
+      const index = this.value.indexOf(value)
+      if (index !== -1) {
+        this.value.splice(index, 1)
+      } else {
+        this.value.push(value)
+      }
+      this.validate()
+      this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
+    }
+  }
+  private onChangeSelect2 = (value: any) => {
+    this.value = value
+    this.validate()
+    this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
+  }
   private get isReadOnly () {
     return this.props.readonly || this.props.schema.readonly
   }
@@ -165,7 +222,7 @@ export class ArrayEditor extends React.Component<Props, State> {
     return this.props.onDelete && !this.isReadOnly
   }
   private get hasAddButton () {
-    return !this.isReadOnly && this.value !== undefined
+    return !this.isReadOnly && this.value !== undefined && !this.props.schema.enum
   }
   private get getValue () {
     if (this.value !== undefined && !this.collapsed) {
@@ -182,5 +239,8 @@ export class ArrayEditor extends React.Component<Props, State> {
   private get className () {
     const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row
     return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
+  }
+  private get options () {
+    return common.getOptions(this.props.schema) as Select2Option[]
   }
 }

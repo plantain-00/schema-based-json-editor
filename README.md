@@ -14,7 +14,7 @@
 + vuejs component
 + common schema fields: title, description, default, readonly, propertyOrder, requiredWhen, optionalWhen, className
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
-+ array schema fields: items, minItems, uniqueItems
++ array schema fields: items, minItems, uniqueItems, enum, enumTitles, format('select2')
 + number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, enumTitles, format('select' | 'radiobox')
 + string schema fields: format('textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox'), enum, minLength, maxLength, pattern, enumTitles
 + boolean schema fields: format('checkbox' | 'select' | 'select2')

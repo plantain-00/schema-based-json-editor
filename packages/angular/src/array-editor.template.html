@@ -9,7 +9,7 @@
         [locale]="locale"
         (toggleOptional)="toggleOptional()">
       </optional>
-      <icon *ngIf="!disableCollapse && value && value.length > 0"
+      <icon *ngIf="!disableCollapse && value && value.length > 0 && !schema.enum"
         (onClick)="collapseOrExpand()"
         [text]="collapsed ? icon.expand : icon.collapse"
         [theme]="theme"
@@ -30,7 +30,27 @@
     </div>
   </h3>
   <description [theme]="theme" [message]="schema.description"></description>
-  <div #drakContainer [class]="theme.card">
+  <div *ngIf="schema.enum">
+    <select2 *ngIf="schema.format === 'select2' && !noSelect2" [data]="options"
+      [value]="value"
+      [disabled]="isReadOnly"
+      [multiple]="true"
+      (update)="onChangeSelect2($event)">
+    </select2>
+    <ng-container *ngIf="schema.format !== 'select2' || noSelect2">
+      <span *ngFor="let option of options; trackBy:trackByOptions"
+        [class]="theme.checkbox">
+        <label>
+          <input type="checkbox"
+            (change)="onChangeCheckbox(option.value)"
+            [checked]="isChecked(option.value)"
+            [disabled]="isReadOnly" />
+          {{option.label}}
+        </label>
+      </span>
+    </ng-container>
+  </div>
+  <div *ngIf="!schema.enum" #drakContainer [class]="theme.card">
     <div *ngIf="showFilter" [class]="theme.row">
       <input [class]="theme.input"
         (change)="onFilterChange($event)"

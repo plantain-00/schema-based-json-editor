@@ -373,6 +373,37 @@ export let schema: common.Schema = {
       type: 'string',
       className: 'custom-class-string',
       propertyOrder: 35
+    },
+    enumArrayExample: {
+      type: 'array',
+      items: {
+        type: 'string'
+      },
+      enum: [
+        'foo',
+        'bar'
+      ],
+      enumTitle: [
+        'foo title',
+        'bar title'
+      ],
+      propertyOrder: 36
+    },
+    enumArraySelect2Example: {
+      type: 'array',
+      items: {
+        type: 'string'
+      },
+      enum: [
+        'foo',
+        'bar'
+      ],
+      enumTitle: [
+        'foo title',
+        'bar title'
+      ],
+      format: 'select2',
+      propertyOrder: 37
     }
   },
   required: [
@@ -408,7 +439,9 @@ export let schema: common.Schema = {
     'stringEnumRadioboxExample',
     'numberEnumSelectExample',
     'numberEnumRadioboxExample',
-    'classNameExample'
+    'classNameExample',
+    'enumArrayExample',
+    'enumArraySelect2Example'
   ]
 }
 
@@ -446,7 +479,7 @@ if (propertiesString) {
 export const propertiesSchema: common.ObjectSchema = {
   type: 'object',
   title: 'properties of the component',
-  description: 'refresh the page to make it work when you change it',
+  description: 'Editing properties -> Refresh the page -> UI updated(if input is invalid, will use the default input)',
   properties: {
     schema: {
       type: 'string',
