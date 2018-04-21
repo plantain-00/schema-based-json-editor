@@ -48,6 +48,9 @@ export type ArraySchema = CommonSchema & {
   minItems?: number;
   uniqueItems?: boolean;
   collapsed?: boolean;
+  enum?: ValueType[];
+  enumTitles?: string[];
+  format?: 'select2';
 }
 
 /**
@@ -1041,7 +1044,7 @@ export function findContainer (childNodes: NodeList) {
 /**
  * @public
  */
-export function getOptions (schema: NumberSchema | StringSchema) {
+export function getOptions (schema: NumberSchema | StringSchema | ArraySchema) {
   const enumTitles: string[] = schema.enumTitles || []
   return (schema.enum as (number | string)[]).map((e, i) => ({
     value: e,

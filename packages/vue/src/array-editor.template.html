@@ -9,7 +9,7 @@
         :locale="locale"
         @toggleOptional="toggleOptional()">
       </optional>
-      <icon v-if="!disableCollapse && value.length > 0"
+      <icon v-if="!disableCollapse && value.length > 0 && !schema.enum"
         @click="collapseOrExpand()"
         :text="collapsed ? icon.expand : icon.collapse"
         :theme="theme"
@@ -30,7 +30,24 @@
     </div>
   </h3>
   <description :theme="theme" :message="schema.description"></description>
-  <div :class="theme.card">
+  <div v-if="schema.enum">
+    <select2 v-if="schema.format === 'select2' && !noSelect2" :data="options"
+      :value="value"
+      :disabled="isReadOnly"
+      :multiple="true"
+      @update="onChangeSelect2($event)">
+    </select2>
+    <span v-else v-for="option in options" :key="option.value" :class="theme.checkbox">
+      <label>
+        <input type="checkbox"
+          @change="onChangeCheckbox(option.value)"
+          :checked="isChecked(option.value)"
+          :disabled="isReadOnly" />
+        {{option.label}}
+      </label>
+    </span>
+  </div>
+  <div v-else :class="theme.card">
     <div v-if="showFilter" :class="theme.row">
       <input :class="theme.input"
         @change="onFilterChange($event)"

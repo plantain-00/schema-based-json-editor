@@ -81,7 +81,7 @@ export class ArrayEditorComponent {
     return this.hasDeleteButton && !this.isReadOnly
   }
   get hasAddButton () {
-    return !this.isReadOnly && this.value !== undefined
+    return !this.isReadOnly && this.value !== undefined && !this.schema.enum
   }
   get titleToShow () {
     return common.getTitle(this.title, this.schema.title)
@@ -89,6 +89,9 @@ export class ArrayEditorComponent {
   get className () {
     const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
     return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
+  }
+  get options () {
+    return common.getOptions(this.schema)
   }
   ngAfterViewInit () {
     if (this.drakContainer && this.dragula) {
@@ -110,6 +113,9 @@ export class ArrayEditorComponent {
   }
   trackByFunction = (index: number, item: { p: common.ValueType, i: number }) => {
     return (1 + item.i) * this.renderSwitch
+  }
+  trackByOptions = (index: number, item: { value: common.ValueType, label: string }) => {
+    return item.value
   }
   collapseOrExpand = () => {
     this.collapsed = !this.collapsed
@@ -137,6 +143,26 @@ export class ArrayEditorComponent {
   }
   onFilterChange (e: { target: { value: string } }) {
     this.filter = e.target.value
+  }
+  isChecked (value: any) {
+    return this.value && this.value.indexOf(value) !== -1
+  }
+  onChangeCheckbox (value: any) {
+    if (this.value) {
+      const index = this.value.indexOf(value)
+      if (index !== -1) {
+        this.value.splice(index, 1)
+      } else {
+        this.value.push(value)
+      }
+      this.validate()
+      this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
+    }
+  }
+  onChangeSelect2 (value: any) {
+    this.value = value
+    this.validate()
+    this.updateValue.emit({ value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
   }
   private validate () {
     this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale)

@@ -30,6 +30,7 @@ export class ArrayEditor extends Vue {
   required!: boolean
   hasDeleteButton!: boolean
   dragula?: Dragula
+  noSelect2?: boolean
 
   renderSwitch = 1
   collapsed?: boolean = false
@@ -64,7 +65,7 @@ export class ArrayEditor extends Vue {
     return this.hasDeleteButton && !this.isReadOnly
   }
   get hasAddButton () {
-    return !this.isReadOnly && this.value !== undefined
+    return !this.isReadOnly && this.value !== undefined && !this.schema.enum
   }
   get titleToShow () {
     return common.getTitle(this.title, this.schema.title)
@@ -75,6 +76,9 @@ export class ArrayEditor extends Vue {
   get className () {
     const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
     return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
+  }
+  get options () {
+    return common.getOptions(this.schema)
   }
 
   beforeDestroy () {
@@ -124,6 +128,26 @@ export class ArrayEditor extends Vue {
   }
   onFilterChange (e: { target: { value: string } }) {
     this.filter = e.target.value
+  }
+  isChecked (value: any) {
+    return this.value && this.value.indexOf(value) !== -1
+  }
+  onChangeCheckbox (value: any) {
+    if (this.value) {
+      const index = this.value.indexOf(value)
+      if (index !== -1) {
+        this.value.splice(index, 1)
+      } else {
+        this.value.push(value)
+      }
+      this.validate()
+      this.$emit('update-value', { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
+    }
+  }
+  onChangeSelect2 (value: any) {
+    this.value = value
+    this.validate()
+    this.$emit('update-value', { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
   }
   private validate () {
     this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale)
