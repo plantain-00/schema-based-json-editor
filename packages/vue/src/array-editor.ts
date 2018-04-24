@@ -17,7 +17,24 @@ import { arrayEditorTemplateHtml, arrayEditorTemplateHtmlStatic } from './variab
     description: Description,
     editor: Editor
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'disableCollapse', 'noSelect2']
+  props: [
+    'schema',
+    'initialValue',
+    'title',
+    'theme',
+    'icon',
+    'locale',
+    'readonly',
+    'required',
+    'hasDeleteButton',
+    'dragula',
+    'md',
+    'hljs',
+    'forceHttps',
+    'disableCollapse',
+    'noSelect2',
+    'minItemCountIfNeedFilter'
+  ]
 })
 export class ArrayEditor extends Vue {
   schema!: common.ArraySchema
@@ -31,6 +48,7 @@ export class ArrayEditor extends Vue {
   hasDeleteButton!: boolean
   dragula?: Dragula
   noSelect2?: boolean
+  minItemCountIfNeedFilter?: number
 
   renderSwitch = 1
   collapsed?: boolean = false
@@ -71,7 +89,8 @@ export class ArrayEditor extends Vue {
     return common.getTitle(this.title, this.schema.title)
   }
   get showFilter () {
-    return this.getValue.length >= common.minItemCountIfNeedFilter
+    const minItemCountIfNeedFilter = typeof this.minItemCountIfNeedFilter === 'number' ? this.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
+    return this.getValue.length >= minItemCountIfNeedFilter
   }
   get className () {
     const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row

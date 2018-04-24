@@ -16,7 +16,24 @@ import { objectEditorTemplateHtml, objectEditorTemplateHtmlStatic } from './vari
     description: Description,
     editor: Editor
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'disableCollapse', 'noSelect2']
+  props: [
+    'schema',
+    'initialValue',
+    'title',
+    'theme',
+    'icon',
+    'locale',
+    'readonly',
+    'required',
+    'hasDeleteButton',
+    'dragula',
+    'md',
+    'hljs',
+    'forceHttps',
+    'disableCollapse',
+    'noSelect2',
+    'minItemCountIfNeedFilter'
+  ]
 })
 export class ObjectEditor extends Vue {
   schema!: common.ObjectSchema
@@ -28,6 +45,7 @@ export class ObjectEditor extends Vue {
   readonly!: boolean
   required!: boolean
   hasDeleteButton!: boolean
+  minItemCountIfNeedFilter!: boolean
 
   collapsed?: boolean = false
   value?: { [name: string]: common.ValueType } = {}
@@ -81,7 +99,9 @@ export class ObjectEditor extends Vue {
     return common.getTitle(this.title, this.schema.title)
   }
   get showFilter () {
-    return this.properties.filter(p => this.isRequired(p.property) !== false).length >= common.minItemCountIfNeedFilter
+    const propertyCount = this.properties.filter(p => this.isRequired(p.property) !== false).length
+    const minItemCountIfNeedFilter = typeof this.minItemCountIfNeedFilter === 'number' ? this.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
+    return propertyCount >= minItemCountIfNeedFilter
   }
   get className () {
     const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row

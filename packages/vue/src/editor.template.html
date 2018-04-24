@@ -15,7 +15,8 @@
   :hljs="hljs"
   :forceHttps="forceHttps"
   :disableCollapse="disableCollapse"
-  :noSelect2="noSelect2">
+  :noSelect2="noSelect2"
+  :minItemCountIfNeedFilter="minItemCountIfNeedFilter">
 </object-editor>
 <array-editor v-else-if="schema.type === 'array'"
   :schema="schema"
@@ -34,7 +35,8 @@
   :hljs="hljs"
   :forceHttps="forceHttps"
   :disableCollapse="disableCollapse"
-  :noSelect2="noSelect2">
+  :noSelect2="noSelect2"
+  :minItemCountIfNeedFilter="minItemCountIfNeedFilter">
 </array-editor>
 <number-editor v-else-if="schema.type === 'number' || schema.type === 'integer'"
   :schema="schema"
