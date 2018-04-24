@@ -39,6 +39,8 @@ export class JSONEditorComponent {
   disableCollapse?: boolean
   @Input()
   noSelect2?: boolean
+  @Input()
+  minItemCountIfNeedFilter?: number
 
   get themeObject () {
     return common.getTheme(this.theme)

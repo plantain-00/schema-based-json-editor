@@ -42,6 +42,8 @@ export class ArrayEditorComponent {
   disableCollapse?: boolean
   @Input()
   noSelect2?: boolean
+  @Input()
+  minItemCountIfNeedFilter?: number
 
   collapsed?: boolean = false
   value?: common.ValueType[]
@@ -67,7 +69,8 @@ export class ArrayEditorComponent {
             .filter(({ p, i }) => common.filterArray(p, i, this.schema.items, this.filter))
   }
   get showFilter () {
-    return this.getValue.length >= common.minItemCountIfNeedFilter
+    const minItemCountIfNeedFilter = typeof this.minItemCountIfNeedFilter === 'number' ? this.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
+    return this.getValue.length >= minItemCountIfNeedFilter
   }
   ngOnInit () {
     this.collapsed = this.schema.collapsed

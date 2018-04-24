@@ -234,7 +234,8 @@ export class ArrayEditor extends React.Component<Props, State> {
     return common.getTitle(this.props.title, this.props.schema.title)
   }
   private get showFilter () {
-    return this.getValue.length >= common.minItemCountIfNeedFilter
+    const minItemCountIfNeedFilter = typeof this.props.minItemCountIfNeedFilter === 'number' ? this.props.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
+    return this.getValue.length >= minItemCountIfNeedFilter
   }
   private get className () {
     const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row

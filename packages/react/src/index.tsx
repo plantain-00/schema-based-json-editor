@@ -21,6 +21,7 @@ export type Props = {
   forceHttps?: boolean;
   disableCollapse?: boolean;
   noSelect2?: boolean;
+  minItemCountIfNeedFilter?: number;
 }
 
 /**
@@ -49,7 +50,8 @@ export class JSONEditor extends React.Component<Props, {}> {
       hljs={this.props.hljs}
       forceHttps={this.props.forceHttps}
       disableCollapse={this.props.disableCollapse}
-      noSelect2={this.props.noSelect2} />
+      noSelect2={this.props.noSelect2}
+      minItemCountIfNeedFilter={this.props.minItemCountIfNeedFilter} />
   }
   private updateValue = (value: any, isValid: boolean) => {
     this.props.updateValue(value, isValid)

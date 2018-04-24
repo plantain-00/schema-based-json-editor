@@ -120,6 +120,7 @@ hljs | object? | the `highlight.js` library object if you want to highlight code
 forceHttps | boolean? | if true, the preview url of images will be `https://` rather than `http://`
 disableCollapse | boolean? | if true, the collapse button will be hidden
 noSelect2 | boolean? | if true, use `select` rather than `select2-component`
+minItemCountIfNeedFilter | number? | default `6`(if item count > `6`, filter is visible, otherwise hidden), so if `0`, filter always visible, if `Infinity`, filter always hidden
 
 ## improve current theme
 

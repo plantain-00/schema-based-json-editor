@@ -154,7 +154,9 @@ export class ObjectEditor extends React.Component<Props, State> {
     return common.getTitle(this.props.title, this.props.schema.title)
   }
   private get showFilter () {
-    return this.properties.filter(p => this.isRequired(p.property) !== false).length >= common.minItemCountIfNeedFilter
+    const propertyCount = this.properties.filter(p => this.isRequired(p.property) !== false).length
+    const minItemCountIfNeedFilter = typeof this.props.minItemCountIfNeedFilter === 'number' ? this.props.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
+    return propertyCount >= minItemCountIfNeedFilter
   }
   private get className () {
     const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row

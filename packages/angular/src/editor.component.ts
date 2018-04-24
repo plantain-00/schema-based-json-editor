@@ -42,4 +42,6 @@ export class EditorComponent {
   disableCollapse?: boolean
   @Input()
   noSelect2?: boolean
+  @Input()
+  minItemCountIfNeedFilter?: number
 }

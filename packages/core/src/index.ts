@@ -536,6 +536,7 @@ export type Props<TSchema extends CommonSchema, TValue> = {
   forceHttps?: boolean;
   disableCollapse?: boolean;
   noSelect2?: boolean;
+  minItemCountIfNeedFilter?: number;
 }
 
 /**

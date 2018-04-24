@@ -43,6 +43,8 @@ export class ObjectEditorComponent {
   disableCollapse?: boolean
   @Input()
   noSelect2?: boolean
+  @Input()
+  minItemCountIfNeedFilter?: number
 
   collapsed?: boolean = false
   value?: { [name: string]: common.ValueType }
@@ -119,7 +121,9 @@ export class ObjectEditorComponent {
     return common.getTitle(this.title, this.schema.title)
   }
   get showFilter () {
-    return this.properties.filter(p => this.isRequired(p.property) !== false).length >= common.minItemCountIfNeedFilter
+    const propertycount = this.properties.filter(p => this.isRequired(p.property) !== false).length
+    const minItemCountIfNeedFilter = typeof this.minItemCountIfNeedFilter === 'number' ? this.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
+    return propertycount >= minItemCountIfNeedFilter
   }
   get className () {
     const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
