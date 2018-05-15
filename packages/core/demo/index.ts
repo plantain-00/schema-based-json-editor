@@ -1,5 +1,7 @@
 import * as common from '../dist/'
 
+// tslint:disable:no-duplicate-string
+
 /**
  * @public
  */
@@ -529,7 +531,7 @@ export const propertiesInitialValue = {
   icon
 }
 
-function addCssLink (cssRootPath: string, file: string) {
+function addCssLink(cssRootPath: string, file: string) {
   const link = document.createElement('link')
   link.href = cssRootPath + file
   link.type = 'text/css'
@@ -540,7 +542,7 @@ function addCssLink (cssRootPath: string, file: string) {
 /**
  * @public
  */
-export function addAllCssLinks (cssRootPath: string) {
+export function addAllCssLinks(cssRootPath: string) {
   if (theme === 'bootstrap4') {
     addCssLink(cssRootPath, 'bootstrap.min.css')
   }

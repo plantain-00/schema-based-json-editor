@@ -109,6 +109,7 @@ export const themes: { [name: string]: Theme } = {
     card: 'well',
     row: 'row',
     errorRow: 'row has-error',
+    // tslint:disable-next-line:no-duplicate-string
     input: 'form-control',
     errorInput: 'form-control',
     textarea: 'form-control',
@@ -157,6 +158,7 @@ export const themes: { [name: string]: Theme } = {
     card: 'el-form el-card box-card el-card__body',
     row: 'el-form-item',
     errorRow: 'el-form-item is-error',
+    // tslint:disable-next-line:no-duplicate-string
     input: 'el-input__inner',
     errorInput: 'el-input__inner',
     textarea: 'el-textarea__inner',
@@ -189,6 +191,7 @@ export const themes: { [name: string]: Theme } = {
     card: 'pt-card',
     row: '',
     errorRow: '',
+    // tslint:disable-next-line:no-duplicate-string
     input: 'pt-input pt-fill',
     errorInput: 'pt-input pt-fill',
     textarea: 'pt-input pt-fill',
@@ -253,7 +256,7 @@ export type Theme = typeof defaultTheme
 /**
  * @public
  */
-export function getTheme (name: string | undefined | Theme): Theme {
+export function getTheme(name: string | undefined | Theme): Theme {
   if (name === undefined) {
     return defaultTheme
   }
@@ -307,7 +310,7 @@ export const locales: { [name: string]: Locale } = {}
 /**
  * @public
  */
-export function getLocale (locale: undefined | null | Locale): Locale {
+export function getLocale(locale: undefined | null | Locale): Locale {
   return locale || defaultLocale
 }
 
@@ -372,7 +375,7 @@ export const icons: { [name: string]: Icon } = {
 /**
  * @public
  */
-export function getIcon (name: string | undefined | Icon, locale: Locale): Icon {
+export function getIcon(name: string | undefined | Icon, locale: Locale): Icon {
   if (name === undefined) {
     return {
       isText: true,
@@ -402,7 +405,8 @@ export type ValueType = { [name: string]: any } | any[] | number | boolean | str
 /**
  * @public
  */
-export function getDefaultValue (required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {
+// tslint:disable-next-line:cognitive-complexity
+export function getDefaultValue(required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {
   if (initialValue !== undefined) {
     switch (schema.type) {
       case 'object':
@@ -542,19 +546,20 @@ export type Props<TSchema extends CommonSchema, TValue> = {
 /**
  * @public
  */
-export function isSame (value1: ValueType, value2: ValueType) {
+// tslint:disable-next-line:cognitive-complexity
+export function isSame(value1: ValueType, value2: ValueType) {
   if (typeof value1 === 'string'
-        || typeof value1 === 'number'
-        || typeof value1 === 'boolean'
-        || value1 === null
-        || value1 === undefined) {
+    || typeof value1 === 'number'
+    || typeof value1 === 'boolean'
+    || value1 === null
+    || value1 === undefined) {
     return value1 === value2
   }
   if (typeof value2 === 'string'
-        || typeof value2 === 'number'
-        || typeof value2 === 'boolean'
-        || value2 === null
-        || value2 === undefined) {
+    || typeof value2 === 'number'
+    || typeof value2 === 'boolean'
+    || value2 === null
+    || value2 === undefined) {
     return false
   }
   if (Array.isArray(value1)) {
@@ -565,12 +570,11 @@ export function isSame (value1: ValueType, value2: ValueType) {
         }
       }
       return true
-    } else {
-      return false
     }
+    return false
   }
   if (Array.isArray(value2)
-        || Object.keys((value1 as { [name: string]: ValueType })).length !== Object.keys((value1 as { [name: string]: ValueType })).length) {
+    || Object.keys((value1 as { [name: string]: ValueType })).length !== Object.keys((value2 as { [name: string]: ValueType })).length) {
     return false
   }
   for (const key in value1) {
@@ -584,7 +588,7 @@ export function isSame (value1: ValueType, value2: ValueType) {
 /**
  * @public
  */
-export function switchItem (value: any[], el: HTMLElement, sibling: HTMLElement | null) {
+export function switchItem(value: any[], el: HTMLElement, sibling: HTMLElement | null) {
   const fromIndex = +el.dataset.index!
   if (sibling) {
     const toIndex = +sibling.dataset.index!
@@ -603,7 +607,8 @@ export function switchItem (value: any[], el: HTMLElement, sibling: HTMLElement 
 /**
  * @public
  */
-export function getErrorMessageOfArray (value: any[] | undefined, schema: ArraySchema, locale: Locale) {
+// tslint:disable-next-line:cognitive-complexity
+export function getErrorMessageOfArray(value: any[] | undefined, schema: ArraySchema, locale: Locale) {
   if (value !== undefined) {
     if (schema.minItems !== undefined) {
       if (value.length < schema.minItems) {
@@ -626,7 +631,8 @@ export function getErrorMessageOfArray (value: any[] | undefined, schema: ArrayS
 /**
  * @public
  */
-export function getErrorMessageOfNumber (value: number | undefined, schema: NumberSchema, locale: Locale) {
+// tslint:disable-next-line:cognitive-complexity
+export function getErrorMessageOfNumber(value: number | undefined, schema: NumberSchema, locale: Locale) {
   if (value !== undefined) {
     if (schema.minimum !== undefined) {
       if (schema.exclusiveMinimum) {
@@ -662,18 +668,18 @@ export function getErrorMessageOfNumber (value: number | undefined, schema: Numb
 /**
  * @public
  */
-export function getErrorMessageOfString (value: string | undefined, schema: StringSchema, locale: Locale) {
+export function getErrorMessageOfString(value: string | undefined, schema: StringSchema, locale: Locale) {
   if (value !== undefined) {
     if (schema.minLength !== undefined
-            && value.length < schema.minLength) {
+      && value.length < schema.minLength) {
       return locale.error.minLength.replace('{0}', String(schema.minLength))
     }
     if (schema.maxLength !== undefined
-            && value.length > schema.maxLength) {
+      && value.length > schema.maxLength) {
       return locale.error.maxLength.replace('{0}', String(schema.maxLength))
     }
     if (schema.pattern !== undefined
-            && !new RegExp(schema.pattern).test(value)) {
+      && !new RegExp(schema.pattern).test(value)) {
       return locale.error.pattern.replace('{0}', String(schema.pattern))
     }
   }
@@ -683,7 +689,7 @@ export function getErrorMessageOfString (value: string | undefined, schema: Stri
 /**
  * @public
  */
-export function getErrorMessageOfObject (value: { [name: string]: ValueType } | undefined, schema: ObjectSchema, locale: Locale) {
+export function getErrorMessageOfObject(value: { [name: string]: ValueType } | undefined, schema: ObjectSchema, locale: Locale) {
   if (value !== undefined) {
     let length = 0
     for (const key in value) {
@@ -692,11 +698,11 @@ export function getErrorMessageOfObject (value: { [name: string]: ValueType } | 
       }
     }
     if (schema.minProperties !== undefined
-            && length < schema.minProperties) {
+      && length < schema.minProperties) {
       return locale.error.minProperties.replace('{0}', String(schema.minProperties))
     }
     if (schema.maxProperties !== undefined
-            && length > schema.maxProperties) {
+      && length > schema.maxProperties) {
       return locale.error.maxProperties.replace('{0}', String(schema.maxProperties))
     }
   }
@@ -706,7 +712,7 @@ export function getErrorMessageOfObject (value: { [name: string]: ValueType } | 
 /**
  * @public
  */
-export function toggleOptional (value: ValueType | undefined, schema: Schema, initialValue: any) {
+export function toggleOptional(value: ValueType | undefined, schema: Schema, initialValue: any) {
   if (value === undefined) {
     return getDefaultValue(true, schema, initialValue)
   } else {
@@ -725,7 +731,7 @@ export type ValidityValue<T> = {
 /**
  * @public
  */
-export function recordInvalidPropertiesOfObject (invalidProperties: string[], isValid: boolean, property: string) {
+export function recordInvalidPropertiesOfObject(invalidProperties: string[], isValid: boolean, property: string) {
   const index = invalidProperties.indexOf(property)
   if (isValid) {
     if (index !== -1) {
@@ -741,7 +747,7 @@ export function recordInvalidPropertiesOfObject (invalidProperties: string[], is
 /**
  * @public
  */
-export function recordInvalidIndexesOfArray (invalidIndexes: number[], isValid: boolean, i: number) {
+export function recordInvalidIndexesOfArray(invalidIndexes: number[], isValid: boolean, i: number) {
   const index = invalidIndexes.indexOf(i)
   if (isValid) {
     if (index !== -1) {
@@ -759,12 +765,12 @@ const imageExtensions = ['.png', '.jpg', '.bmp', '.gif']
 /**
  * @public
  */
-export function isImageUrl (value?: string) {
+export function isImageUrl(value?: string) {
   if (!value || value.length <= 'https://'.length) {
     return false
   }
   if (value.substr(0, 'http://'.length) !== 'http://'
-        && value.substr(0, 'https://'.length) !== 'https://') {
+    && value.substr(0, 'https://'.length) !== 'https://') {
     return false
   }
   const extensionName = value.substr(value.length - 4, 4)
@@ -774,7 +780,7 @@ export function isImageUrl (value?: string) {
 /**
  * @public
  */
-export function isBase64Image (value?: string) {
+export function isBase64Image(value?: string) {
   if (!value) {
     return false
   }
@@ -785,7 +791,7 @@ export function isBase64Image (value?: string) {
 /**
  * @public
  */
-export function replaceProtocal (src: string) {
+export function replaceProtocal(src: string) {
   if (src.indexOf('http://') === 0 && src.indexOf('http://localhost') !== 0) {
     return 'https://' + src.substring('http://'.length)
   }
@@ -806,14 +812,15 @@ export const imagePreviewStyle = {
   maxWidth: '100%'
 }
 
-function printInConsole (message: string) {
+function printInConsole(message: string) {
   console.log(message)
 }
 
 /**
  * @public
  */
-export function initializeMarkdown (markdownit: MarkdownItType | undefined, hljs: HLJS | undefined, forceHttps: boolean | undefined) {
+// tslint:disable-next-line:cognitive-complexity
+export function initializeMarkdown(markdownit: MarkdownItType | undefined, hljs: HLJS | undefined, forceHttps: boolean | undefined) {
   if (!markdownit) {
     return undefined
   }
@@ -869,7 +876,8 @@ export function initializeMarkdown (markdownit: MarkdownItType | undefined, hljs
 /**
  * @public
  */
-export function findTitle (value: { [name: string]: ValueType } | undefined, properties: { property: string; schema: Schema }[]) {
+// tslint:disable-next-line:cognitive-complexity
+export function findTitle(value: { [name: string]: ValueType } | undefined, properties: { property: string; schema: Schema }[]) {
   if (value) {
     for (const { property, schema } of properties) {
       const title = value[property]
@@ -902,7 +910,8 @@ export function findTitle (value: { [name: string]: ValueType } | undefined, pro
   return undefined
 }
 
-function findTitleFromSchema (value: { [name: string]: ValueType } | undefined, schema: ObjectSchema) {
+// tslint:disable-next-line:cognitive-complexity
+function findTitleFromSchema(value: { [name: string]: ValueType } | undefined, schema: ObjectSchema) {
   if (value) {
     for (const property in schema.properties) {
       if (schema.properties.hasOwnProperty(property)) {
@@ -924,7 +933,7 @@ function findTitleFromSchema (value: { [name: string]: ValueType } | undefined, 
 /**
  * @public
  */
-export function getTitle (...titles: any[]) {
+export function getTitle(...titles: any[]) {
   for (const title of titles) {
     if (title === undefined || title === null) {
       continue
@@ -937,7 +946,7 @@ export function getTitle (...titles: any[]) {
 /**
  * @public
  */
-export function compare (a: { property: string; schema: Schema }, b: { property: string; schema: Schema }) {
+export function compare(a: { property: string; schema: Schema }, b: { property: string; schema: Schema }) {
   if (typeof a.schema.propertyOrder === 'number') {
     if (typeof b.schema.propertyOrder === 'number') {
       return a.schema.propertyOrder - b.schema.propertyOrder
@@ -953,26 +962,26 @@ export function compare (a: { property: string; schema: Schema }, b: { property:
 /**
  * @public
  */
-export function filterObject ({ property, schema }: { property: string; schema: Schema }, filterValue: string): boolean {
+export function filterObject({ property, schema }: { property: string; schema: Schema }, filterValue: string): boolean {
   return filterValue === ''
-        || property.indexOf(filterValue) !== -1
-        || (!!schema.title && schema.title.indexOf(filterValue) !== -1)
-        || (!!schema.description && schema.description.indexOf(filterValue) !== -1)
+    || property.indexOf(filterValue) !== -1
+    || (!!schema.title && schema.title.indexOf(filterValue) !== -1)
+    || (!!schema.description && schema.description.indexOf(filterValue) !== -1)
 }
 
 /**
  * @public
  */
-export function filterArray (value: ValueType, index: number, schema: Schema, filterValue: string): boolean {
+export function filterArray(value: ValueType, index: number, schema: Schema, filterValue: string): boolean {
   const result = filterValue === ''
-        || String(index).indexOf(filterValue) !== -1
-        || (schema.type === 'string' && (value as string).indexOf(filterValue) !== -1)
-        || ((schema.type === 'number' || schema.type === 'integer') && String(value as number).indexOf(filterValue) !== -1)
+    || String(index).indexOf(filterValue) !== -1
+    || (schema.type === 'string' && (value as string).indexOf(filterValue) !== -1)
+    || ((schema.type === 'number' || schema.type === 'integer') && String(value as number).indexOf(filterValue) !== -1)
   if (result) {
     return true
   }
   if (schema.type === 'object') {
-    const title = getTitle(findTitleFromSchema(value as { [name: string]: ValueType }, schema as ObjectSchema), schema.title)
+    const title = getTitle(findTitleFromSchema(value as { [name: string]: ValueType }, schema), schema.title)
     return title.indexOf(filterValue) !== -1
   }
   return false
@@ -986,7 +995,8 @@ export const minItemCountIfNeedFilter = 6
 /**
  * @public
  */
-export function isRequired (
+// tslint:disable-next-line:cognitive-complexity
+export function isRequired(
   required: string[] | undefined,
   value: { [name: string]: ValueType } | undefined,
   schema: ObjectSchema,
@@ -1032,7 +1042,7 @@ export function isRequired (
 /**
  * @public
  */
-export function findContainer (childNodes: NodeList) {
+export function findContainer(childNodes: NodeList) {
   for (let i = 0; i < childNodes.length; i++) {
     const node = childNodes[i]
     if (node.nodeName === 'DIV') {
@@ -1045,7 +1055,7 @@ export function findContainer (childNodes: NodeList) {
 /**
  * @public
  */
-export function getOptions (schema: NumberSchema | StringSchema | ArraySchema) {
+export function getOptions(schema: NumberSchema | StringSchema | ArraySchema) {
   const enumTitles: string[] = schema.enumTitles || []
   return (schema.enum as (number | string)[]).map((e, i) => ({
     value: e,

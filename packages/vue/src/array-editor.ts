@@ -59,53 +59,54 @@ export class ArrayEditor extends Vue {
   private invalidIndexes = []
   private drak?: dragula.Drake | null = null
 
-  beforeMount () {
+  beforeMount() {
     this.collapsed = this.schema.collapsed
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[]
     this.validate()
+    // tslint:disable-next-line:no-duplicate-string
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
   }
 
-  get filteredValues () {
+  get filteredValues() {
     return this.getValue.map((p, i) => ({ p, i }))
-            .filter(({ p, i }) => common.filterArray(p, i, this.schema.items, this.filter))
+      .filter(({ p, i }) => common.filterArray(p, i, this.schema.items, this.filter))
   }
-  private get getValue () {
+  private get getValue() {
     if (this.value !== undefined && !this.collapsed) {
       return this.value
     }
     return []
   }
-  get isReadOnly () {
+  get isReadOnly() {
     return this.readonly || this.schema.readonly
   }
-  get hasDeleteButtonFunction () {
+  get hasDeleteButtonFunction() {
     return this.hasDeleteButton && !this.isReadOnly
   }
-  get hasAddButton () {
+  get hasAddButton() {
     return !this.isReadOnly && this.value !== undefined && !this.schema.enum
   }
-  get titleToShow () {
+  get titleToShow() {
     return common.getTitle(this.title, this.schema.title)
   }
-  get showFilter () {
+  get showFilter() {
     const minItemCountIfNeedFilter = typeof this.minItemCountIfNeedFilter === 'number' ? this.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
     return this.getValue.length >= minItemCountIfNeedFilter
   }
-  get className () {
+  get className() {
     const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
     return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
   }
-  get options () {
+  get options() {
     return common.getOptions(this.schema)
   }
 
-  beforeDestroy () {
+  beforeDestroy() {
     if (this.drak) {
       this.drak.destroy()
     }
   }
-  mounted () {
+  mounted() {
     if (this.dragula) {
       const container = common.findContainer(this.$el.childNodes)
       if (container) {
@@ -121,37 +122,37 @@ export class ArrayEditor extends Vue {
     }
   }
 
-  collapseOrExpand () {
+  collapseOrExpand() {
     this.collapsed = !this.collapsed
   }
-  toggleOptional () {
+  toggleOptional() {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as common.ValueType[] | undefined
     this.validate()
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
   }
-  addItem () {
+  addItem() {
     this.value!.push(common.getDefaultValue(true, this.schema.items, undefined)!)
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
   }
-  onDeleteFunction (i: number) {
+  onDeleteFunction(i: number) {
     this.value!.splice(i, 1)
     this.renderSwitch = -this.renderSwitch
     this.validate()
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
   }
-  onChange (i: number, { value, isValid }: common.ValidityValue<common.ValueType>) {
+  onChange(i: number, { value, isValid }: common.ValidityValue<common.ValueType>) {
     this.value![i] = value
     this.validate()
     common.recordInvalidIndexesOfArray(this.invalidIndexes, isValid, i)
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
   }
-  onFilterChange (e: { target: { value: string } }) {
+  onFilterChange(e: { target: { value: string } }) {
     this.filter = e.target.value
   }
-  isChecked (value: any) {
+  isChecked(value: any) {
     return this.value && this.value.indexOf(value) !== -1
   }
-  onChangeCheckbox (value: any) {
+  onChangeCheckbox(value: any) {
     if (this.value) {
       const index = this.value.indexOf(value)
       if (index !== -1) {
@@ -163,12 +164,12 @@ export class ArrayEditor extends Vue {
       this.$emit('update-value', { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
     }
   }
-  onChangeSelect2 (value: any) {
+  onChangeSelect2(value: any) {
     this.value = value
     this.validate()
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
   }
-  private validate () {
+  private validate() {
     this.errorMessage = common.getErrorMessageOfArray(this.value, this.schema, this.locale)
   }
 }

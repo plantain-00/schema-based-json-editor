@@ -61,21 +61,21 @@ class App extends Vue {
   propertiesInitialValue = propertiesInitialValue
   theme = theme
   icon = icon
-  beforeCreate () {
+  beforeCreate() {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
         this.locale = module.locale
       })
     }
   }
-  updatePropertiesValue ({ value }: ValidityValue<ValueType>) {
+  updatePropertiesValue({ value }: ValidityValue<ValueType>) {
     try {
       localStorage.setItem('json-editor:properties', JSON.stringify(value))
     } catch (error) {
       console.log(error)
     }
   }
-  updateValue ({ value, isValid }: ValidityValue<ValueType>) {
+  updateValue({ value, isValid }: ValidityValue<ValueType>) {
     this.valueHtml = hljs.highlight('json', JSON.stringify(value, null, '  ')).value
     this.color = isValid ? 'black' : 'red'
   }

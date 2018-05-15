@@ -8,45 +8,45 @@ import { nullEditorTemplateHtml } from './variables'
 })
 export class NullEditorComponent {
   @Input()
-    schema!: common.NullSchema
+  schema!: common.NullSchema
   @Input()
-    initialValue!: null
+  initialValue!: null
   @Input()
-    title?: string
+  title?: string
   @Output()
-    updateValue = new EventEmitter<common.ValidityValue<null | undefined>>()
+  updateValue = new EventEmitter<common.ValidityValue<null | undefined>>()
   @Input()
-    theme!: common.Theme
+  theme!: common.Theme
   @Input()
-    icon!: common.Icon
+  icon!: common.Icon
   @Input()
-    locale!: common.Locale
+  locale!: common.Locale
   @Output()
-    onDelete = new EventEmitter()
+  onDelete = new EventEmitter()
   @Input()
-    readonly?: boolean
+  readonly?: boolean
   @Input()
-    required?: boolean
+  required?: boolean
   @Input()
-    hasDeleteButton!: boolean
+  hasDeleteButton!: boolean
 
   value?: null
   buttonGroupStyle = common.buttonGroupStyleString
-  ngOnInit () {
+  ngOnInit() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null
     this.updateValue.emit({ value: this.value, isValid: true })
   }
-  toggleOptional () {
+  toggleOptional() {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as null | undefined
     this.updateValue.emit({ value: this.value, isValid: true })
   }
-  get isReadOnly () {
+  get isReadOnly() {
     return this.readonly || this.schema.readonly
   }
-  get hasDeleteButtonFunction () {
+  get hasDeleteButtonFunction() {
     return this.hasDeleteButton && !this.isReadOnly
   }
-  get titleToShow () {
+  get titleToShow() {
     return common.getTitle(this.title, this.schema.title)
   }
 }

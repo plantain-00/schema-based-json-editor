@@ -11,7 +11,7 @@ export class Icon extends React.Component<{
   onClick: () => void;
   theme: common.Theme;
 }, {}> {
-  render () {
+  render() {
     if (this.props.valid) {
       if (this.props.icon.isText) {
         return (

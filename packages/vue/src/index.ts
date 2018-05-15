@@ -54,15 +54,15 @@ export class JSONEditor extends Vue {
   forceHttps: boolean | undefined
 
   themeObject = common.getTheme(this.theme)
-  get localeObject () {
+  get localeObject() {
     return common.getLocale(this.locale)
   }
-  get iconObject () {
+  get iconObject() {
     return common.getIcon(this.icon, this.localeObject)
   }
   md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)
 
-  updateValue (value: common.ValueType) {
+  updateValue(value: common.ValueType) {
     this.$emit('update-value', value)
   }
 }

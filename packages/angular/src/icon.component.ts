@@ -8,11 +8,11 @@ import { iconTemplateHtml } from './variables'
 })
 export class IconComponent {
   @Input()
-    icon!: common.Icon
+  icon!: common.Icon
   @Input()
-    text!: string
+  text!: string
   @Output()
-    onClick = new EventEmitter()
+  onClick = new EventEmitter()
   @Input()
-    theme!: common.Theme
+  theme!: common.Theme
 }

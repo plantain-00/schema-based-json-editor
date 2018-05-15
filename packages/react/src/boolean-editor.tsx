@@ -20,21 +20,21 @@ export type State = Partial<{
 export class BooleanEditor extends React.Component<Props, State> {
   private value?: boolean
   private willRender = false
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as boolean
   }
-  componentDidMount () {
+  componentDidMount() {
     this.props.updateValue(this.value, true)
   }
-  shouldComponentUpdate (nextProps: Props, nextState: State) {
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
     if (this.willRender) {
       this.willRender = false
       return true
     }
     return this.props.initialValue !== nextProps.initialValue
   }
-  render () {
+  render() {
     let control: JSX.Element | null = null
     if (this.value !== undefined) {
       if (this.props.schema.format === 'checkbox') {
@@ -129,16 +129,16 @@ export class BooleanEditor extends React.Component<Props, State> {
     this.setState({ value: this.value })
     this.props.updateValue(this.value, true)
   }
-  private get isReadOnly () {
+  private get isReadOnly() {
     return this.props.readonly || this.props.schema.readonly
   }
-  private get hasDeleteButtonFunction () {
+  private get hasDeleteButtonFunction() {
     return this.props.onDelete && !this.isReadOnly
   }
-  private get titleToShow () {
+  private get titleToShow() {
     return common.getTitle(this.props.title, this.props.schema.title)
   }
-  private get booleanOptions (): Select2Option[] {
+  private get booleanOptions(): Select2Option[] {
     return [
       {
         value: true,
@@ -150,7 +150,7 @@ export class BooleanEditor extends React.Component<Props, State> {
       }
     ]
   }
-  private get className () {
+  private get className() {
     const rowClass = this.props.theme.row
     return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
   }

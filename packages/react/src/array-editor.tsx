@@ -32,12 +32,12 @@ export class ArrayEditor extends React.Component<Props, State> {
   private errorMessage!: string
   private invalidIndexes: number[] = []
   private filter: string = ''
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[]
     this.validate()
   }
-  componentDidMount () {
+  componentDidMount() {
     this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
     if (this.props.dragula) {
       const container = common.findContainer(ReactDOM.findDOMNode(this as any)!.childNodes)
@@ -52,12 +52,12 @@ export class ArrayEditor extends React.Component<Props, State> {
       })
     }
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.drak) {
       this.drak.destroy()
     }
   }
-  render () {
+  render() {
     const childrenElement: JSX.Element[] = this.getValue.map((p, i) => ({ p, i }))
       .filter(({ p, i }) => common.filterArray(p, i, this.props.schema.items, this.filter))
       .map(({ p, i }) => (
@@ -169,7 +169,7 @@ export class ArrayEditor extends React.Component<Props, State> {
     this.setState({ value: this.value })
     this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
   }
-  private validate () {
+  private validate() {
     this.errorMessage = common.getErrorMessageOfArray(this.value, this.props.schema, this.props.locale)
   }
   private addItem = () => {
@@ -215,33 +215,33 @@ export class ArrayEditor extends React.Component<Props, State> {
     this.validate()
     this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)
   }
-  private get isReadOnly () {
+  private get isReadOnly() {
     return this.props.readonly || this.props.schema.readonly
   }
-  private get hasDeleteButtonFunction () {
+  private get hasDeleteButtonFunction() {
     return this.props.onDelete && !this.isReadOnly
   }
-  private get hasAddButton () {
+  private get hasAddButton() {
     return !this.isReadOnly && this.value !== undefined && !this.props.schema.enum
   }
-  private get getValue () {
+  private get getValue() {
     if (this.value !== undefined && !this.collapsed) {
       return this.value
     }
     return []
   }
-  private get titleToShow () {
+  private get titleToShow() {
     return common.getTitle(this.props.title, this.props.schema.title)
   }
-  private get showFilter () {
+  private get showFilter() {
     const minItemCountIfNeedFilter = typeof this.props.minItemCountIfNeedFilter === 'number' ? this.props.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
     return this.getValue.length >= minItemCountIfNeedFilter
   }
-  private get className () {
+  private get className() {
     const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row
     return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
   }
-  private get options () {
+  private get options() {
     return common.getOptions(this.props.schema) as Select2Option[]
   }
 }
