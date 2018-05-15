@@ -15,7 +15,7 @@ class Main extends React.Component<{}, {}> {
   private isValid = false
   private propertiesSchema = propertiesSchema
   private propertiesInitialValue = propertiesInitialValue
-  componentWillMount () {
+  componentWillMount() {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
         this.locale = module.locale
@@ -23,7 +23,7 @@ class Main extends React.Component<{}, {}> {
       })
     }
   }
-  render () {
+  render() {
     const valueHtml = hljs.highlight('json', JSON.stringify(this.initialValue, null, '  ')).value
     return (
       <div style={{ position: 'relative' }}>

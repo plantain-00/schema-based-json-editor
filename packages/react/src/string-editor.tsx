@@ -26,25 +26,26 @@ export class StringEditor extends React.Component<Props, State> {
   private errorMessage!: string
   private collapsed = false
   private willRender = false
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string
     this.validate()
   }
-  componentDidMount () {
+  componentDidMount() {
     this.props.updateValue(this.value, !this.errorMessage)
   }
-  shouldComponentUpdate (nextProps: Props, nextState: State) {
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
     if (this.willRender) {
       this.willRender = false
       return true
     }
     return this.props.initialValue !== nextProps.initialValue
   }
-  render () {
+  // tslint:disable-next-line:cognitive-complexity
+  render() {
     const fileUploader = this.canUpload ? (
       <FileUploader locale={this.props.locale.fileUploaderLocale}
-      fileGot={(e) => this.fileGot(e)}>
+        fileGot={(e) => this.fileGot(e)}>
       </FileUploader>
     ) : null
 
@@ -148,88 +149,88 @@ export class StringEditor extends React.Component<Props, State> {
     this.setState({ value: this.value })
     this.props.updateValue(this.value, !this.errorMessage)
   }
-  private get isReadOnly () {
+  private get isReadOnly() {
     return this.props.readonly || this.props.schema.readonly
   }
-  private get hasDeleteButtonFunction () {
+  private get hasDeleteButtonFunction() {
     return this.props.onDelete && !this.isReadOnly
   }
-  private get useTextArea () {
+  private get useTextArea() {
     return this.value !== undefined
       && !this.collapsed
       && (this.props.schema.enum === undefined || this.isReadOnly)
       && (this.props.schema.format === 'textarea' || this.props.schema.format === 'code' || this.props.schema.format === 'markdown')
   }
-  private get useInput () {
+  private get useInput() {
     return this.value !== undefined
       && !this.collapsed
       && (this.props.schema.enum === undefined || this.isReadOnly)
       && (this.props.schema.format !== 'textarea' && this.props.schema.format !== 'code' && this.props.schema.format !== 'markdown')
   }
-  private get useSelect () {
+  private get useSelect() {
     return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly
   }
-  private get useSelect2Component () {
+  private get useSelect2Component() {
     return this.useSelect && !this.props.noSelect2 && this.props.schema.format !== 'select' && this.props.schema.format !== 'radiobox'
   }
-  private get useSelectComponent () {
+  private get useSelectComponent() {
     return this.useSelect && (this.props.schema.format === 'select' || this.props.noSelect2)
   }
-  private get useRadioBoxComponent () {
+  private get useRadioBoxComponent() {
     return this.useSelect && this.props.schema.format === 'radiobox'
   }
 
-  private get canPreviewImage () {
+  private get canPreviewImage() {
     return common.isImageUrl(this.value) || common.isBase64Image(this.value)
   }
-  private get canPreviewMarkdown () {
+  private get canPreviewMarkdown() {
     return this.props.md && this.props.schema.format === 'markdown'
   }
-  private get canPreviewCode () {
+  private get canPreviewCode() {
     return this.props.hljs && this.props.schema.format === 'code'
   }
-  private get canPreview () {
+  private get canPreview() {
     return (!!this.value) && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode)
   }
-  private get getImageUrl () {
+  private get getImageUrl() {
     return this.props.forceHttps ? common.replaceProtocal(this.value!) : this.value
   }
-  private get getMarkdown () {
+  private get getMarkdown() {
     return this.props.md!.render(this.value!)
   }
-  private get getCode () {
+  private get getCode() {
     return this.props.hljs!.highlightAuto(this.value!).value
   }
-  private get willPreviewImage () {
+  private get willPreviewImage() {
     return this.value && !this.collapsed && this.canPreviewImage
   }
-  private get willPreviewMarkdown () {
+  private get willPreviewMarkdown() {
     return this.value && !this.collapsed && this.canPreviewMarkdown
   }
-  private get willPreviewCode () {
+  private get willPreviewCode() {
     return this.value && !this.collapsed && this.canPreviewCode
   }
-  private get titleToShow () {
+  private get titleToShow() {
     return common.getTitle(this.props.title, this.props.schema.title)
   }
-  private get options () {
+  private get options() {
     return common.getOptions(this.props.schema) as Select2Option[]
   }
-  private get canUpload () {
+  private get canUpload() {
     return this.props.schema.format === 'base64'
   }
-  private get className () {
+  private get className() {
     const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row
     return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
   }
 
-  private updateSelection (value: Select2UpdateValue) {
+  private updateSelection(value: Select2UpdateValue) {
     this.value = value.toString()
     this.validate()
     this.setState({ value: this.value })
     this.props.updateValue(this.value, !this.errorMessage)
   }
-  private fileGot (file: File | Blob) {
+  private fileGot(file: File | Blob) {
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = () => {
@@ -243,7 +244,7 @@ export class StringEditor extends React.Component<Props, State> {
     }
   }
 
-  private validate () {
+  private validate() {
     this.errorMessage = common.getErrorMessageOfString(this.value, this.props.schema, this.props.locale)
   }
   private toggleOptional = () => {

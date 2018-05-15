@@ -17,17 +17,17 @@ export type State = Partial<{
 
 export class NullEditor extends React.Component<Props, State> {
   private value?: null
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as null
   }
-  componentDidMount () {
+  componentDidMount() {
     this.props.updateValue(this.value, true)
   }
-  shouldComponentUpdate (nextProps: Props, nextState: State) {
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
     return this.props.initialValue !== nextProps.initialValue
   }
-  render () {
+  render() {
     return (
       <div className={this.props.theme.row}>
         <label className={this.props.theme.title}>
@@ -55,13 +55,13 @@ export class NullEditor extends React.Component<Props, State> {
     this.setState({ value: this.value })
     this.props.updateValue(this.value, true)
   }
-  private get isReadOnly () {
+  private get isReadOnly() {
     return this.props.readonly || this.props.schema.readonly
   }
-  private get hasDeleteButtonFunction () {
+  private get hasDeleteButtonFunction() {
     return this.props.onDelete && !this.isReadOnly
   }
-  private get titleToShow () {
+  private get titleToShow() {
     return common.getTitle(this.props.title, this.props.schema.title)
   }
 }

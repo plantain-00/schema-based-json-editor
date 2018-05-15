@@ -36,46 +36,46 @@ export class NumberEditorComponent {
   value?: number
   errorMessage!: string
   buttonGroupStyle = common.buttonGroupStyleString
-  onChange (e: { target: { value: string } }) {
+  onChange(e: { target: { value: string } }) {
     this.updateSelection(e.target.value)
   }
-  ngOnInit () {
+  ngOnInit() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as number
     this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
   }
-  get useInput () {
+  get useInput() {
     return this.value !== undefined && (this.schema.enum === undefined || this.isReadOnly)
   }
-  get useSelect () {
+  get useSelect() {
     return this.value !== undefined && (this.schema.enum !== undefined && !this.isReadOnly)
   }
-  get useSelect2Component () {
+  get useSelect2Component() {
     return this.useSelect && !this.noSelect2 && this.schema.format !== 'select' && this.schema.format !== 'radiobox'
   }
-  get useSelectComponent () {
+  get useSelectComponent() {
     return this.useSelect && (this.schema.format === 'select' || this.noSelect2)
   }
-  get useRadioBoxComponent () {
+  get useRadioBoxComponent() {
     return this.useSelect && this.schema.format === 'radiobox'
   }
-  get isReadOnly () {
+  get isReadOnly() {
     return this.readonly || this.schema.readonly
   }
-  get hasDeleteButtonFunction () {
+  get hasDeleteButtonFunction() {
     return this.hasDeleteButton && !this.isReadOnly
   }
-  get titleToShow () {
+  get titleToShow() {
     return common.getTitle(this.title, this.schema.title)
   }
-  get options () {
+  get options() {
     return common.getOptions(this.schema)
   }
-  get className () {
+  get className() {
     const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
     return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
   }
 
-  updateSelection (value: any) {
+  updateSelection(value: any) {
     this.value = this.schema.type === 'integer' ? common.toInteger(value) : common.toNumber(value)
     this.validate()
     this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
@@ -83,12 +83,12 @@ export class NumberEditorComponent {
   trackByFunction = (index: number) => {
     return index
   }
-  toggleOptional () {
+  toggleOptional() {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as number | undefined
     this.validate()
     this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
   }
-  private validate () {
+  private validate() {
     this.errorMessage = common.getErrorMessageOfNumber(this.value, this.schema, this.locale)
   }
 }

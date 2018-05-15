@@ -28,7 +28,7 @@ export class ObjectEditor extends React.Component<Props, State> {
   private errorMessage!: string
   private properties: { property: string; schema: common.Schema }[] = []
   private filter: string = ''
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType }
     this.validate()
@@ -47,10 +47,10 @@ export class ObjectEditor extends React.Component<Props, State> {
       this.properties = this.properties.sort(common.compare)
     }
   }
-  componentDidMount () {
+  componentDidMount() {
     this.props.updateValue(this.value, this.invalidProperties.length === 0)
   }
-  render () {
+  render() {
     const childrenElement: JSX.Element[] = (!this.collapsed && this.value !== undefined)
       ? this.properties.filter(p => common.filterObject(p, this.filter) && this.isRequired(p.property) !== false)
         .map(({ property, schema }) => <Editor key={property + this.isRequired(property)}
@@ -135,30 +135,30 @@ export class ObjectEditor extends React.Component<Props, State> {
     common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property)
     this.props.updateValue(this.value, !this.errorMessage && this.invalidProperties.length === 0)
   }
-  private isRequired (property: string) {
+  private isRequired(property: string) {
     return common.isRequired(this.props.schema.required, this.value, this.props.schema, property)
   }
-  private validate () {
+  private validate() {
     this.errorMessage = common.getErrorMessageOfObject(this.value, this.props.schema, this.props.locale)
   }
-  private get isReadOnly () {
+  private get isReadOnly() {
     return this.props.readonly || this.props.schema.readonly
   }
-  private get hasDeleteButtonFunction () {
+  private get hasDeleteButtonFunction() {
     return this.props.onDelete && !this.isReadOnly
   }
-  private get titleToShow () {
+  private get titleToShow() {
     if (this.props.onDelete) {
       return common.getTitle(common.findTitle(this.value, this.properties), this.props.title, this.props.schema.title)
     }
     return common.getTitle(this.props.title, this.props.schema.title)
   }
-  private get showFilter () {
+  private get showFilter() {
     const propertyCount = this.properties.filter(p => this.isRequired(p.property) !== false).length
     const minItemCountIfNeedFilter = typeof this.props.minItemCountIfNeedFilter === 'number' ? this.props.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
     return propertyCount >= minItemCountIfNeedFilter
   }
-  private get className () {
+  private get className() {
     const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row
     return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
   }

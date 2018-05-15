@@ -5,7 +5,7 @@ export class Description extends React.Component<{
   theme: common.Theme;
   message: string | undefined;
 }, {}> {
-  render () {
+  render() {
     if (this.props.message) {
       return <p className={this.props.theme.description}>{this.props.message}</p>
     }

@@ -9,7 +9,7 @@ export class Optional extends React.Component<{
   locale: common.Locale;
   toggleOptional: () => void;
 }, {}> {
-  render () {
+  render() {
     if (!this.props.required && (this.props.value === undefined || !this.props.isReadOnly)) {
       return (
         <div className={this.props.theme.checkbox}>

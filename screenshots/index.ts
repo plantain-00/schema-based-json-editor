@@ -1,6 +1,6 @@
 import * as puppeteer from 'puppeteer'
 
-(async () => {
+(async() => {
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
   await page.emulate({ viewport: { width: 1440, height: 900 }, userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36' })
@@ -63,12 +63,6 @@ import * as puppeteer from 'puppeteer'
     await (page.type as any)(`${prefix}:nth-child(100n+8) input`, 'hello')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-array.png` })
-
-    // if (type === 'angular' || type === 'aot') {
-    //   await (page as any).select(`${prefix}:nth-child(100n+11) select`, 'enum 2')
-    //   await page.waitFor(100)
-    //   await page.screenshot({ path: `screenshots/${type}-enum.png` })
-    // }
 
     await (page.type as any)(`${prefix}:nth-child(100n+16) textarea`, 'hello')
     await page.waitFor(100)

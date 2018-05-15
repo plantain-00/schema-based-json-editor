@@ -41,107 +41,108 @@ export class StringEditor extends Vue {
   collapsed = false
   imagePreviewStyle = common.imagePreviewStyleString
 
-  onChange (e: { target: { value: string } }) {
+  onChange(e: { target: { value: string } }) {
     this.value = e.target.value
     this.validate()
+    // tslint:disable-next-line:no-duplicate-string
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
   }
 
-  beforeMount () {
+  beforeMount() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string
     this.validate()
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
   }
 
-  private get canPreviewImage () {
+  private get canPreviewImage() {
     return common.isImageUrl(this.value) || common.isBase64Image(this.value)
   }
-  private get canPreviewMarkdown () {
+  private get canPreviewMarkdown() {
     return this.md && this.schema.format === 'markdown'
   }
-  private get canPreviewCode () {
+  private get canPreviewCode() {
     return this.hljs && this.schema.format === 'code'
   }
-  get canPreview () {
+  get canPreview() {
     return (!!this.value) && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode)
   }
-  get useTextArea () {
+  get useTextArea() {
     return this.value !== undefined
-            && !this.collapsed
-            && (this.schema.enum === undefined || this.isReadOnly)
-            && (this.schema.format === 'textarea' || this.schema.format === 'code' || this.schema.format === 'markdown')
+      && !this.collapsed
+      && (this.schema.enum === undefined || this.isReadOnly)
+      && (this.schema.format === 'textarea' || this.schema.format === 'code' || this.schema.format === 'markdown')
   }
-  get useInput () {
+  get useInput() {
     return this.value !== undefined
-            && !this.collapsed
-            && (this.schema.enum === undefined || this.isReadOnly)
-            && (this.schema.format !== 'textarea' && this.schema.format !== 'code' && this.schema.format !== 'markdown')
+      && !this.collapsed
+      && (this.schema.enum === undefined || this.isReadOnly)
+      && (this.schema.format !== 'textarea' && this.schema.format !== 'code' && this.schema.format !== 'markdown')
   }
-  private get useSelect () {
+  private get useSelect() {
     return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly
   }
-  get useSelect2Component () {
+  get useSelect2Component() {
     return this.useSelect && !this.noSelect2 && this.schema.format !== 'select' && this.schema.format !== 'radiobox'
   }
-  get useSelectComponent () {
+  get useSelectComponent() {
     return this.useSelect && (this.schema.format === 'select' || this.noSelect2)
   }
-  get useRadioBoxComponent () {
+  get useRadioBoxComponent() {
     return this.useSelect && this.schema.format === 'radiobox'
   }
-  get getImageUrl () {
+  get getImageUrl() {
     return this.forceHttps ? common.replaceProtocal(this.value!) : this.value
   }
-  get getMarkdown () {
+  get getMarkdown() {
     return this.md!.render(this.value!)
   }
-  get getCode () {
+  get getCode() {
     return this.hljs!.highlightAuto(this.value!).value
   }
-  get isReadOnly () {
+  get isReadOnly() {
     return this.readonly || this.schema.readonly
   }
-  get hasDeleteButtonFunction () {
+  get hasDeleteButtonFunction() {
     return this.hasDeleteButton && !this.isReadOnly
   }
-  get willPreviewImage () {
+  get willPreviewImage() {
     return this.value && !this.collapsed && this.canPreviewImage
   }
-  get willPreviewMarkdown () {
+  get willPreviewMarkdown() {
     return this.value && !this.collapsed && this.canPreviewMarkdown
   }
-  get willPreviewCode () {
+  get willPreviewCode() {
     return this.value && !this.collapsed && this.canPreviewCode
   }
-  get titleToShow () {
+  get titleToShow() {
     return common.getTitle(this.title, this.schema.title)
   }
-  get options () {
+  get options() {
     return common.getOptions(this.schema)
   }
-  get canUpload () {
+  get canUpload() {
     return this.schema.format === 'base64'
   }
-  get className () {
+  get className() {
     const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
     return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
   }
 
-  updateSelection (value: string) {
+  updateSelection(value: string) {
     this.value = value
     this.validate()
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
   }
 
-  toggleOptional () {
+  toggleOptional() {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined
     this.validate()
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
   }
-  collapseOrExpand () {
+  collapseOrExpand() {
     this.collapsed = !this.collapsed
   }
-  fileGot (file: File | Blob) {
+  fileGot(file: File | Blob) {
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = () => {
@@ -153,7 +154,7 @@ export class StringEditor extends Vue {
       console.log(error)
     }
   }
-  private validate () {
+  private validate() {
     this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale)
   }
 }

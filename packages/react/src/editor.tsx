@@ -8,7 +8,7 @@ import { NullEditor } from './null-editor'
 import { StringEditor } from './string-editor'
 
 export class Editor extends React.Component<common.Props<common.Schema, common.ValueType>, {}> {
-  render () {
+  render() {
     switch (this.props.schema.type) {
       case 'object':
         return <ObjectEditor {...this.props as common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>} />

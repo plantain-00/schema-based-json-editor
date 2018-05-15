@@ -1,5 +1,7 @@
 import * as common from '../packages/core/dist'
 
+// tslint:disable:no-duplicate-string
+
 describe('getDefaultValue', () => {
   it('should work', () => {
     expect(common.getDefaultValue(true, { type: 'string' }, 'initial value')).toEqual('initial value')

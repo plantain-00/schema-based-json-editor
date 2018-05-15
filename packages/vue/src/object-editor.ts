@@ -56,7 +56,7 @@ export class ObjectEditor extends Vue {
   private properties: { property: string; schema: common.Schema }[] = []
   private watchedProperties: string[] = []
 
-  beforeMount () {
+  beforeMount() {
     this.collapsed = this.schema.collapsed
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as { [name: string]: common.ValueType }
     this.validate()
@@ -72,7 +72,7 @@ export class ObjectEditor extends Vue {
           })
         }
       }
-      this.properties = this.properties.sort(common.compare)
+      this.properties.sort(common.compare)
     }
     for (const property in this.schema.properties) {
       const schema = this.schema.properties[property]
@@ -80,46 +80,47 @@ export class ObjectEditor extends Vue {
         this.watchedProperties.push(schema.requiredWhen[0])
       }
     }
+    // tslint:disable-next-line:no-duplicate-string
     this.$emit('update-value', { value: this.value, isValid: true })
   }
 
-  get filteredProperties () {
+  get filteredProperties() {
     return this.properties.filter(p => common.filterObject(p, this.filter))
   }
-  get isReadOnly () {
+  get isReadOnly() {
     return this.readonly || this.schema.readonly
   }
-  get hasDeleteButtonFunction () {
+  get hasDeleteButtonFunction() {
     return this.hasDeleteButton && !this.isReadOnly
   }
-  get titleToShow () {
+  get titleToShow() {
     if (this.hasDeleteButton) {
       return common.getTitle(common.findTitle(this.value, this.properties), this.title, this.schema.title)
     }
     return common.getTitle(this.title, this.schema.title)
   }
-  get showFilter () {
+  get showFilter() {
     const propertyCount = this.properties.filter(p => this.isRequired(p.property) !== false).length
     const minItemCountIfNeedFilter = typeof this.minItemCountIfNeedFilter === 'number' ? this.minItemCountIfNeedFilter : common.minItemCountIfNeedFilter
     return propertyCount >= minItemCountIfNeedFilter
   }
-  get className () {
+  get className() {
     const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
     return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
   }
 
-  isRequired (property: string) {
+  isRequired(property: string) {
     return common.isRequired(this.schema.required, this.value, this.schema, property)
   }
-  collapseOrExpand () {
+  collapseOrExpand() {
     this.collapsed = !this.collapsed
   }
-  toggleOptional () {
+  toggleOptional() {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as { [name: string]: common.ValueType } | undefined
     this.validate()
     this.$emit('update-value', { value: this.value, isValid: this.invalidProperties.length === 0 })
   }
-  onChange (property: string, { value, isValid }: common.ValidityValue<common.ValueType>) {
+  onChange(property: string, { value, isValid }: common.ValidityValue<common.ValueType>) {
     this.value![property] = value
     for (const p in this.schema.properties) {
       if (this.isRequired(p) === false) {
@@ -133,10 +134,10 @@ export class ObjectEditor extends Vue {
     common.recordInvalidPropertiesOfObject(this.invalidProperties, isValid, property)
     this.$emit('update-value', { value: this.value, isValid: this.invalidProperties.length === 0 })
   }
-  onFilterChange (e: { target: { value: string } }) {
+  onFilterChange(e: { target: { value: string } }) {
     this.filter = e.target.value
   }
-  private validate () {
+  private validate() {
     this.errorMessage = common.getErrorMessageOfObject(this.value, this.schema, this.locale)
   }
 }

@@ -9,19 +9,19 @@ import { optionalTemplateHtml } from './variables'
 })
 export class OptionalComponent {
   @Input()
-    required: boolean | undefined
+  required: boolean | undefined
   @Input()
-    value: common.ValueType | undefined
+  value: common.ValueType | undefined
   @Input()
-    isReadOnly: boolean | undefined
+  isReadOnly: boolean | undefined
   @Input()
-    theme!: common.Theme
+  theme!: common.Theme
   @Input()
-    locale!: common.Locale
+  locale!: common.Locale
   @Output()
-    toggleOptional = new EventEmitter()
+  toggleOptional = new EventEmitter()
 
-  get hasOptionalCheckbox () {
+  get hasOptionalCheckbox() {
     return !this.required && (this.value === undefined || !this.isReadOnly)
   }
 }

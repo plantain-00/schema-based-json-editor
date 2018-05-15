@@ -32,28 +32,28 @@ export class BooleanEditorComponent {
 
   value?: boolean
   buttonGroupStyle = common.buttonGroupStyleString
-  ngOnInit () {
+  ngOnInit() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean
     this.updateValue.emit({ value: this.value, isValid: true })
   }
-  onChange () {
+  onChange() {
     this.value = !this.value
     this.updateValue.emit({ value: this.value, isValid: true })
   }
-  toggleOptional () {
+  toggleOptional() {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as boolean | undefined
     this.updateValue.emit({ value: this.value, isValid: true })
   }
-  get isReadOnly () {
+  get isReadOnly() {
     return this.readonly || this.schema.readonly
   }
-  get hasDeleteButtonFunction () {
+  get hasDeleteButtonFunction() {
     return this.hasDeleteButton && !this.isReadOnly
   }
-  get titleToShow () {
+  get titleToShow() {
     return common.getTitle(this.title, this.schema.title)
   }
-  get className () {
+  get className() {
     const rowClass = this.theme.row
     return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
   }

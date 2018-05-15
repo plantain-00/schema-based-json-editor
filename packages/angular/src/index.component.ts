@@ -42,18 +42,18 @@ export class JSONEditorComponent {
   @Input()
   minItemCountIfNeedFilter?: number
 
-  get themeObject () {
+  get themeObject() {
     return common.getTheme(this.theme)
   }
-  get localeObject () {
+  get localeObject() {
     return common.getLocale(this.locale)
   }
-  get iconObject () {
+  get iconObject() {
     return common.getIcon(this.icon, this.localeObject)
   }
   md?: MarkdownIt
 
-  ngOnInit () {
+  ngOnInit() {
     this.md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)
   }
 }

@@ -59,24 +59,24 @@ export class MainComponent {
   propertiesInitialValue = propertiesInitialValue
   theme = theme
   icon = icon
-  ngOnInit () {
+  ngOnInit() {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
         this.locale = module.locale
       })
     }
   }
-  updatePropertiesValue ({ value }: ValidityValue<ValueType>) {
+  updatePropertiesValue({ value }: ValidityValue<ValueType>) {
     try {
       localStorage.setItem('json-editor:properties', JSON.stringify(value))
     } catch (error) {
       console.log(error)
     }
   }
-  get valueHtml () {
+  get valueHtml() {
     return hljs.highlight('json', JSON.stringify(this.initialValue, null, '  ')).value
   }
-  updateValue ({ value, isValid }: ValidityValue<ValueType>) {
+  updateValue({ value, isValid }: ValidityValue<ValueType>) {
     this.initialValue = value
     this.color = isValid ? 'black' : 'red'
   }

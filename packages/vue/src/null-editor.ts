@@ -30,22 +30,22 @@ export class NullEditor extends Vue {
   value?: null = null
   buttonGroupStyle = common.buttonGroupStyleString
 
-  beforeMount () {
+  beforeMount() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as null
     this.$emit('update-value', { value: this.value, isValid: true })
   }
 
-  get isReadOnly () {
+  get isReadOnly() {
     return this.readonly || this.schema.readonly
   }
-  get hasDeleteButtonFunction () {
+  get hasDeleteButtonFunction() {
     return this.hasDeleteButton && !this.isReadOnly
   }
-  get titleToShow () {
+  get titleToShow() {
     return common.getTitle(this.title, this.schema.title)
   }
 
-  toggleOptional () {
+  toggleOptional() {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as null | undefined
     this.$emit('update-value', { value: this.value, isValid: true })
   }

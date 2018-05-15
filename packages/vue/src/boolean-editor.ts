@@ -30,21 +30,22 @@ export class BooleanEditor extends Vue {
   value?: boolean = false
   buttonGroupStyle = common.buttonGroupStyleString
 
-  beforeMount () {
+  beforeMount() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean
+    // tslint:disable-next-line:no-duplicate-string
     this.$emit('update-value', { value: this.value, isValid: true })
   }
 
-  get isReadOnly () {
+  get isReadOnly() {
     return this.readonly || this.schema.readonly
   }
-  get hasDeleteButtonFunction () {
+  get hasDeleteButtonFunction() {
     return this.hasDeleteButton && !this.isReadOnly
   }
-  get titleToShow () {
+  get titleToShow() {
     return common.getTitle(this.title, this.schema.title)
   }
-  get booleanOptions () {
+  get booleanOptions() {
     return [
       {
         value: true,
@@ -56,16 +57,16 @@ export class BooleanEditor extends Vue {
       }
     ]
   }
-  get className () {
+  get className() {
     const rowClass = this.theme.row
     return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
   }
 
-  onChange () {
+  onChange() {
     this.value = !this.value
     this.$emit('update-value', { value: this.value, isValid: true })
   }
-  toggleOptional () {
+  toggleOptional() {
     this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as boolean | undefined
     this.$emit('update-value', { value: this.value, isValid: true })
   }

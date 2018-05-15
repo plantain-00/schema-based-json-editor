@@ -29,11 +29,11 @@ export type Props = {
  */
 export class JSONEditor extends React.Component<Props, {}> {
   private md?: MarkdownIt
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.md = common.initializeMarkdown(this.props.markdownit, this.props.hljs, this.props.forceHttps)
   }
-  render () {
+  render() {
     const theme = common.getTheme(this.props.theme)
     const locale = common.getLocale(this.props.locale)
     const icon = common.getIcon(this.props.icon, locale)
