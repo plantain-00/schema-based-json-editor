@@ -23,6 +23,8 @@
 
 ## reactjs component
 
+[![gzip size](https://img.badgesize.io/https://unpkg.com/react-schema-based-json-editor?compression=gzip)](https://unpkg.com/react-schema-based-json-editor)
+
 `npm i react-schema-based-json-editor`
 
 ```js
@@ -77,6 +79,8 @@ the online demo: <https://plantain-00.github.io/schema-based-json-editor/package
 the AOT online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/angular/demo/aot>
 
 ## vuejs component
+
+[![gzip size](https://img.badgesize.io/https://unpkg.com/vue-schema-based-json-editor?compression=gzip)](https://unpkg.com/vue-schema-based-json-editor)
 
 `npm i vue-schema-based-json-editor`
 
