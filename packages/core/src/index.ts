@@ -73,6 +73,7 @@ export type NumberSchema = CommonSchema & {
  */
 export type StringSchema = CommonSchema & {
   type: 'string';
+  // tslint:disable-next-line:max-union-size
   format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox';
   enum?: string[];
   minLength?: number;
@@ -902,8 +903,6 @@ export function findTitle(value: { [name: string]: ValueType } | undefined, prop
           return title.substring(0, 20) + '...'
         }
         return title
-      } else {
-        continue
       }
     }
   }
@@ -921,8 +920,6 @@ function findTitleFromSchema(value: { [name: string]: ValueType } | undefined, s
             return title.substring(0, 20) + '...'
           }
           return title
-        } else {
-          continue
         }
       }
     }
