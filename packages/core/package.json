@@ -24,6 +24,9 @@
     "src/lib.ngsummary.json"
   ],
   "dependencies": {
+    "@types/dragula": "*",
+    "@types/highlight.js": "*",
+    "@types/markdown-it": "*",
     "file-uploader-component": "7",
     "lodash.isinteger": "4",
     "lodash.isobject": "3",

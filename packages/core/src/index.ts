@@ -519,8 +519,6 @@ export const buttonGroupStyle = { marginLeft: '10px' }
  */
 export const buttonGroupStyleString = 'margin-left: 10px'
 
-import { HLJS, Dragula, MarkdownIt, Token, TokenRender, Renderer, MarkdownItType } from './libs'
-
 /**
  * @public
  */
@@ -1059,3 +1057,24 @@ export function getOptions(schema: NumberSchema | StringSchema | ArraySchema) {
     label: typeof enumTitles[i] === 'string' ? enumTitles[i] : e
   }))
 }
+
+import dragula from 'dragula'
+import markdownit, { MarkdownIt, Token, TokenRender, Renderer } from 'markdown-it'
+import hljs from 'highlight.js'
+
+/**
+ * @public
+ */
+export type Dragula = typeof dragula
+
+export { MarkdownIt, Token, TokenRender, Renderer }
+
+/**
+ * @public
+ */
+export type HLJS = typeof hljs
+
+/**
+ * @public
+ */
+export type MarkdownItType = typeof markdownit

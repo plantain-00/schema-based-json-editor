@@ -4,7 +4,6 @@ import * as common from 'schema-based-json-editor'
 import { Icon } from './icon'
 import { Optional } from './optional'
 import { Description } from './description'
-import { MarkdownIt, HLJS } from 'schema-based-json-editor/dist/libs'
 import { stringEditorTemplateHtml, stringEditorTemplateHtmlStatic } from './variables'
 import 'markdown-tip-vue'
 import 'select2-vue-component'
@@ -30,8 +29,8 @@ export class StringEditor extends Vue {
   readonly!: boolean
   required!: boolean
   hasDeleteButton!: boolean
-  md?: MarkdownIt
-  hljs?: HLJS
+  md?: common.MarkdownIt
+  hljs?: common.HLJS
   forceHttps?: boolean
   noSelect2?: boolean
 

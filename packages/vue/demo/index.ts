@@ -6,9 +6,9 @@ import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, 
 import '../dist/'
 import { ValidityValue, ValueType } from '../dist/'
 
-import * as dragula from 'dragula'
-import * as MarkdownIt from 'markdown-it'
-import * as hljs from 'highlight.js'
+import dragula from 'dragula'
+import MarkdownIt from 'markdown-it'
+import hljs from 'highlight.js'
 
 addAllCssLinks('../../core/demo/css/')
 
