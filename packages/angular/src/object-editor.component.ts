@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 import * as common from 'schema-based-json-editor'
-import { Dragula, MarkdownIt, HLJS } from 'schema-based-json-editor/dist/libs'
 import { objectEditorTemplateHtml } from './variables'
 
 @Component({
@@ -32,11 +31,11 @@ export class ObjectEditorComponent {
   @Input()
   hasDeleteButton!: boolean
   @Input()
-  dragula?: Dragula
+  dragula?: common.Dragula
   @Input()
-  md?: MarkdownIt
+  md?: common.MarkdownIt
   @Input()
-  hljs?: HLJS
+  hljs?: common.HLJS
   @Input()
   forceHttps?: boolean
   @Input()

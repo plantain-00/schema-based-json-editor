@@ -1,6 +1,6 @@
 {
   "name": "angular-schema-based-json-editor",
-  "version": "7.14.0",
+  "version": "7.15.0-0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A angular component of schema based json editor.",
@@ -23,15 +23,15 @@
     "dist"
   ],
   "dependencies": {
-    "@angular/common": "5",
-    "@angular/core": "5",
-    "@angular/forms": "5",
     "@types/dragula": "*",
     "@types/highlight.js": "*",
     "@types/markdown-it": "*",
+    "@angular/common": "5",
+    "@angular/core": "5",
+    "@angular/forms": "5",
     "file-uploader-angular-component": "7",
     "markdown-tip-angular": "6",
-    "schema-based-json-editor": "^7.14.0",
+    "schema-based-json-editor": "^7.15.0-0",
     "select2-angular-component": "5"
   },
   "devDependencies": {

@@ -3,8 +3,6 @@ import Component from 'vue-class-component'
 import * as common from 'schema-based-json-editor'
 export * from 'schema-based-json-editor'
 
-import { MarkdownItType, HLJS } from 'schema-based-json-editor/dist/libs'
-
 import { Editor } from './editor'
 
 import { ArrayEditor } from './array-editor'
@@ -49,8 +47,8 @@ export class JSONEditor extends Vue {
   theme: string | undefined
   locale!: common.Locale
   icon: string | undefined
-  markdownit: MarkdownItType | undefined
-  hljs: HLJS | undefined
+  markdownit: common.MarkdownItType | undefined
+  hljs: common.HLJS | undefined
   forceHttps: boolean | undefined
 
   themeObject = common.getTheme(this.theme)

@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 
 import * as common from 'schema-based-json-editor'
 export * from 'schema-based-json-editor'
-import { Dragula, MarkdownItType, MarkdownIt, HLJS } from 'schema-based-json-editor/dist/libs'
 import { indexTemplateHtml } from './variables'
 
 /**
@@ -28,11 +27,11 @@ export class JSONEditorComponent {
   @Input()
   readonly?: boolean
   @Input()
-  dragula?: Dragula
+  dragula?: common.Dragula
   @Input()
-  markdownit?: MarkdownItType
+  markdownit?: common.MarkdownItType
   @Input()
-  hljs?: HLJS
+  hljs?: common.HLJS
   @Input()
   forceHttps?: boolean
   @Input()
@@ -51,7 +50,7 @@ export class JSONEditorComponent {
   get iconObject() {
     return common.getIcon(this.icon, this.localeObject)
   }
-  md?: MarkdownIt
+  md?: common.MarkdownIt
 
   ngOnInit() {
     this.md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)

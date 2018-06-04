@@ -1,6 +1,6 @@
 {
   "name": "schema-based-json-editor",
-  "version": "7.14.0",
+  "version": "7.15.0-0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs, angular and vuejs component of schema based json editor.",
@@ -24,6 +24,9 @@
     "src/lib.ngsummary.json"
   ],
   "dependencies": {
+    "@types/dragula": "*",
+    "@types/highlight.js": "*",
+    "@types/markdown-it": "*",
     "file-uploader-component": "7",
     "lodash.isinteger": "4",
     "lodash.isobject": "3",

@@ -5,7 +5,6 @@ import { Icon } from './icon'
 import { Editor } from './editor'
 import { Optional } from './optional'
 import { Description } from './description'
-import { Dragula } from 'schema-based-json-editor/dist/libs'
 import { arrayEditorTemplateHtml, arrayEditorTemplateHtmlStatic } from './variables'
 
 @Component({
@@ -46,7 +45,7 @@ export class ArrayEditor extends Vue {
   readonly!: boolean
   required!: boolean
   hasDeleteButton!: boolean
-  dragula?: Dragula
+  dragula?: common.Dragula
   noSelect2?: boolean
   minItemCountIfNeedFilter?: number
 

@@ -2,7 +2,6 @@ import * as React from 'react'
 import * as common from 'schema-based-json-editor'
 export * from 'schema-based-json-editor'
 import { Editor } from './editor'
-import { Dragula, MarkdownItType, MarkdownIt, HLJS } from 'schema-based-json-editor/dist/libs'
 
 /**
  * @public
@@ -15,9 +14,9 @@ export type Props = {
   icon?: string;
   locale?: common.Locale | null;
   readonly?: boolean;
-  dragula?: Dragula;
-  markdownit?: MarkdownItType;
-  hljs?: HLJS;
+  dragula?: common.Dragula;
+  markdownit?: common.MarkdownItType;
+  hljs?: common.HLJS;
   forceHttps?: boolean;
   disableCollapse?: boolean;
   noSelect2?: boolean;
@@ -28,7 +27,7 @@ export type Props = {
  * @public
  */
 export class JSONEditor extends React.Component<Props, {}> {
-  private md?: MarkdownIt
+  private md?: common.MarkdownIt
   constructor(props: Props) {
     super(props)
     this.md = common.initializeMarkdown(this.props.markdownit, this.props.hljs, this.props.forceHttps)
