@@ -26,6 +26,9 @@
     "dist"
   ],
   "dependencies": {
+    "@types/dragula": "*",
+    "@types/highlight.js": "*",
+    "@types/markdown-it": "*",
     "file-uploader-vue-component": "7",
     "markdown-tip-vue": "6",
     "schema-based-json-editor": "^7.15.0-0",

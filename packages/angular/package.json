@@ -23,6 +23,9 @@
     "dist"
   ],
   "dependencies": {
+    "@types/dragula": "*",
+    "@types/highlight.js": "*",
+    "@types/markdown-it": "*",
     "@angular/common": "5",
     "@angular/core": "5",
     "@angular/forms": "5",
