@@ -44,13 +44,8 @@
     "markdown-it": "8.4.1"
   },
   "peerDependencies": {
-    "@types/dragula": "*",
-    "@types/highlight.js": "*",
-    "@types/markdown-it": "*",
-    "markdown-tip-react": "6",
     "react": "16",
     "react-dom": "16",
-    "schema-based-json-editor": "^7.14.0",
-    "select2-react-component": "5"
+    "schema-based-json-editor": "^7.14.0"
   }
 }
