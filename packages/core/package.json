@@ -1,6 +1,6 @@
 {
   "name": "schema-based-json-editor",
-  "version": "7.15.0",
+  "version": "7.15.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs, angular and vuejs component of schema based json editor.",
@@ -47,15 +47,5 @@
     "highlight.js": "9.12.0",
     "iview": "2.14.2",
     "markdown-it": "8.4.1"
-  },
-  "peerDependencies": {
-    "file-uploader-component": "7",
-    "lodash.isinteger": "4",
-    "lodash.isobject": "3",
-    "lodash.tointeger": "4",
-    "lodash.tonumber": "4",
-    "markdown-tip": "6",
-    "select2-component": "5",
-    "tslib": "1"
   }
 }
