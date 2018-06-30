@@ -50,5 +50,7 @@ dist
 !0.bundle.js
 !1.bundle.js
 
+!packages/core/demo/vs/**/*.js
+!packages/core/demo/vs/**/*.css
 !packages/core/demo/css/**/*.css
 *.ngsummary.json
