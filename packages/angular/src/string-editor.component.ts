@@ -46,7 +46,7 @@ export class StringEditorComponent {
   @Input()
   monacoEditor?: common.MonacoEditor
 
-  @ViewChild('monacoEditor')
+  @ViewChild('monacoEditorRef')
   private monacoEditorRef!: ElementRef
 
   value?: string
@@ -65,7 +65,7 @@ export class StringEditorComponent {
     this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
   }
   ngAfterViewInit() {
-    if (this.monacoEditor && this.monacoEditorRef.nativeElement) {
+    if (this.monacoEditor && this.monacoEditorRef && this.monacoEditorRef.nativeElement) {
       this.monacoCodeEditor = this.monacoEditor.create(this.monacoEditorRef.nativeElement, {
         value: this.value,
         language: 'json',
