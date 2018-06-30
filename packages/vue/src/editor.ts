@@ -24,7 +24,8 @@ import { editorTemplateHtml, editorTemplateHtmlStatic } from './variables'
     'forceHttps',
     'disableCollapse',
     'noSelect2',
-    'minItemCountIfNeedFilter'
+    'minItemCountIfNeedFilter',
+    'monacoEditor'
   ]
 })
 export class Editor extends Vue {

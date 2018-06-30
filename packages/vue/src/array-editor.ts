@@ -32,7 +32,8 @@ import { arrayEditorTemplateHtml, arrayEditorTemplateHtmlStatic } from './variab
     'forceHttps',
     'disableCollapse',
     'noSelect2',
-    'minItemCountIfNeedFilter'
+    'minItemCountIfNeedFilter',
+    'monacoEditor'
   ]
 })
 export class ArrayEditor extends Vue {

@@ -27,7 +27,10 @@
     :locale="locale.fileUploaderLocale"
     @file-got="fileGot($event)">
   </file-uploader>
-  <textarea v-if="useTextArea"
+  <div v-if="useTextArea && monacoEditor && schema.format === 'json'"
+    ref="monacoEditor" :style="{ height: '400px', width: '90%', display: collapsed ? 'none' : undefined }">
+  </div>
+  <textarea v-if="useTextArea && (!monacoEditor || schema.format !== 'json')"
     :class="errorMessage ? theme.errorTextarea : theme.textarea"
     @change="onChange($event)"
     @keyup="onChange($event)"
@@ -68,7 +71,7 @@
   <img v-if="willPreviewImage"
     :style="imagePreviewStyle"
     :src="getImageUrl" />
-  <markdown-tip v-if="useTextArea && willPreviewMarkdown" :locale="locale.markdownTipLocale"></markdown-tip>
+  <markdown-tip v-if="useTextArea && !collapsed && willPreviewMarkdown" :locale="locale.markdownTipLocale"></markdown-tip>
   <div v-if="willPreviewMarkdown" v-html="getMarkdown"></div>
   <pre v-if="willPreviewCode"><code v-html="getCode"></code></pre>
   <description :theme="theme" :message="schema.description"></description>

@@ -21,6 +21,7 @@ export type Props = {
   disableCollapse?: boolean;
   noSelect2?: boolean;
   minItemCountIfNeedFilter?: number;
+  monacoEditor?: common.MonacoEditor;
 }
 
 /**
@@ -50,7 +51,8 @@ export class JSONEditor extends React.Component<Props, {}> {
       forceHttps={this.props.forceHttps}
       disableCollapse={this.props.disableCollapse}
       noSelect2={this.props.noSelect2}
-      minItemCountIfNeedFilter={this.props.minItemCountIfNeedFilter} />
+      minItemCountIfNeedFilter={this.props.minItemCountIfNeedFilter}
+      monacoEditor={this.props.monacoEditor} />
   }
   private updateValue = (value: any, isValid: boolean) => {
     this.props.updateValue(value, isValid)

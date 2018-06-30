@@ -12,6 +12,17 @@ import { __extends, __decorate, __assign } from 'tslib'
 (window as any).__decorate = __decorate;
 (window as any).__assign = __assign
 
+import * as monaco from 'monaco-editor'
+
+/**
+ * @public
+ */
+export type MonacoEditor = typeof monaco.editor
+/**
+ * @public
+ */
+export type IStandaloneCodeEditor = monaco.editor.IStandaloneCodeEditor
+
 /**
  * @public
  */
@@ -74,7 +85,7 @@ export type NumberSchema = CommonSchema & {
 export type StringSchema = CommonSchema & {
   type: 'string';
   // tslint:disable-next-line:max-union-size
-  format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox';
+  format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox' | 'json';
   enum?: string[];
   minLength?: number;
   maxLength?: number;
@@ -540,6 +551,7 @@ export type Props<TSchema extends CommonSchema, TValue> = {
   disableCollapse?: boolean;
   noSelect2?: boolean;
   minItemCountIfNeedFilter?: number;
+  monacoEditor?: MonacoEditor;
 }
 
 /**

@@ -32,7 +32,8 @@ import { objectEditorTemplateHtml, objectEditorTemplateHtmlStatic } from './vari
     'forceHttps',
     'disableCollapse',
     'noSelect2',
-    'minItemCountIfNeedFilter'
+    'minItemCountIfNeedFilter',
+    'monacoEditor'
   ]
 })
 export class ObjectEditor extends Vue {

@@ -23,5 +23,8 @@ module.exports = {
       'markdown-it': 'markdown-it/dist/markdown-it.min.js',
       'vue$': 'vue/dist/vue.esm.js'
     }
+  },
+  externals: {
+    'monaco-editor': 'monaco'
   }
 }

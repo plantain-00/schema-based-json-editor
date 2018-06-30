@@ -44,7 +44,14 @@ module.exports = {
         `cpy ./packages/core/node_modules/element-ui/lib/theme-chalk/fonts/*.* ./packages/core/demo/css/element-ui/fonts/`,
         `cpy ./packages/core/node_modules/iview/dist/styles/iview.css ./packages/core/demo/css/`,
         `cpy ./packages/core/node_modules/iview/dist/styles/fonts/*.* ./packages/core/demo/css/fonts/`,
-        `cpy ./packages/core/node_modules/@blueprintjs/core/lib/css/blueprint.css ./packages/core/demo/css/`
+        `cpy ./packages/core/node_modules/@blueprintjs/core/lib/css/blueprint.css ./packages/core/demo/css/`,
+        `cpy ./packages/core/node_modules/monaco-editor/min/vs/loader.js ./packages/core/demo/vs/`,
+        `cpy ./packages/core/node_modules/monaco-editor/min/vs/language/json/jsonMode.js ./packages/core/demo/vs/language/json/`,
+        `cpy ./packages/core/node_modules/monaco-editor/min/vs/language/json/jsonWorker.js ./packages/core/demo/vs/language/json/`,
+        `cpy ./packages/core/node_modules/monaco-editor/min/vs/editor/editor.main.js ./packages/core/demo/vs/editor/`,
+        `cpy ./packages/core/node_modules/monaco-editor/min/vs/editor/editor.main.css ./packages/core/demo/vs/editor/`,
+        `cpy ./packages/core/node_modules/monaco-editor/min/vs/editor/editor.main.nls.js ./packages/core/demo/vs/editor/`,
+        `cpy ./packages/core/node_modules/monaco-editor/min/vs/base/worker/workerMain.js ./packages/core/demo/vs/base/worker/`
       ],
       version: [
         {

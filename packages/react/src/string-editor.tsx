@@ -26,13 +26,34 @@ export class StringEditor extends React.Component<Props, State> {
   private errorMessage!: string
   private collapsed = false
   private willRender = false
+  private monacoEditorRef: React.RefObject<HTMLDivElement>
+  private monacoCodeEditor: common.IStandaloneCodeEditor | undefined
   constructor(props: Props) {
     super(props)
     this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string
     this.validate()
+    this.monacoEditorRef = React.createRef()
   }
   componentDidMount() {
     this.props.updateValue(this.value, !this.errorMessage)
+    if (this.props.monacoEditor && this.monacoEditorRef.current) {
+      this.monacoCodeEditor = this.props.monacoEditor.create(this.monacoEditorRef.current, {
+        value: this.value,
+        language: 'json',
+        minimap: { enabled: false },
+        lineNumbers: 'off'
+      })
+      let timer: NodeJS.Timer
+      this.monacoCodeEditor.onDidChangeModelContent((e) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          this.value = this.monacoCodeEditor!.getValue()
+          this.validate()
+          this.setState({ value: this.value })
+          this.props.updateValue(this.value, !this.errorMessage)
+        }, 500)
+      })
+    }
   }
   shouldComponentUpdate(nextProps: Props, nextState: State) {
     if (this.willRender) {
@@ -40,6 +61,11 @@ export class StringEditor extends React.Component<Props, State> {
       return true
     }
     return this.props.initialValue !== nextProps.initialValue
+  }
+  componentWillUnmount() {
+    if (this.monacoCodeEditor) {
+      this.monacoCodeEditor.dispose()
+    }
   }
   // tslint:disable-next-line:cognitive-complexity
   render() {
@@ -49,15 +75,29 @@ export class StringEditor extends React.Component<Props, State> {
       </FileUploader>
     ) : null
 
-    const textarea = this.useTextArea ? (
-      <textarea className={this.errorMessage ? this.props.theme.errorTextarea : this.props.theme.textarea}
-        onChange={this.onChange}
-        defaultValue={this.value}
-        rows={10}
-        readOnly={this.isReadOnly}
-        disabled={this.isReadOnly} >
-      </textarea>
-    ) : null
+    let textarea: JSX.Element | null = null
+    if (this.useTextArea) {
+      if (this.props.monacoEditor && this.props.schema.format === 'json') {
+        textarea = (
+          <div ref={this.monacoEditorRef} style={{
+            height: '400px',
+            width: '90%',
+            display: this.collapsed ? 'none' : undefined
+          }}>
+          </div>
+        )
+      } else {
+        textarea = (
+          <textarea className={this.errorMessage ? this.props.theme.errorTextarea : this.props.theme.textarea}
+            onChange={this.onChange}
+            defaultValue={this.value}
+            rows={10}
+            readOnly={this.isReadOnly}
+            disabled={this.isReadOnly} >
+          </textarea>
+        )
+      }
+    }
 
     const input = this.useInput ? (
       <input className={this.errorMessage ? this.props.theme.errorInput : this.props.theme.input}
@@ -102,7 +142,7 @@ export class StringEditor extends React.Component<Props, State> {
 
     const imagePreview = this.willPreviewImage ? <img style={common.imagePreviewStyle} src={this.getImageUrl} /> : null
 
-    const markdownTip = this.useTextArea && this.willPreviewMarkdown ? <MarkdownTip locale={this.props.locale.markdownTipLocale}></MarkdownTip> : null
+    const markdownTip = this.useTextArea && !this.collapsed && this.willPreviewMarkdown ? <MarkdownTip locale={this.props.locale.markdownTipLocale}></MarkdownTip> : null
     const markdownPreview = this.willPreviewMarkdown ? <div dangerouslySetInnerHTML={{ __html: this.getMarkdown }}></div> : null
 
     const codePreview = this.willPreviewCode ? <pre><code dangerouslySetInnerHTML={{ __html: this.getCode }}></code></pre> : null
@@ -157,15 +197,14 @@ export class StringEditor extends React.Component<Props, State> {
   }
   private get useTextArea() {
     return this.value !== undefined
-      && !this.collapsed
       && (this.props.schema.enum === undefined || this.isReadOnly)
-      && (this.props.schema.format === 'textarea' || this.props.schema.format === 'code' || this.props.schema.format === 'markdown')
+      && (this.props.schema.format === 'textarea' || this.props.schema.format === 'code' || this.props.schema.format === 'json' || this.props.schema.format === 'markdown')
   }
   private get useInput() {
     return this.value !== undefined
       && !this.collapsed
       && (this.props.schema.enum === undefined || this.isReadOnly)
-      && (this.props.schema.format !== 'textarea' && this.props.schema.format !== 'code' && this.props.schema.format !== 'markdown')
+      && (this.props.schema.format !== 'textarea' && this.props.schema.format !== 'code' && this.props.schema.format !== 'json' && this.props.schema.format !== 'markdown')
   }
   private get useSelect() {
     return this.value !== undefined && this.props.schema.enum !== undefined && !this.isReadOnly

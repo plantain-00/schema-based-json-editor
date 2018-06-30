@@ -33,6 +33,7 @@
     "lodash.tointeger": "4",
     "lodash.tonumber": "4",
     "markdown-tip": "6",
+    "monaco-editor": "0.13",
     "select2-component": "5",
     "tslib": "1"
   },
