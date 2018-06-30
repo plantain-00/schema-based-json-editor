@@ -28,7 +28,7 @@
     (fileGot)="fileGot($event)">
   </file-uploader>
   <div *ngIf="useTextArea && monacoEditor && schema.format === 'json'"
-    #monacoEditor
+    #monacoEditorRef
     [ngStyle]="{ height: '400px', width: '90%', display: collapsed ? 'none' : undefined }">
   </div>
   <textarea *ngIf="useTextArea && (!monacoEditor || schema.format !== 'json')"
