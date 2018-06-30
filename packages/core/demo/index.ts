@@ -485,11 +485,11 @@ export const propertiesSchema: common.ObjectSchema = {
   properties: {
     schema: {
       type: 'string',
-      format: 'textarea'
+      format: 'json'
     },
     initialValue: {
       type: 'string',
-      format: 'textarea'
+      format: 'json'
     },
     theme: {
       type: 'string',

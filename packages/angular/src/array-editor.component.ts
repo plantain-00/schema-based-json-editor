@@ -43,6 +43,8 @@ export class ArrayEditorComponent {
   noSelect2?: boolean
   @Input()
   minItemCountIfNeedFilter?: number
+  @Input()
+  monacoEditor?: common.MonacoEditor
 
   collapsed?: boolean = false
   value?: common.ValueType[]

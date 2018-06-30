@@ -16,7 +16,7 @@
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems, enum, enumTitles, format('select2')
 + number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, enumTitles, format('select' | 'radiobox')
-+ string schema fields: format('textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox'), enum, minLength, maxLength, pattern, enumTitles
++ string schema fields: format('textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox' | 'json'), enum, minLength, maxLength, pattern, enumTitles
 + boolean schema fields: format('checkbox' | 'select' | 'select2')
 + image preview, code highlight, markdown preview
 + multi-language
@@ -125,6 +125,7 @@ forceHttps | boolean? | if true, the preview url of images will be `https://` ra
 disableCollapse | boolean? | if true, the collapse button will be hidden
 noSelect2 | boolean? | if true, use `select` rather than `select2-component`
 minItemCountIfNeedFilter | number? | default `6`(if item count > `6`, filter is visible, otherwise hidden), so if `0`, filter always visible, if `Infinity`, filter always hidden
+monacoEditor | object? | the `monacoEditor` library object if you want to edit code with it
 
 ## improve current theme
 

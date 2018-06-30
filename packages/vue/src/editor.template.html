@@ -16,7 +16,8 @@
   :forceHttps="forceHttps"
   :disableCollapse="disableCollapse"
   :noSelect2="noSelect2"
-  :minItemCountIfNeedFilter="minItemCountIfNeedFilter">
+  :minItemCountIfNeedFilter="minItemCountIfNeedFilter"
+  :monacoEditor="monacoEditor">
 </object-editor>
 <array-editor v-else-if="schema.type === 'array'"
   :schema="schema"
@@ -36,7 +37,8 @@
   :forceHttps="forceHttps"
   :disableCollapse="disableCollapse"
   :noSelect2="noSelect2"
-  :minItemCountIfNeedFilter="minItemCountIfNeedFilter">
+  :minItemCountIfNeedFilter="minItemCountIfNeedFilter"
+  :monacoEditor="monacoEditor">
 </array-editor>
 <number-editor v-else-if="schema.type === 'number' || schema.type === 'integer'"
   :schema="schema"
@@ -94,5 +96,6 @@
   :md="md"
   :hljs="hljs"
   :forceHttps="forceHttps"
-  :noSelect2="noSelect2">
+  :noSelect2="noSelect2"
+  :monacoEditor="monacoEditor">
 </string-editor>

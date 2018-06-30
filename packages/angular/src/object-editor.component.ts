@@ -44,6 +44,8 @@ export class ObjectEditorComponent {
   noSelect2?: boolean
   @Input()
   minItemCountIfNeedFilter?: number
+  @Input()
+  monacoEditor?: common.MonacoEditor
 
   collapsed?: boolean = false
   value?: { [name: string]: common.ValueType }

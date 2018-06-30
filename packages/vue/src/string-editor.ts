@@ -17,7 +17,7 @@ import 'file-uploader-vue-component'
     optional: Optional,
     description: Description
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'noSelect2']
+  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'noSelect2', 'monacoEditor']
 })
 export class StringEditor extends Vue {
   schema!: common.StringSchema
@@ -33,12 +33,14 @@ export class StringEditor extends Vue {
   hljs?: common.HLJS
   forceHttps?: boolean
   noSelect2?: boolean
+  monacoEditor?: common.MonacoEditor
 
   value?: string = ''
   errorMessage?: string = ''
   buttonGroupStyle = common.buttonGroupStyleString
   collapsed = false
   imagePreviewStyle = common.imagePreviewStyleString
+  private monacoCodeEditor: common.IStandaloneCodeEditor | undefined
 
   onChange(e: { target: { value: string } }) {
     this.value = e.target.value
@@ -51,6 +53,34 @@ export class StringEditor extends Vue {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string
     this.validate()
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
+  }
+
+  mounted() {
+    if (this.monacoEditor && this.$refs.monacoEditor) {
+      this.monacoCodeEditor = this.monacoEditor.create(this.$refs.monacoEditor as HTMLDivElement, {
+        value: this.value,
+        language: 'json',
+        minimap: { enabled: false },
+        lineNumbers: 'off'
+      })
+      let timer: NodeJS.Timer
+      this.monacoCodeEditor.onDidChangeModelContent((e) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          this.value = this.monacoCodeEditor!.getValue()
+          this.validate()
+          // tslint:disable-next-line:no-duplicate-string
+          this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
+        }, 500)
+      })
+    }
+
+  }
+
+  beforeDestroy() {
+    if (this.monacoCodeEditor) {
+      this.monacoCodeEditor.dispose()
+    }
   }
 
   private get canPreviewImage() {
@@ -67,15 +97,14 @@ export class StringEditor extends Vue {
   }
   get useTextArea() {
     return this.value !== undefined
-      && !this.collapsed
       && (this.schema.enum === undefined || this.isReadOnly)
-      && (this.schema.format === 'textarea' || this.schema.format === 'code' || this.schema.format === 'markdown')
+      && (this.schema.format === 'textarea' || this.schema.format === 'code' || this.schema.format === 'json' || this.schema.format === 'markdown')
   }
   get useInput() {
     return this.value !== undefined
       && !this.collapsed
       && (this.schema.enum === undefined || this.isReadOnly)
-      && (this.schema.format !== 'textarea' && this.schema.format !== 'code' && this.schema.format !== 'markdown')
+      && (this.schema.format !== 'textarea' && this.schema.format !== 'code' && this.schema.format !== 'json' && this.schema.format !== 'markdown')
   }
   private get useSelect() {
     return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly

@@ -40,6 +40,8 @@ export class JSONEditorComponent {
   noSelect2?: boolean
   @Input()
   minItemCountIfNeedFilter?: number
+  @Input()
+  monacoEditor?: common.MonacoEditor
 
   get themeObject() {
     return common.getTheme(this.theme)

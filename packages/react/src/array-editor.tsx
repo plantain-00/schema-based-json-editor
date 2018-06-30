@@ -77,7 +77,8 @@ export class ArrayEditor extends React.Component<Props, State> {
             hljs={this.props.hljs}
             forceHttps={this.props.forceHttps}
             disableCollapse={this.props.disableCollapse}
-            noSelect2={this.props.noSelect2} />
+            noSelect2={this.props.noSelect2}
+            monacoEditor={this.props.monacoEditor} />
         </div>
       ))
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)

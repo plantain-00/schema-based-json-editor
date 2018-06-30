@@ -40,7 +40,8 @@ import { indexTemplateHtml, indexTemplateHtmlStatic } from './variables'
     'forceHttps',
     'disableCollapse',
     'noSelect2',
-    'minItemCountIfNeedFilter'
+    'minItemCountIfNeedFilter',
+    'monacoEditor'
   ]
 })
 export class JSONEditor extends Vue {
