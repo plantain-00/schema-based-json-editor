@@ -11,5 +11,8 @@ module.exports = {
     alias: {
       'markdown-it': 'markdown-it/dist/markdown-it.min.js'
     }
+  },
+  externals: {
+    'monaco-editor': 'monaco'
   }
 }

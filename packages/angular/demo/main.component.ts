@@ -6,6 +6,7 @@ import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, 
 import dragula from 'dragula'
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+import * as monaco from 'monaco-editor'
 
 addAllCssLinks('../../../core/demo/css/')
 
@@ -25,7 +26,8 @@ addAllCssLinks('../../../core/demo/css/')
           [locale]="locale"
           [dragula]="dragula"
           [markdownit]="markdownit"
-          [hljs]="hljs">
+          [hljs]="hljs"
+          [monacoEditor]="monacoEditor">
         </json-editor>
       </div>
       <div style="width: 35%; margin: 10px; position: absolute; left: 31%" class="bootstrap3-row-container">
@@ -37,7 +39,8 @@ addAllCssLinks('../../../core/demo/css/')
           [locale]="locale"
           [dragula]="dragula"
           [markdownit]="markdownit"
-          [hljs]="hljs">
+          [hljs]="hljs"
+          [monacoEditor]="monacoEditor">
         </json-editor>
       </div>
       <div style="width: 30%; margin: 10px; position: fixed; right: 10px; height: 100%; overflow-y: scroll">
@@ -55,6 +58,7 @@ export class MainComponent {
   dragula = dragula
   markdownit = MarkdownIt as any
   hljs = hljs
+  monacoEditor = monaco.editor
   propertiesSchema = propertiesSchema
   propertiesInitialValue = propertiesInitialValue
   theme = theme

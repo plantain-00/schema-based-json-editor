@@ -5,6 +5,7 @@ import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, 
 import dragula from 'dragula'
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+import * as monaco from 'monaco-editor'
 addAllCssLinks('../../core/demo/css/')
 
 class Main extends React.Component<{}, {}> {
@@ -37,7 +38,8 @@ class Main extends React.Component<{}, {}> {
             locale={this.locale}
             dragula={dragula}
             markdownit={MarkdownIt}
-            hljs={hljs} />
+            hljs={hljs}
+            monacoEditor={monaco.editor} />
         </div>
         <div style={{ width: '35%', margin: '10px', position: 'absolute', left: '31%' }} className='bootstrap3-row-container'>
           <JSONEditor schema={this.schema}
@@ -48,7 +50,8 @@ class Main extends React.Component<{}, {}> {
             locale={this.locale}
             dragula={dragula}
             markdownit={MarkdownIt}
-            hljs={hljs} />
+            hljs={hljs}
+            monacoEditor={monaco.editor} />
         </div>
         <div style={{ margin: '10px', width: '30%', position: 'fixed', right: '10px', height: '100%', overflowY: 'scroll' }}>
           Value:

@@ -43,4 +43,6 @@ export class EditorComponent {
   noSelect2?: boolean
   @Input()
   minItemCountIfNeedFilter?: number
+  @Input()
+  monacoEditor?: common.MonacoEditor
 }

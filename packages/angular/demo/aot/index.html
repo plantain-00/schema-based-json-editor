@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="../../../core/demo/css/gh-fork-ribbon.css">
 <link rel="stylesheet" href="../../../core/demo/css/select2.min.css">
 <link rel="stylesheet" href="../../../core/demo/css/file-uploader.min.css">
+<link rel="stylesheet" data-name="vs/editor/editor.main" href="../../../core/demo/vs/editor/editor.main.css">
 <style>
 * {
-font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif;
 -webkit-font-smoothing: antialiased;
 }
 input,
@@ -22,10 +22,16 @@ position: fixed;
 }.custom-class-string > label {
 font-weight: 700;
 color: green;
+}.monaco-editor * {
+font-family: unset;
 }
 </style>
 </head><body>
 <a class="github-fork-ribbon right-bottom" href="https://github.com/plantain-00/schema-based-json-editor" title="Fork me on GitHub" target="_blank" rel="noopener">Fork me on GitHub</a>
 <app></app>
-<script src="./index.bundle-7d7b1938bba3dafd19c8f6469202da50.js" crossOrigin="anonymous" integrity="sha256-qYxhi2DlNzKYgUYy2C8+p3lIOZJoFiciP3xj/bFG7uE="></script>
+<script>var require = { paths: { 'vs': '../../../core/demo/vs' } };</script>
+<script src="../../../core/demo/vs/loader.js"></script>
+<script src="../../../core/demo/vs/editor/editor.main.nls.js"></script>
+<script src="../../../core/demo/vs/editor/editor.main.js"></script>
+<script src="./index.bundle-770fe5257fc2b53e32ab5b9e50c589a6.js" crossOrigin="anonymous" integrity="sha256-F9+wMzsiST38yHZFxQ7j7+ctmaqIeQzNuhT0j5gOngE="></script>
 </body></html>

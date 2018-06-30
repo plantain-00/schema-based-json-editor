@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core'
 import * as common from 'schema-based-json-editor'
 import { stringEditorTemplateHtml } from './variables'
 
@@ -43,11 +43,17 @@ export class StringEditorComponent {
   forceHttps?: boolean
   @Input()
   noSelect2?: boolean
+  @Input()
+  monacoEditor?: common.MonacoEditor
+
+  @ViewChild('monacoEditor')
+  private monacoEditorRef!: ElementRef
 
   value?: string
   errorMessage!: string
   buttonGroupStyle = common.buttonGroupStyleString
   collapsed = false
+  private monacoCodeEditor: common.IStandaloneCodeEditor | undefined
   onChange(e: { target: { value: string } }) {
     this.value = e.target.value
     this.validate()
@@ -58,17 +64,41 @@ export class StringEditorComponent {
     this.validate()
     this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
   }
+  ngAfterViewInit() {
+    if (this.monacoEditor && this.monacoEditorRef.nativeElement) {
+      this.monacoCodeEditor = this.monacoEditor.create(this.monacoEditorRef.nativeElement, {
+        value: this.value,
+        language: 'json',
+        minimap: { enabled: false },
+        lineNumbers: 'off'
+      })
+      let timer: NodeJS.Timer
+      this.monacoCodeEditor.onDidChangeModelContent((e) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          this.value = this.monacoCodeEditor!.getValue()
+          this.validate()
+          this.validate()
+          this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
+        }, 500)
+      })
+    }
+  }
+  ngOnDestroy() {
+    if (this.monacoCodeEditor) {
+      this.monacoCodeEditor.dispose()
+    }
+  }
   get useTextArea() {
     return this.value !== undefined
-      && !this.collapsed
       && (this.schema.enum === undefined || this.isReadOnly)
-      && (this.schema.format === 'textarea' || this.schema.format === 'code' || this.schema.format === 'markdown')
+      && (this.schema.format === 'textarea' || this.schema.format === 'code' || this.schema.format === 'json' || this.schema.format === 'markdown')
   }
   get useInput() {
     return this.value !== undefined
       && !this.collapsed
       && (this.schema.enum === undefined || this.isReadOnly)
-      && (this.schema.format !== 'textarea' && this.schema.format !== 'code' && this.schema.format !== 'markdown')
+      && (this.schema.format !== 'textarea' && this.schema.format !== 'code' && this.schema.format !== 'json' && this.schema.format !== 'markdown')
   }
   get useSelect() {
     return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly

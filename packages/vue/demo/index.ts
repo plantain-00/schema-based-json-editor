@@ -9,6 +9,7 @@ import { ValidityValue, ValueType } from '../dist/'
 import dragula from 'dragula'
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+import * as monaco from 'monaco-editor'
 
 addAllCssLinks('../../core/demo/css/')
 
@@ -26,7 +27,8 @@ addAllCssLinks('../../core/demo/css/')
           :locale="locale"
           :dragula="dragula"
           :markdownit="markdownit"
-          :hljs="hljs">
+          :hljs="hljs"
+          :monaco-editor="monacoEditor">
         </json-editor>
       </div>
       <div style="width: 35%; margin: 10px; position: absolute; left: 31%;" class="bootstrap3-row-container">
@@ -38,7 +40,8 @@ addAllCssLinks('../../core/demo/css/')
           :locale="locale"
           :dragula="dragula"
           :markdownit="markdownit"
-          :hljs="hljs">
+          :hljs="hljs"
+          :monaco-editor="monacoEditor">
         </json-editor>
       </div>
       <div style="width: 30%; margin: 10px; position: fixed; right: 10px; height: 100%; overflow-y: scroll">
@@ -56,6 +59,7 @@ class App extends Vue {
   dragula = dragula
   markdownit = MarkdownIt
   hljs = hljs
+  monacoEditor = monaco.editor
   valueHtml = ''
   propertiesSchema = propertiesSchema
   propertiesInitialValue = propertiesInitialValue

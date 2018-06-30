@@ -27,7 +27,11 @@
     [locale]="locale.fileUploaderLocale"
     (fileGot)="fileGot($event)">
   </file-uploader>
-  <textarea *ngIf="useTextArea"
+  <div *ngIf="useTextArea && monacoEditor && schema.format === 'json'"
+    #monacoEditor
+    [ngStyle]="{ height: '400px', width: '90%', display: collapsed ? 'none' : undefined }">
+  </div>
+  <textarea *ngIf="useTextArea && (!monacoEditor || schema.format !== 'json')"
     [class]="errorMessage ? theme.errorTextarea : theme.textarea"
     (change)="onChange($event)"
     (keyup)="onChange($event)"
@@ -69,7 +73,7 @@
   <img *ngIf="willPreviewImage"
     class="schema-based-json-editor-image-preview"
     [src]="getImageUrl" />
-  <markdown-tip *ngIf="useTextArea && willPreviewMarkdown" [locale]="locale.markdownTipLocale"></markdown-tip>
+  <markdown-tip *ngIf="useTextArea && !collapsed && willPreviewMarkdown" [locale]="locale.markdownTipLocale"></markdown-tip>
   <div *ngIf="willPreviewMarkdown" [innerHTML]="getMarkdown">
   </div>
   <pre *ngIf="willPreviewCode"><code [innerHTML]="getCode"></code></pre>
