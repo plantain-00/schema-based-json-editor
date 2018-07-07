@@ -64,7 +64,7 @@
     "tslint-config-standard": "7.1.0",
     "tslint-sonarts": "1.7.0",
     "typescript": "2.9.2",
-    "webpack": "4.14.0",
+    "webpack": "4.15.1",
     "webpack-cli": "3.0.8"
   }
 }
