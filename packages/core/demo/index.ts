@@ -467,7 +467,7 @@ if (propertiesString) {
   try {
     const properties = JSON.parse(propertiesString)
     schema = JSON.parse(properties.schema)
-    initialValue = JSON.parse(properties.initialValue)
+    initialValue = properties.initialValue
     theme = properties.theme
     icon = properties.icon
   } catch (error) {
@@ -488,8 +488,7 @@ export const propertiesSchema: common.ObjectSchema = {
       format: 'json'
     },
     initialValue: {
-      type: 'string',
-      format: 'json'
+      type: undefined
     },
     theme: {
       type: 'string',
@@ -526,7 +525,7 @@ export const propertiesSchema: common.ObjectSchema = {
  */
 export const propertiesInitialValue = {
   schema: JSON.stringify(schema, null, '  '),
-  initialValue: JSON.stringify(initialValue, null, '  '),
+  initialValue,
   theme,
   icon
 }

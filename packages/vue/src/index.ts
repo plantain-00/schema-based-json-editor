@@ -11,6 +11,7 @@ import { NullEditor } from './null-editor'
 import { NumberEditor } from './number-editor'
 import { ObjectEditor } from './object-editor'
 import { StringEditor } from './string-editor'
+import { AnyEditor } from './any-editor'
 
 Vue.component('array-editor', ArrayEditor)
 Vue.component('boolean-editor', BooleanEditor)
@@ -18,6 +19,7 @@ Vue.component('null-editor', NullEditor)
 Vue.component('number-editor', NumberEditor)
 Vue.component('object-editor', ObjectEditor)
 Vue.component('string-editor', StringEditor)
+Vue.component('any-editor', AnyEditor)
 
 import { indexTemplateHtml, indexTemplateHtmlStatic } from './variables'
 

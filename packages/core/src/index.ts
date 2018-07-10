@@ -41,6 +41,13 @@ export type CommonSchema = {
 /**
  * @public
  */
+export type AnySchema = CommonSchema & {
+  type: undefined;
+}
+
+/**
+ * @public
+ */
 export type ObjectSchema = CommonSchema & {
   type: 'object';
   properties: { [name: string]: Schema };
@@ -111,7 +118,7 @@ export type NullSchema = CommonSchema & {
 /**
  * @public
  */
-export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema
+export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema | AnySchema
 
 /**
  * @public
@@ -447,6 +454,8 @@ export function getDefaultValue(required: boolean | undefined, schema: Schema, i
           return initialValue
         }
         break
+      case undefined:
+        return initialValue
       case 'null':
       default:
         if (initialValue === null) {

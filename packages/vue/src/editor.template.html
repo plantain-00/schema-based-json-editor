@@ -99,3 +99,17 @@
   :noSelect2="noSelect2"
   :monacoEditor="monacoEditor">
 </string-editor>
+<any-editor v-else-if="schema.type === undefined"
+  :schema="schema"
+  :initial-value="initialValue"
+  :title="title"
+  :theme="theme"
+  :locale="locale"
+  :icon="icon"
+  :readonly="readonly"
+  :required="required"
+  @update-value="$emit('update-value', $event)"
+  @delete="$emit('delete')"
+  :has-delete-button="hasDeleteButton"
+  :monacoEditor="monacoEditor">
+</any-editor>

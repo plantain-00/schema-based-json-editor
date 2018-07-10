@@ -28,8 +28,10 @@
   "dependencies": {
     "@types/dragula": "*",
     "@types/highlight.js": "*",
+    "@types/json5": "*",
     "@types/markdown-it": "*",
     "file-uploader-react-component": "7",
+    "json5": "1",
     "markdown-tip-react": "6",
     "react": "16",
     "react-dom": "16",

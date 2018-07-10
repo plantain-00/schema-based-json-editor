@@ -6,6 +6,7 @@ import { NumberEditor } from './number-editor'
 import { BooleanEditor } from './boolean-editor'
 import { NullEditor } from './null-editor'
 import { StringEditor } from './string-editor'
+import { AnyEditor } from './any-editor'
 
 export class Editor extends React.Component<common.Props<common.Schema, common.ValueType>, {}> {
   render() {
@@ -23,6 +24,8 @@ export class Editor extends React.Component<common.Props<common.Schema, common.V
         return <NullEditor {...this.props as common.Props<common.NullSchema, null>} />
       case 'string':
         return <StringEditor {...this.props as common.Props<common.StringSchema, string>} />
+      case undefined:
+        return <AnyEditor {...this.props as common.Props<common.AnySchema, any>} />
       default:
         return null
     }

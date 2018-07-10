@@ -28,6 +28,9 @@ module.exports = {
     if (file.endsWith('string-editor.template.html')) {
       return { type: 'vue', name: 'StringEditor', path: './string-editor' }
     }
+    if (file.endsWith('any-editor.template.html')) {
+      return { type: 'vue', name: 'AnyEditor', path: './any-editor' }
+    }
     if (file.endsWith('editor.template.html')) {
       return { type: 'vue', name: 'Editor', path: './editor' }
     }

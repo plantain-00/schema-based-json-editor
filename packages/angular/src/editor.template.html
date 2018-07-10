@@ -99,3 +99,17 @@
   [noSelect2]="noSelect2"
   [monacoEditor]="monacoEditor">
 </string-editor>
+<any-editor *ngIf="schema.type === undefined"
+  [schema]="schema"
+  [initialValue]="initialValue"
+  [title]="title"
+  [theme]="theme"
+  [locale]="locale"
+  [icon]="icon"
+  [readonly]="readonly"
+  [required]="required"
+  (updateValue)="updateValue.emit($event)"
+  (onDelete)="onDelete.emit()"
+  [hasDeleteButton]="hasDeleteButton"
+  [monacoEditor]="monacoEditor">
+</any-editor>
