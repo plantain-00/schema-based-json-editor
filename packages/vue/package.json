@@ -28,8 +28,10 @@
   "dependencies": {
     "@types/dragula": "*",
     "@types/highlight.js": "*",
+    "@types/json5": "*",
     "@types/markdown-it": "*",
     "file-uploader-vue-component": "7",
+    "json5": "1",
     "markdown-tip-vue": "6",
     "schema-based-json-editor": "^7.16.0",
     "select2-vue-component": "5",

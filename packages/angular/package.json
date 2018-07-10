@@ -28,8 +28,10 @@
     "@angular/forms": "5",
     "@types/dragula": "*",
     "@types/highlight.js": "*",
+    "@types/json5": "*",
     "@types/markdown-it": "*",
     "file-uploader-angular-component": "7",
+    "json5": "1",
     "markdown-tip-angular": "6",
     "schema-based-json-editor": "^7.16.0",
     "select2-angular-component": "5"
