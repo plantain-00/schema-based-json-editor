@@ -60,7 +60,7 @@ class Main extends React.Component<{}, {}> {
       </div>
     )
   }
-  private updatePropertiesValue = (value: any, isValid: boolean) => {
+  private updatePropertiesValue = (value: any, _isValid: boolean) => {
     try {
       localStorage.setItem('json-editor:properties', JSON.stringify(value))
     } catch (error) {

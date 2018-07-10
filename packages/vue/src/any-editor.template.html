@@ -1,0 +1,24 @@
+<div :class="className">
+  <label :class="theme.title">
+    {{titleToShow}}
+    <div :class="theme.buttonGroup" :style="buttonGroupStyle">
+      <optional :required="required"
+        :value="value"
+        :isReadOnly="isReadOnly"
+        :theme="theme"
+        :locale="locale"
+        @toggleOptional="toggleOptional()">
+      </optional>
+      <icon v-if="hasDeleteButtonFunction"
+        @click="$emit('delete')"
+        :text="icon.delete"
+        :theme="theme"
+        :icon="icon">
+      </icon>
+    </div>
+  </label>
+  <div v-if="monacoEditor"
+    ref="monacoEditor" :style="{ height: '400px', width: '90%' }">
+  </div>
+  <description :theme="theme" :message="schema.description"></description>
+</div>

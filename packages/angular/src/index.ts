@@ -19,6 +19,7 @@ import { FileUploaderModule } from 'file-uploader-angular-component'
     NumberEditorComponent,
     ObjectEditorComponent,
     StringEditorComponent,
+    AnyEditorComponent,
     IconComponent,
     OptionalComponent,
     DescriptionComponent
@@ -38,6 +39,7 @@ import { FileUploaderModule } from 'file-uploader-angular-component'
     NumberEditorComponent,
     ObjectEditorComponent,
     StringEditorComponent,
+    AnyEditorComponent,
     IconComponent,
     OptionalComponent,
     DescriptionComponent
@@ -68,6 +70,9 @@ export { ObjectEditorComponent }
 
 import { StringEditorComponent } from './string-editor.component'
 export { StringEditorComponent }
+
+import { AnyEditorComponent } from './any-editor.component'
+export { AnyEditorComponent }
 
 import { IconComponent } from './icon.component'
 export { IconComponent }

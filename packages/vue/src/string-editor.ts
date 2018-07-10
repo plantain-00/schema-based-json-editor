@@ -74,7 +74,6 @@ export class StringEditor extends Vue {
         }, 500)
       })
     }
-
   }
 
   beforeDestroy() {
