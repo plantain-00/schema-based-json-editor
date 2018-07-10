@@ -40,10 +40,6 @@ export class AnyEditorComponent {
   value?: string
   buttonGroupStyle = common.buttonGroupStyleString
   private monacoCodeEditor: common.IStandaloneCodeEditor | undefined
-  onChange(e: { target: { value: string } }) {
-    this.value = e.target.value
-    this.updateValue.emit({ value: this.value, isValid: true })
-  }
   ngOnInit() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string
     this.updateValue.emit({ value: this.value, isValid: true })

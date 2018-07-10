@@ -38,7 +38,7 @@ export class AnyEditor extends Vue {
   locale!: common.Locale
   readonly!: boolean
   required!: boolean
-  hasDeleteButton!: boolean
+  private hasDeleteButton!: boolean
   monacoEditor?: common.MonacoEditor
 
   value?: common.ValueType
