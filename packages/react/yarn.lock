@@ -19,8 +19,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.4.tgz#c5f67365916044b342dae8d702724788ba0b5b74"
 
 "@types/node@*":
-  version "10.5.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.2.tgz#f19f05314d5421fe37e74153254201a7bf00a707"
+  version "10.5.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.3.tgz#5bcfaf088ad17894232012877669634c06b20cc5"
 
 "@types/react-dom@16.0.6":
   version "16.0.6"
@@ -29,9 +29,9 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.4.6":
-  version "16.4.6"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.6.tgz#5024957c6bcef4f02823accf5974faba2e54fada"
+"@types/react@*", "@types/react@16.4.7":
+  version "16.4.7"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.7.tgz#f33f6d759a7e1833befa15224d68942d178a5a3f"
   dependencies:
     csstype "^2.2.0"
 
@@ -103,17 +103,17 @@ fbjs@^0.8.16:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.18"
 
-file-uploader-component@^7.2.2:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.2.2.tgz#623125c272cbc08fc0cba74028e8958d346a0b3f"
+file-uploader-component@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.3.0.tgz#89766a7882cd9e7ef23a9b3de8f68fe4ce53802f"
   dependencies:
     tslib "1"
 
 file-uploader-react-component@7:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.2.2.tgz#bb037c79840897fcdb911e6534341ac933d6aeef"
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.3.0.tgz#e867f0f28d247968b3e9be85a73cd959c3a45435"
   dependencies:
-    file-uploader-component "^7.2.2"
+    file-uploader-component "^7.3.0"
     react "16"
     react-dom "16"
 
@@ -171,16 +171,16 @@ markdown-it@8.4.2:
     uc.micro "^1.0.5"
 
 markdown-tip-react@6:
-  version "6.2.2"
-  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.2.2.tgz#aac5787f1632d39f1d7eb935be55c0ca42f185b1"
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.3.0.tgz#9da5569d36aa6f70cffb0191d1ccda3a9ec3bf4e"
   dependencies:
-    markdown-tip "^6.2.0"
+    markdown-tip "^6.3.0"
     react "16"
     react-dom "16"
 
-markdown-tip@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.2.0.tgz#716ed6e74f4f3516a21f9f93211c94fdadea6b34"
+markdown-tip@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.3.0.tgz#ff0dd1fc06a202bc0d11dd85df9bd29993c24132"
   dependencies:
     tslib "1"
 
@@ -220,7 +220,7 @@ prop-types@^15.6.0:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-"react-dom@15 || 16", react-dom@16:
+react-dom@16:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.1.tgz#7f8b0223b3a5fbe205116c56deb85de32685dad6"
   dependencies:
@@ -229,7 +229,7 @@ prop-types@^15.6.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-"react@15 || 16", react@16:
+react@16:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
   dependencies:
@@ -242,21 +242,21 @@ prop-types@^15.6.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
-select2-component@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.3.0.tgz#42b655d30aa3abb81ea1e69319301efcfdaf9ff0"
+select2-component@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.4.0.tgz#0a286d9ac0743e40d0e01f4a6da838702e14d5c3"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-react-component@5:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.3.0.tgz#8280272cfe3cc2de043fb803de1ccb01e1e45113"
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.4.0.tgz#f93ce673a77709a166f1581f611c3d2c756cd904"
   dependencies:
     "@types/node" "*"
-    react "15 || 16"
-    react-dom "15 || 16"
-    select2-component "^5.3.0"
+    react "16"
+    react-dom "16"
+    select2-component "^5.4.0"
 
 setimmediate@^1.0.5:
   version "1.0.5"
