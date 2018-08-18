@@ -55,7 +55,8 @@ module.exports = {
         `cpy ./packages/core/node_modules/monaco-editor/min/vs/editor/editor.main.css ./packages/core/demo/vs/editor/`,
         `cpy ./packages/core/node_modules/monaco-editor/min/vs/editor/editor.main.nls.js ./packages/core/demo/vs/editor/`,
         `cpy ./packages/core/node_modules/monaco-editor/min/vs/base/worker/workerMain.js ./packages/core/demo/vs/base/worker/`,
-        `cpy ./packages/core/node_modules/monaco-editor/min/vs/basic-languages/typescript/typescript.js ./packages/core/demo/vs/basic-languages/typescript/`
+        `cpy ./packages/core/node_modules/monaco-editor/min/vs/basic-languages/typescript/typescript.js ./packages/core/demo/vs/basic-languages/typescript/`,
+        `cpy ./packages/core/node_modules/monaco-editor/min/vs/basic-languages/javascript/javascript.js ./packages/core/demo/vs/basic-languages/javascript/`
       ],
       version: [
         {
