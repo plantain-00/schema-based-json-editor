@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import * as common from 'schema-based-json-editor'
-import JSON5 from 'json5'
+const JSON5 = require('json5/dist')
 import { Icon } from './icon'
 import { Editor } from './editor'
 import { Optional } from './optional'
