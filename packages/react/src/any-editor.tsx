@@ -1,5 +1,5 @@
 import * as React from 'react'
-import JSON5 from 'json5'
+const JSON5 = require('json5/dist')
 import * as common from 'schema-based-json-editor'
 
 import { Icon } from './icon'

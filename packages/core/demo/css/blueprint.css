@@ -7152,7 +7152,7 @@ span.bp3-popover-target{
     -webkit-transform:rotate(90deg);
             transform:rotate(90deg); }
   .bp3-tree-node-caret.bp3-icon-standard::before{
-    content:"〉"; }
+    content:""; }
   .bp3-tree-node-caret .bp3-icon{
     margin:7px; }
 
