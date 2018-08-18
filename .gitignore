@@ -49,6 +49,7 @@ dist
 !**/*-*.css
 !0.bundle.js
 !1.bundle.js
+!2.bundle.js
 
 !packages/core/demo/vs/**/*.js
 !packages/core/demo/vs/**/*.css
