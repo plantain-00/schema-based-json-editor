@@ -77,6 +77,7 @@ export class ArrayEditor extends React.Component<Props, State> {
             hljs={this.props.hljs}
             forceHttps={this.props.forceHttps}
             disableCollapse={this.props.disableCollapse}
+            minItemCountIfNeedFilter={this.props.minItemCountIfNeedFilter}
             noSelect2={this.props.noSelect2}
             monacoEditor={this.props.monacoEditor} />
         </div>
