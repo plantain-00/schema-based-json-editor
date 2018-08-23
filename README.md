@@ -212,8 +212,8 @@ export const defaultLocale = {
 field | type | description
 --- | --- | ---
 propertyOrder | number? | in a object, the property with smaller `propertyOrder` will be closer to the top
-requiredWhen | [string, '===' or 'in', any]? | in a object, the property is required when the condition is true, eg, `['name', '===', 'foo']` or `['name', 'in', ['foo', 'bar']]`, otherwise the property is hidden
-optionalWhen | [string, '===' or 'in', any]? | in a object, the property is optional when the condition is true, eg, `['name', '===', 'foo']` or `['name', 'in', ['foo', 'bar']]`, otherwise the property is hidden
+requiredWhen | [string, '===' or 'in' or 'isUndefined', any]? | in a object, the property is required when the condition is true, eg, `['name', '===', 'foo']` or `['name', 'in', ['foo', 'bar']]` or `['name', 'isUndefined']`, otherwise the property is hidden
+optionalWhen | [string, '===' or 'in' or 'isUndefined', any]? | in a object, the property is optional when the condition is true, eg, `['name', '===', 'foo']` or `['name', 'in', ['foo', 'bar']]` or `['name', 'isUndefined']`, otherwise the property is hidden
 collapsed | boolean? | if true, the object or array is collapsed by default
 enumTitles | string[]? | works with `enum` field, are the titles of the enum
 className | string? | custom class name
