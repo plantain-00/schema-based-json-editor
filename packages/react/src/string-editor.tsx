@@ -27,7 +27,7 @@ export class StringEditor extends React.Component<Props, State> {
   private collapsed = false
   private willRender = false
   private monacoEditorRef: React.RefObject<HTMLDivElement>
-  private monacoCodeEditor: common.IStandaloneCodeEditor | undefined
+  private monacoCodeEditor?: common.IStandaloneCodeEditor
   constructor(props: Props) {
     super(props)
     this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as string
@@ -273,7 +273,7 @@ export class StringEditor extends React.Component<Props, State> {
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = () => {
-      this.value = reader.result
+      this.value = reader.result as string
       this.validate()
       this.setState({ value: this.value })
       this.props.updateValue(this.value, !this.errorMessage)

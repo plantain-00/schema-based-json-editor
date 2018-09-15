@@ -2,9 +2,9 @@ import * as React from 'react'
 import * as common from 'schema-based-json-editor'
 
 export class Optional extends React.Component<{
-  required: boolean | undefined;
-  value: common.ValueType | undefined;
-  isReadOnly: boolean | undefined;
+  required?: boolean;
+  value?: common.ValueType;
+  isReadOnly?: boolean;
   theme: common.Theme;
   locale: common.Locale;
   toggleOptional: () => void;

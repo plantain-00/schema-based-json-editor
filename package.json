@@ -37,7 +37,7 @@
     "@commitlint/cli": "7.1.2",
     "@commitlint/config-conventional": "7.1.2",
     "@types/jasmine": "2.8.8",
-    "@types/puppeteer": "1.6.3",
+    "@types/puppeteer": "1.6.4",
     "clean-scripts": "1.9.2",
     "cpy-cli": "2.0.0",
     "cross-env": "5.2.0",
@@ -48,8 +48,8 @@
     "karma-chrome-launcher": "2.2.0",
     "karma-firefox-launcher": "1.1.0",
     "karma-jasmine": "1.1.2",
-    "karma-webpack": "3.0.4",
-    "lerna": "3.3.0",
+    "karma-webpack": "3.0.5",
+    "lerna": "3.3.2",
     "markdownlint-cli": "0.13.0",
     "no-unused-export": "1.6.0",
     "puppeteer": "1.8.0",
@@ -62,9 +62,9 @@
     "standard": "12.0.1",
     "tslint": "5.11.0",
     "tslint-config-standard": "8.0.1",
-    "tslint-sonarts": "1.7.0",
+    "tslint-sonarts": "1.8.0",
     "typescript": "2.9.2",
-    "webpack": "4.17.2",
+    "webpack": "4.19.0",
     "webpack-cli": "3.1.0"
   }
 }

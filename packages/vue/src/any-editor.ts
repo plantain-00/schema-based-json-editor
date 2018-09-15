@@ -31,7 +31,7 @@ import { anyEditorTemplateHtml, anyEditorTemplateHtmlStatic } from './variables'
 })
 export class AnyEditor extends Vue {
   schema!: common.StringSchema
-  initialValue: string | undefined
+  initialValue?: string
   title!: string
   theme!: common.Theme
   icon!: common.Icon
@@ -42,7 +42,7 @@ export class AnyEditor extends Vue {
   monacoEditor?: common.MonacoEditor
 
   value?: common.ValueType
-  private monacoCodeEditor: common.IStandaloneCodeEditor | undefined
+  private monacoCodeEditor?: common.IStandaloneCodeEditor
 
   beforeMount() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue)

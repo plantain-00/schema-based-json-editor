@@ -634,10 +634,8 @@ export function switchItem(value: any[], el: HTMLElement, sibling: HTMLElement |
 // tslint:disable-next-line:cognitive-complexity
 export function getErrorMessageOfArray(value: any[] | undefined, schema: ArraySchema, locale: Locale) {
   if (value !== undefined) {
-    if (schema.minItems !== undefined) {
-      if (value.length < schema.minItems) {
-        return locale.error.minItems.replace('{0}', String(schema.minItems))
-      }
+    if (schema.minItems !== undefined && value.length < schema.minItems) {
+      return locale.error.minItems.replace('{0}', String(schema.minItems))
     }
     if (schema.uniqueItems) {
       for (let i = 1; i < value.length; i++) {
@@ -680,10 +678,8 @@ export function getErrorMessageOfNumber(value: number | undefined, schema: Numbe
         }
       }
     }
-    if (schema.multipleOf && schema.multipleOf > 0) {
-      if (!isInteger(value / schema.multipleOf)) {
-        return locale.error.multipleOf.replace('{0}', String(schema.multipleOf))
-      }
+    if (schema.multipleOf && schema.multipleOf > 0 && !isInteger(value / schema.multipleOf)) {
+      return locale.error.multipleOf.replace('{0}', String(schema.multipleOf))
     }
   }
   return ''
@@ -905,19 +901,18 @@ export function findTitle(value: { [name: string]: ValueType } | undefined, prop
   if (value) {
     for (const { property, schema } of properties) {
       const title = value[property]
-      if (schema.type === 'number'
+      if ((schema.type === 'number'
         || schema.type === 'integer'
-        || schema.type === 'string') {
-        if (schema.enum && schema.enumTitles) {
-          const index = (schema.enum as (string | number)[]).indexOf(title as string | number)
-          if (index !== -1 && index < schema.enumTitles.length) {
-            const enumTitle = schema.enumTitles[index]
-            if (typeof enumTitle === 'string' && enumTitle.length > 0) {
-              if (enumTitle.length > 23) {
-                return enumTitle.substring(0, 20) + '...'
-              }
-              return enumTitle
+        || schema.type === 'string')
+        && schema.enum && schema.enumTitles) {
+        const index = (schema.enum as (string | number)[]).indexOf(title as string | number)
+        if (index !== -1 && index < schema.enumTitles.length) {
+          const enumTitle = schema.enumTitles[index]
+          if (typeof enumTitle === 'string' && enumTitle.length > 0) {
+            if (enumTitle.length > 23) {
+              return enumTitle.substring(0, 20) + '...'
             }
+            return enumTitle
           }
         }
       }
