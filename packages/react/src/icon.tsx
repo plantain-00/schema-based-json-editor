@@ -7,7 +7,7 @@ import * as common from 'schema-based-json-editor'
 export class Icon extends React.Component<{
   icon: common.Icon;
   text: string;
-  valid: boolean | undefined;
+  valid?: boolean;
   onClick: () => void;
   theme: common.Theme;
 }, {}> {

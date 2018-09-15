@@ -9,9 +9,9 @@ import { optionalTemplateHtml, optionalTemplateHtmlStatic } from './variables'
   props: ['required', 'value', 'isReadOnly', 'theme', 'locale']
 })
 export class Optional extends Vue {
-  required: boolean | undefined
-  value: common.ValueType | undefined
-  isReadOnly: boolean | undefined
+  required?: boolean
+  value?: common.ValueType
+  isReadOnly?: boolean
   theme!: common.Theme
   locale!: common.Locale
 

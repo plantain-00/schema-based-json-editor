@@ -3,7 +3,7 @@ import * as common from 'schema-based-json-editor'
 
 export class Description extends React.Component<{
   theme: common.Theme;
-  message: string | undefined;
+  message?: string;
 }, {}> {
   render() {
     if (this.props.message) {

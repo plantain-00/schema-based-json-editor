@@ -9,5 +9,5 @@ export class DescriptionComponent {
   @Input()
   theme!: common.Theme
   @Input()
-  message: string | undefined
+  message?: string
 }

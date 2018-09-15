@@ -21,7 +21,7 @@ import 'file-uploader-vue-component'
 })
 export class StringEditor extends Vue {
   schema!: common.StringSchema
-  initialValue: string | undefined
+  initialValue?: string
   title!: string
   theme!: common.Theme
   icon!: common.Icon
@@ -40,7 +40,7 @@ export class StringEditor extends Vue {
   buttonGroupStyle = common.buttonGroupStyleString
   collapsed = false
   imagePreviewStyle = common.imagePreviewStyleString
-  private monacoCodeEditor: common.IStandaloneCodeEditor | undefined
+  private monacoCodeEditor?: common.IStandaloneCodeEditor
 
   onChange(e: { target: { value: string } }) {
     this.value = e.target.value
@@ -173,7 +173,7 @@ export class StringEditor extends Vue {
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = () => {
-      this.value = reader.result
+      this.value = reader.result as string
       this.validate()
       this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
     }

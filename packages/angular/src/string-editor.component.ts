@@ -53,7 +53,7 @@ export class StringEditorComponent {
   errorMessage!: string
   buttonGroupStyle = common.buttonGroupStyleString
   collapsed = false
-  private monacoCodeEditor: common.IStandaloneCodeEditor | undefined
+  private monacoCodeEditor?: common.IStandaloneCodeEditor
   onChange(e: { target: { value: string } }) {
     this.value = e.target.value
     this.validate()
@@ -182,7 +182,7 @@ export class StringEditorComponent {
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onload = () => {
-      this.value = reader.result
+      this.value = reader.result as string
       this.validate()
       this.updateValue.emit({ value: this.value, isValid: !this.errorMessage })
     }

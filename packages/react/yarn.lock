@@ -35,9 +35,9 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.4.13":
-  version "16.4.13"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.13.tgz#1385f5dc3486aa493849a32ccce626a817543e28"
+"@types/react@*", "@types/react@16.4.14":
+  version "16.4.14"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.14.tgz#47c604c8e46ed674bbdf4aabf82b34b9041c6a04"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -66,8 +66,8 @@ crossvent@1.5.4:
     custom-event "1.0.0"
 
 csstype@^2.2.0:
-  version "2.5.6"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.6.tgz#2ae1db2319642d8b80a668d2d025c6196071e788"
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.7.tgz#bf9235d5872141eccfb2d16d82993c6b149179ff"
 
 custom-event@1.0.0:
   version "1.0.0"
@@ -172,26 +172,26 @@ prop-types@^15.6.2:
     object-assign "^4.1.1"
 
 react-dom@16:
-  version "16.5.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.0.tgz#57704e5718669374b182a17ea79a6d24922cb27d"
+  version "16.5.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.1.tgz#29d0c5a01ed3b6b4c14309aa91af6ec4eb4f292c"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    schedule "^0.3.0"
+    schedule "^0.4.0"
 
 react@16:
-  version "16.5.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.5.0.tgz#f2c1e754bf9751a549d9c6d9aca41905beb56575"
+  version "16.5.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.5.1.tgz#8cb8e9f8cdcb4bde41c9a138bfbf907e66132372"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    schedule "^0.3.0"
+    schedule "^0.4.0"
 
-schedule@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.3.0.tgz#1be2ab2fc2e768536269ce7326efb478d6c045e8"
+schedule@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.4.0.tgz#fa20cfd0bfbf91c47d02272fd7096780d3170bbb"
   dependencies:
     object-assign "^4.1.1"
 

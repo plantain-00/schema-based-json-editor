@@ -21,7 +21,7 @@ export type State = Partial<{
 export class AnyEditor extends React.Component<Props, State> {
   private value?: common.ValueType
   private monacoEditorRef: React.RefObject<HTMLDivElement>
-  private monacoCodeEditor: common.IStandaloneCodeEditor | undefined
+  private monacoCodeEditor?: common.IStandaloneCodeEditor
 
   constructor(props: Props) {
     super(props)

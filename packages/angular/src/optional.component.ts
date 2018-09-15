@@ -9,11 +9,11 @@ import { optionalTemplateHtml } from './variables'
 })
 export class OptionalComponent {
   @Input()
-  required: boolean | undefined
+  required?: boolean
   @Input()
-  value: common.ValueType | undefined
+  value?: common.ValueType
   @Input()
-  isReadOnly: boolean | undefined
+  isReadOnly?: boolean
   @Input()
   theme!: common.Theme
   @Input()
