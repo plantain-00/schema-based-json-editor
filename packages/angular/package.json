@@ -37,8 +37,8 @@
     "select2-angular-component": "5"
   },
   "devDependencies": {
-    "@angular/platform-browser": "6.1.9",
-    "@angular/platform-browser-dynamic": "6.1.9",
+    "@angular/platform-browser": "6.1.10",
+    "@angular/platform-browser-dynamic": "6.1.10",
     "core-js": "2.5.7",
     "dragula": "3.7.2",
     "highlight.js": "9.12.0",
