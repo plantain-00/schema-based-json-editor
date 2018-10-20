@@ -19,8 +19,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.6.tgz#32c4bea406f243263ba741b8d588e314a44d4a45"
 
 "@types/node@*":
-  version "10.11.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.7.tgz#0e75ca9357d646ca754016ca1d68a127ad7e7300"
+  version "10.12.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.0.tgz#ea6dcbddbc5b584c83f06c60e82736d8fbb0c235"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -60,23 +60,23 @@ entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-file-uploader-component@^7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.3.0.tgz#89766a7882cd9e7ef23a9b3de8f68fe4ce53802f"
+file-uploader-component@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.4.0.tgz#7497b12e12ae994167be6d1a3cd98af2ef336541"
   dependencies:
     tslib "1"
 
 file-uploader-vue-component@7:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.3.0.tgz#db40cef3df00d01c5d3549046f238e11c4fc5c6c"
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.4.0.tgz#7681fcf844871f7aae799fe364be783a11fc01df"
   dependencies:
-    file-uploader-component "^7.3.0"
+    file-uploader-component "^7.4.0"
     vue "2"
     vue-class-component "6"
 
-highlight.js@9.12.0:
-  version "9.12.0"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
+highlight.js@9.13.1:
+  version "9.13.1"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.13.1.tgz#054586d53a6863311168488a0f58d6c505ce641e"
 
 json5@2:
   version "2.1.0"
@@ -101,8 +101,8 @@ markdown-it@8.4.2:
     uc.micro "^1.0.5"
 
 markdown-tip-vue@6:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.3.0.tgz#46d4924a4fe32add08397367ace2b7f0ce6389c8"
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.4.0.tgz#53d4fdb46e7771cb83b132432d0a10bd4befb6a3"
   dependencies:
     markdown-tip "^6.3.0"
     vue "2"
@@ -126,19 +126,19 @@ monaco-editor@0.14.3:
   version "0.14.3"
   resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.14.3.tgz#7cc4a4096a3821f52fea9b10489b527ef3034e22"
 
-select2-component@^5.4.0:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.4.0.tgz#0a286d9ac0743e40d0e01f4a6da838702e14d5c3"
+select2-component@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.5.0.tgz#5e7c9f3dcb93cf792cea043f86cf5eb2c980694b"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-vue-component@5:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.4.0.tgz#79d9dcf54dcb55ce6152eea7e37d25f4c0745694"
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.5.0.tgz#66074d71f9dabeadd6cae5d2b7a544351b6683d2"
   dependencies:
     "@types/node" "*"
-    select2-component "^5.4.0"
+    select2-component "^5.5.0"
     vue "2"
     vue-class-component "6"
 
@@ -159,8 +159,8 @@ uc.micro@^1.0.1, uc.micro@^1.0.5:
   resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.5.tgz#0c65f15f815aa08b560a61ce8b4db7ffc3f45376"
 
 vue-class-component@6:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.2.0.tgz#7adb1daa9a868c75f30f97f33f4f1b94aee62089"
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.3.2.tgz#e6037e84d1df2af3bde4f455e50ca1b9eec02be6"
 
 vue@2:
   version "2.5.17"

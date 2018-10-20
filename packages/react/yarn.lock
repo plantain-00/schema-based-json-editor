@@ -19,8 +19,8 @@
   resolved "https://registry.yarnpkg.com/@types/markdown-it/-/markdown-it-0.0.6.tgz#32c4bea406f243263ba741b8d588e314a44d4a45"
 
 "@types/node@*":
-  version "10.11.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.7.tgz#0e75ca9357d646ca754016ca1d68a127ad7e7300"
+  version "10.12.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.0.tgz#ea6dcbddbc5b584c83f06c60e82736d8fbb0c235"
 
 "@types/prop-types@*":
   version "15.5.6"
@@ -33,9 +33,9 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.4.16":
-  version "16.4.16"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.16.tgz#99f91b1200ae8c2062030402006d3b3c3a177043"
+"@types/react@*", "@types/react@16.4.18":
+  version "16.4.18"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.18.tgz#2e28a2e7f92d3fa7d6a65f2b73275c3e3138a13d"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -82,23 +82,23 @@ entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-file-uploader-component@^7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.3.0.tgz#89766a7882cd9e7ef23a9b3de8f68fe4ce53802f"
+file-uploader-component@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.4.0.tgz#7497b12e12ae994167be6d1a3cd98af2ef336541"
   dependencies:
     tslib "1"
 
 file-uploader-react-component@7:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.3.0.tgz#e867f0f28d247968b3e9be85a73cd959c3a45435"
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.4.0.tgz#a22a303ac84a627f5c296cd8d55365fc9a99911b"
   dependencies:
-    file-uploader-component "^7.3.0"
+    file-uploader-component "^7.4.0"
     react "16"
     react-dom "16"
 
-highlight.js@9.12.0:
-  version "9.12.0"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
+highlight.js@9.13.1:
+  version "9.13.1"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.13.1.tgz#054586d53a6863311168488a0f58d6c505ce641e"
 
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
@@ -133,8 +133,8 @@ markdown-it@8.4.2:
     uc.micro "^1.0.5"
 
 markdown-tip-react@6:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.3.0.tgz#9da5569d36aa6f70cffb0191d1ccda3a9ec3bf4e"
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.4.0.tgz#0829c07f331ee9e1718e7d024caac3df0e41153a"
   dependencies:
     markdown-tip "^6.3.0"
     react "16"
@@ -193,21 +193,21 @@ schedule@^0.5.0:
   dependencies:
     object-assign "^4.1.1"
 
-select2-component@^5.4.0:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.4.0.tgz#0a286d9ac0743e40d0e01f4a6da838702e14d5c3"
+select2-component@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.5.0.tgz#5e7c9f3dcb93cf792cea043f86cf5eb2c980694b"
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-react-component@5:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.4.0.tgz#f93ce673a77709a166f1581f611c3d2c756cd904"
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.5.0.tgz#6c2a041478cf2628ebfaf7c3ad8ebda5e863b8dc"
   dependencies:
     "@types/node" "*"
     react "16"
     react-dom "16"
-    select2-component "^5.4.0"
+    select2-component "^5.5.0"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
