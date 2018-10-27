@@ -1,6 +1,6 @@
 {
   "name": "vue-schema-based-json-editor",
-  "version": "7.19.1",
+  "version": "7.20.0",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "unpkg": "dist/vue-schema-based-json-editor.min.js",
@@ -33,7 +33,7 @@
     "file-uploader-vue-component": "7",
     "json5": "2",
     "markdown-tip-vue": "6",
-    "schema-based-json-editor": "^7.19.1",
+    "schema-based-json-editor": "^7.20.0",
     "select2-vue-component": "5",
     "vue": "2",
     "vue-class-component": "6"
