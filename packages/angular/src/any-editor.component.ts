@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core'
 import * as common from 'schema-based-json-editor'
-const JSON5 = require('json5/dist')
+import JSON5 from 'json5'
 import { anyEditorTemplateHtml } from './variables'
 
 @Component({
