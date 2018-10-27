@@ -124,6 +124,8 @@ export type NullSchema = CommonSchema & {
  */
 export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema | AnySchema
 
+// tslint:disable:no-duplicate-string
+
 /**
  * @public
  */
@@ -210,6 +212,22 @@ export const themes: { [name: string]: Theme } = {
     description: '',
     select: 'ivu-input'
   },
+  iview3: {
+    card: 'ivu-card ivu-card-body',
+    row: 'ivu-row',
+    errorRow: 'ivu-row ivu-form-item-error',
+    input: 'ivu-input',
+    errorInput: 'ivu-input',
+    textarea: 'ivu-input',
+    errorTextarea: 'ivu-input',
+    button: 'ivu-btn',
+    buttonGroup: 'ivu-btn-group ivu-btn-group-small',
+    checkbox: 'ivu-checkbox',
+    radiobox: 'ivu-radio',
+    title: 'ivu-form-item-label',
+    description: '',
+    select: 'ivu-input'
+  },
   blueprint1: {
     card: 'pt-card',
     row: '',
@@ -242,6 +260,22 @@ export const themes: { [name: string]: Theme } = {
     title: 'pt-label',
     description: 'pt-text-muted',
     select: 'pt-input pt-fill'
+  },
+  blueprint3: {
+    card: 'pt3-card',
+    row: '',
+    errorRow: '',
+    input: 'pt3-input pt3-fill',
+    errorInput: 'pt3-input pt3-fill',
+    textarea: 'pt3-input pt-fill',
+    errorTextarea: 'pt3-input pt-fill',
+    button: 'pt3-button',
+    buttonGroup: 'pt3-button-group',
+    checkbox: 'pt3-checkbox',
+    radiobox: 'pt3-radio',
+    title: 'pt3-label',
+    description: 'pt3-text-muted',
+    select: 'pt3-input pt3-fill'
   }
 }
 
@@ -392,6 +426,13 @@ export const icons: { [name: string]: Icon } = {
     expand: 'ivu-icon ivu-icon-ios-arrow-right',
     add: 'ivu-icon ivu-icon-ios-plus-empty',
     delete: 'ivu-icon ivu-icon-ios-close-empty'
+  },
+  iview3: {
+    isText: false,
+    collapse: 'ivu-icon ivu-icon-ios-arrow-down',
+    expand: 'ivu-icon ivu-icon-ios-arrow-back',
+    add: 'ivu-icon ivu-icon-md-add',
+    delete: 'ivu-icon ivu-icon-md-close'
   }
 }
 
