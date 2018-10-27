@@ -496,8 +496,8 @@ export const propertiesSchema: common.ObjectSchema = {
         'bootstrap4',
         'antd3',
         'element-ui2',
-        'iview2',
-        'blueprint2',
+        'iview3',
+        'blueprint3',
         '(undefined)'
       ]
     },
@@ -505,9 +505,8 @@ export const propertiesSchema: common.ObjectSchema = {
       type: 'string',
       enum: [
         'fontawesome4',
-        'antd3',
         'element-ui2',
-        'iview2',
+        'iview3',
         '(undefined)'
       ]
     }
@@ -550,7 +549,7 @@ export function addAllCssLinks(cssRootPath: string) {
     addCssLink(cssRootPath, 'font-awesome.min.css')
   }
 
-  if (theme === 'antd3' || icon === 'antd3') {
+  if (theme === 'antd3') {
     addCssLink(cssRootPath, 'antd.min.css')
   }
 
@@ -558,11 +557,11 @@ export function addAllCssLinks(cssRootPath: string) {
     addCssLink(cssRootPath, 'element-ui/index.css')
   }
 
-  if (theme === 'iview2' || icon === 'iview2') {
+  if (theme === 'iview3' || icon === 'iview3') {
     addCssLink(cssRootPath, 'iview.css')
   }
 
-  if (theme === 'blueprint2') {
+  if (theme === 'blueprint3') {
     addCssLink(cssRootPath, 'blueprint.css')
   }
 }
