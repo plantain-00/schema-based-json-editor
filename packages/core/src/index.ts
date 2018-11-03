@@ -599,7 +599,7 @@ export type Props<TSchema extends CommonSchema, TValue> = {
   readonly?: boolean;
   required?: boolean;
   dragula?: Dragula;
-  md?: MarkdownIt;
+  md?: any;
   hljs?: HLJS;
   forceHttps?: boolean;
   disableCollapse?: boolean;
@@ -881,7 +881,7 @@ function printInConsole(message: string) {
  * @public
  */
 // tslint:disable-next-line:cognitive-complexity
-export function initializeMarkdown(markdownit: MarkdownItType | undefined, hljs: HLJS | undefined, forceHttps: boolean | undefined) {
+export function initializeMarkdown(markdownit: any, hljs: HLJS | undefined, forceHttps: boolean | undefined): any {
   if (!markdownit) {
     return undefined
   }
@@ -907,7 +907,7 @@ export function initializeMarkdown(markdownit: MarkdownItType | undefined, hljs:
     }
   })
 
-  md.renderer.rules.image = (tokens: Token[], index: number, options: any, env: any, self: Renderer) => {
+  md.renderer.rules.image = (tokens: any[], index: number, options: any, env: any, self: any) => {
     const token = tokens[index]
     const aIndex = token.attrIndex('src')
     if (forceHttps) {
@@ -918,15 +918,15 @@ export function initializeMarkdown(markdownit: MarkdownItType | undefined, hljs:
     return md.renderer.rules.image(tokens, index, options, env, self)
   }
 
-  let defaultLinkRender: TokenRender
+  let defaultLinkRender: any
   if (md.renderer.rules.link_open) {
     defaultLinkRender = md.renderer.rules.link_open
   } else {
-    defaultLinkRender = (tokens: Token[], index: number, options: any, env: any, self: Renderer) => {
+    defaultLinkRender = (tokens: any[], index: number, options: any, env: any, self: any) => {
       return self.renderToken(tokens, index, options)
     }
   }
-  md.renderer.rules.link_open = (tokens: Token[], index: number, options: any, env: any, self: Renderer) => {
+  md.renderer.rules.link_open = (tokens: any[], index: number, options: any, env: any, self: any) => {
     tokens[index].attrPush(['target', '_blank'])
     tokens[index].attrPush(['rel', 'nofollow'])
     return defaultLinkRender(tokens, index, options, env, self)
@@ -1128,7 +1128,6 @@ export function getOptions(schema: NumberSchema | StringSchema | ArraySchema) {
 }
 
 import dragula from 'dragula'
-import markdownit, { MarkdownIt, Token, TokenRender, Renderer } from 'markdown-it'
 import hljs from 'highlight.js'
 
 /**
@@ -1136,14 +1135,7 @@ import hljs from 'highlight.js'
  */
 export type Dragula = typeof dragula
 
-export { MarkdownIt, Token, TokenRender, Renderer }
-
 /**
  * @public
  */
 export type HLJS = typeof hljs
-
-/**
- * @public
- */
-export type MarkdownItType = typeof markdownit

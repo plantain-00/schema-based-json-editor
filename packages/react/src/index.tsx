@@ -15,7 +15,7 @@ export type Props = {
   locale?: common.Locale | null;
   readonly?: boolean;
   dragula?: common.Dragula;
-  markdownit?: common.MarkdownItType;
+  markdownit?: any;
   hljs?: common.HLJS;
   forceHttps?: boolean;
   disableCollapse?: boolean;
@@ -28,7 +28,7 @@ export type Props = {
  * @public
  */
 export class JSONEditor extends React.Component<Props, {}> {
-  private md?: common.MarkdownIt
+  private md?: any
   constructor(props: Props) {
     super(props)
     this.md = common.initializeMarkdown(this.props.markdownit, this.props.hljs, this.props.forceHttps)

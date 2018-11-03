@@ -36,7 +36,7 @@ export class StringEditorComponent {
   @Input()
   dragula?: common.Dragula
   @Input()
-  md?: common.MarkdownIt
+  md?: any
   @Input()
   hljs?: common.HLJS
   @Input()

@@ -29,7 +29,7 @@ export class StringEditor extends Vue {
   readonly!: boolean
   required!: boolean
   hasDeleteButton!: boolean
-  md?: common.MarkdownIt
+  md?: any
   hljs?: common.HLJS
   forceHttps?: boolean
   noSelect2?: boolean
