@@ -56,7 +56,7 @@ export class MainComponent {
   initialValue: any = initialValue
   color = 'black'
   dragula = dragula
-  markdownit = MarkdownIt as any
+  markdownit = MarkdownIt
   hljs = hljs
   monacoEditor = monaco.editor
   propertiesSchema = propertiesSchema

@@ -29,7 +29,7 @@ export class JSONEditorComponent {
   @Input()
   dragula?: common.Dragula
   @Input()
-  markdownit?: common.MarkdownItType
+  markdownit?: any
   @Input()
   hljs?: common.HLJS
   @Input()
@@ -52,7 +52,7 @@ export class JSONEditorComponent {
   get iconObject() {
     return common.getIcon(this.icon, this.localeObject)
   }
-  md?: common.MarkdownIt
+  md?: any
 
   ngOnInit() {
     this.md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)

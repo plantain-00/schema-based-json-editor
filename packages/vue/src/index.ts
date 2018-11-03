@@ -50,7 +50,7 @@ export class JSONEditor extends Vue {
   theme?: string
   locale!: common.Locale
   icon?: string
-  markdownit?: common.MarkdownItType
+  markdownit?: any
   hljs?: common.HLJS
   forceHttps?: boolean
 
