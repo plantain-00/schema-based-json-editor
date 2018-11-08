@@ -1,6 +1,6 @@
 {
   "name": "react-schema-based-json-editor",
-  "version": "7.20.0",
+  "version": "7.20.1",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "unpkg": "dist/react-schema-based-json-editor.min.js",
@@ -35,7 +35,7 @@
     "markdown-tip-react": "6",
     "react": "16",
     "react-dom": "16",
-    "schema-based-json-editor": "^7.20.0",
+    "schema-based-json-editor": "^7.20.1",
     "select2-react-component": "5"
   },
   "devDependencies": {
@@ -45,10 +45,5 @@
     "highlight.js": "9.13.1",
     "markdown-it": "8.4.2",
     "monaco-editor": "0.14.3"
-  },
-  "peerDependencies": {
-    "react": "16",
-    "react-dom": "16",
-    "schema-based-json-editor": "^7.14.0"
   }
 }
