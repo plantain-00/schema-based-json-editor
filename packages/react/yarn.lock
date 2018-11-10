@@ -30,9 +30,9 @@
     "@types/linkify-it" "*"
 
 "@types/node@*":
-  version "10.12.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.2.tgz#d77f9faa027cadad9c912cd47f4f8b07b0fb0864"
-  integrity sha512-53ElVDSnZeFUUFIYzI8WLQ25IhWzb6vbddNp8UHlXQyU0ET2RhV5zg0NfubzU7iNMh5bBXb0htCzfvrSVNgzaQ==
+  version "10.12.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.5.tgz#7e7ea1a9b34d2c8d704cb0b755dffbcda34741ad"
+  integrity sha512-GzdHjq3t3eGLMv92Al90Iq+EoLL+86mPfQhuglbBFO7HiLdC/rkt+zrzJJumAiBF6nsrBWhou22rPW663AAyFw==
 
 "@types/prop-types@*":
   version "15.5.6"
@@ -47,10 +47,10 @@
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.4.18":
-  version "16.4.18"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.18.tgz#2e28a2e7f92d3fa7d6a65f2b73275c3e3138a13d"
-  integrity sha512-eFzJKEg6pdeaukVLVZ8Xb79CTl/ysX+ExmOfAAqcFlCCK5TgFDD9kWR0S18sglQ3EmM8U+80enjUqbfnUyqpdA==
+"@types/react@*", "@types/react@16.7.1":
+  version "16.7.1"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.1.tgz#ae76b653d1d7d26b32186bba33c39745316bcdc4"
+  integrity sha512-kxde2oP2JvHiEXiAfb8WkL+8Aa9txDRD7L8zb3BipMNRoBbcr32xy/kfpbxmWMus71yXgJDqBgLmWil6UXdLzQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -105,19 +105,19 @@ entities@~1.1.1:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
 
-file-uploader-component@^7.4.0:
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.4.0.tgz#7497b12e12ae994167be6d1a3cd98af2ef336541"
-  integrity sha512-gD+21xFXkFU8NGFFiobf6695xQHH6zgyOxee5BJFUrgGmwPz+G/3XKpILcd12s48hi6GYEaLT5QRIpaDQ9tGQA==
+file-uploader-component@^7.4.1:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.4.1.tgz#4ea39dbfb38475a89a2f7ea1fc2888f5aabe5cb6"
+  integrity sha512-iflocSWrW64Ng6PRfV6d7BDTZvS+tW7NGfM/ZhAtLt37drYI6g+ciz7kyIIyPgYREyAQWVSAb6mQ1p3FiUgVGQ==
   dependencies:
     tslib "1"
 
 file-uploader-react-component@7:
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.4.0.tgz#a22a303ac84a627f5c296cd8d55365fc9a99911b"
-  integrity sha512-n7j3GmZcw3fbAa11lkEtWKXdks/CMCeVXKXZO7fWT4Dz1OmHuW48N/RzXNE/IXQy6xUJplWWrBPJHvfZlyevUA==
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.4.1.tgz#fe1b469321af0ae3ae2a685694982a0bfd2c6c17"
+  integrity sha512-s/DugazJlFDddo1MWL3rRxyy5iZpuf7S1eXqEbg+SdF2Fn4zwwNYqwS6//AKAR5o4hevwXg9e7ogahG8kpbjJA==
   dependencies:
-    file-uploader-component "^7.4.0"
+    file-uploader-component "^7.4.1"
     react "16"
     react-dom "16"
 
@@ -164,18 +164,18 @@ markdown-it@8.4.2:
     uc.micro "^1.0.5"
 
 markdown-tip-react@6:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.4.0.tgz#0829c07f331ee9e1718e7d024caac3df0e41153a"
-  integrity sha512-S4kar9xNuIm1veEsJfvkhOhC/04fSWpDfbczAZCZxPxgB7YcBPvl0AO7jDZOTX3aLSjCcfJ5H2745ALuSF7cCQ==
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.4.1.tgz#4939cc63ac890efc79cbe54590640753dbbbaedb"
+  integrity sha512-gQ3lBRpuzykdGUgMSiZ5lj+4WWiKdttWvOhoXknHCk6sfjENB81XVztOzdCgLHiovuC8XQtXoRNkdU9tb/f90Q==
   dependencies:
-    markdown-tip "^6.3.0"
+    markdown-tip "^6.4.1"
     react "16"
     react-dom "16"
 
-markdown-tip@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.3.0.tgz#ff0dd1fc06a202bc0d11dd85df9bd29993c24132"
-  integrity sha1-/w3R/AaiArwNEd2F35vSmZPCQTI=
+markdown-tip@^6.4.1:
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.4.1.tgz#b30c4aa264759145710d8c9fb3a0b117ebe63b24"
+  integrity sha512-V1S5vdpt7mDWJNcc4ukIg/MqVVZO11dSS/KLdT9TqRAw9D9Z36El1tOCMjf7s9jU9iJVVlnrvDQ6pn38pzLZFg==
   dependencies:
     tslib "1"
 
@@ -208,50 +208,50 @@ prop-types@^15.6.2:
     object-assign "^4.1.1"
 
 react-dom@16:
-  version "16.6.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.6.0.tgz#6375b8391e019a632a89a0988bce85f0cc87a92f"
-  integrity sha512-Stm2D9dXEUUAQdvpvhvFj/DEXwC2PAL/RwEMhoN4dvvD2ikTlJegEXf97xryg88VIAU22ZAP7n842l+9BTz6+w==
+  version "16.6.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.6.1.tgz#5476e08694ae504ae385a28b62ecc4fe3a29add9"
+  integrity sha512-zm+wBuEMGm009Wt1uE4Zw5KcXOW7qC4E/xW/fpJsCsbOco4U/R84u+DzzO/S4SYSdNBcqcaulcp4w3FXl8pImw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.10.0"
+    scheduler "^0.11.0"
 
 react@16:
-  version "16.6.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.6.0.tgz#b34761cfaf3e30f5508bc732fb4736730b7da246"
-  integrity sha512-zJPnx/jKtuOEXCbQ9BKaxDMxR0001/hzxXwYxG8septeyYGfsgAei6NgfbVgOhbY1WOP2o3VPs/E9HaN+9hV3Q==
+  version "16.6.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.6.1.tgz#ee2aef4f0a09e494594882029821049772f915fe"
+  integrity sha512-OtawJThYlvRgm9BXK+xTL7BIlDx8vv21j+fbQDjRRUyok6y7NyjlweGorielTahLZHYIdKUoK2Dp9ByVWuMqxw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.10.0"
+    scheduler "^0.11.0"
 
-scheduler@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.10.0.tgz#7988de90fe7edccc774ea175a783e69c40c521e1"
-  integrity sha512-+TSTVTCBAA3h8Anei3haDc1IRwMeDmtI/y/o3iBe3Mjl2vwYF9DtPDt929HyRmV/e7au7CLu8sc4C4W0VOs29w==
+scheduler@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.11.0.tgz#def1f1bfa6550cc57981a87106e65e8aea41a6b5"
+  integrity sha512-MAYbBfmiEHxF0W+c4CxMpEqMYK+rYF584VP/qMKSiHM6lTkBKKYOJaDiSILpJHla6hBOsVd6GucPL46o2Uq3sg==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-select2-component@^5.5.0:
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.5.0.tgz#5e7c9f3dcb93cf792cea043f86cf5eb2c980694b"
-  integrity sha512-Q0H7XnyWpQOPLEVZWJtl3crMUK8m3ZOV42zF9O+rf13qGAHDmp5NZ7/VtQJbK4iVROOvD1VEcJjmuvNTJIkJAg==
+select2-component@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.5.1.tgz#7e09d947dcbc707402dd8731cdb450f7d21e953f"
+  integrity sha512-5q5JoBQh9kJOatW1ZEsOmkkGhB/6Dfr/FAtYOtBwaRECEIzM5PsBLCi2+Crfy9jN08/ySbOWEgce3ff9maw9oQ==
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-react-component@5:
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.5.0.tgz#6c2a041478cf2628ebfaf7c3ad8ebda5e863b8dc"
-  integrity sha512-YyDL0+ZpCtsC7SiOKK5/8AhQyBnI8pqPFIgzN/utPALT3G/5TONvNC6guLANjw4g6xO9DxJFKcyNwMZfzY9CJA==
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.5.1.tgz#47f9528cd8f6dade6a327f52db286b02a4741f97"
+  integrity sha512-czhfEUEcAiVOlGDUthd3wW9rSV9p/4izF6GiGG54AuvvQ0zyxgUaGtogymOcet5fTGAjf6vfsDQmrB4A32RtVA==
   dependencies:
     "@types/node" "*"
     react "16"
     react-dom "16"
-    select2-component "^5.5.0"
+    select2-component "^5.5.1"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
