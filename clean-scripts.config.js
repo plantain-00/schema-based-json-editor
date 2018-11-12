@@ -100,7 +100,7 @@ module.exports = {
     export: `no-unused-export ${tsFiles} --exclude ${excludeTsFiles}`,
     commit: `commitlint --from=HEAD~1`,
     markdown: `markdownlint README.md change_logs.md`,
-    typeCoverage: 'lerna exec -- type-coverage -p src --at-least 92'
+    typeCoverage: 'lerna exec -- type-coverage -p src'
   },
   test: [
     'tsc -p spec',
