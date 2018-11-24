@@ -34,12 +34,12 @@
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {},
   "devDependencies": {
-    "@angular/compiler": "7.0.4",
-    "@angular/compiler-cli": "7.0.4",
-    "@angular/core": "7.0.4",
+    "@angular/compiler": "7.1.0",
+    "@angular/compiler-cli": "7.1.0",
+    "@angular/core": "7.1.0",
     "@commitlint/cli": "7.2.1",
     "@commitlint/config-conventional": "7.1.2",
-    "@types/jasmine": "2.8.11",
+    "@types/jasmine": "3.3.0",
     "@types/puppeteer": "1.10.0",
     "clean-scripts": "1.9.2",
     "cpy-cli": "2.0.0",
@@ -50,7 +50,7 @@
     "karma": "3.1.1",
     "karma-chrome-launcher": "2.2.0",
     "karma-firefox-launcher": "1.1.0",
-    "karma-jasmine": "2.0.0",
+    "karma-jasmine": "2.0.1",
     "karma-webpack": "3.0.5",
     "lerna": "3.4.3",
     "markdownlint-cli": "0.13.0",
@@ -58,7 +58,7 @@
     "puppeteer": "1.10.0",
     "rev-static": "3.4.2",
     "rimraf": "2.6.2",
-    "rollup": "0.67.1",
+    "rollup": "0.67.3",
     "rollup-plugin-commonjs": "9.2.0",
     "rollup-plugin-node-resolve": "3.4.0",
     "rollup-plugin-uglify": "6.0.0",
@@ -68,7 +68,7 @@
     "tslint-sonarts": "1.8.0",
     "type-coverage": "1.5.0",
     "typescript": "3.1.6",
-    "webpack": "4.25.1",
+    "webpack": "4.26.0",
     "webpack-cli": "3.1.2"
   }
 }
