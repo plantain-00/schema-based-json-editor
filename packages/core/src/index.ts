@@ -353,7 +353,7 @@ export const defaultLocale = {
     false: 'false',
     search: 'search'
   },
-  markdownTipLocale: defaultMarkDownTipLocale,
+  markdownTipLocale: defaultMarkDownTipLocale as any,
   fileUploaderLocale: defaultFileUploaderLocale
 }
 
