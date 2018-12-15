@@ -3848,6 +3848,15 @@ span.bp3-icon:empty{
 .bp3-icon-crown::before{
   content:""; }
 
+.bp3-icon-cube::before{
+  content:""; }
+
+.bp3-icon-cube-add::before{
+  content:""; }
+
+.bp3-icon-cube-remove::before{
+  content:""; }
+
 .bp3-icon-curved-range-chart::before{
   content:""; }
 
@@ -4322,6 +4331,9 @@ span.bp3-icon:empty{
 .bp3-icon-left-join::before{
   content:""; }
 
+.bp3-icon-lifesaver::before{
+  content:""; }
+
 .bp3-icon-lightbulb::before{
   content:""; }
 
@@ -4795,6 +4807,9 @@ span.bp3-icon:empty{
 
 .bp3-icon-th-derived::before{
   content:""; }
+
+.bp3-icon-th-filtered::before{
+  content:""; }
 
 .bp3-icon-th-list::before{
   content:""; }
