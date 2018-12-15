@@ -30,9 +30,9 @@
     "@types/linkify-it" "*"
 
 "@types/node@*":
-  version "10.12.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.11.tgz#715c476c99a5f6898a1ae61caf9825e43c03912e"
-  integrity sha512-3iIOhNiPGTdcUNVCv9e5G7GotfvJJe2pc9w2UgDXlUwnxSZ3RgcUocIU+xYm+rTU54jIKih998QE4dMOyMN1NQ==
+  version "10.12.15"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.15.tgz#20e85651b62fd86656e57c9c9bc771ab1570bc59"
+  integrity sha512-9kROxduaN98QghwwHmxXO2Xz3MaWf+I1sLVAA6KJDF5xix+IyXVhds0MAfdNwtcpSrzhaTsNB0/jnL86fgUhqA==
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -200,6 +200,6 @@ vue-class-component@6:
   integrity sha512-cH208IoM+jgZyEf/g7mnFyofwPDJTM/QvBNhYMjqGB8fCsRyTf68rH2ISw/G20tJv+5mIThQ3upKwoL4jLTr1A==
 
 vue@2:
-  version "2.5.17"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
-  integrity sha512-mFbcWoDIJi0w0Za4emyLiW72Jae0yjANHbCVquMKijcavBGypqlF7zHRgMa5k4sesdv7hv2rB4JPdZfR+TPfhQ==
+  version "2.5.21"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
+  integrity sha512-Aejvyyfhn0zjVeLvXd70h4hrE4zZDx1wfZqia6ekkobLmUZ+vNFQer53B4fu0EjWBSiqApxPejzkO1Znt3joxQ==
