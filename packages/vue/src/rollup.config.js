@@ -4,13 +4,13 @@ import commonjs from 'rollup-plugin-commonjs'
 
 export default {
   input: 'packages/vue/dist/index.js',
-  name: 'JSONEditor',
   plugins: [
     resolve({ browser: true }),
     uglify(),
     commonjs()
   ],
   output: {
+    name: 'JSONEditor',
     file: 'packages/vue/dist/vue-schema-based-json-editor.min.js',
     format: 'umd'
   },
