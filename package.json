@@ -52,13 +52,13 @@
     "karma-firefox-launcher": "1.1.0",
     "karma-jasmine": "2.0.1",
     "karma-webpack": "3.0.5",
-    "lerna": "3.8.0",
+    "lerna": "3.8.4",
     "markdownlint-cli": "0.13.0",
     "no-unused-export": "1.7.0",
     "puppeteer": "1.11.0",
     "rev-static": "3.4.2",
-    "rimraf": "2.6.2",
-    "rollup": "1.0.0",
+    "rimraf": "2.6.3",
+    "rollup": "1.0.1",
     "rollup-plugin-commonjs": "9.2.0",
     "rollup-plugin-node-resolve": "4.0.0",
     "rollup-plugin-uglify": "6.0.0",
@@ -69,6 +69,6 @@
     "type-coverage": "1.6.2",
     "typescript": "3.1.6",
     "webpack": "4.28.3",
-    "webpack-cli": "3.1.2"
+    "webpack-cli": "3.2.0"
   }
 }
