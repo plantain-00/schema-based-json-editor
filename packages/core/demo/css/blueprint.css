@@ -1615,9 +1615,6 @@ a.bp3-button{
   .bp3-editable-text-input::-webkit-input-placeholder{
     opacity:1;
     color:rgba(92, 112, 128, 0.5); }
-  .bp3-editable-text-input:-ms-input-placeholder{
-    opacity:1;
-    color:rgba(92, 112, 128, 0.5); }
   .bp3-editable-text-input::-ms-input-placeholder{
     opacity:1;
     color:rgba(92, 112, 128, 0.5); }
@@ -2149,9 +2146,6 @@ a.bp3-button{
   .bp3-file-upload-input::-webkit-input-placeholder{
     opacity:1;
     color:rgba(92, 112, 128, 0.5); }
-  .bp3-file-upload-input:-ms-input-placeholder{
-    opacity:1;
-    color:rgba(92, 112, 128, 0.5); }
   .bp3-file-upload-input::-ms-input-placeholder{
     opacity:1;
     color:rgba(92, 112, 128, 0.5); }
@@ -2244,8 +2238,6 @@ a.bp3-button{
     color:#f5f8fa;
     color:#bfccd6; }
     .bp3-dark .bp3-file-upload-input::-webkit-input-placeholder{
-      color:rgba(191, 204, 214, 0.5); }
-    .bp3-dark .bp3-file-upload-input:-ms-input-placeholder{
       color:rgba(191, 204, 214, 0.5); }
     .bp3-dark .bp3-file-upload-input::-ms-input-placeholder{
       color:rgba(191, 204, 214, 0.5); }
@@ -2571,9 +2563,6 @@ a.bp3-button{
   .bp3-input::-webkit-input-placeholder{
     opacity:1;
     color:rgba(92, 112, 128, 0.5); }
-  .bp3-input:-ms-input-placeholder{
-    opacity:1;
-    color:rgba(92, 112, 128, 0.5); }
   .bp3-input::-ms-input-placeholder{
     opacity:1;
     color:rgba(92, 112, 128, 0.5); }
@@ -2623,8 +2612,6 @@ a.bp3-button{
     background:rgba(16, 22, 26, 0.3);
     color:#f5f8fa; }
     .bp3-dark .bp3-input::-webkit-input-placeholder{
-      color:rgba(191, 204, 214, 0.5); }
-    .bp3-dark .bp3-input:-ms-input-placeholder{
       color:rgba(191, 204, 214, 0.5); }
     .bp3-dark .bp3-input::-ms-input-placeholder{
       color:rgba(191, 204, 214, 0.5); }
@@ -2753,8 +2740,6 @@ textarea.bp3-input{
     background:rgba(16, 22, 26, 0.3);
     color:#f5f8fa; }
     .bp3-dark textarea.bp3-input::-webkit-input-placeholder{
-      color:rgba(191, 204, 214, 0.5); }
-    .bp3-dark textarea.bp3-input:-ms-input-placeholder{
       color:rgba(191, 204, 214, 0.5); }
     .bp3-dark textarea.bp3-input::-ms-input-placeholder{
       color:rgba(191, 204, 214, 0.5); }
@@ -6768,8 +6753,6 @@ span.bp3-popover-target{
     color:#f5f8fa; }
     .bp3-dark .bp3-tag-input .bp3-input-ghost::-webkit-input-placeholder, .bp3-tag-input.bp3-dark .bp3-input-ghost::-webkit-input-placeholder{
       color:rgba(191, 204, 214, 0.5); }
-    .bp3-dark .bp3-tag-input .bp3-input-ghost:-ms-input-placeholder, .bp3-tag-input.bp3-dark .bp3-input-ghost:-ms-input-placeholder{
-      color:rgba(191, 204, 214, 0.5); }
     .bp3-dark .bp3-tag-input .bp3-input-ghost::-ms-input-placeholder, .bp3-tag-input.bp3-dark .bp3-input-ghost::-ms-input-placeholder{
       color:rgba(191, 204, 214, 0.5); }
     .bp3-dark .bp3-tag-input .bp3-input-ghost::placeholder, .bp3-tag-input.bp3-dark .bp3-input-ghost::placeholder{
@@ -6786,9 +6769,6 @@ span.bp3-popover-target{
   background:none;
   padding:0; }
   .bp3-input-ghost::-webkit-input-placeholder{
-    opacity:1;
-    color:rgba(92, 112, 128, 0.5); }
-  .bp3-input-ghost:-ms-input-placeholder{
     opacity:1;
     color:rgba(92, 112, 128, 0.5); }
   .bp3-input-ghost::-ms-input-placeholder{
