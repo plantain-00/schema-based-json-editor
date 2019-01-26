@@ -470,7 +470,7 @@ export type ValueType = { [name: string]: any } | any[] | number | boolean | str
  * @public
  */
 // tslint:disable-next-line:cognitive-complexity
-export function getDefaultValue(required: boolean | undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {
+export function getDefaultValue(required: boolean | undefined = undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {
   if (initialValue !== undefined) {
     switch (schema.type) {
       case 'object':
@@ -881,7 +881,7 @@ function printInConsole(message: string) {
  * @public
  */
 // tslint:disable-next-line:cognitive-complexity
-export function initializeMarkdown(markdownit: any, hljs: HLJS | undefined, forceHttps: boolean | undefined): any {
+export function initializeMarkdown(markdownit: any, hljs: HLJS | undefined, forceHttps: boolean | undefined = undefined): any {
   if (!markdownit) {
     return undefined
   }
