@@ -6484,6 +6484,11 @@ span.bp3-popover-target{
         background-color:rgba(219, 55, 55, 0.85); }
       .bp3-tag.bp3-intent-danger.bp3-interactive.bp3-active, .bp3-tag.bp3-intent-danger.bp3-interactive:active{
         background-color:rgba(219, 55, 55, 0.7); }
+  .bp3-tag.bp3-fill{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    width:100%; }
   .bp3-tag.bp3-minimal > .bp3-icon, .bp3-tag.bp3-minimal .bp3-icon-standard, .bp3-tag.bp3-minimal .bp3-icon-large{
     fill:#5c7080; }
   .bp3-tag.bp3-minimal:not([class*="bp3-intent-"]){
