@@ -39,7 +39,7 @@
   "devDependencies": {
     "@blueprintjs/core": "3.13.0",
     "antd": "3.13.2",
-    "bootstrap": "4.2.1",
+    "bootstrap": "4.3.1",
     "dragula": "3.7.2",
     "element-ui": "2.5.4",
     "font-awesome": "4.7.0",
