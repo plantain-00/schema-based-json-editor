@@ -1097,6 +1097,14 @@ a.bp3-button{
           color:rgba(255, 115, 115, 0.5); }
           .bp3-dark .bp3-button-group.bp3-minimal .bp3-button.bp3-intent-danger:disabled.bp3-active, .bp3-dark .bp3-button-group.bp3-minimal .bp3-button.bp3-intent-danger.bp3-disabled.bp3-active{
             background:rgba(219, 55, 55, 0.3); }
+  .bp3-button-group .bp3-popover-wrapper,
+  .bp3-button-group .bp3-popover-target{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-flex:1;
+        -ms-flex:1 1 auto;
+            flex:1 1 auto; }
   .bp3-button-group.bp3-fill{
     display:-webkit-box;
     display:-ms-flexbox;
@@ -1122,8 +1130,6 @@ a.bp3-button{
     .bp3-button-group.bp3-vertical .bp3-button{
       margin-right:0 !important;
       width:100%; }
-    .bp3-button-group.bp3-vertical .bp3-popover-target{
-      display:block; }
     .bp3-button-group.bp3-vertical:not(.bp3-minimal) > .bp3-popover-wrapper:first-child .bp3-button,
     .bp3-button-group.bp3-vertical:not(.bp3-minimal) > .bp3-button:first-child{
       border-radius:3px 3px 0 0; }
@@ -7334,6 +7340,14 @@ span.bp3-popover-target{
   cursor:help; }
 .bp3-tree .bp3-icon, .bp3-tree .bp3-icon-standard, .bp3-tree .bp3-icon-large{
   color:#5c7080; }
+  .bp3-tree .bp3-icon.bp3-intent-primary, .bp3-tree .bp3-icon-standard.bp3-intent-primary, .bp3-tree .bp3-icon-large.bp3-intent-primary{
+    color:#137cbd; }
+  .bp3-tree .bp3-icon.bp3-intent-success, .bp3-tree .bp3-icon-standard.bp3-intent-success, .bp3-tree .bp3-icon-large.bp3-intent-success{
+    color:#0f9960; }
+  .bp3-tree .bp3-icon.bp3-intent-warning, .bp3-tree .bp3-icon-standard.bp3-intent-warning, .bp3-tree .bp3-icon-large.bp3-intent-warning{
+    color:#d9822b; }
+  .bp3-tree .bp3-icon.bp3-intent-danger, .bp3-tree .bp3-icon-standard.bp3-intent-danger, .bp3-tree .bp3-icon-large.bp3-intent-danger{
+    color:#db3737; }
 
 .bp3-tree-node-list{
   margin:0;
@@ -7482,6 +7496,16 @@ span.bp3-popover-target{
     -webkit-box-align:center;
         -ms-flex-align:center;
             align-items:center; }
+
+.bp3-tree-node.bp3-disabled .bp3-tree-node-content{
+  background-color:inherit;
+  cursor:not-allowed;
+  color:rgba(92, 112, 128, 0.5); }
+
+.bp3-tree-node.bp3-disabled .bp3-tree-node-caret,
+.bp3-tree-node.bp3-disabled .bp3-tree-node-icon{
+  cursor:not-allowed;
+  color:rgba(92, 112, 128, 0.5); }
 
 .bp3-tree-node.bp3-tree-node-selected > .bp3-tree-node-content{
   background-color:#137cbd; }
