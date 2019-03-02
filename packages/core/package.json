@@ -37,14 +37,14 @@
     "tslib": "1"
   },
   "devDependencies": {
-    "@blueprintjs/core": "3.13.0",
-    "antd": "3.13.5",
+    "@blueprintjs/core": "3.14.0",
+    "antd": "3.13.6",
     "bootstrap": "4.3.1",
     "dragula": "3.7.2",
-    "element-ui": "2.5.4",
+    "element-ui": "2.6.0",
     "font-awesome": "4.7.0",
     "github-fork-ribbon-css": "0.2.1",
-    "highlight.js": "9.14.2",
+    "highlight.js": "9.15.6",
     "iview": "3.2.2",
     "markdown-it": "8.4.2"
   }

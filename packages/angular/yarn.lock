@@ -3,37 +3,37 @@
 
 
 "@angular/common@7":
-  version "7.2.6"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-7.2.6.tgz#876aaf1f9021807b306faba39334b30917f4c3a8"
-  integrity sha512-jzWUgsgS0dmPy7yDHX4qCqVpt7ZZmHhApgkg5RkzTAlp+0cvZ/KsDpBgHXnZUIfmk/5g1/EtTbkbClgp1kCkIg==
+  version "7.2.7"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-7.2.7.tgz#d0078a1cabc5e5c34ceb7691c2a31440ce7630fb"
+  integrity sha512-U1l2CIcmpTAJMWcyTXI9qt1E8CxwKNW1vr6XWZo4X5ziCIzf7RvClzK7Ci5KZKkoPJrJqBJu661Q75Yt22dJsg==
   dependencies:
     tslib "^1.9.0"
 
 "@angular/core@7":
-  version "7.2.6"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-7.2.6.tgz#0142bba2b08d6b49811e12d04cb50586f9c5a1f0"
-  integrity sha512-MZg17DWH1KUoDa9wFYK9Z+3F7DnUW2DjSwGyIi9U4cB54IWFhgt1JsA0mcuSYuRSRpvwaArCDC2AN90f+0/EFA==
+  version "7.2.7"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-7.2.7.tgz#4311028181a98aa844572ea4b6cb9e87fc58d9ba"
+  integrity sha512-E7qjMQdS77SbRROKu13VsfL+MJN52eTlrU0SzEAFGUOgdvbmDYJOaEwjqrouKpYZ0pul8KOoalvlPB7oVflC7A==
   dependencies:
     tslib "^1.9.0"
 
 "@angular/forms@7":
-  version "7.2.6"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-7.2.6.tgz#4db5238a5aa462927be29c90bc60ce4585ed939f"
-  integrity sha512-At72AJNGe+Zzmryb7DDIG+iws7zKdgZx/eEVjZ/Obu/yREefbZY4R7q83U90Vljtn97BwJPx9ur9ttxE9WpnlA==
+  version "7.2.7"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-7.2.7.tgz#bdffad0070e01bd0e1f6f7045909cc9aa33e59f0"
+  integrity sha512-2gBs+BG2cMPsHq9JVEzmu2Ev539zjfHmr6cna2W38KLXeGbNf42rbbMUXpYD8cndY0QTYcnwfMpRNIl9zKRZnw==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-browser-dynamic@7.2.6":
-  version "7.2.6"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-7.2.6.tgz#3a1cc79b40a1ab487cf035ca679f21b406677c09"
-  integrity sha512-/co/q4v11nKin2MFscCMZyixbW103I2FxbPgCAYBN5NSvfIwTrt5J6xWmDoKJ8HkZBqL3R9B+uhYdzsRN/pQxg==
+"@angular/platform-browser-dynamic@7.2.7":
+  version "7.2.7"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-7.2.7.tgz#22db038715c5b17464627a89898a63ece149c840"
+  integrity sha512-3nlcwCZOzlKw/4CMJ4zy1JEVy8Ky4KyLRRePLledOMdsGbuDIoq/kyAnBzg295Xe9ovBxv8cmuSkShci+s/x8g==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-browser@7.2.6":
-  version "7.2.6"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-7.2.6.tgz#7587dfc60c3af77943c0343658e770f706017f7a"
-  integrity sha512-VE4yS4l8Cdx6DlvrbOFOZDKmQuyz1RhVcshgSt9hKlkehvAXMtX8Sqnp6po7z0aPykTh0TZZtMtLEerkFEe+DA==
+"@angular/platform-browser@7.2.7":
+  version "7.2.7"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-7.2.7.tgz#a1a14181354e07c19d38218a7a4af6ea4defa569"
+  integrity sha512-9C3ffZs0ZUw+dYg1oJKiONf64UKTdAzIOaTQXTrVrCa3oN7Jb2tUfmpenmB+ATRxwhL2n7Yi725YWwxY2FwqvQ==
   dependencies:
     tslib "^1.9.0"
 
@@ -65,9 +65,9 @@
     "@types/linkify-it" "*"
 
 "@types/node@*":
-  version "11.9.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.9.5.tgz#011eece9d3f839a806b63973e228f85967b79ed3"
-  integrity sha512-vVjM0SVzgaOUpflq4GYBvCpozes8OgIIS5gVXVka+OfK3hvnkC1i93U8WiY2OtNE4XUWyyy/86Kf6e0IHTQw1Q==
+  version "11.10.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.10.0.tgz#08eeb736ae678ccf9ca0922063f3a08795894ede"
+  integrity sha512-6Mb9+PPq9UzRpQrlPzZAbhEvodWDTnsIakddUAtSDpKYF6eu5zAdW31n8x7UZStvqGnDC7dCJnvU188ylv/Ytw==
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -135,10 +135,10 @@ file-uploader-component@^7.4.1:
   dependencies:
     tslib "1"
 
-highlight.js@9.14.2:
-  version "9.14.2"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.14.2.tgz#efbfb22dc701406e4da406056ef8c2b70ebe5b26"
-  integrity sha512-Nc6YNECYpxyJABGYJAyw7dBAYbXEuIzwzkqoJnwbc1nIpCiN+3ioYf0XrBnLiyyG0JLuJhpPtt2iTSbXiKLoyA==
+highlight.js@9.15.6:
+  version "9.15.6"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.6.tgz#72d4d8d779ec066af9a17cb14360c3def0aa57c4"
+  integrity sha512-zozTAWM1D6sozHo8kqhfYgsac+B+q0PmsjXeyDrYIHHcBN0zTVT66+s2GW1GZv7DbyaROdLXKdabwS/WqPyIdQ==
 
 json5@2:
   version "2.1.0"
