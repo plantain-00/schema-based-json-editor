@@ -32,20 +32,20 @@
     "lodash.tointeger": "4",
     "lodash.tonumber": "4",
     "markdown-tip": "6",
-    "monaco-editor": "0.15",
+    "monaco-editor": "0.16",
     "select2-component": "5",
     "tslib": "1"
   },
   "devDependencies": {
-    "@blueprintjs/core": "3.14.0",
-    "antd": "3.13.6",
+    "@blueprintjs/core": "3.14.1",
+    "antd": "3.15.0",
     "bootstrap": "4.3.1",
     "dragula": "3.7.2",
-    "element-ui": "2.6.0",
+    "element-ui": "2.6.1",
     "font-awesome": "4.7.0",
     "github-fork-ribbon-css": "0.2.1",
     "highlight.js": "9.15.6",
-    "iview": "3.2.2",
+    "iview": "3.3.0",
     "markdown-it": "8.4.2"
   }
 }
