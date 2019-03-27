@@ -5,7 +5,7 @@ import commonjs from 'rollup-plugin-commonjs'
 export default {
   input: 'packages/react/dist/index.js',
   plugins: [
-    resolve({ browser: true }),
+    resolve(),
     uglify(),
     commonjs()
   ],
