@@ -38,14 +38,14 @@
   },
   "devDependencies": {
     "@blueprintjs/core": "3.14.1",
-    "antd": "3.15.0",
+    "antd": "3.15.1",
     "bootstrap": "4.3.1",
     "dragula": "3.7.2",
-    "element-ui": "2.6.1",
+    "element-ui": "2.6.3",
     "font-awesome": "4.7.0",
     "github-fork-ribbon-css": "0.2.1",
     "highlight.js": "9.15.6",
-    "iview": "3.3.0",
+    "iview": "3.3.3",
     "markdown-it": "8.4.2"
   }
 }
