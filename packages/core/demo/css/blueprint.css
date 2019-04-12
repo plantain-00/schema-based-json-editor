@@ -263,12 +263,12 @@ a{
 .bp3-running-text ol, .bp3-list{
   margin:10px 0;
   padding-left:30px; }
-  .bp3-running-text ul li:not(:last-child),
-  .bp3-running-text ol li:not(:last-child), .bp3-list li:not(:last-child){
+  .bp3-running-text ul li:not(:last-child), .bp3-running-text ol li:not(:last-child), .bp3-list li:not(:last-child){
     margin-bottom:5px; }
-  .bp3-running-text ul ol,
-  .bp3-running-text ol ol, .bp3-list ol, .bp3-running-text ul ul,
-  .bp3-running-text ol ul, .bp3-list ul{
+  .bp3-running-text ul ol, .bp3-running-text ol ol, .bp3-list ol,
+  .bp3-running-text ul ul,
+  .bp3-running-text ol ul,
+  .bp3-list ul{
     margin-top:5px; }
 
 .bp3-list-unstyled{
@@ -2448,6 +2448,10 @@ a.bp3-button{
           .bp3-dark .bp3-file-input input:disabled + .bp3-file-upload-input::after.bp3-active, .bp3-dark
           .bp3-file-input input.bp3-disabled + .bp3-file-upload-input::after.bp3-active{
             background:rgba(57, 75, 89, 0.7); }
+  .bp3-file-input.bp3-file-input-has-selection .bp3-file-upload-input{
+    color:#182026; }
+  .bp3-dark .bp3-file-input.bp3-file-input-has-selection .bp3-file-upload-input{
+    color:#f5f8fa; }
   .bp3-file-input.bp3-fill{
     width:100%; }
   .bp3-file-input.bp3-large,
@@ -2484,6 +2488,7 @@ a.bp3-button{
   right:0;
   left:0;
   padding-right:80px;
+  color:rgba(92, 112, 128, 0.5);
   -webkit-user-select:none;
      -moz-user-select:none;
       -ms-user-select:none;
@@ -2581,7 +2586,7 @@ a.bp3-button{
             box-shadow:0 0 0 0 rgba(19, 124, 189, 0), 0 0 0 0 rgba(19, 124, 189, 0), 0 0 0 0 rgba(19, 124, 189, 0), inset 0 0 0 1px rgba(16, 22, 26, 0.3), inset 0 1px 1px rgba(16, 22, 26, 0.4);
     background:rgba(16, 22, 26, 0.3);
     color:#f5f8fa;
-    color:#bfccd6; }
+    color:rgba(191, 204, 214, 0.5); }
     .bp3-dark .bp3-file-upload-input::-webkit-input-placeholder{
       color:rgba(191, 204, 214, 0.5); }
     .bp3-dark .bp3-file-upload-input::-ms-input-placeholder{
@@ -3199,26 +3204,24 @@ form{
   padding:0 25px 0 10px;
   -moz-appearance:none;
   -webkit-appearance:none; }
-  .bp3-html-select select > *,
-  .bp3-select select > *{
+  .bp3-html-select select > *, .bp3-select select > *{
     -webkit-box-flex:0;
         -ms-flex-positive:0;
             flex-grow:0;
     -ms-flex-negative:0;
         flex-shrink:0; }
-  .bp3-html-select select > .bp3-fill,
-  .bp3-select select > .bp3-fill{
+  .bp3-html-select select > .bp3-fill, .bp3-select select > .bp3-fill{
     -webkit-box-flex:1;
         -ms-flex-positive:1;
             flex-grow:1;
     -ms-flex-negative:1;
         flex-shrink:1; }
   .bp3-html-select select::before,
-  .bp3-select select::before, .bp3-html-select select > *,
-  .bp3-select select > *{
+  .bp3-select select::before, .bp3-html-select select > *, .bp3-select select > *{
     margin-right:7px; }
   .bp3-html-select select:empty::before,
-  .bp3-select select:empty::before, .bp3-html-select select > :last-child,
+  .bp3-select select:empty::before,
+  .bp3-html-select select > :last-child,
   .bp3-select select > :last-child{
     margin-right:0; }
   .bp3-html-select select:hover,
@@ -3284,55 +3287,40 @@ form{
     .bp3-select.bp3-minimal select.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal select.bp3-disabled:hover.bp3-active,
     .bp3-select.bp3-minimal select.bp3-disabled:hover.bp3-active{
       background:rgba(115, 134, 148, 0.3); }
-  .bp3-dark .bp3-html-select.bp3-minimal select, .bp3-html-select.bp3-minimal .bp3-dark select, .bp3-dark
-  .bp3-select.bp3-minimal select,
-  .bp3-select.bp3-minimal .bp3-dark select{
+  .bp3-dark .bp3-html-select.bp3-minimal select, .bp3-html-select.bp3-minimal .bp3-dark select,
+  .bp3-dark .bp3-select.bp3-minimal select, .bp3-select.bp3-minimal .bp3-dark select{
     -webkit-box-shadow:none;
             box-shadow:none;
     background:none;
     color:inherit; }
-    .bp3-dark .bp3-html-select.bp3-minimal select:hover, .bp3-html-select.bp3-minimal .bp3-dark select:hover, .bp3-dark
-    .bp3-select.bp3-minimal select:hover,
-    .bp3-select.bp3-minimal .bp3-dark select:hover, .bp3-dark .bp3-html-select.bp3-minimal select:active, .bp3-html-select.bp3-minimal .bp3-dark select:active, .bp3-dark
-    .bp3-select.bp3-minimal select:active,
-    .bp3-select.bp3-minimal .bp3-dark select:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-active, .bp3-dark
-    .bp3-select.bp3-minimal select.bp3-active,
-    .bp3-select.bp3-minimal .bp3-dark select.bp3-active{
+    .bp3-dark .bp3-html-select.bp3-minimal select:hover, .bp3-html-select.bp3-minimal .bp3-dark select:hover,
+    .bp3-dark .bp3-select.bp3-minimal select:hover, .bp3-select.bp3-minimal .bp3-dark select:hover, .bp3-dark .bp3-html-select.bp3-minimal select:active, .bp3-html-select.bp3-minimal .bp3-dark select:active,
+    .bp3-dark .bp3-select.bp3-minimal select:active, .bp3-select.bp3-minimal .bp3-dark select:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-active,
+    .bp3-dark .bp3-select.bp3-minimal select.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-active{
       -webkit-box-shadow:none;
               box-shadow:none;
       background:none; }
-    .bp3-dark .bp3-html-select.bp3-minimal select:hover, .bp3-html-select.bp3-minimal .bp3-dark select:hover, .bp3-dark
-    .bp3-select.bp3-minimal select:hover,
-    .bp3-select.bp3-minimal .bp3-dark select:hover{
+    .bp3-dark .bp3-html-select.bp3-minimal select:hover, .bp3-html-select.bp3-minimal .bp3-dark select:hover,
+    .bp3-dark .bp3-select.bp3-minimal select:hover, .bp3-select.bp3-minimal .bp3-dark select:hover{
       background:rgba(138, 155, 168, 0.15); }
-    .bp3-dark .bp3-html-select.bp3-minimal select:active, .bp3-html-select.bp3-minimal .bp3-dark select:active, .bp3-dark
-    .bp3-select.bp3-minimal select:active,
-    .bp3-select.bp3-minimal .bp3-dark select:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-active, .bp3-dark
-    .bp3-select.bp3-minimal select.bp3-active,
-    .bp3-select.bp3-minimal .bp3-dark select.bp3-active{
+    .bp3-dark .bp3-html-select.bp3-minimal select:active, .bp3-html-select.bp3-minimal .bp3-dark select:active,
+    .bp3-dark .bp3-select.bp3-minimal select:active, .bp3-select.bp3-minimal .bp3-dark select:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-active,
+    .bp3-dark .bp3-select.bp3-minimal select.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-active{
       background:rgba(138, 155, 168, 0.3);
       color:#f5f8fa; }
-    .bp3-dark .bp3-html-select.bp3-minimal select:disabled, .bp3-html-select.bp3-minimal .bp3-dark select:disabled, .bp3-dark
-    .bp3-select.bp3-minimal select:disabled,
-    .bp3-select.bp3-minimal .bp3-dark select:disabled, .bp3-dark .bp3-html-select.bp3-minimal select:disabled:hover, .bp3-html-select.bp3-minimal .bp3-dark select:disabled:hover, .bp3-dark
-    .bp3-select.bp3-minimal select:disabled:hover,
-    .bp3-select.bp3-minimal .bp3-dark select:disabled:hover, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-disabled, .bp3-dark
-    .bp3-select.bp3-minimal select.bp3-disabled,
-    .bp3-select.bp3-minimal .bp3-dark select.bp3-disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-disabled:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-disabled:hover, .bp3-dark
-    .bp3-select.bp3-minimal select.bp3-disabled:hover,
-    .bp3-select.bp3-minimal .bp3-dark select.bp3-disabled:hover{
+    .bp3-dark .bp3-html-select.bp3-minimal select:disabled, .bp3-html-select.bp3-minimal .bp3-dark select:disabled,
+    .bp3-dark .bp3-select.bp3-minimal select:disabled, .bp3-select.bp3-minimal .bp3-dark select:disabled, .bp3-dark .bp3-html-select.bp3-minimal select:disabled:hover, .bp3-html-select.bp3-minimal .bp3-dark select:disabled:hover,
+    .bp3-dark .bp3-select.bp3-minimal select:disabled:hover, .bp3-select.bp3-minimal .bp3-dark select:disabled:hover, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-disabled,
+    .bp3-dark .bp3-select.bp3-minimal select.bp3-disabled, .bp3-select.bp3-minimal .bp3-dark select.bp3-disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-disabled:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-disabled:hover,
+    .bp3-dark .bp3-select.bp3-minimal select.bp3-disabled:hover, .bp3-select.bp3-minimal .bp3-dark select.bp3-disabled:hover{
       background:none;
       cursor:not-allowed;
       color:rgba(191, 204, 214, 0.5); }
-      .bp3-dark .bp3-html-select.bp3-minimal select:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select:disabled.bp3-active, .bp3-dark
-      .bp3-select.bp3-minimal select:disabled.bp3-active,
-      .bp3-select.bp3-minimal .bp3-dark select:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select:disabled:hover.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select:disabled:hover.bp3-active, .bp3-dark
-      .bp3-select.bp3-minimal select:disabled:hover.bp3-active,
-      .bp3-select.bp3-minimal .bp3-dark select:disabled:hover.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-disabled.bp3-active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-disabled.bp3-active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-disabled:hover.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-disabled:hover.bp3-active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-disabled:hover.bp3-active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-disabled:hover.bp3-active{
+      .bp3-dark .bp3-html-select.bp3-minimal select:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select:disabled.bp3-active,
+      .bp3-dark .bp3-select.bp3-minimal select:disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select:disabled:hover.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select:disabled:hover.bp3-active,
+      .bp3-dark .bp3-select.bp3-minimal select:disabled:hover.bp3-active, .bp3-select.bp3-minimal .bp3-dark select:disabled:hover.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-disabled.bp3-active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-disabled:hover.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-disabled:hover.bp3-active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-disabled:hover.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-disabled:hover.bp3-active{
         background:rgba(138, 155, 168, 0.3); }
   .bp3-html-select.bp3-minimal select.bp3-intent-primary,
   .bp3-select.bp3-minimal select.bp3-intent-primary{
@@ -3363,37 +3351,28 @@ form{
       .bp3-select.bp3-minimal select.bp3-intent-primary:disabled.bp3-active, .bp3-html-select.bp3-minimal select.bp3-intent-primary.bp3-disabled.bp3-active,
       .bp3-select.bp3-minimal select.bp3-intent-primary.bp3-disabled.bp3-active{
         background:rgba(19, 124, 189, 0.3); }
-    .bp3-html-select.bp3-minimal select.bp3-intent-primary .bp3-button-spinner .bp3-spinner-head,
-    .bp3-select.bp3-minimal select.bp3-intent-primary .bp3-button-spinner .bp3-spinner-head{
+    .bp3-html-select.bp3-minimal select.bp3-intent-primary .bp3-button-spinner .bp3-spinner-head, .bp3-select.bp3-minimal select.bp3-intent-primary .bp3-button-spinner .bp3-spinner-head{
       stroke:#106ba3; }
-    .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary, .bp3-dark
-    .bp3-select.bp3-minimal select.bp3-intent-primary,
-    .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary{
+    .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary,
+    .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-primary, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary{
       color:#48aff0; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary:hover, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-primary:hover,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary:hover{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary:hover,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-primary:hover, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary:hover{
         background:rgba(19, 124, 189, 0.2);
         color:#48aff0; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary:active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary:active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-primary:active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-primary.bp3-active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-active{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary:active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary:active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-primary:active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-primary.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-active{
         background:rgba(19, 124, 189, 0.3);
         color:#48aff0; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary:disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary:disabled, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-primary:disabled,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary:disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-disabled, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-primary.bp3-disabled,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-disabled{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary:disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary:disabled,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-primary:disabled, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary:disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-disabled,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-primary.bp3-disabled, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-disabled{
         background:none;
         color:rgba(72, 175, 240, 0.5); }
-        .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary:disabled.bp3-active, .bp3-dark
-        .bp3-select.bp3-minimal select.bp3-intent-primary:disabled.bp3-active,
-        .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-disabled.bp3-active, .bp3-dark
-        .bp3-select.bp3-minimal select.bp3-intent-primary.bp3-disabled.bp3-active,
-        .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-disabled.bp3-active{
+        .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary:disabled.bp3-active,
+        .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-primary:disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-primary.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-disabled.bp3-active,
+        .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-primary.bp3-disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-primary.bp3-disabled.bp3-active{
           background:rgba(19, 124, 189, 0.3); }
   .bp3-html-select.bp3-minimal select.bp3-intent-success,
   .bp3-select.bp3-minimal select.bp3-intent-success{
@@ -3424,37 +3403,28 @@ form{
       .bp3-select.bp3-minimal select.bp3-intent-success:disabled.bp3-active, .bp3-html-select.bp3-minimal select.bp3-intent-success.bp3-disabled.bp3-active,
       .bp3-select.bp3-minimal select.bp3-intent-success.bp3-disabled.bp3-active{
         background:rgba(15, 153, 96, 0.3); }
-    .bp3-html-select.bp3-minimal select.bp3-intent-success .bp3-button-spinner .bp3-spinner-head,
-    .bp3-select.bp3-minimal select.bp3-intent-success .bp3-button-spinner .bp3-spinner-head{
+    .bp3-html-select.bp3-minimal select.bp3-intent-success .bp3-button-spinner .bp3-spinner-head, .bp3-select.bp3-minimal select.bp3-intent-success .bp3-button-spinner .bp3-spinner-head{
       stroke:#0d8050; }
-    .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success, .bp3-dark
-    .bp3-select.bp3-minimal select.bp3-intent-success,
-    .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success{
+    .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success,
+    .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-success, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success{
       color:#3dcc91; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success:hover, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-success:hover,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success:hover{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success:hover,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-success:hover, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success:hover{
         background:rgba(15, 153, 96, 0.2);
         color:#3dcc91; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success:active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success:active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-success:active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-success.bp3-active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-active{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success:active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success:active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-success:active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-success.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-active{
         background:rgba(15, 153, 96, 0.3);
         color:#3dcc91; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success:disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success:disabled, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-success:disabled,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success:disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-disabled, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-success.bp3-disabled,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-disabled{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success:disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success:disabled,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-success:disabled, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success:disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-disabled,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-success.bp3-disabled, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-disabled{
         background:none;
         color:rgba(61, 204, 145, 0.5); }
-        .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success:disabled.bp3-active, .bp3-dark
-        .bp3-select.bp3-minimal select.bp3-intent-success:disabled.bp3-active,
-        .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-disabled.bp3-active, .bp3-dark
-        .bp3-select.bp3-minimal select.bp3-intent-success.bp3-disabled.bp3-active,
-        .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-disabled.bp3-active{
+        .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success:disabled.bp3-active,
+        .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-success:disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-success.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-disabled.bp3-active,
+        .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-success.bp3-disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-success.bp3-disabled.bp3-active{
           background:rgba(15, 153, 96, 0.3); }
   .bp3-html-select.bp3-minimal select.bp3-intent-warning,
   .bp3-select.bp3-minimal select.bp3-intent-warning{
@@ -3485,37 +3455,28 @@ form{
       .bp3-select.bp3-minimal select.bp3-intent-warning:disabled.bp3-active, .bp3-html-select.bp3-minimal select.bp3-intent-warning.bp3-disabled.bp3-active,
       .bp3-select.bp3-minimal select.bp3-intent-warning.bp3-disabled.bp3-active{
         background:rgba(217, 130, 43, 0.3); }
-    .bp3-html-select.bp3-minimal select.bp3-intent-warning .bp3-button-spinner .bp3-spinner-head,
-    .bp3-select.bp3-minimal select.bp3-intent-warning .bp3-button-spinner .bp3-spinner-head{
+    .bp3-html-select.bp3-minimal select.bp3-intent-warning .bp3-button-spinner .bp3-spinner-head, .bp3-select.bp3-minimal select.bp3-intent-warning .bp3-button-spinner .bp3-spinner-head{
       stroke:#bf7326; }
-    .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning, .bp3-dark
-    .bp3-select.bp3-minimal select.bp3-intent-warning,
-    .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning{
+    .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning,
+    .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-warning, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning{
       color:#ffb366; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning:hover, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-warning:hover,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning:hover{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning:hover,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-warning:hover, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning:hover{
         background:rgba(217, 130, 43, 0.2);
         color:#ffb366; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning:active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning:active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-warning:active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-warning.bp3-active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-active{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning:active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning:active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-warning:active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-warning.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-active{
         background:rgba(217, 130, 43, 0.3);
         color:#ffb366; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning:disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning:disabled, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-warning:disabled,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning:disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-disabled, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-warning.bp3-disabled,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-disabled{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning:disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning:disabled,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-warning:disabled, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning:disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-disabled,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-warning.bp3-disabled, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-disabled{
         background:none;
         color:rgba(255, 179, 102, 0.5); }
-        .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning:disabled.bp3-active, .bp3-dark
-        .bp3-select.bp3-minimal select.bp3-intent-warning:disabled.bp3-active,
-        .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-disabled.bp3-active, .bp3-dark
-        .bp3-select.bp3-minimal select.bp3-intent-warning.bp3-disabled.bp3-active,
-        .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-disabled.bp3-active{
+        .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning:disabled.bp3-active,
+        .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-warning:disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-warning.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-disabled.bp3-active,
+        .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-warning.bp3-disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-warning.bp3-disabled.bp3-active{
           background:rgba(217, 130, 43, 0.3); }
   .bp3-html-select.bp3-minimal select.bp3-intent-danger,
   .bp3-select.bp3-minimal select.bp3-intent-danger{
@@ -3546,37 +3507,28 @@ form{
       .bp3-select.bp3-minimal select.bp3-intent-danger:disabled.bp3-active, .bp3-html-select.bp3-minimal select.bp3-intent-danger.bp3-disabled.bp3-active,
       .bp3-select.bp3-minimal select.bp3-intent-danger.bp3-disabled.bp3-active{
         background:rgba(219, 55, 55, 0.3); }
-    .bp3-html-select.bp3-minimal select.bp3-intent-danger .bp3-button-spinner .bp3-spinner-head,
-    .bp3-select.bp3-minimal select.bp3-intent-danger .bp3-button-spinner .bp3-spinner-head{
+    .bp3-html-select.bp3-minimal select.bp3-intent-danger .bp3-button-spinner .bp3-spinner-head, .bp3-select.bp3-minimal select.bp3-intent-danger .bp3-button-spinner .bp3-spinner-head{
       stroke:#c23030; }
-    .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger, .bp3-dark
-    .bp3-select.bp3-minimal select.bp3-intent-danger,
-    .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger{
+    .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger,
+    .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-danger, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger{
       color:#ff7373; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger:hover, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-danger:hover,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger:hover{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger:hover, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger:hover,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-danger:hover, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger:hover{
         background:rgba(219, 55, 55, 0.2);
         color:#ff7373; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger:active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger:active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-danger:active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-active, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-danger.bp3-active,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-active{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger:active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger:active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-danger:active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger:active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-active,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-danger.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-active{
         background:rgba(219, 55, 55, 0.3);
         color:#ff7373; }
-      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger:disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger:disabled, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-danger:disabled,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger:disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-disabled, .bp3-dark
-      .bp3-select.bp3-minimal select.bp3-intent-danger.bp3-disabled,
-      .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-disabled{
+      .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger:disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger:disabled,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-danger:disabled, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger:disabled, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger.bp3-disabled, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-disabled,
+      .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-danger.bp3-disabled, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-disabled{
         background:none;
         color:rgba(255, 115, 115, 0.5); }
-        .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger:disabled.bp3-active, .bp3-dark
-        .bp3-select.bp3-minimal select.bp3-intent-danger:disabled.bp3-active,
-        .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-disabled.bp3-active, .bp3-dark
-        .bp3-select.bp3-minimal select.bp3-intent-danger.bp3-disabled.bp3-active,
-        .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-disabled.bp3-active{
+        .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger:disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger:disabled.bp3-active,
+        .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-danger:disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger:disabled.bp3-active, .bp3-dark .bp3-html-select.bp3-minimal select.bp3-intent-danger.bp3-disabled.bp3-active, .bp3-html-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-disabled.bp3-active,
+        .bp3-dark .bp3-select.bp3-minimal select.bp3-intent-danger.bp3-disabled.bp3-active, .bp3-select.bp3-minimal .bp3-dark select.bp3-intent-danger.bp3-disabled.bp3-active{
           background:rgba(219, 55, 55, 0.3); }
 
 .bp3-html-select.bp3-large select,
@@ -3585,45 +3537,33 @@ form{
   padding-right:35px;
   font-size:16px; }
 
-.bp3-dark .bp3-html-select select, .bp3-dark
-.bp3-select select{
+.bp3-dark .bp3-html-select select, .bp3-dark .bp3-select select{
   -webkit-box-shadow:0 0 0 1px rgba(16, 22, 26, 0.4);
           box-shadow:0 0 0 1px rgba(16, 22, 26, 0.4);
   background-color:#394b59;
   background-image:-webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.05)), to(rgba(255, 255, 255, 0)));
   background-image:linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
   color:#f5f8fa; }
-  .bp3-dark .bp3-html-select select:hover, .bp3-dark
-  .bp3-select select:hover, .bp3-dark .bp3-html-select select:active, .bp3-dark
-  .bp3-select select:active, .bp3-dark .bp3-html-select select.bp3-active, .bp3-dark
-  .bp3-select select.bp3-active{
+  .bp3-dark .bp3-html-select select:hover, .bp3-dark .bp3-select select:hover, .bp3-dark .bp3-html-select select:active, .bp3-dark .bp3-select select:active, .bp3-dark .bp3-html-select select.bp3-active, .bp3-dark .bp3-select select.bp3-active{
     color:#f5f8fa; }
-  .bp3-dark .bp3-html-select select:hover, .bp3-dark
-  .bp3-select select:hover{
+  .bp3-dark .bp3-html-select select:hover, .bp3-dark .bp3-select select:hover{
     -webkit-box-shadow:0 0 0 1px rgba(16, 22, 26, 0.4);
             box-shadow:0 0 0 1px rgba(16, 22, 26, 0.4);
     background-color:#30404d; }
-  .bp3-dark .bp3-html-select select:active, .bp3-dark
-  .bp3-select select:active, .bp3-dark .bp3-html-select select.bp3-active, .bp3-dark
-  .bp3-select select.bp3-active{
+  .bp3-dark .bp3-html-select select:active, .bp3-dark .bp3-select select:active, .bp3-dark .bp3-html-select select.bp3-active, .bp3-dark .bp3-select select.bp3-active{
     -webkit-box-shadow:0 0 0 1px rgba(16, 22, 26, 0.6), inset 0 1px 2px rgba(16, 22, 26, 0.2);
             box-shadow:0 0 0 1px rgba(16, 22, 26, 0.6), inset 0 1px 2px rgba(16, 22, 26, 0.2);
     background-color:#202b33;
     background-image:none; }
-  .bp3-dark .bp3-html-select select:disabled, .bp3-dark
-  .bp3-select select:disabled, .bp3-dark .bp3-html-select select.bp3-disabled, .bp3-dark
-  .bp3-select select.bp3-disabled{
+  .bp3-dark .bp3-html-select select:disabled, .bp3-dark .bp3-select select:disabled, .bp3-dark .bp3-html-select select.bp3-disabled, .bp3-dark .bp3-select select.bp3-disabled{
     -webkit-box-shadow:none;
             box-shadow:none;
     background-color:rgba(57, 75, 89, 0.5);
     background-image:none;
     color:rgba(191, 204, 214, 0.5); }
-    .bp3-dark .bp3-html-select select:disabled.bp3-active, .bp3-dark
-    .bp3-select select:disabled.bp3-active, .bp3-dark .bp3-html-select select.bp3-disabled.bp3-active, .bp3-dark
-    .bp3-select select.bp3-disabled.bp3-active{
+    .bp3-dark .bp3-html-select select:disabled.bp3-active, .bp3-dark .bp3-select select:disabled.bp3-active, .bp3-dark .bp3-html-select select.bp3-disabled.bp3-active, .bp3-dark .bp3-select select.bp3-disabled.bp3-active{
       background:rgba(57, 75, 89, 0.7); }
-  .bp3-dark .bp3-html-select select .bp3-button-spinner .bp3-spinner-head, .bp3-dark
-  .bp3-select select .bp3-button-spinner .bp3-spinner-head{
+  .bp3-dark .bp3-html-select select .bp3-button-spinner .bp3-spinner-head, .bp3-dark .bp3-select select .bp3-button-spinner .bp3-spinner-head{
     background:rgba(16, 22, 26, 0.5);
     stroke:#8a9ba8; }
 
@@ -3697,16 +3637,22 @@ form{
 .bp3-running-text table, table.bp3-html-table{
   border-spacing:0;
   font-size:14px; }
-  .bp3-running-text table th, table.bp3-html-table th, .bp3-running-text table td, table.bp3-html-table td{
+  .bp3-running-text table th, table.bp3-html-table th,
+  .bp3-running-text table td,
+  table.bp3-html-table td{
     padding:11px;
     vertical-align:top;
     text-align:left; }
   .bp3-running-text table th, table.bp3-html-table th{
     color:#182026;
     font-weight:600; }
-  .bp3-running-text table td, table.bp3-html-table td{
+  
+  .bp3-running-text table td,
+  table.bp3-html-table td{
     color:#182026; }
-  .bp3-running-text table tbody tr:first-child th, table.bp3-html-table tbody tr:first-child th, .bp3-running-text table tbody tr:first-child td, table.bp3-html-table tbody tr:first-child td{
+  .bp3-running-text table tbody tr:first-child th, table.bp3-html-table tbody tr:first-child th,
+  .bp3-running-text table tbody tr:first-child td,
+  table.bp3-html-table tbody tr:first-child td{
     -webkit-box-shadow:inset 0 1px 0 0 rgba(16, 22, 26, 0.15);
             box-shadow:inset 0 1px 0 0 rgba(16, 22, 26, 0.15); }
   .bp3-dark .bp3-running-text table th, .bp3-running-text .bp3-dark table th, .bp3-dark table.bp3-html-table th{
@@ -3714,8 +3660,8 @@ form{
   .bp3-dark .bp3-running-text table td, .bp3-running-text .bp3-dark table td, .bp3-dark table.bp3-html-table td{
     color:#f5f8fa; }
   .bp3-dark .bp3-running-text table tbody tr:first-child th, .bp3-running-text .bp3-dark table tbody tr:first-child th, .bp3-dark table.bp3-html-table tbody tr:first-child th,
-  .bp3-dark .bp3-running-text table tbody tr:first-child td, .bp3-running-text
-  .bp3-dark table tbody tr:first-child td,
+  .bp3-dark .bp3-running-text table tbody tr:first-child td,
+  .bp3-running-text .bp3-dark table tbody tr:first-child td,
   .bp3-dark table.bp3-html-table tbody tr:first-child td{
     -webkit-box-shadow:inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
             box-shadow:inset 0 1px 0 0 rgba(255, 255, 255, 0.15); }
@@ -4571,6 +4517,9 @@ span.bp3-icon:empty{
 .bp3-icon-info-sign::before{
   content:"ℹ"; }
 
+.bp3-icon-inheritance::before{
+  content:""; }
+
 .bp3-icon-inner-join::before{
   content:""; }
 
@@ -5400,7 +5349,8 @@ span.bp3-icon:empty{
     .bp3-menu-item.bp3-intent-primary:active{
       background-color:#106ba3; }
     .bp3-menu-item.bp3-intent-primary:hover, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item, .bp3-menu-item.bp3-intent-primary:hover::before, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item::before, .bp3-menu-item.bp3-intent-primary:hover::after, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item::after,
-    .bp3-menu-item.bp3-intent-primary:hover .bp3-menu-item-label, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item .bp3-menu-item-label, .bp3-menu-item.bp3-intent-primary:active, .bp3-menu-item.bp3-intent-primary:active::before, .bp3-menu-item.bp3-intent-primary:active::after,
+    .bp3-menu-item.bp3-intent-primary:hover .bp3-menu-item-label,
+    .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item .bp3-menu-item-label, .bp3-menu-item.bp3-intent-primary:active, .bp3-menu-item.bp3-intent-primary:active::before, .bp3-menu-item.bp3-intent-primary:active::after,
     .bp3-menu-item.bp3-intent-primary:active .bp3-menu-item-label, .bp3-menu-item.bp3-intent-primary.bp3-active, .bp3-menu-item.bp3-intent-primary.bp3-active::before, .bp3-menu-item.bp3-intent-primary.bp3-active::after,
     .bp3-menu-item.bp3-intent-primary.bp3-active .bp3-menu-item-label{
       color:#ffffff; }
@@ -5416,7 +5366,8 @@ span.bp3-icon:empty{
     .bp3-menu-item.bp3-intent-success:active{
       background-color:#0d8050; }
     .bp3-menu-item.bp3-intent-success:hover, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item, .bp3-menu-item.bp3-intent-success:hover::before, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item::before, .bp3-menu-item.bp3-intent-success:hover::after, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item::after,
-    .bp3-menu-item.bp3-intent-success:hover .bp3-menu-item-label, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item .bp3-menu-item-label, .bp3-menu-item.bp3-intent-success:active, .bp3-menu-item.bp3-intent-success:active::before, .bp3-menu-item.bp3-intent-success:active::after,
+    .bp3-menu-item.bp3-intent-success:hover .bp3-menu-item-label,
+    .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item .bp3-menu-item-label, .bp3-menu-item.bp3-intent-success:active, .bp3-menu-item.bp3-intent-success:active::before, .bp3-menu-item.bp3-intent-success:active::after,
     .bp3-menu-item.bp3-intent-success:active .bp3-menu-item-label, .bp3-menu-item.bp3-intent-success.bp3-active, .bp3-menu-item.bp3-intent-success.bp3-active::before, .bp3-menu-item.bp3-intent-success.bp3-active::after,
     .bp3-menu-item.bp3-intent-success.bp3-active .bp3-menu-item-label{
       color:#ffffff; }
@@ -5432,7 +5383,8 @@ span.bp3-icon:empty{
     .bp3-menu-item.bp3-intent-warning:active{
       background-color:#bf7326; }
     .bp3-menu-item.bp3-intent-warning:hover, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item, .bp3-menu-item.bp3-intent-warning:hover::before, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item::before, .bp3-menu-item.bp3-intent-warning:hover::after, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item::after,
-    .bp3-menu-item.bp3-intent-warning:hover .bp3-menu-item-label, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item .bp3-menu-item-label, .bp3-menu-item.bp3-intent-warning:active, .bp3-menu-item.bp3-intent-warning:active::before, .bp3-menu-item.bp3-intent-warning:active::after,
+    .bp3-menu-item.bp3-intent-warning:hover .bp3-menu-item-label,
+    .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item .bp3-menu-item-label, .bp3-menu-item.bp3-intent-warning:active, .bp3-menu-item.bp3-intent-warning:active::before, .bp3-menu-item.bp3-intent-warning:active::after,
     .bp3-menu-item.bp3-intent-warning:active .bp3-menu-item-label, .bp3-menu-item.bp3-intent-warning.bp3-active, .bp3-menu-item.bp3-intent-warning.bp3-active::before, .bp3-menu-item.bp3-intent-warning.bp3-active::after,
     .bp3-menu-item.bp3-intent-warning.bp3-active .bp3-menu-item-label{
       color:#ffffff; }
@@ -5448,7 +5400,8 @@ span.bp3-icon:empty{
     .bp3-menu-item.bp3-intent-danger:active{
       background-color:#c23030; }
     .bp3-menu-item.bp3-intent-danger:hover, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item, .bp3-menu-item.bp3-intent-danger:hover::before, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item::before, .bp3-menu-item.bp3-intent-danger:hover::after, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item::after,
-    .bp3-menu-item.bp3-intent-danger:hover .bp3-menu-item-label, .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item .bp3-menu-item-label, .bp3-menu-item.bp3-intent-danger:active, .bp3-menu-item.bp3-intent-danger:active::before, .bp3-menu-item.bp3-intent-danger:active::after,
+    .bp3-menu-item.bp3-intent-danger:hover .bp3-menu-item-label,
+    .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item .bp3-menu-item-label, .bp3-menu-item.bp3-intent-danger:active, .bp3-menu-item.bp3-intent-danger:active::before, .bp3-menu-item.bp3-intent-danger:active::after,
     .bp3-menu-item.bp3-intent-danger:active .bp3-menu-item-label, .bp3-menu-item.bp3-intent-danger.bp3-active, .bp3-menu-item.bp3-intent-danger.bp3-active::before, .bp3-menu-item.bp3-intent-danger.bp3-active::after,
     .bp3-menu-item.bp3-intent-danger.bp3-active .bp3-menu-item-label{
       color:#ffffff; }
@@ -5550,8 +5503,8 @@ button.bp3-menu-item{
     background-color:#106ba3; }
   .bp3-dark .bp3-menu-item.bp3-intent-primary:hover, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item, .bp3-dark .bp3-menu-item.bp3-intent-primary:hover::before, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item::before, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item::before, .bp3-dark .bp3-menu-item.bp3-intent-primary:hover::after, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item::after, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item::after,
   .bp3-dark .bp3-menu-item.bp3-intent-primary:hover .bp3-menu-item-label,
-  .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item .bp3-menu-item-label, .bp3-submenu
-  .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-primary:active, .bp3-dark .bp3-menu-item.bp3-intent-primary:active::before, .bp3-dark .bp3-menu-item.bp3-intent-primary:active::after,
+  .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item .bp3-menu-item-label,
+  .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-primary.bp3-menu-item .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-primary:active, .bp3-dark .bp3-menu-item.bp3-intent-primary:active::before, .bp3-dark .bp3-menu-item.bp3-intent-primary:active::after,
   .bp3-dark .bp3-menu-item.bp3-intent-primary:active .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-primary.bp3-active, .bp3-dark .bp3-menu-item.bp3-intent-primary.bp3-active::before, .bp3-dark .bp3-menu-item.bp3-intent-primary.bp3-active::after,
   .bp3-dark .bp3-menu-item.bp3-intent-primary.bp3-active .bp3-menu-item-label{
     color:#ffffff; }
@@ -5569,8 +5522,8 @@ button.bp3-menu-item{
     background-color:#0d8050; }
   .bp3-dark .bp3-menu-item.bp3-intent-success:hover, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item, .bp3-dark .bp3-menu-item.bp3-intent-success:hover::before, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item::before, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item::before, .bp3-dark .bp3-menu-item.bp3-intent-success:hover::after, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item::after, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item::after,
   .bp3-dark .bp3-menu-item.bp3-intent-success:hover .bp3-menu-item-label,
-  .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item .bp3-menu-item-label, .bp3-submenu
-  .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-success:active, .bp3-dark .bp3-menu-item.bp3-intent-success:active::before, .bp3-dark .bp3-menu-item.bp3-intent-success:active::after,
+  .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item .bp3-menu-item-label,
+  .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-success.bp3-menu-item .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-success:active, .bp3-dark .bp3-menu-item.bp3-intent-success:active::before, .bp3-dark .bp3-menu-item.bp3-intent-success:active::after,
   .bp3-dark .bp3-menu-item.bp3-intent-success:active .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-success.bp3-active, .bp3-dark .bp3-menu-item.bp3-intent-success.bp3-active::before, .bp3-dark .bp3-menu-item.bp3-intent-success.bp3-active::after,
   .bp3-dark .bp3-menu-item.bp3-intent-success.bp3-active .bp3-menu-item-label{
     color:#ffffff; }
@@ -5588,8 +5541,8 @@ button.bp3-menu-item{
     background-color:#bf7326; }
   .bp3-dark .bp3-menu-item.bp3-intent-warning:hover, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item, .bp3-dark .bp3-menu-item.bp3-intent-warning:hover::before, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item::before, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item::before, .bp3-dark .bp3-menu-item.bp3-intent-warning:hover::after, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item::after, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item::after,
   .bp3-dark .bp3-menu-item.bp3-intent-warning:hover .bp3-menu-item-label,
-  .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item .bp3-menu-item-label, .bp3-submenu
-  .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-warning:active, .bp3-dark .bp3-menu-item.bp3-intent-warning:active::before, .bp3-dark .bp3-menu-item.bp3-intent-warning:active::after,
+  .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item .bp3-menu-item-label,
+  .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-warning.bp3-menu-item .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-warning:active, .bp3-dark .bp3-menu-item.bp3-intent-warning:active::before, .bp3-dark .bp3-menu-item.bp3-intent-warning:active::after,
   .bp3-dark .bp3-menu-item.bp3-intent-warning:active .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-warning.bp3-active, .bp3-dark .bp3-menu-item.bp3-intent-warning.bp3-active::before, .bp3-dark .bp3-menu-item.bp3-intent-warning.bp3-active::after,
   .bp3-dark .bp3-menu-item.bp3-intent-warning.bp3-active .bp3-menu-item-label{
     color:#ffffff; }
@@ -5607,8 +5560,8 @@ button.bp3-menu-item{
     background-color:#c23030; }
   .bp3-dark .bp3-menu-item.bp3-intent-danger:hover, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item, .bp3-dark .bp3-menu-item.bp3-intent-danger:hover::before, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item::before, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item::before, .bp3-dark .bp3-menu-item.bp3-intent-danger:hover::after, .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item::after, .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item::after,
   .bp3-dark .bp3-menu-item.bp3-intent-danger:hover .bp3-menu-item-label,
-  .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item .bp3-menu-item-label, .bp3-submenu
-  .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-danger:active, .bp3-dark .bp3-menu-item.bp3-intent-danger:active::before, .bp3-dark .bp3-menu-item.bp3-intent-danger:active::after,
+  .bp3-dark .bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item .bp3-menu-item-label,
+  .bp3-submenu .bp3-dark .bp3-popover-target.bp3-popover-open > .bp3-intent-danger.bp3-menu-item .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-danger:active, .bp3-dark .bp3-menu-item.bp3-intent-danger:active::before, .bp3-dark .bp3-menu-item.bp3-intent-danger:active::after,
   .bp3-dark .bp3-menu-item.bp3-intent-danger:active .bp3-menu-item-label, .bp3-dark .bp3-menu-item.bp3-intent-danger.bp3-active, .bp3-dark .bp3-menu-item.bp3-intent-danger.bp3-active::before, .bp3-dark .bp3-menu-item.bp3-intent-danger.bp3-active::after,
   .bp3-dark .bp3-menu-item.bp3-intent-danger.bp3-active .bp3-menu-item-label{
     color:#ffffff; }
