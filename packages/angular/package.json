@@ -39,7 +39,7 @@
   "devDependencies": {
     "@angular/platform-browser": "7.2.12",
     "@angular/platform-browser-dynamic": "7.2.12",
-    "core-js": "3.0.0",
+    "core-js": "3.0.1",
     "dragula": "3.7.2",
     "highlight.js": "9.15.6",
     "markdown-it": "8.4.2",
