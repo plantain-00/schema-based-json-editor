@@ -551,7 +551,11 @@ export function getDefaultValue(required: boolean | undefined = undefined, schem
 
   switch (schema.type) {
     case 'object':
-      return {}
+      const value: any = {}
+      for (const property in schema.properties) {
+        value[property] = undefined
+      }
+      return value
     case 'array':
       return []
     case 'number':
