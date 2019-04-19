@@ -30,9 +30,9 @@
     "@types/linkify-it" "*"
 
 "@types/node@*":
-  version "11.13.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.4.tgz#f83ec3c3e05b174b7241fadeb6688267fe5b22ca"
-  integrity sha512-+rabAZZ3Yn7tF/XPGHupKIL5EcAbrLxnTr/hgQICxbeuAfWtT0UZSfULE+ndusckBItcv4o6ZeOJplQikVcLvQ==
+  version "11.13.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.6.tgz#37ec75690830acb0d74ce3c6c43caab787081e85"
+  integrity sha512-Xoo/EBzEe8HxTSwaZNLZjaW6M6tA/+GmD3/DZ6uo8qSaolE/9Oarko0oV1fVfrLqOz0tx0nXJB4rdD5c+vixLw==
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -87,13 +87,13 @@ file-uploader-component@^7.4.1:
     tslib "1"
 
 file-uploader-vue-component@7:
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.4.1.tgz#373ad0eaeaf801b9962b1b498d1b6c939d0479d9"
-  integrity sha512-LVsnKUP9PDNhQBX3BCojWMD8s7fCaHotVlXh929y5RCI6bfMbOHH6yHftvcE48Wgyqwmp6XhFasJLJxm1TCdCg==
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.5.0.tgz#caadd70f928106317afa9fbe922af0f20c219c2d"
+  integrity sha512-i8XjiWWOO3ARy17hm3ELtR+CG1xmk0pPVqchK7UdGGwPCDZQ/ta76/d0RmhjJZcQZxYNQbQZjDnuz7Y0nRdHYQ==
   dependencies:
     file-uploader-component "^7.4.1"
     vue "2"
-    vue-class-component "6"
+    vue-class-component "7"
 
 highlight.js@9.15.6:
   version "9.15.6"
