@@ -41,6 +41,7 @@
   <input *ngIf="useInput"
     [class]="errorMessage ? theme.errorInput : theme.input"
     [type]="schema.format"
+    [step]="schema.step"
     (change)="onChange($event)"
     (keyup)="onChange($event)"
     [defaultValue]="value"
