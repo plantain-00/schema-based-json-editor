@@ -218,6 +218,7 @@ optionalWhen | [string, '===' or 'in' or 'isUndefined', any]? | in a object, the
 collapsed | boolean? | if true, the object or array is collapsed by default
 enumTitles | string[]? | works with `enum` field, are the titles of the enum
 className | string? | custom class name
+step | number? | in a string, works with format `time`
 
 ## change logs
 

@@ -71,8 +71,7 @@ export class StringEditor extends React.Component<Props, State> {
   render() {
     const fileUploader = this.canUpload ? (
       <FileUploader locale={this.props.locale.fileUploaderLocale}
-        fileGot={(e) => this.fileGot(e)}>
-      </FileUploader>
+        fileGot={(e) => this.fileGot(e)}/>
     ) : null
 
     let textarea: JSX.Element | null = null
@@ -102,6 +101,7 @@ export class StringEditor extends React.Component<Props, State> {
     const input = this.useInput ? (
       <input className={this.errorMessage ? this.props.theme.errorInput : this.props.theme.input}
         type={this.props.schema.format}
+        step={this.props.schema.step}
         onChange={this.onChange}
         defaultValue={this.value}
         readOnly={this.isReadOnly}

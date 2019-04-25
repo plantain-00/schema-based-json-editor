@@ -102,6 +102,7 @@ export type StringSchema = CommonSchema & {
   maxLength?: number;
   pattern?: string;
   enumTitles?: string[];
+  step?: number;
 }
 
 /**
