@@ -30,9 +30,9 @@
     "@types/linkify-it" "*"
 
 "@types/node@*":
-  version "11.13.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.6.tgz#37ec75690830acb0d74ce3c6c43caab787081e85"
-  integrity sha512-Xoo/EBzEe8HxTSwaZNLZjaW6M6tA/+GmD3/DZ6uo8qSaolE/9Oarko0oV1fVfrLqOz0tx0nXJB4rdD5c+vixLw==
+  version "11.13.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.8.tgz#e5d71173c95533be9842b2c798978f095f912aab"
+  integrity sha512-szA3x/3miL90ZJxUCzx9haNbK5/zmPieGraZEe4WI+3srN0eGLiT22NXeMHmyhNEopn+IrxqMc7wdVwvPl8meg==
 
 "@types/prop-types@*":
   version "15.7.1"
@@ -104,7 +104,7 @@ entities@~1.1.1:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
 
-file-uploader-component@^7.4.1:
+file-uploader-component@7, file-uploader-component@^7.4.1:
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.4.1.tgz#4ea39dbfb38475a89a2f7ea1fc2888f5aabe5cb6"
   integrity sha512-iflocSWrW64Ng6PRfV6d7BDTZvS+tW7NGfM/ZhAtLt37drYI6g+ciz7kyIIyPgYREyAQWVSAb6mQ1p3FiUgVGQ==
@@ -144,6 +144,26 @@ linkify-it@^2.0.0:
   dependencies:
     uc.micro "^1.0.1"
 
+lodash.isinteger@4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
+  integrity sha1-YZwK89A/iwTDH1iChAt3sRzWg0M=
+
+lodash.isobject@3:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
+  integrity sha1-PI+41bW/S/kK4G4U8qUwpO2TXh0=
+
+lodash.tointeger@4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/lodash.tointeger/-/lodash.tointeger-4.0.4.tgz#65e655acaa724e26d3fef57effc46970e1cd17e6"
+  integrity sha1-ZeZVrKpyTibT/vV+/8RpcOHNF+Y=
+
+lodash.tonumber@4:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
+  integrity sha1-C5azGzVnJ5Prf1pj7nkfG56QJdk=
+
 loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
@@ -171,7 +191,7 @@ markdown-tip-react@6:
     react "16"
     react-dom "16"
 
-markdown-tip@^6.4.1:
+markdown-tip@6, markdown-tip@^6.4.1:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.4.1.tgz#b30c4aa264759145710d8c9fb3a0b117ebe63b24"
   integrity sha512-V1S5vdpt7mDWJNcc4ukIg/MqVVZO11dSS/KLdT9TqRAw9D9Z36El1tOCMjf7s9jU9iJVVlnrvDQ6pn38pzLZFg==
@@ -188,7 +208,7 @@ minimist@^1.2.0:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
 
-monaco-editor@0.16.2:
+monaco-editor@0.16, monaco-editor@0.16.2:
   version "0.16.2"
   resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.16.2.tgz#950084ed82eeaef1c8c9d3c1bcab849fe11b2415"
   integrity sha512-NtGrFzf54jADe7qsWh3lazhS7Kj0XHkJUGBq9fA/Jbwc+sgVcyfsYF6z2AQ7hPqDC+JmdOt/OwFjBnRwqXtx6w==
@@ -240,7 +260,24 @@ scheduler@^0.13.6:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-select2-component@^5.5.1:
+schema-based-json-editor@^7.21.0:
+  version "7.21.0"
+  resolved "https://registry.yarnpkg.com/schema-based-json-editor/-/schema-based-json-editor-7.21.0.tgz#85fe085bab8f3f101df642d27e6a4bdd9678a8cd"
+  integrity sha512-FuevB8gwu77dPC9ncYGRfuTTIRc3BZl2tgkWn5rn+YzleoXwzOw/NfpeAxzcumJ+TdhbV47d6+arEtZUHcariw==
+  dependencies:
+    "@types/dragula" "*"
+    "@types/highlight.js" "*"
+    file-uploader-component "7"
+    lodash.isinteger "4"
+    lodash.isobject "3"
+    lodash.tointeger "4"
+    lodash.tonumber "4"
+    markdown-tip "6"
+    monaco-editor "0.16"
+    select2-component "5"
+    tslib "1"
+
+select2-component@5, select2-component@^5.5.1:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.5.1.tgz#7e09d947dcbc707402dd8731cdb450f7d21e953f"
   integrity sha512-5q5JoBQh9kJOatW1ZEsOmkkGhB/6Dfr/FAtYOtBwaRECEIzM5PsBLCi2+Crfy9jN08/ySbOWEgce3ff9maw9oQ==
