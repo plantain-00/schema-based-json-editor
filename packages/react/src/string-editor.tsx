@@ -101,7 +101,7 @@ export class StringEditor extends React.Component<Props, State> {
     const input = this.useInput ? (
       <input className={this.errorMessage ? this.props.theme.errorInput : this.props.theme.input}
         type={this.props.schema.format}
-        step={this.props.schema.step}
+        step={this.props.schema.step || 1}
         onChange={this.onChange}
         defaultValue={this.value}
         readOnly={this.isReadOnly}
