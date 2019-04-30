@@ -40,7 +40,7 @@
   <input v-if="useInput"
     :class="errorMessage ? theme.errorInput : theme.input"
     :type="schema.format"
-    :step="schema.step"
+    :step="schema.step || 1"
     @change="onChange($event)"
     @keyup="onChange($event)"
     :value="value"
