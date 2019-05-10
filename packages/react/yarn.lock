@@ -46,10 +46,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.8.15":
-  version "16.8.15"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.15.tgz#a76515fed5aa3e996603056f54427fec5f2a5122"
-  integrity sha512-dMhzw1rWK+wwJWvPp5Pk12ksSrm/z/C/+lOQbMZ7YfDQYnJ02bc0wtg4EJD9qrFhuxFrf/ywNgwTboucobJqQg==
+"@types/react@*", "@types/react@16.8.17":
+  version "16.8.17"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.17.tgz#f287b76a5badb93bc9aa3f54521a3eb53d6c2374"
+  integrity sha512-pln3mgc6VfkNg92WXODul/ONo140huK9OMsx62GlBlZ2lvjNK86PQJhYMPLO1i66aF5O9OPyZefogvNltBIszA==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -188,10 +188,10 @@ minimist@^1.2.0:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
 
-monaco-editor@0.16.2:
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.16.2.tgz#950084ed82eeaef1c8c9d3c1bcab849fe11b2415"
-  integrity sha512-NtGrFzf54jADe7qsWh3lazhS7Kj0XHkJUGBq9fA/Jbwc+sgVcyfsYF6z2AQ7hPqDC+JmdOt/OwFjBnRwqXtx6w==
+monaco-editor@0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.17.0.tgz#d1d035c6f512ab88503cbee8213cab34b85ab954"
+  integrity sha512-8BQQHCFxy3DF0GYFOy5BmcCWlwm/XaTMPbPbN4gwItFGctZErSfX82uQSBpojJSlPNyudB5Q5qnukoorD3/UuA==
 
 object-assign@^4.1.1:
   version "4.1.1"
