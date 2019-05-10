@@ -3,37 +3,37 @@
 
 
 "@angular/common@7":
-  version "7.2.14"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-7.2.14.tgz#6477b87a203af918e6a00b8238c29198322456f2"
-  integrity sha512-c2QBhVpbQhg1FDhOQkyVdFvU11mfvYHW5ZaXzxdCpq2rZXCureYiCSnlv++EsIAKqi22+2a6GACHF9Gh8kBmSg==
+  version "7.2.15"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-7.2.15.tgz#e6c2f6913cdc49f87adcaabc30604e721561374b"
+  integrity sha512-2b5JY2HWVHCf3D1GZjmde7jdAXSTXkYtmjLtA9tQkjOOTr80eHpNSujQqnzb97dk9VT9OjfjqTQd7K3pxZz8jw==
   dependencies:
     tslib "^1.9.0"
 
 "@angular/core@7":
-  version "7.2.14"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-7.2.14.tgz#b78c936d284223c1c5a4c4b02cd0d5fd6d03ec91"
-  integrity sha512-XeZZJCyBKSKo0E/7Ef0SfJejmn+E7uBXa5cR1QapafS0Hnrq/hZu/NI039IDU/51NoycMDH2vTV19SmKu9Mkow==
+  version "7.2.15"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-7.2.15.tgz#c00d4be0ebe95b70f7631154169509cc97934e9a"
+  integrity sha512-XsuYm0jEU/mOqwDOk2utThv8J9kESkAerfuCHClE9rB2TtHUOGCfekF7lJWqjjypu6/J9ygoPFo7hdAE058ZGg==
   dependencies:
     tslib "^1.9.0"
 
 "@angular/forms@7":
-  version "7.2.14"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-7.2.14.tgz#7df70df357b9e1ae4aa8a0d008bf7ec753ccc03d"
-  integrity sha512-jL5YbTk7VZmz4l0++iFVUNa1vGM+nnALjHKi1Ub8VWioRDRboYUsHyxzlgWW9gZRbHpnLEXFiUz1td+v7TouJw==
+  version "7.2.15"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-7.2.15.tgz#6b6e10b5f4687b6be3081abcc02a055b3ceeb6d8"
+  integrity sha512-p0kcIQLtBBC1qeTA6M3nOuXf/k91E80FKquVM9zEsO2kDjI0oZJVfFYL2UMov5samlJOPN+t6lRHEIUa7ApPsw==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-browser-dynamic@7.2.14":
-  version "7.2.14"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-7.2.14.tgz#ae055ab0d3246c0f2d27d40a46cd99c012aa199d"
-  integrity sha512-lmTCBiDRbOPtniIqBjm1n5jl1TdyQM0qWQdBcoCsKpMNS/6/RacRcQsJZApAMdWm6gIVuLgmRQzaCLkSoekfYA==
+"@angular/platform-browser-dynamic@7.2.15":
+  version "7.2.15"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-7.2.15.tgz#e697159b565ef78bd7d276fa876d099172ad8735"
+  integrity sha512-UL2PqhzXMD769NQ6Lh6pxlBDKvN9Qol3XLRFil80lwJ1GRW16ITeYbCamcafIH2GOyd88IhmYcbMfUQ/6q4MMQ==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-browser@7.2.14":
-  version "7.2.14"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-7.2.14.tgz#9b259c335eb0dda64bc79409fa8dbb8fbb6bd818"
-  integrity sha512-yAq2+3W4J4B48HEmZYQucdEb9AHwRnv72q9CC/SxU7g59vaLhl1nv7cAWGJ4XFaJTbB7aB4Y4rLffuR+Gxkn7A==
+"@angular/platform-browser@7.2.15":
+  version "7.2.15"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-7.2.15.tgz#d6df74c427453e563c12bc2ec03a83bf10bb3805"
+  integrity sha512-aYgmPsbC9Tvp9vmKWD8voeAp4crwCay7/D6lM3ClEe2EeK934LuEXq3/uczMrFVbnIX7BBIo8fh03Tl7wbiGPw==
   dependencies:
     tslib "^1.9.0"
 
@@ -192,15 +192,15 @@ minimist@^1.2.0:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
 
-monaco-editor@0.16.2:
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.16.2.tgz#950084ed82eeaef1c8c9d3c1bcab849fe11b2415"
-  integrity sha512-NtGrFzf54jADe7qsWh3lazhS7Kj0XHkJUGBq9fA/Jbwc+sgVcyfsYF6z2AQ7hPqDC+JmdOt/OwFjBnRwqXtx6w==
+monaco-editor@0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.17.0.tgz#d1d035c6f512ab88503cbee8213cab34b85ab954"
+  integrity sha512-8BQQHCFxy3DF0GYFOy5BmcCWlwm/XaTMPbPbN4gwItFGctZErSfX82uQSBpojJSlPNyudB5Q5qnukoorD3/UuA==
 
-rxjs@6.5.1:
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.1.tgz#f7a005a9386361921b8524f38f54cbf80e5d08f4"
-  integrity sha512-y0j31WJc83wPu31vS1VlAFW5JGrnGC+j+TtGAa1fRQphy48+fDYiDmX8tjGloToEsMkxnouOg/1IzXGKkJnZMg==
+rxjs@6.5.2:
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.2.tgz#2e35ce815cd46d84d02a209fb4e5921e051dbec7"
+  integrity sha512-HUb7j3kvb7p7eCUHE3FqjoDsC1xfZQ4AHFWfTKSpZ+sAhhz5X1WX0ZuUqWbzB2QhSLp3DoLUG+hMdEDKqWo2Zg==
   dependencies:
     tslib "^1.9.0"
 
