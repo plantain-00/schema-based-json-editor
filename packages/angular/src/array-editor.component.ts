@@ -52,7 +52,7 @@ export class ArrayEditorComponent {
   buttonGroupStyleString = common.buttonGroupStyleString
   filter = ''
 
-  @ViewChild('drakContainer')
+  @ViewChild('drakContainer', { static: false })
   private drakContainer!: ElementRef
 
   private renderSwitch = 1
