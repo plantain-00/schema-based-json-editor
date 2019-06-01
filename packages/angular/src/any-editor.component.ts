@@ -34,7 +34,7 @@ export class AnyEditorComponent {
   @Input()
   monacoEditor?: common.MonacoEditor
 
-  @ViewChild('monacoEditorRef')
+  @ViewChild('monacoEditorRef', { static: false })
   private monacoEditorRef!: ElementRef
 
   value?: string

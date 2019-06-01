@@ -212,12 +212,7 @@ minimist@^1.2.0:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
 
-monaco-editor@0.16:
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.16.2.tgz#950084ed82eeaef1c8c9d3c1bcab849fe11b2415"
-  integrity sha512-NtGrFzf54jADe7qsWh3lazhS7Kj0XHkJUGBq9fA/Jbwc+sgVcyfsYF6z2AQ7hPqDC+JmdOt/OwFjBnRwqXtx6w==
-
-monaco-editor@0.17.0:
+monaco-editor@0.17, monaco-editor@0.17.0:
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.17.0.tgz#d1d035c6f512ab88503cbee8213cab34b85ab954"
   integrity sha512-8BQQHCFxy3DF0GYFOy5BmcCWlwm/XaTMPbPbN4gwItFGctZErSfX82uQSBpojJSlPNyudB5Q5qnukoorD3/UuA==
@@ -230,19 +225,19 @@ rxjs@6.5.2:
     tslib "^1.9.0"
 
 select2-angular-component@5:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/select2-angular-component/-/select2-angular-component-5.5.1.tgz#ad3a6cf16682869d77c628ce22dc74a89ef48859"
-  integrity sha512-IYC4CtJzUfv4Sa1tohT+yJPNdSENexQ0//fB3NL8C/A4HF4h12bBHoH5eWMsIpIu8uPXcGrt50s6wHUXt/Auyw==
+  version "5.6.1"
+  resolved "https://registry.yarnpkg.com/select2-angular-component/-/select2-angular-component-5.6.1.tgz#55e96924f23feba54ed8c00bc0d49aaffeb69fcb"
+  integrity sha512-tcJJ+KaAibgfzhX6sK70ZnMDEin4uamUVtaJhb9bailBefx39nt4DVRuDn49z7ptGWTpu5ZqRN/ttETf1qLi8A==
   dependencies:
-    "@angular/common" "7"
-    "@angular/core" "7"
-    "@angular/forms" "7"
-    select2-component "^5.5.1"
+    "@angular/common" "8"
+    "@angular/core" "8"
+    "@angular/forms" "8"
+    select2-component "^5.6.0"
 
-select2-component@^5.5.1:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.5.1.tgz#7e09d947dcbc707402dd8731cdb450f7d21e953f"
-  integrity sha512-5q5JoBQh9kJOatW1ZEsOmkkGhB/6Dfr/FAtYOtBwaRECEIzM5PsBLCi2+Crfy9jN08/ySbOWEgce3ff9maw9oQ==
+select2-component@5, select2-component@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.6.0.tgz#a397a9e3392b733d46962b229582522b4203a4aa"
+  integrity sha512-m8zieJdIIdgQbYTm91iCUgRbqMLorbCbQk0fEtgeV30ZRi0pAbol2aKjY96SnlbF37DmvzWyAGjxIdpxqp+CNw==
   dependencies:
     "@types/node" "*"
     tslib "1"
