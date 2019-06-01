@@ -23,9 +23,9 @@
     "dist"
   ],
   "dependencies": {
-    "@angular/common": "7",
-    "@angular/core": "7",
-    "@angular/forms": "7",
+    "@angular/common": "8",
+    "@angular/core": "8",
+    "@angular/forms": "8",
     "@types/dragula": "*",
     "@types/highlight.js": "*",
     "@types/json5": "*",
@@ -37,8 +37,8 @@
     "select2-angular-component": "5"
   },
   "devDependencies": {
-    "@angular/platform-browser": "7.2.15",
-    "@angular/platform-browser-dynamic": "7.2.15",
+    "@angular/platform-browser": "8.0.0",
+    "@angular/platform-browser-dynamic": "8.0.0",
     "core-js": "3.1.2",
     "dragula": "3.7.2",
     "highlight.js": "9.15.6",

@@ -424,9 +424,9 @@ fbjs@^0.8.0, fbjs@^0.8.15, fbjs@^0.8.16, fbjs@^0.8.9:
     ua-parser-js "^0.7.18"
 
 file-uploader-component@7:
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.4.1.tgz#4ea39dbfb38475a89a2f7ea1fc2888f5aabe5cb6"
-  integrity sha512-iflocSWrW64Ng6PRfV6d7BDTZvS+tW7NGfM/ZhAtLt37drYI6g+ciz7kyIIyPgYREyAQWVSAb6mQ1p3FiUgVGQ==
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.6.0.tgz#c7df9894aadafa785d3a50269989db532310eaa2"
+  integrity sha512-9umyShHUkeZhSNHHQOooo0U8J9cLvo7Exp9I8T7YLj0tg5PjIEzG/xUdd9m3jDFhVGr7Yni4yh20Fl36QQ+Ctg==
   dependencies:
     tslib "1"
 
@@ -1219,9 +1219,9 @@ rmc-feedback@^2.0.0:
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 select2-component@5:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.5.1.tgz#7e09d947dcbc707402dd8731cdb450f7d21e953f"
-  integrity sha512-5q5JoBQh9kJOatW1ZEsOmkkGhB/6Dfr/FAtYOtBwaRECEIzM5PsBLCi2+Crfy9jN08/ySbOWEgce3ff9maw9oQ==
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.6.0.tgz#a397a9e3392b733d46962b229582522b4203a4aa"
+  integrity sha512-m8zieJdIIdgQbYTm91iCUgRbqMLorbCbQk0fEtgeV30ZRi0pAbol2aKjY96SnlbF37DmvzWyAGjxIdpxqp+CNw==
   dependencies:
     "@types/node" "*"
     tslib "1"

@@ -2,38 +2,38 @@
 # yarn lockfile v1
 
 
-"@angular/common@7":
-  version "7.2.15"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-7.2.15.tgz#e6c2f6913cdc49f87adcaabc30604e721561374b"
-  integrity sha512-2b5JY2HWVHCf3D1GZjmde7jdAXSTXkYtmjLtA9tQkjOOTr80eHpNSujQqnzb97dk9VT9OjfjqTQd7K3pxZz8jw==
+"@angular/common@8":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-8.0.0.tgz#700aeda9be8af96692fce0ea6bf6157f7c874c0e"
+  integrity sha512-iOAJZ0+1zTRHnHE/5G30+4Q66W1pfZkSkxZIXvgijZ+wtuNloYdWNy/IdZ/m7ayBI7A6FsYEhyMUoWz2HVEJNw==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@7":
-  version "7.2.15"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-7.2.15.tgz#c00d4be0ebe95b70f7631154169509cc97934e9a"
-  integrity sha512-XsuYm0jEU/mOqwDOk2utThv8J9kESkAerfuCHClE9rB2TtHUOGCfekF7lJWqjjypu6/J9ygoPFo7hdAE058ZGg==
+"@angular/core@8":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-8.0.0.tgz#bf7a582b818e9181d830219907470e2b865ba32f"
+  integrity sha512-mrkP1PTzqCmZGLYll+TDyawLXHzi+FcRPqSuRxCmDMthUUE93SLXT2yISDkx9aMPtFKgFr6KfrIkKuCz16BP/g==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/forms@7":
-  version "7.2.15"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-7.2.15.tgz#6b6e10b5f4687b6be3081abcc02a055b3ceeb6d8"
-  integrity sha512-p0kcIQLtBBC1qeTA6M3nOuXf/k91E80FKquVM9zEsO2kDjI0oZJVfFYL2UMov5samlJOPN+t6lRHEIUa7ApPsw==
+"@angular/forms@8":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-8.0.0.tgz#6d636c4f83004290e1a5732a05e87148aaf6ed64"
+  integrity sha512-T6XdG3mALWzvnrN3fA1hAmfwvraiF1SPMWNXgPk2riuMf8CFdoro+tQZ4eo1islHrTTw5QzmqN8JJALfhAG6bg==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-browser-dynamic@7.2.15":
-  version "7.2.15"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-7.2.15.tgz#e697159b565ef78bd7d276fa876d099172ad8735"
-  integrity sha512-UL2PqhzXMD769NQ6Lh6pxlBDKvN9Qol3XLRFil80lwJ1GRW16ITeYbCamcafIH2GOyd88IhmYcbMfUQ/6q4MMQ==
+"@angular/platform-browser-dynamic@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-8.0.0.tgz#c15f394579ff44f3752033de58edc1afa5065d59"
+  integrity sha512-dx7W7JoSFbsveexjZ/BPlsXbMDLWVLmRCo7IqLvibMrTbdpaaOCNJIXJk1X+f7JJrQ7SwlZaVkoLCMoDWw6fmA==
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-browser@7.2.15":
-  version "7.2.15"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-7.2.15.tgz#d6df74c427453e563c12bc2ec03a83bf10bb3805"
-  integrity sha512-aYgmPsbC9Tvp9vmKWD8voeAp4crwCay7/D6lM3ClEe2EeK934LuEXq3/uczMrFVbnIX7BBIo8fh03Tl7wbiGPw==
+"@angular/platform-browser@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-8.0.0.tgz#fc7c55a0483e67e5606e499c129fda60ae8d4363"
+  integrity sha512-fTD+pTMbq+On9Uv3VXiei2lfuX7GX31dngm/Y4yWTFeW6eXy0+7kkfflzpLOb0hykCZvcXzarqCuEBBYNLrrOg==
   dependencies:
     tslib "^1.9.0"
 
@@ -120,18 +120,18 @@ entities@~1.1.1:
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
 
 file-uploader-angular-component@7:
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-angular-component/-/file-uploader-angular-component-7.5.0.tgz#ce3c593f5baa321686ccea20784aac318d51e32f"
-  integrity sha512-4d4yVO02jr0QjajWmOvhzdq4Q+IHDhNwYbn3fdYodbJjwqoA2J2PMBQzJNELRsPLpG1u4/QiOXepHeD0pRSqKA==
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-angular-component/-/file-uploader-angular-component-7.6.0.tgz#8b2023280ddfd739f722895c32a5c97acf3fb47a"
+  integrity sha512-sIU0pn/Yeoo+bTUcMqi2zYBbXctrywHaFgvxi+wto+dFBM7fnrYx7ZP5PtCS26WM2Y8OnN4fad0fCA6EDhwV4w==
   dependencies:
-    "@angular/common" "7"
-    "@angular/core" "7"
-    file-uploader-component "^7.4.1"
+    "@angular/common" "8"
+    "@angular/core" "8"
+    file-uploader-component "^7.6.0"
 
-file-uploader-component@^7.4.1:
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.4.1.tgz#4ea39dbfb38475a89a2f7ea1fc2888f5aabe5cb6"
-  integrity sha512-iflocSWrW64Ng6PRfV6d7BDTZvS+tW7NGfM/ZhAtLt37drYI6g+ciz7kyIIyPgYREyAQWVSAb6mQ1p3FiUgVGQ==
+file-uploader-component@7, file-uploader-component@^7.6.0:
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.6.0.tgz#c7df9894aadafa785d3a50269989db532310eaa2"
+  integrity sha512-9umyShHUkeZhSNHHQOooo0U8J9cLvo7Exp9I8T7YLj0tg5PjIEzG/xUdd9m3jDFhVGr7Yni4yh20Fl36QQ+Ctg==
   dependencies:
     tslib "1"
 
@@ -154,6 +154,26 @@ linkify-it@^2.0.0:
   dependencies:
     uc.micro "^1.0.1"
 
+lodash.isinteger@4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
+  integrity sha1-YZwK89A/iwTDH1iChAt3sRzWg0M=
+
+lodash.isobject@3:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
+  integrity sha1-PI+41bW/S/kK4G4U8qUwpO2TXh0=
+
+lodash.tointeger@4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/lodash.tointeger/-/lodash.tointeger-4.0.4.tgz#65e655acaa724e26d3fef57effc46970e1cd17e6"
+  integrity sha1-ZeZVrKpyTibT/vV+/8RpcOHNF+Y=
+
+lodash.tonumber@4:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
+  integrity sha1-C5azGzVnJ5Prf1pj7nkfG56QJdk=
+
 markdown-it@8.4.2:
   version "8.4.2"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.2.tgz#386f98998dc15a37722aa7722084f4020bdd9b54"
@@ -166,16 +186,16 @@ markdown-it@8.4.2:
     uc.micro "^1.0.5"
 
 markdown-tip-angular@6:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip-angular/-/markdown-tip-angular-6.4.1.tgz#cbd6e6f1881d74c6e3c6abaaf96de1cc5bd8582e"
-  integrity sha512-p/fY7BFv7ZbH6/UzNlrLCZz5i5aREkhtEzlGBaCI1oNKrVrdD9Cfs+cYWXLwP7UiOLOb5oNDr7e/Ru8PP20Uww==
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-angular/-/markdown-tip-angular-6.5.0.tgz#435d98d4ce942479d8a93994cc53b930602531b5"
+  integrity sha512-690gbQWuARohgd23ahh3aMGd3HEBTUWZnOzPr4vzhRWfE5AdHSO5mh5Do3f+eFe9fbE4sQQBgwPRZtHg7rZc8w==
   dependencies:
-    "@angular/common" "7"
-    "@angular/core" "7"
-    "@angular/forms" "7"
+    "@angular/common" "8"
+    "@angular/core" "8"
+    "@angular/forms" "8"
     markdown-tip "^6.4.1"
 
-markdown-tip@^6.4.1:
+markdown-tip@6, markdown-tip@^6.4.1:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-6.4.1.tgz#b30c4aa264759145710d8c9fb3a0b117ebe63b24"
   integrity sha512-V1S5vdpt7mDWJNcc4ukIg/MqVVZO11dSS/KLdT9TqRAw9D9Z36El1tOCMjf7s9jU9iJVVlnrvDQ6pn38pzLZFg==
@@ -191,6 +211,11 @@ minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
   integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
+
+monaco-editor@0.16:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.16.2.tgz#950084ed82eeaef1c8c9d3c1bcab849fe11b2415"
+  integrity sha512-NtGrFzf54jADe7qsWh3lazhS7Kj0XHkJUGBq9fA/Jbwc+sgVcyfsYF6z2AQ7hPqDC+JmdOt/OwFjBnRwqXtx6w==
 
 monaco-editor@0.17.0:
   version "0.17.0"
