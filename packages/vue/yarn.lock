@@ -30,9 +30,9 @@
     "@types/linkify-it" "*"
 
 "@types/node@*":
-  version "12.0.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.2.tgz#3452a24edf9fea138b48fad4a0a028a683da1e40"
-  integrity sha512-5tabW/i+9mhrfEOUcLDu2xBPsHJ+X5Orqy9FKpale3SjDA17j5AEpYq5vfy3oAeAHGcvANRCO3NV3d2D6q3NiA==
+  version "12.0.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.7.tgz#4f2563bad652b2acb1722d7e7aae2b0ff62d192c"
+  integrity sha512-1YKeT4JitGgE4SOzyB9eMwO0nGVNkNEsm9qlIt1Lqm/tG2QEiSMTD4kS3aO6L+w5SClLVxALmIBESK6Mk5wX0A==
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -79,26 +79,26 @@ entities@~1.1.1:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
 
-file-uploader-component@^7.4.1:
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.4.1.tgz#4ea39dbfb38475a89a2f7ea1fc2888f5aabe5cb6"
-  integrity sha512-iflocSWrW64Ng6PRfV6d7BDTZvS+tW7NGfM/ZhAtLt37drYI6g+ciz7kyIIyPgYREyAQWVSAb6mQ1p3FiUgVGQ==
+file-uploader-component@^7.6.0:
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.6.0.tgz#c7df9894aadafa785d3a50269989db532310eaa2"
+  integrity sha512-9umyShHUkeZhSNHHQOooo0U8J9cLvo7Exp9I8T7YLj0tg5PjIEzG/xUdd9m3jDFhVGr7Yni4yh20Fl36QQ+Ctg==
   dependencies:
     tslib "1"
 
 file-uploader-vue-component@7:
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.5.0.tgz#caadd70f928106317afa9fbe922af0f20c219c2d"
-  integrity sha512-i8XjiWWOO3ARy17hm3ELtR+CG1xmk0pPVqchK7UdGGwPCDZQ/ta76/d0RmhjJZcQZxYNQbQZjDnuz7Y0nRdHYQ==
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-7.6.0.tgz#a67f338c3eb9fda5c1140160ee9791d536d7740f"
+  integrity sha512-I4c4Ou8wudc42WG5rV539sTsG0NVPCSvSIL57a1tnDgE0d/uhkwdwKtuWbIel53yRvwt9KLw7r9mooGgawwaWQ==
   dependencies:
-    file-uploader-component "^7.4.1"
+    file-uploader-component "^7.6.0"
     vue "2"
     vue-class-component "7"
 
-highlight.js@9.15.6:
-  version "9.15.6"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.6.tgz#72d4d8d779ec066af9a17cb14360c3def0aa57c4"
-  integrity sha512-zozTAWM1D6sozHo8kqhfYgsac+B+q0PmsjXeyDrYIHHcBN0zTVT66+s2GW1GZv7DbyaROdLXKdabwS/WqPyIdQ==
+highlight.js@9.15.8:
+  version "9.15.8"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.8.tgz#f344fda123f36f1a65490e932cf90569e4999971"
+  integrity sha512-RrapkKQWwE+wKdF73VsOa2RQdIoO3mxwJ4P8mhbI6KYJUraUHRKM5w5zQQKXNk0xNL4UVRdulV9SBJcmzJNzVA==
 
 json5@2:
   version "2.1.0"
@@ -126,13 +126,13 @@ markdown-it@8.4.2:
     uc.micro "^1.0.5"
 
 markdown-tip-vue@6:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.4.1.tgz#40945bb35e7b2047175872dad04660e8f9302180"
-  integrity sha512-TqlcJev2mzAErbG7sSjEw9jRldouj6dyaogSJ8LPQDTgy/g81/ZUiYiYYNTiLt8w4/WvyWNDJSSX5woBXzXdAQ==
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-6.5.0.tgz#34d41b0a016aa1889dd629e0aa737a462b30ae88"
+  integrity sha512-FMFfnSu4jhusnY5InelcYlntlDUVTMqmPLRH59Hwf+SUel9UzGQ8ALo6qMp91fj3/NxLsSt52jmBY+8VCTUJ0g==
   dependencies:
     markdown-tip "^6.4.1"
     vue "2"
-    vue-class-component "6"
+    vue-class-component "7"
 
 markdown-tip@^6.4.1:
   version "6.4.1"
@@ -156,23 +156,23 @@ monaco-editor@0.17.0:
   resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.17.0.tgz#d1d035c6f512ab88503cbee8213cab34b85ab954"
   integrity sha512-8BQQHCFxy3DF0GYFOy5BmcCWlwm/XaTMPbPbN4gwItFGctZErSfX82uQSBpojJSlPNyudB5Q5qnukoorD3/UuA==
 
-select2-component@^5.5.1:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.5.1.tgz#7e09d947dcbc707402dd8731cdb450f7d21e953f"
-  integrity sha512-5q5JoBQh9kJOatW1ZEsOmkkGhB/6Dfr/FAtYOtBwaRECEIzM5PsBLCi2+Crfy9jN08/ySbOWEgce3ff9maw9oQ==
+select2-component@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.6.0.tgz#a397a9e3392b733d46962b229582522b4203a4aa"
+  integrity sha512-m8zieJdIIdgQbYTm91iCUgRbqMLorbCbQk0fEtgeV30ZRi0pAbol2aKjY96SnlbF37DmvzWyAGjxIdpxqp+CNw==
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-vue-component@5:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.5.1.tgz#937fa98f82ff5d44517ad5225f1bf66b8e7ad4b8"
-  integrity sha512-J16z9/Y7vT7o6//4JLLC9SvfQGunn3tNYjj7JA+pyDGlwBwsRh9xk7m3CLkPKduoGAB0YT47UE85RWlPoIpLZw==
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-5.6.0.tgz#ff3a9f8f8b111ba3c1646f9eca09446a460b9eca"
+  integrity sha512-2fygZNEMiyh3uDTQ6Itp+E10IxDcWPebvkd9QYTBnBksJlHr8c0511uawOnJAVxKzCkuHhI2aMuaGfO3qSHR4A==
   dependencies:
     "@types/node" "*"
-    select2-component "^5.5.1"
+    select2-component "^5.6.0"
     vue "2"
-    vue-class-component "6"
+    vue-class-component "7"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -193,11 +193,6 @@ uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.6.tgz#9c411a802a409a91fc6cf74081baba34b24499ac"
   integrity sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==
-
-vue-class-component@6:
-  version "6.3.2"
-  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.3.2.tgz#e6037e84d1df2af3bde4f455e50ca1b9eec02be6"
-  integrity sha512-cH208IoM+jgZyEf/g7mnFyofwPDJTM/QvBNhYMjqGB8fCsRyTf68rH2ISw/G20tJv+5mIThQ3upKwoL4jLTr1A==
 
 vue-class-component@7:
   version "7.1.0"

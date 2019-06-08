@@ -30,9 +30,9 @@
     "@types/linkify-it" "*"
 
 "@types/node@*":
-  version "12.0.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.2.tgz#3452a24edf9fea138b48fad4a0a028a683da1e40"
-  integrity sha512-5tabW/i+9mhrfEOUcLDu2xBPsHJ+X5Orqy9FKpale3SjDA17j5AEpYq5vfy3oAeAHGcvANRCO3NV3d2D6q3NiA==
+  version "12.0.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.7.tgz#4f2563bad652b2acb1722d7e7aae2b0ff62d192c"
+  integrity sha512-1YKeT4JitGgE4SOzyB9eMwO0nGVNkNEsm9qlIt1Lqm/tG2QEiSMTD4kS3aO6L+w5SClLVxALmIBESK6Mk5wX0A==
 
 "@types/prop-types@*":
   version "15.7.1"
@@ -46,10 +46,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.8.18":
-  version "16.8.18"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.18.tgz#fe66fb748b0b6ca9709d38b87b2d1356d960a511"
-  integrity sha512-lUXdKzRqWR4FebR5tGHkLCqnvQJS4fdXKCBrNGGbglqZg2gpU+J82pMONevQODUotATs9fc9k66bx3/St8vReg==
+"@types/react@*", "@types/react@16.8.19":
+  version "16.8.19"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.19.tgz#629154ef05e2e1985cdde94477deefd823ad9be3"
+  integrity sha512-QzEzjrd1zFzY9cDlbIiFvdr+YUmefuuRYrPxmkwG0UQv5XF35gFIi7a95m1bNVcFU0VimxSZ5QVGSiBmlggQXQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -82,9 +82,9 @@ crossvent@1.5.4:
     custom-event "1.0.0"
 
 csstype@^2.2.0:
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.4.tgz#d585a6062096e324e7187f80e04f92bd0f00e37f"
-  integrity sha512-lAJUJP3M6HxFXbqtGRc0iZrdyeN+WzOWeY0q/VnFzI+kqVrYIzC7bWlKqCW7oCIdzoPkvfp82EVvrTlQ8zsWQg==
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.5.tgz#1cd1dff742ebf4d7c991470ae71e12bb6751e034"
+  integrity sha512-JsTaiksRsel5n7XwqPAfB0l3TFKdpjW/kgAELf9vrb5adGA7UCPLajKK5s3nFrcFm3Rkyp/Qkgl73ENc1UY3cA==
 
 custom-event@1.0.0:
   version "1.0.0"
@@ -104,26 +104,26 @@ entities@~1.1.1:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
 
-file-uploader-component@^7.4.1:
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.4.1.tgz#4ea39dbfb38475a89a2f7ea1fc2888f5aabe5cb6"
-  integrity sha512-iflocSWrW64Ng6PRfV6d7BDTZvS+tW7NGfM/ZhAtLt37drYI6g+ciz7kyIIyPgYREyAQWVSAb6mQ1p3FiUgVGQ==
+file-uploader-component@^7.6.0:
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-component/-/file-uploader-component-7.6.0.tgz#c7df9894aadafa785d3a50269989db532310eaa2"
+  integrity sha512-9umyShHUkeZhSNHHQOooo0U8J9cLvo7Exp9I8T7YLj0tg5PjIEzG/xUdd9m3jDFhVGr7Yni4yh20Fl36QQ+Ctg==
   dependencies:
     tslib "1"
 
 file-uploader-react-component@7:
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.5.0.tgz#788af0a0af8e69d327db87c20190a5c392d695d1"
-  integrity sha512-C+gj2uY+SU6KFWDC4ze6TCI3+cB3ctTDfdS7MFX70OXPxKnqma/qKw4tnVsExU35z8EHXpoKOpz373h9iGSJ7g==
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-7.6.0.tgz#996544bacade1b8daf34b79e04bdc803843c6c26"
+  integrity sha512-rtC7A3hBP2DsC5AVft/lNBC+8xOHFGOP6aNiahF/uJwToTuppND1POezauXxnPR3JpTOfVJCXRFPV3ZqM3+JEg==
   dependencies:
-    file-uploader-component "^7.4.1"
+    file-uploader-component "^7.6.0"
     react "16"
     react-dom "16"
 
-highlight.js@9.15.6:
-  version "9.15.6"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.6.tgz#72d4d8d779ec066af9a17cb14360c3def0aa57c4"
-  integrity sha512-zozTAWM1D6sozHo8kqhfYgsac+B+q0PmsjXeyDrYIHHcBN0zTVT66+s2GW1GZv7DbyaROdLXKdabwS/WqPyIdQ==
+highlight.js@9.15.8:
+  version "9.15.8"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.8.tgz#f344fda123f36f1a65490e932cf90569e4999971"
+  integrity sha512-RrapkKQWwE+wKdF73VsOa2RQdIoO3mxwJ4P8mhbI6KYJUraUHRKM5w5zQQKXNk0xNL4UVRdulV9SBJcmzJNzVA==
 
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
@@ -163,9 +163,9 @@ markdown-it@8.4.2:
     uc.micro "^1.0.5"
 
 markdown-tip-react@6:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.4.1.tgz#4939cc63ac890efc79cbe54590640753dbbbaedb"
-  integrity sha512-gQ3lBRpuzykdGUgMSiZ5lj+4WWiKdttWvOhoXknHCk6sfjENB81XVztOzdCgLHiovuC8XQtXoRNkdU9tb/f90Q==
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-6.5.0.tgz#0887a579eaf2e9969562c2c9d02281e656ebe971"
+  integrity sha512-/SlvxLs1nLJ7IE8vCviHwOu3dfxeWpjKekjk1YSpS7wlMyOdJLa+qFZwYM/2YgEuldhHlCElf2Ejml+rr/ugRA==
   dependencies:
     markdown-tip "^6.4.1"
     react "16"
@@ -240,23 +240,23 @@ scheduler@^0.13.6:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-select2-component@^5.5.1:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.5.1.tgz#7e09d947dcbc707402dd8731cdb450f7d21e953f"
-  integrity sha512-5q5JoBQh9kJOatW1ZEsOmkkGhB/6Dfr/FAtYOtBwaRECEIzM5PsBLCi2+Crfy9jN08/ySbOWEgce3ff9maw9oQ==
+select2-component@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/select2-component/-/select2-component-5.6.0.tgz#a397a9e3392b733d46962b229582522b4203a4aa"
+  integrity sha512-m8zieJdIIdgQbYTm91iCUgRbqMLorbCbQk0fEtgeV30ZRi0pAbol2aKjY96SnlbF37DmvzWyAGjxIdpxqp+CNw==
   dependencies:
     "@types/node" "*"
     tslib "1"
 
 select2-react-component@5:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.5.1.tgz#47f9528cd8f6dade6a327f52db286b02a4741f97"
-  integrity sha512-czhfEUEcAiVOlGDUthd3wW9rSV9p/4izF6GiGG54AuvvQ0zyxgUaGtogymOcet5fTGAjf6vfsDQmrB4A32RtVA==
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.6.0.tgz#fbd32c65b00cfe8d6df0bc61edcc683ec3cf589d"
+  integrity sha512-42PHDPYxtpvz9xXSuzdEXEf6ToJmsEJmBxO57HW7nt7Ydx6uPuQxpkLARSfaT01tfb1tO+NXpRNPKTR7vB0XAA==
   dependencies:
     "@types/node" "*"
     react "16"
     react-dom "16"
-    select2-component "^5.5.1"
+    select2-component "^5.6.0"
 
 sprintf-js@~1.0.2:
   version "1.0.3"

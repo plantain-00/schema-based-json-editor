@@ -18,6 +18,7 @@ module.exports = function (karma) {
     singleRun: true,
     concurrency: Infinity,
     webpack: webpackConfig,
+    webpackMiddleware: {},
     preprocessors: {
       '**/*Spec.js': ['webpack']
     }
