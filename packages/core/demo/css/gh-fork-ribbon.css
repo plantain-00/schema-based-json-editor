@@ -1,5 +1,5 @@
 /*!
- * "Fork me on GitHub" CSS ribbon v0.2.0 | MIT License
+ * "Fork me on GitHub" CSS ribbon v0.2.3 | MIT License
  * https://github.com/simonwhitaker/github-fork-ribbon-css
 */
 
@@ -21,16 +21,24 @@
   position: fixed;
 }
 
+.github-fork-ribbon:hover, .github-fork-ribbon:active {
+  background-color: rgba(0, 0, 0, 0.0);
+}
+
 .github-fork-ribbon:before, .github-fork-ribbon:after {
   /* The right and left classes determine the side we attach our banner to */
   position: absolute;
   display: block;
   width: 15.38em;
   height: 1.54em;
-  
+
   top: 3.23em;
   right: -3.23em;
-  
+
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -64,8 +72,8 @@
 }
 
 .github-fork-ribbon:after {
-  /* Set the text from the title attribute */
-  content: attr(title);
+  /* Set the text from the data-ribbon attribute */
+  content: attr(data-ribbon);
 
   /* Set the text properties */
   color: #fff;
