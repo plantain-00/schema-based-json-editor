@@ -37,13 +37,13 @@
     "select2-angular-component": "5"
   },
   "devDependencies": {
-    "@angular/platform-browser": "8.0.2",
-    "@angular/platform-browser-dynamic": "8.0.2",
+    "@angular/platform-browser": "8.0.3",
+    "@angular/platform-browser-dynamic": "8.0.3",
     "core-js": "3.1.4",
     "dragula": "3.7.2",
     "highlight.js": "9.15.8",
     "markdown-it": "8.4.2",
-    "monaco-editor": "0.17.0",
+    "monaco-editor": "0.17.1",
     "rxjs": "6.5.2",
     "zone.js": "0.9.1"
   }
