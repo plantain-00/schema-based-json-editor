@@ -2412,9 +2412,9 @@ a.bp3-button{
   .bp3-dark .bp3-control.bp3-switch input:checked ~ .bp3-control-indicator{
     background:#137cbd; }
   .bp3-dark .bp3-control.bp3-switch:hover input:checked ~ .bp3-control-indicator{
-    background:#2b95d6; }
+    background:#106ba3; }
   .bp3-dark .bp3-control.bp3-switch input:checked:not(:disabled):active ~ .bp3-control-indicator{
-    background:#48aff0; }
+    background:#0e5a8a; }
   .bp3-dark .bp3-control.bp3-switch input:checked:disabled ~ .bp3-control-indicator{
     background:rgba(14, 90, 138, 0.5); }
   .bp3-dark .bp3-control.bp3-switch .bp3-control-indicator::before{
@@ -6310,6 +6310,9 @@ body.bp3-overlay-open{
 span.bp3-popover-target{
   display:inline-block; }
 
+.bp3-popover-wrapper.bp3-fill{
+  width:100%; }
+
 .bp3-portal{
   position:absolute;
   top:0;
@@ -7425,7 +7428,8 @@ span.bp3-popover-target{
   -webkit-flex:1 1 auto;
       -ms-flex:1 1 auto;
           flex:1 1 auto;
-  padding:11px; }
+  padding:11px;
+  word-break:break-word; }
 
 .bp3-toast-container{
   display:-webkit-box !important;
