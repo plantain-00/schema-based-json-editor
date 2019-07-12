@@ -43,7 +43,7 @@
     "@types/react-dom": "16.8.4",
     "dragula": "3.7.2",
     "highlight.js": "9.15.8",
-    "markdown-it": "8.4.2",
+    "markdown-it": "9.0.1",
     "monaco-editor": "0.17.1"
   }
 }
