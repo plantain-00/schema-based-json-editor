@@ -32,7 +32,6 @@ export class BooleanEditor extends Vue {
 
   beforeMount() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as boolean
-    // tslint:disable-next-line:no-duplicate-string
     this.$emit('update-value', { value: this.value, isValid: true })
   }
 

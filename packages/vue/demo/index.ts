@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, icon, addAllCssLinks } from 'schema-based-json-editor/demo/'
 
-// tslint:disable:no-duplicate-imports
 import '../dist/'
 import { ValidityValue, ValueType } from '../dist/'
 
@@ -85,5 +84,4 @@ class App extends Vue {
   }
 }
 
-// tslint:disable-next-line:no-unused-expression
 new App({ el: '#container' })

@@ -1,4 +1,3 @@
-/// <reference path="./lib.d.ts" />
 import toNumber from 'lodash.tonumber'
 import toInteger from 'lodash.tointeger'
 import isObject from 'lodash.isobject'
@@ -26,7 +25,7 @@ export type IStandaloneCodeEditor = monaco.editor.IStandaloneCodeEditor
 /**
  * @public
  */
-export type CommonSchema = {
+export interface CommonSchema {
   $schema?: string;
   title?: string;
   description?: string;
@@ -95,7 +94,6 @@ export type NumberSchema = CommonSchema & {
  */
 export type StringSchema = CommonSchema & {
   type: 'string';
-  // tslint:disable-next-line:max-union-size
   format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox' | 'json';
   enum?: string[];
   minLength?: number;
@@ -125,8 +123,6 @@ export type NullSchema = CommonSchema & {
  */
 export type Schema = ObjectSchema | ArraySchema | NumberSchema | StringSchema | BooleanSchema | NullSchema | AnySchema
 
-// tslint:disable:no-duplicate-string
-
 /**
  * @public
  */
@@ -135,7 +131,6 @@ export const themes: { [name: string]: Theme } = {
     card: 'well',
     row: 'row',
     errorRow: 'row has-error',
-    // tslint:disable-next-line:no-duplicate-string
     input: 'form-control',
     errorInput: 'form-control',
     textarea: 'form-control',
@@ -184,7 +179,6 @@ export const themes: { [name: string]: Theme } = {
     card: 'el-form el-card box-card el-card__body',
     row: 'el-form-item',
     errorRow: 'el-form-item is-error',
-    // tslint:disable-next-line:no-duplicate-string
     input: 'el-input__inner',
     errorInput: 'el-input__inner',
     textarea: 'el-textarea__inner',
@@ -233,7 +227,6 @@ export const themes: { [name: string]: Theme } = {
     card: 'pt-card',
     row: '',
     errorRow: '',
-    // tslint:disable-next-line:no-duplicate-string
     input: 'pt-input pt-fill',
     errorInput: 'pt-input pt-fill',
     textarea: 'pt-input pt-fill',
@@ -470,7 +463,6 @@ export type ValueType = { [name: string]: any } | any[] | number | boolean | str
 /**
  * @public
  */
-// tslint:disable-next-line:cognitive-complexity
 export function getDefaultValue(required: boolean | undefined = undefined, schema: Schema, initialValue: ValueType | undefined): ValueType | undefined {
   if (initialValue !== undefined) {
     switch (schema.type) {
@@ -592,7 +584,7 @@ export const buttonGroupStyleString = 'margin-left: 10px'
 /**
  * @public
  */
-export type Props<TSchema extends CommonSchema, TValue> = {
+export interface Props<TSchema extends CommonSchema, TValue> {
   schema: TSchema;
   initialValue: TValue;
   title?: string;
@@ -616,7 +608,6 @@ export type Props<TSchema extends CommonSchema, TValue> = {
 /**
  * @public
  */
-// tslint:disable-next-line:cognitive-complexity
 export function isSame(value1: ValueType, value2: ValueType) {
   if (typeof value1 === 'string'
     || typeof value1 === 'number'
@@ -677,7 +668,6 @@ export function switchItem(value: any[], el: HTMLElement, sibling: HTMLElement |
 /**
  * @public
  */
-// tslint:disable-next-line:cognitive-complexity
 export function getErrorMessageOfArray(value: any[] | undefined, schema: ArraySchema, locale: Locale) {
   if (value !== undefined) {
     if (schema.minItems !== undefined && value.length < schema.minItems) {
@@ -699,7 +689,6 @@ export function getErrorMessageOfArray(value: any[] | undefined, schema: ArraySc
 /**
  * @public
  */
-// tslint:disable-next-line:cognitive-complexity
 export function getErrorMessageOfNumber(value: number | undefined, schema: NumberSchema, locale: Locale) {
   if (value !== undefined) {
     if (schema.minimum !== undefined) {
@@ -789,7 +778,7 @@ export function toggleOptional(value: ValueType | undefined, schema: Schema, ini
 /**
  * @public
  */
-export type ValidityValue<T> = {
+export interface ValidityValue<T> {
   value: T;
   isValid: boolean;
 }
@@ -885,7 +874,6 @@ function printInConsole(message: string) {
 /**
  * @public
  */
-// tslint:disable-next-line:cognitive-complexity
 export function initializeMarkdown(markdownit: any, hljs: HLJS | undefined, forceHttps: boolean | undefined = undefined): any {
   if (!markdownit) {
     return undefined
@@ -931,6 +919,7 @@ export function initializeMarkdown(markdownit: any, hljs: HLJS | undefined, forc
       return self.renderToken(tokens, index, options)
     }
   }
+  // eslint-disable-next-line @typescript-eslint/camelcase
   md.renderer.rules.link_open = (tokens: any[], index: number, options: any, env: any, self: any) => {
     tokens[index].attrPush(['target', '_blank'])
     tokens[index].attrPush(['rel', 'nofollow'])
@@ -942,7 +931,6 @@ export function initializeMarkdown(markdownit: any, hljs: HLJS | undefined, forc
 /**
  * @public
  */
-// tslint:disable-next-line:cognitive-complexity
 export function findTitle(value: { [name: string]: ValueType } | undefined, properties: { property: string; schema: Schema }[]) {
   if (value) {
     for (const { property, schema } of properties) {
@@ -973,7 +961,6 @@ export function findTitle(value: { [name: string]: ValueType } | undefined, prop
   return undefined
 }
 
-// tslint:disable-next-line:cognitive-complexity
 function findTitleFromSchema(value: { [name: string]: ValueType } | undefined, schema: ObjectSchema) {
   if (value) {
     for (const property in schema.properties) {
@@ -1056,7 +1043,6 @@ export const minItemCountIfNeedFilter = 6
 /**
  * @public
  */
-// tslint:disable-next-line:cognitive-complexity
 export function isRequired(
   required: string[] | undefined,
   value: { [name: string]: ValueType } | undefined,

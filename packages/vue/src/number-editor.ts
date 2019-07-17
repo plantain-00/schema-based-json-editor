@@ -35,7 +35,6 @@ export class NumberEditor extends Vue {
   onChange(e: { target: { value: string } }) {
     this.value = this.schema.type === 'integer' ? common.toInteger(e.target.value) : common.toNumber(e.target.value)
     this.validate()
-    // tslint:disable-next-line:no-duplicate-string
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
   }
 

@@ -19,13 +19,13 @@ import puppeteer from 'puppeteer'
 
     const prefix = (type === 'angular' || type === 'aot') ? 'editor' : '.row'
 
-    await (page.type as any)(`${prefix}:nth-child(100n+1) input`, 'num')
+    await page.type(`${prefix}:nth-child(100n+1) input`, 'num')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-filter.png` })
 
-    await (page.keyboard as any).press('Backspace')
-    await (page.keyboard as any).press('Backspace')
-    await (page.keyboard as any).press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-filter-reset.png` })
 
@@ -37,41 +37,41 @@ import puppeteer from 'puppeteer'
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-optional-and-default-reset.png` })
 
-    await (page.type as any)(`${prefix}:nth-child(100n+3) input`, 'hello')
+    await page.type(`${prefix}:nth-child(100n+3) input`, 'hello')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-string-long.png` })
 
-    await (page.keyboard as any).press('Backspace')
-    await (page.keyboard as any).press('Backspace')
-    await (page.keyboard as any).press('Backspace')
-    await (page.keyboard as any).press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-string-reset.png` })
 
-    await (page.type as any)(`${prefix}:nth-child(100n+4) input`, '567')
+    await page.type(`${prefix}:nth-child(100n+4) input`, '567')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-number.png` })
 
-    await (page.type as any)(`${prefix}:nth-child(100n+5) input`, '567')
+    await page.type(`${prefix}:nth-child(100n+5) input`, '567')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-integer.png` })
 
-    await (page.type as any)(`${prefix}:nth-child(100n+7) input`, 'hello')
+    await page.type(`${prefix}:nth-child(100n+7) input`, 'hello')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-object.png` })
 
-    await (page.type as any)(`${prefix}:nth-child(100n+8) input`, 'hello')
+    await page.type(`${prefix}:nth-child(100n+8) input`, 'hello')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-array.png` })
 
-    await (page.type as any)(`${prefix}:nth-child(100n+16) textarea`, 'hello')
+    await page.type(`${prefix}:nth-child(100n+16) textarea`, 'hello')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-textarea.png` })
 
-    await (page.type as any)(`${prefix}:nth-child(100n+17) input`, 'a')
+    await page.type(`${prefix}:nth-child(100n+17) input`, 'a')
     await page.waitFor(100)
     await page.screenshot({ path: `screenshots/${type}-pattern.png` })
   }
 
-  browser.close()
+  await browser.close()
 })()

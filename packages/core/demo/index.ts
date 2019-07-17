@@ -1,7 +1,5 @@
 import * as common from '../dist/'
 
-// tslint:disable:no-duplicate-string
-
 /**
  * @public
  */

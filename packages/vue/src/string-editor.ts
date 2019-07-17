@@ -45,7 +45,6 @@ export class StringEditor extends Vue {
   onChange(e: { target: { value: string } }) {
     this.value = e.target.value
     this.validate()
-    // tslint:disable-next-line:no-duplicate-string
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
   }
 
@@ -64,12 +63,11 @@ export class StringEditor extends Vue {
         lineNumbers: 'off'
       })
       let timer: NodeJS.Timer
-      this.monacoCodeEditor.onDidChangeModelContent((e) => {
+      this.monacoCodeEditor.onDidChangeModelContent(() => {
         clearTimeout(timer)
         timer = setTimeout(() => {
           this.value = this.monacoCodeEditor!.getValue()
           this.validate()
-          // tslint:disable-next-line:no-duplicate-string
           this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
         }, 500)
       })
