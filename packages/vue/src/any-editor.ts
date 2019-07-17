@@ -66,7 +66,6 @@ export class AnyEditor extends Vue {
               value = value.substring('export default'.length)
             }
             this.value = JSON5.parse(value)
-            // tslint:disable-next-line:no-duplicate-string
             this.$emit('update-value', { value: this.value, isValid: true })
           } catch (error) {
             // do nothing

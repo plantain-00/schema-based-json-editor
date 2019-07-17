@@ -67,7 +67,6 @@ export class StringEditor extends React.Component<Props, State> {
       this.monacoCodeEditor.dispose()
     }
   }
-  // tslint:disable-next-line:cognitive-complexity
   render() {
     const fileUploader = this.canUpload ? (
       <FileUploader locale={this.props.locale.fileUploaderLocale}

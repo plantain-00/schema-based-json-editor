@@ -6,7 +6,7 @@ import { Editor } from './editor'
 /**
  * @public
  */
-export type Props = {
+export interface Props {
   schema: common.Schema;
   initialValue: common.ValueType;
   updateValue: (value: common.ValueType | undefined, isValid: boolean) => void;

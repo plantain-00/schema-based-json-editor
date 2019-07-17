@@ -81,7 +81,6 @@ export class ObjectEditor extends Vue {
         this.watchedProperties.push(schema.requiredWhen[0])
       }
     }
-    // tslint:disable-next-line:no-duplicate-string
     this.$emit('update-value', { value: this.value, isValid: true })
   }
 

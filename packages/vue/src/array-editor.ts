@@ -63,7 +63,6 @@ export class ArrayEditor extends Vue {
     this.collapsed = this.schema.collapsed
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as common.ValueType[]
     this.validate()
-    // tslint:disable-next-line:no-duplicate-string
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
   }
 
