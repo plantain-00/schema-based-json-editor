@@ -21,6 +21,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     "no-case-declarations": "off",
     "no-console": "off",
+    "no-prototype-builtins": "off",
     "plantain/promise-not-await": "error"
   },
   "env": {
