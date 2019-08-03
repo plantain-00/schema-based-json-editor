@@ -383,7 +383,7 @@ export let schema: common.Schema = {
         'foo',
         'bar'
       ],
-      enumTitle: [
+      enumTitles: [
         'foo title',
         'bar title'
       ],
@@ -398,7 +398,7 @@ export let schema: common.Schema = {
         'foo',
         'bar'
       ],
-      enumTitle: [
+      enumTitles: [
         'foo title',
         'bar title'
       ],
