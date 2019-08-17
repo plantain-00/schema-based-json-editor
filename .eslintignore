@@ -1,2 +1,3 @@
 node_modules
 packages/@(core|vue|react|angular)/@(src|demo)/**/*.d.ts
+*.d.ts

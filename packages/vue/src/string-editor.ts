@@ -35,8 +35,8 @@ export class StringEditor extends Vue {
   noSelect2?: boolean
   monacoEditor?: common.MonacoEditor
 
-  value?: string = ''
-  errorMessage?: string = ''
+  value? = ''
+  errorMessage? = ''
   buttonGroupStyle = common.buttonGroupStyleString
   collapsed = false
   imagePreviewStyle = common.imagePreviewStyleString

@@ -31,7 +31,7 @@ export class ArrayEditor extends React.Component<Props, State> {
   private drak?: dragula.Drake
   private errorMessage!: string
   private invalidIndexes: number[] = []
-  private filter: string = ''
+  private filter = ''
   constructor(props: Props) {
     super(props)
     this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as common.ValueType[]

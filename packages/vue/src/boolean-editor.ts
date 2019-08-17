@@ -27,7 +27,7 @@ export class BooleanEditor extends Vue {
   required!: boolean
   hasDeleteButton!: boolean
 
-  value?: boolean = false
+  value? = false
   buttonGroupStyle = common.buttonGroupStyleString
 
   beforeMount() {
