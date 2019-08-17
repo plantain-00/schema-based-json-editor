@@ -27,7 +27,7 @@ export class NullEditor extends Vue {
   required!: boolean
   hasDeleteButton!: boolean
 
-  value?: null = null
+  value? = null
   buttonGroupStyle = common.buttonGroupStyleString
 
   beforeMount() {

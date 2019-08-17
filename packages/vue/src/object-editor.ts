@@ -48,10 +48,10 @@ export class ObjectEditor extends Vue {
   hasDeleteButton!: boolean
   minItemCountIfNeedFilter!: boolean
 
-  collapsed?: boolean = false
+  collapsed? = false
   value?: { [name: string]: common.ValueType } = {}
   buttonGroupStyle = common.buttonGroupStyleString
-  errorMessage?: string = ''
+  errorMessage? = ''
   filter = ''
   private invalidProperties: string[] = []
   private properties: { property: string; schema: common.Schema }[] = []

@@ -51,9 +51,9 @@ export class ArrayEditor extends Vue {
   minItemCountIfNeedFilter?: number
 
   renderSwitch = 1
-  collapsed?: boolean = false
+  collapsed? = false
   value?: common.ValueType[] = []
-  errorMessage?: string = ''
+  errorMessage? = ''
   buttonGroupStyleString = common.buttonGroupStyleString
   filter = ''
   private invalidIndexes = []

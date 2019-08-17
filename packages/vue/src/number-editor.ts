@@ -28,8 +28,8 @@ export class NumberEditor extends Vue {
   hasDeleteButton!: boolean
   noSelect2!: boolean
 
-  value?: number = 0
-  errorMessage?: string = ''
+  value? = 0
+  errorMessage? = ''
   buttonGroupStyle = common.buttonGroupStyleString
 
   onChange(e: { target: { value: string } }) {

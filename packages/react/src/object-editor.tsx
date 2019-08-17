@@ -27,7 +27,7 @@ export class ObjectEditor extends React.Component<Props, State> {
   private invalidProperties: string[] = []
   private errorMessage!: string
   private properties: { property: string; schema: common.Schema }[] = []
-  private filter: string = ''
+  private filter = ''
   constructor(props: Props) {
     super(props)
     this.value = common.getDefaultValue(this.props.required, this.props.schema, this.props.initialValue) as { [name: string]: common.ValueType }

@@ -47,7 +47,7 @@ export class ObjectEditorComponent {
   @Input()
   monacoEditor?: common.MonacoEditor
 
-  collapsed?: boolean = false
+  collapsed? = false
   value?: { [name: string]: common.ValueType }
   buttonGroupStyle = common.buttonGroupStyleString
   errorMessage!: string

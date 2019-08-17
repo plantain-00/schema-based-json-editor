@@ -57,7 +57,7 @@ export class AnyEditor extends Vue {
         lineNumbers: 'off'
       })
       let timer: NodeJS.Timer
-      this.monacoCodeEditor.onDidChangeModelContent((e) => {
+      this.monacoCodeEditor.onDidChangeModelContent(() => {
         clearTimeout(timer)
         timer = setTimeout(() => {
           try {
