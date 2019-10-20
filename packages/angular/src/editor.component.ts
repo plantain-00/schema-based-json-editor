@@ -45,4 +45,16 @@ export class EditorComponent {
   minItemCountIfNeedFilter?: number
   @Input()
   monacoEditor?: common.MonacoEditor
+  @Input()
+  getReference!: (name: string) => common.Schema | undefined
+
+  get realSchema() {
+    if (this.schema.$ref) {
+      const reference = this.getReference(this.schema.$ref)
+      if (reference) {
+        return reference
+      }
+    }
+    return this.schema
+  }
 }

@@ -10,22 +10,29 @@ import { AnyEditor } from './any-editor'
 
 export class Editor extends React.Component<common.Props<common.Schema, common.ValueType>, {}> {
   render() {
-    switch (this.props.schema.type) {
+    let props = this.props
+    if (props.schema.$ref) {
+      const reference = props.getReference(props.schema.$ref)
+      if (reference) {
+        props = { ...this.props, schema: reference }
+      }
+    }
+    switch (props.schema.type) {
       case 'object':
-        return <ObjectEditor {...this.props as common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>} />
+        return <ObjectEditor {...props as common.Props<common.ObjectSchema, { [name: string]: common.ValueType }>} />
       case 'array':
-        return <ArrayEditor {...this.props as common.Props<common.ArraySchema, common.ValueType[]>} />
+        return <ArrayEditor {...props as common.Props<common.ArraySchema, common.ValueType[]>} />
       case 'number':
       case 'integer':
-        return <NumberEditor {...this.props as common.Props<common.NumberSchema, number>} />
+        return <NumberEditor {...props as common.Props<common.NumberSchema, number>} />
       case 'boolean':
-        return <BooleanEditor {...this.props as common.Props<common.BooleanSchema, boolean>} />
+        return <BooleanEditor {...props as common.Props<common.BooleanSchema, boolean>} />
       case 'null':
-        return <NullEditor {...this.props as common.Props<common.NullSchema, null>} />
+        return <NullEditor {...props as common.Props<common.NullSchema, null>} />
       case 'string':
-        return <StringEditor {...this.props as common.Props<common.StringSchema, string>} />
+        return <StringEditor {...props as common.Props<common.StringSchema, string>} />
       case undefined:
-        return <AnyEditor {...this.props as common.Props<common.AnySchema, any>} />
+        return <AnyEditor {...props as common.Props<common.AnySchema, any>} />
       default:
         return null
     }

@@ -60,6 +60,7 @@
     <div *ngFor="let item of filteredValues; trackBy:trackByFunction" [attr.data-index]="item.i" [class]="theme.card">
       <editor [schema]="schema.items"
         [title]="item.i"
+        [getReference]="getReference"
         [initialValue]="value![item.i]"
         (updateValue)="onChange(item.i, $event)"
         [theme]="theme"

@@ -47,6 +47,7 @@ import { indexTemplateHtml, indexTemplateHtmlStatic } from './variables'
   ]
 })
 export class JSONEditor extends Vue {
+  schema!: common.Schema
   theme?: string
   locale!: common.Locale
   icon?: string
@@ -62,6 +63,13 @@ export class JSONEditor extends Vue {
     return common.getIcon(this.icon, this.localeObject)
   }
   md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)
+
+  getReference = (name: string) => {
+    if (this.schema.definitions) {
+      return this.schema.definitions[name.substring('#/definitions/'.length)]
+    }
+    return undefined
+  }
 
   updateValue(value: common.ValueType) {
     this.$emit('update-value', value)

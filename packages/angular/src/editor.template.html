@@ -1,7 +1,8 @@
-<object-editor *ngIf="schema.type === 'object'"
-  [schema]="schema"
+<object-editor *ngIf="realSchema.type === 'object'"
+  [schema]="realSchema"
   [initialValue]="initialValue"
   [title]="title"
+  [getReference]="getReference"
   [theme]="theme"
   [locale]="locale"
   [icon]="icon"
@@ -19,10 +20,11 @@
   [minItemCountIfNeedFilter]="minItemCountIfNeedFilter"
   [monacoEditor]="monacoEditor">
 </object-editor>
-<array-editor *ngIf="schema.type === 'array'"
-  [schema]="schema"
+<array-editor *ngIf="realSchema.type === 'array'"
+  [schema]="realSchema"
   [initialValue]="initialValue"
   [title]="title"
+  [getReference]="getReference"
   [theme]="theme"
   [locale]="locale"
   [icon]="icon"
@@ -40,8 +42,8 @@
   [minItemCountIfNeedFilter]="minItemCountIfNeedFilter"
   [monacoEditor]="monacoEditor">
 </array-editor>
-<number-editor *ngIf="schema.type === 'number' || schema.type === 'integer'"
-  [schema]="schema"
+<number-editor *ngIf="realSchema.type === 'number' || realSchema.type === 'integer'"
+  [schema]="realSchema"
   [initialValue]="initialValue"
   [title]="title"
   [theme]="theme"
@@ -54,8 +56,8 @@
   [hasDeleteButton]="hasDeleteButton"
   [noSelect2]="noSelect2">
 </number-editor>
-<boolean-editor *ngIf="schema.type === 'boolean'"
-  [schema]="schema"
+<boolean-editor *ngIf="realSchema.type === 'boolean'"
+  [schema]="realSchema"
   [initialValue]="initialValue"
   [title]="title"
   [theme]="theme"
@@ -67,8 +69,8 @@
   (onDelete)="onDelete.emit()"
   [hasDeleteButton]="hasDeleteButton">
 </boolean-editor>
-<null-editor *ngIf="schema.type === 'null'"
-  [schema]="schema"
+<null-editor *ngIf="realSchema.type === 'null'"
+  [schema]="realSchema"
   [initialValue]="initialValue"
   [title]="title"
   [theme]="theme"
@@ -80,8 +82,8 @@
   (onDelete)="onDelete.emit()"
   [hasDeleteButton]="hasDeleteButton">
 </null-editor>
-<string-editor *ngIf="schema.type === 'string'"
-  [schema]="schema"
+<string-editor *ngIf="realSchema.type === 'string'"
+  [schema]="realSchema"
   [initialValue]="initialValue"
   [title]="title"
   [theme]="theme"
@@ -99,8 +101,8 @@
   [noSelect2]="noSelect2"
   [monacoEditor]="monacoEditor">
 </string-editor>
-<any-editor *ngIf="schema.type === undefined"
-  [schema]="schema"
+<any-editor *ngIf="realSchema.type === undefined"
+  [schema]="realSchema"
   [initialValue]="initialValue"
   [title]="title"
   [theme]="theme"

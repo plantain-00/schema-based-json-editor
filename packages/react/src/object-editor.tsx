@@ -55,6 +55,7 @@ export class ObjectEditor extends React.Component<Props, State> {
       ? this.properties.filter(p => common.filterObject(p, this.filter) && this.isRequired(p.property) !== false)
         .map(({ property, schema }) => <Editor key={property + this.isRequired(property)}
           schema={schema}
+          getReference={this.props.getReference}
           title={schema.title || property}
           initialValue={this.value![property]}
           updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(property, value, isValid)}

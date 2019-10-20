@@ -37,6 +37,7 @@
       :key="p.property + isRequired(p.property)"
       :schema="p.schema"
       :title="p.schema.title || p.property"
+      :getReference="getReference"
       :initial-value="value[p.property]"
       @update-value="onChange(p.property, $event)"
       :theme="theme"

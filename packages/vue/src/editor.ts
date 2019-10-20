@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { editorTemplateHtml, editorTemplateHtmlStatic } from './variables'
+import { Schema } from '.'
 
 @Component({
   render: editorTemplateHtml,
@@ -12,6 +13,7 @@ import { editorTemplateHtml, editorTemplateHtmlStatic } from './variables'
     'schema',
     'initialValue',
     'title',
+    'getReference',
     'theme',
     'icon',
     'locale',
@@ -29,5 +31,16 @@ import { editorTemplateHtml, editorTemplateHtmlStatic } from './variables'
   ]
 })
 export class Editor extends Vue {
+  schema!: Schema
+  getReference!: (name: string) => Schema | undefined
 
+  get realSchema() {
+    if (this.schema.$ref) {
+      const reference = this.getReference(this.schema.$ref)
+      if (reference) {
+        return reference
+      }
+    }
+    return this.schema
+  }
 }

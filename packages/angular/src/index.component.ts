@@ -54,6 +54,13 @@ export class JSONEditorComponent {
   }
   md?: any
 
+  getReference = (name: string) => {
+    if (this.schema.definitions) {
+      return this.schema.definitions[name.substring('#/definitions/'.length)]
+    }
+    return undefined
+  }
+
   ngOnInit() {
     this.md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)
   }

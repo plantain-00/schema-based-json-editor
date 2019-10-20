@@ -27,6 +27,8 @@ export type IStandaloneCodeEditor = monaco.editor.IStandaloneCodeEditor
  */
 export interface CommonSchema {
   $schema?: string;
+  $ref?: string;
+  definitions?: {[name: string]: Schema}
   title?: string;
   description?: string;
   default?: ValueType;
@@ -603,6 +605,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
   noSelect2?: boolean;
   minItemCountIfNeedFilter?: number;
   monacoEditor?: MonacoEditor;
+  getReference: (name: string) => TSchema | undefined;
 }
 
 /**
