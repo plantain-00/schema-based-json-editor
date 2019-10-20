@@ -45,6 +45,8 @@ export class ArrayEditorComponent {
   minItemCountIfNeedFilter?: number
   @Input()
   monacoEditor?: common.MonacoEditor
+  @Input()
+  getReference!: (name: string) => common.Schema | undefined
 
   collapsed? = false
   value?: common.ValueType[]

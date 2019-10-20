@@ -33,6 +33,12 @@ export class JSONEditor extends React.Component<Props, {}> {
     super(props)
     this.md = common.initializeMarkdown(this.props.markdownit, this.props.hljs, this.props.forceHttps)
   }
+  private getReference = (name: string) => {
+    if (this.props.schema.definitions) {
+      return this.props.schema.definitions[name.substring('#/definitions/'.length)]
+    }
+    return undefined
+  }
   render() {
     const theme = common.getTheme(this.props.theme)
     const locale = common.getLocale(this.props.locale)
@@ -40,6 +46,7 @@ export class JSONEditor extends React.Component<Props, {}> {
     return <Editor schema={this.props.schema}
       initialValue={this.props.initialValue}
       updateValue={this.updateValue}
+      getReference={this.getReference}
       readonly={this.props.readonly}
       theme={theme}
       locale={locale}

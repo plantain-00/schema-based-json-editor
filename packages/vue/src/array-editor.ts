@@ -20,6 +20,7 @@ import { arrayEditorTemplateHtml, arrayEditorTemplateHtmlStatic } from './variab
     'schema',
     'initialValue',
     'title',
+    'getReference',
     'theme',
     'icon',
     'locale',
@@ -49,6 +50,7 @@ export class ArrayEditor extends Vue {
   dragula?: common.Dragula
   noSelect2?: boolean
   minItemCountIfNeedFilter?: number
+  getReference!: (name: string) => common.Schema | undefined
 
   renderSwitch = 1
   collapsed? = false

@@ -64,6 +64,7 @@ export class ArrayEditor extends React.Component<Props, State> {
         <div key={(1 + i) * this.renderSwitch} data-index={i} className={this.props.theme.card}>
           <Editor schema={this.props.schema.items}
             title={String(i)}
+            getReference={this.props.getReference}
             initialValue={this.getValue[i]}
             updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(i, value, isValid)}
             theme={this.props.theme}

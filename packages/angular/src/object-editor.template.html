@@ -35,6 +35,7 @@
     <editor *ngFor="let p of filteredProperties; trackBy: trackByFunction"
       [schema]="p.schema"
       [title]="p.schema.title || p.property"
+      [getReference]="getReference"
       [initialValue]="value[p.property]"
       (updateValue)="onChange(p.property, $event)"
       [theme]="theme"

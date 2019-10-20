@@ -1,7 +1,8 @@
-<object-editor v-if="schema.type === 'object'"
-  :schema="schema"
+<object-editor v-if="realSchema.type === 'object'"
+  :schema="realSchema"
   :initial-value="initialValue"
   :title="title"
+  :getReference="getReference"
   :theme="theme"
   :locale="locale"
   :icon="icon"
@@ -19,10 +20,11 @@
   :minItemCountIfNeedFilter="minItemCountIfNeedFilter"
   :monacoEditor="monacoEditor">
 </object-editor>
-<array-editor v-else-if="schema.type === 'array'"
-  :schema="schema"
+<array-editor v-else-if="realSchema.type === 'array'"
+  :schema="realSchema"
   :initial-value="initialValue"
   :title="title"
+  :getReference="getReference"
   :theme="theme"
   :locale="locale"
   :icon="icon"
@@ -40,8 +42,8 @@
   :minItemCountIfNeedFilter="minItemCountIfNeedFilter"
   :monacoEditor="monacoEditor">
 </array-editor>
-<number-editor v-else-if="schema.type === 'number' || schema.type === 'integer'"
-  :schema="schema"
+<number-editor v-else-if="realSchema.type === 'number' || realSchema.type === 'integer'"
+  :schema="realSchema"
   :initial-value="initialValue"
   :title="title"
   :theme="theme"
@@ -54,8 +56,8 @@
   :has-delete-button="hasDeleteButton"
   :noSelect2="noSelect2">
 </number-editor>
-<boolean-editor v-else-if="schema.type === 'boolean'"
-  :schema="schema"
+<boolean-editor v-else-if="realSchema.type === 'boolean'"
+  :schema="realSchema"
   :initial-value="initialValue"
   :title="title"
   :theme="theme"
@@ -67,8 +69,8 @@
   @delete="$emit('delete')"
   :has-delete-button="hasDeleteButton">
 </boolean-editor>
-<null-editor v-else-if="schema.type === 'null'"
-  :schema="schema"
+<null-editor v-else-if="realSchema.type === 'null'"
+  :schema="realSchema"
   :initial-value="initialValue"
   :title="title"
   :theme="theme"
@@ -80,8 +82,8 @@
   @delete="$emit('delete')"
   :has-delete-button="hasDeleteButton">
 </null-editor>
-<string-editor v-else-if="schema.type === 'string'"
-  :schema="schema"
+<string-editor v-else-if="realSchema.type === 'string'"
+  :schema="realSchema"
   :initial-value="initialValue"
   :title="title"
   :theme="theme"
@@ -99,8 +101,8 @@
   :noSelect2="noSelect2"
   :monacoEditor="monacoEditor">
 </string-editor>
-<any-editor v-else-if="schema.type === undefined"
-  :schema="schema"
+<any-editor v-else-if="realSchema.type === undefined"
+  :schema="realSchema"
   :initial-value="initialValue"
   :title="title"
   :theme="theme"

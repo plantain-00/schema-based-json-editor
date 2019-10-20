@@ -20,6 +20,7 @@ import { objectEditorTemplateHtml, objectEditorTemplateHtmlStatic } from './vari
     'schema',
     'initialValue',
     'title',
+    'getReference',
     'theme',
     'icon',
     'locale',
@@ -47,6 +48,7 @@ export class ObjectEditor extends Vue {
   required!: boolean
   hasDeleteButton!: boolean
   minItemCountIfNeedFilter!: boolean
+  getReference!: (name: string) => common.Schema | undefined
 
   collapsed? = false
   value?: { [name: string]: common.ValueType } = {}
