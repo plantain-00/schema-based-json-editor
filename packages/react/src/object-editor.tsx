@@ -26,7 +26,7 @@ export class ObjectEditor extends React.Component<Props, State> {
   private value?: { [name: string]: common.ValueType }
   private invalidProperties: string[] = []
   private errorMessage!: string
-  private properties: { property: string; schema: common.Schema }[] = []
+  private properties: { property: string; schema: common.Schema; propertyName: string }[] = []
   private filter = ''
   constructor(props: Props) {
     super(props)
@@ -37,9 +37,11 @@ export class ObjectEditor extends React.Component<Props, State> {
         if (this.props.schema.properties.hasOwnProperty(property)) {
           const schema = this.props.schema.properties[property]
           const required = this.props.schema.required && this.props.schema.required.some(r => r === property)
-          this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType }
+          const propertyName = schema.propertyName || property
+          this.value[propertyName] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType }
           this.properties.push({
             property,
+            propertyName,
             schema
           })
         }
@@ -53,12 +55,12 @@ export class ObjectEditor extends React.Component<Props, State> {
   render() {
     const childrenElement: JSX.Element[] = (!this.collapsed && this.value !== undefined)
       ? this.properties.filter(p => common.filterObject(p, this.filter) && this.isRequired(p.property) !== false)
-        .map(({ property, schema }) => <Editor key={property + this.isRequired(property)}
+        .map(({ property, propertyName, schema }) => <Editor key={property + this.isRequired(property)}
           schema={schema}
           getReference={this.props.getReference}
-          title={schema.title || property}
+          title={schema.title || propertyName}
           initialValue={this.value![property]}
-          updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(property, value, isValid)}
+          updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(propertyName, value, isValid)}
           theme={this.props.theme}
           icon={this.props.icon}
           locale={this.props.locale}
