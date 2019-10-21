@@ -13,7 +13,7 @@
 + reactjs component
 + angular component
 + vuejs component
-+ common schema fields: title, description, default, readonly, $ref, propertyOrder, requiredWhen, optionalWhen, className
++ common schema fields: title, description, default, readonly, $ref, propertyOrder, requiredWhen, optionalWhen, className, propertyName
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
 + array schema fields: items, minItems, uniqueItems, enum, enumTitles, format('select2')
 + number and integer schema fields: minimum, exclusiveMinimum, maximum, exclusiveMaximum, enum, multipleOf, enumTitles, format('select' | 'radiobox')
@@ -219,6 +219,7 @@ collapsed | boolean? | if true, the object or array is collapsed by default
 enumTitles | string[]? | works with `enum` field, are the titles of the enum
 className | string? | custom class name
 step | number? | in a string, works with format `time`
+propertyName | string? | in a object, used as property name
 
 ## change logs
 

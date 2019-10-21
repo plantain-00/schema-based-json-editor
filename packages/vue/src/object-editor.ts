@@ -56,7 +56,7 @@ export class ObjectEditor extends Vue {
   errorMessage? = ''
   filter = ''
   private invalidProperties: string[] = []
-  private properties: { property: string; schema: common.Schema }[] = []
+  private properties: { property: string; schema: common.Schema; propertyName: string }[] = []
   private watchedProperties: string[] = []
 
   beforeMount() {
@@ -68,8 +68,10 @@ export class ObjectEditor extends Vue {
         if (this.schema.properties.hasOwnProperty(property)) {
           const schema = this.schema.properties[property]
           const required = this.schema.required && this.schema.required.some(r => r === property)
-          this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType }
+          const propertyName = schema.propertyName || property
+          this.value[propertyName] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType }
           this.properties.push({
+            propertyName,
             property,
             schema
           })

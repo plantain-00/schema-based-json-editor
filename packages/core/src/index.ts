@@ -37,6 +37,7 @@ export interface CommonSchema {
   requiredWhen?: EqualCondition | InCondition | IsUndefinedCondition;
   optionalWhen?: EqualCondition | InCondition | IsUndefinedCondition;
   className?: string;
+  propertyName?: string
 }
 
 type EqualCondition = [string, '===', any]
@@ -548,7 +549,8 @@ export function getDefaultValue(required: boolean | undefined = undefined, schem
     case 'object':
       const value: any = {}
       for (const property in schema.properties) {
-        value[property] = undefined
+        const propertySchema = schema.properties[property]
+        value[propertySchema.propertyName || property] = undefined
       }
       return value
     case 'array':

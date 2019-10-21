@@ -54,7 +54,7 @@ export class ObjectEditorComponent {
   buttonGroupStyle = common.buttonGroupStyleString
   errorMessage!: string
   filter = ''
-  private properties: { property: string; schema: common.Schema }[] = []
+  private properties: { property: string; schema: common.Schema; propertyName: string }[] = []
   private invalidProperties: string[] = []
   ngOnInit() {
     this.collapsed = this.schema.collapsed
@@ -65,10 +65,12 @@ export class ObjectEditorComponent {
         if (this.schema.properties.hasOwnProperty(property)) {
           const schema = this.schema.properties[property]
           const required = this.schema.required && this.schema.required.some(r => r === property)
-          this.value[property] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType }
+          const propertyName = schema.propertyName || property
+          this.value[propertyName] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType }
 
           this.properties.push({
             property,
+            propertyName,
             schema
           })
         }

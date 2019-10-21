@@ -34,10 +34,10 @@
     </div>
     <editor *ngFor="let p of filteredProperties; trackBy: trackByFunction"
       [schema]="p.schema"
-      [title]="p.schema.title || p.property"
+      [title]="p.schema.title || p.propertyName"
       [getReference]="getReference"
       [initialValue]="value[p.property]"
-      (updateValue)="onChange(p.property, $event)"
+      (updateValue)="onChange(p.propertyName, $event)"
       [theme]="theme"
       [icon]="icon"
       [locale]="locale"
