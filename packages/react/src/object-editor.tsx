@@ -36,9 +36,11 @@ export class ObjectEditor extends React.Component<Props, State> {
       for (const property in this.props.schema.properties) {
         if (this.props.schema.properties.hasOwnProperty(property)) {
           const schema = this.props.schema.properties[property]
-          const required = this.props.schema.required && this.props.schema.required.some(r => r === property)
           const propertyName = schema.propertyName || property
-          this.value[propertyName] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType }
+          if (this.isRequired(property) !== false) {
+            const required = this.props.schema.required && this.props.schema.required.some(r => r === property)
+            this.value[propertyName] = common.getDefaultValue(required, schema, this.value[propertyName]) as { [name: string]: common.ValueType }
+          }
           this.properties.push({
             property,
             propertyName,
@@ -59,7 +61,7 @@ export class ObjectEditor extends React.Component<Props, State> {
           schema={schema}
           getReference={this.props.getReference}
           title={schema.title || propertyName}
-          initialValue={this.value![property]}
+          initialValue={this.value![propertyName]}
           updateValue={(value: common.ValueType | undefined, isValid: boolean) => this.onChange(propertyName, value, isValid)}
           theme={this.props.theme}
           icon={this.props.icon}

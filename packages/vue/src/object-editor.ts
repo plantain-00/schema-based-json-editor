@@ -67,9 +67,11 @@ export class ObjectEditor extends Vue {
       for (const property in this.schema.properties) {
         if (this.schema.properties.hasOwnProperty(property)) {
           const schema = this.schema.properties[property]
-          const required = this.schema.required && this.schema.required.some(r => r === property)
           const propertyName = schema.propertyName || property
-          this.value[propertyName] = common.getDefaultValue(required, schema, this.value[property]) as { [name: string]: common.ValueType }
+          if (this.isRequired(property) !== false) {
+            const required = this.schema.required && this.schema.required.some(r => r === property)
+            this.value[propertyName] = common.getDefaultValue(required, schema, this.value[propertyName]) as { [name: string]: common.ValueType }
+          }
           this.properties.push({
             propertyName,
             property,
@@ -81,7 +83,7 @@ export class ObjectEditor extends Vue {
     }
     for (const property in this.schema.properties) {
       const schema = this.schema.properties[property]
-      if (schema && schema.requiredWhen) {
+      if (schema && schema.requiredWhen && !this.watchedProperties.includes(schema.requiredWhen[0])) {
         this.watchedProperties.push(schema.requiredWhen[0])
       }
     }

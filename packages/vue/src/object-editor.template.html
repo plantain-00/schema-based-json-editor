@@ -38,7 +38,7 @@
       :schema="p.schema"
       :title="p.schema.title || p.propertyName"
       :getReference="getReference"
-      :initial-value="value[p.property]"
+      :initial-value="value[p.propertyName]"
       @update-value="onChange(p.propertyName, $event)"
       :theme="theme"
       :icon="icon"
