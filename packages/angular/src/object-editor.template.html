@@ -36,7 +36,7 @@
       [schema]="p.schema"
       [title]="p.schema.title || p.propertyName"
       [getReference]="getReference"
-      [initialValue]="value[p.property]"
+      [initialValue]="value[p.propertyName]"
       (updateValue)="onChange(p.propertyName, $event)"
       [theme]="theme"
       [icon]="icon"
