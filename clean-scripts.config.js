@@ -50,7 +50,6 @@ module.exports = {
         `cpy ./node_modules/monaco-editor/min/vs/language/json/jsonWorker.js ./packages/core/demo/vs/language/json/`,
         `cpy ./node_modules/monaco-editor/min/vs/language/typescript/tsMode.js ./packages/core/demo/vs/language/typescript/`,
         `cpy ./node_modules/monaco-editor/min/vs/language/typescript/tsWorker.js ./packages/core/demo/vs/language/typescript/`,
-        `cpy ./node_modules/monaco-editor/min/vs/language/typescript/lib/typescriptServices.js ./packages/core/demo/vs/language/typescript/lib/`,
         `cpy ./node_modules/monaco-editor/min/vs/editor/editor.main.js ./packages/core/demo/vs/editor/`,
         `cpy ./node_modules/monaco-editor/min/vs/editor/editor.main.css ./packages/core/demo/vs/editor/`,
         `cpy ./node_modules/monaco-editor/min/vs/editor/editor.main.nls.js ./packages/core/demo/vs/editor/`,
