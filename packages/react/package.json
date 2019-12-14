@@ -39,10 +39,10 @@
     "select2-react-component": "5"
   },
   "devDependencies": {
-    "@types/react": "16.9.15",
+    "@types/react": "16.9.16",
     "@types/react-dom": "16.9.4",
     "dragula": "3.7.2",
-    "highlight.js": "9.16.2",
+    "highlight.js": "9.17.1",
     "markdown-it": "10.0.0",
     "monaco-editor": "0.18.1"
   }
