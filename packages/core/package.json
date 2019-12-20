@@ -32,13 +32,13 @@
     "lodash.tointeger": "4",
     "lodash.tonumber": "4",
     "markdown-tip": "6",
-    "monaco-editor": "0.18",
+    "monaco-editor": "0.19",
     "select2-component": "5",
     "tslib": "1"
   },
   "devDependencies": {
-    "@blueprintjs/core": "3.22.2",
-    "antd": "3.26.2",
+    "@blueprintjs/core": "3.22.3",
+    "antd": "3.26.3",
     "bootstrap": "4.4.1",
     "dragula": "3.7.2",
     "element-ui": "2.13.0",
