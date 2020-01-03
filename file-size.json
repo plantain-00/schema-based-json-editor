@@ -1,13 +1,13 @@
 {
-  "angularDemoAotIndexBundleJs": "1.61 MB 470 kB",
-  "angularDemoJitIndexBundleJs": "73.1 kB 12.2 kB",
-  "angularDemoJitVendorBundleJs": "2.01 MB 582 kB",
+  "angularDemoAotIndexBundleJs": "1.61 MB 469 kB",
+  "angularDemoJitIndexBundleJs": "73.2 kB 12.2 kB",
+  "angularDemoJitVendorBundleJs": "2.01 MB 580 kB",
   "reactDemoIndexBundleJs": "60.1 kB 11.4 kB",
   "reactDemoVendorBundleJs": "1.05 MB 347 kB",
-  "vueDemoIndexBundleJs": "65.7 kB 12 kB",
-  "vueDemoVendorBundleJs": "1.02 MB 342 kB",
-  "packagesAngularDemoAotIndexHtml": "1.6 kB 700 B",
-  "packagesAngularDemoJitIndexHtml": "1.76 kB 778 B",
-  "packagesReactDemoIndexHtml": "1.75 kB 785 B",
-  "packagesVueDemoIndexHtml": "1.74 kB 790 B"
+  "vueDemoIndexBundleJs": "65.8 kB 12 kB",
+  "vueDemoVendorBundleJs": "1.02 MB 341 kB",
+  "packagesAngularDemoAotIndexHtml": "1.6 kB 701 B",
+  "packagesAngularDemoJitIndexHtml": "1.76 kB 781 B",
+  "packagesReactDemoIndexHtml": "1.75 kB 790 B",
+  "packagesVueDemoIndexHtml": "1.74 kB 791 B"
 }
