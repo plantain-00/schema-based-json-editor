@@ -1,6 +1,6 @@
 import { uglify } from 'rollup-plugin-uglify'
-import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
 
 export default {
   input: 'packages/vue/dist/index.js',
@@ -12,13 +12,13 @@ export default {
   output: {
     name: 'JSONEditor',
     file: 'packages/vue/dist/vue-schema-based-json-editor.min.js',
-    format: 'umd'
+    format: 'umd',
+    globals: {
+      'vue-class-component': 'VueClassComponent'
+    }
   },
   external: [
     'vue',
     'vue-class-component'
-  ],
-  globals: {
-    'vue-class-component': 'VueClassComponent'
-  }
+  ]
 }
