@@ -42,9 +42,9 @@ export class ArrayEditor extends React.Component<Props, State> {
     if (this.props.dragula) {
       const container = common.findContainer((ReactDOM.findDOMNode(this as any) as HTMLElement).childNodes)!
       this.drak = this.props.dragula([container])
-      this.drak!.on('drop', (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+      this.drak!.on('drop', (el, target, source, sibling) => {
         if (this.value) {
-          common.switchItem(this.value, el, sibling)
+          common.switchItem(this.value, el as HTMLElement, sibling as HTMLElement)
           this.renderSwitch = -this.renderSwitch
           this.setState({ value: this.value, renderSwitch: this.renderSwitch })
           this.props.updateValue(this.value, !this.errorMessage && this.invalidIndexes.length === 0)

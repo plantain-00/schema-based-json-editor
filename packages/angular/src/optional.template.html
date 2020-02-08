@@ -1,6 +1,0 @@
-<div *ngIf="hasOptionalCheckbox" [class]="theme.checkbox">
-  <label>
-    <input type="checkbox" (change)="toggleOptional.emit()" [checked]="value === undefined" [disabled]="isReadOnly" />
-    {{locale.info.notExists}}
-  </label>
-</div>

@@ -3,7 +3,7 @@
   "version": "7.25.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "description": "A reactjs, angular and vuejs component of schema based json editor.",
+  "description": "A reactjs and vuejs component of schema based json editor.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/plantain-00/schema-based-json-editor.git"

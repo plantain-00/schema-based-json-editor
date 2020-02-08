@@ -7,9 +7,7 @@ import puppeteer from 'puppeteer'
 
   const cases = [
     { type: 'vue', url: '/packages/vue/demo' },
-    { type: 'react', url: '/packages/react/demo' },
-    { type: 'angular', url: '/packages/angular/demo/jit' },
-    { type: 'aot', url: '/packages/angular/demo/aot' }
+    { type: 'react', url: '/packages/react/demo' }
   ]
 
   for (const { type, url } of cases) {
