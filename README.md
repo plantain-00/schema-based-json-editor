@@ -11,7 +11,6 @@
 ## features
 
 + reactjs component
-+ angular component
 + vuejs component
 + common schema fields: title, description, default, readonly, $ref, propertyOrder, requiredWhen, optionalWhen, className, propertyName
 + object schema fields: properties, required, maxProperties, minProperties, collapsed
@@ -50,34 +49,6 @@ or
 ```
 
 the online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/react/demo>
-
-## angular component
-
-`npm i angular-schema-based-json-editor`
-
-```js
-import { JSONEditorModule } from "angular-schema-based-json-editor";
-
-@NgModule({
-    imports: [BrowserModule, FormsModule, JSONEditorModule],
-    declarations: [MainComponent],
-    bootstrap: [MainComponent],
-})
-class MainModule { }
-```
-
-```jsx
-<json-editor [schema]="schema"
-    [initialValue]="value"
-    (updateValue)="updateValue($event)"
-    theme="bootstrap3"
-    icon="fontawesome4">
-</json-editor>
-```
-
-the online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/angular/demo/jit>
-
-the AOT online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/angular/demo/aot>
 
 ## vuejs component
 

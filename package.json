@@ -1,7 +1,7 @@
 {
   "name": "schema-based-json-editor",
   "private": true,
-  "description": "A reactjs, angular and vuejs component of schema based json editor.",
+  "description": "A reactjs and vuejs component of schema based json editor.",
   "scripts": {
     "bootstrap": "lerna bootstrap -- --frozen-lockfile",
     "build": "clean-scripts build",
@@ -20,8 +20,7 @@
     "json",
     "schema",
     "vue",
-    "react",
-    "angular"
+    "react"
   ],
   "author": "York Yao",
   "license": "MIT",
@@ -37,17 +36,14 @@
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {},
   "devDependencies": {
-    "@angular/compiler": "8.2.14",
-    "@angular/compiler-cli": "8.2.14",
-    "@angular/core": "8.2.14",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
-    "@rollup/plugin-commonjs": "11.0.1",
-    "@rollup/plugin-node-resolve": "7.0.0",
-    "@types/jasmine": "3.5.2",
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-node-resolve": "7.1.1",
+    "@types/jasmine": "3.5.3",
     "@types/puppeteer": "2.0.0",
-    "@typescript-eslint/eslint-plugin": "2.18.0",
-    "@typescript-eslint/parser": "2.18.0",
+    "@typescript-eslint/eslint-plugin": "2.19.0",
+    "@typescript-eslint/parser": "2.19.0",
     "clean-scripts": "1.12.1",
     "cpy-cli": "3.0.0",
     "cross-env": "7.0.0",
@@ -65,13 +61,13 @@
     "lerna": "3.20.2",
     "markdownlint-cli": "0.21.0",
     "no-unused-export": "1.10.0",
-    "puppeteer": "2.1.0",
+    "puppeteer": "2.1.1",
     "rev-static": "3.4.3",
     "rimraf": "3.0.1",
     "rollup": "1.31.0",
     "rollup-plugin-uglify": "6.0.4",
     "type-coverage": "2.4.0",
-    "typescript": "3.5.3",
+    "typescript": "3.7.5",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10"
   }

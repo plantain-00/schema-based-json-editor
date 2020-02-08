@@ -112,9 +112,9 @@ export class ArrayEditor extends Vue {
       const container = common.findContainer(this.$el.childNodes)
       if (container) {
         this.drak = this.dragula([container])
-        this.drak!.on('drop', (el: HTMLElement, target: HTMLElement, source: HTMLElement, sibling: HTMLElement | null) => {
+        this.drak!.on('drop', (el, target, source, sibling) => {
           if (this.value) {
-            common.switchItem(this.value, el, sibling)
+            common.switchItem(this.value, el as HTMLElement, sibling as HTMLElement)
             this.renderSwitch = -this.renderSwitch
             this.$emit('update-value', { value: this.value, isValid: !this.errorMessage && this.invalidIndexes.length === 0 })
           }
