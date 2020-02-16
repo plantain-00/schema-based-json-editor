@@ -1,7 +1,7 @@
 {
   "name": "vue-schema-based-json-editor",
   "version": "7.25.1",
-  "main": "dist/index.js",
+  "main": "dist/vue-schema-based-json-editor.min.js",
   "module": "dist/index.js",
   "unpkg": "dist/vue-schema-based-json-editor.min.js",
   "jsdelivr": "dist/vue-schema-based-json-editor.min.js",
