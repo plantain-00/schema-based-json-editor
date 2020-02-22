@@ -15,7 +15,7 @@ class Main extends React.Component<{}, {}> {
   private isValid = false
   private propertiesSchema = propertiesSchema
   private propertiesInitialValue = propertiesInitialValue
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (navigator.language === 'zh-CN') {
       import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
         this.locale = module.locale
