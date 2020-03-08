@@ -24,7 +24,7 @@ module.exports = function (karma) {
     }
   }
 
-  if (!process.env.APPVEYOR) {
+  if (process.env.TRAVIS) {
     config.browsers.push('Firefox')
   }
 
