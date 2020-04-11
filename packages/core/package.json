@@ -37,8 +37,8 @@
     "tslib": "1"
   },
   "devDependencies": {
-    "@blueprintjs/core": "3.24.0",
-    "antd": "4.0.4",
+    "@blueprintjs/core": "3.25.0",
+    "antd": "4.1.2",
     "bootstrap": "4.4.1",
     "dragula": "3.7.2",
     "element-ui": "2.13.0",
