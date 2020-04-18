@@ -20,6 +20,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: sudo apt update
+    - name: Install utilities
+      run:
+        sudo apt install -y libgbm-dev
     - run: git fetch --unshallow || true
     - run: yarn install --frozen-lockfile
     - run: npm run build
