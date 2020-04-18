@@ -38,10 +38,10 @@
   },
   "devDependencies": {
     "@blueprintjs/core": "3.25.0",
-    "antd": "4.1.2",
+    "antd": "4.1.3",
     "bootstrap": "4.4.1",
     "dragula": "3.7.2",
-    "element-ui": "2.13.0",
+    "element-ui": "2.13.1",
     "font-awesome": "4.7.0",
     "github-fork-ribbon-css": "0.2.3",
     "highlight.js": "9.18.1",
