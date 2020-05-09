@@ -6141,7 +6141,8 @@ body.bp3-overlay-open{
   display:flex;
   -ms-flex-negative:0;
       flex-shrink:0;
-  height:30px; }
+  height:30px;
+  z-index:1; }
   .bp3-dark .bp3-panel-stack-header{
     -webkit-box-shadow:0 1px rgba(255, 255, 255, 0.15);
             box-shadow:0 1px rgba(255, 255, 255, 0.15); }
@@ -7109,7 +7110,7 @@ span.bp3-popover-target{
     line-height:20px;
     min-height:30px;
     min-width:30px;
-    padding:0 10px; }
+    padding:5px 10px; }
     .bp3-tag.bp3-large::before,
     .bp3-tag.bp3-large > *,
     .bp3-large .bp3-tag::before,
