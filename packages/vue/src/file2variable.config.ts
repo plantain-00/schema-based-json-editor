@@ -1,12 +1,9 @@
-module.exports = {
+export default {
   base: 'packages/vue/src/',
   files: [
     'packages/vue/src/*.template.html'
   ],
-  /**
-   * @argument {string} file
-   */
-  handler: file => {
+  handler: (file: string) => {
     if (file.endsWith('index.template.html')) {
       return { type: 'vue', name: 'JSONEditor', path: './index' }
     }

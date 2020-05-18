@@ -1,27 +1,23 @@
-const { Service } = require('clean-scripts')
-
-const tsFiles = `"packages/@(core|vue|react)/@(src|demo)/**/*.@(ts|tsx)" "spec/**/*.ts" "screenshots/**/*.ts"`
-const jsFiles = `"*.config.js" "spec/**/*.config.js"`
+const tsFiles = `"packages/@(core|vue|react)/@(src|demo)/**/*.@(ts|tsx)"`
+const jsFiles = `"*.config.js"`
 const excludeTsFiles = `"packages/@(core|vue|react)/@(src|demo)/**/*.d.ts"`
 
-const vueTemplateCommand = `file2variable-cli --config packages/vue/src/file2variable.config.js`
+const vueTemplateCommand = `file2variable-cli --config packages/vue/src/file2variable.config.ts`
 
 const tscCoreSrcCommand = `tsc -p packages/core/src`
 const tscVueSrcCommand = `tsc -p packages/vue/src`
 const tscReactSrcCommand = `tsc -p packages/react/src`
 
 const tscCoreDemoCommand = `tsc -p packages/core/demo`
-const tscVueDemoCommand = `tsc -p packages/vue/demo`
-const tscReactDemoCommand = `tsc -p packages/react/demo`
 
-const webpackVueCommand = `webpack --config packages/vue/demo/webpack.config.js`
-const webpackReactCommand = `webpack --config packages/react/demo/webpack.config.js`
+const webpackVueCommand = `webpack --config packages/vue/demo/webpack.config.ts`
+const webpackReactCommand = `webpack --config packages/react/demo/webpack.config.ts`
 
 const revStaticCommand = `rev-static`
 
 const isDev = process.env.NODE_ENV === 'development'
 
-module.exports = {
+export default {
   build: [
     {
       copy: isDev ? undefined : [
@@ -62,13 +58,11 @@ module.exports = {
                 vueTemplateCommand,
                 tscVueSrcCommand,
                 isDev ? undefined : `rollup --config packages/vue/src/rollup.config.js`,
-                tscVueDemoCommand,
                 webpackVueCommand
               ],
               react: [
                 tscReactSrcCommand,
                 isDev ? undefined : `rollup --config packages/react/src/rollup.config.js`,
-                tscReactDemoCommand,
                 webpackReactCommand
               ]
             }
@@ -87,8 +81,7 @@ module.exports = {
     typeCoverage: 'lerna exec -- type-coverage -p src --strict'
   },
   test: [
-    'tsc -p spec',
-    'karma start spec/karma.config.js'
+    // 'ava'
   ],
   fix: `eslint --ext .js,.ts ${tsFiles} ${jsFiles} --fix`,
   watch: {
@@ -97,15 +90,8 @@ module.exports = {
     tscVueSrcCommand: `${tscVueSrcCommand} --watch`,
     tscReactSrcCommand: `${tscReactSrcCommand} --watch`,
     tscCoreDemoCommand: `${tscCoreDemoCommand} --watch`,
-    tscVueDemoCommand: `${tscVueDemoCommand} --watch`,
-    tscReactDemoCommand: `${tscReactDemoCommand} --watch`,
     webpackVueCommand: `${webpackVueCommand} --watch`,
     webpackReactCommand: `${webpackReactCommand} --watch`,
     revStaticCommand: `${revStaticCommand} --watch`
-  },
-  screenshot: [
-    new Service(`http-server -p 8000`),
-    `tsc -p screenshots`,
-    `node screenshots/index.js`
-  ]
+  }
 }
