@@ -1,0 +1,6 @@
+{
+  "extends": "./packages/tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS"
+  }
+}
