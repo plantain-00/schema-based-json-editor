@@ -8,7 +8,7 @@ import hljs from 'highlight.js'
 import * as monaco from 'monaco-editor'
 addAllCssLinks('../../core/demo/css/')
 
-class Main extends React.Component<{}, {}> {
+class Main extends React.Component<unknown, unknown> {
   private locale = null
   private schema = schema
   private initialValue = initialValue

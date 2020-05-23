@@ -8,7 +8,7 @@ import { NullEditor } from './null-editor'
 import { StringEditor } from './string-editor'
 import { AnyEditor } from './any-editor'
 
-export class Editor extends React.Component<common.Props<common.Schema, common.ValueType>, {}> {
+export class Editor extends React.Component<common.Props<common.Schema, common.ValueType>, unknown> {
   render() {
     let props = this.props
     if (props.schema.$ref) {

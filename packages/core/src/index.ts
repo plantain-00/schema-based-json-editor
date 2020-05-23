@@ -924,7 +924,6 @@ export function initializeMarkdown(markdownit: any, hljs: HLJS | undefined, forc
       return self.renderToken(tokens, index, options)
     }
   }
-  // eslint-disable-next-line @typescript-eslint/camelcase
   md.renderer.rules.link_open = (tokens: any[], index: number, options: any, env: any, self: any) => {
     tokens[index].attrPush(['target', '_blank'])
     tokens[index].attrPush(['rel', 'nofollow'])

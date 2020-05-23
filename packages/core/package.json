@@ -34,18 +34,18 @@
     "markdown-tip": "6",
     "monaco-editor": "0.20",
     "select2-component": "5",
-    "tslib": "1"
+    "tslib": "2"
   },
   "devDependencies": {
-    "@blueprintjs/core": "3.26.1",
-    "antd": "4.2.0",
-    "bootstrap": "4.4.1",
+    "@blueprintjs/core": "3.28.0",
+    "antd": "4.2.4",
+    "bootstrap": "4.5.0",
     "dragula": "3.7.2",
-    "element-ui": "2.13.1",
+    "element-ui": "2.13.2",
     "font-awesome": "4.7.0",
     "github-fork-ribbon-css": "0.2.3",
     "highlight.js": "10.0.3",
     "iview": "3.5.4",
-    "markdown-it": "10.0.0"
+    "markdown-it": "11.0.0"
   }
 }
