@@ -27,7 +27,7 @@ export interface Props {
 /**
  * @public
  */
-export class JSONEditor extends React.Component<Props, {}> {
+export class JSONEditor extends React.Component<Props, unknown> {
   private md?: any
   constructor(props: Props) {
     super(props)

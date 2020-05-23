@@ -8,7 +8,7 @@ export class Optional extends React.Component<{
   theme: common.Theme;
   locale: common.Locale;
   toggleOptional: () => void;
-}, {}> {
+}, unknown> {
   render() {
     if (!this.props.required && (this.props.value === undefined || !this.props.isReadOnly)) {
       return (

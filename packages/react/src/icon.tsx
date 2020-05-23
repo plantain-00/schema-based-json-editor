@@ -10,7 +10,7 @@ export class Icon extends React.Component<{
   valid?: boolean;
   onClick: () => void;
   theme: common.Theme;
-}, {}> {
+}, unknown> {
   render() {
     if (this.props.valid) {
       if (this.props.icon.isText) {
