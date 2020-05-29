@@ -306,6 +306,9 @@ a{
     margin-right:20px;
     margin-top:0; }
 
+.bp3-alert-contents{
+  word-break:break-word; }
+
 .bp3-alert-footer{
   display:-webkit-box;
   display:-ms-flexbox;
