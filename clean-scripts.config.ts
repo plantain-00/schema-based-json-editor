@@ -76,7 +76,11 @@ export default {
     ts: `eslint --ext .js,.ts ${tsFiles}`,
     export: `no-unused-export ${tsFiles} --exclude ${excludeTsFiles}`,
     markdown: `markdownlint README.md change_logs.md`,
-    typeCoverage: 'lerna exec -- type-coverage -p src --strict'
+    typeCoverage: {
+      core: 'cd packages/core && type-coverage -p src --strict',
+      vue: 'cd packages/vue && type-coverage -p src --strict',
+      react: 'cd packages/react && type-coverage -p src --strict'
+    }
   },
   test: [
     // 'ava'
