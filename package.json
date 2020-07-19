@@ -3,7 +3,6 @@
   "private": true,
   "description": "A reactjs and vuejs component of schema based json editor.",
   "scripts": {
-    "bootstrap": "lerna bootstrap -- --frozen-lockfile",
     "build": "clean-scripts build",
     "dev": "cross-env NODE_ENV=development clean-scripts build",
     "lint": "clean-scripts lint",
@@ -48,7 +47,6 @@
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-plantain": "1.0.0",
     "file2variable-cli": "1.12.1",
-    "lerna": "3.22.1",
     "markdownlint-cli": "0.23.2",
     "no-unused-export": "1.11.1",
     "rev-static": "3.6.0",
