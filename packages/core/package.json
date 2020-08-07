@@ -38,8 +38,8 @@
   },
   "devDependencies": {
     "@blueprintjs/core": "3.30.0",
-    "antd": "4.5.1",
-    "bootstrap": "4.5.0",
+    "antd": "4.5.2",
+    "bootstrap": "4.5.2",
     "dragula": "3.7.2",
     "element-ui": "2.13.2",
     "font-awesome": "4.7.0",
