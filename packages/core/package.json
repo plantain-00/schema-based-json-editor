@@ -18,11 +18,6 @@
     "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
-  "files": [
-    "dist",
-    "src/lib.d.ts",
-    "src/lib.ngsummary.json"
-  ],
   "dependencies": {
     "@types/dragula": "*",
     "@types/highlight.js": "*",
@@ -47,5 +42,8 @@
     "highlight.js": "10.1.2",
     "iview": "3.5.4",
     "markdown-it": "11.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
