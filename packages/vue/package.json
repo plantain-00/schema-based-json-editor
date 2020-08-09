@@ -22,9 +22,6 @@
     "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
-  "files": [
-    "dist"
-  ],
   "dependencies": {
     "@types/dragula": "*",
     "@types/highlight.js": "*",
@@ -42,5 +39,8 @@
     "dragula": "3.7.2",
     "highlight.js": "10.1.2",
     "markdown-it": "11.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
