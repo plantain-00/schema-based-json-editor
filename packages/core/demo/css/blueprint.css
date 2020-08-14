@@ -2199,6 +2199,12 @@ a.bp3-button{
     overflow:auto;
     white-space:pre-wrap;
     word-wrap:break-word; }
+.bp3-divider{
+  border-bottom:1px solid rgba(16, 22, 26, 0.15);
+  border-right:1px solid rgba(16, 22, 26, 0.15);
+  margin:5px; }
+  .bp3-dark .bp3-divider{
+    border-color:rgba(16, 22, 26, 0.4); }
 .bp3-control-group{
   -webkit-transform:translateZ(0);
           transform:translateZ(0);
@@ -2305,9 +2311,13 @@ a.bp3-button{
   .bp3-control-group .bp3-select > .bp3-icon,
   .bp3-control-group .bp3-html-select > .bp3-icon{
     z-index:17; }
-  .bp3-control-group:not(.bp3-vertical) > *{
+  .bp3-control-group .bp3-select:focus-within{
+    z-index:5; }
+  .bp3-control-group:not(.bp3-vertical) > *:not(.bp3-divider){
     margin-right:-1px; }
-  .bp3-dark .bp3-control-group:not(.bp3-vertical) > *{
+  .bp3-control-group:not(.bp3-vertical) > .bp3-divider:not(:first-child){
+    margin-left:6px; }
+  .bp3-dark .bp3-control-group:not(.bp3-vertical) > *:not(.bp3-divider){
     margin-right:0; }
   .bp3-dark .bp3-control-group:not(.bp3-vertical) > .bp3-button + .bp3-button{
     margin-left:1px; }
@@ -2324,6 +2334,9 @@ a.bp3-button{
     margin-right:0; }
   .bp3-control-group .bp3-input-group .bp3-button{
     border-radius:3px; }
+  .bp3-control-group .bp3-numeric-input:not(:first-child) .bp3-input-group{
+    border-bottom-left-radius:0;
+    border-top-left-radius:0; }
   .bp3-control-group > .bp3-fill{
     -webkit-box-flex:1;
         -ms-flex:1 1 auto;
