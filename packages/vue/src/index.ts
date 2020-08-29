@@ -55,14 +55,18 @@ export class JSONEditor extends Vue {
   hljs?: common.HLJS
   forceHttps?: boolean
 
-  themeObject = common.getTheme(this.theme)
+  get themeObject() {
+    return common.getTheme(this.theme)
+  }
   get localeObject() {
     return common.getLocale(this.locale)
   }
   get iconObject() {
     return common.getIcon(this.icon, this.localeObject)
   }
-  md = common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)
+  get md() {
+    return common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)
+  }
 
   getReference = (name: string) => {
     if (this.schema.definitions) {
