@@ -67,7 +67,7 @@ export class AnyEditor extends Vue {
             }
             this.value = JSON5.parse(value)
             this.$emit('update-value', { value: this.value, isValid: true })
-          } catch (error) {
+          } catch {
             // do nothing
           }
         }, 500)

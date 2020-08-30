@@ -468,7 +468,7 @@ if (propertiesString) {
     initialValue = properties.initialValue
     theme = properties.theme
     icon = properties.icon
-  } catch (error) {
+  } catch (error: unknown) {
     console.log(error)
   }
 }

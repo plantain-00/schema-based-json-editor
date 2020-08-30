@@ -74,7 +74,7 @@ class App extends Vue {
   updatePropertiesValue({ value }: ValidityValue<ValueType>) {
     try {
       localStorage.setItem('json-editor:properties', JSON.stringify(value))
-    } catch (error) {
+    } catch (error: unknown) {
       console.log(error)
     }
   }
