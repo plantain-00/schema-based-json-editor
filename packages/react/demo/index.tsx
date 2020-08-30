@@ -63,7 +63,7 @@ class Main extends React.Component<unknown, unknown> {
   private updatePropertiesValue = (value: any, _isValid: boolean) => {
     try {
       localStorage.setItem('json-editor:properties', JSON.stringify(value))
-    } catch (error) {
+    } catch (error: unknown) {
       console.log(error)
     }
   }

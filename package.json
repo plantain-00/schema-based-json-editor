@@ -30,7 +30,7 @@
     "packages/*"
   ],
   "typeCoverage": {
-    "atLeast": 92
+    "atLeast": 91.12
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {},

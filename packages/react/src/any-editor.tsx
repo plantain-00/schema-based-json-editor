@@ -49,7 +49,7 @@ export class AnyEditor extends React.Component<Props, State> {
             this.value = JSON5.parse(value)
             this.setState({ value: this.value })
             this.props.updateValue(this.value, true)
-          } catch (error) {
+          } catch {
             // do nothing
           }
         }, 500)
