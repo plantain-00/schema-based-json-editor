@@ -1,8 +1,8 @@
 {
   "reactDemoIndexBundleJs": "60.3 kB 11.5 kB",
-  "reactDemoVendorBundleJs": "1.08 MB 355 kB",
+  "reactDemoVendorBundleJs": "1.08 MB 356 kB",
   "vueDemoIndexBundleJs": "66.2 kB 12 kB",
   "vueDemoVendorBundleJs": "1.05 MB 351 kB",
-  "packagesReactDemoIndexHtml": "1.75 kB 786 B",
-  "packagesVueDemoIndexHtml": "1.75 kB 786 B"
+  "packagesReactDemoIndexHtml": "1.75 kB 785 B",
+  "packagesVueDemoIndexHtml": "1.75 kB 782 B"
 }
