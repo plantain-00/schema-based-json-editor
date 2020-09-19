@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@blueprintjs/core": "3.31.0",
-    "antd": "4.6.3",
+    "antd": "4.6.4",
     "bootstrap": "4.5.2",
     "dragula": "3.7.2",
     "element-ui": "2.13.2",
@@ -41,7 +41,7 @@
     "github-fork-ribbon-css": "0.2.3",
     "highlight.js": "10.2.0",
     "iview": "3.5.4",
-    "markdown-it": "11.0.0"
+    "markdown-it": "11.0.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
