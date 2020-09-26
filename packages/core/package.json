@@ -27,13 +27,13 @@
     "lodash.tointeger": "4",
     "lodash.tonumber": "4",
     "markdown-tip": "6",
-    "monaco-editor": "0.20",
+    "monaco-editor": "0.21",
     "select2-component": "5",
     "tslib": "2"
   },
   "devDependencies": {
-    "@blueprintjs/core": "3.31.0",
-    "antd": "4.6.3",
+    "@blueprintjs/core": "3.32.1",
+    "antd": "4.6.5",
     "bootstrap": "4.5.2",
     "dragula": "3.7.2",
     "element-ui": "2.13.2",
@@ -41,7 +41,7 @@
     "github-fork-ribbon-css": "0.2.3",
     "highlight.js": "10.2.0",
     "iview": "3.5.4",
-    "markdown-it": "11.0.0"
+    "markdown-it": "11.0.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
