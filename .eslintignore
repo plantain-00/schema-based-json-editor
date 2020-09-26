@@ -1,3 +1,4 @@
 node_modules
 packages/@(core|vue|react)/@(src|demo)/**/*.d.ts
 *.d.ts
+variables.ts
