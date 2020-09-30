@@ -1,12 +1,7 @@
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { iconTemplateHtml, iconTemplateHtmlStatic } from './variables'
+import { defineComponent } from 'vue'
+import { iconTemplateHtml } from './variables'
 
-@Component({
+export const Icon = defineComponent({
   render: iconTemplateHtml,
-  staticRenderFns: iconTemplateHtmlStatic,
-  props: ['icon', 'text', 'theme']
+  props: ['icon', 'text', 'theme'],
 })
-export class Icon extends Vue {
-
-}

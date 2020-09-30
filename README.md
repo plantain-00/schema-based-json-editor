@@ -58,7 +58,10 @@ the online demo: <https://plantain-00.github.io/schema-based-json-editor/package
 `npm i vue-schema-based-json-editor`
 
 ```js
-import "vue-schema-based-json-editor";
+import { ArrayEditor, ObjectEditor, JSONEditor } from "vue-schema-based-json-editor";
+app.component('array-editor', ArrayEditor)
+app.component('object-editor', ObjectEditor)
+app.component('json-editor', JSONEditor)
 ```
 
 or

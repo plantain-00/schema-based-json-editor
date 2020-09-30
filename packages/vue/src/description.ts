@@ -1,13 +1,8 @@
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import { defineComponent } from 'vue'
 
-import { descriptionTemplateHtml, descriptionTemplateHtmlStatic } from './variables'
+import { descriptionTemplateHtml } from './variables'
 
-@Component({
+export const Description = defineComponent({
   render: descriptionTemplateHtml,
-  staticRenderFns: descriptionTemplateHtmlStatic,
-  props: ['theme', 'message']
+  props: ['theme', 'message'],
 })
-export class Description extends Vue {
-
-}

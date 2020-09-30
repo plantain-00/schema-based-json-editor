@@ -1,59 +1,72 @@
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import { defineComponent, PropType } from 'vue'
 import * as common from 'schema-based-json-editor'
+import { Select2 } from "select2-vue-component"
+import { FileUploader } from "file-uploader-vue-component"
+import { MarkdownTip } from "markdown-tip-vue"
 import { Icon } from './icon'
 import { Optional } from './optional'
 import { Description } from './description'
-import { stringEditorTemplateHtml, stringEditorTemplateHtmlStatic } from './variables'
-import 'markdown-tip-vue'
-import 'select2-vue-component'
-import 'file-uploader-vue-component'
+import { stringEditorTemplateHtml } from './variables'
 
-@Component({
+export const StringEditor = defineComponent({
   render: stringEditorTemplateHtml,
-  staticRenderFns: stringEditorTemplateHtmlStatic,
   components: {
     icon: Icon,
     optional: Optional,
-    description: Description
+    description: Description,
+    select2: Select2,
+    'file-uploader': FileUploader,
+    'markdown-tip': MarkdownTip,
   },
-  props: ['schema', 'initialValue', 'title', 'theme', 'icon', 'locale', 'readonly', 'required', 'hasDeleteButton', 'dragula', 'md', 'hljs', 'forceHttps', 'noSelect2', 'monacoEditor']
-})
-export class StringEditor extends Vue {
-  schema!: common.StringSchema
-  initialValue?: string
-  title!: string
-  theme!: common.Theme
-  icon!: common.Icon
-  locale!: common.Locale
-  readonly!: boolean
-  required!: boolean
-  hasDeleteButton!: boolean
-  md?: any
-  hljs?: common.HLJS
-  forceHttps?: boolean
-  noSelect2?: boolean
-  monacoEditor?: common.MonacoEditor
-
-  value? = ''
-  errorMessage? = ''
-  buttonGroupStyle = common.buttonGroupStyleString
-  collapsed = false
-  imagePreviewStyle = common.imagePreviewStyleString
-  private monacoCodeEditor?: common.IStandaloneCodeEditor
-
-  onChange(e: { target: { value: string } }) {
-    this.value = e.target.value
-    this.validate()
-    this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
-  }
-
+  props: {
+    schema: {
+      type: Object as PropType<common.StringSchema>,
+      required: true,
+    },
+    initialValue: String,
+    title: [String, Number],
+    theme: {
+      type: Object as PropType<common.Theme>,
+      required: true,
+    },
+    icon: {
+      type: Object as PropType<common.Icon>,
+      requried: true,
+    },
+    locale: {
+      type: Object as PropType<common.Locale>,
+      required: true,
+    },
+    readonly: Boolean,
+    required: Boolean,
+    hasDeleteButton: {
+      type: Boolean,
+      required: true,
+    },
+    noSelect2: {
+      type: Boolean,
+      required: true,
+    },
+    md: Object,
+    hljs: Object,
+    forceHttps: Boolean,
+    monacoEditor: Object as PropType<common.MonacoEditor>,
+  },
+  data: () => {
+    return {
+      value: '' as string | undefined,
+      errorMessage: '' as string | undefined,
+      buttonGroupStyle: common.buttonGroupStyleString,
+      collapsed: false,
+      imagePreviewStyle: common.imagePreviewStyleString,
+      monacoCodeEditor: undefined as common.IStandaloneCodeEditor | undefined,
+    }
+  },
   beforeMount() {
     this.value = common.getDefaultValue(this.required, this.schema, this.initialValue) as string
     this.validate()
     this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
-  }
-
+  },
   mounted() {
     if (this.monacoEditor && this.$refs.monacoEditor) {
       this.monacoCodeEditor = this.monacoEditor.create(this.$refs.monacoEditor as HTMLDivElement, {
@@ -72,114 +85,122 @@ export class StringEditor extends Vue {
         }, 500)
       })
     }
-  }
-
-  beforeDestroy() {
+  },
+  beforeUnmount() {
     if (this.monacoCodeEditor) {
       this.monacoCodeEditor.dispose()
     }
-  }
-
-  private get canPreviewImage() {
-    return common.isImageUrl(this.value) || common.isBase64Image(this.value)
-  }
-  private get canPreviewMarkdown() {
-    return this.md && this.schema.format === 'markdown'
-  }
-  private get canPreviewCode() {
-    return this.hljs && this.schema.format === 'code'
-  }
-  get canPreview() {
-    return (!!this.value) && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode)
-  }
-  get useTextArea() {
-    return this.value !== undefined
-      && (this.schema.enum === undefined || this.isReadOnly)
-      && (this.schema.format === 'textarea' || this.schema.format === 'code' || this.schema.format === 'json' || this.schema.format === 'markdown')
-  }
-  get useInput() {
-    return this.value !== undefined
-      && !this.collapsed
-      && (this.schema.enum === undefined || this.isReadOnly)
-      && (this.schema.format !== 'textarea' && this.schema.format !== 'code' && this.schema.format !== 'json' && this.schema.format !== 'markdown')
-  }
-  private get useSelect() {
-    return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly
-  }
-  get useSelect2Component() {
-    return this.useSelect && !this.noSelect2 && this.schema.format !== 'select' && this.schema.format !== 'radiobox'
-  }
-  get useSelectComponent() {
-    return this.useSelect && (this.schema.format === 'select' || this.noSelect2)
-  }
-  get useRadioBoxComponent() {
-    return this.useSelect && this.schema.format === 'radiobox'
-  }
-  get getImageUrl() {
-    return this.forceHttps ? common.replaceProtocal(this.value!) : this.value
-  }
-  get getMarkdown() {
-    return this.md!.render(this.value!)
-  }
-  get getCode() {
-    return this.hljs!.highlightAuto(this.value!).value
-  }
-  get isReadOnly() {
-    return this.readonly || this.schema.readonly
-  }
-  get hasDeleteButtonFunction() {
-    return this.hasDeleteButton && !this.isReadOnly
-  }
-  get willPreviewImage() {
-    return this.value && !this.collapsed && this.canPreviewImage
-  }
-  get willPreviewMarkdown() {
-    return this.value && !this.collapsed && this.canPreviewMarkdown
-  }
-  get willPreviewCode() {
-    return this.value && !this.collapsed && this.canPreviewCode
-  }
-  get titleToShow() {
-    return common.getTitle(this.title, this.schema.title)
-  }
-  get options() {
-    return common.getOptions(this.schema)
-  }
-  get canUpload() {
-    return this.schema.format === 'base64'
-  }
-  get className() {
-    const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
-    return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
-  }
-
-  updateSelection(value: string) {
-    this.value = value
-    this.validate()
-    this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
-  }
-
-  toggleOptional() {
-    this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined
-    this.validate()
-    this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
-  }
-  collapseOrExpand() {
-    this.collapsed = !this.collapsed
-  }
-  fileGot(file: File | Blob) {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => {
-      this.value = reader.result as string
+  },
+  methods: {
+    onChange(e: { target: { value: string } }) {
+      this.value = e.target.value
       this.validate()
       this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
-    }
-    reader.onerror = (error) => {
-      console.log(error)
-    }
-  }
-  private validate() {
-    this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale)
-  }
-}
+    },
+    updateSelection(value: string) {
+      this.value = value
+      this.validate()
+      this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
+    },
+    toggleOptional() {
+      this.value = common.toggleOptional(this.value, this.schema, this.initialValue) as string | undefined
+      this.validate()
+      this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
+    },
+    collapseOrExpand() {
+      this.collapsed = !this.collapsed
+    },
+    fileGot(file: File | Blob) {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        this.value = reader.result as string
+        this.validate()
+        this.$emit('update-value', { value: this.value, isValid: !this.errorMessage })
+      }
+      reader.onerror = (error) => {
+        console.log(error)
+      }
+    },
+    validate() {
+      this.errorMessage = common.getErrorMessageOfString(this.value, this.schema, this.locale)
+    },
+  },
+  computed: {
+    canPreviewImage(): boolean {
+      return common.isImageUrl(this.value) || common.isBase64Image(this.value)
+    },
+    canPreviewMarkdown(): boolean | undefined {
+      return this.md && this.schema.format === 'markdown'
+    },
+    canPreviewCode(): boolean | undefined {
+      return this.hljs && this.schema.format === 'code'
+    },
+    canPreview(): boolean | undefined {
+      return (!!this.value) && (this.canPreviewImage || this.canPreviewMarkdown || this.canPreviewCode)
+    },
+    useTextArea(): boolean | undefined {
+      return this.value !== undefined
+        && (this.schema.enum === undefined || this.isReadOnly)
+        && (this.schema.format === 'textarea' || this.schema.format === 'code' || this.schema.format === 'json' || this.schema.format === 'markdown')
+    },
+    useInput(): boolean | undefined {
+      return this.value !== undefined
+        && !this.collapsed
+        && (this.schema.enum === undefined || this.isReadOnly)
+        && (this.schema.format !== 'textarea' && this.schema.format !== 'code' && this.schema.format !== 'json' && this.schema.format !== 'markdown')
+    },
+    useSelect(): boolean {
+      return this.value !== undefined && this.schema.enum !== undefined && !this.isReadOnly
+    },
+    useSelect2Component(): boolean {
+      return this.useSelect && !this.noSelect2 && this.schema.format !== 'select' && this.schema.format !== 'radiobox'
+    },
+    useSelectComponent(): boolean {
+      return this.useSelect && (this.schema.format === 'select' || this.noSelect2)
+    },
+    useRadioBoxComponent(): boolean {
+      return this.useSelect && this.schema.format === 'radiobox'
+    },
+    getImageUrl(): string | undefined {
+      return this.forceHttps ? common.replaceProtocal(this.value!) : this.value
+    },
+    getMarkdown(): string {
+      return this.md!.render(this.value!)
+    },
+    getCode(): string {
+      return this.hljs!.highlightAuto(this.value!).value
+    },
+    isReadOnly(): boolean | undefined {
+      return this.readonly || this.schema.readonly
+    },
+    hasDeleteButtonFunction(): boolean {
+      return this.hasDeleteButton && !this.isReadOnly
+    },
+    willPreviewImage(): boolean | '' | undefined {
+      return this.value && !this.collapsed && this.canPreviewImage
+    },
+    willPreviewMarkdown(): boolean | '' | undefined {
+      return this.value && !this.collapsed && this.canPreviewMarkdown
+    },
+    willPreviewCode(): boolean | '' | undefined {
+      return this.value && !this.collapsed && this.canPreviewCode
+    },
+    titleToShow(): string {
+      return common.getTitle(this.title, this.schema.title)
+    },
+    options(): {
+      value: string | number;
+      label: string | number;
+    }[] {
+      return common.getOptions(this.schema)
+    },
+    canUpload(): boolean {
+      return this.schema.format === 'base64'
+    },
+    className(): string {
+      const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
+      return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
+    },
+  },
+})

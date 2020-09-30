@@ -2,7 +2,7 @@ import { Configuration } from 'clean-release'
 
 const config: Configuration = {
   include: [
-    'packages/*/dist/*',
+    'packages/*/dist/**/*',
     'packages/*/package.json',
     'packages/*/README.md',
   ],
@@ -11,7 +11,7 @@ const config: Configuration = {
   askVersion: true,
   changesGitStaged: true,
   postScript: ({ dir, tag, version, effectedWorkspacePaths }) => [
-    ...effectedWorkspacePaths.map((w) => w.map((e) => {
+    ...(effectedWorkspacePaths || []).map((w) => w.map((e) => {
       return tag
         ? `npm publish "${dir}/${e}" --access public --tag ${tag}`
         : `npm publish "${dir}/${e}" --access public`

@@ -21,12 +21,12 @@
   "dependencies": {
     "@types/dragula": "*",
     "@types/highlight.js": "*",
-    "file-uploader-component": "7",
+    "file-uploader-component": "8",
     "lodash.isinteger": "4",
     "lodash.isobject": "3",
     "lodash.tointeger": "4",
     "lodash.tonumber": "4",
-    "markdown-tip": "6",
+    "markdown-tip": "7",
     "monaco-editor": "0.21",
     "select2-component": "5",
     "tslib": "2"
