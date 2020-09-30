@@ -1,83 +1,64 @@
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import { defineComponent, PropType } from 'vue'
 import * as common from 'schema-based-json-editor'
 export * from 'schema-based-json-editor'
 
 import { Editor } from './editor'
 
-import { ArrayEditor } from './array-editor'
-import { BooleanEditor } from './boolean-editor'
-import { NullEditor } from './null-editor'
-import { NumberEditor } from './number-editor'
-import { ObjectEditor } from './object-editor'
-import { StringEditor } from './string-editor'
-import { AnyEditor } from './any-editor'
+export { ArrayEditor } from './array-editor'
+export { ObjectEditor } from './object-editor'
 
-Vue.component('array-editor', ArrayEditor)
-Vue.component('boolean-editor', BooleanEditor)
-Vue.component('null-editor', NullEditor)
-Vue.component('number-editor', NumberEditor)
-Vue.component('object-editor', ObjectEditor)
-Vue.component('string-editor', StringEditor)
-Vue.component('any-editor', AnyEditor)
+import { indexTemplateHtml } from './variables'
 
-import { indexTemplateHtml, indexTemplateHtmlStatic } from './variables'
-
-@Component({
+/**
+ * @public
+ */
+export const JSONEditor = defineComponent({
   render: indexTemplateHtml,
-  staticRenderFns: indexTemplateHtmlStatic,
   components: {
     editor: Editor
   },
-  props: [
-    'schema',
-    'initialValue',
-    'theme',
-    'icon',
-    'locale',
-    'readonly',
-    'dragula',
-    'markdownit',
-    'hljs',
-    'forceHttps',
-    'disableCollapse',
-    'noSelect2',
-    'minItemCountIfNeedFilter',
-    'monacoEditor'
-  ]
+  props: {
+    schema: {
+      type: Object as PropType<common.Schema>,
+      required: true,
+    },
+    initialValue: null,
+    theme: String,
+    icon: String,
+    locale: Object as PropType<common.Locale>,
+    readonly: Boolean,
+    dragula: Function as PropType<common.Dragula | undefined>,
+    markdownit: Function,
+    hljs: Object as PropType<common.HLJS>,
+    forceHttps: Boolean,
+    disableCollapse: Boolean,
+    noSelect2: Boolean,
+    minItemCountIfNeedFilter: Number,
+    monacoEditor: Object as PropType<common.MonacoEditor>,
+  },
+  computed: {
+    themeObject(): common.Theme {
+      return common.getTheme(this.theme)
+    },
+    localeObject(): common.Locale {
+      return common.getLocale(this.locale)
+    },
+    iconObject(): common.Icon {
+      return common.getIcon(this.icon, this.localeObject)
+    },
+    md(): any {
+      return common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)
+    },
+  },
+  methods: {
+    getReference (name: string)  {
+      if (this.schema.definitions) {
+        return this.schema.definitions[name.substring('#/definitions/'.length)]
+      }
+      return undefined
+    },
+    updateValue(value: common.ValueType) {
+      this.$emit('update-value', value)
+    },
+  },
 })
-export class JSONEditor extends Vue {
-  schema!: common.Schema
-  theme?: string
-  locale!: common.Locale
-  icon?: string
-  markdownit?: any
-  hljs?: common.HLJS
-  forceHttps?: boolean
-
-  get themeObject() {
-    return common.getTheme(this.theme)
-  }
-  get localeObject() {
-    return common.getLocale(this.locale)
-  }
-  get iconObject() {
-    return common.getIcon(this.icon, this.localeObject)
-  }
-  get md() {
-    return common.initializeMarkdown(this.markdownit, this.hljs, this.forceHttps)
-  }
-
-  getReference = (name: string) => {
-    if (this.schema.definitions) {
-      return this.schema.definitions[name.substring('#/definitions/'.length)]
-    }
-    return undefined
-  }
-
-  updateValue(value: common.ValueType) {
-    this.$emit('update-value', value)
-  }
-}
-
-Vue.component('json-editor', JSONEditor)

@@ -1,5 +1,19 @@
 # change logs
 
+## v 8.x
+
+```ts
+# v7
+// vue 2
+import 'vue-schema-based-json-editor'
+# v8
+// vue 3
+import { ArrayEditor, ObjectEditor, JSONEditor } from "vue-schema-based-json-editor";
+app.component('array-editor', ArrayEditor)
+app.component('object-editor', ObjectEditor)
+app.component('json-editor', JSONEditor)
+```
+
 ## v 7.x
 
 ```bash

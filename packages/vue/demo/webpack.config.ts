@@ -32,7 +32,7 @@ export default {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
       'markdown-it': 'markdown-it/dist/markdown-it.min.js',
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm-bundler.js'
     }
   },
   externals: {

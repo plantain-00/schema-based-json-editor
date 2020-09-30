@@ -1,9 +1,7 @@
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import { createApp, defineComponent } from 'vue'
 import { schema, initialValue, propertiesSchema, propertiesInitialValue, theme, icon, addAllCssLinks } from 'schema-based-json-editor/demo/'
 
-import '../dist/'
-import { ValidityValue, ValueType } from '../dist/'
+import { ArrayEditor, JSONEditor, ObjectEditor, ValidityValue, ValueType } from  '../dist/'
 
 import dragula from 'dragula'
 import MarkdownIt from 'markdown-it'
@@ -12,7 +10,44 @@ import * as monaco from 'monaco-editor'
 
 addAllCssLinks('../../core/demo/css/')
 
-@Component({
+const App = defineComponent({
+  data: () => {
+    return {
+      locale: null,
+      schema,
+      initialValue,
+      color: 'black',
+      dragula,
+      markdownit: MarkdownIt,
+      hljs,
+      monacoEditor: monaco.editor,
+      valueHtml: '',
+      propertiesSchema,
+      propertiesInitialValue,
+      theme,
+      icon,
+    }
+  },
+  beforeCreate() {
+    if (navigator.language === 'zh-CN') {
+      import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
+        this.locale = module.locale
+      })
+    }
+  },
+  methods: {
+    updatePropertiesValue({ value }: ValidityValue<ValueType>) {
+      try {
+        localStorage.setItem('json-editor:properties', JSON.stringify(value))
+      } catch (error: unknown) {
+        console.log(error)
+      }
+    },
+    updateValue({ value, isValid }: ValidityValue<ValueType>) {
+      this.valueHtml = hljs.highlight('json', JSON.stringify(value, null, '  ')).value
+      this.color = isValid ? 'black' : 'red'
+    },
+  },
   template: `
     <div style="position: relative">
       <a href="https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/vue/demo" target="_blank">the source code of the demo</a>
@@ -50,38 +85,9 @@ addAllCssLinks('../../core/demo/css/')
     </div>
     `
 })
-class App extends Vue {
-  locale = null
-  schema = schema
-  initialValue = initialValue
-  color = 'black'
-  dragula = dragula
-  markdownit = MarkdownIt
-  hljs = hljs
-  monacoEditor = monaco.editor
-  valueHtml = ''
-  propertiesSchema = propertiesSchema
-  propertiesInitialValue = propertiesInitialValue
-  theme = theme
-  icon = icon
-  beforeCreate() {
-    if (navigator.language === 'zh-CN') {
-      import('../../core/dist/locales/' + navigator.language + '.js').then(module => {
-        this.locale = module.locale
-      })
-    }
-  }
-  updatePropertiesValue({ value }: ValidityValue<ValueType>) {
-    try {
-      localStorage.setItem('json-editor:properties', JSON.stringify(value))
-    } catch (error: unknown) {
-      console.log(error)
-    }
-  }
-  updateValue({ value, isValid }: ValidityValue<ValueType>) {
-    this.valueHtml = hljs.highlight('json', JSON.stringify(value, null, '  ')).value
-    this.color = isValid ? 'black' : 'red'
-  }
-}
 
-new App({ el: '#container' })
+const app = createApp(App)
+app.component('array-editor', ArrayEditor)
+app.component('object-editor', ObjectEditor)
+app.component('json-editor', JSONEditor)
+app.mount('#container')

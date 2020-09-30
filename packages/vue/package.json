@@ -1,6 +1,6 @@
 {
   "name": "vue-schema-based-json-editor",
-  "version": "7.25.2",
+  "version": "8.0.0",
   "main": "dist/vue-schema-based-json-editor.min.js",
   "module": "dist/index.js",
   "unpkg": "dist/vue-schema-based-json-editor.min.js",
@@ -27,13 +27,12 @@
     "@types/highlight.js": "*",
     "@types/json5": "*",
     "@types/markdown-it": "*",
-    "file-uploader-vue-component": "7",
+    "file-uploader-vue-component": "8",
     "json5": "2",
-    "markdown-tip-vue": "6",
-    "schema-based-json-editor": "^7.25.2",
-    "select2-vue-component": "5",
-    "vue": "2",
-    "vue-class-component": "7"
+    "markdown-tip-vue": "7",
+    "schema-based-json-editor": "^8.0.0",
+    "select2-vue-component": "6",
+    "vue": "3"
   },
   "devDependencies": {
     "dragula": "3.7.2",
