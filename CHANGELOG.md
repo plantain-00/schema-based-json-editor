@@ -1,5 +1,10 @@
 # Change Log
 
+## [8.0.1](https://github.com/plantain-00/schema-based-json-editor/compare/v8.0.0...v8.0.1) (2020-10-08)
+  
+* fix: twice click ([60d9b26](https://github.com/plantain-00/schema-based-json-editor/commit/60d9b2621420759e26f2373c9f23af71d7b74d6e))
+* chore: update dependencies ([b25a757](https://github.com/plantain-00/schema-based-json-editor/commit/b25a75793924270fe014a21053b8f9dcedb060ab))
+
 ## [8.0.0](https://github.com/plantain-00/schema-based-json-editor/compare/v7.25.2...v8.0.0) (2020-09-30)
   
 * feat: support vue3 ([cef4063](https://github.com/plantain-00/schema-based-json-editor/commit/cef406358ba3b8fd784e5652ac073a4e3e3b6064))
