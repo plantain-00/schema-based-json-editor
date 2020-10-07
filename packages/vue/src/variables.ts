@@ -448,8 +448,7 @@ export function editorTemplateHtml(_ctx, _cache) {
 }
 export function iconTemplateHtml(_ctx, _cache) {
   return (_openBlock(), _createBlock("button", {
-    class: _ctx.theme.button,
-    onClick: _cache[1] || (_cache[1] = $event => (_ctx.$emit('click')))
+    class: _ctx.theme.button
   }, [
     (_ctx.icon.isText)
       ? (_openBlock(), _createBlock("span", { key: 0 }, _toDisplayString(_ctx.text), 1 /* TEXT */))
