@@ -36,7 +36,7 @@
     "select2-react-component": "5"
   },
   "devDependencies": {
-    "@types/react": "16.9.50",
+    "@types/react": "16.9.51",
     "@types/react-dom": "16.9.8",
     "dragula": "3.7.3",
     "highlight.js": "10.2.1",
