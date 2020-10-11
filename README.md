@@ -68,7 +68,6 @@ or
 
 ```html
 <script src="./node_modules/vue/dist/vue.min.js"></script>
-<script src="./node_modules/vue-class-component/dist/vue-class-component.min.js"></script>
 <script src="./node_modules/vue-schema-based-json-editor/dist/vue-schema-based-json-editor.min.js"></script>
 ```
 
