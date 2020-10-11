@@ -12,13 +12,9 @@ export default {
   output: {
     name: 'JSONEditor',
     file: 'packages/vue/dist/vue-schema-based-json-editor.min.js',
-    format: 'umd',
-    globals: {
-      'vue-class-component': 'VueClassComponent'
-    }
+    format: 'umd'
   },
   external: [
-    'vue',
-    'vue-class-component'
+    'vue'
   ]
 }
