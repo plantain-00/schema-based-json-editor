@@ -36,11 +36,11 @@
     "select2-react-component": "5"
   },
   "devDependencies": {
-    "@types/react": "16.9.51",
+    "@types/react": "16.9.53",
     "@types/react-dom": "16.9.8",
     "dragula": "3.7.3",
     "highlight.js": "10.2.1",
-    "markdown-it": "11.0.1"
+    "markdown-it": "12.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
