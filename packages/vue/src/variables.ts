@@ -164,7 +164,7 @@ export function arrayEditorTemplateHtml(_ctx, _cache) {
                 title: item.i,
                 getReference: _ctx.getReference,
                 "initial-value": _ctx.value[item.i],
-                "onUpdate-value": $event => (_ctx.onChange(item.i, $event)),
+                onUpdateValue: $event => (_ctx.onChange(item.i, $event)),
                 theme: _ctx.theme,
                 icon: _ctx.icon,
                 locale: _ctx.locale,
@@ -180,7 +180,7 @@ export function arrayEditorTemplateHtml(_ctx, _cache) {
                 minItemCountIfNeedFilter: _ctx.minItemCountIfNeedFilter,
                 "no-select2": _ctx.noSelect2,
                 "monaco-editor": _ctx.monacoEditor
-              }, null, 8 /* PROPS */, ["schema", "title", "getReference", "initial-value", "onUpdate-value", "theme", "icon", "locale", "readonly", "onDelete", "dragula", "md", "hljs", "force-https", "disable-collapse", "minItemCountIfNeedFilter", "no-select2", "monaco-editor"])
+              }, null, 8 /* PROPS */, ["schema", "title", "getReference", "initial-value", "onUpdateValue", "theme", "icon", "locale", "readonly", "onDelete", "dragula", "md", "hljs", "force-https", "disable-collapse", "minItemCountIfNeedFilter", "no-select2", "monaco-editor"])
             ], 10 /* CLASS, PROPS */, ["data-index"]))
           }), 128 /* KEYED_FRAGMENT */))
         ], 2 /* CLASS */)),
@@ -325,7 +325,7 @@ export function editorTemplateHtml(_ctx, _cache) {
         icon: _ctx.icon,
         readonly: _ctx.readonly,
         required: _ctx.required,
-        "onUpdate-value": _cache[1] || (_cache[1] = $event => (_ctx.$emit('update-value', $event))),
+        onUpdateValue: _cache[1] || (_cache[1] = $event => (_ctx.$emit('update-value', $event))),
         onDelete: _cache[2] || (_cache[2] = $event => (_ctx.$emit('delete'))),
         "has-delete-button": _ctx.hasDeleteButton,
         dragula: _ctx.dragula,
@@ -349,7 +349,7 @@ export function editorTemplateHtml(_ctx, _cache) {
           icon: _ctx.icon,
           readonly: _ctx.readonly,
           required: _ctx.required,
-          "onUpdate-value": _cache[3] || (_cache[3] = $event => (_ctx.$emit('update-value', $event))),
+          onUpdateValue: _cache[3] || (_cache[3] = $event => (_ctx.$emit('update-value', $event))),
           onDelete: _cache[4] || (_cache[4] = $event => (_ctx.$emit('delete'))),
           "has-delete-button": _ctx.hasDeleteButton,
           dragula: _ctx.dragula,
@@ -372,7 +372,7 @@ export function editorTemplateHtml(_ctx, _cache) {
             icon: _ctx.icon,
             readonly: _ctx.readonly,
             required: _ctx.required,
-            "onUpdate-value": _cache[5] || (_cache[5] = $event => (_ctx.$emit('update-value', $event))),
+            onUpdateValue: _cache[5] || (_cache[5] = $event => (_ctx.$emit('update-value', $event))),
             onDelete: _cache[6] || (_cache[6] = $event => (_ctx.$emit('delete'))),
             "has-delete-button": _ctx.hasDeleteButton,
             noSelect2: _ctx.noSelect2
@@ -388,7 +388,7 @@ export function editorTemplateHtml(_ctx, _cache) {
               icon: _ctx.icon,
               readonly: _ctx.readonly,
               required: _ctx.required,
-              "onUpdate-value": _cache[7] || (_cache[7] = $event => (_ctx.$emit('update-value', $event))),
+              onUpdateValue: _cache[7] || (_cache[7] = $event => (_ctx.$emit('update-value', $event))),
               onDelete: _cache[8] || (_cache[8] = $event => (_ctx.$emit('delete'))),
               "has-delete-button": _ctx.hasDeleteButton
             }, null, 8 /* PROPS */, ["schema", "initial-value", "title", "theme", "locale", "icon", "readonly", "required", "has-delete-button"]))
@@ -403,7 +403,7 @@ export function editorTemplateHtml(_ctx, _cache) {
                 icon: _ctx.icon,
                 readonly: _ctx.readonly,
                 required: _ctx.required,
-                "onUpdate-value": _cache[9] || (_cache[9] = $event => (_ctx.$emit('update-value', $event))),
+                onUpdateValue: _cache[9] || (_cache[9] = $event => (_ctx.$emit('update-value', $event))),
                 onDelete: _cache[10] || (_cache[10] = $event => (_ctx.$emit('delete'))),
                 "has-delete-button": _ctx.hasDeleteButton
               }, null, 8 /* PROPS */, ["schema", "initial-value", "title", "theme", "locale", "icon", "readonly", "required", "has-delete-button"]))
@@ -418,7 +418,7 @@ export function editorTemplateHtml(_ctx, _cache) {
                   icon: _ctx.icon,
                   readonly: _ctx.readonly,
                   required: _ctx.required,
-                  "onUpdate-value": _cache[11] || (_cache[11] = $event => (_ctx.$emit('update-value', $event))),
+                  onUpdateValue: _cache[11] || (_cache[11] = $event => (_ctx.$emit('update-value', $event))),
                   onDelete: _cache[12] || (_cache[12] = $event => (_ctx.$emit('delete'))),
                   "has-delete-button": _ctx.hasDeleteButton,
                   dragula: _ctx.dragula,
@@ -439,7 +439,7 @@ export function editorTemplateHtml(_ctx, _cache) {
                     icon: _ctx.icon,
                     readonly: _ctx.readonly,
                     required: _ctx.required,
-                    "onUpdate-value": _cache[13] || (_cache[13] = $event => (_ctx.$emit('update-value', $event))),
+                    onUpdateValue: _cache[13] || (_cache[13] = $event => (_ctx.$emit('update-value', $event))),
                     onDelete: _cache[14] || (_cache[14] = $event => (_ctx.$emit('delete'))),
                     "has-delete-button": _ctx.hasDeleteButton,
                     monacoEditor: _ctx.monacoEditor
@@ -470,7 +470,7 @@ export function indexTemplateHtml(_ctx, _cache) {
     icon: _ctx.iconObject,
     readonly: _ctx.readonly,
     required: true,
-    "onUpdate-value": _cache[1] || (_cache[1] = $event => (_ctx.updateValue($event))),
+    onUpdateValue: _cache[1] || (_cache[1] = $event => (_ctx.updateValue($event))),
     dragula: _ctx.dragula,
     md: _ctx.md,
     hljs: _ctx.hljs,
@@ -696,7 +696,7 @@ export function objectEditorTemplateHtml(_ctx, _cache) {
                     title: p.schema.title || p.propertyName,
                     getReference: _ctx.getReference,
                     "initial-value": _ctx.value[p.propertyName],
-                    "onUpdate-value": $event => (_ctx.onChange(p.propertyName, $event)),
+                    onUpdateValue: $event => (_ctx.onChange(p.propertyName, $event)),
                     theme: _ctx.theme,
                     icon: _ctx.icon,
                     locale: _ctx.locale,
@@ -710,7 +710,7 @@ export function objectEditorTemplateHtml(_ctx, _cache) {
                     minItemCountIfNeedFilter: _ctx.minItemCountIfNeedFilter,
                     "no-select2": _ctx.noSelect2,
                     "monaco-editor": _ctx.monacoEditor
-                  }, null, 8 /* PROPS */, ["schema", "title", "getReference", "initial-value", "onUpdate-value", "theme", "icon", "locale", "required", "readonly", "dragula", "md", "hljs", "force-https", "disable-collapse", "minItemCountIfNeedFilter", "no-select2", "monaco-editor"]))
+                  }, null, 8 /* PROPS */, ["schema", "title", "getReference", "initial-value", "onUpdateValue", "theme", "icon", "locale", "required", "readonly", "dragula", "md", "hljs", "force-https", "disable-collapse", "minItemCountIfNeedFilter", "no-select2", "monaco-editor"]))
                 : _createCommentVNode("v-if", true)
             ], 64 /* STABLE_FRAGMENT */))
           }), 256 /* UNKEYED_FRAGMENT */))
@@ -789,7 +789,7 @@ export function stringEditorTemplateHtml(_ctx, _cache) {
       ? (_openBlock(), _createBlock(_component_file_uploader, {
           key: 0,
           locale: _ctx.locale.fileUploaderLocale,
-          "onFile-got": _cache[4] || (_cache[4] = $event => (_ctx.fileGot($event)))
+          onFileGot: _cache[4] || (_cache[4] = $event => (_ctx.fileGot($event)))
         }, null, 8 /* PROPS */, ["locale"]))
       : _createCommentVNode("v-if", true),
     (_ctx.useTextArea && _ctx.monacoEditor && _ctx.schema.format === 'json')
