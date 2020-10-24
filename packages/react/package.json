@@ -30,8 +30,8 @@
     "file-uploader-react-component": "8",
     "json5": "2",
     "markdown-tip-react": "7",
-    "react": "16",
-    "react-dom": "16",
+    "react": "17",
+    "react-dom": "17",
     "schema-based-json-editor": "^8.0.1",
     "select2-react-component": "5"
   },
@@ -39,8 +39,8 @@
     "@types/react": "16.9.53",
     "@types/react-dom": "16.9.8",
     "dragula": "3.7.3",
-    "highlight.js": "10.2.1",
-    "markdown-it": "12.0.0"
+    "highlight.js": "10.3.1",
+    "markdown-it": "12.0.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
