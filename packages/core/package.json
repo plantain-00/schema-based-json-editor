@@ -1,6 +1,6 @@
 {
   "name": "schema-based-json-editor",
-  "version": "8.0.1",
+  "version": "8.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "A reactjs and vuejs component of schema based json editor.",

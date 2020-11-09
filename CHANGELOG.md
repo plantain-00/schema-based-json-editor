@@ -1,5 +1,11 @@
 # Change Log
 
+## [8.1.0](https://github.com/plantain-00/schema-based-json-editor/compare/v8.0.1...v8.1.0) (2020-11-09)
+  
+* fix: depend on react 16 and 17 ([e759247](https://github.com/plantain-00/schema-based-json-editor/commit/e7592472e9fb41e54a31c3065ffc34d2d8e0ae7f))
+* chore: update dependencies ([857259b](https://github.com/plantain-00/schema-based-json-editor/commit/857259ba57aaf659578ac3d63613f4fe2032cc3e)) ([c68a3ec](https://github.com/plantain-00/schema-based-json-editor/commit/c68a3ec3d9bd21454e68bd2fb40252e25bdda9e0)) ([9da1b30](https://github.com/plantain-00/schema-based-json-editor/commit/9da1b30337f0bb4f584a786cfa7719ecd9f8dd5f)) ([9adde70](https://github.com/plantain-00/schema-based-json-editor/commit/9adde708febfb32177d3d603f586715d68a55ebd)) ([56ed59b](https://github.com/plantain-00/schema-based-json-editor/commit/56ed59b3aa24f169233eb0c5fcda4e90fbc2b341))
+* docs: remove unused vue-class-component ([edfc334](https://github.com/plantain-00/schema-based-json-editor/commit/edfc3344d36ee531e031b6c4e3e282a1d20d57ea))
+
 ## [8.0.1](https://github.com/plantain-00/schema-based-json-editor/compare/v8.0.0...v8.0.1) (2020-10-08)
   
 * fix: twice click ([60d9b26](https://github.com/plantain-00/schema-based-json-editor/commit/60d9b2621420759e26f2373c9f23af71d7b74d6e))
