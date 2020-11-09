@@ -34,11 +34,6 @@
     "select2-vue-component": "6",
     "vue": "3"
   },
-  "devDependencies": {
-    "dragula": "3.7.3",
-    "highlight.js": "10.3.2",
-    "markdown-it": "12.0.2"
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   }
