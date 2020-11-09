@@ -33,7 +33,7 @@
     "react": "17",
     "react-dom": "17",
     "schema-based-json-editor": "^8.0.1",
-    "select2-react-component": "5"
+    "select2-react-component": "6"
   },
   "devDependencies": {
     "@types/react": "16.9.56",

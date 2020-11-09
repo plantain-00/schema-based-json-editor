@@ -2437,18 +2437,18 @@ file-uploader-component@8, file-uploader-component@^8.0.0:
     tslib "2"
 
 file-uploader-react-component@8:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-8.0.0.tgz#9668af8a15935cc36151bc7ef7f6286d29cf54ac"
-  integrity sha512-9IO3pPKoWGIALh/pp4qrfVPr76F7o4wioG0Jqa93US+WPUf9SteaincC1QPi3VuVXcqQe1Il999idUxnVCxoWg==
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-react-component/-/file-uploader-react-component-8.1.0.tgz#4bfab31dc843a1e20c1fb96d87fefd7c5ef096ca"
+  integrity sha512-S9cXPdchrGyuFYbbZBRDpSk3pCdhcBLwg4rpdWU2GWlkQOTOkOx5LVfA5AaoxzBFzKz+kVpzduin2y+P2g4XrQ==
   dependencies:
     file-uploader-component "^8.0.0"
-    react "16"
-    react-dom "16"
+    react "17"
+    react-dom "17"
 
 file-uploader-vue-component@8:
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-8.0.3.tgz#4677c5d04c11066beb65e47e71ae4ff8e02a8fef"
-  integrity sha512-t25pTf5vwhL+c91R0hyWyukn5k9hDDVA9VmxESPCX8xopkiZWtflpAqm0hWbqPjeGeY7cOOsHZHHO81lvKxPNA==
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/file-uploader-vue-component/-/file-uploader-vue-component-8.1.0.tgz#92d99a3777df0f706bcf52627d0cdde5e88f9472"
+  integrity sha512-kaIAzx8RbJeh34JfYztKdwYRvp9GWcn1dJyUIXpkNJ4KCLhFNHvvVYR+Jso+IX+mLZjrLzICIRd2uXvPWq54Jw==
   dependencies:
     file-uploader-component "^8.0.0"
     vue "3"
@@ -3611,26 +3611,26 @@ markdown-it@12.0.2:
     uc.micro "^1.0.5"
 
 markdown-tip-react@7:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-7.0.0.tgz#1d1fc2315360c1ae6ba02b416f97470dc6198074"
-  integrity sha512-vDH+2Nly8A4yCZw1d7E4R3NvVUVgb9KnT/8watJd+JaFS/vLpgpfTGJLUwEceayAQ+oF7FgDQNhKJS82d+RGzg==
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-react/-/markdown-tip-react-7.1.0.tgz#859a9f1046afd46625df8e1f825e58e0b4b55cf3"
+  integrity sha512-go97QOiJoo7xuj1l09Teg38Q//FjDFIT19QC/qWHC40WBFbt6yPpPkZFwTvy+LCiVfamNNUmsp20gcrU42pvGg==
   dependencies:
     markdown-tip "^7.0.0"
-    react "16"
-    react-dom "16"
+    react "17"
+    react-dom "17"
 
 markdown-tip-vue@7:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-7.0.0.tgz#ca6cda8c330670e6bf987ced6abf5c1ce1284c8c"
-  integrity sha512-MVs3t9+b65oztLyC5oS5O4sWNdv9iBoTfivzk/ZwyFc4E+IB03eQq7A4qLnxncu6+t+3NvrHbGB3e2z4tHwfxw==
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip-vue/-/markdown-tip-vue-7.1.0.tgz#213d2e79cde4c225964fd64284702c65a9fe50c7"
+  integrity sha512-KM+siRLZ1r1Z9MNEQzqQgbQXNcrep1EuZ5E7Hnde5fcOfsF19QynZQuXGPhf9tcHjTs99w9BrVELQ/OD62uBSg==
   dependencies:
     markdown-tip "^7.0.0"
     vue "3"
 
 markdown-tip@7, markdown-tip@^7.0.0:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-7.0.2.tgz#5215bf488e48dce27fe958690cb477f6cf2455fd"
-  integrity sha512-c+DubZrrsGwU1kXGW7epcRDHtuXeNp61qkfFAo5xVePv87KTZPgUFDGLGwzPTQG823DdIgWGCEUgMcXuRQHqEw==
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/markdown-tip/-/markdown-tip-7.1.0.tgz#1dff97e1c7c0b0b55b222b99f8ec0b327e5ef490"
+  integrity sha512-++iH50B1QbDWUhLCOC6aSRhfYN3hlZmTmBsyTnv5Nd3fIFvvy/13JPV2LRMyBHIehrVlWf0Hb6tG5FRFgpb09Q==
   dependencies:
     tslib "2"
 
@@ -4827,16 +4827,6 @@ rc@^1.2.8, rc@~1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@16:
-  version "16.14.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
-  integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.19.1"
-
 react-dom@17:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz#1de2560474ec9f0e334285662ede52dbc5426fc6"
@@ -4878,15 +4868,6 @@ react-transition-group@^2.9.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
-
-react@16:
-  version "16.14.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
-  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
 
 react@17:
   version "17.0.1"
@@ -5170,14 +5151,6 @@ sax@^1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
-scheduler@^0.19.1:
-  version "0.19.1"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
-  integrity sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-
 scheduler@^0.20.1:
   version "0.20.1"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.1.tgz#da0b907e24026b01181ecbc75efdc7f27b5a000c"
@@ -5210,20 +5183,20 @@ select2-component@5, select2-component@^5.10.3:
     "@types/node" "*"
     tslib "2"
 
-select2-react-component@5:
-  version "5.10.3"
-  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-5.10.3.tgz#bfbdd3a5d883b7dfdcc3d8187233119e3aadf389"
-  integrity sha512-U6zVCfT2UXnkbAg6CbvkRPt6Lnp2RqSBg4lmlghSWgkfmL2CMc5FZwChg4Pr2TQ67egwJ8i+VPxIRXhlA/bkMA==
+select2-react-component@6:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/select2-react-component/-/select2-react-component-6.1.0.tgz#cf97fe02a3f50992e08e73c4c2ffd18bb7253cb6"
+  integrity sha512-dtEjU32GNzWcVbWftrOOF/4Q4rmKI/Olp0oo+t8zMXgto6lrKth34VlhioTF3TYrFNgv1mpCksISuKio2kTPpA==
   dependencies:
     "@types/node" "*"
-    react "16"
-    react-dom "16"
+    react "17"
+    react-dom "17"
     select2-component "^5.10.3"
 
 select2-vue-component@6:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-6.0.1.tgz#ea29a0f8fe126d22cdf3966ac2806d09cb6d53cb"
-  integrity sha512-TUdprcNfmmlO7BRE7AfFSAT5WL3kJd46PzTD5M5zSeEFkgUDOkDrDoX0n5p+aXN3wg+Pk4Pok3SSdB7zqYnaIg==
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/select2-vue-component/-/select2-vue-component-6.1.0.tgz#9c8e0b4345961667a0b1678807a9678155fa8b64"
+  integrity sha512-TzyxEM718paOqkZdsuDINnUrio/IDyqhSzYe7LTEI+JtkI4ZjXxTLocfU0uSXTE6v2gegRmD5d3SrzYvUYTDCQ==
   dependencies:
     "@types/node" "*"
     select2-component "^5.10.3"
