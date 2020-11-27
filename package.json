@@ -41,9 +41,9 @@
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
     "@types/webpack": "4.41.25",
-    "@typescript-eslint/eslint-plugin": "4.8.1",
-    "@typescript-eslint/parser": "4.8.1",
-    "antd": "4.8.4",
+    "@typescript-eslint/eslint-plugin": "4.8.2",
+    "@typescript-eslint/parser": "4.8.2",
+    "antd": "4.8.6",
     "ava": "3.13.0",
     "bootstrap": "4.5.3",
     "clean-release": "2.15.2",
@@ -52,7 +52,7 @@
     "cross-env": "7.0.2",
     "dragula": "3.7.3",
     "element-ui": "2.14.1",
-    "eslint": "7.13.0",
+    "eslint": "7.14.0",
     "eslint-config-prettier": "6.15.0",
     "eslint-plugin-plantain": "1.1.0",
     "file2variable-cli": "2.0.0",
@@ -69,9 +69,9 @@
     "rollup-plugin-uglify": "6.0.4",
     "ts-loader": "8.0.11",
     "ts-node": "9.0.0",
-    "type-coverage": "2.14.3",
+    "type-coverage": "2.14.5",
     "typescript": "4.1.2",
-    "webpack": "5.6.0",
+    "webpack": "5.8.0",
     "webpack-cli": "4.2.0"
   }
 }
