@@ -27,7 +27,7 @@
     "lodash.tointeger": "4",
     "lodash.tonumber": "4",
     "markdown-tip": "7",
-    "monaco-editor": "0.21",
+    "monaco-editor": "0.22",
     "select2-component": "5",
     "tslib": "2"
   },
