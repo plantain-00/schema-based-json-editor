@@ -35,14 +35,14 @@
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {},
   "devDependencies": {
-    "@blueprintjs/core": "3.38.2",
+    "@blueprintjs/core": "3.39.0",
     "@rollup/plugin-commonjs": "17.1.0",
-    "@rollup/plugin-node-resolve": "11.1.1",
+    "@rollup/plugin-node-resolve": "11.2.0",
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.1",
     "@types/webpack": "4.41.26",
-    "@typescript-eslint/eslint-plugin": "4.15.0",
-    "@typescript-eslint/parser": "4.15.0",
+    "@typescript-eslint/eslint-plugin": "4.15.1",
+    "@typescript-eslint/parser": "4.15.1",
     "antd": "4.12.3",
     "ava": "3.15.0",
     "bootstrap": "4.6.0",
@@ -69,9 +69,9 @@
     "rollup-plugin-uglify": "6.0.4",
     "ts-loader": "8.0.17",
     "ts-node": "9.1.1",
-    "type-coverage": "2.14.9",
+    "type-coverage": "2.15.1",
     "typescript": "4.1.5",
-    "webpack": "5.21.2",
+    "webpack": "5.23.0",
     "webpack-cli": "4.5.0"
   }
 }
