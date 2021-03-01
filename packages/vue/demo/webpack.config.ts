@@ -35,6 +35,11 @@ export default {
       'vue$': 'vue/dist/vue.esm-bundler.js'
     }
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      __VUE_PROD_DEVTOOLS__: false,
+    }),
+  ],
   externals: {
     'monaco-editor': 'monaco'
   }
