@@ -75,7 +75,7 @@ export function arrayEditorTemplateHtml(_ctx, _cache) {
           locale: _ctx.locale,
           onToggleOptional: _cache[1] || (_cache[1] = $event => (_ctx.toggleOptional()))
         }, null, 8 /* PROPS */, ["required", "value", "isReadOnly", "theme", "locale"]),
-        (!_ctx.disableCollapse && _ctx.value.length > 0 && !_ctx.schema.enum)
+        (!_ctx.disableCollapse && _ctx.value && _ctx.value.length > 0 && !_ctx.schema.enum)
           ? (_openBlock(), _createBlock(_component_icon, {
               key: 0,
               onClick: _cache[2] || (_cache[2] = $event => (_ctx.collapseOrExpand())),
