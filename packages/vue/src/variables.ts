@@ -565,8 +565,9 @@ export function numberEditorTemplateHtml(_ctx, _cache) {
           onKeyup: _cache[4] || (_cache[4] = $event => (_ctx.onChange($event))),
           value: _ctx.value,
           readOnly: _ctx.isReadOnly,
+          step: _ctx.step,
           disabled: _ctx.isReadOnly
-        }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, ["value", "readOnly", "disabled"]))
+        }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, ["value", "readOnly", "step", "disabled"]))
       : _createCommentVNode("v-if", true),
     (_ctx.useSelect2Component)
       ? (_openBlock(), _createBlock(_component_select2, {

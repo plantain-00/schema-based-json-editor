@@ -24,6 +24,7 @@
     @keyup="onChange($event)"
     :value="value"
     :readOnly="isReadOnly"
+    :step="step"
     :disabled="isReadOnly" />
   <select2 v-if="useSelect2Component" :data="options"
     :value="value"

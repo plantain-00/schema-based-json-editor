@@ -91,6 +91,9 @@ export const NumberEditor = defineComponent({
       const rowClass = this.errorMessage ? this.theme.errorRow : this.theme.row
       return this.schema.className ? rowClass + ' ' + this.schema.className : rowClass
     },
+    step(): number | "any" | undefined {
+      return common.getNumberStep(this.schema)
+    },
   },
   methods: {
     onChange(e: { target: { value: string } }) {

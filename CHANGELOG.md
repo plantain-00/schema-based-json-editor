@@ -1,5 +1,9 @@
 # Change Log
 
+## [8.2.0](https://github.com/plantain-00/schema-based-json-editor/compare/v8.1.1...v8.2.0) (2021-03-03)
+  
+* feat: support step for number input, set default step for number input ([6e68a2c](https://github.com/plantain-00/schema-based-json-editor/commit/6e68a2c78d73cf8987602fee2bc1632862800181))
+
 ## [8.1.1](https://github.com/plantain-00/schema-based-json-editor/compare/v8.1.0...v8.1.1) (2021-03-01)
   
 * fix: error when default optional value is not provided ([93885ef](https://github.com/plantain-00/schema-based-json-editor/commit/93885efc9cf7d41c27f27d75b52e68602a8eb813))
