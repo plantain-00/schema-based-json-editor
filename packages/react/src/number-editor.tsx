@@ -44,6 +44,7 @@ export class NumberEditor extends React.Component<Props, State> {
         onChange={this.onChange}
         defaultValue={String(this.value)}
         readOnly={this.isReadOnly}
+        step={common.getNumberStep(this.props.schema)}
         disabled={this.isReadOnly} />
     ) : null
 

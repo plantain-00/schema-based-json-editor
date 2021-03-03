@@ -90,6 +90,7 @@ export type NumberSchema = CommonSchema & {
   multipleOf?: number;
   enumTitles?: string[];
   format?: 'select' | 'radiobox';
+  step?: number | 'any';
 }
 
 /**
@@ -103,7 +104,7 @@ export type StringSchema = CommonSchema & {
   maxLength?: number;
   pattern?: string;
   enumTitles?: string[];
-  step?: number;
+  step?: number | 'any';
 }
 
 /**
@@ -1134,3 +1135,13 @@ export type Dragula = typeof dragula
  * @public
  */
 export type HLJS = typeof hljs
+
+/**
+ * @public
+ */
+export function getNumberStep(schema: NumberSchema) {
+  if (schema.step !== undefined) {
+    return schema.step
+  }
+  return schema.type === 'number' ? 'any' : undefined
+}
