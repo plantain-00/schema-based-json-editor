@@ -1,6 +1,6 @@
 {
   "name": "react-schema-based-json-editor",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "main": "dist/react-schema-based-json-editor.min.js",
   "module": "dist/index.js",
   "unpkg": "dist/react-schema-based-json-editor.min.js",
@@ -24,7 +24,6 @@
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {
     "@types/dragula": "*",
-    "@types/highlight.js": "*",
     "@types/json5": "*",
     "@types/markdown-it": "*",
     "file-uploader-react-component": "8",
@@ -32,7 +31,7 @@
     "markdown-tip-react": "7",
     "react": "17",
     "react-dom": "17",
-    "schema-based-json-editor": "^8.2.0",
+    "schema-based-json-editor": "^8.2.1",
     "select2-react-component": "6"
   },
   "publishConfig": {
