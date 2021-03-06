@@ -1,5 +1,9 @@
 # Change Log
 
+## [8.2.1](https://github.com/plantain-00/schema-based-json-editor/compare/v8.2.0...v8.2.1) (2021-03-06)
+  
+* chore: remove unused package ([6131353](https://github.com/plantain-00/schema-based-json-editor/commit/6131353a4eb4b3c866e5e6670062028089a60ee9))
+
 ## [8.2.0](https://github.com/plantain-00/schema-based-json-editor/compare/v8.1.1...v8.2.0) (2021-03-03)
   
 * feat: support step for number input, set default step for number input ([6e68a2c](https://github.com/plantain-00/schema-based-json-editor/commit/6e68a2c78d73cf8987602fee2bc1632862800181))
