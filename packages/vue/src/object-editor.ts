@@ -24,7 +24,7 @@ export const ObjectEditor = defineComponent({
     initialValue: Object as PropType<{ [name: string]: common.ValueType }>,
     title: [String, Number],
     getReference: {
-      type: Function as PropType<(ref: string) => common.Schema | undefined>,
+      type: Function as unknown as PropType<(ref: string) => common.Schema | undefined>,
       required: true,
     },
     theme: {
@@ -45,7 +45,7 @@ export const ObjectEditor = defineComponent({
       type: Boolean,
       required: true,
     },
-    dragula: Function as PropType<common.Dragula | undefined>,
+    dragula: Function as unknown as PropType<common.Dragula | undefined>,
     md: Object,
     hljs: Object,
     forceHttps: Boolean,

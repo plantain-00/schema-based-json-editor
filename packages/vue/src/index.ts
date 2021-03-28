@@ -27,7 +27,7 @@ export const JSONEditor = defineComponent({
     icon: String,
     locale: Object as PropType<common.Locale>,
     readonly: Boolean,
-    dragula: Function as PropType<common.Dragula | undefined>,
+    dragula: Function as unknown as PropType<common.Dragula | undefined>,
     markdownit: Function,
     hljs: Object as PropType<common.HLJS>,
     forceHttps: Boolean,
