@@ -16,7 +16,7 @@ export const ArrayEditor = defineComponent({
     initialValue: Array as PropType<common.ValueType[]>,
     title: [String, Number],
     getReference: {
-      type: Function as PropType<(name: string) => common.Schema | undefined>,
+      type: Function as unknown as PropType<(name: string) => common.Schema | undefined>,
       required: true,
     },
     theme: {
@@ -37,7 +37,7 @@ export const ArrayEditor = defineComponent({
       type: Boolean,
       required: true,
     },
-    dragula: Function as PropType<common.Dragula | undefined>,
+    dragula: Function as unknown as PropType<common.Dragula | undefined>,
     md: Object,
     hljs: Object,
     forceHttps: Boolean,

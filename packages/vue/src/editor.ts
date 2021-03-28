@@ -25,7 +25,7 @@ export const Editor = defineComponent({
     initialValue: null,
     title: [String, Number],
     getReference: {
-      type: Function as PropType<(ref: string) => Schema | undefined>,
+      type: Function as unknown as PropType<(ref: string) => Schema | undefined>,
       required: true,
     },
     theme: {
@@ -46,7 +46,7 @@ export const Editor = defineComponent({
       type: Boolean,
       required: true,
     },
-    dragula: Function as PropType<common.Dragula | undefined>,
+    dragula: Function as unknown as PropType<common.Dragula | undefined>,
     md: Object,
     hljs: Object,
     forceHttps: Boolean,
