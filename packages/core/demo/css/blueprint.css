@@ -1819,9 +1819,9 @@ a.bp3-button{
     color:rgba(167, 182, 194, 0.6); }
   .bp3-active.bp3-dialog-step-viewed .bp3-dialog-step-title{
     color:#2b95d6; }
-  .bp3-dialog-step-viewed .bp3-dialog-step-title{
+  .bp3-dialog-step-viewed:not(.bp3-active) .bp3-dialog-step-title{
     color:#182026; }
-    .bp3-dark .bp3-dialog-step-viewed .bp3-dialog-step-title{
+    .bp3-dark .bp3-dialog-step-viewed:not(.bp3-active) .bp3-dialog-step-title{
       color:#f5f8fa; }
 .bp3-drawer{
   background:#ffffff;
