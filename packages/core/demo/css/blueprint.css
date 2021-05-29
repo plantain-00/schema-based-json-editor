@@ -8136,10 +8136,6 @@ span.bp3-popover-target{
   .bp3-tree .bp3-icon.bp3-intent-danger, .bp3-tree .bp3-icon-standard.bp3-intent-danger, .bp3-tree .bp3-icon-large.bp3-intent-danger{
     color:#db3737; }
 
-.bp3-tree.bp3-fixed-positioning-containing-block{
-  -webkit-transform:translateY(0);
-          transform:translateY(0); }
-
 .bp3-tree-node-list{
   list-style:none;
   margin:0;
