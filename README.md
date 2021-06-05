@@ -2,7 +2,6 @@
 
 [![Dependency Status](https://david-dm.org/plantain-00/schema-based-json-editor.svg)](https://david-dm.org/plantain-00/schema-based-json-editor)
 [![devDependency Status](https://david-dm.org/plantain-00/schema-based-json-editor/dev-status.svg)](https://david-dm.org/plantain-00/schema-based-json-editor#info=devDependencies)
-[![Build Status: Linux](https://travis-ci.org/plantain-00/schema-based-json-editor.svg?branch=master)](https://travis-ci.org/plantain-00/schema-based-json-editor)
 [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/github/plantain-00/schema-based-json-editor?branch=master&svg=true)](https://ci.appveyor.com/project/plantain-00/schema-based-json-editor/branch/master)
 ![Github CI](https://github.com/plantain-00/schema-based-json-editor/workflows/Github%20CI/badge.svg)
 [![npm version](https://badge.fury.io/js/schema-based-json-editor.svg)](https://badge.fury.io/js/schema-based-json-editor)
