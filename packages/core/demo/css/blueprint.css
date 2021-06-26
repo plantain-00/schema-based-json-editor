@@ -2416,6 +2416,7 @@ a.bp3-button{
         z-index:8; }
   .bp3-control-group .bp3-input-group > .bp3-icon,
   .bp3-control-group .bp3-input-group > .bp3-button,
+  .bp3-control-group .bp3-input-group > .bp3-input-left-container,
   .bp3-control-group .bp3-input-group > .bp3-input-action{
     z-index:16; }
   .bp3-control-group .bp3-select::after,
