@@ -453,7 +453,7 @@ export let initialValue = {}
 /**
  * @public
  */
-export let theme = 'bootstrap4'
+export let theme = 'bootstrap5'
 
 /**
  * @public
@@ -491,7 +491,7 @@ export const propertiesSchema: common.ObjectSchema = {
     theme: {
       type: 'string',
       enum: [
-        'bootstrap4',
+        'bootstrap5',
         'antd3',
         'element-ui2',
         'iview3',
@@ -505,6 +505,7 @@ export const propertiesSchema: common.ObjectSchema = {
         'fontawesome4',
         'element-ui2',
         'iview3',
+        'bootstrap-icons',
         '(undefined)'
       ]
     }
@@ -539,12 +540,16 @@ function addCssLink(cssRootPath: string, file: string) {
  * @public
  */
 export function addAllCssLinks(cssRootPath: string) {
-  if (theme === 'bootstrap4') {
+  if (theme === 'bootstrap4' || theme === 'bootstrap5') {
     addCssLink(cssRootPath, 'bootstrap.min.css')
   }
 
   if (icon === 'fontawesome4') {
     addCssLink(cssRootPath, 'font-awesome.min.css')
+  }
+
+  if (icon === 'bootstrap-icons') {
+    addCssLink(cssRootPath, 'bootstrap-icons.css')
   }
 
   if (theme === 'antd3') {

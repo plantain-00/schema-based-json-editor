@@ -24,6 +24,8 @@ export default {
         `cpy ./node_modules/font-awesome/css/font-awesome.min.css ./packages/core/demo/css/`,
         `cpy ./node_modules/dragula/dist/dragula.min.css ./packages/core/demo/css/`,
         `cpy ./node_modules/font-awesome/fonts/*.* ./packages/core/demo/fonts`,
+        `cpy ./node_modules/bootstrap-icons/font/bootstrap-icons.css ./packages/core/demo/css/`,
+        `cpy ./node_modules/bootstrap-icons/font/fonts/*.* ./packages/core/demo/css/fonts`,
         `cpy ./node_modules/highlight.js/styles/default.css ./packages/core/demo/css/highlightjs/`,
         `cpy ./node_modules/markdown-tip/dist/markdown-tip.css ./packages/core/demo/css/`,
         `cpy ./node_modules/github-fork-ribbon-css/gh-fork-ribbon.css ./packages/core/demo/css/`,
