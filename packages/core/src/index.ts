@@ -163,6 +163,22 @@ export const themes: { [name: string]: Theme } = {
     description: 'form-text',
     select: 'form-control'
   },
+  bootstrap5: {
+    card: 'card card-body',
+    row: '',
+    errorRow: 'text-danger',
+    input: 'form-control',
+    errorInput: 'form-control is-invalid',
+    textarea: 'form-control',
+    errorTextarea: 'form-control is-invalid',
+    checkbox: '',
+    radiobox: '',
+    button: 'btn btn-default',
+    buttonGroup: 'btn-group',
+    title: 'col-form-label',
+    description: 'form-text',
+    select: 'form-control'
+  },
   antd3: {
     card: 'ant-card ant-card-bordered ant-card-body',
     row: 'ant-row',
@@ -431,6 +447,13 @@ export const icons: { [name: string]: Icon } = {
     expand: 'ivu-icon ivu-icon-ios-arrow-back',
     add: 'ivu-icon ivu-icon-md-add',
     delete: 'ivu-icon ivu-icon-md-close'
+  },
+  'bootstrap-icons': {
+    isText: false,
+    collapse: 'bi bi-arrows-collapse',
+    expand: 'bi bi-arrows-expand',
+    add: 'bi bi-plus',
+    delete: 'bi bi-trash'
   }
 }
 
