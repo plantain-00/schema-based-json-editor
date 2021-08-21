@@ -286,7 +286,6 @@ a{
   outline:none !important; }
   .bp3-focus-disabled :focus ~ .bp3-control-indicator{
     outline:none !important; }
-
 .bp3-alert{
   max-width:400px;
   padding:20px; }
@@ -1533,7 +1532,6 @@ a.bp3-button{
   .bp3-dark .bp3-card.bp3-interactive:active{
     -webkit-box-shadow:0 0 0 1px rgba(16, 22, 26, 0.2), 0 0 0 rgba(16, 22, 26, 0), 0 1px 1px rgba(16, 22, 26, 0.4);
             box-shadow:0 0 0 1px rgba(16, 22, 26, 0.2), 0 0 0 rgba(16, 22, 26, 0), 0 1px 1px rgba(16, 22, 26, 0.4); }
-
 .bp3-collapse{
   height:0;
   overflow-y:hidden;
@@ -1552,7 +1550,6 @@ a.bp3-button{
 
 .bp3-context-menu-popover-target{
   position:fixed; }
-
 .bp3-divider{
   border-bottom:1px solid rgba(16, 22, 26, 0.15);
   border-right:1px solid rgba(16, 22, 26, 0.15);
@@ -4148,7 +4145,6 @@ table.bp3-html-table.bp3-interactive tbody tr:active td{
     cursor:pointer; }
   .bp3-dark table.bp3-html-table.bp3-interactive tbody tr:active td{
     background-color:rgba(92, 112, 128, 0.4); }
-
 .bp3-key-combo{
   display:-webkit-box;
   display:-ms-flexbox;
@@ -6180,7 +6176,6 @@ button.bp3-menu-item{
   -ms-flex-negative:1;
       flex-shrink:1;
   width:1px; }
-
 body.bp3-overlay-open{
   overflow:hidden; }
 
@@ -7104,7 +7099,6 @@ span.bp3-popover-target{
       border-bottom-right-radius:0;
       border-top-left-radius:3px;
       margin-bottom:8px; }
-
 @-webkit-keyframes pt-spinner-animation{
   from{
     -webkit-transform:rotate(0deg);
@@ -7112,7 +7106,6 @@ span.bp3-popover-target{
   to{
     -webkit-transform:rotate(360deg);
             transform:rotate(360deg); } }
-
 @keyframes pt-spinner-animation{
   from{
     -webkit-transform:rotate(0deg);
