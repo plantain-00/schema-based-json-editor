@@ -619,6 +619,7 @@ a{
   .bp3-small .bp3-button{
     min-height:24px;
     min-width:24px;
+    font-size:12px;
     padding:0 7px; }
   .bp3-button.bp3-loading{
     position:relative; }
@@ -676,7 +677,7 @@ a{
       stroke:#8a9ba8; }
     .bp3-dark .bp3-button:not([class*="bp3-intent-"])[class*="bp3-icon-"]::before{
       color:#a7b6c2; }
-    .bp3-dark .bp3-button:not([class*="bp3-intent-"]) .bp3-icon, .bp3-dark .bp3-button:not([class*="bp3-intent-"]) .bp3-icon-standard, .bp3-dark .bp3-button:not([class*="bp3-intent-"]) .bp3-icon-large{
+    .bp3-dark .bp3-button:not([class*="bp3-intent-"]) .bp3-icon:not([class*="bp3-intent-"]), .bp3-dark .bp3-button:not([class*="bp3-intent-"]) .bp3-icon-standard:not([class*="bp3-intent-"]), .bp3-dark .bp3-button:not([class*="bp3-intent-"]) .bp3-icon-large:not([class*="bp3-intent-"]){
       color:#a7b6c2; }
   .bp3-dark .bp3-button[class*="bp3-intent-"]{
     -webkit-box-shadow:0 0 0 1px rgba(16, 22, 26, 0.4);
@@ -6625,7 +6626,9 @@ body.bp3-overlay-open{
     -webkit-transform-origin:bottom right;
             transform-origin:bottom right; }
   .bp3-popover .bp3-popover-content{
-    background:#ffffff;
+    background:#ffffff; }
+  .bp3-popover .bp3-popover-content,
+  .bp3-popover .bp3-heading{
     color:inherit; }
   .bp3-popover .bp3-popover-arrow::before{
     -webkit-box-shadow:1px 1px 6px rgba(16, 22, 26, 0.2);
@@ -6720,7 +6723,11 @@ body.bp3-overlay-open{
             box-shadow:0 0 0 1px rgba(16, 22, 26, 0.2), 0 2px 4px rgba(16, 22, 26, 0.4), 0 8px 24px rgba(16, 22, 26, 0.4); }
     .bp3-popover.bp3-dark .bp3-popover-content,
     .bp3-dark .bp3-popover .bp3-popover-content{
-      background:#30404d;
+      background:#30404d; }
+    .bp3-popover.bp3-dark .bp3-popover-content,
+    .bp3-popover.bp3-dark .bp3-heading,
+    .bp3-dark .bp3-popover .bp3-popover-content,
+    .bp3-dark .bp3-popover .bp3-heading{
       color:inherit; }
     .bp3-popover.bp3-dark .bp3-popover-arrow::before,
     .bp3-dark .bp3-popover .bp3-popover-arrow::before{
@@ -7666,6 +7673,7 @@ span.bp3-popover-target{
   .bp3-tag-input .bp3-button{
     min-height:24px;
     min-width:24px;
+    font-size:12px;
     padding:0 7px; }
   .bp3-tag-input.bp3-large{
     height:auto;
@@ -8032,7 +8040,9 @@ span.bp3-popover-target{
     -webkit-transform-origin:bottom right;
             transform-origin:bottom right; }
   .bp3-tooltip .bp3-popover-content{
-    background:#394b59;
+    background:#394b59; }
+  .bp3-tooltip .bp3-popover-content,
+  .bp3-tooltip .bp3-heading{
     color:#f5f8fa; }
   .bp3-tooltip .bp3-popover-arrow::before{
     -webkit-box-shadow:1px 1px 6px rgba(16, 22, 26, 0.2);
@@ -8082,7 +8092,11 @@ span.bp3-popover-target{
             box-shadow:0 0 0 1px rgba(16, 22, 26, 0.2), 0 2px 4px rgba(16, 22, 26, 0.4), 0 8px 24px rgba(16, 22, 26, 0.4); }
     .bp3-tooltip.bp3-dark .bp3-popover-content,
     .bp3-dark .bp3-tooltip .bp3-popover-content{
-      background:#e1e8ed;
+      background:#e1e8ed; }
+    .bp3-tooltip.bp3-dark .bp3-popover-content,
+    .bp3-tooltip.bp3-dark .bp3-heading,
+    .bp3-dark .bp3-tooltip .bp3-popover-content,
+    .bp3-dark .bp3-tooltip .bp3-heading{
       color:#394b59; }
     .bp3-tooltip.bp3-dark .bp3-popover-arrow::before,
     .bp3-dark .bp3-tooltip .bp3-popover-arrow::before{
