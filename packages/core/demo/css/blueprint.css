@@ -619,7 +619,6 @@ a{
   .bp3-small .bp3-button{
     min-height:24px;
     min-width:24px;
-    font-size:12px;
     padding:0 7px; }
   .bp3-button.bp3-loading{
     position:relative; }
@@ -7673,7 +7672,6 @@ span.bp3-popover-target{
   .bp3-tag-input .bp3-button{
     min-height:24px;
     min-width:24px;
-    font-size:12px;
     padding:0 7px; }
   .bp3-tag-input.bp3-large{
     height:auto;
