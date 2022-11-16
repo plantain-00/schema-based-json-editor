@@ -1,0 +1,40 @@
+{
+  "name": "react-composable-json-editor",
+  "version": "8.3.0",
+  "main": "dist/react-composable-json-editor.min.js",
+  "module": "dist/index.js",
+  "unpkg": "dist/react-composable-json-editor.min.js",
+  "jsdelivr": "dist/react-composable-json-editor.min.js",
+  "types": "dist/index.d.ts",
+  "description": "A reactjs component of composable json editor.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plantain-00/schema-based-json-editor.git"
+  },
+  "keywords": [
+    "json",
+    "composable",
+    "react"
+  ],
+  "author": "York Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plantain-00/schema-based-json-editor/issues"
+  },
+  "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
+  "dependencies": {
+    "immer": "8"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.9",
+    "react": "18",
+    "react-dom": "18"
+  },
+  "peerDependencies": {
+    "react": "18"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
