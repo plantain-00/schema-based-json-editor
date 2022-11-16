@@ -1,5 +1,9 @@
 # Change Log
 
+## [8.3.2](https://github.com/plantain-00/schema-based-json-editor/compare/v8.3.1...v8.3.2) (2022-11-16)
+  
+* feat: expose common ([62563d0](https://github.com/plantain-00/schema-based-json-editor/commit/62563d0b913c9181a2c0b8aca8fe29b575028ec8))
+
 ## [8.3.1](https://github.com/plantain-00/schema-based-json-editor/compare/v8.3.0...v8.3.1) (2022-11-16)
   
 * feat: add react-composable-json-editor ([8bfeb0e](https://github.com/plantain-00/schema-based-json-editor/commit/8bfeb0e0c40ff6c9acefca75b46d37f75be8b8ea))

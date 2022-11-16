@@ -59,7 +59,7 @@ function Main() {
   return (
     <div style={{ position: 'relative' }}>
       <a href='https://github.com/plantain-00/schema-based-json-editor/tree/master/packages/react-composable-json-editor/demo/index.tsx' target='_blank'>the source code of the demo</a>
-      <BooleanEditor style={{ position: 'absolute', left: '8px', top: '8px' }} value={readOnly} setValue={v => setReadOnly(v)} />
+      <BooleanEditor style={{ display: 'inline' }} value={readOnly} setValue={v => setReadOnly(v)} /> read only
       <br />
       <div style={{ width: '49%', margin: '10px', position: 'absolute', left: '0px' }}>
         <ObjectEditor
