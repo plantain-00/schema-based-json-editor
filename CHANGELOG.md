@@ -1,5 +1,10 @@
 # Change Log
 
+## [8.3.1](https://github.com/plantain-00/schema-based-json-editor/compare/v8.3.0...v8.3.1) (2022-11-16)
+  
+* feat: add react-composable-json-editor ([8bfeb0e](https://github.com/plantain-00/schema-based-json-editor/commit/8bfeb0e0c40ff6c9acefca75b46d37f75be8b8ea))
+* chore: update dependencies ([228df38](https://github.com/plantain-00/schema-based-json-editor/commit/228df38f0f4da84233b641f153af2c0df0b035ec)) ([0241aef](https://github.com/plantain-00/schema-based-json-editor/commit/0241aef28b19f0df30c5e164769d355b5101e8c1)) ([057e961](https://github.com/plantain-00/schema-based-json-editor/commit/057e9618ef140e5d5fefeff5e9450e1c55329544)) ([ec8d846](https://github.com/plantain-00/schema-based-json-editor/commit/ec8d8461a177b434dbf827292c41c7403a3fe5b9)) ([7b13141](https://github.com/plantain-00/schema-based-json-editor/commit/7b131412aa583b3bf562eb6072818ad157011d0f)) ([874c7a7](https://github.com/plantain-00/schema-based-json-editor/commit/874c7a7ff159ddd35e570a84affa870d5e497095)) ([bd54510](https://github.com/plantain-00/schema-based-json-editor/commit/bd54510bde0a752a973b71bb85402662bd03314a))
+
 ## [8.3.0](https://github.com/plantain-00/schema-based-json-editor/compare/v8.2.1...v8.3.0) (2021-07-10)
   
 * feat: support bootstrap 5 theme and bootstrap-icon ([c23b809](https://github.com/plantain-00/schema-based-json-editor/commit/c23b8096568c8fd2253b30598a5d7aee417cadac))
