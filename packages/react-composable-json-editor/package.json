@@ -1,6 +1,6 @@
 {
   "name": "react-composable-json-editor",
-  "version": "8.3.2",
+  "version": "8.3.3",
   "main": "dist/react-composable-json-editor.min.js",
   "module": "dist/index.js",
   "unpkg": "dist/react-composable-json-editor.min.js",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {
-    "immer": "8"
+    "immer": ">=8"
   },
   "devDependencies": {
     "@types/react": "18.0.25",
