@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/plantain-00/schema-based-json-editor#readme",
   "dependencies": {
-    "immer": "8"
+    "immer": ">=8"
   },
   "devDependencies": {
     "@types/react": "18.0.25",

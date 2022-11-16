@@ -3,7 +3,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 
 export default {
-  input: 'packages/react/dist/index.js',
+  input: 'packages/react-composable-json-editor/dist/index.js',
   plugins: [
     resolve({ browser: true }),
     uglify(),
@@ -11,7 +11,7 @@ export default {
   ],
   output: {
     name: 'JSONEditor',
-    file: 'packages/react/dist/react-schema-based-json-editor.min.js',
+    file: 'packages/react-composable-json-editor/dist/react-composable-json-editor.min.js',
     format: 'umd'
   },
   external: [
