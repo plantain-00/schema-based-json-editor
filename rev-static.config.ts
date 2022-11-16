@@ -1,7 +1,7 @@
 export default {
   inputFiles: [
-    'packages/@(vue|react)/demo/**/@(index|editor|vendor).bundle.js',
-    'packages/@(vue|react)/demo/**/*.ejs.html',
+    'packages/@(vue|react|react-composable-json-editor)/demo/**/@(index|editor|vendor).bundle.js',
+    'packages/@(vue|react|react-composable-json-editor)/demo/**/*.ejs.html',
     'packages/core/demo/*.bundle.css'
   ],
   revisedFiles: [

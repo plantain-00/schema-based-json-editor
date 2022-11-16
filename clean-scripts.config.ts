@@ -6,11 +6,13 @@ const vueTemplateCommand = `file2variable-cli --config packages/vue/src/file2var
 const tscCoreSrcCommand = `tsc -p packages/core/src`
 const tscVueSrcCommand = `tsc -p packages/vue/src`
 const tscReactSrcCommand = `tsc -p packages/react/src`
+const tscComposableSrcCommand = `tsc -p packages/react-composable-json-editor/src`
 
 const tscCoreDemoCommand = `tsc -p packages/core/demo`
 
 const webpackVueCommand = `webpack --config packages/vue/demo/webpack.config.ts`
 const webpackReactCommand = `webpack --config packages/react/demo/webpack.config.ts`
+const webpackComposableCommand = `webpack --config packages/react-composable-json-editor/demo/webpack.config.ts`
 
 const revStaticCommand = `rev-static`
 
@@ -65,6 +67,11 @@ export default {
                 tscReactSrcCommand,
                 isDev ? undefined : `rollup --config packages/react/src/rollup.config.js`,
                 webpackReactCommand
+              ],
+              composable: [
+                tscComposableSrcCommand,
+                isDev ? undefined : `rollup --config packages/react-composable-json-editor/src/rollup.config.js`,
+                webpackComposableCommand
               ]
             }
           ],

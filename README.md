@@ -20,6 +20,7 @@
 + boolean schema fields: format('checkbox' | 'select' | 'select2')
 + image preview, code highlight, markdown preview
 + multi-language
++ react-composable-json-editor
 
 ## reactjs component
 
@@ -80,6 +81,40 @@ or
 ```
 
 the online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/vue/demo>
+
+## react-composable-json-editor
+
+[![gzip size](https://img.badgesize.io/https://unpkg.com/react-composable-json-editor?compression=gzip)](https://unpkg.com/react-composable-json-editor)
+
+`npm i react-composable-json-editor`
+
+```js
+import { useJsonEditorData, ObjectEditor, StringEditor, NumberEditor } from "react-composable-json-editor";
+
+const { value, update, getArrayProps } = useJsonEditorData({
+  stringExample: 'a string example',
+  objectExample: {
+    propertyExample1: '',
+    propertyExample2: 0,
+  },
+})
+```
+
+```jsx
+<ObjectEditor
+  properties={{
+    'A string example': <StringEditor value={value.stringExample} setValue={update((draft, v) => draft.stringExample = v)} />,
+    'A object example': <ObjectEditor
+      properties={{
+        'Property example 1': <StringEditor value={value.objectExample.propertyExample1} setValue={update((draft, v) => draft.objectExample.propertyExample1 = v)} />,
+        'Property example 2': <NumberEditor value={value.objectExample.propertyExample2} setValue={update((draft, v) => draft.objectExample.propertyExample2 = v)} />,
+      }}
+    />,
+  }}
+/>
+```
+
+the online demo: <https://plantain-00.github.io/schema-based-json-editor/packages/react-composable-json-editor/demo>
 
 ## properties and events of the component
 
