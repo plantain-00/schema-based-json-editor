@@ -1,5 +1,13 @@
 # Change Log
 
+## [8.3.4](https://github.com/plantain-00/schema-based-json-editor/compare/v8.3.3...v8.3.4) (2022-11-21)
+  
+* fix: image preview ([6ab82fd](https://github.com/plantain-00/schema-based-json-editor/commit/6ab82fde6e29cc0df595850725bcecbc9de73a9e))
+
+## [8.3.3](https://github.com/plantain-00/schema-based-json-editor/compare/v8.3.2...v8.3.3) (2022-11-16)
+  
+* fix: rollup bundle ([0ae85f0](https://github.com/plantain-00/schema-based-json-editor/commit/0ae85f0652cf57e4018cf0289c2082b0ef1be603))
+
 ## [8.3.2](https://github.com/plantain-00/schema-based-json-editor/compare/v8.3.1...v8.3.2) (2022-11-16)
   
 * feat: expose common ([62563d0](https://github.com/plantain-00/schema-based-json-editor/commit/62563d0b913c9181a2c0b8aca8fe29b575028ec8))
