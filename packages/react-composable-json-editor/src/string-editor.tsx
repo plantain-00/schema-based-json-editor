@@ -54,7 +54,7 @@ export function StringEditor(props: JsonEditorProps<string> & {
     )
   }
   let preview: JSX.Element | undefined
-  if (props.value.startsWith('http')) {
+  if (isImageUrl(props.value) || isBase64Image(props.value)) {
     preview = <img src={props.value} style={{ display: 'block', height: 'auto', margin: '6px 0px', maxWidth: '100%' }} />
   }
   return (
@@ -88,4 +88,26 @@ export function StringEditor(props: JsonEditorProps<string> & {
       {preview}
     </>
   )
+}
+
+const imageExtensions = ['.png', '.jpg', '.bmp', '.gif']
+
+function isImageUrl(value?: string) {
+  if (!value || value.length <= 'https://'.length) {
+    return false
+  }
+  if (value.substr(0, 'http://'.length) !== 'http://'
+    && value.substr(0, 'https://'.length) !== 'https://') {
+    return false
+  }
+  const extensionName = value.substr(value.length - 4, 4)
+  return imageExtensions.indexOf(extensionName) !== -1
+}
+
+function isBase64Image(value?: string) {
+  if (!value) {
+    return false
+  }
+  return value.indexOf(`data:image/`) === 0
+    && value.indexOf(`;base64,`) !== -1
 }
