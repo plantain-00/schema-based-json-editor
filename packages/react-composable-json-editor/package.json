@@ -1,6 +1,6 @@
 {
   "name": "react-composable-json-editor",
-  "version": "8.3.3",
+  "version": "8.3.4",
   "main": "dist/react-composable-json-editor.min.js",
   "module": "dist/index.js",
   "unpkg": "dist/react-composable-json-editor.min.js",
