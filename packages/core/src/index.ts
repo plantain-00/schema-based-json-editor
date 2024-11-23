@@ -98,7 +98,7 @@ export type NumberSchema = CommonSchema & {
  */
 export type StringSchema = CommonSchema & {
   type: 'string';
-  format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'select' | 'radiobox' | 'json';
+  format?: 'textarea' | 'color' | 'date' | 'datetime' | 'datetime-local' | 'time' | 'month' | 'email' | 'uri' | 'url' | 'week' | 'hostname' | 'ipv4' | 'ipv6' | 'code' | 'markdown' | 'base64' | 'image' | 'select' | 'radiobox' | 'json';
   enum?: string[];
   minLength?: number;
   maxLength?: number;
@@ -609,6 +609,12 @@ export const buttonGroupStyle = { marginLeft: '10px' }
  */
 export const buttonGroupStyleString = 'margin-left: 10px'
 
+import { Props as UploaderProps } from 'file-uploader-react-component'
+/**
+ * @public
+ */
+export type UploadOptions = Pick<UploaderProps, 'accept' | 'method' | 'multiple' | 'name'> & UploadCallbacks
+
 /**
  * @public
  */
@@ -632,6 +638,7 @@ export interface Props<TSchema extends CommonSchema, TValue> {
   minItemCountIfNeedFilter?: number;
   monacoEditor?: MonacoEditor;
   getReference: (name: string) => TSchema | undefined;
+  uploadOptions?: UploadOptions
 }
 
 /**
@@ -1158,6 +1165,18 @@ export type Dragula = typeof dragula
  * @public
  */
 export type HLJS = typeof hljs
+
+declare type UploadSuccessCallback = (fileUrl: string) => void;
+
+declare type UploadErrorCallback = (error: Error) => void;
+
+/**
+ * @public
+ */
+export interface UploadCallbacks {
+    fileGot?: (file: File | Blob, uploadSuccess: UploadSuccessCallback, uploadError: UploadErrorCallback) => void;
+    fileUploaded?: (response: any, uploadSuccess: UploadSuccessCallback, uploadError: UploadErrorCallback) => void;
+}
 
 /**
  * @public

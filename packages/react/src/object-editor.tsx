@@ -75,7 +75,8 @@ export class ObjectEditor extends React.Component<Props, State> {
           disableCollapse={this.props.disableCollapse}
           minItemCountIfNeedFilter={this.props.minItemCountIfNeedFilter}
           noSelect2={this.props.noSelect2}
-          monacoEditor={this.props.monacoEditor} />)
+          monacoEditor={this.props.monacoEditor}
+          uploadOptions={this.props.uploadOptions} />)
       : []
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)
       ? <div className={this.props.theme.row}><input className={this.props.theme.input}

@@ -17,6 +17,11 @@ export const JSONEditor = defineComponent({
   components: {
     editor: Editor
   },
+  provide() {
+    return {
+      uploadOptions: this.$props.uploadOptions
+    }
+  },
   props: {
     schema: {
       type: Object as PropType<common.Schema>,
@@ -35,6 +40,7 @@ export const JSONEditor = defineComponent({
     noSelect2: Boolean,
     minItemCountIfNeedFilter: Number,
     monacoEditor: Object as PropType<common.MonacoEditor>,
+    uploadOptions: Object,
   },
   computed: {
     themeObject(): common.Theme {

@@ -80,7 +80,8 @@ export class ArrayEditor extends React.Component<Props, State> {
             disableCollapse={this.props.disableCollapse}
             minItemCountIfNeedFilter={this.props.minItemCountIfNeedFilter}
             noSelect2={this.props.noSelect2}
-            monacoEditor={this.props.monacoEditor} />
+            monacoEditor={this.props.monacoEditor}
+            uploadOptions={this.props.uploadOptions} />
         </div>
       ))
     const filterElement: JSX.Element | null = (!this.collapsed && this.value !== undefined && this.showFilter)

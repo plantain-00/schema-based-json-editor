@@ -8,6 +8,19 @@ import hljs from 'highlight.js'
 import * as monaco from 'monaco-editor'
 addAllCssLinks('../../core/demo/css/')
 
+const uploadOptions = {
+  fileGot(file: any, uploadSuccess: (fileUrl: string) => void) {
+    console.log(file)
+    uploadSuccess('xx')
+  },
+  // fileUploaded(res: any) {
+  //   console.log(res)
+  // },
+  // url: '/upload',
+  // name: 'file',
+  // method: 'POST',
+}
+
 class Main extends React.Component<unknown, unknown> {
   private locale = null
   private schema = schema
@@ -51,7 +64,8 @@ class Main extends React.Component<unknown, unknown> {
             dragula={dragula}
             markdownit={MarkdownIt}
             hljs={hljs}
-            monacoEditor={monaco.editor} />
+            monacoEditor={monaco.editor}
+            uploadOptions={uploadOptions} />
         </div>
         <div style={{ margin: '10px', width: '30%', position: 'fixed', right: '10px', height: '100%', overflowY: 'scroll' }}>
           Value:

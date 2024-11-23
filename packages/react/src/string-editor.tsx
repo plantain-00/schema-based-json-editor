@@ -68,10 +68,7 @@ export class StringEditor extends React.Component<Props, State> {
     }
   }
   render() {
-    const fileUploader = this.canUpload ? (
-      <FileUploader locale={this.props.locale.fileUploaderLocale}
-        fileGot={(e) => this.fileGot(e)}/>
-    ) : null
+    const fileUploader = this.canUpload ? this.uploadRender : null
 
     let textarea: JSX.Element | null = null
     if (this.useTextArea) {
@@ -255,15 +252,59 @@ export class StringEditor extends React.Component<Props, State> {
     return common.getOptions(this.props.schema) as Select2Option[]
   }
   private get canUpload() {
-    return this.props.schema.format === 'base64'
+    return ['base64', 'image'].indexOf(this.props.schema.format as string) > -1
+  }
+  private get uploadRender() {
+    const isBase64 = this.props.schema.format === 'base64'
+    if (isBase64) {
+      return (
+        <FileUploader
+          locale={this.props.locale.fileUploaderLocale}
+          fileGot={this.fileGot.bind(this)}
+        />
+      )
+    }
+    const { fileGot, fileUploaded, ...restOptions } = this.props.uploadOptions || {}
+    const uploadSuccess = this.uploadSuccess.bind(this)
+    const uploadError = this.uploadError.bind(this)
+    const onFileGot = (file: File | Blob) => {
+      if (fileGot) {
+        fileGot(file, uploadSuccess, uploadError)
+      }
+    }
+    const onFileUploaded = (response: any) => {
+      if (fileUploaded) {
+        fileUploaded(response, uploadSuccess, uploadError)
+      }
+    }
+    return (
+      <FileUploader
+        locale={this.props.locale.fileUploaderLocale}
+        fileGot={onFileGot}
+        fileUploaded={onFileUploaded}
+        {...restOptions}
+      />
+    )
   }
   private get className() {
     const rowClass = this.errorMessage ? this.props.theme.errorRow : this.props.theme.row
     return this.props.schema.className ? rowClass + ' ' + this.props.schema.className : rowClass
-  }
-
+  }  
   private updateSelection(value: Select2UpdateValue) {
     this.value = value.toString()
+    this.validate()
+    this.setState({ value: this.value })
+    this.props.updateValue(this.value, !this.errorMessage)
+  }
+  private uploadSuccess(fileUrl: string) {
+    this.value = fileUrl
+    this.validate()
+    this.setState({ value: this.value })
+    this.props.updateValue(this.value, !this.errorMessage)
+  }
+  private uploadError(error: Error) {
+    console.log(error)
+    this.value = ''
     this.validate()
     this.setState({ value: this.value })
     this.props.updateValue(this.value, !this.errorMessage)

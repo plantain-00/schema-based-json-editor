@@ -22,6 +22,7 @@ export interface Props {
   noSelect2?: boolean;
   minItemCountIfNeedFilter?: number;
   monacoEditor?: common.MonacoEditor;
+  uploadOptions?: common.UploadOptions;
 }
 
 /**
@@ -43,23 +44,28 @@ export class JSONEditor extends React.Component<Props, unknown> {
     const theme = common.getTheme(this.props.theme)
     const locale = common.getLocale(this.props.locale)
     const icon = common.getIcon(this.props.icon, locale)
-    return <Editor schema={this.props.schema}
-      initialValue={this.props.initialValue}
-      updateValue={this.updateValue}
-      getReference={this.getReference}
-      readonly={this.props.readonly}
-      theme={theme}
-      locale={locale}
-      icon={icon}
-      required={true}
-      dragula={this.props.dragula}
-      md={this.md}
-      hljs={this.props.hljs}
-      forceHttps={this.props.forceHttps}
-      disableCollapse={this.props.disableCollapse}
-      noSelect2={this.props.noSelect2}
-      minItemCountIfNeedFilter={this.props.minItemCountIfNeedFilter}
-      monacoEditor={this.props.monacoEditor} />
+    return (
+      <Editor
+        schema={this.props.schema}
+        initialValue={this.props.initialValue}
+        updateValue={this.updateValue}
+        getReference={this.getReference}
+        readonly={this.props.readonly}
+        theme={theme}
+        locale={locale}
+        icon={icon}
+        required={true}
+        dragula={this.props.dragula}
+        md={this.md}
+        hljs={this.props.hljs}
+        forceHttps={this.props.forceHttps}
+        disableCollapse={this.props.disableCollapse}
+        noSelect2={this.props.noSelect2}
+        minItemCountIfNeedFilter={this.props.minItemCountIfNeedFilter}
+        monacoEditor={this.props.monacoEditor}
+        uploadOptions={this.props.uploadOptions}
+      />
+    )
   }
   private updateValue = (value: any, isValid: boolean) => {
     this.props.updateValue(value, isValid)
